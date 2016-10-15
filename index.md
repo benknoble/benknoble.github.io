@@ -2,11 +2,9 @@
 layout: default
 title: Home
 ---
-#Home
+<h1>Home</h1>
 
-```csharp
-public static void Main(String[] args)
-{
-    Console.WriteLine("Hello World!");
-}
-```
+    public static void Main(String[] args)
+    {
+        Console.WriteLine("Hello World!");
+    }
