@@ -6,5 +6,5 @@ title: Home
 
     public static void Main(String[] args)
     {
-        Console.WriteLine("Hello World!");
+        Console.WriteLine("Do you keep your junk drawer full of fun and creative things?");
     }
