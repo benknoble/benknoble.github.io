@@ -409,14 +409,14 @@ nav a {
 }
 
 .tag:hover {
-  background-color: #C6EAFA;
+  background-color: #DEDEDE;
   color: #069;
 }
 
 .tag:hover::after {
-   border-left-color: #C6EAFA; 
+   border-left-color: #DEDEDE; 
 }
 
 .tag:hover::before {
-  background:  #C6EAFA;
+  background:  #DEDEDE;
 }
