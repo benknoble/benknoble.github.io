@@ -348,6 +348,11 @@ footer p + p {
   header p {
     width: 100%;
   }
+  
+  header a {
+    color: #fff;
+    font-weight: bold;
+  }
 }
 @media print {
   header p.view a small:before {
