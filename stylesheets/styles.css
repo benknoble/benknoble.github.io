@@ -374,7 +374,6 @@ nav a {
 
 .tag {
   background: #C6EAFA;
-  border-radius: 3px 0 0 3px;
   color: #000;
   display: inline-block;
   height: 26px;
@@ -407,7 +406,6 @@ nav a {
   position: absolute;
   right: 0;
   top: 0;
-  border-radius: 3px 0 0 3px;
 }
 
 .tag:hover {
