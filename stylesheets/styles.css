@@ -414,7 +414,8 @@ nav a {
 }
 
 .tag:hover::after {
-   border-left-color: #DEDEDE; 
+   border-left-color: #DEDEDE;
+   background-color: #DEDEDE;
 }
 
 .tag:hover::before {
