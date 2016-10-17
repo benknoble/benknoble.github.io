@@ -1,2 +1,2 @@
 # benknoble.github.io
-Blog site
+Blog site located [here](https://benknoble.github.io/)
