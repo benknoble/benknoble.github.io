@@ -6,7 +6,7 @@ tags: BoyScouts Blog
 ---
 Today is the online Junk Drawer's birthday! Hooray!
 
-For a more detailed discussion about the site, see the [About page]("/about").
+For a more detailed discussion about the site, see the [About page](/about).
 
 <h2>Eagle Scout</h2>
 
