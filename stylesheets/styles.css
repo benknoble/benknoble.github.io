@@ -353,7 +353,7 @@ nav a {
   header p {
     width: 100%;
   }
-  
+
 }
 @media print {
   header p.view a small:before {
@@ -364,12 +364,12 @@ nav a {
 .tags {
   list-style: none;
   margin: 0;
-  overflow: hidden; 
+  overflow: hidden;
   padding: 0;
 }
 
 .tags li {
-  float: left; 
+  float: left;
 }
 
 .tag {
