@@ -285,6 +285,7 @@ hr {
 }
 
 footer {
+  float: center;
   width: 640px;
   margin: 0 auto;
   padding: 20px 0 0;
@@ -300,6 +301,19 @@ footer p {
 }
 footer p + p {
   float: right;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer li {
+    float: left;
+}
+
+footer li a {
+    display: block;
+    padding: 8px;
 }
 
 nav a {
@@ -353,7 +367,7 @@ nav a {
   header p {
     width: 100%;
   }
-  
+
 }
 @media print {
   header p.view a small:before {
