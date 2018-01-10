@@ -1,0 +1,43 @@
+#! /usr/bin/env bash
+
+set -euo pipefail
+site_source="$( cd "$( dirname "${BASH_SOURCE[0]}")" && pwd )"
+
+message() {
+  echo "$@" >&2
+}
+
+usage() {
+  message "$0 [ENV_TYPE]
+  Serve the site with JEKYLL_ENV set to ENV_TYPE (default: development)"
+}
+
+die() {
+  exit 1
+}
+
+bad_env() {
+  message "Bad JEKYLL_ENV type $1 !"
+  usage
+  die
+}
+
+env_type() {
+  local env_type
+  case "$1" in
+    dev*)   env_type="development"  ;;
+    pro*)   env_type="production"   ;;
+    *)      bad_env "$1"            ;;
+  esac
+  echo "${env_type}"
+}
+
+serve() {
+  local env_used
+  env_used="$(env_type "$1")"
+  message "Using JEKYLL_ENV ${env_used}"
+  JEKYLL_ENV="${env_used}" bundle exec jekyll serve --watch
+}
+
+env_arg="${1:-development}"
+serve "${env_arg}"
