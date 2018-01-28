@@ -2,13 +2,13 @@
 layout: default
 title: About
 ---
-<h1>About</h1>
+# About
 
-<h3>The Site</h3>
+### The Site
 
 Junk Drawer is hosted by <a href="https://github.com/">GitHub</a> Pages and powered by the <a href= "http://jekyllrb.com">Jekyll</a> engine.
 
-<h3>Me</h3>
+### Me
 
 I'm David B. Knoble, an Honors Computer Science student at UNC Chapel Hill.
 
@@ -16,7 +16,7 @@ Most of my programming knowledge until now has been self-taught, with the beginn
 
 For some of the projects I'm working on, check out <a href="https://github.com/benknoble">benknoble@GitHub</a>. I'm also on <a href="http://stackoverflow.com/users/4400820/david-ben-knoble">StackOverflow</a> and a few other StackExchange sites.
 
-<h3>Junk Drawer</h3>
+### Junk Drawer
 
 So, what is the "Junk Drawer"? Good question. In my everyday life, no matter where I'm living or working, there's always a drawer or desk space or shelf or shoe box where I throw flyers, books, notes, scribbles, and thoughts. It's a catchall, and often times it gets quite cluttered.
 
