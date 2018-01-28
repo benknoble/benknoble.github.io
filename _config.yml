@@ -2,3 +2,21 @@ name: Junk Drawer
 permalink: /blog/:year/:month/:day/:title
 
 github: [metadata]
+encoding: UTF-8
+kramdown:
+  input: GFM
+  hard_wrap: false
+future: true
+jailed: false
+gfm_quirks: paragraph_end
+
+exclude:
+  - serve
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
