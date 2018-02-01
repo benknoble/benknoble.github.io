@@ -2,7 +2,7 @@
 layout: default
 title: Home
 ---
-<h1>Home</h1>
+# Home
 
     public static void Main(String[] args)
     {
