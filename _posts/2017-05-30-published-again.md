@@ -1,16 +1,20 @@
 ---
 layout: post
-title: I've Been Published (Again)!
+title: Secrets from a Freshman--Survival Skills, Chapter 2
 date: 2017-05-30
-tags: College
+tags: [ College ]
 ---
 
 Want to know what it takes to succeed during your Freshman year on a college
 campus? So did [Lee Bierer][lee].
 
-You can find the articles I contributed to [here (Part 1)][part_1] and [here (Part 2)][part_2].
+She interviewed me about my experiences at UNC, which resulted in 2 articles
+on the topic:
 
-You can also find my article about the previous publishing [here][article].
+- In [Part 1][part_1], I focus on passionate balance
+- [Part 2][part_2] takes on the phenomenon of "friends for life"
+
+You can also find my previous musings on the subject [here][article].
 
 [lee]: http://collegeadmissionsstrategies.com
 [part_1]: http://www.carolinacollegebound.com/2017/05/23/secrets-to-a-successful-freshman-year-lessons-learned-part-1/

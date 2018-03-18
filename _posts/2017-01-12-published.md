@@ -1,8 +1,8 @@
 ---
 layout: post
-title: I've Been Published (sort of)!
+title: Survival Skills, University Edition
 date: 2017-01-12
-tags: College
+tags: [ College ]
 ---
 
 I spent part of my Junior and most of my Senior year working with Lee Bierer,
@@ -10,7 +10,15 @@ columnist and independent college counselor at [CAS][cas]. After my first
 semester, she interviewed me about my experiences in college and published the
 results.
 
-You can find Part 1 [here][part_1] and Part 2 [here][part_2].  Later, the
+In the following two articles, I focus mostly on the academic and social
+challenges of my first semester at UNC Chapel Hill (Go Heels!). Probably the
+most important advice, though, is this:
+
+> Pick a place you’ll walk around smiling. That extra bit of happiness counts
+> more than academics or social life. If you don’t enjoy looking at the campus
+> for a day or two, you won’t enjoy it for four years.
+
+You can find Part 1 [here][part_1] and Part 2 [here][part_2]. Later, the
 Raleigh News & Observer picked up the first article [here][raleigh].
 
 [cas]: http://collegeadmissionsstrategies.com
