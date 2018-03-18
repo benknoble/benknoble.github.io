@@ -13,10 +13,10 @@ Junk Drawer is hosted by [GitHub][github] Pages and powered by the
 
 I'm David B. Knoble, an Honors Computer Science student at UNC Chapel Hill.
 
-Most of my programming knowledge until now has been self-taught, with the
-beginning of my collegiate career finally formalizing what I already know about
-CS principles. My primary experiences have been in C# and Java, but recently I
-have discovered Scala, Vim, Bash, and Python.
+I rely on a healthy mix of self-taught experimentation and formal class training
+for anything I do, including programming. My first experiences were been in C#
+and Java, but recently I have discovered Scala, Vim, Bash, and Python. As time
+continues, I gain exposure to other technologies, most recently including Go.
 
 For some of the projects I'm working on, check out
 [benknoble@GitHub][benknoble], or try my [showcase][showcase]. I'm also on
