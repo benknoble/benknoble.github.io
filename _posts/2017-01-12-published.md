@@ -2,7 +2,7 @@
 layout: post
 title: Survival Skills, University Edition
 date: 2017-01-12
-tags: College
+tags: [ College ]
 ---
 
 I spent part of my Junior and most of my Senior year working with Lee Bierer,

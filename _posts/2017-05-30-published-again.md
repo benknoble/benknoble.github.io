@@ -2,7 +2,7 @@
 layout: post
 title: Secrets from a Freshman--Survival Skills, Chapter 2
 date: 2017-05-30
-tags: College
+tags: [ College ]
 ---
 
 Want to know what it takes to succeed during your Freshman year on a college

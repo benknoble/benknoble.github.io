@@ -2,10 +2,10 @@
 layout: post
 title: Lady Book Dragon
 date: 2017-08-04
-tags: Blog Books
+tags: [ Blog, Books ]
 ---
 
-Long have I wanted to write book reviews on this blog! I have not yet made it
+Long have I wanted to write book reviews on this blog. I have not yet made it
 there, but a friend of mine has.
 
 Go check out [Lady Book Dragon](https://ladybookdragon.wixsite.com/ladybookdragon),
