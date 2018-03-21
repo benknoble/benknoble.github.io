@@ -6,7 +6,7 @@ title: About
 
 ### The Site
 
-Junk Drawer is hosted by [GitHub][github] Pages and powered by the
+[Junk Drawer][site] is hosted by [GitHub][github] Pages and powered by the
 [Jekyll][jekyll] engine.
 
 ### Me
@@ -48,3 +48,4 @@ matter of passing interest!
 [junk]: https://github.com/benknoble/junk-drawer
 [vim]: https://vi.stackexchange.com/users/10604/david-ben-knoble
 [showcase]: https://www.gitshowcase.com/benknoble
+[site]: https://github.com/benknoble/benknoble.github.io
