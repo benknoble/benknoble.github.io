@@ -23,6 +23,12 @@ For some of the projects I'm working on, check out
 [StackOverflow][stack_overflow] and a few other StackExchange sites ([vim][vim]
 anyone?).
 
+<a href="https://stackexchange.com/users/5546231"><img
+src="https://stackexchange.com/users/flair/5546231.png?theme=dark" width="208"
+height="58" alt="profile for David Ben Knoble on Stack Exchange, a network of
+free, community-driven Q&amp;A sites" title="profile for David Ben Knoble on
+Stack Exchange, a network of free, community-driven Q&amp;A sites"></a>
+
 ### Junk Drawer
 
 So, what is the "Junk Drawer"? Good question. In my everyday life, no matter
