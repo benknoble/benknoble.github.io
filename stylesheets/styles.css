@@ -412,7 +412,7 @@ nav a {
 }
 
 .tag::after {
-  background: #C6EAFA url("../images/bkg.png") 0 0;
+  background: #C6EAFA 0 0;
   border-bottom: 13px solid transparent;
   border-left: 10px solid #C6EAFA;
   border-top: 13px solid transparent;
