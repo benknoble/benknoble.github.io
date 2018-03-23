@@ -406,6 +406,10 @@ nav a {
   background:  #DEDEDE;
 }
 
-.entry-date {
+.archive-title {
+    float: left;
+}
+
+.archive-date {
     float: right;
 }

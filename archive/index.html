@@ -17,7 +17,12 @@ title: Archive
         <ul class="post-list">
       {% endif %}
     {% endunless %}
-      <li><a href="{{ site.url }}{{ post.url }}">{{ post.title }}<span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d %B %Y" }}</time></span></a></li>
+      <div class="archive-list">
+          <li>
+              <span class="archive-title"><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></span>
+              <span class="archive-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d %B %Y" }}</time></span>
+          </li>
+      </div>
   {% endfor %}
   </ul>
 </section>
