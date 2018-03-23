@@ -2,8 +2,6 @@
 layout: default
 title: About
 ---
-# About
-
 ### The Site
 
 [Junk Drawer][site] is hosted by [GitHub][github] Pages and powered by the
