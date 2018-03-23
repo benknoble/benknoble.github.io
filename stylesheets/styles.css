@@ -23,6 +23,17 @@ a {
   text-decoration: none;
 }
 
+a:visited {
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
 p {
   margin: 0 0 20px;
   padding: 0;
