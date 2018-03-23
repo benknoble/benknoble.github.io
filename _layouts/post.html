@@ -3,11 +3,11 @@ layout: default
 ---
 <ul class="tags">
   {% for tag in page.tags %}
-  <li><a href="{{ site.github.url }}/tags#{{ tag }}" class="tag">{{ tag }}</a></li>
+  <li><a href="{{ "/tags" | absolute_url }}#{{ tag }}" class="tag">{{ tag }}</a></li>
   {% endfor %}
 </ul>
 <p class="meta"><i>{{ page.date | date_to_string }}</i></p>
 <div class="post">
   {{ content }}
 </div>
-<a href="/blog">Back to blog</a>
+<a href="{{ "/blog" | absolute_url }}">Back to blog</a>

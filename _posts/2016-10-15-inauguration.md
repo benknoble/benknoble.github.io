@@ -6,7 +6,7 @@ tags: [ BoyScouts, Blog ]
 ---
 Today is the online Junk Drawer's birthday! Hooray!
 
-For a more detailed discussion about the site, see the [About page](/about).
+For a more detailed discussion about the site, see the [About page][about].
 
 ## Eagle Scout
 
@@ -18,4 +18,5 @@ helped make that possible: Hal Groce, my parents, and
 
 More on the project in a future [post][eagle]!
 
-[eagle]: {{ site.url }}{% link _posts/2016-12-25-eagle.md %}
+[about]: {% link about/index.md %}
+[eagle]: {% link _posts/2016-12-25-eagle.md %}
