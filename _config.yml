@@ -1,6 +1,7 @@
 name: Junk Drawer
 permalink: /blog/:year/:month/:day/:title
 
+repository: benknoble/benknoble.github.io
 github: [metadata]
 encoding: UTF-8
 kramdown:
