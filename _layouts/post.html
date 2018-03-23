@@ -1,11 +1,7 @@
 ---
 layout: default
 ---
-<ul class="tags">
-  {% for tag in page.tags %}
-  <li><a href="{{ "/tags" | absolute_url }}#{{ tag }}" class="tag">{{ tag }}</a></li>
-  {% endfor %}
-</ul>
+{% include tags.html %}
 <p class="meta"><i>{{ page.date | date_to_string }}</i></p>
 <div class="post">
   {{ content }}
