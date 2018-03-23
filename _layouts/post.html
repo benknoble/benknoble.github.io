@@ -2,12 +2,12 @@
 layout: default
 ---
 <ul class="tags">
-    {% for tag in page.tags %}
-    <li><a href="{{ site.github.url }}/tags#{{ tag }}" class="tag">{{ tag }}</a></li>
-    {% endfor %}
+  {% for tag in page.tags %}
+  <li><a href="{{ site.github.url }}/tags#{{ tag }}" class="tag">{{ tag }}</a></li>
+  {% endfor %}
 </ul>
 <p class="meta"><i>{{ page.date | date_to_string }}</i></p>
 <div class="post">
-    {{ content }}
+  {{ content }}
 </div>
 <a href="/blog">Back to blog</a>

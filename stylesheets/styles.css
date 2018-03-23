@@ -14,7 +14,9 @@ body {
   margin: 0 auto;
 }
 
-header, section, footer {
+header,
+section,
+footer {
   display: block;
 }
 
@@ -27,11 +29,11 @@ a:visited {
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 a:active {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 p {
@@ -61,6 +63,7 @@ header {
   padding: 15px 20px;
   border-bottom: 1px solid #B2D2E1;
 }
+
 header h1 {
   margin: 0;
   padding: 0;
@@ -69,15 +72,18 @@ header h1 {
   color: #069;
   text-shadow: rgba(255, 255, 255, 0.9) 0 1px 0;
 }
+
 header.without-description h1 {
   margin: 10px 0;
 }
+
 header p {
   margin: 0;
   color: #61778B;
   width: 300px;
   font-size: 13px;
 }
+
 header ul {
   margin: 0;
   padding: 0;
@@ -101,6 +107,7 @@ header ul {
   box-shadow: inset rgba(255, 255, 255, 0.45) 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -1px 0;
   width: auto;
 }
+
 header ul:before {
   content: '';
   position: absolute;
@@ -119,23 +126,28 @@ header ul:before {
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0, inset rgba(255, 255, 255, 0.7) 0 -1px 0;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0, inset rgba(255, 255, 255, 0.7) 0 -1px 0;
 }
+
 header ul li {
   width: 79px;
   float: left;
   border-right: 1px solid #3A7CBE;
   height: 38px;
 }
+
 header ul li.single {
   border: none;
 }
+
 header ul li + li {
   width: 78px;
   border-left: 1px solid #8BBEF3;
 }
+
 header ul li + li + li {
   border-right: none;
   width: 79px;
 }
+
 header ul a {
   line-height: 1;
   font-size: 11px;
@@ -148,6 +160,7 @@ header ul a {
   height: 40px;
   text-shadow: rgba(0, 0, 0, 0.4) 0 -1px 0;
 }
+
 header ul a strong {
   font-size: 14px;
   display: block;
@@ -172,18 +185,30 @@ section {
   position: relative;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #222;
   padding: 0;
   margin: 0 0 20px;
   line-height: 1.2;
 }
 
-p, ul, ol, table, pre, dl {
+p,
+ul,
+ol,
+table,
+pre,
+dl {
   margin: 0 0 20px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   line-height: 1.1;
 }
 
@@ -195,7 +220,10 @@ h2 {
   color: #393939;
 }
 
-h3, h4, h5, h6 {
+h3,
+h4,
+h5,
+h6 {
   color: #494949;
 }
 
@@ -212,7 +240,8 @@ img {
   max-width: 100%;
 }
 
-code, pre {
+code,
+pre {
   font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
   font-size: 12px;
   overflow-x: auto;
@@ -223,9 +252,11 @@ pre {
   color: #f8f8f2;
   margin: 0 -20px 20px;
 }
+
 pre code {
   color: #f8f8f2;
 }
+
 li pre {
   margin-left: -60px;
   padding-left: 60px;
@@ -236,7 +267,8 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding: 5px 10px;
   border-bottom: 1px solid #aaa;
@@ -270,58 +302,61 @@ footer {
   color: #ccc;
   overflow: hidden;
 }
+
 footer a {
   color: #fff;
   font-weight: bold;
 }
+
 footer p {
   float: left;
 }
+
 footer p + p {
   float: right;
 }
 
 footer ul {
-    list-style: none;
+  list-style: none;
 }
 
 footer li {
-    float: left;
+  float: left;
 }
 
 footer li a {
-    display: block;
-    padding: 8px;
+  display: block;
+  padding: 8px;
 }
 
 nav {
-    background: #fafafa;
-    overflow: hidden;
+  background: #fafafa;
+  overflow: hidden;
 }
 
 nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 nav li {
-    float: left;
-    margin: 2px;
+  float: left;
+  margin: 2px;
 }
 
 nav a {
-    display: block;
-    text-align: center;
-    padding: 4px;
-    font-weight: bold;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 5px;
+  display: block;
+  text-align: center;
+  padding: 4px;
+  font-weight: bold;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
 }
 
 nav a:hover {
-    background-color: #c6eafa;
+  background-color: #c6eafa;
 }
 
 @media print, screen and (max-width: 740px) {
@@ -354,10 +389,13 @@ nav a:hover {
     float: none;
     margin: 0;
   }
+
   footer p + p {
     float: none;
   }
+
 }
+
 @media print, screen and (max-width:580px) {
   header ul {
     display: none;
@@ -422,8 +460,8 @@ nav a:hover {
 }
 
 .tag:hover::after {
-   border-left-color: #DEDEDE;
-   background-color: #DEDEDE;
+  border-left-color: #DEDEDE;
+  background-color: #DEDEDE;
 }
 
 .tag:hover::before {
@@ -431,9 +469,9 @@ nav a:hover {
 }
 
 .archive-title {
-    float: left;
+  float: left;
 }
 
 .archive-date {
-    float: right;
+  float: right;
 }
