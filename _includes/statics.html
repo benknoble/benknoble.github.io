@@ -1,0 +1,5 @@
+<ul class="static-files">
+  {% for file in site.static_files %}
+  <li><a href="{{ file.path | absolute_url }}" class="static-file">{{ file.name }}</a></li>
+  {% endfor %}
+</ul>
