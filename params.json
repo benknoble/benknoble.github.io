@@ -1,6 +1,0 @@
-{
-  "name": "Junk Drawer",
-  "tagline": "For all those little papers scattered across your desk",
-  "body": "#Home\r\n\r\n```csharp\r\n//code test\r\npublic static void Main(String[] args)\r\n{\r\n    Console.WriteLine(\"Hello World! Do you keep your drawers clean, or full of ideas?\");\r\n    if (Console.ReadLine() == \"y\")\r\n        Congratulate();\r\n}\r\n```",
-  "note": "Don't delete this file! It's used internally to help with page regeneration."
-}
