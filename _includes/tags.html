@@ -1,5 +1,5 @@
 <ul class="tags">
-  {% for tag in post.tags %}
+  {% for tag in include.tags %}
   <li><a href="{{ "/tags" | absolute_url }}#{{ tag }}" class="tag">{{ tag }}</a></li>
   {% endfor %}
 </ul>

@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-{% include tags.html %}
+{% include tags.html tags=page.tags %}
 <p class="meta"><i>{{ page.date | date_to_string }}</i></p>
 <div class="post">
   {{ content }}
