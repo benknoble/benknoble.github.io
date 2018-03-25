@@ -16,5 +16,5 @@ helped make that possible: Hal Groce, my parents, and
 
 More on the project in a future [post][eagle]!
 
-[about]: {% link about/index.md %}
+[about]: {% link pages/about.md %}
 [eagle]: {% link _posts/2016-12-25-eagle.md %}
