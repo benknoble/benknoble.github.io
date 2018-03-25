@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Survival Skills, University Edition
-date: 2017-01-12
 tags: [ College ]
 ---
 

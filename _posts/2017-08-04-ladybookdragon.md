@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Lady Book Dragon
-date: 2017-08-04
 tags: [ Blog, Books ]
 ---
 

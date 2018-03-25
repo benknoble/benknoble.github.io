@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Site Inauguration
-date: 2016-10-15
 tags: [ BoyScouts, Blog ]
 ---
 Today is the online Junk Drawer's birthday! Hooray!
