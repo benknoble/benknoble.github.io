@@ -1,4 +1,5 @@
-name: Junk Drawer
+title: Junk Drawer
+description: For all those little papers scattered across your desk
 permalink: /blog/:year/:month/:day/:title
 
 repository: benknoble/benknoble.github.io
