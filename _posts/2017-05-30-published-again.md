@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Secrets from a Freshman--Survival Skills, Chapter 2
 tags: [ College ]
 ---

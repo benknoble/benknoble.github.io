@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Survival Skills, University Edition
 tags: [ College ]
 ---

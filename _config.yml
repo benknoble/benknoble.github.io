@@ -25,3 +25,11 @@ exclude:
   - notes
   - .ackrc
   - .gitignore
+
+defaults:
+  -
+    scope:
+      path: _posts
+      type: posts
+    values:
+      layout: post

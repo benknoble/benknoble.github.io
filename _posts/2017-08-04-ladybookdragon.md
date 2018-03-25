@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Lady Book Dragon
 tags: [ Blog, Books ]
 ---

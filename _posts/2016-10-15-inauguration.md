@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Site Inauguration
 tags: [ BoyScouts, Blog ]
 ---
