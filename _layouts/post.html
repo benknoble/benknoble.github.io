@@ -15,7 +15,7 @@ layout: default
     </a>
   </span>
   {% else %}
-  <span class="previous">Previous</span>
+  <span class="no-previous">Previous</span>
   {% endif %}
   {% if page.next.url %}
   <span class="next">
@@ -25,7 +25,9 @@ layout: default
     </a>
   </span>
   {% else %}
-  <span class="next">Next</span>
+  <span class="no-next">Next</span>
   {% endif %}
 </div>
-<a href="{{ "/blog" | absolute_url }}">Back to blog</a>
+<div class="back-to-blog">
+  <a href="{{ "/blog" | absolute_url }}">Back to blog</a>
+</div>
