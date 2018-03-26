@@ -6,4 +6,26 @@ layout: default
 <div class="post">
   {{ content }}
 </div>
+<div class="post-navigation">
+  {% if page.previous.url %}
+  <span class="previous">
+    <a href="{{ page.previous.url | absolute_url }}"
+      title="{{ page.previous.title }}">
+      Previous
+    </a>
+  </span>
+  {% else %}
+  <span class="previous">Previous</span>
+  {% endif %}
+  {% if page.next.url %}
+  <span class="next">
+    <a href="{{ page.next.url | absolute_url }}"
+       title="{{ page.next.title }}">
+      Next
+    </a>
+  </span>
+  {% else %}
+  <span class="next">Next</span>
+  {% endif %}
+</div>
 <a href="{{ "/blog" | absolute_url }}">Back to blog</a>
