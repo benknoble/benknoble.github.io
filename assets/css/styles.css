@@ -244,7 +244,7 @@ img {
 code,
 pre {
   font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
-  font-size: 12px;
+  font-size: 13px;
   overflow-x: auto;
 }
 
@@ -256,6 +256,10 @@ pre {
 
 pre code {
   color: #f8f8f2;
+}
+
+code {
+  color: #006699;
 }
 
 li pre {
