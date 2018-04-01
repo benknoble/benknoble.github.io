@@ -300,7 +300,6 @@ hr {
 }
 
 footer {
-  float: center;
   color: #ccc;
   overflow: hidden;
   margin-top: 2px;
@@ -512,4 +511,9 @@ nav a:hover {
   text-align: center;
   position: relative;
   top: 2px;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
 }
