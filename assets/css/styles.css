@@ -301,15 +301,15 @@ hr {
 
 footer {
   float: center;
-  width: 640px;
-  margin: 0 auto;
-  padding: 20px 0 0;
   color: #ccc;
   overflow: hidden;
+  margin-top: 2px;
+  padding-top: 2px;
+  border-top: 1px solid #000;
 }
 
 footer a {
-  color: #fff;
+  color: #069;
   font-weight: bold;
 }
 
@@ -335,8 +335,10 @@ footer li a {
 }
 
 nav {
-  background: #fafafa;
   overflow: hidden;
+  border-bottom: 1px solid #000;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 nav ul {
