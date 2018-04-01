@@ -345,6 +345,11 @@ nav li {
   margin: 2px;
 }
 
+nav li.active a {
+  color: #555;
+  cursor: default;
+}
+
 .post-navigation .no-previous,
 .post-navigation .no-next,
 .post-navigation .previous a,
