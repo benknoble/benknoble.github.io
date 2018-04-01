@@ -23,6 +23,7 @@ footer {
 a {
   color: #069;
   text-decoration: none;
+  font-weight: bold;
 }
 
 a:visited {
@@ -442,6 +443,7 @@ nav a:hover {
   margin: 0 10px 10px 0;
   text-decoration: none;
   -webkit-transition: color 0.2s;
+  font-weight: normal;
 }
 
 .tag::before {
