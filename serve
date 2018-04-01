@@ -26,6 +26,7 @@ env_type() {
   local env_type
   case "$1" in
     dev*)   env_type="development"  ;;
+    deb*)   env_type="debug"        ;;
     pro*)   env_type="production"   ;;
     *)      bad_env "$1"            ;;
   esac
