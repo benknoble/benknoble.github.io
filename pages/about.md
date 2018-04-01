@@ -47,9 +47,9 @@ matter of passing interest!
 <!-- Links -->
 [github]: https://github.com/
 [jekyll]: http://jekyllrb.com
-[benknoble]: https://github.com/benknoble
-[stack_overflow]: http://stackoverflow.com/users/4400820/david-ben-knoble
-[junk]: https://github.com/benknoble/junk-drawer
-[vim]: https://vi.stackexchange.com/users/10604/david-ben-knoble
-[showcase]: https://www.gitshowcase.com/benknoble
-[site]: https://github.com/benknoble/benknoble.github.io
+[benknoble]: {{ site.data.people.benknoble.github }}
+[stack_overflow]: {{ site.data.people.benknoble.stack_overflow }}
+[junk]: {{ site.data.people.benknoble.junk_drawer }}
+[vim]: {{ site.data.people.benknoble.vi_se }}
+[showcase]: {{ site.data.people.benknoble.portfolio }}
+[site]: https://github.com/{{ site.repository }}
