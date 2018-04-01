@@ -1,9 +1,9 @@
 <nav>
   <ul>
-    <li><a href="{% link index.md %}">Home</a></li>
-    <li><a href="{% link pages/about.md %}">About</a></li>
-    <li><a href="{% link pages/blog.html %}">Blog Posts</a></li>
-    <li><a href="{% link pages/tags.md %}">Tags</a></li>
-    <li><a href="{% link pages/archive.html %}">Archive</a></li>
+    {% for button in site.data.nav.buttons %}
+    <li class="{% if button.url == page.url %}active{% endif %}">
+      <a href="{{ button.url | absolute_url }}">{{ button.title }}</a>
+    </li>
+    {% endfor %}
   </ul>
 </nav>
