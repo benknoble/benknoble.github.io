@@ -356,11 +356,11 @@ nav li.active a {
   cursor: default;
 }
 
-.post-navigation .no-previous,
-.post-navigation .no-next,
-.post-navigation .previous a,
-.post-navigation .next a,
-.back-to-blog a,
+#post-navigation #no-previous,
+#post-navigation #no-next,
+#post-navigation #previous a,
+#post-navigation #next a,
+#back-to-blog a,
 nav a {
   display: block;
   text-align: center;
@@ -371,9 +371,9 @@ nav a {
   border-radius: 5px;
 }
 
-.post-navigation .previous a:hover,
-.post-navigation .next a:hover,
-.back-to-blog a:hover,
+#post-navigation #previous a:hover,
+#post-navigation #next a:hover,
+#back-to-blog a:hover,
 nav a:hover {
   background-color: #c6eafa;
 }
@@ -496,17 +496,17 @@ nav a:hover {
   float: right;
 }
 
-.post-navigation .no-previous,
-.post-navigation .previous a {
+#post-navigation #no-previous,
+#post-navigation #previous a {
   float: left;
 }
 
-.post-navigation .no-next,
-.post-navigation .next a {
+#post-navigation #no-next,
+#post-navigation #next a {
   float: right
 }
 
-.back-to-blog {
+#back-to-blog {
   clear: both;
   text-align: center;
   position: relative;
@@ -516,4 +516,8 @@ nav a:hover {
 .center {
   margin: auto;
   width: 50%;
+}
+
+.meta {
+  font-style: italic;
 }

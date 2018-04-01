@@ -2,32 +2,32 @@
 layout: default
 ---
 {% include tags.html tags=page.tags %}
-<p class="meta"><i>{{ page.date | date_to_string }}</i></p>
-<div class="post">
+<p class="meta">{{ page.date | date_to_string }}</p>
+<div id="post">
   {{ content }}
 </div>
-<div class="post-navigation">
+<div id="post-navigation">
   {% if page.previous.url %}
-  <span class="previous">
+  <span id="previous">
     <a href="{{ page.previous.url | absolute_url }}"
       title="{{ page.previous.title }}">
       Previous
     </a>
   </span>
   {% else %}
-  <span class="no-previous">Previous</span>
+  <span id="no-previous">Previous</span>
   {% endif %}
   {% if page.next.url %}
-  <span class="next">
+  <span id="next">
     <a href="{{ page.next.url | absolute_url }}"
        title="{{ page.next.title }}">
       Next
     </a>
   </span>
   {% else %}
-  <span class="no-next">Next</span>
+  <span id="no-next">Next</span>
   {% endif %}
 </div>
-<div class="back-to-blog">
+<div id="back-to-blog">
   <a href="{{ "/blog" | absolute_url }}">Back to blog</a>
 </div>
