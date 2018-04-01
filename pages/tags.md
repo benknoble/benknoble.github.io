@@ -20,7 +20,7 @@ to the `site_tags` variable. -->
   {% endunless %}{% endfor %}
 </ul>
 <!-- Posts by Tag -->
-<div>
+<div style="margin-bottom: 15px;">
   {% for item in (0..site.tags.size) %}{% unless forloop.last %}
     {% capture this_word %}{{ tag_words[item] }}{% endcapture %}
     <br>
