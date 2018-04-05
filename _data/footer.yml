@@ -1,0 +1,12 @@
+links:
+
+  - title: "Copyright © David B. Knoble 2018"
+    url: /LICENSE
+  # - title: Sitemap
+  #   url: /sitemap.xml
+  - title: Home
+    url: /
+  - title: About
+    url: /about/
+  - title: Contact
+    url: /contact/

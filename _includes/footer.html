@@ -1,7 +1,9 @@
 <footer class="center">
   <ul>
-    <li><a href="mailto:{{ site.data.people.benknoble.email }}">email</a></li>
-    <li><a href="{{ site.data.people.benknoble.github }}">github</a></li>
-    <li><a href="{{ site.data.people.benknoble.portfolio }}">portfolio</a></li>
+    {% for link in site.data.footer.links %}
+    <li>
+      <a href="{{ link.url | absolute_url }}">{{ link.title }}</a>
+    </li>
+    {% endfor %}
   </ul>
 </footer>
