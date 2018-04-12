@@ -1,6 +1,6 @@
 ---
 title: Survival Skills, University Edition
-tags: [ College ]
+tags: [ college ]
 category: Blog
 ---
 

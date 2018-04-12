@@ -1,6 +1,6 @@
 ---
 title: Lady Book Dragon
-tags: [ Blog, Books ]
+tags: [ blog, books ]
 category: Blog
 ---
 
