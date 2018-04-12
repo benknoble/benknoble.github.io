@@ -6,6 +6,15 @@ layout: default
 <div id="post">
   {{ content }}
 </div>
+<hr/>
+<div id="post-categories">
+  <h4>Categories:
+  {% for category in page.categories %}
+    <a href="{% link pages/categories.html %}#{{ category | slugify }}">{{ category }}</a>
+    {% unless forloop.last %},&nbsp;{% endunless %}
+  {% endfor %}
+  </h4>
+</div>
 <div id="post-navigation">
   {% if page.previous.url %}
   <span id="previous">
