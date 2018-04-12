@@ -1,6 +1,7 @@
 title: Junk Drawer
 description: For all those little papers scattered across your desk
-permalink: /blog/:year/:month/:day/:title
+# permalink: pretty
+permalink: /:categories/:year/:month/:day/:title/
 author: benknoble
 
 repository: benknoble/benknoble.github.io
