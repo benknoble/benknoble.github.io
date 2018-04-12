@@ -44,6 +44,8 @@ Stack Exchange, a network of free, community-driven Q&amp;A sites"></a>
 Feel free to [contact me][contact] with questions, corrections of misspelt
 words, or as a matter of passing interest!
 
+[RSS Feed][rss]
+
 <!-- Links -->
 [github]: https://github.com/
 [jekyll]: http://jekyllrb.com
@@ -54,3 +56,4 @@ words, or as a matter of passing interest!
 [showcase]: {{ site.data.people.benknoble.portfolio }}
 [site]: https://github.com/{{ site.repository }}
 [contact]: /contact/
+[rss]: /feed.xml

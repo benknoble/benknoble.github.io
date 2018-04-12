@@ -26,6 +26,9 @@ exclude:
   - .ackrc
   - .gitignore
 
+plugins:
+  - jekyll-feed
+
 defaults:
   -
     scope:
