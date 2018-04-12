@@ -1,6 +1,7 @@
 title: Junk Drawer
 description: For all those little papers scattered across your desk
 permalink: /blog/:year/:month/:day/:title
+author: benknoble
 
 repository: benknoble/benknoble.github.io
 github: [metadata]
@@ -28,6 +29,9 @@ exclude:
 
 plugins:
   - jekyll-feed
+  - jekyll-redirect-from
+  - jemoji
+  - jekyll-mentions
 
 defaults:
   -
