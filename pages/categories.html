@@ -1,0 +1,38 @@
+---
+title: Categories
+permalink: /categories/
+---
+<div id="category-list">
+  <ul class="categories">
+  {% for category in site.categories %}
+    {% capture category_name %}{{ category | first }}{% endcapture %}
+    <li class="category-item">
+      <a href="#{{ category_name | slugify }}">{{ category_name }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+
+<hr/>
+
+<div id="categories">
+{% for category in site.categories %}
+  {% capture category_name %}{{ category | first }}{% endcapture %}
+  <div class="category">
+    <h2 class="category-name" id="{{ category_name | slugify }}">{{ category_name }}</h2>
+    <ul class="posts">
+      {% for post in site.categories[category_name] %}
+        <li>
+          <h3><a href="{{ post.url | absolute_url }}" title="{{ post.title }}">{{ post.title }}</a>
+            <br>
+            <small class="meta">{{ post.date | date_to_string }} in {{ post.categories | array_to_sentence_string }}</small>
+          </h3>
+          {% include tags.html tags=post.tags %}
+          "{{ post.excerpt | remove: '<p>' | remove: '</p>' }} <a href ="{{ post.url }}">[...]</a>"
+        </li>
+        <br>
+      {% endfor %}
+    </ul>
+  </div>
+{% endfor %}
+</div>
