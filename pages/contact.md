@@ -9,7 +9,7 @@ permalink: /contact/
 | snail mail | equip your snail with a computer, then see above |
 | hologram | coming in the near future |
 
-*Other cornerns of the internet where I participate*
+*Other corners of the internet where I participate*
 
 | medium | where to find me |
 |--------|---------|
