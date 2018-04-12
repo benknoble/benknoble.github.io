@@ -7,6 +7,20 @@ permalink: /about/
 [Junk Drawer][site] is hosted by [GitHub][github] Pages and powered by the
 [Jekyll][jekyll] engine.
 
+### Junk Drawer
+
+So, what is the "Junk Drawer"? Good question. In my everyday life, no matter
+where I'm living or working, there's always a drawer or desk space or shelf or
+shoe box where I throw flyers, books, notes, scribbles, and thoughts. It's a
+catchall, and often times it gets quite cluttered.
+
+This blog is dedicated to being a virtual representation of my junk drawers,
+holding musings and notes from my life. Primarily, I will try to write about
+programming, but I will frequently digress into other topics, such as math,
+reading/writing, music, or D&D.
+
+To see my virtual Junk Drawer on GitHub, visit [benknoble/JunkDrawer][junk].
+
 ### Me
 
 I'm David B. Knoble, an Honors Computer Science student at UNC Chapel Hill.
@@ -27,22 +41,8 @@ height="58" alt="profile for David Ben Knoble on Stack Exchange, a network of
 free, community-driven Q&amp;A sites" title="profile for David Ben Knoble on
 Stack Exchange, a network of free, community-driven Q&amp;A sites"></a>
 
-### Junk Drawer
-
-So, what is the "Junk Drawer"? Good question. In my everyday life, no matter
-where I'm living or working, there's always a drawer or desk space or shelf or
-shoe box where I throw flyers, books, notes, scribbles, and thoughts. It's a
-catchall, and often times it gets quite cluttered.
-
-This blog is dedicated to being a virtual representation of my junk drawers,
-holding musings and notes from my life. Primarily, I will try to write about
-programming, but I will frequently digress into other topics, such as math,
-reading/writing, music, or D&D.
-
-To see my virtual Junk Drawer on GitHub, visit [benknoble/JunkDrawer][junk].
-
-Feel free to contact me with questions, corrections of misspelt words, or as a
-matter of passing interest!
+Feel free to [contact me][contact] with questions, corrections of misspelt
+words, or as a matter of passing interest!
 
 <!-- Links -->
 [github]: https://github.com/
@@ -53,3 +53,4 @@ matter of passing interest!
 [vim]: {{ site.data.people.benknoble.vi_se }}
 [showcase]: {{ site.data.people.benknoble.portfolio }}
 [site]: https://github.com/{{ site.repository }}
+[contact]: /contact/
