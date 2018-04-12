@@ -1,6 +1,7 @@
 ---
 title: Lady Book Dragon
 tags: [ Blog, Books ]
+category: Blog
 ---
 
 Long have I wanted to write book reviews on this blog. I have not yet made it

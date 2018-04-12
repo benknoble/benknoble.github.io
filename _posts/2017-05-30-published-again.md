@@ -1,6 +1,7 @@
 ---
 title: Secrets from a Freshman--Survival Skills, Chapter 2
 tags: [ College ]
+category: Blog
 ---
 
 Want to know what it takes to succeed during your Freshman year on a college

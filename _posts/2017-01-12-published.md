@@ -1,6 +1,7 @@
 ---
 title: Survival Skills, University Edition
 tags: [ College ]
+category: Blog
 ---
 
 I spent part of my Junior and most of my Senior year working with Lee Bierer,
