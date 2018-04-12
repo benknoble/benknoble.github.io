@@ -32,6 +32,7 @@ plugins:
   - jekyll-redirect-from
   - jemoji
   - jekyll-mentions
+  - jekyll-sitemap
 
 defaults:
   -
