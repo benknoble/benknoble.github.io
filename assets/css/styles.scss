@@ -55,10 +55,6 @@ strong {
 }
 
 header {
-  -webkit-border-radius: 8px 8px 0 0;
-  -moz-border-radius: 8px 8px 0 0;
-  -ms-border-radius: 8px 8px 0 0;
-  -o-border-radius: 8px 8px 0 0;
   border-radius: 8px 8px 0 0;
   background: #C6EAFA;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ddfbfc), color-stop(100%, #c6eafa));
@@ -95,16 +91,7 @@ header p {
 section {
   padding: 15px 20px;
   font-size: 15px;
-  background: -webkit-gradient(linear, 50% 0%, 50% 700, color-stop(0%, #fafafa), color-stop(100%, #fafafa));
-  background: -webkit-linear-gradient(#fafafa, #fafafa 700px);
-  background: -moz-linear-gradient(#fafafa, #fafafa 700px);
-  background: -o-linear-gradient(#fafafa, #fafafa 700px);
-  background: -ms-linear-gradient(#fafafa, #fafafa 700px);
-  background: linear-gradient(#fafafa, #fafafa 700px);
-  -webkit-border-radius: 0 0 8px 8px;
-  -moz-border-radius: 0 0 8px 8px;
-  -ms-border-radius: 0 0 8px 8px;
-  -o-border-radius: 0 0 8px 8px;
+  background: #fafafa;
   border-radius: 0 0 8px 8px;
   position: relative;
 }
