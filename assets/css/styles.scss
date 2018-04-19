@@ -7,10 +7,11 @@
 
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 body {
-  padding: 50px 0;
-  margin: 0;
-  font: 14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #555;
+  padding: 0 10px;
+  margin: 40px auto;
+  max-width: 640px;
+  font: 18px/1.6 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #444;
   font-weight: 300;
   background: #6c7989
 }
