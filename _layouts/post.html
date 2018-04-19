@@ -1,12 +1,13 @@
 ---
 layout: default
 ---
-{% include tags.html tags=page.tags %}
 <p class="meta">{{ page.date | date_to_string }} in {{ page.categories | array_to_sentence_string }}</p>
 <div id="post">
   {{ content }}
 </div>
 <hr/>
+<h4>Tags:</h4>
+{% include tags.html tags=page.tags %}
 <div id="post-categories">
   <h4>Categories:
   {% for category in page.categories %}
