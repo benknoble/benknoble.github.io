@@ -37,7 +37,7 @@ serve() {
   local env_used
   env_used="$(env_type "$1")"
   message "Using JEKYLL_ENV ${env_used}"
-  JEKYLL_ENV="${env_used}" bundle exec jekyll serve --watch
+  JEKYLL_ENV="${env_used}" bundle exec jekyll serve --watch --livereload
 }
 
 env_arg="${1:-development}"
