@@ -23,9 +23,14 @@ permalink: /categories/
     <ul class="posts">
       {% for post in site.categories[category_name] %}
         <li>
-          <h3><a href="{{ post.url | absolute_url }}" title="{{ post.title }}">{{ post.title }}</a>
-            <br>
-            <small class="meta">{{ post.date | date_to_string }} in {{ post.categories | array_to_sentence_string }}</small>
+          <h3>
+              <a href="{{ post.url | absolute_url }}"
+                 title="{{ post.title }}"
+                 id="{{ post.title | slugify }}" >
+              {{ post.title }}
+              </a>
+              <br>
+              <small class="meta">{{ post.date | date_to_string }} in {{ post.categories | array_to_sentence_string }}</small>
           </h3>
           {% include tags.html tags=post.tags %}
           "{{ post.excerpt | remove: '<p>' | remove: '</p>' }} <a href ="{{ post.url }}">[...]</a>"

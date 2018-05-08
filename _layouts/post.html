@@ -39,5 +39,7 @@ layout: default
   {% endif %}
 </div>
 <div id="back-to-posts">
-  <a href="{% link pages/categories.html %}">Back to posts</a>
+  <a href="{% link pages/categories.html %}#{{ page.title | slugify }}">
+    Back to posts
+  </a>
 </div>
