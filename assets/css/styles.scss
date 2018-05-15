@@ -5,19 +5,19 @@
 
 @import "syntax";
 
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
+
 body {
-  padding: 0 10px;
   margin: 40px auto;
-  max-width: 640px;
-  font: 18px/1.6 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  max-width: 840px;
+  font: 16px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #444;
-  font-weight: 300;
   background: #6c7989
 }
 
 /* wrap content in default layout */
 .wrapper {
-  width: 640px;
+  width: 840px;
 }
 
 header,
@@ -63,8 +63,6 @@ header {
 header h1 {
   margin: 0;
   padding: 0;
-  font-size: 24px;
-  line-height: 1.2;
   color: #069;
   text-shadow: rgba(255, 255, 255, 0.9) 0 1px 0;
 }
@@ -81,8 +79,7 @@ header p {
 }
 
 section {
-  padding: 15px 20px;
-  font-size: 15px;
+  padding: 15px 150px;
   background: #fafafa;
   border-radius: 0 0 8px 8px;
   position: relative;
@@ -107,12 +104,6 @@ table,
 pre,
 dl {
   margin: 0 0 20px;
-}
-
-h1,
-h2,
-h3 {
-  line-height: 1.1;
 }
 
 h1 {
@@ -146,7 +137,7 @@ img {
 code,
 pre {
   font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
-  font-size: 13px;
+  font-size: 12px;
   overflow-x: auto;
 }
 
