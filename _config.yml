@@ -1,12 +1,16 @@
-name: Junk Drawer
-permalink: /blog/:year/:month/:day/:title
+title: Junk Drawer
+description: For all those little papers scattered across your desk
+# permalink: pretty
+permalink: /:categories/:year/:month/:day/:title/
+author: benknoble
 
+repository: benknoble/benknoble.github.io
 github: [metadata]
 encoding: UTF-8
 kramdown:
   input: GFM
   hard_wrap: false
-future: true
+future: false
 jailed: false
 gfm_quirks: paragraph_end
 
@@ -20,3 +24,27 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  - notes
+  - .ackrc
+  - .gitignore
+
+plugins:
+  - jekyll-feed
+  - jekyll-redirect-from
+  - jemoji
+  - jekyll-mentions
+  - jekyll-sitemap
+
+defaults:
+  -
+    scope:
+      path: _posts
+      type: posts
+    values:
+      layout: post
+  -
+    scope:
+      path: ""
+      type: pages
+    values:
+      layout: page

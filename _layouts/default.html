@@ -1,53 +1,16 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>{{ page.title }}</title>
-		<!-- link to main stylesheet -->
-		<meta charset='utf-8'>
-    		<meta http-equiv="X-UA-Compatible" content="chrome=1">
-    		<link rel="stylesheet" type="text/css" href="{{ site.github.url }}/stylesheets/styles.css" media="screen">
-    		<link rel="stylesheet" type="text/css" href="{{ site.github.url }}/stylesheets/github-dark.css" media="screen">
-    		<script src="/javascripts/scale.fix.js"></script>
-    		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    
-    		<!--[if lt IE 9]>
-    		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    		<![endif]-->
-	</head>
-	<body>
-		<nav>
-    		<ul>
-        		<li><a href="/">Junk Drawer</a></li>
-	        	<li><a href="/about">About</a></li>
-        		<li><a href="/blog">Blog Posts</a></li>
-        		<li><a href="/tags">Tags</a></li>
-    		</ul>
-		</nav>
-		<div class="wrapper">
-     			<header>
-        			<h1>Junk Drawer</h1>
-       					<p>For all those little papers scattered across your desk</p>
-        				<p class="view"><a href="https://github.com/benknoble">View the Project on GitHub <small>benknoble</small></a></p>
-        				<ul>
-          					<li class="single"><a href="https://github.com/benknoble/benknoble.github.io">View On <strong>GitHub</strong></a></li>
-        				</ul>
-      			</header>
-      
-      			<section>
-      
-      				{{ content }}
-      
-      			</section>
-    		</div>
-		
-		<footer>
-			<ul>
-				<li><a href="mailto:ben.knoble@gmail.com">email</a></li>
-				<li><a href="https://github.com/benknoble">github</a></li>
-                                <li><a href="https://www.gitshowcase.com/benknoble">portfolio</a></li>
-				<li><a href="https://stackexchange.com/users/5546231"><img src="https://stackexchange.com/users/flair/5546231.png?theme=dark" width="208" height="58" alt="profile for David Ben Knoble on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for David Ben Knoble on Stack Exchange, a network of free, community-driven Q&amp;A sites"></a></li>
-			</ul>
-		</footer>
-      		<!--[if !IE]><script>fixScale(document);</script><![endif]-->
-	</body>
+  {% include head.html %}
+  <body>
+    <div class="wrapper">
+      {% include header.html %}
+      <section>
+      {% include nav.html %}
+        <h1>{{ page.title }}</h1>
+        {{ content }}
+      {% include footer.html %}
+      </section>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
 </html>

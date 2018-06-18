@@ -1,0 +1,14 @@
+buttons:
+
+  # - title: Home
+  #   url: /
+  - title: About
+    url: /about/
+  - title: Posts
+    url: /categories/
+  # - title: Blog Posts
+  #   url: /blog/
+  - title: Tags
+    url: /tags/
+  - title: Archive
+    url: /archive/

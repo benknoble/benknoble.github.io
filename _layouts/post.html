@@ -1,14 +1,45 @@
 ---
 layout: default
 ---
-<ul class="tags">
-  {% for tag in page.tags %}
-    <li><a href="{{ site.github.url }}/tags#{{ tag }}" class="tag">{{ tag }}</a></li>
-  {% endfor %}
-</ul>
-<h1>{{ page.title }}</h1>
-<p class="meta">{{ page.date | date_to_string }}</p>
-
-<div class="post">
+<p class="meta">{{ page.date | date_to_string }} in {{ page.categories | array_to_sentence_string }}</p>
+<div id="post">
   {{ content }}
+</div>
+<hr/>
+<h4>Tags:</h4>
+{% include tags.html tags=page.tags %}
+<div id="post-categories">
+  <h4>Categories:
+  {% for category in page.categories %}
+    <a href="{% link pages/categories.html %}#{{ category | slugify }}">{{ category }}</a>
+    {% unless forloop.last %},&nbsp;{% endunless %}
+  {% endfor %}
+  </h4>
+</div>
+<div id="post-navigation">
+  {% if page.previous.url %}
+  <span id="previous">
+    <a href="{{ page.previous.url | absolute_url }}"
+      title="{{ page.previous.title }}">
+      Previous
+    </a>
+  </span>
+  {% else %}
+  <span id="no-previous">Previous</span>
+  {% endif %}
+  {% if page.next.url %}
+  <span id="next">
+    <a href="{{ page.next.url | absolute_url }}"
+       title="{{ page.next.title }}">
+      Next
+    </a>
+  </span>
+  {% else %}
+  <span id="no-next">Next</span>
+  {% endif %}
+</div>
+<div id="back-to-posts">
+  <a href="{% link pages/categories.html %}#{{ page.title | slugify }}">
+    Back to posts
+  </a>
 </div>

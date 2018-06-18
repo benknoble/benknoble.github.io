@@ -1,8 +1,7 @@
 ---
-layout: post
 title: Secrets from a Freshman--Survival Skills, Chapter 2
-date: 2017-05-30
-tags: [ College ]
+tags: [ college ]
+category: Blog
 ---
 
 Want to know what it takes to succeed during your Freshman year on a college
@@ -19,4 +18,4 @@ You can also find my previous musings on the subject [here][article].
 [lee]: http://collegeadmissionsstrategies.com
 [part_1]: http://www.carolinacollegebound.com/2017/05/23/secrets-to-a-successful-freshman-year-lessons-learned-part-1/
 [part_2]: http://www.carolinacollegebound.com/2017/05/26/lessons-learned-freshman-year-part-2-importance-of-connecting/?CID=10487377&BSD_SID=29723
-[article]: {{ site.url }}{% link _posts/2017-01-12-published.md %}
+[article]: {% link _posts/2017-01-12-published.md %}

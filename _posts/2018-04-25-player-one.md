@@ -1,8 +1,7 @@
 ---
-layout: post
 title: Ready, Player Two ?
-date: 2018-04-25
 tags: [ film, critic, ]
+category: Blog
 ---
 
 Brace yourself. *The Oasis* launches in 3...2...1...
@@ -87,5 +86,5 @@ more like a liberation. And don't forget your sense of nostalgia.
 [grail]: https://en.wikipedia.org/wiki/Holy_Grail
 [jones]: https://en.wikipedia.org/wiki/Indiana_Jones_and_the_Last_Crusade
 [python]: https://en.wikipedia.org/wiki/Monty_Python_and_the_Holy_Grail
-[contact]: {% link about/index.md %}
+[contact]: {% link pages/contact.md %}
 [prince]: https://en.wikipedia.org/wiki/The_Little_Prince
