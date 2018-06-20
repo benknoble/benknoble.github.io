@@ -1,0 +1,29 @@
+#! /usr/bin/env bash
+
+set -euo pipefail
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}")" && pwd )"
+
+SKEL="$dir/til.skel"
+AWK_TITLE="$dir/add-title.awk"
+
+log() {
+  printf '%s\n' "$@" >&2
+}
+
+die() {
+  log "$@"
+  exit 1
+}
+
+title_sub() {
+  title="$1"
+  file="$2"
+  local temp
+  temp="$(mktemp)" || die "Couldn't get a temp file"
+  trap "rm -f $temp" EXIT
+  awk -v title="$title" -f "$AWK_TITLE" > "$temp" && mv "$temp" "$file"
+}
+
+main() {
+  :
+}
