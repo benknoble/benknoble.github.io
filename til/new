@@ -1,10 +1,10 @@
 #! /usr/bin/env bash
 
 set -euo pipefail
-dir="$( cd "$( dirname "${BASH_SOURCE[0]}")" && pwd )"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")" && pwd )"
 
-SKEL="$dir/til.skel"
-AWK_TITLE="$dir/add-title.awk"
+SKEL="$DIR/til.skel"
+AWK_TITLE="$DIR/add-title.awk"
 
 log() {
   printf '%s\n' "$@" >&2
