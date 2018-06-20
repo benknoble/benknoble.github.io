@@ -18,10 +18,7 @@ die() {
 title_sub() {
   title="$1"
   file="$2"
-  local temp
-  temp="$(mktemp)" || die "Couldn't get a temp file"
-  trap "rm -f $temp" EXIT
-  awk -v title="$title" -f "$AWK_TITLE" > "$temp" && mv "$temp" "$file"
+  awk -v title="$title" -f "$AWK_TITLE" "$SKEL" > "$file"
 }
 
 main() {
