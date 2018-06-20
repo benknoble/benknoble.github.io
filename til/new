@@ -4,6 +4,7 @@ set -euo pipefail
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 SKEL="$DIR/til.skel"
+SKEL_LEN="$( wc -l < "$SKEL" | tr -d ' ' )"
 AWK_TITLE="$DIR/add-title.awk"
 POSTS_DIR="$( dirname "$DIR" )/_posts"
 
@@ -22,8 +23,42 @@ title_sub() {
   awk -v title="$title" -f "$AWK_TITLE" "$SKEL" > "$file"
 }
 
-main() {
-  :
+fix_title() {
+  title="$1"
+  tr '[:upper:] ' '[:lower:]-' <<<"$title"
 }
 
-main
+generate_post_name() {
+  title="$1"
+  local day
+  day="$( date +'%Y-%m-%d' )"
+  file="$POSTS_DIR/${day}-${title}.md"
+  # log "File name: $file"
+  echo "$file"
+}
+
+edit() {
+  "${EDITOR:-vi}" +"$SKEL_LEN" "$@"
+}
+
+usage() {
+  die "$0 [title]: create a new til post for today with title 'title'"
+}
+
+main() {
+  if (( $# < 1 )); then
+    usage
+  fi
+  title="$1"
+  local fixed_title
+  fixed_title="$( fix_title "$title" )"
+  local post
+  post="$( generate_post_name "$fixed_title" )"
+  if [[ -e "$post" ]]; then
+    die "Post $post already exists!"
+  fi
+  title_sub "$title" "$post"
+  edit "$post"
+}
+
+main "$@"
