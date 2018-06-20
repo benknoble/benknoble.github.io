@@ -27,6 +27,7 @@ exclude:
   - notes
   - .ackrc
   - .gitignore
+  - til
 
 plugins:
   - jekyll-feed
