@@ -5,7 +5,6 @@ permalink: /:categories/:year/:month/:day/:title/
 author: benknoble
 
 repository: benknoble/benknoble.github.io
-github: [metadata]
 encoding: UTF-8
 kramdown:
   input: GFM
@@ -27,7 +26,6 @@ exclude:
   - notes
   - .ackrc
   - .gitignore
-  - til
 
 plugins:
   - jekyll-feed
