@@ -32,7 +32,7 @@ generate_post_name() {
   title="$1"
   local day
   day="$( date +'%Y-%m-%d' )"
-  file="$POSTS_DIR/${day}-${title}.md"
+  file="$POSTS_DIR/${day}-til-${title}.md"
   # log "File name: $file"
   echo "$file"
 }
