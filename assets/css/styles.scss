@@ -277,7 +277,7 @@ nav a:hover {
   }
 
   section {
-      padding: 0 20px
+      padding: 0 20px;
   }
 }
 
@@ -343,12 +343,23 @@ nav a:hover {
   background:  #DEDEDE;
 }
 
+.tag-title,
 .archive-title {
   float: left;
 }
 
+.tag-date,
 .archive-date {
   float: right;
+}
+
+#tag-list,
+#archive-list {
+    margin-bottom: 15px;
+}
+
+.clearfix {
+    clear: both;
 }
 
 #post-navigation #no-previous,
