@@ -8,6 +8,10 @@ SKEL_LEN="$( wc -l < "$SKEL" | tr -d ' ' )"
 AWK_TITLE="$DIR/add-title.awk"
 POSTS_DIR="$( dirname "$DIR" )/_posts"
 
+# man ispunct, minus the '-'
+# can't use '[:punct:]' because of the dash
+PUNCTUATION='!"#$%&()*+,./:;<=>?@[\]^_`{|}~'\'
+
 log() {
   printf '%s\n' "$@" >&2
 }
@@ -25,7 +29,7 @@ title_sub() {
 
 fix_title() {
   title="$1"
-  tr '[:upper:] ' '[:lower:]-' <<<"$title"
+  tr '[:upper:] ' '[:lower:]-' <<<"$title" | tr -d "$PUNCTUATION"
 }
 
 generate_post_name() {
