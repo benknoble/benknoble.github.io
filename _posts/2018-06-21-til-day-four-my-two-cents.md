@@ -1,6 +1,6 @@
 ---
 title: Day Four, My Two Cents
-tags: [ til, infra, intern, work ]
+tags: [ til, infra, intern ]
 category: Work
 ---
 

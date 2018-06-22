@@ -1,6 +1,6 @@
 ---
 title: First Day
-tags: [ til, infra, intern, work ]
+tags: [ til, infra, intern ]
 category: Work
 ---
 
