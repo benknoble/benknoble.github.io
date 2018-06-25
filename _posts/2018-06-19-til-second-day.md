@@ -1,6 +1,6 @@
 ---
 title: Second Day
-tags: [ til, infra, intern ]
+tags: [ til, infra, intern, ixia, shell ]
 category: Work
 ---
 

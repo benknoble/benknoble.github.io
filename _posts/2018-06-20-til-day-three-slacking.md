@@ -1,6 +1,6 @@
 ---
 title: Day Three--Slacking
-tags: [ til, infra, intern ]
+tags: [ til, infra, intern, make ]
 category: Work
 ---
 
