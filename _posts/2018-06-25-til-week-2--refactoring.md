@@ -1,6 +1,6 @@
 ---
 title: Week 2--Refactoring++
-tags: [ til, infra, intern ]
+tags: [ til, infra, intern, refactor ]
 category: Work
 ---
 
