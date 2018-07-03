@@ -1,6 +1,6 @@
 ---
 title: Day match [0-9]--Regex
-tags: [ til, infra, intern ]
+tags: [ til, infra, intern, tcl, regex ]
 category: Work
 ---
 
