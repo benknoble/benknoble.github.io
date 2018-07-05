@@ -78,10 +78,11 @@ use ssh urls.
 
 ## Round and Round Again
 
-I planned to do a whole thing here, but I've moved it to the feature. Expect it
-on Friday (or early, if I'm feeling generous).
+I planned to do a whole thing here, but I've moved it to the [feature][]. Expect
+it on Friday (or early, if I'm feeling generous).
 
 [ibm]: https://www.ibm.com/support/knowledgecenter/en/SSDV85_4.1.0/Admin/concepts/part_hypervisors_cloud.html
 [Github]: https://github.com
 [Dotfiles]: {{ site.data.people.benknoble.github }}/Dotfiles
 [cluster]: {% link _posts/2018-06-25-til-week-2--refactoring.md %}#dhcp-clustering
+[feature]: {% link _posts/2018-07-04-feature-cycles.md %}
