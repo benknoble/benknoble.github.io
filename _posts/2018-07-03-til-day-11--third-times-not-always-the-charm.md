@@ -9,7 +9,7 @@ category: Work
 Ok, ok, I'm not done with the emoticons yet.
 
 Also, since tomorrow is the 4th of July :fireworks: and I don't have work :grin:
-I'm not doing a TIL. Instead you'll get the feature that spawned out of
+I'm not doing a TIL. Instead you'll get the [feature][] that spawned out of
 yesterday's TIL.
 
 ## Today I Learned
@@ -20,7 +20,7 @@ yesterday's TIL.
 ## Cache ! :baseball:
 
 I'll get to why I had time to work on this in a moment (and it'll wind up being
-related to tomorrow's feature article as well), so hang tight.
+related to tomorrow's [feature][] article as well), so hang tight.
 
 In the meantime, let me tell you about [another][] [strategy][] for [build][]
 [time][] [improvement][]: cached artifacts.
@@ -73,3 +73,4 @@ of the code, I'm not surprised.
 [time]: {% link _posts/2018-06-27-til-day-8-context-and-computers.md %}
 [improvement]: {% link _posts/2018-06-28-til-day-match-0-9--regex.md %}
 [spec]: https://docs.google.com/document/d/14HxZFLA7eMN6leZeBBRfWUUuBFE5t3vyfIDwgfm5O3I/edit?usp=sharing
+[feature]: {% link _posts/2018-07-04-feature-cycles.md %}
