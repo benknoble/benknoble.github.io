@@ -1,6 +1,6 @@
 ---
 title: Day 7, Asking Questions
-tags: [ til, infra, intern ]
+tags: [ til, infra, intern, builds ]
 category: Work
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Reading, Refactoring, and RPatterns
-tags: [ til, infra, intern, refactor, shell ]
+tags: [ til, infra, intern, refactor, shell, builds ]
 category: Work
 ---
 
