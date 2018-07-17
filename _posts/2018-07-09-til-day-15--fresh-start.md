@@ -28,9 +28,9 @@ Now that I know things work, I can put them back in. They constitute
 backgrounding two build steps so that they run in parallel rather than
 series--I'm hoping to get a speed increase out of this.
 
-On a further note, I read an interesting post in response to an article about
-TDD and its wastefulness. I'll link them back later if I can find them (it was
-on a different machine).
+On a further note, I read an interesting [post][] in response to an [article][]
+about TDD and its wastefulness. ~~I'll link them back later if I can find them
+(it was on a different machine).~~
 
 One point mentioned was that these kinds of tests condition developers to assume
 "green is good," meaning my code is perfect and didn't break anything.
@@ -75,3 +75,5 @@ aren't sharp, then I can't cut anything with them.
 But if *I'm* not sharp, how do I know what to cut?
 
 [preserve]: {% link _posts/2018-06-22-til-reading-refactoring-and-rpatterns.md %}#functional-refactoring
+[post]: https://dmerej.info/blog/post/my-thoughts-on-why-most-unit-testing-is-waste/
+[article]: http://rbcs-us.com/documents/Why-Most-Unit-Testing-is-Waste.pdf
