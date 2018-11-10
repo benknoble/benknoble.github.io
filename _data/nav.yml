@@ -12,3 +12,5 @@ buttons:
     url: /tags/
   - title: Archive
     url: /archive/
+  - title: Reading List
+    url: /reading/
