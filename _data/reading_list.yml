@@ -1,2 +1,78 @@
 - title: Fabulous Adventures in Code
   url: https://ericlippert.com
+- title: Joel on Software
+  url: https://www.joelonsoftware.com
+- title: Bastard Operator from Hell (BOFH)
+  url: http://www.bofharchive.com
+- title: The Angry GM
+  url: https://theangrygm.com
+- title: dmerej's Blog
+  url: https://dmerej.info/blog/
+- title: Code Without Rules
+  url: https://codewithoutrules.com
+- title: Linus Akesson
+  url: http://www.linusakesson.net/index.php
+- title: Blog de Lionel Drico
+  url: http://ploum.net
+- title: Coding Horror
+  url: https://blog.codinghorror.com/
+- title: Brave New Geek
+  url: https://bravenewgeek.com
+- title: Destroy All Software
+  url: https://www.destroyallsoftware.com/
+- title: Crocker's Rules
+  url: http://sl4.org/crocker.html
+- title: An interesting approach to résumés
+  url: http://resume.livingston-gray.com/
+- title: Dork Tower
+  url: http://www.dorktower.com/
+- title: Trevor Jim
+  url: http://trevorjim.com/
+- title: Extra Cheese (dead)
+  url: http://blog.extracheese.org/
+- title: t+1
+  url: http://blog.tplus1.com
+- title: Arabesque
+  url: https://sanctum.geek.nz/arabesque/
+- title: Select Start SQL
+  url: https://selectstarsql.com/
+- title: Darts, Dice, and Coins
+  url: http://www.keithschwarz.com/darts-dice-coins/
+- title: Matt Might
+  url: http://matt.might.net
+- title: Crafting Interpreters
+  url: http://www.craftinginterpreters.com/
+- title: Wargames
+  url: http://overthewire.org/wargames/
+- title: Learn You a Haskell
+  url: http://learnyouahaskell.com
+- title: Beautiful Racket
+  url: https://beautifulracket.com/
+- title: Practical Typography
+  url: https://practicaltypography.com/
+- title: RubyCon:Adventures in Functional Programming
+  url: http://confreaks.tv/videos/rubyconf2012-y-not-adventures-in-functional-programming
+- title: Programming with Nothing
+  url: http://codon.com/programming-with-nothing
+- title: Unix Haters
+  url: http://web.mit.edu/~simsong/www/ugh.pdf
+- title: Map, map, and flatMap in Scala
+  url: http://www.brunton-spall.co.uk/post/2011/12/02/map-map-and-flatmap-in-scala/
+- title: Learn Vimscript the Hard Way
+  url: http://learnvimscriptthehardway.stevelosh.com/
+- title: Steve Losh
+  url: http://stevelosh.com/blog/
+- title: Vimcasts
+  url: http://vimcasts.org/
+- title: Advanced Bash Scripting Guide
+  url: http://www.tldp.org/LDP/abs/html/abs-guide.html
+- title: Bash Strict Mode
+  url: http://redsymbol.net/articles/unofficial-bash-strict-mode/
+- title: Git Book
+  url: https://git-scm.com/book/en/v2
+- title: THE Note about Git Commit Messages
+  url: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+- title: Object Calisthenics
+  url: https://www.cs.helsinki.fi/u/luontola/tdd-2009/ext/ObjectCalisthenics.pdf
+- title: Things of Interest
+  url: https://qntm.org/
