@@ -26,6 +26,8 @@ exclude:
   - notes
   - .ackrc
   - .gitignore
+  - til
+  - Session.vim
 
 plugins:
   - jekyll-feed
