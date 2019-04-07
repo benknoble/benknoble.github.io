@@ -134,4 +134,4 @@ program. It's on my todo-list.
 
 [loner]: {{ site.data.people.benknoble.loner }}
 [loner-site]: {{ site.url }}/loner
-[might]: https://matt.might.net/articles/grammars-bnf-ebnf
+[might]: http://matt.might.net/articles/grammars-bnf-ebnf
