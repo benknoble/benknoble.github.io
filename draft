@@ -1,0 +1,60 @@
+#! /usr/bin/env bash
+
+set -euo pipefail
+current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+TEMPLATE="---
+title: '%%TITLE%%'
+tags: [ tags ]
+category: [ Blog, Code ]
+---
+"
+DRAFTS="$current_dir/_drafts"
+
+die() { exit 1 ; }
+
+usage() {
+  cat<<DOG
+$0 article-name: edit a draft
+DOG
+} >&2
+
+usage_and_die() { usage && die ; }
+
+edit() {
+  local file="$1"
+  local title
+  title="$( basename "${file%%.md}" | tr '_-' ' ' )"
+  if ! [[ -d "$DRAFTS" ]] ; then
+    mkdir "$DRAFTS"
+  fi
+  if ! [[ -e "$file" ]] ; then
+    CMD=(
+      sed
+      -e "s/%%TITLE%%/$title/g"
+    )
+    "${CMD[@]}" <<<"$TEMPLATE" >"$file"
+  fi
+  exec "$EDITOR" "$file"
+}
+
+main() {
+  local draft
+  case $# in
+    1)
+      case "$1" in
+        -h)
+          usage_and_die
+          ;;
+        *)
+          draft="$DRAFTS/$( basename "${1%%.md}" ).md"
+      esac
+      ;;
+    *)
+      usage_and_die
+      ;;
+  esac
+  edit "$draft"
+}
+
+main "$@"
