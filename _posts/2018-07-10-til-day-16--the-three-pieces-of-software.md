@@ -49,7 +49,7 @@ Piece #2: Good Design.
 
 ## 1+1 ≠ 2, or, Math is Broken, and I Need to Fix It
 
-Ok, well, *math* isn't broken, per se. But a build that runs find sequentially
+Ok, well, *math* isn't broken, per se. But a build that runs fine sequentially
 is.
 
 Think of it like this. There are two steps to the build. Step 1 gives us `1`.

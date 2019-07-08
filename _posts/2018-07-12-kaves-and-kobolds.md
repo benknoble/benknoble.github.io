@@ -49,7 +49,7 @@ published by WOTC. Yes, I've run it a few times before.
 And yes, that's what we played.
 
 You might know, I was expecting to walk into a Rage of Demons storyline
-adventure. In fact I specifically build Hargroth, my Human Ranger 2, with that
+adventure. In fact I specifically built Hargroth, my Human Ranger 2, with that
 in mind. His favored enemy is fiends, favored terrain the Underdark, and he is a
 mash-up of Dr. Van Helsing from Bram Stoker's Dracula, Hugh Jackman-Van Helsing,
 and Gibbs. Silent, stealthy, and gruff, but intelligent. And deadly.

@@ -1,7 +1,7 @@
 ---
 title: Day 01010--Everything Runs on Cycles
 tags: [ til, infra, intern, vm, ssh, github, git ]
-category: Work
+category: Work, Code
 ---
 
 $$A \to B \to C \to A \to \cdots $$
