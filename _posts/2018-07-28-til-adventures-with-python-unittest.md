@@ -1,7 +1,7 @@
 ---
 title: Adventures with Python unittest
 tags: [ til, infra, intern ]
-category: Work, Code
+category: [ Work, Code ]
 ---
 
 Some good, some bad, some ugly, as with all tests.

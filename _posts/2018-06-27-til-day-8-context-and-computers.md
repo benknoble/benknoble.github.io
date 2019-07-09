@@ -1,7 +1,7 @@
 ---
 title: Day 8, Context and Computers
 tags: [ til, infra, intern, shell, builds ]
-category: Work, Code
+category: [ Work, Code ]
 ---
 
 I will keep this alliteration up until it kills me. Just sayin'.

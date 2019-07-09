@@ -1,7 +1,7 @@
 ---
 title: Week 7--Code and Communication
 tags: [ til, infra, intern ]
-category: Work, Code
+category: [ Work, Code ]
 ---
 
 One week after my forays of unit testing, and I'm almost ready to ship.
