@@ -1,7 +1,7 @@
 ---
 title: Feature--Round and Round Again
 tags: [ feature, intern ]
-category: Work
+category: Blog
 ---
 
 :bike: :recycle: :bike:

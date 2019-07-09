@@ -1,7 +1,7 @@
 ---
 title: Life Lessons
 tags: [ til, infra, intern, rpg, sotdl, "in nomine", food, friends ]
-category: Work
+category: Blog
 ---
 
 This is my first "Today I Learned" on the new schedule, though it now spans

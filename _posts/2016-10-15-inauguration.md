@@ -1,7 +1,7 @@
 ---
 title: Site Inauguration
 tags: [ boyscouts, blog ]
-category: Blog
+category: Announcement
 ---
 Today is the online Junk Drawer's birthday! Hooray!
 

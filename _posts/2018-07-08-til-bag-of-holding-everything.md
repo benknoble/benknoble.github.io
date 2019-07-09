@@ -1,7 +1,7 @@
 ---
 title: Bag of Holding (Everything)
 tags: [ til, infra, intern, rpg, make, python, "call of cthulhu", d&d-5e ]
-category: Work
+category: Blog
 ---
 
 You never know what you might pull out…

@@ -1,7 +1,7 @@
 ---
 title: ':tada: Announcing the release of loner! :tada:'
 tags: [ github, scala, ebnf, ll-one, grammar, tdd ]
-category: [ Blog, Code ]
+category: Release
 ---
 
 I am pleased to announce the release of version 0.1.0 of [loner][loner]! You can

@@ -1,7 +1,7 @@
 ---
 title: Day 7, Asking Questions
 tags: [ til, infra, intern, builds ]
-category: Work
+category: Blog
 ---
 
 Because that's what the job of any scientist is.

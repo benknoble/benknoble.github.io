@@ -1,7 +1,7 @@
 ---
 title: Reading, Refactoring, and RPatterns
 tags: [ til, infra, intern, refactor, shell, builds ]
-category: [ Work, Code ]
+category: Blog
 ---
 
 I couldn't leave the alliteration hanging in a title containing the word

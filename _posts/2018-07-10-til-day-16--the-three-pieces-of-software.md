@@ -1,7 +1,7 @@
 ---
 title: Day 16--The Three Pieces of Software
 tags: [ til, infra, intern ]
-category: Work
+category: Blog
 ---
 
 There's probably more than that, but these are the bigguns.
