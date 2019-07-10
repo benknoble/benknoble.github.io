@@ -5,7 +5,7 @@ permalink: /contact/
 
 | medium | address |
 |--------|---------|
-| email | [ben.knoble@gmail.com][mail] |
+| email | [my personal email][mail] |
 | snail mail | equip your snail with a computer, then see above |
 | hologram | coming in the near future |
 
