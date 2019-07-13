@@ -4,8 +4,8 @@ set -euo pipefail
 site_source="$( cd "$( dirname "${BASH_SOURCE[0]}")" && pwd )"
 
 message() {
-  echo "$@" >&2
-}
+  printf '%s\n' "$@"
+} >&2
 
 usage() {
   message "$0 [ENV_TYPE]
