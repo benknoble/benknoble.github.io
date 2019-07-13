@@ -1,7 +1,7 @@
 ---
 title: Feature--Flexibility and Engagement
 tags: [ feature, intern, management ]
-category: Work
+category: Blog
 ---
 
 Physical *and* temporal flexibility.

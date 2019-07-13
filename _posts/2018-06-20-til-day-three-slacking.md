@@ -1,7 +1,7 @@
 ---
 title: Day Three--Slacking
 tags: [ til, infra, intern, make ]
-category: Work, Code
+category: Blog
 ---
 
 I promise it is work related!

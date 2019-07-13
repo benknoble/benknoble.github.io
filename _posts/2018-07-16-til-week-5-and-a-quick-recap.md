@@ -1,7 +1,7 @@
 ---
 title: Week 5 (and a Quick Recap)
 tags: [ til, infra, intern, builds, make, refactor, tdd, shell ]
-category: Work, Code
+category: Blog
 ---
 
 I've officially crossed the halfway point of my internship. But don't worry,

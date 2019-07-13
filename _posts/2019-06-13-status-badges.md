@@ -1,7 +1,7 @@
 ---
 title: 'Status Badges'
 tags: [ 'project-managament' ]
-category: [ Blog, Code ]
+category: Blog
 ---
 
 Today I made some status badges to represent the quality of the code I publish

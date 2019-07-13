@@ -1,7 +1,7 @@
 ---
 title: Day match [0-9]--Regex
 tags: [ til, infra, intern, tcl, regex ]
-category: Work, Code
+category: Blog
 ---
 
 This is __not__ a regex tutorial. Those are in the manpages.

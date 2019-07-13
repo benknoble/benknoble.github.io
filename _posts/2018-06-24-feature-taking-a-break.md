@@ -1,7 +1,7 @@
 ---
 title: Feature--Taking a Break
 tags: [ feature, intern, breaks ]
-category: Work
+category: Blog
 ---
 
 The animal kingdom has known for centuries, if not millenia, that breaks are a

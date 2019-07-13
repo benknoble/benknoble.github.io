@@ -1,7 +1,7 @@
 ---
 title: Openings & Closings
 tags: [ til, infra, intern ]
-category: Work
+category: Blog
 ---
 
 Tuesday is meeting day. And after our meetings, I met up with my younger brother

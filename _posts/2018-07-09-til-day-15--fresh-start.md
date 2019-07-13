@@ -1,7 +1,7 @@
 ---
 title: Day 15--Fresh Start
 tags: [ til, infra, intern, builds, python, json, git, make, shell, tdd ]
-category: Work, Code
+category: Blog
 ---
 
 Refreshing your browser page does not count as one.

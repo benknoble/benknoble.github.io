@@ -1,7 +1,7 @@
 ---
 title: ':tada: Announcing the release of tmplr! :tada:'
 tags: [ 'github', 'python', 'pip', 'templates', 'shell' ]
-category: [ Blog, Code ]
+category: Release
 ---
 
 I am pleased to announce the release of version 0.1.0 of [tmplr][tmplr]! You can

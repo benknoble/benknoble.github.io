@@ -1,7 +1,7 @@
 ---
 title: Week 2--Refactoring++
 tags: [ til, infra, intern, refactor, shell, builds ]
-category: Work, Code
+category: Blog
 ---
 
 Something about those [R][]'s keeps coming back...

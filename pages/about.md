@@ -16,41 +16,71 @@ catchall, and often times it gets quite cluttered.
 
 This blog is dedicated to being a virtual representation of my junk drawers,
 holding musings and notes from my life. Primarily, I will try to write about
-programming, but I will frequently digress into other topics, such as math,
-reading/writing, music, or D&D.
+programming, but I will frequently digress to other topics, such as math,
+language (reading, writing, or programming), music, or D&D.
 
 To see my virtual Junk Drawer on GitHub, visit [benknoble/JunkDrawer][junk].
 
 ### Me
 
-I'm David B. Knoble, an Honors Computer Science student at UNC Chapel Hill.
+I'm D. Ben Knoble, an Honors Computer Science student at UNC Chapel Hill. I
+have a second major in French and a minor in Math.
 
 I rely on a healthy mix of self-taught experimentation and formal class training
-for anything I do, including programming. My first experiences were been in C#
-and Java, but recently I have discovered Scala, Vim, Bash, and Python. As time
-continues, I gain exposure to other technologies, most recently including Go.
+for anything I do, including programming. Being self-taught keeps me curious. My
+biggest personal interests in the computer science sphere are programming
+languages and programming tools. Outside of that, I'm an avid biker,
+clarinetist, martial artist, reader, and gamer.
 
 For some of the projects I'm working on, check out
 [benknoble@GitHub][benknoble], or try my [showcase][showcase]. I'm also on
-[StackOverflow][stack_overflow] and a few other StackExchange sites ([vim][vim]
-anyone?).
+the Stack Exchange network (primarly [vim][vim], though I still use
+[StackOverflow][stack_overflow] as well as a few others).
 
-<a href="https://stackexchange.com/users/5546231"><img
-src="https://stackexchange.com/users/flair/5546231.png?theme=dark" width="208"
-height="58" alt="profile for David Ben Knoble on Stack Exchange, a network of
-free, community-driven Q&amp;A sites" title="profile for David Ben Knoble on
-Stack Exchange, a network of free, community-driven Q&amp;A sites"></a>
+{% include SO_flair.html %}
+{% include LinkedIn_flair.html %}
+{% include github_flair.html %}
 
-<script type="text/javascript"
-src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
-<div class="LI-profile-badge"  data-version="v1" data-size="medium"
-data-locale="en_US" data-type="horizontal" data-theme="dark"
-data-vanity="ben-knoble"><a class="LI-simple-link"
-href='https://www.linkedin.com/in/ben-knoble?trk=profile-badge'>David (Ben)
-Knoble</a></div>
+Please [contact me][contact] with questions, corrections, or to chat.
 
-Feel free to [contact me][contact] with questions, corrections of misspelt
-words, or as a matter of passing interest!
+### Technical
+
+- Favorite __editor__: `vim`.
+
+Editing should be done at the speed of thought, not the speed of click-and-drag
+or the speed of which-function-key-is-it
+
+- Favorite __IDE__: `tmux`.
+
+No, it's not an IDE like Eclipse. It *is* a great way to manage projects and
+terminals. (Note: I don't even use iTerm!  Terminal.app is good enough with
+tmux, even if it doesn't support truecolor yet.)
+
+- Favorite __shell__: `bash`.
+
+It's the default, it's what I learned, it's just simple enough to be a really
+great shell. It does what I need and doesn't get in my way. It's easier to
+configure than zsh, and forces me not to rely on *too* many non-portable-isms. I
+do wish sh would get proper (associative) arrays.
+
+- Favorite __language__: a mix of `bash`, `make`, `vimscript`, the functional
+stuff.
+
+Scala is fun, but the JVM dependence makes it too heavy for me most of the time.
+I want to learn perl, the lisp and ML families, and Haskell well enough to be
+dangerous. After that, something older and something esoteric. Perhaps
+smalltalk?
+
+- Favorite __OS__: `macOS`.
+
+I've been using a macbook since 2012 and it's here to stay. I'm not convinced on
+the new touchbar thing yet though.
+
+- Favorite __version control__: definitely `git`.
+
+I think some people prefer the mercurial (hg) interface, but I'm not sold. Git
+has outgrown its historical reputation for a complex interface, and is the de
+facto standard.
 
 [RSS Feed][rss]
 

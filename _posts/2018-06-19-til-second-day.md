@@ -1,7 +1,7 @@
 ---
 title: Second Day
 tags: [ til, infra, intern, ixia, shell ]
-category: Work
+category: Blog
 ---
 
 My second day at work--progress was made.

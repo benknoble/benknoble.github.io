@@ -1,7 +1,7 @@
 ---
 title: Day Four, My Two Cents
 tags: [ til, infra, intern ]
-category: Work
+category: Blog
 ---
 
 Penny for your thoughts?

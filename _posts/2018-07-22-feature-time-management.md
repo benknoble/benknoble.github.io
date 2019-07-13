@@ -1,7 +1,7 @@
 ---
 title: Time Stops for No Mouse
 tags: [ feature, time ]
-category: Work
+category: Blog
 ---
 
 ...or man, as it happens. Read on for some of my thoughts about time, how to

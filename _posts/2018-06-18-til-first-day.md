@@ -1,7 +1,7 @@
 ---
 title: First Day
 tags: [ til, infra, intern, ixia ]
-category: Work
+category: Blog
 ---
 
 Today was my first day with [Nuage Networks][], a [software-defined
