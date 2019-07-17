@@ -5,7 +5,7 @@ category: Release
 ---
 
 I am pleased to announce the release of version 1.0.0 of [plink][plink]! You can
-find its online documentation on [GitHub][plink]. (I [did the thing](rant) this
+find its online documentation on [GitHub][plink]. (I [did the thing][rant] this
 weekend!)
 
 ## What is it?
