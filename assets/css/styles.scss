@@ -8,16 +8,10 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
 
 body {
-  margin: 40px auto;
-  max-width: 840px;
   font: 16px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #444;
-  background: #6c7989
-}
-
-/* wrap content in default layout */
-.wrapper {
-  width: 840px;
+  background: #fafafa;
+  margin: 0;
 }
 
 header,
@@ -31,7 +25,6 @@ a {
 }
 
 p {
-  margin: 0 0 20px;
   padding: 0;
 }
 
@@ -41,7 +34,6 @@ strong {
 }
 
 header {
-  border-radius: 8px 8px 0 0;
   background: #C6EAFA;
   position: relative;
   padding: 15px 20px;
@@ -67,10 +59,10 @@ header p {
 }
 
 section {
-  padding: 15px 150px;
+  padding: 1em 5em;
   background: #fafafa;
-  border-radius: 0 0 8px 8px;
   position: relative;
+  max-width: 80ch;
 }
 
 h1,
@@ -212,8 +204,7 @@ footer li a {
 
 nav {
   overflow: hidden;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
+  padding-bottom: 1em;
 }
 
 nav ul {
