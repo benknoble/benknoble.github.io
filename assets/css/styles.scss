@@ -227,6 +227,7 @@ nav li.active a {
 #post-navigation #no-next,
 #post-navigation #previous a,
 #post-navigation #next a,
+#back-to-writings a,
 #back-to-posts a,
 nav a {
   display: block;
@@ -240,6 +241,7 @@ nav a {
 
 #post-navigation #previous a:hover,
 #post-navigation #next a:hover,
+#back-to-writings a:hover,
 #back-to-posts a:hover,
 nav a:hover {
   background-color: #c6eafa;
@@ -347,6 +349,7 @@ nav a:hover {
   float: right
 }
 
+#back-to-writings,
 #back-to-posts {
   clear: both;
   text-align: center;

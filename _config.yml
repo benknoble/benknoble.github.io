@@ -48,3 +48,13 @@ defaults:
       type: pages
     values:
       layout: page
+  -
+    scope:
+      path: _writings
+      type: writings
+    values:
+      layout: writing
+
+collections:
+  writings:
+    output: true

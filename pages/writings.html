@@ -1,0 +1,21 @@
+---
+title: Writings
+permalink: /writings/
+---
+<p>
+Things I've written, like fiction, poetry, or talks.
+</p>
+
+<div id="writings">
+  <ul class="writings-list">
+    {% for writing in site.writings %}
+      <li class="writing-item">
+        <a
+          id="{{ writing.title | slugify }}"
+          href="{{ writing.url }}">
+          {{ writing.title }}</a>
+        <small class="meta">Written {{ writing.date | date_to_string }}</small>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

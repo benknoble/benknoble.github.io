@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<p class="meta">Written {{ page.date | date_to_string }}</p>
+<div id="writing">
+  {{ content }}
+</div>
+<div id="back-to-writings">
+  <a href="{% link pages/writings.html %}#{{ page.title | slugify }}">
+    Back to writings</a>
+</div>
