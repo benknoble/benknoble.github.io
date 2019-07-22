@@ -221,6 +221,9 @@ nav li {
 nav li.active a {
   color: #555;
   cursor: default;
+  &:hover {
+      background: #fafafa;
+  }
 }
 
 #post-navigation #no-previous,
