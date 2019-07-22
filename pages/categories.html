@@ -32,8 +32,7 @@ chronological order, or <a href={% link pages/tags.html %}>tags</a> for tags.
               <a href="{{ post.url | absolute_url }}"
                  title="{{ post.title }}"
                  id="{{ post.title | slugify }}" >
-              {{ post.title }}
-              </a>
+              {{ post.title }}</a>
               <br>
               <small class="meta">{{ post.date | date_to_string }} in {{ post.categories | array_to_sentence_string }}</small>
           </h3>

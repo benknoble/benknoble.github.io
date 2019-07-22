@@ -21,8 +21,7 @@ layout: default
   <span id="previous">
     <a href="{{ page.previous.url | absolute_url }}"
       title="{{ page.previous.title }}">
-      Previous
-    </a>
+      Previous</a>
   </span>
   {% else %}
   <span id="no-previous">Previous</span>
@@ -31,8 +30,7 @@ layout: default
   <span id="next">
     <a href="{{ page.next.url | absolute_url }}"
        title="{{ page.next.title }}">
-      Next
-    </a>
+      Next</a>
   </span>
   {% else %}
   <span id="no-next">Next</span>
@@ -40,6 +38,5 @@ layout: default
 </div>
 <div id="back-to-posts">
   <a href="{% link pages/categories.html %}#{{ page.title | slugify }}">
-    Back to posts
-  </a>
+    Back to posts</a>
 </div>
