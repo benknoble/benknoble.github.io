@@ -5,6 +5,7 @@ permalink: /:categories/:year/:month/:day/:title/
 author: benknoble
 
 repository: benknoble/benknoble.github.io
+disqus_shortname: https-benknoble-github-io
 encoding: UTF-8
 kramdown:
   input: GFM

@@ -5,6 +5,7 @@ layout: default
 <div id="writing">
   {{ content }}
 </div>
+{% include disqus.html %}
 <div id="back-to-writings">
   <a href="{% link pages/writings.html %}#{{ page.title | slugify }}">
     Back to writings</a>
