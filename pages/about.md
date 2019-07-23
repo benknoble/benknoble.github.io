@@ -82,8 +82,6 @@ I think some people prefer the mercurial (hg) interface, but I'm not sold. Git
 has outgrown its historical reputation for a complex interface, and is the de
 facto standard.
 
-[RSS Feed][rss]
-
 <!-- Links -->
 [github]: https://github.com/
 [jekyll]: http://jekyllrb.com
@@ -94,4 +92,3 @@ facto standard.
 [showcase]: {{ site.data.people.benknoble.portfolio }}
 [site]: https://github.com/{{ site.repository }}
 [contact]: /contact/
-[rss]: /feed.xml
