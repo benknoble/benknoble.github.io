@@ -222,7 +222,7 @@ nav li.active a {
   color: #555;
   cursor: default;
   &:hover {
-      background: #fafafa;
+    background: #fafafa;
   }
 }
 
@@ -257,7 +257,7 @@ nav a:hover {
   }
 
   section {
-      padding: 0 20px;
+    padding: 0 20px;
   }
 }
 
@@ -335,11 +335,11 @@ nav a:hover {
 
 #tag-list,
 #archive-list {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .clearfix {
-    clear: both;
+  clear: both;
 }
 
 #post-navigation #no-previous,
@@ -371,18 +371,18 @@ nav a:hover {
 }
 
 kbd {
-    display: inline-block;
-    margin: 0 .1em;
-    padding: .1em .6em;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #242729;
-    text-shadow: 0 1px 0 #FFF;
-    background-color: #e1e3e5;
-    border: 1px solid #adb3b9;
-    border-radius: 3px;
-    box-shadow: 0 1px 0 rgba(12, 13, 14, 0.2), 0 0 0 2px #FFF inset;
-    white-space: nowrap
+  display: inline-block;
+  margin: 0 .1em;
+  padding: .1em .6em;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #242729;
+  text-shadow: 0 1px 0 #FFF;
+  background-color: #e1e3e5;
+  border: 1px solid #adb3b9;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(12, 13, 14, 0.2), 0 0 0 2px #FFF inset;
+  white-space: nowrap
 }
 
 .load-comments {
