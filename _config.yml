@@ -28,6 +28,7 @@ exclude:
   - .ackrc
   - .gitignore
   - Session.vim
+  - tags-list
 
 plugins:
   - jekyll-feed

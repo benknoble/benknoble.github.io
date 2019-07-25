@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+
+main() {
+  ack --md -hQ 'tags: [' \
+    | tr -d '"'\' \
+    | sed -Ee 's/tags: \[|]$//g' -e 's/,/\'$'\n''/g' \
+    | sed -Ee 's/^[[:space:]]*|[[:space:]]*$//g' -e '/^[[:space:]]*$/d' \
+    | sort -u
+}
+
+main "$@"
