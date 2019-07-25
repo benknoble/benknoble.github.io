@@ -1,6 +1,6 @@
 ---
 title: Skill Checks in D&D 5e
-tags: [ d&d, zelda, ]
+tags: [ d&d-5e, zelda, ]
 ---
 
 > Migrated and edited from the Temple of Time site, where it was originally

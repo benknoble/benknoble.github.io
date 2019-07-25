@@ -1,6 +1,6 @@
 ---
 title: 'Status Badges'
-tags: [ 'project-managament' ]
+tags: [ 'project-management' ]
 category: Blog
 ---
 
