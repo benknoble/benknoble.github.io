@@ -59,3 +59,7 @@ defaults:
 collections:
   writings:
     output: true
+
+feed:
+  collections:
+    - writings
