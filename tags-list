@@ -14,7 +14,7 @@ tags() {
 main() {
   filter=(cat)
   if (($# > 0)) ; then
-    filter=(grep "$@")
+    filter=(grep -E "$@")
   fi
   tags | "${filter[@]}"
 }
