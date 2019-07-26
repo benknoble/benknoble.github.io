@@ -1,11 +1,21 @@
 #! /usr/bin/env bash
 
-main() {
+set -euo pipefail
+
+tags() {
   ack --md -hQ 'tags: [' \
     | tr -d '"'\' \
     | sed -Ee 's/tags: \[|]$//g' -e 's/,/\'$'\n''/g' \
     | sed -Ee 's/^[[:space:]]*|[[:space:]]*$//g' -e '/^[[:space:]]*$/d' \
     | sort -u
+}
+
+main() {
+  filter=(cat)
+  if (($# > 0)) ; then
+    filter=(grep "$@")
+  fi
+  tags | "${filter[@]}"
 }
 
 main "$@"
