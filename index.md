@@ -13,6 +13,10 @@ Excerpt:
 > {{ latest.excerpt | remove: '<p>' | remove: '</p>' }}
 
 ## Recent Posts
+<ul>
 {% for post in site.posts offset:1 limit:2 %}
-- [{{ post.title }}]({{ post.url }}) posted on {{ post.date | date: "%d %B %Y" }}
+  <li>
+  <a href="{{ post.url }}">{{ post.title }}</a> posted on {{ post.date | date: "%d %B %Y" }}
+  </li>
 {% endfor %}
+</ul>

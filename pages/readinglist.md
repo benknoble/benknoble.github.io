@@ -14,8 +14,12 @@ permalink: /reading/
 In addition to the entries below, check out my list of [subscribed RSS
 feeds][feeds].
 
+<ul>
 {% for blog in site.data.reading_list %}
-- [{{blog.title}}]({{blog.url}})
+  <li>
+  <a href="{{blog.url}}">{{blog.title}}</a>
+  </li>
 {% endfor %}
+</ul>
 
 [feeds]: https://github.com/benknoble/Dotfiles/blob/master/links/newsboat/urls
