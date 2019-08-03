@@ -36,26 +36,19 @@ strong {
 header {
   background: #C6EAFA;
   position: relative;
-  padding: 15px 20px;
-  border-bottom: 1px solid #B2D2E1;
-}
+  padding: 1em 1em;
 
-header h1 {
-  margin: 0;
-  padding: 0;
-  color: #069;
-  text-shadow: rgba(255, 255, 255, 0.9) 0 1px 0;
-}
+  h1 {
+    margin: 0;
+    padding: 0;
+    color: #069;
+  }
 
-header.without-description h1 {
-  margin: 10px 0;
-}
-
-header p {
-  margin: 0;
-  color: #61778B;
-  width: 300px;
-  font-size: 13px;
+  p {
+    margin: 0;
+    color: #61778B;
+    font-size: 0.9em;
+  }
 }
 
 section {
@@ -73,7 +66,7 @@ h5,
 h6 {
   color: #222;
   padding: 0;
-  margin: 0 0 20px;
+  margin: 0 0 1em;
   line-height: 1.2;
 }
 
@@ -83,11 +76,11 @@ ol,
 table,
 pre,
 dl {
-  margin: 0 0 20px;
+  margin: 0 0 1em;
 }
 
 h1 {
-  font-size: 28px;
+  font-size: 2em;
 }
 
 h2 {
@@ -102,10 +95,8 @@ h6 {
 }
 
 blockquote {
-  margin: 0 -20px 20px;
-  padding: 15px 20px 1px 40px;
+  padding: 1em 1em 0.1em 1em;
   font-style: italic;
-  background: #ccc;
   background: rgba(0, 0, 0, 0.06);
   color: #222;
 }
@@ -122,84 +113,39 @@ pre {
 }
 
 pre {
-  padding: 20px;
+  padding: 1em;
   color: #f8f8f2;
-  margin: 0 -20px 20px;
-}
-
-pre code {
-  color: #f8f8f2;
-}
-
-li pre {
-  margin-left: -60px;
-  padding-left: 60px;
 }
 
 table {
-  width: 100%;
   border-collapse: collapse;
 }
 
 th,
 td {
   text-align: left;
-  padding: 5px 10px;
-  border-bottom: 1px solid #aaa;
-}
-
-dt {
-  color: #222;
-  font-weight: 700;
-}
-
-th {
-  color: #222;
-}
-
-small {
-  font-size: 11px;
+  padding: 0.25em 0.5em;
+  border-bottom: 0.1em solid #aaa;
 }
 
 hr {
   border: 0;
   background: #aaa;
-  height: 1px;
-  margin: 0 0 20px;
-}
-
-footer {
-  color: #ccc;
-  overflow: hidden;
-  margin-top: 2px;
-  padding-top: 2px;
-  font-size: 12px;
-}
-
-footer a {
-  color: #069;
-  font-weight: bold;
-}
-
-footer p {
-  float: left;
-}
-
-footer p + p {
-  float: right;
+  height: 0.1em;
+  margin: 0 0 1em;
 }
 
 footer ul {
   list-style: none;
 }
 
-footer li {
-  float: left;
-}
-
-footer li a {
-  display: block;
-  padding: 8px;
+footer {
+  // doesn't work???
+  // background: #c6eafa;
+  li {
+    float: left;
+    padding: 0.5em;
+  }
 }
 
 nav {
@@ -215,7 +161,7 @@ nav ul {
 
 nav li {
   float: left;
-  margin: 2px;
+  margin: 0.1em;
 }
 
 nav li.active a {
@@ -235,7 +181,7 @@ nav li.active a {
 nav a {
   display: block;
   text-align: center;
-  padding: 4px;
+  padding: 0.1em;
   font-weight: bold;
   border-style: solid;
   border-width: 2px;
@@ -265,6 +211,7 @@ nav a:hover {
 
   li {
     float: left;
+    margin: 0;
   }
 }
 
@@ -294,7 +241,7 @@ nav a:hover {
 
 #tag-list,
 #archive-list {
-  margin-bottom: 15px;
+  margin-bottom: 1em;
 }
 
 .clearfix {
@@ -316,8 +263,8 @@ nav a:hover {
   clear: both;
   text-align: center;
   position: relative;
-  top: 2px;
-  margin-bottom: 15px;
+  top: 0.1em;
+  margin-bottom: 1em;
 }
 
 .center {
@@ -354,9 +301,13 @@ kbd {
   border-style: solid;
   border-width: 2px;
   border-radius: 5px;
-  padding: 4px;
+  padding: 0.1em;
   &:hover, &:active {
     background-color: #c6eafa;
   }
-  margin-bottom: 2px;
+  margin-bottom: 0.1em;
+}
+
+.post {
+  margin-bottom: 0.75em;
 }
