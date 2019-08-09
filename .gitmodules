@@ -1,0 +1,3 @@
+[submodule "subs/dracula-syntax"]
+	path = subs/dracula-syntax
+	url = git://github.com/dracula/pygments.git
