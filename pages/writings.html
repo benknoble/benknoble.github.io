@@ -6,9 +6,11 @@ permalink: /writings/
 Things I've written, like fiction, poetry, or talks.
 </p>
 
+<a href="/feed/writings.xml">RSS Feed</a>
+
 <div id="writings">
   <ul class="writings-list">
-    {% for writing in site.writings %}
+    {% for writing in site.writings reversed %}
       <li class="writing-item">
         <a
           id="{{ writing.title | slugify }}"
@@ -19,5 +21,3 @@ Things I've written, like fiction, poetry, or talks.
     {% endfor %}
   </ul>
 </div>
-
-<a href="/feed/writings.xml">RSS Feed</a>
