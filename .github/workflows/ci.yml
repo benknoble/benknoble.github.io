@@ -7,11 +7,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-16.04, ubuntu-18.04, macos-latest]
+        os: [ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v1
-      - run: |
-          bundle install
+      - uses: actions/setup-ruby@v1
+        with:
+          version: 2.6.x
+      - name: Install deps
+        run: bundle install
+      - name: Lint site
+        run: |
           jekyll doctor
           jekyll build --profile
