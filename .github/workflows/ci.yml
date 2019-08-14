@@ -11,6 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+        with:
+          submodules: true
       - uses: actions/setup-ruby@v1
         with:
           version: 2.6.x
@@ -20,5 +22,5 @@ jobs:
           bundle install
       - name: Lint site
         run: |
-          # jekyll doctor
+          jekyll doctor
           jekyll build --profile
