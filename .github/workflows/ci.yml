@@ -22,5 +22,5 @@ jobs:
           bundle install
       - name: Lint site
         run: |
-          jekyll doctor
+          # jekyll doctor
           jekyll build --profile
