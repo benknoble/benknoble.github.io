@@ -15,7 +15,9 @@ jobs:
         with:
           version: 2.6.x
       - name: Install deps
-        run: bundle install
+        run: |
+          gem install bundler
+          bundle install
       - name: Lint site
         run: |
           jekyll doctor
