@@ -1,6 +1,6 @@
 ---
 title: 'Ruby, where are you (in GitHub workflows)?'
-tags: [ git, github, github-workflow, ruby, ci ]
+tags: [ git, github, github-workflow, ruby, ci, dotfiles]
 category: [ Blog ]
 ---
 
