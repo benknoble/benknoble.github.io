@@ -4,6 +4,8 @@ tags: []
 category: Blog
 ---
 
+I map D&D alignments to type systems.
+
 | | Lawful (static) | Neutral (none) | Chaotic (dynamic) |
 |-|-----------------|----------------|-------------------|
 | Good (strong) | C, Java, the ML family: every object has a type, and it must be correct at compile time | | Perl6, (Lisp I think), Python: every object has a type, but variables don't have static compile-time types. All the checking happens at runtime. |
