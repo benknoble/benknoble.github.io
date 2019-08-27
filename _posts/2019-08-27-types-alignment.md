@@ -1,6 +1,6 @@
 ---
 title: The Alignment Axes of Type Systems
-tags: []
+tags: [types, d&d-5e, prog-langs]
 category: Blog
 ---
 
