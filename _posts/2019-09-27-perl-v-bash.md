@@ -243,6 +243,39 @@ Just, wow. Now, let's take a look at the frequency of lines. The format is
 
 Anyone want to build a histogram for me? Say, bucketed by 10?
 
+**Edit 28th September**: I got close with `awk(1)` (`A`), and formatted by
+(lines, count):
+
+```bash
+# wc -l $(ack -f --shell) | G -v 'total' | fields 1 |
+#   A '{ printf "%d\n", sprintf("%1.0e", $0) }' |
+#   frequency | fields 2 1 | sort -g |
+#   A '{ printf "%d\t", $1
+#        for (i=0;i<int($2);i++) printf "*"
+#        printf "\n" }'
+2       *
+4       *
+5       ***
+6       *
+7       **
+8       *
+10      ********
+20      *********
+30      ******
+40      *****
+50      **
+60      **
+70      **
+80      **
+90      *
+100     ***
+200     **
+```
+
+(With judicious function definitions, I got this down to
+`wc -l $(ack -f --shell) | G -v 'total' | fields 1 | nearest_ten | frequency | histogram_f`
+.)
+
 To be clear, my argument is that emilper presents good reasons against Perl in
 large systems. But not against Perl v. Bash.
 
