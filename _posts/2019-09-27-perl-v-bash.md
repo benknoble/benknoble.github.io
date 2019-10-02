@@ -167,7 +167,7 @@ to rethink their design.
 
 My longest (in lines) scripts in my Dotfiles are:
 
-```shell
+```bash
 # wc -l $(ack -f --shell) | sort -rg | head
     2009 total                            # total lines
      196 links/bash/PS1.bash              # builds my prompt
@@ -180,7 +180,7 @@ The real scripts are on the order of 100 lines.
 
 The smallest?
 
-```shell
+```bash
 # wc -l $(ack -f --shell) | sort -g | head
        2 links/bash/linux/clipboard.bash
        4 links/bash/jobs.bash
@@ -197,7 +197,7 @@ The smallest?
 Just, wow. Now, let's take a look at the frequency of lines. The format is
 (count lines):
 
-```shell
+```bash
 # wc -l $(ack -f --shell) | G -v 'total' | fields 1 | frequency
    1 10
    1 102
