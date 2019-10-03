@@ -22,5 +22,5 @@ permalink: /contact/
 [mail]: mailto:{{ site.data.people.benknoble.email }}
 [portfolio]: {{ site.data.people.benknoble.portfolio }}
 [github]: {{ site.data.people.benknoble.github }}
-[stack]: {{ site.data.people.benknoble.stack_overflow }}
+[stack]: {{ site.data.people.benknoble.stack_network }}
 [linkedin]: {{ site.data.people.benknoble.linkedin }}
