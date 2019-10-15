@@ -28,6 +28,7 @@ exclude:
   - .gitignore
   - Session.vim
   - tags-list
+  - subs/
 
 plugins:
   - jekyll-feed
