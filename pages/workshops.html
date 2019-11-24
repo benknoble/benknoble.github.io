@@ -1,0 +1,21 @@
+---
+title: Workshops
+permalink: /workshops/
+---
+<p>
+Workshops I've given
+</p>
+
+<div id="workshops">
+  <ul class="workshops-list">
+    {% for workshop in site.workshops reversed %}
+      <li class="workshop-item">
+        <a
+          id="{{ workshop.title | slugify }}"
+          href="{{ workshop.url }}">
+          {{ workshop.title }}</a>
+        <small class="meta">Originally given: {{ workshop.date | date_to_string }}</small>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

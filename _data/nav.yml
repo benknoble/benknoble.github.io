@@ -4,6 +4,8 @@ buttons:
     url: /about/
   - title: Posts
     url: /categories/
+  - title: Workshops
+    url: /workshops/
   - title: Writings
     url: /writings/
   - title: Reading List
