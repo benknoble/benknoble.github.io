@@ -1,0 +1,12 @@
+---
+layout: default
+---
+<p class="meta">Originally presented {{ page.date | date_to_string }}</p>
+<div id="workshop-content">
+  {{ content }}
+</div>
+{% include disqus.html %}
+<div id="back-to-workshops">
+  <a href="{% link pages/workshops.html %}#{{ page.title | slugify }}">
+    Back to workshops</a>
+</div>

@@ -56,9 +56,17 @@ defaults:
       type: writings
     values:
       layout: writing
+  -
+    scope:
+      path: _workshops
+      type: workshops
+    values:
+      layout: workshop
 
 collections:
   writings:
+    output: true
+  workshops:
     output: true
 
 feed:

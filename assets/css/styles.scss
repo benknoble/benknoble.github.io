@@ -176,6 +176,7 @@ nav li.active a {
 #post-navigation #no-next,
 #post-navigation #previous a,
 #post-navigation #next a,
+#back-to-workshops a,
 #back-to-writings a,
 #back-to-posts a,
 nav a {
@@ -258,6 +259,7 @@ nav a:hover {
   float: right
 }
 
+#back-to-workshops,
 #back-to-writings,
 #back-to-posts {
   clear: both;
