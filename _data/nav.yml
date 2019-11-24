@@ -4,10 +4,6 @@ buttons:
     url: /about/
   - title: Posts
     url: /categories/
-  - title: Tags
-    url: /tags/
-  - title: Archive
-    url: /archive/
   - title: Writings
     url: /writings/
   - title: Reading List
