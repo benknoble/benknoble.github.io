@@ -6,6 +6,7 @@
 @import "syntax";
 
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap&subset=latin-ext');
 
 body {
   font: 16px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -107,8 +108,8 @@ img {
 
 code,
 pre {
-  font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
-  font-size: .9em;
+  font-family: 'Source Code Pro', monospace;
+  font-size: .95em;
   overflow-x: auto;
 }
 
