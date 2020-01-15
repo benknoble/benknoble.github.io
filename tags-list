@@ -3,7 +3,7 @@
 set -euo pipefail
 
 tags() {
-  ack --md -hQ 'tags: [' \
+  ack --markdown -hQ 'tags: [' \
     | tr -d '"'\' \
     | sed -Ee 's/tags: \[|]$//g' -e 's/,/\'$'\n''/g' \
     | sed -Ee 's/^[[:space:]]*|[[:space:]]*$//g' -e '/^[[:space:]]*$/d' \
