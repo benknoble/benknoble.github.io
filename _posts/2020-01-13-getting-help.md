@@ -24,7 +24,7 @@ Keep these things in mind when asking for help from others.
 - Do check spelling and grammar<sup>4</sup>
 - Do check formatting
 - Do read the entire question again before asking
-- [Do _not_ post images of text]({% link _posts/2019-11-24-pics-text.md %})
+- [Do *not* post images of text]({% link _posts/2019-11-24-pics-text.md %})
 
 ### In person
 
