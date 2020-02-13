@@ -107,7 +107,7 @@ Further examples:
 ```bash
 # most recent commands
 recent() {
-  hisotry | cut -c8- | cut -d" " -f1 | frequency_sorted | sort -rn | head
+  history | cut -c8- | cut -d" " -f1 | frequency_sorted | sort -rn | head
 }
 
 # mode
