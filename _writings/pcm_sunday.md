@@ -23,9 +23,12 @@ adulterer," "rapist," and "murderer." This is a "far cry" from the "shalom" God
 is calling us to. David's self-image is so worn down that he struggles to
 recognized God's pure, perfect love. This is not new to me: friends, this is the
 image of my biblical Doppelgänger. Covered in shame, hiding from my own self and
-from vulnerability with others, I know what is to be the deeply sinful David. I
-would like to share with you my response to Psalm 139, written at Fall Retreat;
-you will find it in your bulletin if you would like to follow along.
+from vulnerability with others, I know what is to be like the deeply sinful
+David. Just as David had "stuff" that he wrestled with, so do I. So do each of
+us.
+
+I would like to share with you my response to Psalm 139, written at Fall
+Retreat; you will find it in your bulletin if you would like to follow along.
 
 ```
 Shattered,
@@ -93,6 +96,11 @@ wrong with us. Made in the image and likeness of God, our natural state does
 this news is also a challenge: to confront my shame, I need people. And for
 others to confront theirs, they need me. This is a necessary and desirable
 vulnerability, and yet it scares us.
+
+None of us *wants* to be so weak and so broken that we need a savior to love us
+and redeem us the way Jesus does. But we all are. As we move into the Lenten
+season next week, I would encourage each of us to think about our need for a
+restorative savior, one who brings shalom and without whom we cannot be whole.
 
 So I leave you with this: who helps you confront your shame? Who lifts up the
 Lord's love for you? And how can you do that for others?
