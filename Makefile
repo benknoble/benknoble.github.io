@@ -29,7 +29,7 @@ prod: JEKYLL_ENV = production
 prod: serve
 
 lint: $(DEPS)
-	# $(JEKYLL) doctor
+	$(JEKYLL) doctor
 	$(JEKYLL) build --profile $(BUILD_OPTS)
 
 clean:

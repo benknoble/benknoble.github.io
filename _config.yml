@@ -4,6 +4,7 @@ description: For all those little papers scattered across your desk
 permalink: /:categories/:year/:month/:day/:title/
 author: benknoble
 
+url: https://benknoble.github.io
 repository: benknoble/benknoble.github.io
 disqus_shortname: https-benknoble-github-io
 encoding: UTF-8
