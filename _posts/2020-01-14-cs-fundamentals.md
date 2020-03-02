@@ -54,5 +54,4 @@ I won't give the entire formal description here (unless someone really asks for
 it), but I've coded a reference implementation in Clojure to keep with the theme
 of balanced parentheses.
 
-<script
-src="https://gist.github.com/benknoble/f6d157217a7a814450d6fc9cf45625ee.js"></script>
+{% gist f6d157217a7a814450d6fc9cf45625ee %}
