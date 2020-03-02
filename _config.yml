@@ -16,21 +16,21 @@ jailed: false
 gfm_quirks: paragraph_end
 
 exclude:
-  - serve
-  - README.md
   - Gemfile
   - Gemfile.lock
   - Makefile
+  - README.md
   - Session.vim
-  - tags-list
+  - serve
   - subs/
+  - tags-list
 
 plugins:
   - jekyll-feed
-  - jekyll-redirect-from
-  - jemoji
   - jekyll-mentions
+  - jekyll-redirect-from
   - jekyll-sitemap
+  - jemoji
 
   # gh pages
   # - jekyll-coffeescript
