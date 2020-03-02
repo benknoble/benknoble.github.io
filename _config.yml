@@ -20,13 +20,6 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
-  - node_modules
-  - vendor/bundle/
-  - vendor/cache/
-  - vendor/gems/
-  - vendor/ruby/
-  - .ackrc
-  - .gitignore
   - Session.vim
   - tags-list
   - subs/
@@ -37,6 +30,17 @@ plugins:
   - jemoji
   - jekyll-mentions
   - jekyll-sitemap
+
+  # gh pages
+  # - jekyll-coffeescript
+  # - jekyll-default-layout
+  # - jekyll-gist
+  # - jekyll-github-metadata
+  # - jekyll-optional-front-matter
+  # - jekyll-paginate
+  # - jekyll-readme-index
+  # - jekyll-relative-links
+  # - jekyll-titles-from-headings
 
 defaults:
   -
