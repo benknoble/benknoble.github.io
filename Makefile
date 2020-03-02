@@ -21,6 +21,7 @@ serve: $(DEPS)
 	$(JEKYLL) serve --watch --livereload $(SERVE_OPTS)
 
 local: JEKYLL_ENV = development
+local: SERVE_OPTS += --incremental
 local: serve
 debug: JEKYLL_ENV = debug
 debug: serve
