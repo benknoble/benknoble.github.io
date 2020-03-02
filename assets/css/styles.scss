@@ -6,7 +6,7 @@
 @import "syntax";
 
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap&subset=latin-ext');
+@import url('https://cdn.jsdelivr.net/npm/victormono@latest/dist/index.min.css');
 
 body {
   font: 16px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -108,7 +108,7 @@ img {
 
 code,
 pre {
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Victor Mono', monospace;
   font-size: .95em;
   overflow-x: auto;
 }
