@@ -136,3 +136,31 @@
   url: https://jasonroell.com/2015/03/16/12-most-infuential-books-every-software-engineer-needs-to-read/
 - title: Unix Toolbox (somewhat dated)
   url: http://cb.vu/unixtoolbox.xhtml
+- title: 'Magic: the Gathering is Turing Complete'
+  url: https://arxiv.org/abs/1904.09828
+- title: A Personal History of Modeless Editing and Cut/Copy-Paste
+  url: https://dl.acm.org/doi/pdf/10.1145/2212877.2212896?download=true
+- title: Programming with Categories
+  url: http://brendanfong.com/programmingcats.html
+- title: Category Theory for Programmers
+  url: https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/
+- title: Lecture notes on Types and Programming Languages
+  url: https://www.cs.cmu.edu/~fp/courses/15814-f18/lectures/Notes-15814-f18.pdf
+- title: Parametric Press
+  url: https://parametric.press/
+- title: Bel
+  url: http://paulgraham.com/bel.html
+- title: Haskell wiki
+  url: https://wiki.haskell.org/Haskell
+- title: Operator Etymology
+  url: https://jasdev.me/operators
+- title: 'Cunningham & Cunningham'
+  url: http://c2.com/
+- title: Can Programming Be Liberated from the von Neumann Style? A Functional Style and Its Algebra of Programs
+  url: http://www.thocp.net/biographies/papers/backus_turingaward_lecture.pdf
+- title: argumatronic
+  url: https://argumatronic.com
+- title: Lambda the Ultimate
+  url: http://lambda-the-ultimate.org
+- title: Game Programming Patterns
+  url: https://gameprogrammingpatterns.com/
