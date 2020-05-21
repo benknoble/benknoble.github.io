@@ -67,13 +67,20 @@ great shell. It does what I need and doesn't get in my way. It's easier to
 configure than zsh, and forces me not to rely on *too* many non-portable-isms. I
 do wish sh would get proper (associative) arrays.
 
-- Favorite __language__: a mix of `bash`, `make`, `vimscript`, the functional
-stuff.
+- Favorite __languages__: a mix of `shell`, `make`, `vimscript`, and the
+functional stuff.
 
-Scala is fun, but the JVM dependence makes it too heavy for me most of the time.
-I want to learn perl, the lisp and ML families, and Haskell well enough to be
-dangerous. After that, something older and something esoteric. Perhaps
-smalltalk?
+I've written enough SML to really enjoy it (see my entries for the 2019 Advent
+of Code, for example). Scala and Clojure are fun, but the JVM dependence makes
+it too heavy for me most of the time. I appreciate the true smallness of C, and
+have learned a lot from it. Haskell and Rust are next on my list. Then some new
+paradigms: maybe true logic programming or something. After that,
+something older and something esoteric.
+
+(Languages I'm tired of? `python` and `javascript` make the top of the list. The
+former is everywhere, but it's functional-language side isn't on par with things
+like SML or Clojure. The latter is, well, broken, though Deno seems to be making
+progress.)
 
 - Favorite __OS__: `macOS`.
 
