@@ -62,10 +62,13 @@ tmux, even if it doesn't support truecolor yet.)
 
 - Favorite __shell__: `bash`.
 
-It's the default, it's what I learned, it's just simple enough to be a really
-great shell. It does what I need and doesn't get in my way. It's easier to
-configure than zsh, and forces me not to rely on *too* many non-portable-isms. I
-do wish sh would get proper (associative) arrays.
+It's the default; it's what I learned; it's just simple enough to be a really
+great shell (the core really is small). It does what I need and doesn't get in
+my way. It's easier to configure than zsh, and forces me not to rely on *too*
+many non-portable-isms. I do wish sh would get proper (associative) arrays.
+
+I have [switched to zsh]({% link _posts/2020-05-21-switch-zsh.md %}) for
+interactive use, but bash and sh are still my automation go-tos.
 
 - Favorite __languages__: a mix of `shell`, `make`, `vimscript`, and the
 functional stuff.
