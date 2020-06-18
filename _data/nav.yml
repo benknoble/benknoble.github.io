@@ -6,6 +6,8 @@ buttons:
     url: /categories/
   - title: Workshops
     url: /workshops/
+  - title: Papers
+    url: /papers/
   - title: Writings
     url: /writings/
   - title: Reading List

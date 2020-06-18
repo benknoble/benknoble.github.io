@@ -1,0 +1,20 @@
+---
+title: Papers
+permalink: /papers/
+---
+<p>
+Papers I have written or contributed to.
+</p>
+
+<div id='papers'>
+  <ul class='papers-list'>
+    {% for paper in site.data.papers %}
+      <li class='paper-item'>
+        <a id='{{ paper.title }}' href='{{ paper.url }}'>
+          {{ paper.title }}</a>
+        <div>by {{ paper.authors | join: " and " }}</div>
+        <div><small class='meta'>Published: {{ paper.date | date_to_string }}</small></div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
