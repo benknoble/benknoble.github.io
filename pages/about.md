@@ -96,6 +96,12 @@ I think some people prefer the mercurial (hg) interface, but I'm not sold. Git
 has outgrown its historical reputation for a complex interface, and is the de
 facto standard.
 
+- Favorite **keyboard**: my Ergodox EZ.
+
+<div style="padding-top: 60%; position: relative;">
+	<iframe src="https://configure.ergodox-ez.com/embed/ergodox-ez/layouts/BNalB/latest/0" style="border: 0; height: 100%; left: 0; position: absolute; top: 0; width: 100%"></iframe>
+</div>
+
 <!-- Links -->
 [github]: https://github.com/
 [jekyll]: http://jekyllrb.com
