@@ -23,8 +23,9 @@ To see my virtual Junk Drawer on GitHub, visit [benknoble/JunkDrawer][junk].
 
 ### Me
 
-I'm D. Ben Knoble, an Honors Computer Science student at UNC Chapel Hill. I
-have a second major in French and a minor in Math.
+I'm D. Ben Knoble, an graduate Computer Science student at UNC Chapel Hill. I
+completed my undergraduate degree in CS and French, with a minor in Mathematics.
+I am now pursuing a Master's in CS.
 
 I rely on a healthy mix of self-taught experimentation and formal class training
 for anything I do, including programming. Being self-taught keeps me curious. My
