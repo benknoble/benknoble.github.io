@@ -150,7 +150,7 @@ these, but this might have required additional setup.
 
 ## But wait, there's more!
 
-I wanted to collect a list of PRs without trying to webscrape them off my PRs
+I wanted to collect a list of PRs without trying to web-scrape them off my PRs
 page. I had the repos, and `hub`'s command `pr` can show the URL. I needed to
 do some setup, though, because `hub pr` only works when the remote is the
 upstream repository!
