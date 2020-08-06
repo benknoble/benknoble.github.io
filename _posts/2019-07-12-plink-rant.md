@@ -1,6 +1,6 @@
 ---
 title: 'Something is rotten in the state of Dotfiles'
-tags: [ dotfiles, make, perl, shell, DSL, rants, design ]
+tags: [ dotfiles, make, perl, shell, DSL, rants, design, posix ]
 category: [ Blog ]
 ---
 

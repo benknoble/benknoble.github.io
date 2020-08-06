@@ -1,6 +1,6 @@
 ---
 title: ':tada: Announcing the release of plink! :tada:'
-tags: [ dotfiles, make, perl, shell, DSL, design ]
+tags: [ dotfiles, make, perl, shell, DSL, design, posix ]
 category: Release
 ---
 

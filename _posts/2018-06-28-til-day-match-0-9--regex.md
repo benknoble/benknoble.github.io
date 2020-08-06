@@ -1,6 +1,6 @@
 ---
 title: Day match [0-9]--Regex
-tags: [ til, infra, intern, tcl, regex ]
+tags: [ til, infra, intern, tcl, regex, posix ]
 category: Blog
 ---
 
