@@ -158,7 +158,7 @@ upstream repository!
 First, move the old repos out of the way:
 
 ```bash
-<forks xargs basename | -n1 bash -c 'mv "$1" benknoble-"$1)"' sh
+<forks xargs basename | xargs -n1 bash -c 'mv "$1" benknoble-"$1"' sh
 ```
 
 (Thank goodness `basename` works on URLs! Coincidence?)
@@ -195,7 +195,7 @@ So the first bit was to grab all the right spots and dumps them to the file
 fixes:
 
 ```bash
-<URLs xargs basename | xargs -n1 bash -c 'git -C benknoble-"$1" grep newkey | xargs -L1 echo "$1/"' sh | grep -w cde | sed 's/ //' >fixes
+<URLs xargs basename | xargs -n1 bash -c 'git -C benknoble-"$1" grep newkey | xargs -L1 echo "$1/"' sh | grep -w thing | sed 's/ //' >fixes
 ```
 
 Note the nested `xargs` to process the grep results and prepend the repository
@@ -203,17 +203,17 @@ name!
 
 I loaded this in vim with the `-q` flag for the quickfix list and made the edit:
 
-```bash
-vim -q fixes
-# :cdo s/newkey: \zs.*/fixed-value
-# :wall | q
+```vim
+" vim -q fixes
+:cdo s/newkey: \zs.*/fixed-value
+:wall | q
 ```
 
 Then I created a list of repos that needed the fixes using [my old fields
 script]({% link _posts/2019-09-11-fields.md %}), and used that to create the
 commits. A push to the PR branch and I was good to go.
 
-```
+```bash
 <fixes fields -f: 1 | fields -f/ 1 | sort -u > fixed-repos
 <fixed-repos xargs -L1 bash -c 'cd "$1" && git add . && git commit -m "fix the thing"' sh
 ```
