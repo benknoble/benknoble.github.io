@@ -50,6 +50,7 @@ defaults:
       type: posts
     values:
       layout: post
+      authors: [D. Ben Knoble]
   -
     scope:
       path: ""
@@ -62,12 +63,14 @@ defaults:
       type: writings
     values:
       layout: writing
+      authors: [D. Ben Knoble]
   -
     scope:
       path: _workshops
       type: workshops
     values:
       layout: workshop
+      authors: [D. Ben Knoble]
 
 collections:
   writings:

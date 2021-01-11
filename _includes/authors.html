@@ -1,0 +1,8 @@
+<span class="authors">
+  {% assign number_authors = include.authors | size %}
+  {% if number_authors == 0 %}
+    No author
+  {% else %}
+    {{ include.authors | array_to_sentence_string }}
+  {% endif %}
+</span>

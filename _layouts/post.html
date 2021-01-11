@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<p class="meta">{{ page.date | date_to_string }} in {{ page.categories | array_to_sentence_string }}</p>
+<p class="meta">{% include authors.html authors=page.authors %} on {{ page.date | date_to_string }} in {{ page.categories | array_to_sentence_string }}</p>
 <div id="post">
   {{ content }}
 </div>

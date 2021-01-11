@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<p class="meta">Written {{ page.date | date_to_string }}</p>
+<p class="meta">Written {{ page.date | date_to_string }} by {% include authors.html authors=page.authors %}</p>
 <div id="writing">
   {{ content }}
 </div>
