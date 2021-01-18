@@ -59,7 +59,9 @@ guidelines for question-answerers, but that is generally less pressing for me.
 Most of these stem from personal experience, painful or otherwise, and all are
 intended to help the asker grow, learn, or receive better feedback faster.
 
-If you have time, you should read [this
-post](https://codeblog.jonskeet.uk/2010/08/29/writing-the-perfect-question/). I
-took some ideas from [the followup](http://tinyurl.com/stack-hints). Both are
+If you have time, you should read [Writing the Perfect Question](http://tinyurl.com/stack-hints). I
+took some ideas from [the followup checklist-version](http://tinyurl.com/stack-checklist). Both are
 good reads.
+
+I also highly recommend [How to not get a question
+answered](https://ericlippert.com/2008/02/20/how-to-not-get-a-question-answered/).
