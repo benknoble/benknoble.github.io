@@ -15,6 +15,7 @@ permalink: /contact/
 |--------|---------|
 | portfolio | [git showcase][portfolio] |
 | github | [@benknoble][github] |
+| gitlab | [@benknoble][gitlab] |
 | stack overflow | [David Ben Knoble][stack] |
 | linkedin | [ben-knoble][linkedin] |
 
@@ -22,5 +23,6 @@ permalink: /contact/
 [mail]: mailto:{{ site.data.people.benknoble.email }}
 [portfolio]: {{ site.data.people.benknoble.portfolio }}
 [github]: {{ site.data.people.benknoble.github }}
+[gitlab]: {{ site.data.people.benknoble.gitlab }}
 [stack]: {{ site.data.people.benknoble.stack_network }}
 [linkedin]: {{ site.data.people.benknoble.linkedin }}
