@@ -62,8 +62,8 @@ and run `:exec getline('.')` in vim).
 ## Plan
 
 - [x] Early January: Clean Machine checkup
-- [ ] January: short (<5 mile) rides
-- [ ] February: longer (10-15 mile?) rides
+- [x] January: short (<5 mile) rides
+- [ ] February: longer (10-15 mile?) rides (need to do some more short ones first)
 - [ ] March: able to ride to Mapleview
 - [ ] April: able to ride to Jordan Lake
 - [ ] May: combined March + April
@@ -72,9 +72,10 @@ and run `:exec getline('.')` in vim).
 
 ## Plan
 
-- [ ] Early January: re-read/note *Game Angry*
-- [ ] Late January: acquire *The Fall of Silverpine Watch* and run it
-- [ ] February: find a game
+- ~~[ ] Early January: re-read/note *Game Angry*~~
+- ~~[ ] Late January: acquire *The Fall of Silverpine Watch* and run it~~
+- ~~[ ] February: find a game~~
+- [ ] February: acquire *The Fall of Silverpine Watch* and run it
 - [ ] March: find a game
 - [ ] April: find a game
 - [ ] May: find a game
