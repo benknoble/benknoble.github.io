@@ -14,10 +14,11 @@ hasn't changed. What has is that a direct link is now provided in the footer.
 
 ## Subscribe Me
 
-Using feedburner, I have put together and email subscription service. Simply
-click [subscribe][] here or in the footer.
+**Update 2020 April 14th: [Feedburner got rid of email
+subscriptions](https://support.google.com/feedburner/answer/10483501)**
 
-[subscribe]: https://feedburner.google.com/fb/a/mailverify?uri=github/ZRoM&amp;loc=en_US
+<s>Using feedburner, I have put together and email subscription service. Simply
+click subscribe here or in the footer.</s>
 
 ## Comment on Me
 
