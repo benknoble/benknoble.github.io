@@ -14,6 +14,11 @@ Papers I have written or contributed to.
           {{ paper.title }}</a>
         <div>by {{ paper.authors | join: " and " }}</div>
         <div><small class='meta'>Published: {{ paper.date | date_to_string }}</small></div>
+        {% comment %} left alignment to fix indentation {% endcomment %}
+        {% comment %} to get rid of syntax highlighting, change highlight/endhighlight to pre {% endcomment %}
+{% highlight bibtex %}
+{{paper.citation}}
+{% endhighlight %}
       </li>
     {% endfor %}
   </ul>
