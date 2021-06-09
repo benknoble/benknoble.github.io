@@ -186,3 +186,7 @@
   url: https://papl.cs.brown.edu/2020/
 - title: A Brief, Incomplete, and Mostly Wrong History of Programming Languages
   url: https://james-iry.blogspot.com/2009/05/brief-incomplete-and-mostly-wrong.html
+- title: Resources for Amateur Compiler Writers
+  url: https://c9x.me/compile/bib/
+- title: History of Programming Languages
+  url: https://felleisen.org/matthias/7480-s21/index.html
