@@ -46,6 +46,8 @@
   url: http://overthewire.org/wargames/
 - title: Learn You a Haskell
   url: http://learnyouahaskell.com
+- title: Write You a Haskell
+  url: http://dev.stephendiehl.com/fun/
 - title: Beautiful Racket
   url: https://beautifulracket.com/
 - title: Practical Typography
@@ -190,3 +192,15 @@
   url: https://c9x.me/compile/bib/
 - title: History of Programming Languages
   url: https://felleisen.org/matthias/7480-s21/index.html
+- title: Lecture Notes on the Lambda Calculus
+  url: https://www.cs.cmu.edu/~fp/courses/15814-f18/lectures/Notes-15814-f18.pdf
+- title: Language-oriented Programming in Racket (A Cultural Anthropology)
+  url: https://gumroad.com/l/lop-in-racket-cultural-anthro
+- title: Logic and Computation Intertwined
+  url: https://cs.uwaterloo.ca/~plragde/flaneries/LACI/
+- title: The Power of Prolog
+  url: https://www.metalevel.at/prolog
+- title: Software Design for Flexibility
+  url: https://mitpress.mit.edu/books/software-design-flexibility
+- title: Essentials of Programming Languages
+  url: http://www.eopl3.com
