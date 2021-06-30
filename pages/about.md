@@ -23,9 +23,9 @@ To see my virtual Junk Drawer on GitHub, visit [benknoble/JunkDrawer][junk].
 
 ### Me
 
-I'm D. Ben Knoble, an graduate Computer Science student at UNC Chapel Hill. I
-completed my undergraduate degree in CS and French, with a minor in Mathematics.
-I am now pursuing a Master's in CS.
+I'm D. Ben Knoble, an incoming TDP at CapitalOne. I just finished a Master's in
+CS. I have also completed my undergraduate degree in CS and French, with a minor
+in Mathematics.
 
 I rely on a healthy mix of self-taught experimentation and formal class training
 for anything I do, including programming. Being self-taught keeps me curious. My
@@ -57,8 +57,9 @@ or the speed of which-function-key-is-it
 - Favorite __IDE__: `tmux`.
 
 No, it's not an IDE like Eclipse. It *is* a great way to manage projects and
-terminals. (Note: I don't even use iTerm!  Terminal.app is good enough with
-tmux, even if it doesn't support truecolor yet.)
+terminals. (Note: I don't even use iTerm! Terminal.app is good enough with tmux,
+even if it doesn't support truecolor yet. I have spent the last year or two in
+Alacritty, however.)
 
 - Favorite __shell__: `bash`.
 
@@ -71,14 +72,14 @@ I have [switched to zsh]({% link _posts/2020-05-21-switch-zsh.md %}) for
 interactive use, but bash and sh are still my automation go-tos.
 
 - Favorite __languages__: a mix of `shell`, `make`, `vimscript`, and the
-functional stuff.
+functional stuff (especially `racket`).
 
 I've written enough SML to really enjoy it (see my entries for the 2019 Advent
 of Code, for example). Scala and Clojure are fun, but the JVM dependence makes
 it too heavy for me most of the time. I appreciate the true smallness of C, and
 have learned a lot from it. Haskell and Rust are next on my list. Then some new
-paradigms: maybe true logic programming or something. After that,
-something older and something esoteric.
+paradigms: maybe true logic programming or something. After that, something
+older and something esoteric.
 
 (Languages I'm tired of? `python` and `javascript` make the top of the list. The
 former is everywhere, but it's functional-language side isn't on par with things
