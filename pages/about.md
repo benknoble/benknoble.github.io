@@ -43,7 +43,6 @@ the Stack Exchange network (primarly [vim][vim], though I still use
 [StackOverflow][stack_overflow] as well as a few others).
 
 {% include SO_flair.html %}
-{% include LinkedIn_flair.html %}
 {% include github_flair.html %}
 
 Please [contact me][contact] with questions, corrections, or to chat.
@@ -97,11 +96,8 @@ I think some people prefer the mercurial (hg) interface, but I'm not sold. Git
 has outgrown its historical reputation for a complex interface, and is the de
 facto standard.
 
-- Favorite **keyboard**: my Ergodox EZ.
-
-<div style="padding-top: 60%; position: relative;">
-	<iframe src="https://configure.ergodox-ez.com/embed/ergodox-ez/layouts/BNalB/latest/0" style="border: 0; height: 100%; left: 0; position: absolute; top: 0; width: 100%"></iframe>
-</div>
+- Favorite **keyboard**: my Ergodox EZ. Here's my
+[layout](https://configure.zsa.io/ergodox-ez/layouts/BNalB/latest/0).
 
 <!-- Links -->
 [github]: https://github.com/
