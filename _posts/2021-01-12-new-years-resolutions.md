@@ -63,10 +63,18 @@ and run `:exec getline('.')` in vim).
 
 - [x] Early January: Clean Machine checkup
 - [x] January: short (<5 mile) rides
-- [ ] February: longer (10-15 mile?) rides (need to do some more short ones first)
-- [ ] March: able to ride to Mapleview
-- [ ] April: able to ride to Jordan Lake
-- [ ] May: combined March + April
+- ~~[ ] February: longer (10-15 mile?) rides (need to do some more short ones first)~~
+- ~~[ ] March: shorter rides (5-10 mile?)~~
+- ~~[ ] March: able to ride to Mapleview~~
+- ~~[ ] April: able to ride to Jordan Lake~~
+- ~~[ ] May: combined March + April~~
+- [x] June: Fitness center rides
+- [ ] July: Fitness center & local rides
+- [ ] August: To/from work
+- [ ] September: To/from work
+- [ ] October: To/from work
+- [ ] November: To/from work
+- [ ] December: To/from work
 
 # Play or run a game of D&D (or other RPG) at least once a month
 
@@ -75,10 +83,10 @@ and run `:exec getline('.')` in vim).
 - ~~[ ] Early January: re-read/note *Game Angry*~~
 - ~~[ ] Late January: acquire *The Fall of Silverpine Watch* and run it~~
 - ~~[ ] February: find a game~~
-- [ ] February: acquire *The Fall of Silverpine Watch* and run it
-- [ ] March: find a game
-- [ ] April: find a game
-- [ ] May: find a game
+- [x] March: acquire *The Fall of Silverpine Watch* and run it (partial)
+- ~~[ ] March: find a game~~
+- ~~[ ] April: find a game~~
+- ~~[ ] May: find a game~~
 - [ ] June: find a game
 - [ ] July: find a game
 - [ ] August: find a game
