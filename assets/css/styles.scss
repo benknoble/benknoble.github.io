@@ -114,6 +114,7 @@ img {
 code,
 pre {
   font-family: 'Victor Mono', monospace;
+  font-variant-ligatures: no-contextual;
   font-size: .95em;
   overflow-x: auto;
 }
