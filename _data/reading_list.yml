@@ -216,3 +216,9 @@
   url: https://www.cs.cornell.edu/courses/cs3110/2021sp/textbook/
 - title: 'Programming Languages: Application and Interpretation'
   url: https://www.plai.org
+- title: An Incremental Approach to Compiler Construction
+  url: http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf
+- title: Bibliography of Scheme research (readscheme.org and beyond)
+  url: https://github.com/schemedoc/bibliography
+- title: Lisp in Small Pieces
+  url: https://pages.lip6.fr/Christian.Queinnec/WWW/LiSP.html
