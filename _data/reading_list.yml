@@ -222,3 +222,21 @@
   url: https://github.com/schemedoc/bibliography
 - title: Lisp in Small Pieces
   url: https://pages.lip6.fr/Christian.Queinnec/WWW/LiSP.html
+- title: A Data-Centric Introduction to Computing
+  url: https://dcic-world.org/2021-08-21/index.html
+- title: Pyret
+  url: https://www.pyret.org/index.html
+- title: Monads, Arrows, and Idioms
+  url: https://homepages.inf.ed.ac.uk/wadler/topics/monads.html
+- title: Functional Pearls
+  url: https://wiki.haskell.org/Research_papers/Functional_pearls
+- title: Rust for the Polyglot Programmer
+  url: https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/index.html
+- title: A New Medium for Communicating Research on Programming Languages
+  url: https://willcrichton.net/nota/
+- title: Jamie Brandon
+  url: https://scattered-thoughts.net
+- title: The Traditional Vi
+  url: http://ex-vi.sourceforge.net
+- title: Hacker News folk wisdom on visual programming
+  url: https://drossbucket.com/2021/06/30/hacker-news-folk-wisdom-on-visual-programming/
