@@ -10,11 +10,12 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
           submodules: true
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1.76.0
         with:
-          ruby-version: 2.6.x
+          ruby-version: '3.0'
+          bundler-cache: true
       - name: Lint site
         run: make lint
