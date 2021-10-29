@@ -1,0 +1,36 @@
+name: Deploy to pages
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy_pages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # - name: Install Racket
+      #   uses: Bogdanp/setup-racket@v0.11
+      #   with:
+      #     architecture: 'x64'
+      #     distribution: 'full'
+      #     variant: 'CS'
+      #     version: '8.0'
+
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1.76.0
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+
+      - name: Build
+        run: bundle exec jekyll build --trace
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: _site
