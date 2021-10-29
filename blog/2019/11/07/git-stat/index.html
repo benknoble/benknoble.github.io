@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Re: Dumpster Diving through Dotfiles</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Re: Dumpster Diving through Dotfiles</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 07 Nov 2019 in Blog</p>
+<div id="post">
+  <p>I learn a lot after <a href="https://thoughtbot.com/blog/dumpster-diving-through-dotfiles-git-branches">some advice from
+thoughtbot</a>.</p>
+
+<p><strong>Update 2019-11-19:</strong> <a href="https://docs.google.com/presentation/d/1z-6ffE9KY-Jswl2BiWzYV2DG6fOutgWSi_aZ5uql__s/edit?usp=sharing">slides for a presentation on this performance
+mystery</a></p>
+
+<p><strong>Update 2019-11-29:</strong> Both HTML traces are available on Google Drive:
+<a href="https://drive.google.com/file/d/1JyYO420yWp7XvNJJ8HLOPU0o6mesSKZf/view?usp=sharing">1</a>,
+<a href="https://drive.google.com/file/d/1BqqxH0PRCYz_vvYkBBFpbL5dkFTLPyuK/view?usp=sharing">2</a></p>
+
+<h2 id="dumpster-diving">Dumpster-diving?</h2>
+
+<p>Thoughtbot apparently started a new series on finding tricks in folks’ Dotfiles.
+As you may know by now, I maintain <a href="https://github.com/benknoble/Dotfiles">my own</a>
+over on GitHub. I peruse others for fun and often learn a lot.</p>
+
+<p>Well, in the course of <a href="https://github.com/benknoble/Dotfiles/commit/0ed70bb29a12fa53368919f1b7a1526725a1a074">adjusting their git-branches
+alias</a>,
+I found a new trick.</p>
+
+<h2 id="g-for-git"><code class="language-plaintext highlighter-rouge">g</code> for <code class="language-plaintext highlighter-rouge">git</code></h2>
+
+<p>I have long had <code class="language-plaintext highlighter-rouge">alias g='git'</code> in my bash files, along with the appropriate
+completion definition. But I saw that thoughtbot had a <code class="language-plaintext highlighter-rouge">g</code> function which does a
+<code class="language-plaintext highlighter-rouge">git-status</code> if no arguments are provided! This is genius, says I, and I
+convert.</p>
+
+<blockquote>
+  <p>Aside: In doing so, I forgot to <code class="language-plaintext highlighter-rouge">unalias g</code> prior to reload my files. That
+caused the function definition <code class="language-plaintext highlighter-rouge">g() { ... }</code> to expand to <code class="language-plaintext highlighter-rouge">git() { ...
+}</code>—worse, since that definition calls git, I had made every invocation of git
+(including that of my <code class="language-plaintext highlighter-rouge">PS1</code> prompt) a recursive stack overflow.</p>
+
+  <p>Lesson: prefer functions if the complexity can grow.</p>
+</blockquote>
+
+<h2 id="more-performance-problems">More performance problems</h2>
+
+<p>Anyways, as you may remember from <a href="/blog/2019/08/14/cstat-efficiencies/">earlier</a>, my Dotfiles repo is <em>big</em>. At time
+of writing:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ g cstat count
+1707
+λ <span class="nb">du</span> <span class="nt">-hd1</span> .git
+ 16K    .git/gitweb
+1,4M    .git/objects
+  0B    .git/rr-cache
+8,0K    .git/info
+ 84K    .git/logs
+ 24K    .git/hooks
+ 12K    .git/refs
+ 40M    .git/modules
+ 42M    .git
+</code></pre></div></div>
+
+<p>So the sucker is, well, large (and note how big <code class="language-plaintext highlighter-rouge">.git/modules</code> is—we’ll be
+coming back to that).</p>
+
+<p>Testing out my new <code class="language-plaintext highlighter-rouge">g</code> function, I found that <code class="language-plaintext highlighter-rouge">git status -sb</code> was taking half a
+second to complete, where on other repos it ran 10-100x faster. What gives?</p>
+
+<p>Naïvely, I tried <code class="language-plaintext highlighter-rouge">git gc</code> (even with <code class="language-plaintext highlighter-rouge">--aggressive</code>, which git admits you
+probably don’t need). This shaved off 6MB to get the numbers you see now. But
+the performance didn’t waver.</p>
+
+<p>Thinking back to those numbers (and a trace of git code I’d accidentally done
+recently, wherein there were calls to submodule code), I remembered this
+little gem:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ g submodule | <span class="nb">wc</span> <span class="nt">-l</span>
+      47
+</code></pre></div></div>
+
+<p>A quick experiment revealed the issue. After issuing <code class="language-plaintext highlighter-rouge">git submodule deinit
+--all</code>, speeds were back to normal. Having a lot of vim plugins is catching up
+to me…</p>
+
+<p>Long-story short, turning off submodule stuff in the status brings me back down
+to the right time. You can do this with a flag on status, but I ended up doing</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ g config diff.ignoresubmodules all
+</code></pre></div></div>
+
+<p>So only my Dotfiles, where the submodules are a problem, ignores them.</p>
+
+<p>Lesson: if your repo has a lot of submodules, you can speed up some operations
+with this local configuration. But be sure to check <code class="language-plaintext highlighter-rouge">git submodule summary</code>
+every now and then, just to be sure. In my workflow, I almost always only make
+changes by updating the submodules from upstream, so this can be less of an
+issue.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#shell" class="tag">
+        shell
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#performance" class="tag">
+        performance
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2019/11/07/git-stat/";
+    this.page.identifier = "/blog/2019/11/07/git-stat";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2019/10/25/wakeup45/"
+      title="6am Wake-up Call: Day 4/5">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2019/11/24/pics-text/"
+       title="Please do not post images of text">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#re-dumpster-diving-through-dotfiles">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

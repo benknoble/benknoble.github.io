@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Solving a logic puzzle the right way™</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Solving a logic puzzle the right way™</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 22 Jun 2020 in Blog</p>
+<div id="post">
+  <p>I take a break from my internship with Capital One to solve a puzzle they posed:
+for a chance to win!</p>
+
+<p>Today, the intern group sent out a logic puzzle—correct submissions are
+entered into a raffle to win prizes. What I really want to do, though, is show
+how I solved it (and discuss some pitfalls along the way).</p>
+
+<p>Without further ado, the puzzle:</p>
+
+<blockquote>
+  <p>Valero’s 5k Fun Run was held yesterday in the downtown district. Determine the
+shirt color and hometown of each of the top runners, and match each to their
+finishing time.</p>
+
+  <p>Clues</p>
+
+  <ol>
+    <li>Mathew finished 1 minute after Anthony.</li>
+    <li>The contestant in the white shirt was either Anthony or the runner who
+finished in 22 minutes.</li>
+    <li>The competitor from Kamrar finished sometime after the runner from Pierson.</li>
+    <li>Salvador finished 1 minute after the runner in the maroon shirt.</li>
+    <li>Greg finished 1 minute before the competitor in the white shirt.</li>
+    <li>The contestant from Corinth didn’t wear the pink shirt.</li>
+    <li>The contestant who finished in 22 minutes was either the contestant from
+Kamrar or the contestant in the pink shirt.</li>
+    <li>The competitor who finished in 23 minutes wasn’t from Corinth.</li>
+  </ol>
+</blockquote>
+
+<p>What’s not clear from the description is that there is a fourth color
+(aquamarine), that no two runners have the same color shirt, nor are any two
+from the same town. (This becomes somewhat more obvious in the grid we were
+given as an aid.)</p>
+
+<p>The most egregious ambiguity, however, I will save for later.</p>
+
+<h2 id="cracking-the-puzzle-in-prolog">Cracking the puzzle in prolog</h2>
+
+<p>Prolog is a logic programming language: source code consists of facts and
+predicates (also called functors; not to be confused with category theory).
+Predicates are often notated <code class="language-plaintext highlighter-rouge">name/3</code> to mean that the predicate <code class="language-plaintext highlighter-rouge">name</code> has 3
+parameters. A simple example:</p>
+
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">man</span><span class="p">(</span><span class="ss">socrates</span><span class="p">).</span> <span class="c1">% socrates is a man</span>
+<span class="ss">mortal</span><span class="p">(</span><span class="nv">X</span><span class="p">)</span> <span class="p">:-</span> <span class="ss">man</span><span class="p">(</span><span class="nv">X</span><span class="p">).</span> <span class="c1">% X is mortal if X is a man</span>
+</code></pre></div></div>
+
+<p>Firing up the interpreter, we can ask questions about the universe, given a set
+of facts and queries:</p>
+
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">?-</span> <span class="p">[</span><span class="ss">socrates</span><span class="p">].</span> <span class="c1">% This is how you load files (omit the .pl extension)</span>
+<span class="o">?-</span> <span class="ss">mortal</span><span class="p">(</span><span class="ss">socrates</span><span class="p">).</span>
+<span class="ss">true</span><span class="p">.</span>
+<span class="o">?-</span> <span class="ss">man</span><span class="p">(</span><span class="nv">X</span><span class="p">).</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="ss">socrates</span><span class="p">.</span>
+<span class="o">?-</span> <span class="ss">mortal</span><span class="p">(</span><span class="nv">X</span><span class="p">).</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="ss">socrates</span><span class="p">.</span>
+</code></pre></div></div>
+
+<p>Different interpreters give slight different truth/false values.</p>
+
+<p>Note that not only can we ask if a predicate is true for a value, but we can
+ask which values satisfy a predicate! With properly coded predicates, this can
+be used to generate solutions to a problem. (The process by which this occurs is
+called unification, an algorithm that also lies at the heart of the
+Hindley-Milner type system and inference algorithm used in Standard ML, the
+precursor to OCaml and Haskell.)</p>
+
+<p>A quick example of a built-in functor, <code class="language-plaintext highlighter-rouge">member/2</code> (in some prologs, this
+requires loading a library, but only when used in source-code):</p>
+
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">?-</span> <span class="ss">member</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">]).</span>
+<span class="ss">true</span><span class="p">.</span>
+<span class="o">?-</span> <span class="ss">member</span><span class="p">(</span><span class="nv">X</span><span class="p">,</span> <span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">]).</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="m">1</span> <span class="p">;</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="m">2</span> <span class="p">;</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="m">3</span><span class="p">.</span>
+<span class="o">?-</span> <span class="ss">member</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="p">[</span><span class="nv">X</span><span class="p">,</span><span class="nv">Y</span><span class="p">]).</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="m">1</span> <span class="p">;</span>
+<span class="nv">Y</span> <span class="o">=</span> <span class="m">1</span><span class="p">.</span>
+</code></pre></div></div>
+
+<p>Note that lower-case words are atoms (along with numbers and strings and such),
+while upper-case words are variables for unification. And lists have the
+somewhat universal <code class="language-plaintext highlighter-rouge">[]</code> syntax.</p>
+
+<p>Onto the puzzle. We first decide on a representation of the solution: since we
+care about the order the 4 people finished in, we’ll use a list to hold the
+runners in order of finish time. Each item will be a list of their name, shirt
+color, and town:</p>
+
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Sol = [[Name, Color, Town] times 4]</span>
+<span class="c1">% the list is ordered by finish time, which is then mapped to 21,22,23,24</span>
+<span class="ss">solve</span><span class="p">(</span><span class="nv">Sol</span><span class="p">)</span> <span class="p">:-</span>
+
+    <span class="nv">Sol</span> <span class="o">=</span> <span class="p">[[</span><span class="nv">Name1</span><span class="p">,</span> <span class="nv">Color1</span><span class="p">,</span> <span class="nv">Town1</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name2</span><span class="p">,</span> <span class="nv">Color2</span><span class="p">,</span> <span class="nv">Town2</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name3</span><span class="p">,</span> <span class="nv">Color3</span><span class="p">,</span> <span class="nv">Town3</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name4</span><span class="p">,</span> <span class="nv">Color4</span><span class="p">,</span> <span class="nv">Town4</span><span class="p">]],</span>
+</code></pre></div></div>
+
+<p>Then, we add some uniqueness constraints:</p>
+
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">% puzzle constraints</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Name1</span><span class="p">,</span> <span class="nv">Name2</span><span class="p">,</span> <span class="nv">Name3</span><span class="p">,</span> <span class="nv">Name4</span><span class="p">],</span> <span class="p">[</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">greg</span><span class="p">,</span> <span class="ss">mathew</span><span class="p">,</span> <span class="ss">salvador</span><span class="p">]),</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Color1</span><span class="p">,</span> <span class="nv">Color2</span><span class="p">,</span> <span class="nv">Color3</span><span class="p">,</span> <span class="nv">Color4</span><span class="p">],</span> <span class="p">[</span><span class="ss">aquamarine</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">white</span><span class="p">]),</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Town1</span><span class="p">,</span> <span class="nv">Town2</span><span class="p">,</span> <span class="nv">Town3</span><span class="p">,</span> <span class="nv">Town4</span><span class="p">],</span> <span class="p">[</span><span class="ss">corinth</span><span class="p">,</span> <span class="ss">janesville</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">]),</span>
+</code></pre></div></div>
+
+<p>Then we iterate the puzzle constraints:</p>
+
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">%1</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="ss">anthony</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="ss">mathew</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%2</span>
+    <span class="p">(</span><span class="ss">member</span><span class="p">([</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">)</span> <span class="p">;</span> <span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">])),</span>
+    <span class="c1">%3</span>
+    <span class="p">(</span><span class="ss">append</span><span class="p">(</span><span class="nv">Left</span><span class="p">,</span> <span class="nv">Right</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">),</span>
+        <span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">],</span> <span class="nv">Left</span><span class="p">),</span>
+        <span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">],</span> <span class="nv">Right</span><span class="p">)),</span>
+    <span class="c1">%4</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="ss">salvador</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%5</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="ss">greg</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%6</span>
+    <span class="err">\</span><span class="o">+</span><span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%7</span>
+    <span class="p">(</span><span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">])</span> <span class="p">;</span> <span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="nv">_</span><span class="p">])),</span>
+    <span class="c1">%8</span>
+    <span class="err">\</span><span class="o">+</span><span class="ss">nth1</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">]).</span>
+</code></pre></div></div>
+
+<p>Or at least, so we think.</p>
+
+<p>In one early version of this solution, I had the argument order for <code class="language-plaintext highlighter-rouge">nth1/3</code>
+backwards, giving me bogus answers. In another, I had forgotten to encode the
+uniqueness of the shirt colors and towns, so my solutions had more than one
+person in the same shirt or from the same town!  (Aside: I would love to know if
+there’s a more elegant way to encode those than completely destructing the
+solution.)</p>
+
+<p>But the really, truly, frustrating thing is that the interpreter gives two
+solutions to these constraints!</p>
+
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">?-</span> <span class="p">[</span><span class="ss">race</span><span class="p">].</span>
+<span class="o">?-</span> <span class="ss">solve</span><span class="p">(</span><span class="nv">S</span><span class="p">).</span>
+<span class="nv">S</span> <span class="o">=</span> <span class="p">[[</span><span class="ss">greg</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">],</span> <span class="p">[</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">],</span> <span class="p">[</span><span class="ss">mathew</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="ss">janesville</span><span class="p">],</span> <span class="p">[</span><span class="ss">salvador</span><span class="p">,</span> <span class="ss">aquamarine</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">]]</span> <span class="p">;</span>
+<span class="nv">S</span> <span class="o">=</span> <span class="p">[[</span><span class="ss">greg</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">],</span> <span class="p">[</span><span class="ss">salvador</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">],</span> <span class="p">[</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">janesville</span><span class="p">],</span> <span class="p">[</span><span class="ss">mathew</span><span class="p">,</span> <span class="ss">aquamarine</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">]]</span> <span class="p">;</span>
+</code></pre></div></div>
+
+<p>Worse, working through the constraints, both are entirely valid—unless you
+read <em>or</em> as <em>exclusive or</em>! Then, Anthony can no longer be wearing the white
+shirt, and the second solution is the only valid one. Some claim <code class="language-plaintext highlighter-rouge">;</code> is supposed
+to mean exclusive or, others that is logical or (which isn’t exclusive). Alas,
+I found no easy way to rectify the final code (below) to account for this
+oddity short of mapping <code class="language-plaintext highlighter-rouge">a ; b</code> to <code class="language-plaintext highlighter-rouge">(a, \+b ; b, \+a)</code>, which I find ugly.</p>
+
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% vim: ft=prolog</span>
+
+<span class="p">:-</span> <span class="ss">use_module</span><span class="p">(</span><span class="ss">library</span><span class="p">(</span><span class="ss">lists</span><span class="p">)).</span>
+
+<span class="c1">% Sol = [[Name, Color, Town] times 4]</span>
+<span class="c1">% the list is ordered by finish time, which is then mapped to 21,22,23,24</span>
+<span class="ss">solve</span><span class="p">(</span><span class="nv">Sol</span><span class="p">)</span> <span class="p">:-</span>
+
+    <span class="nv">Sol</span> <span class="o">=</span> <span class="p">[[</span><span class="nv">Name1</span><span class="p">,</span> <span class="nv">Color1</span><span class="p">,</span> <span class="nv">Town1</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name2</span><span class="p">,</span> <span class="nv">Color2</span><span class="p">,</span> <span class="nv">Town2</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name3</span><span class="p">,</span> <span class="nv">Color3</span><span class="p">,</span> <span class="nv">Town3</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name4</span><span class="p">,</span> <span class="nv">Color4</span><span class="p">,</span> <span class="nv">Town4</span><span class="p">]],</span>
+
+    <span class="c1">% puzzle constraints</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Name1</span><span class="p">,</span> <span class="nv">Name2</span><span class="p">,</span> <span class="nv">Name3</span><span class="p">,</span> <span class="nv">Name4</span><span class="p">],</span> <span class="p">[</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">greg</span><span class="p">,</span> <span class="ss">mathew</span><span class="p">,</span> <span class="ss">salvador</span><span class="p">]),</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Color1</span><span class="p">,</span> <span class="nv">Color2</span><span class="p">,</span> <span class="nv">Color3</span><span class="p">,</span> <span class="nv">Color4</span><span class="p">],</span> <span class="p">[</span><span class="ss">aquamarine</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">white</span><span class="p">]),</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Town1</span><span class="p">,</span> <span class="nv">Town2</span><span class="p">,</span> <span class="nv">Town3</span><span class="p">,</span> <span class="nv">Town4</span><span class="p">],</span> <span class="p">[</span><span class="ss">corinth</span><span class="p">,</span> <span class="ss">janesville</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">]),</span>
+
+    <span class="c1">%1</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="ss">anthony</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="ss">mathew</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%2</span>
+    <span class="p">(</span><span class="ss">member</span><span class="p">([</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">)</span> <span class="p">;</span> <span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">])),</span>
+    <span class="c1">%3</span>
+    <span class="p">(</span><span class="ss">append</span><span class="p">(</span><span class="nv">Left</span><span class="p">,</span> <span class="nv">Right</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">),</span>
+        <span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">],</span> <span class="nv">Left</span><span class="p">),</span>
+        <span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">],</span> <span class="nv">Right</span><span class="p">)),</span>
+    <span class="c1">%4</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="ss">salvador</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%5</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="ss">greg</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%6</span>
+    <span class="err">\</span><span class="o">+</span><span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%7</span>
+    <span class="p">(</span><span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">])</span> <span class="p">;</span> <span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="nv">_</span><span class="p">])),</span>
+    <span class="c1">%8</span>
+    <span class="err">\</span><span class="o">+</span><span class="ss">nth1</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">]).</span>
+</code></pre></div></div>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#breaks" class="tag">
+        breaks
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#capital+one" class="tag">
+        capital one
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#puzzle" class="tag">
+        puzzle
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#prolog" class="tag">
+        prolog
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#prog-langs" class="tag">
+        prog-langs
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2020/06/22/logic-puzzle-race/";
+    this.page.identifier = "/blog/2020/06/22/logic-puzzle-race";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2020/05/22/libexec-git-core-on-path/"
+      title="Programs invoked by git have libexec/git-core on $PATH">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2020/07/16/parallel-git-pipelines/"
+       title="Making mass-edits to many repos via shell pipelines">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#solving-a-logic-puzzle-the-right-way">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

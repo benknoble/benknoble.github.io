@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Day 16--The Three Pieces of Software</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Day 16--The Three Pieces of Software</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 10 Jul 2018 in Blog</p>
+<div id="post">
+  <p>There’s probably more than that, but these are the bigguns.</p>
+
+<h2 id="today-i-learned">Today I Learned</h2>
+
+<ol>
+  <li>Communication breaks down</li>
+  <li>Design is more than half the battle (and fresh eyes never hurt)</li>
+  <li>1+1 ain’t always 2</li>
+</ol>
+
+<h2 id="communication">Communication</h2>
+
+<p>How many times have you heard me say it? <em>Communication is key.</em> And sure, that
+makes a nice, easy sort of sense–too easy, I say. Too easy, because it’s apt to
+be forgot.</p>
+
+<p>Today I was witness to the result of a communication breakdown. It wasn’t
+exactly pretty, but it got the point across: some things aren’t working, and we
+need to fix them. That’s all I’ll say about it.</p>
+
+<p>Piece #1: Communication (horizontal, vertical, and circular–if you achieve
+extra-dimensional, please let me know).</p>
+
+<h2 id="architects">Architects</h2>
+
+<p>Ever built a home? No? Ever <em>thought</em> about it? Well, I know this because my dad
+used to build ‘em, but homes actually have these things called <em>plans</em>. You
+know, these magical documents that lay out how, in a perfect world, this is
+exactly the end result.</p>
+
+<p>Well, it turns out good plans have been designed. And, like good software, this
+step is important.</p>
+
+<p>Much like you don’t want your toilet to be right smack next to your kitchen
+island, you want to think about how you’re going to code up a fancy new feature.
+And I mean really put some brainpower into it; this isn’t write it down once and
+then do it.</p>
+
+<p>So, today, I spent a good couple hours working, on a team and alone, on the
+design for the new cache system. You’ll be happy to know it’s significantly more
+explicit, formal, and robust. And that is only possible because of (1)
+communication, and (2):</p>
+
+<p>Piece #2: Good Design.</p>
+
+<h2 id="11--2-or-math-is-broken-and-i-need-to-fix-it">1+1 ≠ 2, or, Math is Broken, and I Need to Fix It</h2>
+
+<p>Ok, well, <em>math</em> isn’t broken, per se. But a build that runs fine sequentially
+is.</p>
+
+<p>Think of it like this. There are two steps to the build. Step 1 gives us <code class="language-plaintext highlighter-rouge">1</code>.
+And Step 2 gives us <code class="language-plaintext highlighter-rouge">1</code>. But they don’t depend on each other–I can actually do
+them in any old order I want to (and I’ve checked that out pretty thoroughly).</p>
+
+<p>So, the end result is clear <code class="language-plaintext highlighter-rouge">1+1=2</code> right?</p>
+
+<p>Well, here’s the tricky part of the beast: when I run them <strong>at the exact same
+time</strong>, all hell breaks loose. Now I get things like <code class="language-plaintext highlighter-rouge">NaN</code>, <code class="language-plaintext highlighter-rouge">∞</code>, and all manner
+of other nonsense.</p>
+
+<p>(Yes, this is directly related to the building and refactoring I’ve been writing
+about for a number of posts. I’m so close I can taste it. Parallel stuff is
+hard.)</p>
+
+<p>So, Piece #3: Fixing stuff when it’s broke.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#infra" class="tag">
+        infra
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2018/07/10/til-day-16-the-three-pieces-of-software/";
+    this.page.identifier = "/blog/2018/07/10/til-day-16--the-three-pieces-of-software";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/07/09/til-day-15-fresh-start/"
+      title="Day 15--Fresh Start">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2018/07/12/kaves-and-kobolds/"
+       title="Kaves and Kobolds">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#day-16-the-three-pieces-of-software">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

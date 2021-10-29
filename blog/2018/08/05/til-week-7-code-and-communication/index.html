@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Week 7--Code and Communication</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Week 7--Code and Communication</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 05 Aug 2018 in Blog</p>
+<div id="post">
+  <p>One week after my forays of unit testing, and I’m almost ready to ship.</p>
+
+<p><em>I got caught up in a busy week, full of surprises and late nights. So I’m
+snowballing it all together.</em></p>
+
+<h2 id="this-week-i-learned">This Week I Learned</h2>
+
+<ol>
+  <li>How it feels when a plan comes together</li>
+  <li>How to build programs with <code class="language-plaintext highlighter-rouge">git</code>-like subcommands using <code class="language-plaintext highlighter-rouge">argparse</code></li>
+  <li>Communication is essential</li>
+</ol>
+
+<p>I also spent time in the lab racking, stacking, lacing, and labeling servers,
+but it’s harder to write about because the process depends so heavily on the
+specific configuration desired. Suffice it to say Wednesday was a good,
+physical day, a nice change of pace from my cubicle.</p>
+
+<p>At any rate, on with this week’s lessons.</p>
+
+<h3 id="wrapping-it-all-up">Wrapping It All Up</h3>
+
+<p>After weeks of development, I finally have a full library of code that passes
+all my tests, implements all the desired “version one” features, and is nearly
+ready to integrate. I am still working on the command-line interface, but the
+project is coming to a close.</p>
+
+<p>The students in raleigh have been offered time to present, demo, or whiteboard
+anything they want from their summer. It could be a challenge, a project, or
+something they learned. I will be presenting and demoing my caching project,
+provided I finish it. And I’m very excited.</p>
+
+<h3 id="cli">CLI</h3>
+
+<p>Python, with a mature language ecosystem, has several libraries for building
+command line programs. Click, docopt, and more all present themselves as easy to
+use. But they aren’t part of the standard library, and so they introduce
+dependency.</p>
+
+<p>Unfortunately, I am constrained–I can’t have any dependencies (for the time
+being). So I need a standard library solution–<code class="language-plaintext highlighter-rouge">argparse</code>.</p>
+
+<p>Argparse is remarkably simple–I programmatically build up parsers by defining
+what arguments they take and what to do with them. It takes care of building the
+help messages, parsing the command line, and all that jazz. The most difficult
+part was to decide how to implement subcommands.</p>
+
+<p>Fortunately, <code class="language-plaintext highlighter-rouge">argparse</code> makes defining subparsers easy. They even recommend an
+approach for associating a subparser with a particular method. With that
+capability, I’m able to define the flags, positional parameters, and actions for
+an entire CLI very quickly.</p>
+
+<p>The idea is to use <code class="language-plaintext highlighter-rouge">setDefaults</code> on each subparser with a ‘parameter’ like
+<code class="language-plaintext highlighter-rouge">func</code>. Then, when you parse the <code class="language-plaintext highlighter-rouge">args</code> out, you can call <code class="language-plaintext highlighter-rouge">args.func(args)</code>,
+passing an object into whatever function is appropriate based on the subcommand
+at the command line.</p>
+
+<h3 id="communication">Communication</h3>
+
+<p>It would seem, no matter how many times I repeat it, even I managed to forget
+how important communication is.</p>
+
+<p>A failure on my part to continuously update my colleague on the progress of this
+caching project, in addition to some other changes in the way we tracked work,
+lead to some concerns about how much time I was spending on which projects.</p>
+
+<p>Happily, the concern was easily alleviated by the rapid progress I was making
+(and my planned Tuesday finish). But it was a sharp reminder of how easily
+things can slip away if I’m not conscientious of communicating with my
+coworkers.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#infra" class="tag">
+        infra
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2018/08/05/til-week-7-code-and-communication/";
+    this.page.identifier = "/blog/2018/08/05/til-week-7--code-and-communication";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/07/28/til-adventures-with-python-unittest/"
+      title="Adventures with Python unittest">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2018/12/08/octocat/"
+       title="Build-a-Octocat">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#week-7-code-and-communication">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

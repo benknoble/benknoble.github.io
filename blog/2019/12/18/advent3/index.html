@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Advent of Code 2019 : Day 3</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Advent of Code 2019 : Day 3</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 18 Dec 2019 in Blog</p>
+<div id="post">
+  <p>I feel like an electrical engineer, unscrambling these wires…</p>
+
+<h2 id="part-1">Part 1</h2>
+
+<h3 id="c8087e4"><a href="https://github.com/benknoble/advent2019/commit/c8087e4ebc3fd50ecc07cc37f281db1e1fc6ec14">c8087e4</a></h3>
+
+<p>Just adding the input files.</p>
+
+<h3 id="bddbdb6"><a href="https://github.com/benknoble/advent2019/commit/bddbdb6839f92a683926ccd5b298181b813de18e">bddbdb6</a></h3>
+
+<p>Talk about abstraction on top of abstraction. We start with the <code class="language-plaintext highlighter-rouge">Step</code>
+structure, which provides an abstraction over a direction and a distance to go.
+Notice that I write little <code class="language-plaintext highlighter-rouge">map</code> functions which can decompose these tuples,
+because it’s annoying to write</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">let</span>
+  <span class="kr">val</span> <span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="nv">=</span> <span class="n">someStep</span>
+<span class="kr">in</span>
+  <span class="c">(*</span><span class="cm"> use d and i somewhere *)</span>
+<span class="kr">end</span>
+</code></pre></div></div>
+
+<p>Instead, I write</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">Step</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="kr">fn</span> <span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">...)</span> <span class="n">someStep</span>
+</code></pre></div></div>
+
+<p>which makes the decomposition easier. It also helps to keep track of which
+variable belongs to which.</p>
+
+<p>Next we have the <code class="language-plaintext highlighter-rouge">Path</code> structure, which provides a list of <code class="language-plaintext highlighter-rouge">Step</code>s. (I’m
+skipping the parser code for most of these, but it’s there).</p>
+
+<p>Then there is the <code class="language-plaintext highlighter-rouge">Point</code> structure. <code class="language-plaintext highlighter-rouge">map</code> really came in handy here, because
+the syntax for decomposing records <code class="language-plaintext highlighter-rouge">{x,y}</code> is really a pain when you want to use
+variable names other that <code class="language-plaintext highlighter-rouge">x,y</code>. 2-D <code class="language-plaintext highlighter-rouge">point</code>s also have a total ordering via
+<code class="language-plaintext highlighter-rouge">compare</code>, a <code class="language-plaintext highlighter-rouge">map2</code> for combining \(x\)s and \(y\)s, and a Manhattan distance
+calculator.</p>
+
+<p>Then, <code class="language-plaintext highlighter-rouge">point</code>s compose with <code class="language-plaintext highlighter-rouge">step</code>s by being able to move in the direction of a
+<code class="language-plaintext highlighter-rouge">step</code>, but they can also trace out a path (list of <code class="language-plaintext highlighter-rouge">point</code>s) in a given
+direction. This is going to be useful for collecting the points of a given wire.</p>
+
+<p>We create a <code class="language-plaintext highlighter-rouge">PointSet</code> out of the <code class="language-plaintext highlighter-rouge">RedBlackSetFn</code> provided by SML/NJ for use
+with the wires.</p>
+
+<p>Finally, a <code class="language-plaintext highlighter-rouge">wire</code> is a list of <code class="language-plaintext highlighter-rouge">point</code>s! Converting a <code class="language-plaintext highlighter-rouge">path</code> to a <code class="language-plaintext highlighter-rouge">wire</code>
+requires tracing out all the steps, starting from the origin.</p>
+
+<p>Then we deal with the intersections. The naïve method of searching is easily
+\(O(n^w)\) in the size of the number of wires and their lengths. (Consider for
+each point in a wire \(w_i\) searching through the points in the other wires,
+whose sizes are assumed to be \(O(n)\).) And since we have lists on the order of
+150,000 points, that’s not going to be feasible. Using sets brings us down to
+\(O(w \sum{n_i})\) where \(w\) is the number of wires (2, in these cases) and
+\(n_i\) are the individual wire lengths. This ends up being a cut of two orders
+of magnitude.</p>
+
+<p>The solution, then, ends up being computing all the intersections and filtering
+out the origin. I really banged my head on this one for hours before I managed
+to figure it out—and it was important that 2-dimensional points <em>have</em> a total
+order, or I wouldn’t have been able to build the set. The spaghetti code that
+failed to compute the intersections before I wrote this was <em>horrible</em>.</p>
+
+<h2 id="part-2">Part 2</h2>
+
+<h3 id="1a1d129"><a href="https://github.com/benknoble/advent2019/commit/1a1d129aefb48710cb6ba0cfee5a5fb85b671bb6">1a1d129</a></h3>
+
+<p>Next we have a quick re-ordering of the wires, to put them in the “correct”
+order. We need this for other properties to work out.</p>
+
+<h3 id="74d823a"><a href="https://github.com/benknoble/advent2019/commit/74d823a6734b52bef02be4112f690d676942f876">74d823a</a></h3>
+
+<p>Then, it turned out we were double-counting the origin point, which we don’t
+want. Both this and the last commit are aimed at not over-counting the path to
+the intersection.</p>
+
+<h3 id="fdd7bf2"><a href="https://github.com/benknoble/advent2019/commit/fdd7bf22cea28357493c697ccb1a052d8cce5ab9">fdd7bf2</a></h3>
+
+<p>And so is this one—here, we were double counting <em>corners</em>.</p>
+
+<h3 id="15bef57"><a href="https://github.com/benknoble/advent2019/commit/15bef57ebce4445d018ac6e9b16ae787561358e5">15bef57</a></h3>
+
+<p>Now I finally copy over the code and modify it.</p>
+
+<p>The first big change is <code class="language-plaintext highlighter-rouge">stepsFromTo</code>, which recursively seeks out a path from
+one point to another in the wire and returns its length. Of note, we don’t
+include the source point in this path-length. This guy is really just a clever
+recursive accumulator: given a particular wire, we keep marching through it
+until we find the origin point. Then, and only then, do we keep start tracking
+points seen along the way. We return when we find the destination. Thus this
+is similar to a list fold, but the state includes points between origin and
+destination and a “seen origin” boolean. Plus, we bail out early.</p>
+
+<p>The next big change is the solution: we collect a list of functions from origin
+to intersection, one for each intersection, and apply them to each of the wires.
+From there, we sum the distances per intersection and grab the minima.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#advent+of+code" class="tag">
+        advent of code
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#sml%2Fnj" class="tag">
+        sml/nj
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2019/12/18/advent3/";
+    this.page.identifier = "/blog/2019/12/18/advent3";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2019/12/17/advent2/"
+      title="Advent of Code 2019 : Day 2">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2019/12/19/advent4/"
+       title="Advent of Code 2019 : Day 4">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#advent-of-code-2019-day-3">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

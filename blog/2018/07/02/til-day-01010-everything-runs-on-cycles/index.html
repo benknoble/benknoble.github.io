@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Day 01010--Everything Runs on Cycles</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Day 01010--Everything Runs on Cycles</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 02 Jul 2018 in Blog</p>
+<div id="post">
+  \[A \to B \to C \to A \to \cdots\]
+
+<h2 id="today-i-learned">Today I Learned</h2>
+
+<ol>
+  <li>About clustering VMs in Hypervisor</li>
+  <li>A trick for using ssh keys with a personal and corporate GitHub account</li>
+  <li>To properly cycle</li>
+</ol>
+
+<h3 id="sunglasses-hypervisor">
+<img class="emoji" title=":sunglasses:" alt=":sunglasses:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f60e.png" height="20" width="20"> Hypervisor</h3>
+
+<p>So, in my <a href="#round-and-round-again">spare time</a>, I have a task for our Raleigh
+lab to <a href="/blog/2018/06/25/til-week-2-refactoring/#dhcp-clustering">cluster our DHCP server</a>, which runs on a VM, so that if it
+goes down we have an easy backup already running. This was new technology to me,
+but a familiar concept (<em>redundancy</em>). The first step was the “R” in “R&amp;D”:
+research.</p>
+
+<p>So I spent today putting together a document on the basics of accomplishing the
+above, what questions I still had, and what challenges we might face.
+Unfortunately, I can’t share it with you.</p>
+
+<p>So have <a href="https://www.ibm.com/support/knowledgecenter/en/SSDV85_4.1.0/Admin/concepts/part_hypervisors_cloud.html">IBM’s</a>.</p>
+
+<h2 id="keys-key-and-locks-lock">Keys <img class="emoji" title=":key:" alt=":key:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f511.png" height="20" width="20"> and Locks <img class="emoji" title=":lock:" alt=":lock:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f512.png" height="20" width="20">
+</h2>
+
+<p>I’m really sorry about the emoji. I seem to be on a thing today. We’ll break up
+tomorrow.</p>
+
+<p>Anyhoo, as I was saying, <a href="https://github.com">GitHub</a>. <code class="language-plaintext highlighter-rouge">ssh</code>. Right, so I have this whole <a href="https://github.com/benknoble/Dotfiles">Dotfiles</a>
+repository on <a href="https://github.com">GitHub</a>. And it actually was really easy to set up the second
+time on my new Ubuntu machine. Only, (1) I configured <code class="language-plaintext highlighter-rouge">git</code> to use my Nuage
+name &amp; email for git commits, leading to (2) I edited my Dotfiles internal
+<code class="language-plaintext highlighter-rouge">.git/config</code> to have my personal information, and (3) had to put in my GitHub
+password every time I pushed!</p>
+
+<p>I suffered that for a whole day longer than I thought I would (Friday). Today, I
+had had enough.</p>
+
+<p>As it turns out, <code class="language-plaintext highlighter-rouge">~/.ssh/config</code> is your friend here. This is especially true in
+my case, where our corporate credentials are for a server Enterprise GitHub, so
+the hostname is completely different. But you can use the same trick for
+multiple regular accounts. Comments follow.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># change this if you want to use 'me.github.com' for a personal account in</span>
+<span class="c"># your `git clone` urls</span>
+<span class="c"># e.g., git clone git@me.github.com:benknoble/Dotfiles</span>
+Host github.com
+  <span class="c"># HostName github.com</span>
+  <span class="c"># Uncomment the above line if the Host and HostName aren't the same</span>
+  <span class="c"># Think of Host as 'command line shortcut' and HostName as 'real URL'</span>
+  IdentityFile ~/.ssh/path/to/personal/public/key
+
+<span class="c"># change this if you want to use 'corp.github.com' for an enterprise or</span>
+<span class="c"># secondary account in your `git clone` urls</span>
+<span class="c"># e.g., git clone git@corp.github.com:benknoble/Dotfiles</span>
+Host github.corp.domain.com
+  <span class="c"># HostName github.fullurl.com</span>
+  <span class="c"># Uncomment the above line if the Host != HostName for corp</span>
+  IdentityFile ~/.ssh/path/to/enterprise/public/key
+</code></pre></div></div>
+
+<p>This assumes you have created and registered separate public keys with the
+appropriate accounts using <code class="language-plaintext highlighter-rouge">ssh-keygen</code> and GitHub settings.</p>
+
+<p>You’ll note some of the comments about <code class="language-plaintext highlighter-rouge">Host</code> and <code class="language-plaintext highlighter-rouge">HostName</code>–this is why it’s
+easiest if one is a full on Enterprise GitHub. I can just use <code class="language-plaintext highlighter-rouge">Host</code> and my
+clone urls over ssh will work. If you needed multiple <code class="language-plaintext highlighter-rouge">github.com</code> profiles, you
+would have to set <code class="language-plaintext highlighter-rouge">HostName</code> to <code class="language-plaintext highlighter-rouge">github.com</code> in each one.</p>
+
+<p>One final word on keys: you’ll need to update any remotes on current projects to
+use ssh urls.</p>
+
+<h2 id="round-and-round-again">Round and Round Again</h2>
+
+<p>I planned to do a whole thing here, but I’ve moved it to the <a href="/blog/2018/07/04/feature-cycles/">feature</a>. Expect
+it on Friday (or early, if I’m feeling generous).</p>
+
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#infra" class="tag">
+        infra
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#vm" class="tag">
+        vm
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#ssh" class="tag">
+        ssh
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#github" class="tag">
+        github
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2018/07/02/til-day-01010-everything-runs-on-cycles/";
+    this.page.identifier = "/blog/2018/07/02/til-day-01010--everything-runs-on-cycles";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/06/29/feature-flexibility-and-engagement/" title="Feature--Flexibility and Engagement">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2018/07/03/til-day-11-third-times-not-always-the-charm/" title="Day 11--Third Time's (Not) Always the Charm">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#day-01010-everything-runs-on-cycles">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

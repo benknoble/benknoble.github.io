@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : :tada: Announcing the release of loner! :tada:</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>
+<img class="emoji" title=":tada:" alt=":tada:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png" height="20" width="20"> Announcing the release of loner! <img class="emoji" title=":tada:" alt=":tada:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png" height="20" width="20">
+</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 07 Apr 2019 in Release</p>
+<div id="post">
+  <p>I am pleased to announce the release of version 0.1.0 of <a href="https://github.com/benknoble/loner">loner</a>! You can
+find its online documentation at <a href="https://benknoble.github.io/loner">Junk Drawer/loner</a>, with a link to
+the online API reference.</p>
+
+<h2 id="what-is-it">What is it?</h2>
+
+<p>Loner aims to be a scala API and DSL for EBNF grammars. To explain those
+acronyms:</p>
+
+<ul>
+  <li>
+<em>API</em>: application programming interface; a library of re-usable code</li>
+  <li>
+<em>DSL</em>: domain specific language; a mini-language suited to a specific need</li>
+  <li>
+<em>EBNF</em>: <a href="http://matt.might.net/articles/grammars-bnf-ebnf">the language of (context-free) languages</a>
+</li>
+</ul>
+
+<h2 id="what-does-it-do">What does it do?</h2>
+
+<p>In short, it allows you to write code like (making use of implicits):</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">grammar</span> <span class="k">=</span> <span class="nc">Grammar</span><span class="o">(</span>
+  <span class="ss">'A</span> <span class="o">::=</span> <span class="s">"abc"</span><span class="o">.?</span> <span class="o">||</span> <span class="ss">'B</span><span class="o">,</span>
+  <span class="ss">'B</span> <span class="o">::=</span> <span class="ss">'C</span><span class="o">.*,</span>
+  <span class="ss">'C</span> <span class="o">::=</span> <span class="s">"c"</span> <span class="o">~</span> <span class="ss">'A</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Which is equivalent to parsing the following grammar:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># A is an abc or a B
+&lt;A&gt; ::= ["abc"]
+        | &lt;B&gt; ;
+# B is 0-or-more Cs
+&lt;B&gt; ::= {&lt;C&gt;} ;
+# C is a c followed by an A
+&lt;C&gt; ::= c&lt;A&gt; ;
+</code></pre></div></div>
+
+<p>Which loner can do for you! From scala,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">grammar</span> <span class="k">=</span> <span class="nc">EbnfParser</span><span class="o">(</span>
+<span class="s">"""
+# A is an abc or a B
+&lt;A&gt; ::= ["abc"]
+        | &lt;B&gt; ;
+# B is 0-or-more Cs
+&lt;B&gt; ::= {&lt;C&gt;} ;
+# C is a c followed by an A
+&lt;C&gt; ::= c&lt;A&gt; ;
+"""</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Finally, this first version provides a command line tool named <code class="language-plaintext highlighter-rouge">ebnf</code> that can
+format such input (called ebnf files), stripping out the comments and produce a
+machine-consumable output.</p>
+
+<p>The aim is to eventually feed this into a <code class="language-plaintext highlighter-rouge">loner</code> tool that verifies that the
+grammar is LL(1) compliant, a subject for another day.</p>
+
+<h2 id="why-is-this-needed">Why is this needed?</h2>
+
+<p>First, playing with languages is fun.</p>
+
+<p>Second, the modern programmer will eventually find him/herself in need of a
+mini-language, and want to write a grammar for it. Having a common way to do so
+improves communication and creates an opportunity for new tools that operate on
+these grammars (e.g., verify that a string is in the language, or manipulate the
+grammar to try and reduce it, or generate random strings in its language, or any
+number of other concepts: imagine allowing users to embed a language in your
+next game just by writing a grammar specification and a mapping from constructs
+to actions).</p>
+
+<p>Third, the LL(1) property of context-free languages is important to development
+tools for mini-languages, like the venerable <code class="language-plaintext highlighter-rouge">yacc</code>. Being able to readily
+verify from the start that your language conforms is a time-saver; being able to
+feed this input to a tool which could generated a <code class="language-plaintext highlighter-rouge">yacc</code> skeleton would be a
+great boon.</p>
+
+<h2 id="how">How?</h2>
+
+<p><code class="language-plaintext highlighter-rouge">loner</code>’s first step was to build a model of a Grammar object. A grammar is
+naturally a sequence of productions, each of which is a nonterminal symbol and a
+rule (or expression).</p>
+
+<p>The expressions naturally model as an abstract syntax tree, something scala’s
+case classes express readily. That, combined with their ability to give DSL-like
+syntax as above, and my desire to implement a serious project in scala, combined
+to make this project a reality.</p>
+
+<p>To create the parser, <code class="language-plaintext highlighter-rouge">loner</code> makes use of scala’s amazing parser combinator
+library to derive a set of functional parsers for the components of the grammar,
+each of which maps a part of the ebnf file into domain level objects above.</p>
+
+<p>To be sure, this was not easy: scala’s <code class="language-plaintext highlighter-rouge">RegexParsers</code> do not handle
+left-recursion natively, forcing me to thing about how to stratify a grammar
+(that, incidentally, described a language of grammars… how very meta). Adding
+support for comments proved equally tricky, and <code class="language-plaintext highlighter-rouge">loner</code> does not (yet) support a
+quoting or escape mechanism to embed special characters in non-terminals and
+terminals. I also had to get over the hurdles of working with sbt and its many
+oddities.</p>
+
+<p>Finally, the Grammar objects provide a format method that does the work of
+prettifying the grammar for output.</p>
+
+<p>Loner employs a TDD-style development process, making use of <code class="language-plaintext highlighter-rouge">ScalaTest</code> to
+express high-level expectations.</p>
+
+<h2 id="future">Future?</h2>
+
+<p>As stated above, work is underway to develop a <code class="language-plaintext highlighter-rouge">loner</code> tool to verify the LL(1)
+property of a grammar. This was the impetus for the project, as the algorithm to
+verify this property is expressed so mathematically that it seemed naturally a
+good fit for a language like scala.</p>
+
+<h2 id="how-can-i-help">How can I help?</h2>
+
+<p>Use the code! Read it, help improve the documentation, report bugs, etc.</p>
+
+<p>Dive in to our issue tracker, and see if there’s something you can help with
+(pesky escape characters…).</p>
+
+<p>Write more tests (we’ll never have perfect coverage).</p>
+
+<p>I would love someone to contribute a vim-plugin for <code class="language-plaintext highlighter-rouge">.ebnf</code> files, complete with
+filetype-detection, syntax highlighting, and support for <code class="language-plaintext highlighter-rouge">ebnf</code> as the indent
+program. It’s on my todo-list.</p>
+
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#github" class="tag">
+        github
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#scala" class="tag">
+        scala
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#ebnf" class="tag">
+        ebnf
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#ll-one" class="tag">
+        ll-one
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#grammar" class="tag">
+        grammar
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#tdd" class="tag">
+        tdd
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#release">Release</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/release/2019/04/07/loner-release-one/";
+    this.page.identifier = "/release/2019/04/07/loner-release-one";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/12/08/octocat/" title="Build-a-Octocat">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2019/06/13/status-badges/" title="Status Badges">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#tada-announcing-the-release-of-loner-tada">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

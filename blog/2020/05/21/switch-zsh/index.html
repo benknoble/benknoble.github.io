@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Why I finally switched to zsh</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Why I finally switched to zsh</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 21 May 2020 in Blog</p>
+<div id="post">
+  <p>Some people were astonished I still used bash (though I was on version 5+).</p>
+
+<h2 id="ok-i-finally-switched-but">Ok, I finally switched, but</h2>
+
+<p>I spent the last week getting my toes wet, reading the <a href="http://zsh.sourceforge.net/FAQ/zshfaq.html">FAQ</a>, <a href="http://zsh.sourceforge.net/Guide/zshguide.html">User’s
+Guide</a>, and <a href="http://zsh.sourceforge.net/Doc/zsh_us.pdf">Manual</a> cover-to-cover, and porting my bash config over to zsh.
+It is at last done, and I have to say I’m happy enough with zsh to have <code class="language-plaintext highlighter-rouge">chsh</code>ed
+to it.</p>
+
+<p>But why?</p>
+
+<p>Ultimately, it took me this long to make the switch because</p>
+
+<ul>
+  <li>I like bash</li>
+  <li>I had a <em>lot</em> of bash configuration</li>
+  <li><code class="language-plaintext highlighter-rouge">zsh</code> is <em>huge</em>—it’s a daunting task to even set up a simple config</li>
+  <li>I consider myself something of an expert in bash</li>
+</ul>
+
+<p>This last point is really the stickler: I like to be an expert in the systems I
+use (no Oh-my-zsh for me). I became an expert in bash precisely because the core
+is so small; I am a long way from mastering zshell and its hieroglyphs.</p>
+
+<p>But, ultimately, I had to recognize that it is likely to bring me performance
+gains in the many years to come. I’ll have</p>
+
+<ul>
+  <li>a better command-line editor</li>
+  <li>more powerful completions</li>
+  <li>more powerful globs and qualifiers</li>
+  <li>better startup-file rules</li>
+  <li>mechanisms for autoloading (much like in vim)</li>
+  <li>and more…</li>
+</ul>
+
+<p>To be clear, zsh is not here to replace bash. Bash is still a mainstay of my
+scripting and automation world; I’m not giving up that expertise, and it ranks
+2nd in terms of portability (<code class="language-plaintext highlighter-rouge">/bin/sh</code> taking first place).</p>
+
+<p>But zsh might just be this programmer’s paradise… for proof, consider how some
+of my zsh configuration is simpler than its bash counterpart (and the more
+complex pieces tend to be the result of more complex, but more powerful and
+ultimately productive, systems).</p>
+
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#productivity" class="tag">
+        productivity
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#prog-langs" class="tag">
+        prog-langs
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#shell" class="tag">
+        shell
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#zsh" class="tag">
+        zsh
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2020/05/21/switch-zsh/";
+    this.page.identifier = "/blog/2020/05/21/switch-zsh";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2020/05/11/advent5/"
+      title="Advent of Code 2019 : Day 5">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2020/05/22/libexec-git-core-on-path/"
+       title="Programs invoked by git have libexec/git-core on $PATH">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#why-i-finally-switched-to-zsh">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

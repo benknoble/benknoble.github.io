@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Re: Coding the Impossible: Palindrome Detector with a Regular Expressions</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Re: Coding the Impossible: Palindrome Detector with a Regular Expressions</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 12 Feb 2020 in Blog</p>
+<div id="post">
+  <p><a href="https://medium.com/analytics-vidhya/coding-the-impossible-palindrome-detector-with-a-regular-expressions-cd76bc23b89b">Another internet
+post</a>
+sparks a small rant.</p>
+
+<p>(This is a follow-up of my previous article on the <a href="/blog/2020/01/14/cs-fundamentals/">Fundamentals of
+Computation</a>.)</p>
+
+<h2 id="do-you-remember">Do you remember?</h2>
+
+<p>Earlier, I ranted about the apparent lack of education regarding the
+fundamentals of what is computable: certain tools are not powerful enough for
+certain problems, and some don’t seem to know this (or don’t care).</p>
+
+<p>Well, the brave Tony Tonev decided to try to bend the rules a bit.</p>
+
+<h3 id="a-man-a-plan-a-canal-panama">A man, a plan, a canal, Panama!</h3>
+
+<p>Technically, Tony succeeded at what he set out to do: check for palindromes
+using regular expressions. This is a rather interesting achievement, since
+palindromes are generally considered context-free. So, how can this be?</p>
+
+<p>Let’s break down the main issues:</p>
+
+<ul>
+  <li>Tony claims:</li>
+</ul>
+
+<blockquote>
+  <p>technically [that StackOverflow user is] right for arbitrary-length
+palindromes, but that doesn’t mean we can’t make one for palindromes up to a
+maximum length</p>
+</blockquote>
+
+<p>Ok, this is <em>technically</em> true, but the resulting DFA (or even NFA) would be
+humongous for even a short maximum-length over the English alphabet! With length
+2, we already have \(26^2 = 676\) states (one for each combination of letters),
+and then only 26 of these are accepting! Imagine the resulting exponential
+blowup for bigger palindromes…</p>
+
+<p>If you’re wondering if this is even feasible, remember that Tony’s goal has
+length 22 (not including whitespace). Fortunately, the astute Tony notes that we
+have far easier (\(O(n)\)) methods of detecting palindromes.</p>
+
+<ul>
+  <li>Next, Tony says:</li>
+</ul>
+
+<blockquote>
+  <p>I wrote a regular expression which detects palindromes up to 22 characters
+ignoring tabs, spaces, commas, and quotes</p>
+</blockquote>
+
+<p>And then he gives a bunch of text. Since he says regular expression, we are left
+wondering what he means. It can’t be a classical CS RE, since it’s not using set
+operations or the like. It <em>appears</em> to be a PCRE (Perl-Compatible RE), due to
+it’s use of the <code class="language-plaintext highlighter-rouge">(?:)</code> non-capturing group and back-references—but wait just a
+minute! <a href="https://catonmat.net/perl-regex-that-matches-prime-numbers">PCRE is famously far more powerful than a classical
+RE</a>! And
+back-references are a core too-big-for-RE feature!</p>
+
+<p>Well, is it really PCRE?</p>
+
+<ul>
+  <li>Tony says:</li>
+</ul>
+
+<blockquote>
+  <p>Nope, it’s actually a valid regex. Feel free to check it using regexr.com,
+which is an awesome tool to instantly see the results of your regex’s [sic]
+and explains what each part does.</p>
+</blockquote>
+
+<p>Wait, regexr.com? Ok, let’s check that out…</p>
+
+<blockquote>
+  <p>Supports JavaScript &amp; PHP/PCRE RegEx.</p>
+</blockquote>
+
+<p>So, PCRE after all, eh? Well, Tony, you sure pulled the wool over our eyes
+there…</p>
+
+<h3 id="who-cares">Who cares?</h3>
+
+<p>Hopefully, it’s obvious that Tony is smart, and I’m not really angry with him.</p>
+
+<p>Hopefully, it’s obvious I’m not aiming for a gate-keeping, “only real
+programmers” approach.</p>
+
+<p>But hopefully it’s equally obvious that terminology matters. This isn’t “solving
+palindromes with RE”—it’s “solving palindromes with something vastly more
+powerful than RE.” Can the problem be solved with an RE? Yes. Does it lead to
+exponential blow-up, since REs don’t actually have back-references? Also yes.</p>
+
+<p>Tony, next time, please be more careful with your terminology. This is the kind
+of imprecision that keeps the “REs can do anything” myth alive.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#rants" class="tag">
+        rants
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#advice" class="tag">
+        advice
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#learning" class="tag">
+        learning
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#college" class="tag">
+        college
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#grammar" class="tag">
+        grammar
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2020/02/12/cs-fundamentals-part2/";
+    this.page.identifier = "/blog/2020/02/12/cs-fundamentals-part2";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2020/01/14/cs-fundamentals/"
+      title="CS Students Must Learn Computation Fundamentals">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2020/05/11/advent5/"
+       title="Advent of Code 2019 : Day 5">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#re-coding-the-impossible-palindrome-detector-with-a-regular-expressions">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

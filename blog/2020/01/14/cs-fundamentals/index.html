@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : CS Students Must Learn Computation Fundamentals</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>CS Students Must Learn Computation Fundamentals</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 14 Jan 2020 in Blog</p>
+<div id="post">
+  <p>Another internet post sparks a small rant.</p>
+
+<h2 id="problems--solutions">Problems &amp; Solutions</h2>
+
+<p>Have you ever seen that <a href="https://stackoverflow.com/q/1732348/4400820">famous StackOverflow post about “parsing” HTML with
+regular expressions</a>?</p>
+
+<p>This one cropped up today about <a href="https://codereview.stackexchange.com/q/235597/123233">detecting balanced
+parentheses</a>: it’s amusing
+that the author converted to a correct approach only after the realization that</p>
+
+<blockquote>
+  <p>performance was quite slow when any large string was passed to the regex</p>
+</blockquote>
+
+<p>…while failing to acknowledge the true flaw in the original approach.</p>
+
+<h3 id="pop-quiz">Pop quiz</h3>
+
+<ol>
+  <li>Parsing HTML with regular expressions is possible. (True or False)</li>
+  <li>Determining if parentheses are correctly balanced and nested is possible with
+a regular expression. (True or False)</li>
+</ol>
+
+<p>Go read the linked posts, and see if your answer matches up.</p>
+
+<p>Ironically enough, this post has sparked a lot of debate about whether it is
+“sometimes, sort of, mostly” OK to “parse” HTML with a regex. The argument is
+that “it worked for me this one time, it’s not production code, it’s a quick
+hack, so no harm no foul.” <em>And I mostly agree.</em> But it’s not parsing.</p>
+
+<h2 id="all-cs-students-must-learn-the-fundamentals-of-computation-theory">All CS Students Must Learn the Fundamentals of Computation Theory</h2>
+
+<p>I like the text <em>Elements of the Theory of Computation</em> by Lewis &amp;
+Papadimitriou. It was used in my Comp 455 (Models of Languages &amp; Computation).</p>
+
+<p>Any student with this knowledge should know that language of balanced
+parentheses is context-free! It can <em>never</em> be decided with a regular
+expression: given any regular expression \(e\), there will always be a string
+\(s \in \text{BalancedParens}\) such that \(s \not\in \mathcal{L}(e)\)!</p>
+
+<p>Students would be better programmers, and better equipped to reason about
+programs, if they knew what was achievable with certain formulations: and
+moreover, what was <em>not</em>.</p>
+
+<p>In the case of balanced parentheses, we need a computer with power to decide at
+least context-free languages. A PDA is one-such computer; in this case, we
+effectively need a stack and a transition function.</p>
+
+<p>I won’t give the entire formal description here (unless someone really asks for
+it), but I’ve coded a reference implementation in Clojure to keep with the theme
+of balanced parentheses.</p>
+
+<script src="https://gist.github.com/f6d157217a7a814450d6fc9cf45625ee.js"> </script>
+
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#rants" class="tag">
+        rants
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#advice" class="tag">
+        advice
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#learning" class="tag">
+        learning
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#college" class="tag">
+        college
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#grammar" class="tag">
+        grammar
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#clojure" class="tag">
+        clojure
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2020/01/14/cs-fundamentals/";
+    this.page.identifier = "/blog/2020/01/14/cs-fundamentals";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2020/01/13/getting-help/"
+      title="Getting Help Dos and Don'ts">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2020/02/12/cs-fundamentals-part2/"
+       title="Re: Coding the Impossible: Palindrome Detector with a Regular Expressions">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#cs-students-must-learn-computation-fundamentals">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

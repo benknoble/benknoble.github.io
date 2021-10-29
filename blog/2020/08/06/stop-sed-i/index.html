@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Stop, sed i!</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Stop, sed i!</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 06 Aug 2020 in Blog</p>
+<div id="post">
+  <p>Right tool for the job people, right tool for the job <img class="emoji" title=":roll_eyes:" alt=":roll_eyes:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f644.png" height="20" width="20"></p>
+
+<h2 id="what-am-i-talking-about">What am I talking about?</h2>
+
+<p>I’m referring to all the use of <code class="language-plaintext highlighter-rouge">sed -i</code> spread wantonly on the internet, <em>sans</em>
+appropriate caveats.</p>
+
+<blockquote>
+  <p>Background: most implementations of the <code class="language-plaintext highlighter-rouge">-i</code> flag allow <code class="language-plaintext highlighter-rouge">sed</code> to edit files in
+place; by default, it edits standard in and writes to standard out, so you end
+up having to do <code class="language-plaintext highlighter-rouge">&lt;file sed ... &gt;file.new &amp;&amp; mv file.new file</code>. Trying to
+redirect back into the file (<code class="language-plaintext highlighter-rouge">&lt;file sed ... &gt;file</code>) fails because the file is
+truncated before <code class="language-plaintext highlighter-rouge">sed</code> gets to read it!</p>
+</blockquote>
+
+<p>The <code class="language-plaintext highlighter-rouge">-i</code> flag is <a href="https://pubs.opengroup.org/onlinepubs/9699919799/">not specified by
+POSIX</a>, which makes it
+non-portable. This isn’t such a big deal, <em>except</em> that different <code class="language-plaintext highlighter-rouge">sed</code>s require
+different arguments! GNU <code class="language-plaintext highlighter-rouge">sed</code> edits in place, no argument provided. BSD <code class="language-plaintext highlighter-rouge">sed</code>,
+such as the one on macOS, requires a suffix:</p>
+
+<ul>
+  <li>if the suffix is non-empty, it places the original file at <code class="language-plaintext highlighter-rouge">file.suffix</code> and
+the new contents in <code class="language-plaintext highlighter-rouge">file</code>;</li>
+  <li>if the suffix is empty, no backup is made.</li>
+</ul>
+
+<p>So now, every <code class="language-plaintext highlighter-rouge">sed -i</code> solution to a problem needs to <em>at least</em></p>
+
+<ul>
+  <li>mention non portability, and</li>
+  <li>mention two different implementations and how they handle it.</li>
+</ul>
+
+<p>I don’t know about you, but I wonder if the solution to editing files in place
+is a lot simpler… <img class="emoji" title=":thinking:" alt=":thinking:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f914.png" height="20" width="20"></p>
+
+<h2 id="sed-for-streams-ed-for-files">
+<code class="language-plaintext highlighter-rouge">sed</code> for streams, <code class="language-plaintext highlighter-rouge">ed</code> for files</h2>
+
+<p><code class="language-plaintext highlighter-rouge">sed</code> stands for “stream editor.” It was designed based on the text-editor
+<code class="language-plaintext highlighter-rouge">ed</code>’s commands! <code class="language-plaintext highlighter-rouge">ed</code> is built to edit files.</p>
+
+<ul>
+  <li>If you need to edit a file in place, use POSIX <code class="language-plaintext highlighter-rouge">ed</code> (or the improved
+POSIX-specified <code class="language-plaintext highlighter-rouge">ex</code>);</li>
+  <li>if you need to transform a stream, <code class="language-plaintext highlighter-rouge">sed</code> is an option.</li>
+</ul>
+
+<p>I cannot emphasize this enough. Trying to use <code class="language-plaintext highlighter-rouge">sed -i</code> in any kind of portable
+anything is likely to break; worse was the thought that <code class="language-plaintext highlighter-rouge">sed</code> should ever be
+used for editing files! Use a text-editor: if you thought “I’m automating, I
+don’t want to run a text-editor to automate,” well, remember:</p>
+
+<ul>
+  <li>it is entirely possible to automate (read: script) <code class="language-plaintext highlighter-rouge">ed</code> and <code class="language-plaintext highlighter-rouge">ex</code>, and</li>
+  <li>people today fire up entire web browsers in their desktop applications in
+order to automate things—running a tiny text-editor is the least of your
+worries.</li>
+</ul>
+
+<h2 id="addendum-scripting-ed">Addendum: scripting ed</h2>
+
+<p><code class="language-plaintext highlighter-rouge">ed</code> takes commands on standard in. It can be made silent with <code class="language-plaintext highlighter-rouge">-s</code>, and the
+argument is a file to edit. I ignore <code class="language-plaintext highlighter-rouge">-p</code> for now because it isn’t useful for
+scripting/automation. So, to script <code class="language-plaintext highlighter-rouge">ed</code>, generate a list of commands and pipe
+it in!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">printf</span> <span class="s1">'%s\n'</span> g/abc/d w q | ed <span class="nt">-s</span> file
+</code></pre></div></div>
+
+<p>That’s the most portable, but <code class="language-plaintext highlighter-rouge">bash</code> users can probably do</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ed <span class="nt">-s</span> file <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
+g/abc/d
+w
+q
+</span><span class="no">EOF
+</span></code></pre></div></div>
+
+<p>There is quite a bit of flexibility here; the left-hand side could actually be
+another <em>program</em> that generates <code class="language-plaintext highlighter-rouge">ed</code> commands on standard out! It turns out,
+this is what <code class="language-plaintext highlighter-rouge">diff</code> does: in its default output mode, we have</p>
+
+<blockquote>
+  <p>These lines resemble <code class="language-plaintext highlighter-rouge">ed</code> subcommands to convert <code class="language-plaintext highlighter-rouge">file1</code> into <code class="language-plaintext highlighter-rouge">file2</code>. The
+line numbers before the action letters shall pertain to <code class="language-plaintext highlighter-rouge">file1</code>; those after
+shall pertain to <code class="language-plaintext highlighter-rouge">file2</code>. Thus, by exchanging <code class="language-plaintext highlighter-rouge">a</code> for <code class="language-plaintext highlighter-rouge">d</code> and reading the line
+in reverse order, one can also determine how to convert <code class="language-plaintext highlighter-rouge">file2</code> into <code class="language-plaintext highlighter-rouge">file1</code>.
+As in <code class="language-plaintext highlighter-rouge">ed</code>, identical pairs (where <code class="language-plaintext highlighter-rouge">num1=num2</code>) are abbreviated as a single
+number.</p>
+</blockquote>
+
+<p>And when we ask for the <code class="language-plaintext highlighter-rouge">-e</code> output mode:</p>
+
+<blockquote>
+  <p>With the <code class="language-plaintext highlighter-rouge">-e</code> option, a script shall be produced that shall, when provided as
+input to <code class="language-plaintext highlighter-rouge">ed</code>, along with an appended <code class="language-plaintext highlighter-rouge">w</code> (write) command, convert <code class="language-plaintext highlighter-rouge">file1</code>
+into <code class="language-plaintext highlighter-rouge">file2</code>.</p>
+</blockquote>
+
+<p>So now, you can probably write a <code class="language-plaintext highlighter-rouge">patch</code> command <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"> you parse the output
+from <code class="language-plaintext highlighter-rouge">diff</code>, with maybe slight modification, and then pass it as input to <code class="language-plaintext highlighter-rouge">ed</code>!</p>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#shell" class="tag">
+        shell
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#sed" class="tag">
+        sed
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#rants" class="tag">
+        rants
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#posix" class="tag">
+        posix
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2020/08/06/stop-sed-i/";
+    this.page.identifier = "/blog/2020/08/06/stop-sed-i";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2020/07/16/parallel-git-pipelines/" title="Making mass-edits to many repos via shell pipelines">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2020/09/29/excel-duplicate-files/" title="Excel for Mac cannot simultaneously edit files with the same basename">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#stop-sed-i">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Day Four, My Two Cents</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Day Four, My Two Cents</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 21 Jun 2018 in Blog</p>
+<div id="post">
+  <p>Penny for your thoughts?</p>
+
+<h2 id="today-i-learned">Today I Learned</h2>
+
+<ol>
+  <li>How to use Cent OS</li>
+  <li>How to configure a proxy</li>
+  <li>Who my boss-boss is, and how I fit into Nuage Networks</li>
+</ol>
+
+<p>So I got a temporary laptop while my work one is getting re-imaged (update: this
+failed, so tomorrow I get to troubleshoot a boot failure with IT. Yay.). The
+loaner is running Cent OS 7, and I have a love-hate relationship so far. I love
+linux, but the keyboard is getting in my way. None of my shortcuts work, and I
+keep hitting <code class="language-plaintext highlighter-rouge">&lt;CapsLock&gt;</code> instead of <code class="language-plaintext highlighter-rouge">&lt;Control&gt;</code> because I haven’t figured out
+how to do that remapping yet. Plus, there’s the proxy (read on). Overall, a
+positive experience though, because it meant I finally have all my accounts
+(except possibly an <code class="language-plaintext highlighter-rouge">ssh</code> account on the internal servers for doing that
+work…).</p>
+
+<p>Also, the trackpad scroll sucks.</p>
+
+<p>Apparently, <code class="language-plaintext highlighter-rouge">/etc/environment</code> needs to know about the work proxy through
+<code class="language-plaintext highlighter-rouge">http_proxy</code> and the <code class="language-plaintext highlighter-rouge">https</code> and uppercase variants, as well as <code class="language-plaintext highlighter-rouge">no_proxy</code>.
+Then, it probably should go in <code class="language-plaintext highlighter-rouge">/etc/bashrc</code> or another file that is sourced by
+every shell to be exported. Finally, I still had to configure Firefox and the
+network individually (and Slack <em>still</em> wouldn’t get through it!).</p>
+
+<p>We had a big luncheon with the boss-boss today (free food!). He gave everybody a
+big spiel about how we need to step up, about running tests and not shipping
+broken or poor-quality products. I sensed there was some history there. But he
+also said we have some good problems (too much business), and the problems are
+all fixable. In other words, we all need to do better of speaking up and
+stepping up to work on things outside of our own areas.</p>
+
+<p>I learned from this that my role in Infra is to make sure everybody else can do
+their jobs effectively–they have better things to do than to wait on builds to
+finish.</p>
+
+<p>If you haven’t figured out the title yet, the first Cent is the OS, and the
+second is me stepping up and speaking up about things at the office.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#infra" class="tag">
+        infra
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2018/06/21/til-day-four-my-two-cents/";
+    this.page.identifier = "/blog/2018/06/21/til-day-four-my-two-cents";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/06/20/til-day-three-slacking/"
+      title="Day Three--Slacking">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2018/06/22/til-reading-refactoring-and-rpatterns/"
+       title="Reading, Refactoring, and RPatterns">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#day-four-my-two-cents">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

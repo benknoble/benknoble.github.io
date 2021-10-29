@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Advent of Code 2019 : Day 1</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Advent of Code 2019 : Day 1</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 16 Dec 2019 in Blog</p>
+<div id="post">
+  <p>We begin the Advent of Code journey, commit by commit…</p>
+
+<h2 id="advent-of-code"><a href="https://adventofcode.com/2019">Advent of Code</a></h2>
+
+<p>I’ve seen Advent of Code for the last few years, but never participated. This
+year, after a challenge from a friend to compete on a private leaderboard, I
+decided <em>not</em> to win, by learning a new language for the challenges.</p>
+
+<p>So I began my journey with SML/NJ on Day 1.</p>
+
+<h2 id="part-1">Part 1</h2>
+
+<h3 id="079f2a4"><a href="https://github.com/benknoble/advent2019/commit/079f2a4c91193dc63f152e4d7f7c9f3b9098b4cf">079f2a4</a></h3>
+
+<p>I’m too used to shell scripts, so I tried to write the SML code like a script:
+give me your input on stdin, and I’ll compute the output.</p>
+
+<p>The code works, though.</p>
+
+<p>It’s not even very interesting: we <code class="language-plaintext highlighter-rouge">map</code> the <code class="language-plaintext highlighter-rouge">fuel</code> calculation over all the
+masses, and <code class="language-plaintext highlighter-rouge">sum</code> it.</p>
+
+<p>I did have to learn how to parse the input with SML. Fortunately it wasn’t
+terribly difficult. The function <code class="language-plaintext highlighter-rouge">String.tokens</code> tokenizes a string <code class="language-plaintext highlighter-rouge">s</code>
+according to a function <code class="language-plaintext highlighter-rouge">f</code>; effectively, it returns a <code class="language-plaintext highlighter-rouge">string list</code> where each
+item in the list was separated by a character <code class="language-plaintext highlighter-rouge">c</code> such that <code class="language-plaintext highlighter-rouge">f c = True</code>.</p>
+
+<p>Examples:</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">-</span> <span class="nn">String</span><span class="p">.</span><span class="n">tokens</span> <span class="p">(</span><span class="kr">fn</span> <span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span> <span class="p">=</span> <span class="sc">#" "</span><span class="p">)</span> <span class="s2">"a b c"</span><span class="p">;</span>
+<span class="kr">val</span> <span class="nv">it</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"b"</span><span class="p">,</span><span class="s2">"c"</span><span class="p">]</span> <span class="p">:</span> <span class="n">string</span> <span class="n">list</span>
+<span class="n">-</span> <span class="nn">String</span><span class="p">.</span><span class="n">tokens</span> <span class="nn">Char</span><span class="p">.</span><span class="n">isSpace</span> <span class="s2">"a b c"</span><span class="p">;</span>
+<span class="kr">val</span> <span class="nv">it</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"b"</span><span class="p">,</span><span class="s2">"c"</span><span class="p">]</span> <span class="p">:</span> <span class="n">string</span> <span class="n">list</span>
+<span class="n">-</span> <span class="nn">String</span><span class="p">.</span><span class="n">tokens</span> <span class="p">(</span><span class="kr">fn</span> <span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span> <span class="p">=</span> <span class="sc">#"."</span><span class="p">)</span> <span class="s2">"a.b.c."</span><span class="p">;</span>
+<span class="kr">val</span> <span class="nv">it</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"b"</span><span class="p">,</span><span class="s2">"c"</span><span class="p">]</span> <span class="p">:</span> <span class="n">string</span> <span class="n">list</span>
+</code></pre></div></div>
+
+<h3 id="5ce233c"><a href="https://github.com/benknoble/advent2019/commit/5ce233c4667bbcdb5afdadeb30dab373576d061d">5ce233c</a></h3>
+
+<p>And now I learn to adjust to the lisp/sml/prolog-style of program.</p>
+
+<p>I supply the source files, you load them up in an interpreter, and code the
+query that gives you the answer.</p>
+
+<p>This actually cleans up the code quite a bit.</p>
+
+<p>Well, that and point-free style. It can be harder to read sometimes, but the
+idea is that</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">fun</span> <span class="nf">foo</span> <span class="n">s</span> <span class="p">=</span> <span class="n">map</span> <span class="p">(</span><span class="kr">fn</span> <span class="n">x</span> <span class="p">=&gt;</span> <span class="p">...)</span> <span class="n">s</span>
+</code></pre></div></div>
+
+<p>is equivalent to</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">val</span> <span class="nv">foo</span> <span class="p">=</span> <span class="n">map</span> <span class="p">(</span><span class="kr">fn</span> <span class="n">x</span> <span class="p">=&gt;</span> <span class="p">...)</span>
+</code></pre></div></div>
+
+<p>modulo possible type constraints. This is because of a little currying in most
+standard library functions: it is possible to partially apply functions, and get
+functions back as a result.</p>
+
+<p>This goes nicely with the composition operator <code class="language-plaintext highlighter-rouge">o</code> (which my syntax files
+conceal to <code class="language-plaintext highlighter-rouge">←</code>). I can chain functions together as long as the outputs match
+the inputs, and build up a single function value to apply all at once to an
+input. (The reality is probably that it’s one big series of lambdas or closures
+or something, so it’s probably not super efficient for the runtime system, but
+it sure is fun to read and write).</p>
+
+<h3 id="5e782f8"><a href="https://github.com/benknoble/advent2019/commit/5e782f8162366180cdf60e4f6d739eeb8bfb1b49">5e782f8</a></h3>
+
+<p>For fun, I did this one in <code class="language-plaintext highlighter-rouge">awk(1)</code> as well. It was straightforward, to say the
+least.</p>
+
+<h2 id="part-2">Part 2</h2>
+
+<h3 id="8a8a8b8"><a href="https://github.com/benknoble/advent2019/commit/8a8a8b82bb24c75b0149ec61dd0940d910287b89">8a8a8b8</a></h3>
+
+<p><small>If that isn’t the strangest “short” commit name… I didn’t notice that
+until now.</small></p>
+
+<p>For Part 2, I had to adjust my fuel calculation a bit. Then it was off to the
+races.</p>
+
+<p>Deciding the types for values and then making them match was slightly trickier
+in this one because of the need to toggle between <code class="language-plaintext highlighter-rouge">real</code>s and <code class="language-plaintext highlighter-rouge">int</code>s.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#advent+of+code" class="tag">
+        advent of code
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#sml%2Fnj" class="tag">
+        sml/nj
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#awk" class="tag">
+        awk
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2019/12/16/advent/";
+    this.page.identifier = "/blog/2019/12/16/advent";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2019/11/24/pics-text/"
+      title="Please do not post images of text">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2019/12/17/advent2/"
+       title="Advent of Code 2019 : Day 2">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#advent-of-code-2019-day-1">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

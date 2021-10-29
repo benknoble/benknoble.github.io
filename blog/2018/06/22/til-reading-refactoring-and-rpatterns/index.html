@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Reading, Refactoring, and RPatterns</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Reading, Refactoring, and RPatterns</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 22 Jun 2018 in Blog</p>
+<div id="post">
+  <p>I couldn’t leave the alliteration hanging in a title containing the word
+‘patterns’…</p>
+
+<h1 id="today-i-learned">Today I Learned</h1>
+
+<ol>
+  <li>I was not alone in the <a href="/blog/2018/06/18/til-first-day/">IXIA</a> troubles</li>
+  <li>Reading build logs hurts</li>
+  <li>Refactoring without changing the functional result is fun</li>
+  <li>I use the right patterns</li>
+</ol>
+
+<h2 id="icky-ixia">Icky Ixia</h2>
+
+<p>I pinged a colleague in our Mountain View office about the Ixia, and he let our
+team know that we had done well so far. He had tech support help him when he was
+where we are now, and he got us rolling with them.</p>
+
+<p>Progress is being made.</p>
+
+<p>On that note, I’d like to add that my colleague <a href="https://www.linkedin.com/in/meritmcmannis/">Merit McMannis</a> was very
+pleased with my contributions to the Ixia.</p>
+
+<p>But then, I was pulled off of that and put on…</p>
+
+<h2 id="build-times">Build Times</h2>
+
+<p>Let me just say one thing about builds, their scripts, and their logs. I expect
+to be able to jump into a build and know what’s going on at a high level,
+even if I don’t know the gory details.</p>
+
+<p>This means that</p>
+
+<ol>
+  <li>A build should be composed of understandable steps <em>on a high level</em>, like a
+recipe</li>
+  <li>Build scripts should reflect <em>on a high level</em> those steps</li>
+  <li>Logs should output what step is being performed, what actions compose that
+step, and failures/failure points if any</li>
+</ol>
+
+<p>We can solve 2 with well-refactored scripts, using function names as high- (and
+low-) level components. We can actually solve 3 with this as well: all of my
+bash scripts start with something like this–</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>log<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span> <span class="c"># &gt;&amp;2 # stderr variant</span>
+  <span class="c"># variant with script name:</span>
+  <span class="nb">printf</span> <span class="s2">"</span><span class="nv">$0</span><span class="s2">: "</span><span class="s1">'%s\n'</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>It helps me output simple information when I need it. But we also have to be
+choosy about what information that is! (If I have to scan through the output of
+another <code class="language-plaintext highlighter-rouge">./configure --whatever --feature=foobar</code>, I might go mad).</p>
+
+<p>Reflecting 1 in all of this means documentation and a clear understanding of
+what the process is–in fact, this necessitates 2 and 3 be solved already.</p>
+
+<p>I’m dissecting this today because I have been reassigned to work on improving a
+build time. Apparently, someone’s feature merge caused a 3x increase in
+time-to-build. We suspect there’s a duplicate compilation going on, and we’d
+like to turn that into a make target to do it in parallel, but we can’t find it.</p>
+
+<p>Or, well, <em>I</em> can’t find it. I sifted through a bajillion line error log,
+knowing already at least what script was the primary builder and what portions
+of that were possibly causing the problem. I couldn’t find it, between the
+<code class="language-plaintext highlighter-rouge">configure</code> output, <code class="language-plaintext highlighter-rouge">make</code> output, errors that get thrown away, and just general
+lack of informative detail.</p>
+
+<p>I’m sure the information is useful to someone, somewhere. For me, though, not so
+much. Part of the output was a bash script being run in debug mode (<code class="language-plaintext highlighter-rouge">set -x</code>)!</p>
+
+<p>Fortunately, I have free reign to refactor in an effort to diagnose and solve
+the issue. It might kill the <code class="language-plaintext highlighter-rouge">git blame</code> a little bit, but <em>dang</em> does that code
+look cleaner.</p>
+
+<h2 id="functional-refactoring">Functional Refactoring</h2>
+
+<p>My definition of functional refactoring is</p>
+
+<blockquote>
+  <p>Refactoring which doesn’t alter the function</p>
+</blockquote>
+
+<p>That is, changing</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span> <span class="nv">$var</span> <span class="nt">-eq</span> <span class="nb">true</span> <span class="o">]</span>
+<span class="k">then</span>
+<span class="c"># do a thing</span>
+<span class="nb">sed</span> <span class="s1">'s/func/function'</span> /really/long/file/name
+<span class="nb">cp</span> /really/long/file/name /other/name
+<span class="k">fi</span>
+
+</code></pre></div></div>
+
+<p>to the equivalent</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>do_a_thing<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local source</span><span class="o">=</span>/really/long/file/name
+  <span class="nb">local </span><span class="nv">dest</span><span class="o">=</span>/other/name
+  <span class="nb">local </span><span class="nv">sub</span><span class="o">=</span><span class="s1">'s/func/function'</span>
+  <span class="nb">sed</span> <span class="s2">"</span><span class="nv">$sub</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$source</span><span class="s2">"</span>
+  <span class="nb">cp</span> <span class="s2">"</span><span class="nv">$source</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$dest</span><span class="s2">"</span>
+
+main<span class="o">()</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[[</span> <span class="s2">"</span><span class="nv">$var</span><span class="s2">"</span> <span class="o">=</span> <span class="nb">true</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then
+    </span>do_a_thing
+  <span class="k">fi</span>
+<span class="o">}</span>
+
+main
+</code></pre></div></div>
+
+<p>is a valid refactoring. I do this all the time because it helps me pull blocks
+of code into functions. I even turn developer comments into function names when
+I don’t know what the code does or why. Theoretically, this is all purely
+mechanical, it shouldn’t change the net result.</p>
+
+<p>So, I did that all day today. It’s funny how much better things read that way.</p>
+
+<h2 id="patterns-patterns-patterns">Patterns Patterns Patterns</h2>
+
+<p>Not much to say here, just a quote from the colleague who assigned me this task:</p>
+
+<blockquote>
+  <p>there’s a lot of ‘crufty’ code here, and based on your coding exercise, you
+have proper patterns ingrained already</p>
+
+  <p>(and reducing build times by 3x is a super awesome project, imo)</p>
+
+  <p>well, maybe not quite 3x reduction…but we can round up <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20"></p>
+</blockquote>
+
+<p>So I’d say my first week finished strong.</p>
+
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#infra" class="tag">
+        infra
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#refactor" class="tag">
+        refactor
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#shell" class="tag">
+        shell
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#builds" class="tag">
+        builds
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2018/06/22/til-reading-refactoring-and-rpatterns/";
+    this.page.identifier = "/blog/2018/06/22/til-reading-refactoring-and-rpatterns";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/06/21/til-day-four-my-two-cents/" title="Day Four, My Two Cents">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2018/06/24/feature-taking-a-break/" title="Feature--Taking a Break">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#reading-refactoring-and-rpatterns">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

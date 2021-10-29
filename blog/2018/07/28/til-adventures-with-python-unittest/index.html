@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Adventures with Python unittest</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Adventures with Python unittest</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 28 Jul 2018 in Blog</p>
+<div id="post">
+  <p>Some good, some bad, some ugly, as with all tests.</p>
+
+<h2 id="today-i-learned">Today I Learned</h2>
+
+<p>Since this is a summary of a week’s worth of learning, I’ve left it ‘til now to
+write and publish.</p>
+
+<ol>
+  <li>About test-running scripts</li>
+  <li>The difference between <code class="language-plaintext highlighter-rouge">tearDown</code> and <code class="language-plaintext highlighter-rouge">cleanup</code></li>
+  <li>How to use <code class="language-plaintext highlighter-rouge">tempfile</code> to create entire mock projects</li>
+  <li>How to use <code class="language-plaintext highlighter-rouge">pdb</code></li>
+</ol>
+
+<p>There’s quite a bit, so let’s dive in. First, we’ll talk shop, then tests, then
+tools.</p>
+
+<h3 id="run-tests-run-">Run, tests, run !</h3>
+
+<p>I’ve written a fair few <code class="language-plaintext highlighter-rouge">run_tests</code> scripts over the course of my projects, but
+I’m mentioning this one today because it nicely complements the overall theme of
+python’s <code class="language-plaintext highlighter-rouge">unittest</code> module.</p>
+
+<p>I’ve been using it as my TDD impetus whilst working on <code class="language-plaintext highlighter-rouge">cake</code>, a neat
+build-artifact cache I’m developing at my internship. <code class="language-plaintext highlighter-rouge">unittest</code> has it’s
+quirks, but it gets the job done (mostly) and avoids external dependencies.
+Normally, they aren’t such a bad thing, but for ease of integration I wanted
+this code to run without any extra setup. So, <code class="language-plaintext highlighter-rouge">python2.7</code> and <code class="language-plaintext highlighter-rouge">unittest</code> it was.</p>
+
+<p>Over the course of writing tests, the need quickly arises for a ‘run tests
+NOW’ button. In <code class="language-plaintext highlighter-rouge">vim</code>, of course, we can take care of this with macros or
+mappings, but what about in the shell? <em>Entrez</em>: scripts.</p>
+
+<p>I’ll even give you the entirety of it.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#! /usr/bin/env python
+</span><span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">tests</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span>
+    <span class="n">verbosity</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="s">'-v'</span> <span class="ow">in</span> <span class="n">args</span> <span class="ow">or</span> <span class="s">'--verbose'</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="n">verbosity</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="s">'-q'</span> <span class="ow">in</span> <span class="n">args</span> <span class="ow">or</span> <span class="s">'--quiet'</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="n">verbosity</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">suite</span> <span class="o">=</span> <span class="n">tests</span><span class="p">.</span><span class="n">suite</span><span class="p">()</span>
+
+    <span class="n">runner</span> <span class="o">=</span> <span class="n">unittest</span><span class="p">.</span><span class="n">TextTestRunner</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="n">verbosity</span><span class="p">)</span>
+    <span class="n">runner</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">suite</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Yep, that simple. Sure, the verbosity checks are a little redundant looking, and
+could possibly be solved with proper data structures. But this is a little
+script, and that feature is (a) completely inconsequential and (b) fits neatly
+across a few lines. I’m not worried about it.</p>
+
+<p>Literally the entire script could fit in 4 lines if I felt like it, minus the
+argument handling.</p>
+
+<p>The one piece of magic is the line <code class="language-plaintext highlighter-rouge">suite = tests.suite()</code>. And I’m going to
+show you how it works.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># tests/__init__.py
+</span><span class="k">def</span> <span class="nf">suite</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">unittest</span>
+    <span class="kn">import</span> <span class="nn">tests.recipe</span>
+    <span class="kn">import</span> <span class="nn">tests.meta</span>
+    <span class="kn">import</span> <span class="nn">tests.pantry</span>
+    <span class="kn">import</span> <span class="nn">tests.chefs_make</span>
+    <span class="kn">import</span> <span class="nn">tests.oven</span>
+
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">unittest</span><span class="p">.</span><span class="n">TestLoader</span><span class="p">()</span>
+    <span class="n">loadmodule</span> <span class="o">=</span> <span class="n">loader</span><span class="p">.</span><span class="n">loadTestsFromModule</span>
+    <span class="n">suite</span> <span class="o">=</span> <span class="n">unittest</span><span class="p">.</span><span class="n">TestSuite</span><span class="p">()</span>
+
+    <span class="n">suite</span><span class="p">.</span><span class="n">addTests</span><span class="p">(</span><span class="n">loadmodule</span><span class="p">(</span><span class="n">tests</span><span class="p">.</span><span class="n">recipe</span><span class="p">))</span>
+    <span class="n">suite</span><span class="p">.</span><span class="n">addTests</span><span class="p">(</span><span class="n">loadmodule</span><span class="p">(</span><span class="n">tests</span><span class="p">.</span><span class="n">meta</span><span class="p">))</span>
+    <span class="n">suite</span><span class="p">.</span><span class="n">addTests</span><span class="p">(</span><span class="n">loadmodule</span><span class="p">(</span><span class="n">tests</span><span class="p">.</span><span class="n">pantry</span><span class="p">))</span>
+    <span class="n">suite</span><span class="p">.</span><span class="n">addTests</span><span class="p">(</span><span class="n">loadmodule</span><span class="p">(</span><span class="n">tests</span><span class="p">.</span><span class="n">chefs_make</span><span class="p">))</span>
+    <span class="n">suite</span><span class="p">.</span><span class="n">addTests</span><span class="p">(</span><span class="n">loadmodule</span><span class="p">(</span><span class="n">tests</span><span class="p">.</span><span class="n">oven</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">suite</span>
+</code></pre></div></div>
+
+<p>Simply import all the modules you need, and load ‘em in a suite. It’s
+done in my <code class="language-plaintext highlighter-rouge">__init__.py</code> to make it <em>very</em> easy: at the interpreter, one
+<code class="language-plaintext highlighter-rouge">import</code> and <code class="language-plaintext highlighter-rouge">unittest</code> can run the suite. In my eventual <code class="language-plaintext highlighter-rouge">setup.py</code>, it will be
+just as easy.</p>
+
+<p>So there, auto-test button.</p>
+
+<h2 id="clean-up-clean-up-everybody-do-your-share">Clean Up, Clean Up, Everybody Do Your Share</h2>
+
+<p>Thought you were never going to hear that again, didn’t you?</p>
+
+<p><code class="language-plaintext highlighter-rouge">cake</code> works with files and directories across several locations. The cache has
+to live somewhere, there’s a project and build location, things get copied
+around, the whole works. Not unlike <code class="language-plaintext highlighter-rouge">git</code>, which inspired it’s model (more on
+that later if I get permission to open-source the project–otherwise, tough
+luck).</p>
+
+<p>So you can imagine, then, that I might be doing some setup and cleanup during my
+testing. The precise mechanism I’m using is the <code class="language-plaintext highlighter-rouge">tempfile</code> module, which does
+exactly what you think it does. I’ll get to how in a moment, but note that it
+doesn’t clean up after itself in the case of temporary <em>directories</em>. That
+burden is on me, which is fine. <code class="language-plaintext highlighter-rouge">tempfile</code> will never remove something I’m in
+the middle of using (even if I accidentally might).</p>
+
+<p>Ok, so, setup and cleanup are a pretty standard part of test suites, right?
+Well, not exactly. They come from the JUnit-style tests, upon which <code class="language-plaintext highlighter-rouge">unittest</code>
+is based. Other frameworks use things like fixtures and function annotations,
+but we don’t get the yummy goodness of that here. Hell, I can’t even mock the
+filesystem easily, so I am forced to use disk operations extensively in testing.
+Which makes me think about efficiency in my code to avoid the disk. Which is
+good.</p>
+
+<p>… I’m getting a little off track. Setup. Right. In python’s <code class="language-plaintext highlighter-rouge">unittest</code>, you
+can define <code class="language-plaintext highlighter-rouge">setUp</code> and <code class="language-plaintext highlighter-rouge">tearDown</code> methods on a <code class="language-plaintext highlighter-rouge">TestCase</code>. Setup is run before
+each test, tear down afterwards.</p>
+
+<p>Mostly.</p>
+
+<p>See, if <code class="language-plaintext highlighter-rouge">setUp</code> fails for any reason, <code class="language-plaintext highlighter-rouge">tearDown</code> won’t run. You can yell at me
+about poor tests later, but my <code class="language-plaintext highlighter-rouge">setUp</code> method needed to invoked methods on the
+unit under test in order to pre-populate the cache. I didn’t have to do it that
+way, but I did, and I’m not arguing about it now since it works.</p>
+
+<p>Anyways, that fails sometimes. So I ended up with temporary directories getting
+created and not removed; the deletion code was in the <code class="language-plaintext highlighter-rouge">tearDown</code> method.</p>
+
+<p>A google search and help doc later, I knew the answer. Turns out, ‘cleanups’ run
+no matter what. Perfect.</p>
+
+<p>I present the trimmed down solution.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestCache</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">methodname</span><span class="o">=</span><span class="s">'runTest'</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TestCache</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">(</span><span class="n">methodname</span><span class="p">)</span>
+        <span class="c1"># this is a clean up, since it must run even if setUp fails
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">addCleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">remove_temp</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># create a 'project' with files in it
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">tempfile</span><span class="p">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+        <span class="n">out_dir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">project</span><span class="p">,</span> <span class="s">'output'</span><span class="p">)</span>
+        <span class="n">os</span><span class="p">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'art1'</span><span class="p">,</span> <span class="s">'art2a'</span><span class="p">,</span> <span class="s">'art2b'</span><span class="p">,</span> <span class="n">art_tree</span><span class="p">]:</span>
+            <span class="n">fullname</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+            <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">fullname</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">dirname</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">dirname</span><span class="p">):</span>
+                <span class="n">os</span><span class="p">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dirname</span><span class="p">)</span>
+            <span class="nb">open</span><span class="p">(</span><span class="n">fullname</span><span class="p">,</span> <span class="s">'a'</span><span class="p">).</span><span class="n">close</span><span class="p">()</span>
+        <span class="c1"># configure the cache
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">cache_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="p">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">conf</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="s">'make all'</span><span class="p">,</span> <span class="p">[</span>
+                    <span class="n">Target</span><span class="p">(</span><span class="s">'one'</span><span class="p">,</span> <span class="p">[</span><span class="s">'src1'</span><span class="p">],</span> <span class="p">[</span><span class="s">'art1'</span><span class="p">]),</span>
+                    <span class="n">Target</span><span class="p">(</span><span class="s">'two'</span><span class="p">,</span> <span class="p">[</span><span class="s">'src2a'</span><span class="p">,</span> <span class="s">'src2b'</span><span class="p">],</span> <span class="p">[</span><span class="s">'art2a'</span><span class="p">,</span> <span class="s">'art2b'</span><span class="p">]),</span>
+                    <span class="n">Target</span><span class="p">(</span><span class="s">'tree'</span><span class="p">,</span> <span class="p">[</span><span class="s">'tree'</span><span class="p">],</span> <span class="p">[</span><span class="n">art_tree</span><span class="p">])</span>
+                    <span class="p">])</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">cake</span><span class="p">.</span><span class="n">pantry</span><span class="p">.</span><span class="n">Cache</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">conf</span><span class="p">)</span>
+        <span class="c1"># we do this here because we it's common setup between all the tests,
+</span>        <span class="c1"># even though it also assumes add is working correctly
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">artifact</span><span class="o">=</span><span class="s">'art1'</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="s">'123'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">artifact</span><span class="o">=</span><span class="n">art_tree</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="s">'123'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">artifact</span><span class="o">=</span><span class="s">'art2b'</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="s">'123'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">artifact</span><span class="o">=</span><span class="s">'art1'</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="s">'456'</span><span class="p">,</span> <span class="n">ancestor</span><span class="o">=</span><span class="s">'123'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">artifact</span><span class="o">=</span><span class="n">art_tree</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="s">'456'</span><span class="p">,</span> <span class="n">ancestor</span><span class="o">=</span><span class="s">'123'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">artifact</span><span class="o">=</span><span class="s">'art2a'</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="s">'789'</span><span class="p">,</span> <span class="n">ancestor</span><span class="o">=</span><span class="s">'456'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">remove_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">tmp</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">project</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">cache_dir</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="p">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_things</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># .... blah blah blah
+</span></code></pre></div></div>
+
+<h3 id="tempfile">Tempfile</h3>
+
+<p>Ok, I was going to write about it, but it’s listed up there in the code and I’m
+about at 1000 words here, so forgive my laziness.</p>
+
+<h3 id="pdb-or-debugging-python">PDB, or, Debugging Python</h3>
+
+<p><code class="language-plaintext highlighter-rouge">import pdb ; pdb.set_trace()</code></p>
+
+<p>That’s all.</p>
+
+<p>Or, well, not all. But that is the only line you need to place in python code to
+start the debugger. It has all the usual commands, which you can read about
+using help (<code class="language-plaintext highlighter-rouge">?</code> in the provided debugger REPL). You can also evaluate python
+code, just be careful; if the debugger thinks it’s a debug command, you’ll need
+the <code class="language-plaintext highlighter-rouge">!</code> prefix.</p>
+
+<p>Finally, a piece of advice. <code class="language-plaintext highlighter-rouge">pdb</code> can be customized with a <code class="language-plaintext highlighter-rouge">pdbrc</code> file. Google
+it. There’s examples everywhere, and some of them are quite helpful. But the one
+you really need to know is <code class="language-plaintext highlighter-rouge">n;;l</code>, which is “execute next command, then list the
+surrounding code.”</p>
+
+<p>That way you don’t get lost.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#infra" class="tag">
+        infra
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2018/07/28/til-adventures-with-python-unittest/";
+    this.page.identifier = "/blog/2018/07/28/til-adventures-with-python-unittest";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/07/24/til-life-lessons/"
+      title="Life Lessons">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2018/08/05/til-week-7-code-and-communication/"
+       title="Week 7--Code and Communication">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#adventures-with-python-unittest">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

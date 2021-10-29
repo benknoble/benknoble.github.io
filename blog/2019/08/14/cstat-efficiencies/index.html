@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Efficient Shell—Git Commit Statistics</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Efficient Shell—Git Commit Statistics</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 14 Aug 2019 in Blog</p>
+<div id="post">
+  <p>I convert a unusably slow script to a surprisingly fast tool.</p>
+
+<blockquote>
+  <p>Background: any program (script or compiled binary) named <code class="language-plaintext highlighter-rouge">git-*</code> in your <code class="language-plaintext highlighter-rouge">PATH</code>
+can be run like a git sub-command. See <code class="language-plaintext highlighter-rouge">man git-sh-setup</code> for some utility
+functions for scripts.</p>
+</blockquote>
+
+<h2 id="meet-git-cstat">Meet <code class="language-plaintext highlighter-rouge">git-cstat</code></h2>
+
+<p><a href="https://github.com/benknoble/Dotfiles/commit/f7657493f61b449b2b27ceb8f4e24f2dfb43e71c">This little
+script</a>
+has been in my bin directory since September of 2018. In it’s initial
+conception, it counted commits and the lengths of their messages before
+displaying a report (count, min, max, avg). It had noisy output, and it took
+ages to run on my Dotfiles, but it worked.</p>
+
+<p>It underwent some revisions, such as <a href="https://github.com/benknoble/Dotfiles/commit/550db2969a304b30ce199ec2d35c3bb1bf605e72#diff-aab6845f62898d4a22e2bab872fbd33e">calculating the average more
+precisely</a>.</p>
+
+<p>And then, <a href="https://github.com/benknoble/Dotfiles/commit/3af2ba76708f308bfa70e3348629740c02e495ce">when I added
+<code class="language-plaintext highlighter-rouge">git-mstat</code></a>,
+I decided the interface needed an update.</p>
+
+<h2 id="improvements">Improvements</h2>
+
+<p>First, I wanted the <a href="https://github.com/benknoble/Dotfiles/commit/cb0c865272d06fce3f1471f798de0bd214ae9c57"><code class="language-plaintext highlighter-rouge">mstat</code> style
+interface</a>:
+tell <code class="language-plaintext highlighter-rouge">cstat</code> to give you the <code class="language-plaintext highlighter-rouge">count</code>, or <code class="language-plaintext highlighter-rouge">len max</code>, and it will (with a minimum
+of output noise).</p>
+
+<p>Then, I wanted the damn thing to be usable. This was a statistic tool, and
+could be useful for reflection. Waiting around for seconds (an eternity at the
+command line for a power user like me) was not going to cut it.</p>
+
+<h3 id="on-efficient-shell">On Efficient Shell</h3>
+
+<p>The essence of efficient shell is efficient pipelines: do as much as possible in
+programs designed to work for you. Shell is slow.</p>
+
+<p>The humongous algorithm duplication between min and max (and even some in
+avg) was really bugging me. So I tried to go from for loops to a more idiomatic
+pipeline: sort the data and grab the relevant info. The max is always the top of
+the sort, while the min is always the top of a reverse sort.</p>
+
+<p>That was yesterday. With the performance still unfeasible, I knew it was time
+for a <a href="https://codereview.stackexchange.com/q/226071/123233">code review
+(spoilers!)</a>.</p>
+
+<p>The next work is mostly in <a href="https://github.com/benknoble/Dotfiles/commit/e7cebfbe37c1fcb5fe090763491f5c1dfdb5fcf8">this
+merge</a>.</p>
+
+<h4 id="awk">Awk</h4>
+
+<p>The first task was <a href="https://github.com/benknoble/Dotfiles/commit/6881e59714263c9abb50e749e4eddac40aa285ab">converting <code class="language-plaintext highlighter-rouge">len avg</code> to pure
+<code class="language-plaintext highlighter-rouge">awk(1)</code></a>.
+This was easy given the output format of <code class="language-plaintext highlighter-rouge">commits_len</code>: I even used a sample
+from the man page. This sped up my averaging, but <code class="language-plaintext highlighter-rouge">commits_len</code> was still too
+slow.</p>
+
+<h4 id="git-can-count">Git can count</h4>
+
+<p>I then managed to convert my count implementation (already fast) to something
+even faster: <a href="https://github.com/benknoble/Dotfiles/commit/9d357bf6987e2ba40f56b3f8e0a86143e22cece5">pure
+git</a>.</p>
+
+<h4 id="more-awk">More awk</h4>
+
+<p>By then I knew I needed to fix the commit length stuff. It was the bottleneck,
+and I’d convinced myself I couldn’t fix it. But it was time.</p>
+
+<p>I <em>knew</em> that if there was an efficient way to output lines of <code class="language-plaintext highlighter-rouge">length commit</code>
+straight using a couple of tools, without forcing consumers to do their own
+looping and sizing, the problem would be solved. Consumers would just be simple
+<code class="language-plaintext highlighter-rouge">sort(1)</code>/<code class="language-plaintext highlighter-rouge">head(1)</code>/<code class="language-plaintext highlighter-rouge">awk(1)</code> pipelines.</p>
+
+<p>And I banged my head on this wall for <em>hours</em>.</p>
+
+<p>As is usually case, it’s all about having your data in the right format. I knew
+with <code class="language-plaintext highlighter-rouge">git-log</code> I could grab all the commits and their messages (thanks,
+<code class="language-plaintext highlighter-rouge">--pretty</code>). But I would need to process that, and quickly. The biggest issue
+was their was no clear “end of record” marker for a tool like awk to use: how
+did I know when a new commit began?</p>
+
+<p>Worse, the null-byte (my favorite data-delimiter for scripts) was out: awk was
+really having a hard time with the pattern <code class="language-plaintext highlighter-rouge">$'/\x00/'</code>.</p>
+
+<p>Finally, I got creative: I embedded a control character (the beep sequence,
+actually, sometimes known as <kbd>Ctrl</kbd>-<kbd>G</kbd>) at the start of each
+record. Then I could use awk, with a tab between commit hash and message body,
+to join all the lines of the message.</p>
+
+<blockquote>
+  <p>Aside: coming to this was basically hours of playing with a live terminal. I
+composed pipelines until my head hurt and the screen-wrap was unreadable. But
+it did work in the end. At the end I’ve posted a <em>sample</em> of my bash history,
+so you can see what I was working with.</p>
+</blockquote>
+
+<p>With the data in that format, counting became easy. I could just split the
+second field.</p>
+
+<p><a href="https://github.com/benknoble/Dotfiles/commit/62cada2e5af667195029d856005457ceed323a64">And that’s exactly what I
+did</a>.</p>
+
+<h3 id="clean-up">Clean up</h3>
+
+<p>I did have to <a href="https://github.com/benknoble/Dotfiles/commit/b9de715e0fd87c83e0aa796d597571a5a71006d7">fix a few things
+post-merge</a>,
+but overall this was a huge success. The old script ran in 10s of seconds on my
+Dotfiles repo. The new one runs in less than 0.5 seconds.</p>
+
+<hr />
+
+<p>Things to know:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">alias g=git</code></li>
+  <li><code class="language-plaintext highlighter-rouge">alias.s = status -sb</code></li>
+  <li><code class="language-plaintext highlighter-rouge">alias.d = diff</code></li>
+  <li><code class="language-plaintext highlighter-rouge">v() { vim "$@" ; }</code></li>
+  <li><code class="language-plaintext highlighter-rouge">G() { grep "$@" ; }</code></li>
+  <li><code class="language-plaintext highlighter-rouge">L() { less "$@" ; }</code></li>
+</ul>
+
+<p>Bash history excerpt:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">'%H %B'</span> <span class="nt">--max-count</span><span class="o">=</span>1 <span class="nt">--all</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">'%H %B'</span> <span class="nt">--max-count</span><span class="o">=</span>h5 <span class="nt">--all</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">'%H%x00 %B'</span> <span class="nt">--max-count</span><span class="o">=</span>5 <span class="nt">--all</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">'%H %s %b'</span> <span class="nt">--max-count</span><span class="o">=</span>h5 <span class="nt">--all</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">'%H %s %b'</span> <span class="nt">--max-count</span><span class="o">=</span>5 <span class="nt">--all</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--max-count</span><span class="o">=</span>5 <span class="nt">--all</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--max-count</span><span class="o">=</span>5 <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'{print $2}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--max-count</span><span class="o">=</span>5 <span class="nt">--all</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print $2}'</span>
+g cstat len | L
+g cstat len | L
+g cstat len | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print $2}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print $1}'</span> |L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |L
+v &lt;<span class="o">(</span>g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span><span class="o">)</span>
+g cstat len avg
+g cstat len max
+g cstat len min
+git log <span class="nt">-1</span> @ <span class="nt">--format</span><span class="o">=</span>%B
+git log <span class="nt">-1</span> @ <span class="nt">--format</span><span class="o">=</span><span class="s1">'%s %b'</span>
+git log <span class="nt">-1</span> @ <span class="nt">--format</span><span class="o">=</span><span class="s1">'%s %b'</span> |L
+git log <span class="nt">--format</span><span class="o">=</span><span class="s1">'%s %b'</span> |L
+git log <span class="nt">--format</span><span class="o">=</span><span class="s1">'%h %s %b'</span> |L
+git log <span class="nt">-1</span> fd1a510 <span class="nt">--format</span><span class="o">=</span><span class="s1">'%s %b'</span> |L
+git log <span class="nt">-1</span> fd1a510 <span class="nt">--format</span><span class="o">=</span><span class="s1">'%s %b'</span>
+git log <span class="nt">-1</span> fd1a510 <span class="nt">--format</span><span class="o">=</span><span class="s1">'%s %B'</span>
+git log <span class="nt">-1</span> fd1a510 <span class="nt">--format</span><span class="o">=</span><span class="s1">'%s %b%x00'</span>
+g cstat len
+g cstat len
+g cstat len | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%H</span><span class="se">\t</span><span class="s1">%s %b%x00'</span> | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%H</span><span class="se">\t</span><span class="s1">%s %b%x00'</span> | <span class="nb">awk</span> <span class="s1">'END { print NR }'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%H</span><span class="se">\t</span><span class="s1">%s %b%x00'</span> | <span class="nb">awk</span> <span class="nt">-v</span> <span class="nv">RS</span><span class="o">=</span><span class="s1">$'</span><span class="se">\0</span><span class="s1">'</span> <span class="s1">'END { print NR }'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'hash%H</span><span class="se">\t</span><span class="s1">%s %b%'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'hash%H</span><span class="se">\t</span><span class="s1">%s %b%'</span> | G <span class="nt">-v</span> <span class="s1">'^hash'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'hash%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | G <span class="nt">-v</span> <span class="s1">'^hash'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\0\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">sed</span> <span class="s1">$'/</span><span class="se">\0</span><span class="s1">/,/</span><span class="se">\0</span><span class="s1">/-1 s /</span><span class="se">\\</span><span class="s1">n//'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">sed</span> <span class="s1">$'/</span><span class="se">\a</span><span class="s1">/,/</span><span class="se">\j</span><span class="s1">a/-1 s /</span><span class="se">\\</span><span class="s1">n//'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/,/a/-1'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/,/a/'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/+1,/a/'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/,-1/a/'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/+1,/a/-1'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/+1,/a/-1 { print sub('</span><span class="se">\n</span><span class="s1">', '') }'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/+1,/a/-1 { print sub("\n", "") }'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/+1,/a/-1 { sub("\n", "");print }'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/+1,/a/-1 { sub("\n", "a");print }'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/+1,/a/-1 { sub("\\n", "a");print }'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">$'/a/+1,/a/-1 { sub("</span><span class="se">\n</span><span class="s1">", "a");print }'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">$'/a/+1,/a/-1 { sub("</span><span class="se">\\</span><span class="s1">n", "a");print }'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/+1,/a/-1 { sub("\n", "a");print }'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/+1,/a/-1 { sub("\n", "a");printf '</span>%s<span class="s1">' $0 }'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/+1,/a/-1 { sub("\n", "a");printf "%s" $0 }'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> a b a | <span class="nb">awk</span> <span class="s1">'/a/+1,/a/-1 { sub("\n", "a");printf "%s", $0 }'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">sed</span> <span class="s1">'/\a/{n;:l N;/\a/b; s/\n//; bl}'</span> input
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\0\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">sed</span> <span class="s1">'/\0/{n;:l N;/\0/b; s/\n//; bl}'</span> input
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\0\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">sed</span> <span class="s1">'/\0/{n;:l N;/\0/b; s/\\n//; bl}'</span> input
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\0\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n%s\n",$0;next} {printf "%s ",$0}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\0\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\0/ {printf "\n%s\n",$0;next} {printf "%s ",$0}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\0\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\0/ {printf "\n%s\n",$0;next} {printf "%s ",$0}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\0\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\0/ {printf "\n%s\n",$0;next} {printf "%s ",$0}'</span> | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\a/ {printf "\n%s\n",$0;next} {printf "%s ",$0}'</span> | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\a/ {printf "\n%s\n",$0;next} {printf "%s ",$0}'</span> | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n</span><span class="se">\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n%s\n",$0;next} {printf "%s ",$0}'</span> | L
+v &lt;<span class="o">(</span>g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n</span><span class="se">\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n%s\n",$0;next} {printf "%s ",$0}'</span><span class="o">)</span>
+v &lt;<span class="o">(</span>g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n</span><span class="se">\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n%s\n",$0;next} {printf "%s ",$0}'</span><span class="o">)</span>
+v &lt;<span class="o">(</span>g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n</span><span class="se">\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {next} {printf "%s ",$0}'</span><span class="o">)</span>
+v &lt;<span class="o">(</span>g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n</span><span class="se">\t</span><span class="s1">%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n"; next} {printf "%s ",$0}'</span><span class="o">)</span>
+v &lt;<span class="o">(</span>g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n"; next} {printf "%s ",$0}'</span><span class="o">)</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g rev-list <span class="nt">--count</span>
+g rev-list <span class="nt">--count</span> <span class="nt">--all</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\a/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g s
+g d
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\x0/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\x0/ {printf "\n"; next} {printf "%s ",$0}'</span> | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> 
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\x0/ {printf "\n"; next} {printf "%s ",$0}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%n%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/^$/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'HEADER%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/HEADER/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\x0/ {printf "\n"; next} {printf "%s ",$0}'</span> | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\x0/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">cat</span> <span class="nt">-enb</span> | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\xx0/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">cat</span> <span class="nt">-enb</span> | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\xx0/ {printf "\n"; next} {printf "%s ",$0}'</span> | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\xx00/ {printf "\n"; next} {printf "%s ",$0}'</span> | L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\xx00/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\xx00/ {printf "\n"; next} {printf "%s ",$0} END {printf "\n"}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'%x00%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/\xx00/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">$'</span><span class="se">\0</span><span class="s1">abc'</span> def
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">$'a</span><span class="se">\0</span><span class="s1">bc'</span> def
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">$'a</span><span class="se">\a</span><span class="s1">bc'</span> def
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">$'a</span><span class="se">\a</span><span class="s1">bc'</span> def | <span class="nb">awk</span> <span class="s1">'/\a/'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">$'a</span><span class="se">\a</span><span class="s1">bc'</span> def | <span class="nb">awk</span> <span class="s1">'/\x0a/'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">$'a</span><span class="se">\a</span><span class="s1">bc'</span> def | <span class="nb">awk</span> <span class="s1">'/\xa/'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">$'a</span><span class="se">\a</span><span class="s1">bc'</span> def | <span class="nb">awk</span> <span class="s1">'/\xxa/'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">$'a</span><span class="se">\a</span><span class="s1">bc'</span> def | <span class="nb">awk</span> <span class="s1">'/\a/'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">$'</span><span class="se">\a</span><span class="s1">bc'</span> def | <span class="nb">awk</span> <span class="s1">'/\a/'</span>
+<span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">$'</span><span class="se">\a</span><span class="s1">bc'</span> def | <span class="nb">awk</span> <span class="s1">$'/</span><span class="se">\a</span><span class="s1">/'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">$'/</span><span class="se">\a</span><span class="s1">/ {printf "</span><span class="se">\n</span><span class="s1">"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g cstat count
+g cstat len
+g cstat len |L
+g cstat len <span class="o">&gt;</span>/dev/null
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> |L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> |cat <span class="nt">-enb</span>|L
+man <span class="nb">cat
+</span>g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> |cat <span class="nt">-venb</span>|L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> |cat <span class="nt">-tvenb</span>|L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> |cat <span class="nt">-tveb</span>|L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> |cat <span class="nt">-tveb</span>|L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print length($2), $1}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print length($2), $1}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print length($2), $1}'</span> | <span class="nb">sort</span> <span class="nt">-rn</span> | <span class="nb">head</span> <span class="nt">-1</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print length($2), $1}'</span> | <span class="nb">sort</span> <span class="nt">-rn</span> | <span class="nb">head</span> <span class="nt">-1</span> | <span class="nb">awk</span> <span class="s1">'{print $2 }'</span> | xargs git show
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print length($2), $1}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,a), $1}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,a), $1}'</span> | <span class="nb">sort</span> <span class="nt">-rn</span> | <span class="nb">head</span> <span class="nt">-1</span> 
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,a,'</span> <span class="s1">'), $1}'</span> | <span class="nb">sort</span> <span class="nt">-rn</span> | <span class="nb">head</span> <span class="nt">-1</span> 
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,a," "), $1}'</span> | <span class="nb">sort</span> <span class="nt">-rn</span> | <span class="nb">head</span> <span class="nt">-1</span> 
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,a," "), $1}'</span> | <span class="nb">sort</span> <span class="nt">-rn</span> | <span class="nb">head</span> <span class="nt">-1</span> | <span class="nb">awk</span> <span class="s1">'{print $2 }'</span> | xargs git show
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,a," "), $1}'</span> | <span class="nb">sort</span> <span class="nt">-rn</span> | <span class="nb">head</span> <span class="nt">-1</span> 
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,a," "), $1}'</span> | <span class="nb">sort</span> <span class="nt">-n</span> | <span class="nb">head</span> <span class="nt">-1</span> 
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,a," "), $1}'</span> | G 0
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,a," "), $1}'</span> | G ^0
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,a," "), $1}'</span> | <span class="nb">head</span> <span class="nt">-1</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,_," "), $1}'</span> | <span class="nb">head</span> <span class="nt">-1</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | G <span class="nt">-v</span> <span class="s1">'^$'</span> <span class="nb">awk</span> <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,_," "), $1}'</span> | <span class="nb">head</span> <span class="nt">-1</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> | G <span class="nt">-v</span> <span class="s1">'^$'</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,_," "), $1}'</span> | <span class="nb">head</span> <span class="nt">-1</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,_," "), $1}'</span> | <span class="nb">head</span> <span class="nt">-1</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ &amp;&amp; NR != {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,_," "), $1}'</span> | <span class="nb">head</span> <span class="nt">-1</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ &amp;&amp; NR != 1 {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,_," "), $1}'</span> | <span class="nb">head</span> <span class="nt">-1</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ &amp;&amp; NR != 1 {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,_," "), $1}'</span> | <span class="nb">sort</span> <span class="nt">-n</span> | <span class="nb">head</span> <span class="nt">-1</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ &amp;&amp; NR != 1 {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,_," "), $1}'</span> | G <span class="s1">'^0'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ &amp;&amp; NR != 1 {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,_," "), $1}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ &amp;&amp; NR != 1 {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> <span class="s1">'{print split($2,_," "), $1}'</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ &amp;&amp; NR != 1 {printf "\n"; next} {printf "%s ",$0}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ &amp;&amp; NR != 1 {printf "\n"; next} {printf "%s ",$0} END{print}'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ &amp;&amp; NR != 1 {printf "\n"; next} {printf "%s ",$0} END{print}'</span>| L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ &amp;&amp; NR != 1 {printf "\n"; next} {printf "%s ",$0} END{printf "\n"}'</span>| L
+g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s1">$'</span><span class="se">\a</span><span class="s1">%n%H</span><span class="se">\t</span><span class="s1">%s %b'</span> <span class="nt">--all</span> |awk <span class="s1">'/'$'</span><span class="se">\a</span><span class="s1">''/ &amp;&amp; NR != 1 {printf "\n"; next} {printf "%s ",$0} END{printf "\n"}'</span>|wc <span class="nt">-l</span>
+</code></pre></div></div>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#dotfiles" class="tag">
+        dotfiles
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#shell" class="tag">
+        shell
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#performance" class="tag">
+        performance
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#refactor" class="tag">
+        refactor
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2019/08/14/cstat-efficiencies/";
+    this.page.identifier = "/blog/2019/08/14/cstat-efficiencies";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2019/08/13/github-actions-ruby/"
+      title="Ruby, where are you (in GitHub workflows)?">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2019/08/23/funnels/"
+       title="I/O Funnels">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#efficient-shell-git-commit-statistics">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

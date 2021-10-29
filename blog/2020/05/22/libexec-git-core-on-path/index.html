@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Programs invoked by git have libexec/git-core on $PATH</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Programs invoked by git have libexec/git-core on $PATH</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 22 May 2020 in Blog</p>
+<div id="post">
+  <p>I discover a strange edge-case in my usage of git and vim together.</p>
+
+<p><a href="https://public-inbox.org/git/CALnO6CDtGRRav8zK2GKi1oHTZWrHFTxZNmnOWu64-ab+oY3_Lw@mail.gmail.com/">I posted very similar content on the git mailing list as well</a></p>
+
+<p>I noticed something odd today—I was working in vim and spawned a new terminal
+with <code class="language-plaintext highlighter-rouge">:terminal</code>. My shell startup files, which use the location of the git
+binary to reconstruct paths to things like
+<code class="language-plaintext highlighter-rouge">etc/bash_completion.d/git-prompt.sh</code> and <code class="language-plaintext highlighter-rouge">contrib/git-jump</code>, suddenly choked.
+The location of the git program was suddenly different than usual!</p>
+
+<hr />
+
+<p>A simple scenario where this might occur is in the following zsh code:</p>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># zsh allows =cmd to expand to the path of the command, so echo =git is similar</span>
+<span class="c"># to which git or command -v git</span>
+<span class="nv">path_to_git</span><span class="o">==</span>git
+<span class="c"># :h:h in an expansion is a lot like appending ../.. to go up two directories</span>
+<span class="nv">path_to_git_jump</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">git</span>:h:h<span class="k">}</span><span class="s2">/share/git-core/contrib/git-jump"</span>
+<span class="o">[[</span> <span class="nt">-x</span> <span class="s2">"</span><span class="nv">$path_to_git_jump</span><span class="s2">"</span>/git-jump <span class="o">]]</span> <span class="o">&amp;&amp;</span> path+<span class="o">=(</span><span class="s2">"</span><span class="nv">$path_to_git_jump</span><span class="s2">"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Here, I’m find the git executable location, moving up two directories, and then
+descending into <code class="language-plaintext highlighter-rouge">share/git-core/contrib</code> to find the git-jump script and add it
+to my path. This is somewhat more portable than assuming <code class="language-plaintext highlighter-rouge">git-jump</code> is always in
+the same place, and more convenient than copying that script into my own
+Dotfiles and managing updates for it.</p>
+
+<hr />
+
+<p>After some debugging, I came to determine that this occurred, not because of
+vim, but because vim was launched from a git-invoked process (in this case,
+<code class="language-plaintext highlighter-rouge">contrib/git-jump/git-jump</code>). My own <code class="language-plaintext highlighter-rouge">git-ed</code> also suffers from this when
+invoked as <code class="language-plaintext highlighter-rouge">git ed</code>—most external git commands do <em>not</em> have this issue when
+run directly (e.g., <code class="language-plaintext highlighter-rouge">git-ed</code>).</p>
+
+<p>The salient git code is <a href="https://github.com/git/git/blob/87680d32efb6d14f162e54ad3bda4e3d6c908559/exec-cmd.c#L304"><code class="language-plaintext highlighter-rouge">setup_path()</code> in <code class="language-plaintext highlighter-rouge">exec-cmd.c</code></a> and its call in
+<a href="https://github.com/git/git/blob/87680d32efb6d14f162e54ad3bda4e3d6c908559/git.c#L868"><code class="language-plaintext highlighter-rouge">git.c</code></a>. They appear to coordinate to prepend the <code class="language-plaintext highlighter-rouge">libexec</code> directory to
+the environment variable <code class="language-plaintext highlighter-rouge">PATH</code>.  This causes the location of the <code class="language-plaintext highlighter-rouge">git</code> binary
+to be (e.g.) <code class="language-plaintext highlighter-rouge">/usr/local/libexec/git-core/git</code>, and not (e.g.)
+<code class="language-plaintext highlighter-rouge">/usr/local/bin/git</code>.</p>
+
+<p>Because subprocesses inherit environment variables from their parents, my vim
+process inherits the modifications to <code class="language-plaintext highlighter-rouge">PATH</code> from the above code. That means any
+shell that vim starts inherits the same modification! The net
+result is that if I run, say, <code class="language-plaintext highlighter-rouge">git jump grep foo</code> and then try to invoke
+<code class="language-plaintext highlighter-rouge">:terminal</code> or <code class="language-plaintext highlighter-rouge">:shell</code>, my shell complains—the git binary path is so
+different that it cannot properly find the <code class="language-plaintext highlighter-rouge">git-jump</code> script.</p>
+
+<p>Unfortunately, this modification propagates to all child processes, as this
+simple test-case demonstrates:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># printf '%s\n' '#!/bin/sh' "printenv PATH | tr : '\n' | grep git-core" &gt; git-show-env</span>
+<span class="c"># chmod u+x git-show-env</span>
+<span class="c"># PATH=.:$PATH git show-env</span>
+/usr/local/Cellar/git/2.26.2/libexec/git-core
+</code></pre></div></div>
+
+<p>While it would be <em>nice</em> if git didn’t modify <code class="language-plaintext highlighter-rouge">PATH</code> in such a way that it
+affected all subprocesses (i.e., if it was somehow scoped to only processes that
+need it), I suspect this is at best difficult and at worst highly-error prone or
+likely to break things.</p>
+
+<p>In the (possibly eternal) interim, I would like to share some vimscript that
+“fixes” <code class="language-plaintext highlighter-rouge">$PATH</code> in vim when it detects this case. The easiest use is to drop the
+code in your vimrc file (usually <code class="language-plaintext highlighter-rouge">~/.vim/vimrc</code> or <code class="language-plaintext highlighter-rouge">~/.vimrc</code>). I’ve tried to
+keep it portable in terms of path separators and file paths, but I do not have a
+Windows box to test on.</p>
+
+<p>Actually, it’s a little more aggressive than I suggested; it strips out <em>all</em>
+<code class="language-plaintext highlighter-rouge">PATH</code> entries ending in <code class="language-plaintext highlighter-rouge">libexec/git-core,</code> not just the first. But I never
+have <code class="language-plaintext highlighter-rouge">libexec/git-core</code> on my <code class="language-plaintext highlighter-rouge">PATH</code> anyway, so I’m not bothered by that. One
+could modify this function to only check the first entry (the one git would have
+prepended).</p>
+
+<p>P.S. Does anyone know what the <code class="language-plaintext highlighter-rouge">libexec/git-core</code> equivalent is on Windows?
+<a href="https://wilsonmar.github.io/git-custom-commands/">This person</a> alludes to <code class="language-plaintext highlighter-rouge">libexec\git-core</code>, which I <em>think</em> is handled by my code.</p>
+
+<p>P.P.S. If your vim is old and does not have <code class="language-plaintext highlighter-rouge">const</code>, you can use <code class="language-plaintext highlighter-rouge">let</code> instead.
+You may need to change out the lambda <code class="language-plaintext highlighter-rouge">{_, d -&gt; ... }</code> for a <code class="language-plaintext highlighter-rouge">v:val</code> string as
+well.</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">" When git starts up, it prepends it's libexec dir to PATH to allow it to find</span>
+<span class="c">" external commands.</span>
+<span class="c">"</span>
+<span class="c">" Thus, if vim is invoked via a git process (such as the contrib git-jump, my</span>
+<span class="c">" own git-ed, or any other usage of GIT_EDITOR/VISUAL/EDITOR in git commands, be</span>
+<span class="c">" they scripts or internals--with the exception of manually invoking the script</span>
+<span class="c">" yourself, without using git: sh .../git-jump), $PATH will contain something</span>
+<span class="c">" like libexec/git-core.</span>
+<span class="c">"</span>
+<span class="c">" We don't generally want it in vim's $PATH, though, as it is passed down to</span>
+<span class="c">" *all* subprocesses, including shells started with :terminal or :shell.</span>
+<span class="k">function</span> <span class="nv">s:fix_git_path</span><span class="p">()</span> abort
+  <span class="k">const</span> slash <span class="p">=</span> <span class="nb">has</span><span class="p">(</span><span class="s1">'win32'</span><span class="p">)</span> ? <span class="s1">'\' : '</span>/'
+  <span class="k">const</span> git_core_base <span class="p">=</span> <span class="nb">printf</span><span class="p">(</span><span class="s1">'libexec%sgit-core'</span><span class="p">,</span> slash<span class="p">)</span>
+  <span class="c">" optimization: early return</span>
+  <span class="k">if</span> $PATH <span class="p">!~</span># <span class="s1">'.*'</span><span class="p">.</span>git_core_base<span class="p">.</span><span class="s1">'.*'</span>
+    <span class="k">return</span>
+  <span class="k">endif</span>
+  <span class="k">const</span> path_sep <span class="p">=</span> <span class="nb">has</span><span class="p">(</span><span class="s1">'win32'</span><span class="p">)</span> ? <span class="s1">';'</span> <span class="p">:</span> <span class="s1">':'</span>
+  <span class="k">const</span> <span class="nb">path</span> <span class="p">=</span> <span class="k">split</span><span class="p">(</span>$PATH<span class="p">,</span> path_sep<span class="p">)</span>
+  <span class="k">const</span> path_sans_libexec_git_core <span class="p">=</span> <span class="k">filter</span><span class="p">(</span><span class="nb">path</span><span class="p">,</span> <span class="p">{</span>_<span class="p">,</span> <span class="k">d</span> <span class="p">-&gt;</span> <span class="k">d</span> <span class="p">!~</span># <span class="s1">'.*'</span><span class="p">.</span>git_core_base<span class="p">})</span>
+  <span class="k">const</span> new_path <span class="p">=</span> <span class="k">join</span><span class="p">(</span>path_sans_libexec_git_core<span class="p">,</span> path_sep<span class="p">)</span>
+  <span class="k">let</span> $PATH <span class="p">=</span> new_path
+<span class="k">endfunction</span>
+
+augroup fix_git_path
+  autocmd<span class="p">!</span>
+  autocmd <span class="nb">VimEnter</span> * <span class="k">call</span> <span class="nv">s:fix_git_path</span><span class="p">()</span>
+augroup END
+</code></pre></div></div>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#dotfiles" class="tag">
+        dotfiles
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#shell" class="tag">
+        shell
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#vim" class="tag">
+        vim
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2020/05/22/libexec-git-core-on-path/";
+    this.page.identifier = "/blog/2020/05/22/libexec-git-core-on-path";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2020/05/21/switch-zsh/"
+      title="Why I finally switched to zsh">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2020/06/22/logic-puzzle-race/"
+       title="Solving a logic puzzle the right way™">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#programs-invoked-by-git-have-libexec-git-core-on-path">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

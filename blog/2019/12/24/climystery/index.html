@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : A terminal case of mysteries</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>A terminal case of mysteries</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 24 Dec 2019 in Blog</p>
+<div id="post">
+  <p>I play through <a href="https://github.com/veltman/clmystery">clmystery</a>, and log the
+journey here.</p>
+
+<blockquote>
+  <p>Note, I have elided some of the experimentation done between commands, and
+thus substituted <code class="language-plaintext highlighter-rouge">!!</code> where appropriate—it stands for the last command
+executed.</p>
+
+  <p>In the same vein, <code class="language-plaintext highlighter-rouge">G</code> is an alias for <code class="language-plaintext highlighter-rouge">grep(1)</code>, <code class="language-plaintext highlighter-rouge">S</code> for <code class="language-plaintext highlighter-rouge">sed(1)</code>, and <code class="language-plaintext highlighter-rouge">A</code> for
+<code class="language-plaintext highlighter-rouge">awk(1)</code>—these are very real and I use them regularly.</p>
+</blockquote>
+
+<h2 id="instructions">Instructions</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.OOOOOOOOOOOOOOO @@                                   @@ OOOOOOOOOOOOOOOO.
+OOOOOOOOOOOOOOOO @@                                    @@ OOOOOOOOOOOOOOOO
+OOOOOOOOOO'''''' @@                                    @@ ```````OOOOOOOOO
+OOOOO'' aaa@@@@@@@@@@@@@@@@@@@@"""                   """""""""@@aaaa `OOOO
+OOOOO,""""@@@@@@@@@@@@@@""""                                     a@"" OOOA
+OOOOOOOOOoooooo,                                            |OOoooooOOOOOS
+OOOOOOOOOOOOOOOOo,                                          |OOOOOOOOOOOOC
+OOOOOOOOOOOOOOOOOO                                         ,|OOOOOOOOOOOOI
+OOOOOOOOOOOOOOOOOO @          THE                          |OOOOOOOOOOOOOI
+OOOOOOOOOOOOOOOOO'@           COMMAND                      OOOOOOOOOOOOOOb
+OOOOOOOOOOOOOOO'a'            LINE                         |OOOOOOOOOOOOOy
+OOOOOOOOOOOOOO''              MURDERS                      aa`OOOOOOOOOOOP
+OOOOOOOOOOOOOOb,..                                          `@aa``OOOOOOOh
+OOOOOOOOOOOOOOOOOOo                                           `@@@aa OOOOo
+OOOOOOOOOOOOOOOOOOO|                                             @@@ OOOOe
+OOOOOOOOOOOOOOOOOOO@                               aaaaaaa       @@',OOOOn
+OOOOOOOOOOOOOOOOOOO@                        aaa@@@@@@@@""        @@ OOOOOi
+OOOOOOOOOO~~ aaaaaa"a                 aaa@@@@@@@@@@""            @@ OOOOOx
+OOOOOO aaaa@"""""""" ""            @@@@@@@@@@@@""               @@@|`OOOO'
+OOOOOOOo`@@a                  aa@@  @@@@@@@""         a@        @@@@ OOOO9
+OOOOOOO'  `@@a               @@a@@   @@""           a@@   a     |@@@ OOOO3
+`OOOO'       `@    aa@@       aaa"""          @a        a@     a@@@',OOOO'
+
+
+There's been a murder in Terminal City, and TCPD needs your help.
+
+To figure out whodunit, go to the 'mystery' subdirectory and start working from there.
+
+You'll want to start by collecting all the clues at the crime scene (the 'crimescene' file).
+
+The officers on the scene are pretty meticulous, so they've written down EVERYTHING in their officer reports.
+
+Fortunately the sergeant went through and marked the real clues with the word "CLUE" in all caps.
+
+If you get stuck, open one of the hint files (from the CL, type 'cat hint1', 'cat hint2', etc.).
+
+To check your answer or find out the solution, open the file 'solution' (from the CL, type 'cat solution').
+
+To get started on how to use the command line, open cheatsheet.md or cheatsheet.pdf (from the command line, you can type 'nano cheatsheet.md').
+
+Don't use a text editor to view any files except these instructions, the cheatsheet, and hints.
+</code></pre></div></div>
+
+<p>All I have to say is, please format your text to 80-columns wide, and eschew
+unnecessary line breaks, please.</p>
+
+<h2 id="automating-checking">Automating checking</h2>
+
+<p>The first thing I did is check that <code class="language-plaintext highlighter-rouge">solution</code> file, and then extract the
+command-line for checking into a script that amounts to</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /usr/bin/env bash</span>
+main<span class="o">()</span> <span class="o">{</span>
+  <span class="k">if </span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="se">\</span>
+    | <span class="s2">"</span><span class="si">$(</span><span class="nb">command</span> <span class="nt">-v</span> md5 <span class="o">||</span> <span class="nb">command</span> <span class="nt">-v</span> <span class="nb">md5sum</span><span class="si">)</span><span class="s2">"</span> <span class="se">\</span>
+    | <span class="nb">grep</span> <span class="nt">-qi</span> ../encoded
+    <span class="k">then
+    </span><span class="nb">echo </span>CORRECT<span class="se">\!</span> GREAT WORK, GUMSHOE.
+  <span class="k">else
+    </span><span class="nb">echo </span>SORRY, TRY AGAIN.
+  <span class="k">fi</span>
+<span class="o">}</span>
+
+main <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h2 id="on-a-hunt">On a hunt</h2>
+
+<p>Now it’s time to look for clues:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ G CLUE crimescene
+CLUE: Footage from an ATM security camera is blurry but shows that the perpetrator is a tall male, at least 6'.
+CLUE: Found a wallet believed to belong to the killer: no ID, just loose change, and membership cards for AAA, Delta SkyMiles, the local library, and the Museum of Bash History. The cards are totally untraceable and have no name, for some reason.
+CLUE: Questioned the barista at the local coffee shop. He said a woman left right before they heard the shots. The name on her latte was Annabel, she had blond spiky hair and a New Zealand accent.
+</code></pre></div></div>
+
+<p>(I understand the necessity of omitting line-breaks here, but ugh.)</p>
+
+<p>Let’s look for Annabel, then:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ G Annabel people
+Annabel Sun	F	26	Hart Place, line 40
+Oluwasegun Annabel	M	37	Mattapan Street, line 173
+Annabel Church	F	38	Buckingham Place, line 179
+Annabel Fuglsang	M	40	Haley Street, line 176
+</code></pre></div></div>
+
+<p>Well, crap, there’s more than one. At least the data is tabular.</p>
+
+<p>But, wait, the interviews are organized by <em>number</em>! Of course… No matter, we’ll
+have to find her properly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ <span class="o">!!</span> |
+fields <span class="o">{</span>5..9<span class="o">}</span> |
+S <span class="nt">-e</span> <span class="s1">'s/ /_/1'</span> <span class="nt">-e</span> <span class="s1">'s/, line / /g'</span> <span class="nt">-e</span> <span class="s1">'s/^/streets\//'</span> |
+<span class="k">while </span><span class="nb">read</span> <span class="nt">-r</span> f l <span class="p">;</span> <span class="k">do
+  </span>S <span class="nt">-n</span> <span class="s2">"</span><span class="k">${</span><span class="nv">l</span><span class="k">}</span><span class="s2">p"</span> <span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span>
+<span class="k">done
+</span>SEE INTERVIEW <span class="c">#47246024</span>
+SEE INTERVIEW <span class="c">#9437737</span>
+SEE INTERVIEW <span class="c">#699607</span>
+SEE INTERVIEW <span class="c">#871877</span>
+</code></pre></div></div>
+
+<p>Hm, let’s check those interviews:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ <span class="o">!!</span> | fields 3 | <span class="nb">cut</span> <span class="nt">-c2-</span> | <span class="k">while </span><span class="nb">read</span> <span class="nt">-r</span> i <span class="p">;</span> <span class="k">do </span><span class="nb">cat </span>interviews/<span class="k">*</span>-<span class="s2">"</span><span class="nv">$i</span><span class="s2">"</span> <span class="p">;</span> <span class="k">done
+</span>Ms. Sun has brown hair and is not from New Zealand.  Not the witness from the cafe.
+Doesn<span class="s1">'t appear to be the witness from the cafe, who is female.
+Interviewed Ms. Church at 2:04 pm.  Witness stated that she did not see anyone she could identify as the shooter, that she ran away as soon as the shots were fired.
+
+However, she reports seeing the car that fled the scene.  Describes it as a blue Honda, with a license plate that starts with "L337" and ends with "9"
+Mr. Fuglsang is male and has brown hair.  Not the witness from the cafe.
+</span></code></pre></div></div>
+
+<p>(That <a href="/blog/2019/09/11/fields/">fields script</a> couldn’t be more
+sweet now.)</p>
+
+<p>We are now looking for the car, a blue Honda with license plate L337*9:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ G <span class="s1">'L337.*9'</span> vehicles
+License Plate L337ZR9
+License Plate L337P89
+License Plate L337GX9
+License Plate L337QE9
+License Plate L337GB9
+License Plate L337OI9
+License Plate L337X19
+License Plate L337539
+License Plate L3373U9
+License Plate L337369
+License Plate L337DV9
+License Plate L3375A9
+License Plate L337WR9
+</code></pre></div></div>
+
+<p>Well, crap. That’s not helpful. But a quick glance at <code class="language-plaintext highlighter-rouge">head vehicles</code> shows the
+information comes <em>after</em> the plate line… who designs these formats, anyway?</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ <span class="o">!!</span> | G <span class="nt">-B2</span> <span class="nt">-A3</span> <span class="s1">'Blue'</span> | G <span class="nt">-B1</span> <span class="nt">-A4</span> <span class="s1">'Honda'</span>
+License Plate L337QE9
+Make: Honda
+Color: Blue
+Owner: Erika Owens
+Height: 6<span class="s1">'5"
+Weight: 220 lbs
+--
+--
+License Plate L337539
+Make: Honda
+Color: Blue
+Owner: Aron Pilhofer
+Height: 5'</span>3<span class="s2">"
+Weight: 198 lbs
+--
+--
+License Plate L337369
+Make: Honda
+Color: Blue
+Owner: Heather Billings
+Height: 5'2"</span>
+Weight: 244 lbs
+<span class="nt">--</span>
+<span class="nt">--</span>
+License Plate L337DV9
+Make: Honda
+Color: Blue
+Owner: Joe Germuska
+Height: 6<span class="s1">'2"
+Weight: 164 lbs
+--
+--
+License Plate L3375A9
+Make: Honda
+Color: Blue
+Owner: Jeremy Bowers
+Height: 6'</span>1<span class="s2">"
+Weight: 204 lbs
+--
+--
+License Plate L337WR9
+Make: Honda
+Color: Blue
+Owner: Jacqui Maher
+Height: 6'2"</span>
+Weight: 130 lbs
+</code></pre></div></div>
+
+<p>I need to limit this suspect list further… what clues do we still have? Oh
+right, suspect is male and at least 6’ tall. I can limit it to 6’ quickly, but
+getting only males is harder.</p>
+
+<p>Why don’t I grab the males first, then convert that to a grep pattern? No, too
+many people; let’s try grabbing the males from the 6’ list. First, the
+owners:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ <span class="o">!!</span> | G <span class="nt">-B4</span> <span class="nt">-A1</span> <span class="s2">"6'"</span> | G Owner | <span class="nb">cut</span> <span class="nt">-c8-</span>
+Erika Owens
+Joe Germuska
+Jeremy Bowers
+Jacqui Maher
+</code></pre></div></div>
+
+<p>Now, joining that with the males list:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ <span class="nb">join</span> &lt;<span class="o">(!!</span> | <span class="nb">sort</span><span class="o">)</span> &lt;<span class="o">(</span>A <span class="s1">'$3 == "M"'</span> people | <span class="nb">sort</span><span class="o">)</span>
+Jeremy Bowers Bowers M 34 Dunstable Road, line 284
+Joe Germuska Germuska M 65 Plainfield Street, line 275
+</code></pre></div></div>
+
+<p>Well, that’s a lot smoother.</p>
+
+<p>My only other clue is the wallet, but it has to be one of these two men, so
+let’s check both. (Spoiler: it’s neither of them?)</p>
+
+<p>Drat, do we have interviews?</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ <span class="o">!!</span> |
+fields <span class="o">{</span>6..9<span class="o">}</span> |
+S <span class="nt">-e</span> <span class="s1">'s/ /_/1'</span> <span class="nt">-e</span> <span class="s1">'s/, line//g'</span> |
+<span class="k">while </span><span class="nb">read</span> <span class="nt">-r</span> s i <span class="p">;</span> <span class="k">do
+  </span>S <span class="nt">-n</span> <span class="s2">"</span><span class="k">${</span><span class="nv">i</span><span class="k">}</span><span class="s2">p"</span> streets/<span class="s2">"</span><span class="nv">$s</span><span class="s2">"</span>
+<span class="k">done
+</span>SEE INTERVIEW <span class="c">#9620713</span>
+SEE INTERVIEW <span class="c">#29741223</span>
+</code></pre></div></div>
+
+<p>Yes, yes we do!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ <span class="o">!!</span> | fields 3 | <span class="nb">cut</span> <span class="nt">-c2-</span> | <span class="k">while </span><span class="nb">read</span> <span class="nt">-r</span> i <span class="p">;</span> <span class="k">do </span><span class="nb">cat </span>interviews/<span class="k">*</span>-<span class="s2">"</span><span class="nv">$i</span><span class="s2">"</span> <span class="p">;</span> <span class="k">done
+</span>Home appears to be empty, no answer at the door.
+
+After questioning neighbors, appears that the occupant may have left <span class="k">for </span>a trip recently.
+
+Considered a suspect <span class="k">until </span>proven otherwise, but would have to eliminate other suspects to confirm.
+Should not be considered a suspect, has no SkyMiles membership and has never been a member of the Museum of Bash History.
+</code></pre></div></div>
+
+<p>So looks like Jeremy Bowers needs further investigating? Or maybe I need new
+suspects… where could I get those?</p>
+
+<p>The wallet! Suspect is a member of</p>
+
+<ul>
+  <li>AAA</li>
+  <li>Delta SkyMiles</li>
+  <li>the local library</li>
+  <li>and the Museum of Bash History</li>
+</ul>
+
+<p>Fortunately, the memberships files are lists of names. A sort/join should do the
+trick—but we need to consider the whole line for the join:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ <span class="nb">join</span> <span class="nt">-t</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> &lt;<span class="o">(</span><span class="nb">sort </span>memberships/AAA<span class="o">)</span> &lt;<span class="o">(</span><span class="nb">sort </span>memberships/Delta_SkyMiles<span class="o">)</span> <span class="se">\</span>
+| <span class="nb">join</span> <span class="nt">-t</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> - &lt;<span class="o">(</span><span class="nb">sort </span>memberships/Terminal_City_Library<span class="o">)</span> <span class="se">\</span>
+| <span class="nb">join</span> <span class="nt">-t</span><span class="s1">$'</span><span class="se">\t</span><span class="s1">'</span> - &lt;<span class="o">(</span><span class="nb">sort </span>memberships/Museum_of_Bash_History<span class="o">)</span>
+Aldo Nicolas
+Andrei Masna
+Augustin Lozano
+Brian Boyer
+Dalibor Vidal
+Deron Estanguet
+Didier Munoz
+Emma Wei
+Jacqui Maher
+Jamila Rodhe
+Jeremy Bowers
+Kelly Kulish
+Krystian Pen
+Liangliang Miller
+Marina Murphy
+Mary Tomashova
+Matt Waite
+Mike Bostock
+Monika Hwang
+Nikolaus Milatz
+Sonata Raif
+Stephanie Adlington
+Tamara Cafaro
+</code></pre></div></div>
+
+<p>Interesting… Jacqui Maher, who we eliminated because she was female, is on this
+list! Could the ATM footage have actually shown a tall female? Let’s find out:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ G Jacqui people |
+fields <span class="o">{</span>5..9<span class="o">}</span> |
+S <span class="nt">-e</span> <span class="s1">'s/ /_/1'</span> <span class="nt">-e</span> <span class="s1">'s/, line//g'</span> |
+<span class="k">while </span><span class="nb">read</span> <span class="nt">-r</span> s i <span class="p">;</span> <span class="k">do </span>S <span class="nt">-n</span> <span class="s2">"</span><span class="k">${</span><span class="nv">i</span><span class="k">}</span><span class="s2">p"</span> streets/<span class="s2">"</span><span class="nv">$s</span><span class="s2">"</span><span class="p">;</span> <span class="k">done</span> |
+fields 3 |
+<span class="nb">cut</span> <span class="nt">-c2-</span> |
+<span class="k">while </span><span class="nb">read</span> <span class="nt">-r</span> i <span class="p">;</span> <span class="k">do </span><span class="nb">cat </span>interviews/<span class="k">*</span>-<span class="s2">"</span><span class="nv">$i</span><span class="s2">"</span><span class="p">;</span> <span class="k">done
+</span>Maher is not considered a suspect. Video evidence confirms that she was away at a professional soccer game on the morning <span class="k">in </span>question, even though it was a workday.
+</code></pre></div></div>
+
+<p>Damn!</p>
+
+<p>Alright, Jeremy Bowers is on the membership list, and I’ve just about
+exhausted my suspect pool… should I track down the remaining vehicle owners? Try
+all the membership folks? I’m at a bit of loss… time for dinner!</p>
+
+<hr>
+
+<p>I’ve returned after a quick lasagna, and reviewed the case files—it turns out,
+my checker script was wrong!</p>
+
+<p>I forgot that <code class="language-plaintext highlighter-rouge">grep(1)</code> reads data to search from standard in, while the
+original usage is to read a <em>pattern</em> from standard in. Let’s clean that up:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if </span><span class="nb">grep</span> <span class="nt">-qi</span> <span class="s2">"</span><span class="si">$(</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">command</span> <span class="nt">-v</span> md5 <span class="o">||</span> <span class="nb">command</span> <span class="nt">-v</span> <span class="nb">md5sum</span><span class="si">)</span><span class="s2">"</span> <span class="o">&lt;&lt;&lt;</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="si">)</span><span class="s2">"</span> ../encoded
+<span class="k">then
+  </span><span class="nb">echo </span>CORRECT<span class="se">\!</span> GREAT WORK, GUMSHOE.
+<span class="k">else
+  </span><span class="nb">echo </span>SORRY, TRY AGAIN.
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>Now, let’s try our friend Jeremy again…</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ ./check <span class="s1">'jeremy bowers'</span>
+CORRECT! GREAT WORK, GUMSHOE.
+</code></pre></div></div>
+
+<p>Nailed that perp!</p>
+
+<p>Coming soon: a live, interactive, on-the-web version?</p>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#awk" class="tag">
+        awk
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#mystery" class="tag">
+        mystery
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#shell" class="tag">
+        shell
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2019/12/24/climystery/";
+    this.page.identifier = "/blog/2019/12/24/climystery";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2019/12/19/advent4/" title="Advent of Code 2019 : Day 4">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2020/01/13/getting-help/" title="Getting Help Dos and Don'ts">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#a-terminal-case-of-mysteries">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

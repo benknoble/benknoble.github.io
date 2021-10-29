@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Day 8, Context and Computers</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Day 8, Context and Computers</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 27 Jun 2018 in Blog</p>
+<div id="post">
+  <p>I will keep this alliteration up until it kills me. Just sayin’.</p>
+
+<h1 id="today-i-learned">Today I Learned</h1>
+
+<ol>
+  <li>Ubuntu downloads are hybrid ISOs</li>
+  <li>Context is king in shell scripting</li>
+</ol>
+
+<h2 id="does-not-compute">Does not compute</h2>
+
+<p>Remember how I <a href="/blog/2018/06/18/til-first-day/">still</a> didn’t have my <a href="/blog/2018/06/21/til-day-four-my-two-cents/">work computer</a>? I was able to put
+Ubuntu on it this evening, and tomorrow should be using primarily it. Huzzah.</p>
+
+<p>Let me tell you something about it though. The Ubuntu download is an ISO. No,
+not like Tron: Legacy, it’s an image file, a snapshot of an entire file system.
+And everywhere online will tell you that, in order to make a bootable USB from
+one, you need special software.</p>
+
+<p>You don’t.</p>
+
+<p>At least, not anymore. Ubuntu decided to put out some kind of hybrid ISO, so you
+can copy bit-by-bit to your USB and it will be bootable. I know; I did it.
+There’s a small bug that prevents macOS Disk Utility from working on it, which
+is unfortunate, but <code class="language-plaintext highlighter-rouge">dd</code> does the job just fine. And you can use raw write mode
+to speed things up.</p>
+
+<h2 id="context">Context</h2>
+
+<p>Here’s the thing about a lot of shell scripts. Many establish, much like a
+makefile recipe, that the way to accomplish a task is a sequential set of steps.
+A recipe. To foo the bar, we follow this list, frobbing along the way.</p>
+
+<p>Now, we have some basic control flow: we can loop, doing the same step multiple
+times; we can make decisions about which steps to do; and we can even have
+someone else do a step for us in the background.</p>
+
+<p><em>Recipes are fine</em>, you’re thinking (I can hear your thoughts)–<em>They work in
+the kitchen</em>. Well, bub, my shell is not your kitchen. For one, my shell won’t
+taste bad if I leave it on too long. More importantly, if I screw up, I brick my
+laptop and not my whole house. Which of those things is more important, I’m
+still working on. The reason recipes require attention is <strong>context</strong>. In a
+shell script, any one step could be affected by what’s gone before. Current
+directory matters, whether or not files exist matters, &amp;c. This is not unlike
+cooking, where having the dough mixed properly is essential to baking a cake.
+But you can go back and fix the dough. A script can’t do that on its own.</p>
+
+<p>Here comes the tricky part–shell functions are a really nifty feature for
+<a href="/blog/2018/06/22/til-reading-refactoring-and-rpatterns/">refactoring</a>, enhancing the code’s ability to read like English (or your
+language of choice). They encapsulate components of the recipe, much like
+<code class="language-plaintext highlighter-rouge">make_the_dough</code> might be a multi-step process necessary for <code class="language-plaintext highlighter-rouge">make_me_a_cake</code>.
+But functions inherit their callers context. Current directory, environment
+variables, &amp;c. And this is a problem when we try to think of functions single,
+isolated, perfect units.</p>
+
+<p>In a perfect world, each function could be run entirely independently, and so
+<code class="language-plaintext highlighter-rouge">cd</code> would never fail because we’re not in the directory we thought we were
+(thanks, caller function). This happened to me today and it borked my build.</p>
+
+<p>Functions are not independent.</p>
+
+<p>Unless you write pure functions, like <code class="language-plaintext highlighter-rouge">sed</code> and <code class="language-plaintext highlighter-rouge">grep</code> and other UNIX-style
+filters that take input (or parameters) and output things. These transformations
+are perfect. They are independent, and often idempotent. But eventually we need
+I/O to Get Things Done™.</p>
+
+<p>So, no, bash isn’t purely functional (although we can do a good job building
+reliable and composable units in it). Knowing this, we have to be defensive in
+our functions. When we do something, we have no guarantees about our context,
+and the burden is on us to handle that the right way. Sometimes, that means fail
+spectacularly. Others, in the case of my <code class="language-plaintext highlighter-rouge">cd</code> problems, meant using absolute
+paths so it couldn’t fail unless things were really screwed up. But at the end
+of the day, we have to recognize that things might not be the way we expect. How
+do we react to that?</p>
+
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#infra" class="tag">
+        infra
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#shell" class="tag">
+        shell
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#builds" class="tag">
+        builds
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2018/06/27/til-day-8-context-and-computers/";
+    this.page.identifier = "/blog/2018/06/27/til-day-8-context-and-computers";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/06/26/til-day-7-asking-questions/"
+      title="Day 7, Asking Questions">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2018/06/28/til-day-match-0-9-regex/"
+       title="Day match [0-9]--Regex">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#day-8-context-and-computers">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

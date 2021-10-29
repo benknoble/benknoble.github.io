@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Week 5 (and a Quick Recap)</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Week 5 (and a Quick Recap)</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 16 Jul 2018 in Blog</p>
+<div id="post">
+  <p>I’ve officially crossed the halfway point of my internship. But don’t worry,
+because I start a co-op with the same company the week after.</p>
+
+<h2 id="the-recapmy-kneecaps">The Recap–My Kneecaps</h2>
+
+<p>Last week things got crazy, what with RPGs pushing their way into my writing/til
+schedule.</p>
+
+<p>Then, Friday, I drove home again for a martial arts event. For the curious, I
+hold a 1st Dan in Tang Soo Do and was double-recertifying–I am now 3/4 of the
+way to 2nd Dan. And my body is sore.</p>
+
+<p>I had promised a feature by the end of the weekend. I didn’t do it, so I’m
+thinking I will spend this weeks feature on time management when I get to it.</p>
+
+<p>In the meantime, enjoy a recap of the two things I learned at work on my half
+day:</p>
+
+<ol>
+  <li>Bash can replace <code class="language-plaintext highlighter-rouge">sed</code> in a good number of instances</li>
+  <li>The parallel issues I was having had mostly to do with <code class="language-plaintext highlighter-rouge">./configure</code>
+</li>
+</ol>
+
+<h3 id="i-sed-take-out-the-trash-">I <em>Sed</em> Take Out the Trash !</h3>
+
+<p>The most common usages of <code class="language-plaintext highlighter-rouge">sed</code> I see are pattern replacements. It’s actually a
+wonderfully built little tool, piggy-backing off the language of <code class="language-plaintext highlighter-rouge">ed</code> (which
+later evolved into <code class="language-plaintext highlighter-rouge">ex</code>, forming the backbone of <code class="language-plaintext highlighter-rouge">vi</code> and <code class="language-plaintext highlighter-rouge">vim</code>, my favorite
+editor).</p>
+
+<p>Even more interestingly, about half of those substitutions–if not more–occur
+on variables. But <code class="language-plaintext highlighter-rouge">bash</code> one-ups <code class="language-plaintext highlighter-rouge">sed</code> here. Invoking <code class="language-plaintext highlighter-rouge">sed</code> has to go through
+the rigamarole of firing up an external process and using it correctly (which is
+tricky even when you know <code class="language-plaintext highlighter-rouge">sed</code> syntax).</p>
+
+<p>Solution: use parameter expansions.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">a</span><span class="o">=</span><span class="s1">'foofoo'</span>
+<span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">a</span><span class="p">/foo/bar</span><span class="k">}</span><span class="s2">"</span> <span class="c"># barfoo</span>
+<span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">a</span><span class="p">//foo/bar</span><span class="k">}</span><span class="s2">"</span> <span class="c"># barbar</span>
+<span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">a</span><span class="p">%foo</span><span class="k">}</span><span class="s2">"</span> <span class="c"># foo</span>
+<span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">a</span><span class="p">^^</span><span class="k">}</span><span class="s2">"</span> <span class="c"># FOOFOO</span>
+</code></pre></div></div>
+
+<p>See <code class="language-plaintext highlighter-rouge">man bash</code> for more incredible builtin solutions to your variable-editing
+problems.</p>
+
+<h3 id="configure-isnt-thread-safe">Configure Isn’t Thread Safe</h3>
+
+<p>Ok, so that probably seems obvious to anyone who’s lived in a Linux world a long
+time. I’m not exactly new to it, but this wasn’t something I’d considered
+previously.</p>
+
+<p>As it turns out, I couldn’t run my <a href="/blog/2018/07/10/til-day-16-the-three-pieces-of-software/">parallel builds</a> on the same machine
+because they both needed to invoke <code class="language-plaintext highlighter-rouge">./configure</code> at the same time in the same
+directory!</p>
+
+<p>I ended up breaking it apart into two separate Jenkins jobs, which was pretty
+easy since I’d moved the script logic for that into the main code as well. I
+just had to set up the build job in the Jenkins instance, when it should run,
+environment variables and all that, and kick it off.</p>
+
+<p>PR merged, feature complete! I ended up saving about 10 minutes per build of the
+repository I was working on.</p>
+
+<h2 id="the-today-show-til">The Today Show: TIL</h2>
+
+<ol>
+  <li>I may switch to TDD even while prototyping</li>
+  <li>Some vim and git stuff (see my <a href="https://github.com/benknoble/Dotfiles">Dotfiles</a>)</li>
+</ol>
+
+<p>If that seems like a short list, it’s because I spent all day prototyping.</p>
+
+<h3 id="prototypes">Prototypes</h3>
+
+<p>I’m prototyping cake, the artifact-caching make-invoking build system I
+designed. I’ve even got funny module names: <code class="language-plaintext highlighter-rouge">cake.recipe</code> for the configuration,
+and I think <code class="language-plaintext highlighter-rouge">make</code> interaction will live in <code class="language-plaintext highlighter-rouge">cake.cooks</code> or <code class="language-plaintext highlighter-rouge">cake.chefs</code>, which
+will become a centerpiece for extensibility (implement a custom cook or chef to
+use something other than <code class="language-plaintext highlighter-rouge">make</code> to build your project).</p>
+
+<p>However, I also spent a lot of time rewriting and rewriting code I was
+prototyping. I spent more time thinking about the interface of the code, it’s
+testability, and just generally how I wanted it to look. I was thinking about a
+lot of different concerns at once, and that tends to paralyze my brain until I
+decide on the ‘perfect’ solution.</p>
+
+<blockquote>
+  <p>Tip: The perfect solution does not exist.</p>
+</blockquote>
+
+<h4 id="teddy-bear">Teddy Bear?</h4>
+
+<p>TDD is not a funny spelling of Teddy, nor is it an STD. It is a tool for
+software developed described by a “red-green-refactor cycle”. Essentially, one
+can choose to code in the following steps:</p>
+
+<ol>
+  <li>Red: write a test that describes what your code should accomplish (it will
+probably fail–if it doesn’t, lucky you).</li>
+  <li>Green: write the code necessary to make it pass</li>
+  <li>Refactor: leave it better than you found it (the Boy Scout method, or
+“refactoring”)</li>
+</ol>
+
+<p>This is Test Driven Development. Now, we still have to be careful not to place
+too much value in the tests and to write <em>good</em> tests. But, the steps do require
+some <a href="https://dmerej.info/blog/post/why-you-should-try-tdd/">pre-processing about API design and testability</a>. They also encourage
+just getting the code out, and cleaning it up later.</p>
+
+<p>The idea is that in the red phase, we focus on the features and the API. During
+green, we Get Stuff Done™. During the refactor I can be obsessive about code
+cleanliness, readability, extraction of functions and classes and things. But
+half the API is already designed by the test: the public one. I can make
+everything else private until it needs to be public.</p>
+
+<p>Anyway, this style of context-switching should help me drop the
+decision-paralysis of ‘right the first time.’</p>
+
+<p>I’m considering using this methodology to guide my decisions with further cake
+prototyping.</p>
+
+<hr>
+
+<p>P.S. Felicitations à la France, qui a gagné le Tour du Monde pour la première
+fois depuis 1966 <img class="emoji" title=":fr:" alt=":fr:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f1eb-1f1f7.png" height="20" width="20"> !</p>
+
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#infra" class="tag">
+        infra
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#builds" class="tag">
+        builds
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#make" class="tag">
+        make
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#refactor" class="tag">
+        refactor
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#tdd" class="tag">
+        tdd
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#shell" class="tag">
+        shell
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2018/07/16/til-week-5-and-a-quick-recap/";
+    this.page.identifier = "/blog/2018/07/16/til-week-5-and-a-quick-recap";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/07/12/kaves-and-kobolds/" title="Kaves and Kobolds">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2018/07/17/til-openings-closings/" title="Openings &amp; Closings">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#week-5-and-a-quick-recap">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

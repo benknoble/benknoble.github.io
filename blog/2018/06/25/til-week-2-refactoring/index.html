@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Week 2--Refactoring++</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Week 2--Refactoring++</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 25 Jun 2018 in Blog</p>
+<div id="post">
+  <p>Something about those <a href="/blog/2018/06/22/til-reading-refactoring-and-rpatterns/">R</a>’s keeps coming back…</p>
+
+<h1 id="today-i-learned">Today I Learned</h1>
+
+<ol>
+  <li>What a DHCP cluster is</li>
+  <li>We all make copy/paste/complete errors</li>
+  <li>Intuition is a strong indicator</li>
+</ol>
+
+<h2 id="dhcp-clustering">DHCP Clustering</h2>
+
+<p>I had some spare cycles today while waiting for a build (more on that in a
+moment), so I checked in with a colleague to see what else I could take on as a
+spare-time task. He assigned me to “cluster the DHCP server so that, in case of
+failure, we have a backup.” Sounds straightforward.</p>
+
+<p>It’s not.</p>
+
+<p>A DHCP cluster is effectively two DHCP servers that are tied together to act as
+one DHCP. They can do this by sharing the load for incoming traffic or by having
+one be dominant, with the other spinning up when the dominant one goes down.</p>
+
+<p>What complicates our setup (beyond this being a complex task) is that our DHCP
+is actually a VM. So, to get this thing working, I’ll need to spin up a new VM
+running the same image, configure it on the network, and then “cluster” them
+(whatever that entails).</p>
+
+<p>My spare cycles were spent on researching this to have a plan before-hand. I
+still don’t have said plan.</p>
+
+<h2 id="copypaste-errors--complete-fools">Copy/Paste Errors &amp; Complete Fools</h2>
+
+<p>Every coder makes a copy/paste error at least once in their life. Good
+developers try to mitigate the effects of this with tests. Strong developers
+seek to reduce duplicated code (or code differing by only a few pieces) to avoid
+it all together.</p>
+
+<p>If you don’t know what a copy/paste error is, it goes something like this. I’ve
+got this code for e.g. multiplication:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mult</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+  <span class="k">return</span> <span class="n">result</span>
+</code></pre></div></div>
+
+<p>And now I have to do division, so I copy/paste the block somewhere else. Only I
+forget to change it:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># spot the error
+</span><span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+  <span class="k">return</span> <span class="n">result</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">result</code> ? Anything from a broken build to people dying. Yes, you read that
+right, <em>death</em>. Think about a hospital or other missions-critical system.
+Granted, that code <em>better</em> get tested, but what if the error occurs in your
+tests? Then you’re really stuck.</p>
+
+<h3 id="relevance">Relevance</h3>
+
+<p>Today, I was a “complete fool.” I didn’t actually make a copy/paste error–thank
+goodness. I spent most of my time, as I did Friday, refactoring code and
+eliminating precisely the kind of duplicate code that goes hand-in-hand with
+copy/paste errors.</p>
+
+<p>But I did make two mistakes that were agonizingly difficult to track down.</p>
+
+<p>And it’s because of one of my favorite <a href="https://www.vim.org">vim</a> features: auto-complete.</p>
+
+<p>The first one goes like this. I have some shell script to fixup some files and
+then copy them to specific spots, so that a later build step will find it.
+Something like</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version_and_copy_single_file<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local source</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+  <span class="nb">local </span><span class="nv">dest</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+  <span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/good/bad'</span> <span class="s2">"</span><span class="nv">$source</span><span class="s2">"</span>
+  <span class="nb">cp</span> <span class="s2">"</span><span class="nv">$source</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$dest</span><span class="s2">"</span>
+<span class="o">}</span>
+
+version_and_copy_files<span class="o">()</span> <span class="o">{</span>
+  <span class="c"># [source]=dest</span>
+  <span class="nb">local</span> <span class="nt">-A</span> <span class="nv">files</span><span class="o">=(</span>
+    <span class="o">[</span>foo]<span class="o">=</span>bar
+    <span class="o">[</span>zork]<span class="o">=</span>grue
+    <span class="c">#...&amp;c.</span>
+  <span class="o">)</span>
+
+  <span class="k">for </span><span class="nb">source </span><span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="p">!files[@]</span><span class="k">}</span><span class="s2">"</span> <span class="p">;</span> <span class="k">do
+    </span><span class="nb">local </span><span class="nv">dest</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">files</span><span class="p">[</span><span class="s2">"</span><span class="nv">$source</span><span class="s2">"</span><span class="p">]</span><span class="k">}</span><span class="s2">"</span>
+    version_and_copy_single_file <span class="s2">"</span><span class="nv">$source</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$dest</span><span class="s2">"</span>
+  <span class="k">done</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Nice, clean, functionally extracted, I even used an associative array, one of my
+favorite ways to tie data together in bash.</p>
+
+<p>But there’s a problem. The <code class="language-plaintext highlighter-rouge">dest</code> parameter isn’t set right. It should be the
+second, not the first, so the copying wasn’t actually working. All because I
+completed the end of the line wrong, using the line above as context. The fix
+was <code class="language-plaintext highlighter-rouge">local dest="$2"</code> in the single file function. Might as well have been
+copy/paste, for the single bit of difference that broke my build.</p>
+
+<p>Number two is even better.</p>
+
+<p>Essentially, <code class="language-plaintext highlighter-rouge">rpmbuild</code> is a binary that gets called to build rpm image files.
+And our builds have to make a certain subset depending on parameters. So I took
+the build logic and gave each one its own function, then did the same for the
+logic that decided which ones to build.</p>
+
+<p>The problem? My ‘decide which to build’ function was named <code class="language-plaintext highlighter-rouge">rpmbuilder</code>. So when
+I autocompleted <code class="language-plaintext highlighter-rouge">rpmbuild --params</code> as <code class="language-plaintext highlighter-rouge">rpmbuilder --params</code> without a second
+thought, I caused an hour-wasting recursion. Each recursive call built rpm
+images and then asked for more. Deadly. Now you know why I had spare cycles.</p>
+
+<p>The best fix in this case was prevent anyone from doing that by giving the
+function name something crazy: <code class="language-plaintext highlighter-rouge">actually_build_rpms</code>. Can’t mistake that.</p>
+
+<h3 id="intuition">Intuition</h3>
+
+<p>I only found this because a build that takes 20 minutes usually suddenly lasted
+an hour. I suspected during the first half something was wrong, but I was
+certain by the end of an hour. And because I smartly logged everything I was
+doing, I was able to track the same line being output over and over and over.</p>
+
+<p>All because my gut said–this is broke.</p>
+
+<h1 id="conclusion-">Conclusion ?</h1>
+
+<p>Be careful what you type, I guess. But have good tests and a good gut to help
+you anyways.</p>
+
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#infra" class="tag">
+        infra
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#refactor" class="tag">
+        refactor
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#shell" class="tag">
+        shell
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#builds" class="tag">
+        builds
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2018/06/25/til-week-2-refactoring/";
+    this.page.identifier = "/blog/2018/06/25/til-week-2--refactoring";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/06/24/feature-taking-a-break/"
+      title="Feature--Taking a Break">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2018/06/26/til-day-7-asking-questions/"
+       title="Day 7, Asking Questions">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#week-2-refactoring">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

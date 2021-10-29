@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Advent of Code 2019 : Day 4</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Advent of Code 2019 : Day 4</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 19 Dec 2019 in Blog</p>
+<div id="post">
+  <p>Password-cracking elves, oh my!</p>
+
+<h2 id="part-1">Part 1</h2>
+
+<h3 id="ffa1d0d"><a href="https://github.com/benknoble/advent2019/commit/ffa1d0dc1fd8aeb52784bedd6da6e0bf0b7c4ea1">ffa1d0d</a></h3>
+
+<p>Given a range of numbers to try, I had to determine how many fit a series of
+rules. Since the rules mostly operated on the individual digits, I decided to
+represent the passwords as <code class="language-plaintext highlighter-rouge">int list</code>s.</p>
+
+<p>Then I encoded the rules as a list of functions <code class="language-plaintext highlighter-rouge">int list -&gt; bool</code>. If all of
+them hold for a given password, then we are in the clear. Here they are:</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">val</span> <span class="nv">rules</span> <span class="p">:</span> <span class="n">rule</span> <span class="n">list</span> <span class="p">=</span> <span class="p">[</span>
+  <span class="kr">fn</span> <span class="n">p</span> <span class="p">=&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">all</span> <span class="p">(</span><span class="kr">fn</span> <span class="n">i</span> <span class="p">=&gt;</span> <span class="mi">0</span> <span class="n">&lt;=</span> <span class="n">i</span> <span class="kr">andalso</span> <span class="n">i</span> <span class="n">&lt;=</span> <span class="mi">9</span><span class="p">)</span> <span class="n">p</span>
+ <span class="p">,</span><span class="kr">fn</span> <span class="n">p</span> <span class="p">=&gt;</span> <span class="n">length</span> <span class="n">p</span> <span class="p">=</span> <span class="mi">6</span>
+ <span class="p">,</span><span class="kr">fn</span> <span class="n">p</span> <span class="p">=&gt;</span> <span class="kr">let</span> <span class="kr">val</span> <span class="nv">p'</span> <span class="p">=</span> <span class="n">toInt</span> <span class="n">p</span>
+          <span class="kr">in</span> <span class="nl">#min</span> <span class="n">r</span> <span class="n">&lt;=</span> <span class="n">p'</span> <span class="kr">andalso</span> <span class="n">p'</span> <span class="n">&lt;=</span> <span class="nl">#max</span> <span class="n">r</span>
+          <span class="kr">end</span>
+ <span class="p">,</span><span class="kr">fn</span> <span class="n">p</span> <span class="p">=&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">exists</span> <span class="p">(</span><span class="kr">fn</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">a</span><span class="p">=</span><span class="n">b</span><span class="p">)</span> <span class="p">(</span><span class="nn">ListPair</span><span class="p">.</span><span class="n">zip</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">tl</span> <span class="n">p</span><span class="p">))</span>
+ <span class="p">,</span><span class="kr">fn</span> <span class="n">p</span> <span class="p">=&gt;</span> <span class="nl">#2</span> <span class="p">(</span><span class="n">foldl</span> <span class="p">(</span><span class="kr">fn</span> <span class="p">(</span><span class="n">curr</span><span class="p">,</span> <span class="p">(</span><span class="n">prev</span><span class="p">,</span> <span class="n">notDecr</span><span class="p">))</span> <span class="p">=&gt;</span>
+                        <span class="p">(</span><span class="n">curr</span><span class="p">,</span> <span class="n">notDecr</span> <span class="kr">andalso</span> <span class="n">curr</span> <span class="n">&gt;=</span> <span class="n">prev</span><span class="p">))</span>
+                    <span class="p">(</span><span class="mi">~1</span><span class="p">,</span> <span class="n">true</span><span class="p">)</span>
+                    <span class="n">p</span><span class="p">)</span>
+                        <span class="p">]</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Each integer is a digit (0-9).</li>
+  <li>The length of the password is 6.</li>
+  <li>The password is in the appropriate range.</li>
+  <li>There is a pair of equal digits next to each other in the password.</li>
+  <li>The digits are non-decreasing.</li>
+</ol>
+
+<p>The rest is some (poor) boiler-plate to set up the solution.</p>
+
+<h2 id="part-2">Part 2</h2>
+
+<h3 id="f980450"><a href="https://github.com/benknoble/advent2019/commit/f98045043b7834ea4f439355cbf81c1ac673f303">f980450</a></h3>
+
+<p>I rewrote the boiler-plate some, although there are some oddities. For example,
+I had to re-convince myself that the composition of <code class="language-plaintext highlighter-rouge">countValid</code> and
+<code class="language-plaintext highlighter-rouge">elvesPasswdChecker</code> was valid:</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">val</span> <span class="nv">elvesPasswdChecker</span> <span class="p">:</span> <span class="n">range</span> <span class="p">-&gt;</span> <span class="n">passwd</span> <span class="p">-&gt;</span> <span class="n">bool</span>
+<span class="kr">val</span> <span class="nv">countValid</span> <span class="p">:</span> <span class="p">(</span><span class="n">passwd</span> <span class="p">-&gt;</span> <span class="n">bool</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">range</span> <span class="p">-&gt;</span> <span class="n">int</span>
+
+<span class="c">(*</span><span class="cm"> therefore *)</span>
+<span class="kr">val</span> <span class="nv">counter</span> <span class="p">:</span> <span class="n">range</span> <span class="p">-&gt;</span> <span class="n">range</span> <span class="p">-&gt;</span> <span class="n">int</span> <span class="p">=</span> <span class="n">countValid</span> <span class="n">o</span> <span class="n">elvesPasswdChecker</span>
+</code></pre></div></div>
+
+<p>Checking the type shows why we have to feed the range in <em>twice</em> in the
+(simplified)</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">counter</span> <span class="n">range</span> <span class="n">range</span>
+</code></pre></div></div>
+
+<p>The truly hardest part, however, was encoding the new rule: the pair of equal
+digits is not in a <em>group</em> of equal digits.</p>
+
+<p>In order to check this, I wanted to examine the <code class="language-plaintext highlighter-rouge">pairs</code> of a password, which
+consist of two middle elements, with possibly an element on either side (the
+type is <code class="language-plaintext highlighter-rouge">int option * (int * int) * int option</code>).  Consider the password
+<code class="language-plaintext highlighter-rouge">abcdef</code>: the pairs would be</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">NONE</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">SOME</span> <span class="n">c</span><span class="p">)</span>
+<span class="p">(</span><span class="n">SOME</span> <span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">SOME</span> <span class="n">d</span><span class="p">)</span>
+<span class="p">(</span><span class="n">SOME</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">),</span> <span class="n">SOME</span> <span class="n">e</span><span class="p">)</span>
+<span class="p">(</span><span class="n">SOME</span> <span class="n">c</span><span class="p">,</span> <span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">),</span> <span class="n">SOME</span> <span class="n">f</span><span class="p">)</span>
+<span class="p">(</span><span class="n">SOME</span> <span class="n">d</span><span class="p">,</span> <span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">),</span> <span class="n">NONE</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The key here is that, in the middle group, I need to check properties of all 4
+integers (e.g., in <code class="language-plaintext highlighter-rouge">122223</code>, I need to know about both sides of a 2 in the
+middle). But for the ends, I only have to check one direction. The new rule is
+encoded as</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">fn</span> <span class="n">p</span> <span class="p">=&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">exists</span> <span class="p">(</span><span class="kr">fn</span> <span class="p">(</span><span class="n">a</span><span class="p">,(</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">),</span><span class="n">d</span><span class="p">)</span> <span class="p">=&gt;</span>
+          <span class="kr">case</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="kr">of</span>
+               <span class="c">(*</span><span class="cm"> technically impossible *)</span>
+               <span class="p">(</span><span class="n">NONE</span><span class="p">,</span> <span class="n">NONE</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">b</span> <span class="p">=</span> <span class="n">c</span>
+             <span class="p">|</span> <span class="p">(</span><span class="n">SOME</span> <span class="n">a'</span><span class="p">,</span> <span class="n">NONE</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">a'</span> <span class="p">=</span> <span class="n">b</span> <span class="kr">andalso</span> <span class="n">b</span> <span class="n">&lt;&gt;</span> <span class="n">c</span>
+             <span class="p">|</span> <span class="p">(</span><span class="n">NONE</span><span class="p">,</span> <span class="n">SOME</span> <span class="n">d'</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">b</span> <span class="n">&lt;&gt;</span> <span class="n">c</span> <span class="kr">andalso</span> <span class="n">c</span> <span class="p">=</span> <span class="n">d'</span>
+             <span class="p">|</span> <span class="p">(</span><span class="n">SOME</span> <span class="n">a'</span><span class="p">,</span> <span class="n">SOME</span> <span class="n">d'</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">a'</span> <span class="n">&lt;&gt;</span> <span class="n">b</span> <span class="kr">andalso</span> <span class="n">b</span> <span class="p">=</span> <span class="n">c</span> <span class="kr">andalso</span> <span class="n">c</span> <span class="n">&lt;&gt;</span> <span class="n">d'</span><span class="p">)</span>
+          <span class="p">(</span><span class="n">pairs</span> <span class="n">p</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>But now, how to write <code class="language-plaintext highlighter-rouge">pairs : int list -&gt; (int option * (int * int) * int
+option) list</code>?</p>
+
+<p>The trick is to have a <code class="language-plaintext highlighter-rouge">windows : int -&gt; 'a list -&gt; 'a list list</code>, where each
+sub-list of the result has exactly \(n\) elements (the first input). This cannot
+be encoded in sml’s type-system, for it requires dependent types. Here are some
+example invocations:</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">-</span> <span class="n">windows</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="kr">val</span> <span class="nv">it</span> <span class="p">=</span> <span class="p">[]</span> <span class="p">:</span> <span class="n">int</span> <span class="n">list</span> <span class="n">list</span>
+<span class="n">-</span> <span class="n">windows</span> <span class="mi">1</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="kr">val</span> <span class="nv">it</span> <span class="p">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">]]</span> <span class="p">:</span> <span class="n">int</span> <span class="n">list</span> <span class="n">list</span>
+<span class="n">-</span> <span class="n">windows</span> <span class="mi">2</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="kr">val</span> <span class="nv">it</span> <span class="p">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]]</span> <span class="p">:</span> <span class="n">int</span> <span class="n">list</span> <span class="n">list</span>
+<span class="n">-</span> <span class="n">windows</span> <span class="mi">3</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="kr">val</span> <span class="nv">it</span> <span class="p">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]]</span> <span class="p">:</span> <span class="n">int</span> <span class="n">list</span> <span class="n">list</span>
+</code></pre></div></div>
+
+<p>Then I can encode <code class="language-plaintext highlighter-rouge">pairs</code> as follows:</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">fun</span> <span class="nf">pairs</span> <span class="n">p</span> <span class="p">:</span> <span class="p">(</span><span class="n">int</span> <span class="n">option</span> <span class="n">*</span> <span class="p">(</span><span class="n">int</span> <span class="n">*</span> <span class="n">int</span><span class="p">)</span> <span class="n">*</span> <span class="n">int</span> <span class="n">option</span><span class="p">)</span> <span class="n">list</span> <span class="p">=</span>
+  <span class="kr">let</span>
+    <span class="kr">val</span> <span class="nv">blocks</span> <span class="p">=</span> <span class="n">windows</span> <span class="mi">4</span> <span class="n">p</span>
+    <span class="kr">val</span> <span class="nv">blocks3</span> <span class="p">=</span> <span class="n">windows</span> <span class="mi">3</span> <span class="n">p</span>
+    <span class="kr">val</span> <span class="nv">fst</span> <span class="p">=</span> <span class="n">hd</span> <span class="n">blocks3</span>
+    <span class="kr">val</span> <span class="nv">lst</span> <span class="p">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">last</span> <span class="n">blocks3</span>
+  <span class="kr">in</span>
+    <span class="p">((</span><span class="kr">fn</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">SOME</span> <span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">),</span> <span class="n">NONE</span><span class="p">))</span> <span class="n">fst</span><span class="p">)</span>
+    <span class="n">::</span>
+    <span class="p">((</span><span class="kr">fn</span> <span class="p">[</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">NONE</span><span class="p">,</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">),</span> <span class="n">SOME</span> <span class="n">d</span><span class="p">))</span> <span class="n">lst</span><span class="p">)</span>
+    <span class="n">::</span>
+    <span class="p">(</span><span class="n">map</span> <span class="p">(</span><span class="kr">fn</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">]</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">SOME</span> <span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">),</span> <span class="n">SOME</span> <span class="n">d</span><span class="p">))</span> <span class="n">blocks</span><span class="p">)</span>
+  <span class="kr">end</span>
+</code></pre></div></div>
+
+<p>Here I grab the middle elements with <code class="language-plaintext highlighter-rouge">windows 4</code> and the ends with <code class="language-plaintext highlighter-rouge">windows 3</code>.
+We go ahead and ignore the warnings about incomplete matches and construct the
+list of pairs.</p>
+
+<p>So we need <code class="language-plaintext highlighter-rouge">windows</code>. The base cases are straightforward, as we handle the
+simplest pieces first. The recursion is visible even in the example I gave
+earlier, and spotting that is how I designed the algorithm.</p>
+
+<p>Given <code class="language-plaintext highlighter-rouge">windows n-1 = [[1,2], [2,3], [3,4]]</code>, we have some merging to do to get
+<code class="language-plaintext highlighter-rouge">windows n</code>. We pair up the results into <code class="language-plaintext highlighter-rouge">[([1,2], [2,3]), ([2,3], [3,4])]</code>.
+But before we concatenate (<code class="language-plaintext highlighter-rouge">@</code>), we need to drop some elements! In fact, we need
+to drop exactly <code class="language-plaintext highlighter-rouge">n-2</code> elements. This won’t raise the <code class="language-plaintext highlighter-rouge">Subscript</code> exception,
+because we have already handled the case for \(n = 1\); i.e., we can prove \(n
+\ge 2\).</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">fun</span> <span class="nf">windows</span> <span class="p">(</span><span class="n">n</span> <span class="p">:</span> <span class="n">int</span><span class="p">)</span> <span class="p">(</span><span class="n">xs</span> <span class="p">:</span> <span class="nd">'a</span> <span class="n">list</span><span class="p">)</span> <span class="p">:</span> <span class="nd">'a</span> <span class="n">list</span> <span class="n">list</span> <span class="p">=</span>
+   <span class="kr">if</span> <span class="n">n</span> <span class="p">=</span> <span class="n">length</span> <span class="n">xs</span> <span class="kr">then</span> <span class="p">[</span><span class="n">xs</span><span class="p">]</span>
+   <span class="kr">else</span> <span class="kr">if</span> <span class="n">n</span> <span class="n">&lt;=</span> <span class="mi">0</span> <span class="kr">orelse</span> <span class="n">null</span> <span class="n">xs</span> <span class="kr">then</span> <span class="p">[]</span>
+   <span class="kr">else</span> <span class="kr">if</span> <span class="n">n</span> <span class="p">=</span> <span class="mi">1</span> <span class="kr">then</span> <span class="n">map</span> <span class="p">(</span><span class="kr">fn</span> <span class="n">x</span> <span class="p">=&gt;</span> <span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="n">xs</span>
+   <span class="kr">else</span>
+     <span class="kr">let</span>
+       <span class="kr">val</span> <span class="nv">prev</span> <span class="p">=</span> <span class="n">windows</span> <span class="p">(</span><span class="n">n-</span><span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+       <span class="kr">fun</span> <span class="nf">merge</span> <span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span> <span class="p">=</span> <span class="n">xs</span> <span class="n">@</span> <span class="p">(</span><span class="nn">List</span><span class="p">.</span><span class="n">drop</span> <span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">n-</span><span class="mi">2</span><span class="p">))</span>
+     <span class="kr">in</span>
+       <span class="n">map</span> <span class="n">merge</span> <span class="p">(</span><span class="nn">ListPair</span><span class="p">.</span><span class="n">zip</span> <span class="p">(</span><span class="n">prev</span><span class="p">,</span> <span class="p">(</span><span class="n">tl</span> <span class="n">prev</span><span class="p">)))</span>
+     <span class="kr">end</span>
+</code></pre></div></div>
+
+<p>And that’s all!</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#advent+of+code" class="tag">
+        advent of code
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#sml%2Fnj" class="tag">
+        sml/nj
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2019/12/19/advent4/";
+    this.page.identifier = "/blog/2019/12/19/advent4";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2019/12/18/advent3/"
+      title="Advent of Code 2019 : Day 3">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2019/12/24/climystery/"
+       title="A terminal case of mysteries">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#advent-of-code-2019-day-4">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

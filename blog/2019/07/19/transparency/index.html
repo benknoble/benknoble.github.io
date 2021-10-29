@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Open-source Transparency</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Open-source Transparency</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 19 Jul 2019 in Blog</p>
+<div id="post">
+  <p>My <a href="https://github.com/tmux/tmux/pull/1848">first contribution</a> to <a href="https://github.com/tmux/tmux">tmux</a> was
+accepted! Only, the history is not transparent.</p>
+
+<p>The contribution itself is relatively trivial; I just added some keys to tmux’s
+<code class="language-plaintext highlighter-rouge">choose-tree</code> mode (invoked by commands like <code class="language-plaintext highlighter-rouge">choose-session</code>, bound to
+<kbd>Prefix</kbd>-<kbd>s</kbd> by default). They keys are specifically intended
+to align with vi-style bindings.</p>
+
+<p>The loss of proper history is where I take issue. In the <a href="https://github.com/tmux/tmux/pull/1848">PR</a>, I was following
+up with patches from a <a href="https://github.com/tmux/tmux/issues/1846">related
+issue</a>. The usual next steps are</p>
+
+<ol>
+  <li>verify the PR does what it should (code review, integration tests)</li>
+  <li>merge the PR</li>
+</ol>
+
+<p>Step (1) was completed by acceptance from Travis CI and a <a href="https://github.com/tmux/tmux/pull/1848#issuecomment-513135116">comment from
+nicm</a>.</p>
+
+<p>Step (2) automatically closes the linked issue and integrates the code. The best
+part is that GitHub provides links to trace back from the merge commit to the PR
+to the issue, and a graphical history log (such as the Insights &gt; Network tab on
+GitHub) shows the merge from the fork. Tools like <code class="language-plaintext highlighter-rouge">git-log</code> and <code class="language-plaintext highlighter-rouge">git-blame</code> make
+tracking these changes really easy. Finally, authorial information is correctly
+capture (I authored the commits and their messages).</p>
+
+<p>Instead, the same nicm did some form of a cherry-pick to another, separate fork,
+squashed the commits, edited the message to put my name on them, and merged that
+in via an unrelated process.</p>
+
+<p>What?</p>
+
+<p>Yes: <code class="language-plaintext highlighter-rouge">git-blame</code> now has a harder time pointing you back to my original PR or
+issue.</p>
+
+<p>Yes: authorial information is obliterated. nicm authored those commits. My name
+is only incidentally attached (and, incidentally, I don’t care about the credit:
+I care about the <em>history</em>).</p>
+
+<p>Yes: the history if FUBAR. It is effectively impossible to reconcile <a href="https://github.com/tmux/tmux/commit/bf6d1aeaa44775923a72a4da49def96268dfa304">nicm’s
+commit</a>
+with the original issue/PR sequence that led to it. Someone could do it, but one
+feature of <code class="language-plaintext highlighter-rouge">git</code> (and GitHub) is to tie these things together in (publicly)
+immutable history. No effort is needed to trace the history if merging is done.
+Now it takes serious digging to connect these dots.</p>
+
+<p>This is a broken software development process. I <img class="emoji" title=":heart:" alt=":heart:" src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png" height="20" width="20"> tmux and am writing in
+vim in tmux right now, but this has me flabbergasted. Such a well-running
+piece of software has creators that appear not to understand the value of git
+history. <a href="https://github.com/tmux/tmux/network">This is a regular pattern</a>. The
+only contributors to the code are effectively <a href="https://github.com/tmux/tmux/graphs/contributors">nicm and
+ThomasAdam</a>. No one else
+appears to have “contributed” since 2008 (or maybe the graphs are too tiny).</p>
+
+<p>This is bad community.</p>
+
+<p>So, to sum up: open-source projects <em>should</em></p>
+
+<ul>
+  <li>maintain correct (not necessarily <em>clean</em>) git history by using merges
+properly</li>
+  <li>value community and contributor support</li>
+  <li>keep code, logs, bugs, and other supporting documents discoverable</li>
+</ul>
+
+<p>They <em>should NOT</em></p>
+
+<ul>
+  <li>destroy git history for the sake of having a few trusted contributors</li>
+  <li>fail to support the community that supports them</li>
+  <li>obscure project history and information</li>
+</ul>
+
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#github" class="tag">
+        github
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#tmux" class="tag">
+        tmux
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#project-management" class="tag">
+        project-management
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#rants" class="tag">
+        rants
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#open-source" class="tag">
+        open-source
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2019/07/19/transparency/";
+    this.page.identifier = "/blog/2019/07/19/transparency";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/release/2019/07/15/plink-release/" title=":tada: Announcing the release of plink! :tada:">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/announcement/2019/07/23/blog-features/" title="Comments, Subscriptions, and Feeds, Oh my!">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#open-source-transparency">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

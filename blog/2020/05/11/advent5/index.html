@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Advent of Code 2019 : Day 5</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Advent of Code 2019 : Day 5</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 11 May 2020 in Blog</p>
+<div id="post">
+  <p>The Advent of Code series is back (from last year…)</p>
+
+<h2 id="part-1">Part 1</h2>
+
+<p>Another intcode challenge! Now, we’re given a new program, new opcodes (I/O!!),
+and addressing modes <img class="emoji" title=":scream:" alt=":scream:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f631.png" height="20" width="20"> (encoded inside opcodes). Also, the program
+counter no longer constantly increments in groups of 4 (i.e., some opcodes are
+shorter or longer than others in number of operands). Our job is to feed <code class="language-plaintext highlighter-rouge">1</code>
+into a diagnostic program and record the output once it’s successful.</p>
+
+<h3 id="530eaa2"><a href="https://github.com/benknoble/advent2019/commit/530eaa2a7cc94b170caaffaaab753bf8d26ba714">530eaa2</a></h3>
+
+<p>Just copying the old code and the new input.</p>
+
+<h3 id="a33986c"><a href="https://github.com/benknoble/advent2019/commit/a33986cda8070ec4a38d8be00c2b8ce21a4942ba">a33986c</a></h3>
+
+<p>This is a big ol’ rewrite. I added an <code class="language-plaintext highlighter-rouge">either</code> type based on scala’s for
+error/result types; I eliminated exceptions completely using it and dedicated
+constructors; I grouped all the structures inside each other…</p>
+
+<p>Interestingly, this refactor introduced a new mechanism for reading and writing
+memory. <code class="language-plaintext highlighter-rouge">read</code> and <code class="language-plaintext highlighter-rouge">write</code> as primitives still operate in terms of <code class="language-plaintext highlighter-rouge">Either.R</code>
+and <code class="language-plaintext highlighter-rouge">Either.L</code> (success and failure). But truly carrying out and using the
+results <em>uniformly</em> is done with <code class="language-plaintext highlighter-rouge">Either.lift</code>: for the <code class="language-plaintext highlighter-rouge">try*</code> functions, the
+caller provides an error handler and a success handler (which must return the
+same type, typically some kind of option or state or some such). The result is a
+function which will operate on the results of the primitives (which still must
+be called: either directly, or via the <code class="language-plaintext highlighter-rouge">next</code> functions for some easy reads).
+One such usage is here:</p>
+
+<div class="language-sml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">datatype</span> <span class="kt">inst</span> <span class="p">=</span> <span class="nc">ADD</span> <span class="kr">of</span> <span class="n">arith_addrs</span>
+              <span class="p">|</span> <span class="nc">MULT</span> <span class="kr">of</span> <span class="n">arith_addrs</span>
+              <span class="p">|</span> <span class="nc">HALT</span>
+              <span class="p">|</span> <span class="nc">UNKNOWN</span> <span class="kr">of</span> <span class="n">opcode</span>
+              <span class="p">|</span> <span class="nc">MEM_ERR</span> <span class="kr">of</span> <span class="nn">Memory</span><span class="p">.</span><span class="n">readErr</span>
+<span class="kr">val</span> <span class="nv">tryRead</span> <span class="p">=</span> <span class="nn">Memory</span><span class="p">.</span><span class="n">tryRead</span> <span class="n">MEM_ERR</span>
+<span class="kr">fun</span> <span class="nf">createArith</span>
+  <span class="p">(</span><span class="n">f</span> <span class="p">:</span> <span class="n">arith_addrs</span> <span class="p">-&gt;</span> <span class="n">inst</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">m</span> <span class="p">:</span> <span class="nn">Memory</span><span class="p">.</span><span class="n">memory</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">ip</span> <span class="p">:</span> <span class="nn">Memory</span><span class="p">.</span><span class="n">addr</span><span class="p">)</span>
+  <span class="p">:</span> <span class="n">inst</span> <span class="p">=</span>
+  <span class="kr">let</span> <span class="kr">val</span> <span class="nv">newIp</span> <span class="p">=</span> <span class="n">ip</span> <span class="n">+</span> <span class="mi">4</span>
+  <span class="kr">in</span>
+    <span class="n">tryRead</span> <span class="p">(</span><span class="kr">fn</span> <span class="n">a</span> <span class="p">=&gt;</span>
+    <span class="n">tryRead</span> <span class="p">(</span><span class="kr">fn</span> <span class="n">b</span> <span class="p">=&gt;</span>
+    <span class="n">tryRead</span> <span class="p">(</span><span class="kr">fn</span> <span class="n">d</span> <span class="p">=&gt;</span> <span class="n">f</span> <span class="p">{</span><span class="n">srcA</span><span class="p">=</span><span class="n">a</span><span class="p">,</span> <span class="n">srcB</span><span class="p">=</span><span class="n">b</span><span class="p">,</span> <span class="n">dest</span><span class="p">=</span><span class="n">d</span><span class="p">,</span> <span class="n">newIp</span><span class="p">=</span><span class="n">newIp</span><span class="p">})</span>
+    <span class="p">(</span><span class="nn">Memory</span><span class="p">.</span><span class="n">next3</span> <span class="n">ip</span> <span class="n">m</span><span class="p">))</span>
+    <span class="p">(</span><span class="nn">Memory</span><span class="p">.</span><span class="n">next2</span> <span class="n">ip</span> <span class="n">m</span><span class="p">))</span>
+    <span class="p">(</span><span class="nn">Memory</span><span class="p">.</span><span class="n">next</span> <span class="n">ip</span> <span class="n">m</span><span class="p">)</span>
+  <span class="kr">end</span>
+</code></pre></div></div>
+
+<p>We alias <code class="language-plaintext highlighter-rouge">tryRead</code> to use the <code class="language-plaintext highlighter-rouge">MEM_ERR</code> constructor as an error handler. An
+arithmetic instruction consists of sequenced reads which are combined into an
+argument to the given instruction constructor. This is used by the decoder to
+create instructions for evaluation (which <em>also</em> relies on <code class="language-plaintext highlighter-rouge">tryRead</code> to fetch an
+instruction to decode).</p>
+
+<p>In the actual CPU, we employ similar tricks to read several addresses, compute
+a result, and write it back to memory; the result is a value of type <code class="language-plaintext highlighter-rouge">state</code>
+this time, instead of a value of type <code class="language-plaintext highlighter-rouge">inst</code>.</p>
+
+<p>In particular, this new form typically necessitates encoding errors in the type
+system (either for states or instructions, in these examples).</p>
+
+<h3 id="95cd8a9"><a href="https://github.com/benknoble/advent2019/commit/95cd8a915bb59c9bebffb26f7b60cf9f6d782231">95cd8a9</a></h3>
+
+<p>This is a doozy. I managed (finally) to functorize the structures and allow for
+some separation of concerns. Unfortunately, some things still leak through (as
+seen in the translation functions from various unspecified types to more
+concrete ones; this was necessary even with the sharing constraints). Months
+later, I now see the solution may have been to duplicate some type names and
+increase the sharing constraints. (The <code class="language-plaintext highlighter-rouge">DecoderFn</code>’s constraint that Memory use
+<code class="language-plaintext highlighter-rouge">int</code>s seems unavoidable.)</p>
+
+<p>In spite of a few ugly spots, the whole thing comes together remarkably well. I
+even added an <code class="language-plaintext highlighter-rouge">IO</code> signature to encapsulate input and output routines, and an
+<code class="language-plaintext highlighter-rouge">StdIO</code> structure that uses the standard streams.</p>
+
+<p>Intcode is built up by applying functors, and then a <code class="language-plaintext highlighter-rouge">Reader</code> struct is built
+using the intcode program type.</p>
+
+<h3 id="8679875"><a href="https://github.com/benknoble/advent2019/commit/867987501a856ac2aabd7fb2721692c54fdfdaa3">8679875</a></h3>
+
+<p>At long last, we are ready to support addressing modes. We add a <code class="language-plaintext highlighter-rouge">mode</code> to the
+decoder, as well as encode the notion of parameter and destination “registers”
+in the type system. A parameter includes a function that carries out the read,
+while a destination includes a function that carries out the write. We thus
+enforce that some parameter sets are read from while others are written to.</p>
+
+<p>We add a couple of digit-manipulating utilities in order to work with the
+opcodes.</p>
+
+<p>Finally, we add the parameter/destination encoding into the actual decoder. This
+certainly complicates reads and writes on the instruction execution side, but it
+is necessary; when creating an instruction, we have to determine what kinds of
+registers and modes go together, and set up the appropriate arguments. Execution
+then pulls them apart and invokes the appropriate sequence of functions. In
+effect, these instruction parameter sets encode the reads and writes, so the CPU
+has to invoke memory primitives less often. (In fact, I believe the CPU only
+uses <code class="language-plaintext highlighter-rouge">try*</code> functions now.)</p>
+
+<p>Lastly, we set up a dummy IO structure that provides the appropriate diagnostic
+input.</p>
+
+<h3 id="1924968"><a href="https://github.com/benknoble/advent2019/commit/192496844c89fd5093a76c562f0b0f1426cc48e7">1924968</a></h3>
+
+<p>Correcting a bug in the use of modes for writes led me to solve the challenge
+(the spec is vague on how write modes work…).</p>
+
+<h2 id="part-2">Part 2</h2>
+
+<p>More opcodes! Yayyyy! And they implement conditional branching…</p>
+
+<h3 id="806e183"><a href="https://github.com/benknoble/advent2019/commit/806e1830b21058e1353288b1213ed50c13df1cd3">806e183</a></h3>
+
+<p>Another copy of programs and inputs. I added the new diagnostic code for the
+challenge here too.</p>
+
+<h3 id="80ae8cc"><a href="https://github.com/benknoble/advent2019/commit/80ae8cceac6ef0b1a662842030ca4abcdedb0daa">80ae8cc</a></h3>
+
+<p>A boring clarification.</p>
+
+<h3 id="17d18ef"><a href="https://github.com/benknoble/advent2019/commit/17d18ef64da292623442b03db7a2856bb63c489c">17d18ef</a></h3>
+
+<p>The actual solution.</p>
+
+<p>We add the extra opcodes (a piece of cake at this point; a couple of types, some
+functions + constructors, and an evaluation function that all build on the
+read/write mechanisms and the use of functions as values). Most of the heavy
+work is in the decoder, which creates jump and test instructions. The <em>complex</em>
+work is in the CPU, though, which has to read appropriate values and handle the
+results, invoking callbacks as necessary to carry out computations for new
+instruction pointers or values to test.</p>
+
+<p>I’m learning that the <code class="language-plaintext highlighter-rouge">try*</code> functions create an inversion of control flow,
+where reads/writes appear to happen at the bottom of the code (in the latter
+parameters). This is <em>also</em> where the computation of what values to write
+appears, somewhat obfuscating the intent. But the <em>resulting state or value</em> is
+front-and-center (literally).</p>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#advent+of+code" class="tag">
+        advent of code
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#sml%2Fnj" class="tag">
+        sml/nj
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2020/05/11/advent5/";
+    this.page.identifier = "/blog/2020/05/11/advent5";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2020/02/12/cs-fundamentals-part2/" title="Re: Coding the Impossible: Palindrome Detector with a Regular Expressions">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2020/05/21/switch-zsh/" title="Why I finally switched to zsh">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#advent-of-code-2019-day-5">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

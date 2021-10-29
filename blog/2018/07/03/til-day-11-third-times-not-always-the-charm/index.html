@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Day 11--Third Time's (Not) Always the Charm</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Day 11--Third Time's (Not) Always the Charm</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 03 Jul 2018 in Blog</p>
+<div id="post">
+  <p><img class="emoji" title=":shamrock:" alt=":shamrock:" src="https://github.githubassets.com/images/icons/emoji/unicode/2618.png" height="20" width="20"> <img class="emoji" title=":shamrock:" alt=":shamrock:" src="https://github.githubassets.com/images/icons/emoji/unicode/2618.png" height="20" width="20"> <img class="emoji" title=":shamrock:" alt=":shamrock:" src="https://github.githubassets.com/images/icons/emoji/unicode/2618.png" height="20" width="20"></p>
+
+<p>Ok, ok, I’m not done with the emoticons yet.</p>
+
+<p>Also, since tomorrow is the 4th of July <img class="emoji" title=":fireworks:" alt=":fireworks:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f386.png" height="20" width="20"> and I don’t have work <img class="emoji" title=":grin:" alt=":grin:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f601.png" height="20" width="20">
+I’m not doing a TIL. Instead you’ll get the <a href="/blog/2018/07/04/feature-cycles/">feature</a> that spawned out of
+yesterday’s TIL.</p>
+
+<h2 id="today-i-learned">Today I Learned</h2>
+
+<ol>
+  <li>Caching is hard</li>
+  <li>Regressions are hard</li>
+</ol>
+
+<h2 id="cache--baseball">Cache ! <img class="emoji" title=":baseball:" alt=":baseball:" src="https://github.githubassets.com/images/icons/emoji/unicode/26be.png" height="20" width="20">
+</h2>
+
+<p>I’ll get to why I had time to work on this in a moment (and it’ll wind up being
+related to tomorrow’s <a href="/blog/2018/07/04/feature-cycles/">feature</a> article as well), so hang tight.</p>
+
+<p>In the meantime, let me tell you about <a href="/blog/2018/06/22/til-reading-refactoring-and-rpatterns/">another</a> <a href="/blog/2018/06/25/til-week-2-refactoring/">strategy</a> for <a href="/blog/2018/06/26/til-day-7-asking-questions/">build</a>
+<a href="/blog/2018/06/27/til-day-8-context-and-computers/">time</a> <a href="/blog/2018/06/28/til-day-match-0-9-regex/">improvement</a>: cached artifacts.</p>
+
+<p>It goes like this. We have a build–call it <code class="language-plaintext highlighter-rouge">meta</code>–that requires a lot of
+smaller components, each of which have their own build process. So, to build
+<code class="language-plaintext highlighter-rouge">meta</code>, we build every single component. Every. Single. Time.</p>
+
+<p>This isn’t such an issue when most of the components take 0-20 seconds. But a
+few take several minutes, and some even break the 10 minute mark. So the overall
+time is quite long.</p>
+
+<h3 id="solution-dont-do-that">Solution: Don’t Do That</h3>
+
+<p>Rather than build these components every time, it would be great if we could
+determine which ones needed to be built (because their source code was changed),
+and which ones could be pulled in from a cache.</p>
+
+<p>Step 1 is easy: <code class="language-plaintext highlighter-rouge">git-diff</code> actually has a <code class="language-plaintext highlighter-rouge">--names-only</code> option that has it spit
+out the names of files that were changed, so we can compare between commits and
+determine what source code was touched. Then, using a map of patterns (that
+match pathnames) to build components, we know what has to be built from scratch.</p>
+
+<p>Step 2 is more involved. Well, computing the list of components to get from the
+cache is easy (it’s just the set of components minus the set of components to
+rebuild). But designing the cache is slightly harder.</p>
+
+<p>Rather than reproduce my whole thought process, I’m going to put my proposal
+spec <a href="https://docs.google.com/document/d/14HxZFLA7eMN6leZeBBRfWUUuBFE5t3vyfIDwgfm5O3I/edit?usp=sharing">here</a>. Note that <code class="language-plaintext highlighter-rouge">/usr/global/</code> is a shared file-system, and we’re
+having internal discussions about using docker volumes on the local build
+machines, giving each machine it’s own cache. I don’t know how to do some of
+this stuff with docker, as I’ve never used it in this capacity before, but we’ll
+see what decisions end up made.</p>
+
+<h2 id="regress-express">Regress Express</h2>
+
+<p>Our regression suite (called Express, or maybe using a tool called Express, I
+really don’t know) has suffered several issues over the past few workdays.</p>
+
+<p>Some were infrastructure issues, others weren’t, but effectively I’ve been on
+and off trying to get the suite to run so I can verify my code. In the meantime,
+I’ve been doing things like this cache and the DHCP documents.</p>
+
+<p>So, yeah, apparently that stuff is hard to get right. Though, having seen some
+of the code, I’m not surprised.</p>
+
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#infra" class="tag">
+        infra
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#builds" class="tag">
+        builds
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2018/07/03/til-day-11-third-times-not-always-the-charm/";
+    this.page.identifier = "/blog/2018/07/03/til-day-11--third-times-not-always-the-charm";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/07/02/til-day-01010-everything-runs-on-cycles/" title="Day 01010--Everything Runs on Cycles">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2018/07/04/feature-cycles/" title="Feature--Round and Round Again">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#day-11-third-time-s-not-always-the-charm">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

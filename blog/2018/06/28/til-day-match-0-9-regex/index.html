@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Day match [0-9]--Regex</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Day match [0-9]--Regex</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 28 Jun 2018 in Blog</p>
+<div id="post">
+  <p>This is <strong>not</strong> a regex tutorial. Those are in the manpages.</p>
+
+<h1 id="today-i-learned">Today I Learned</h1>
+
+<ol>
+  <li>I am more productive on Ubuntu than CentOS</li>
+  <li>A little bit of tcl</li>
+  <li>A lot (more) regex</li>
+</ol>
+
+<h2 id="ubuntu-1804">Ubuntu 18.04</h2>
+
+<p>I got my official machine running last night, but actually worked on it for the
+first time today. I’m still using the CentOS laptop because that’s where my
+current code is, and I haven’t configured the VPN yet. But for the things I was
+doing (Slack, email, web, even getting my <a href="https://github.com/benknoble/Dotfiles">Dotfiles</a> setup), I felt much
+better.</p>
+
+<p>Ubuntu terminal even supports truecolor and italics out of the box!</p>
+
+<h2 id="tickle">Tickle</h2>
+
+<p>Yes, it’s really pronounced that way. Apparently the language is revered for
+both it’s simplicity and it’s use in networking situations. I wouldn’t know; we
+use it for some test suits (part of gash, the whole setup was never explained to
+me). And today I had to use a little to fix a broken build.</p>
+
+<p>It was broken because of…</p>
+
+<h2 id="regex--tada">Regex ! <img class="emoji" title=":tada:" alt=":tada:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png" height="20" width="20">
+</h2>
+
+<p><a href="https://www.explainxkcd.com/wiki/index.php/1171:_Perl_Problems">You know what they say…</a></p>
+
+<p>So, here’s the deal. Like I said, I’m not going to give a tutorial on regex. The
+manpages are actually pretty good at it. But I am going to point you to them,
+just so you can enjoy the <del>hell</del> many flavors of regex. (None of them taste
+good.)</p>
+
+<p>POSIX gives us:</p>
+
+<ol>
+  <li>Basic (obsolete) RE</li>
+  <li>Extended (modern) RE</li>
+  <li>Enhanced (B|E)RE (I had to escape that bar in markdown, yeesh)</li>
+</ol>
+
+<p>You can read about them at <code class="language-plaintext highlighter-rouge">man re_format</code> and <code class="language-plaintext highlighter-rouge">man regex</code>.</p>
+
+<p>Most UNIX-like utilities (<code class="language-plaintext highlighter-rouge">sed</code>, <code class="language-plaintext highlighter-rouge">grep</code>) use BREs, with a flag (usually <code class="language-plaintext highlighter-rouge">-E</code>)
+for extended. Whether or not it is enhanced can be gleaned from the manpages
+(does it, for example, support black magic). Basically, <code class="language-plaintext highlighter-rouge">man</code> and <code class="language-plaintext highlighter-rouge">info</code> the
+tool.</p>
+
+<p>After that, we basically have the following</p>
+
+<ol>
+  <li>Perl, on which most other regex is based (<code class="language-plaintext highlighter-rouge">man perlrequick</code>)</li>
+  <li>Vim, with it’s own quirks (<code class="language-plaintext highlighter-rouge">:help pattern</code>)</li>
+  <li>Python (<code class="language-plaintext highlighter-rouge">help(re)</code>)</li>
+  <li>…and every other language’s unique flavor</li>
+</ol>
+
+<p>Don’t get me started on escape-character hell–no one should have to read
+<code class="language-plaintext highlighter-rouge">"\\"\\\\"</code> and try to figure out what it’s doing. Heck, certain formats even
+have special rules and tables for <em>when</em> characters have special meaning or need
+escaped (vim’s <code class="language-plaintext highlighter-rouge">(very)?magic</code> is famous for this).</p>
+
+<p>Does it support back references? Capture groups? What the hell is a negative
+look-behind? Why did vim decide to give us <code class="language-plaintext highlighter-rouge">\zs</code> and <code class="language-plaintext highlighter-rouge">\ze</code> (they’re brilliantly
+useful, by the way) ? And what about <a href="https://www.ultraedit.com/support/tutorials-power-tips/ultraedit/non-greedy-perl-regex.html">non-greedy modifiers ??</a></p>
+
+<p>Can I use my favorite feature of all, shortcut character classes? This one
+really gets me steamed up–shortcuts like <code class="language-plaintext highlighter-rouge">\w</code> for word-like characters and <code class="language-plaintext highlighter-rouge">\d</code>
+for digits are really helpful. It’s <em>short</em>er than the equivalent <code class="language-plaintext highlighter-rouge">[:digit:]</code>,
+which often has to become <code class="language-plaintext highlighter-rouge">[[:digit:]]</code> for true RE use.</p>
+
+<p>What I recently discovered, though, is that <code class="language-plaintext highlighter-rouge">sed</code> natively supports <em>certain</em>
+shortcuts. And digit isn’t one of them.</p>
+
+<p>So, the regex in the post of this title will match the number of days I’ve
+worked up ‘til now, but <code class="language-plaintext highlighter-rouge">\d</code> won’t. At least not in <code class="language-plaintext highlighter-rouge">sed</code>. And tomorrow, it gets
+even better.</p>
+
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#til" class="tag">
+        til
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#infra" class="tag">
+        infra
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#intern" class="tag">
+        intern
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#tcl" class="tag">
+        tcl
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#regex" class="tag">
+        regex
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#posix" class="tag">
+        posix
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2018/06/28/til-day-match-0-9-regex/";
+    this.page.identifier = "/blog/2018/06/28/til-day-match-0-9--regex";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2018/06/27/til-day-8-context-and-computers/" title="Day 8, Context and Computers">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2018/06/29/feature-flexibility-and-engagement/" title="Feature--Flexibility and Engagement">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#day-match-0-9-regex">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
