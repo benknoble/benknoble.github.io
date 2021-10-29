@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          submodules: true
 
       # - name: Install Racket
       #   uses: Bogdanp/setup-racket@v0.11
