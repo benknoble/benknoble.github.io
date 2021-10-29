@@ -24,6 +24,7 @@ exclude:
   - serve
   - subs/
   - tags-list
+  - vendor/
 
 plugins:
   - jekyll-feed
