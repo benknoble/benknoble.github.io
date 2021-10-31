@@ -1,21 +1,34 @@
-/* Dracula Theme v1.2.5  https://github.com/zenorocha/dracula-theme  Copyright 2016, All rights reserved  Code licensed under the MIT license http://zenorocha.mit-license.org  @author Rob G <wowmotty@gmail.com> @author Chris Bracco <chris@cbracco.me> @author Zeno Rocha <hi@zenorocha.com> @author Piruin Panichphol <piruin.p@gmail.com> */
+/* Dracula Theme v1.2.5 https://github.com/zenorocha/dracula-theme Copyright 2016, All rights reserved Code licensed under the MIT license http://zenorocha.mit-license.org @author Rob G <wowmotty@gmail.com> @author Chris Bracco <chris@cbracco.me> @author Zeno Rocha <hi@zenorocha.com> @author Piruin Panichphol <piruin.p@gmail.com> */
 /* Variables */
 /* Styles */
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i");
 @import url("https://cdn.jsdelivr.net/npm/victormono@latest/dist/index.min.css");
 .highlight { background: #282a36; color: #f8f8f2; }
+
 .highlight .hll, .highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .s1, .highlight .ss { color: #f1fa8c; }
+
 .highlight .go { color: #44475a; }
+
 .highlight .err, .highlight .g, .highlight .l, .highlight .n, .highlight .x, .highlight .p, .highlight .ge, .highlight .gr, .highlight .gh, .highlight .gi, .highlight .gp, .highlight .gs, .highlight .gu, .highlight .gt, .highlight .ld, .highlight .no, .highlight .nd, .highlight .ni, .highlight .ne, .highlight .nn, .highlight .nx, .highlight .py, .highlight .w, .highlight .bp { color: #f8f8f2; }
+
 .highlight .gh, .highlight .gi, .highlight .gu { font-weight: bold; }
+
 .highlight .ge { text-decoration: underline; }
+
 .highlight .bp { font-style: italic; }
+
 .highlight .c, .highlight .ch, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs { color: #6272a4; }
+
 .highlight .kd, .highlight .kt, .highlight .nb, .highlight .nl, .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm { color: #8be9fd; }
+
 .highlight .kd, .highlight .nb, .highlight .nl, .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm { font-style: italic; }
+
 .highlight .na, .highlight .nc, .highlight .nf, .highlight .fm { color: #50fa7b; }
+
 .highlight .k, .highlight .o, .highlight .cp, .highlight .kc, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .nt, .highlight .ow { color: #ff79c6; }
+
 .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .il { color: #bd93f9; }
+
 .highlight .gd { color: #ff5555; }
 
 body { font: 16px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif; color: #444; background: #fafafa; margin: 0; }
@@ -29,7 +42,9 @@ p { padding: 0; }
 strong { color: #222; font-weight: 700; }
 
 header { background: #C6EAFA; position: relative; padding: 1em 1em; }
+
 header h1 { margin: 0; padding: 0; color: #069; }
+
 header p { margin: 0; color: #61778B; font-size: 0.9em; }
 
 section { padding: 1em 5em; background: #fafafa; position: relative; max-width: 80ch; }
@@ -71,6 +86,7 @@ nav ul { list-style: none; margin: 0; padding: 0; }
 nav li { float: left; margin: 0.1em; }
 
 nav li.active a { color: #555; cursor: default; }
+
 nav li.active a:hover { background: #fafafa; }
 
 #post-navigation #no-previous, #post-navigation #no-next, #post-navigation #previous a, #post-navigation #next a, #back-to-workshops a, #back-to-writings a, #back-to-posts a, nav a { display: block; text-align: center; padding: 0.1em; font-weight: bold; border-style: solid; border-width: 2px; border-radius: 5px; }
@@ -78,10 +94,13 @@ nav li.active a:hover { background: #fafafa; }
 #post-navigation #previous a:hover, #post-navigation #next a:hover, #back-to-writings a:hover, #back-to-posts a:hover, nav a:hover { background-color: #c6eafa; }
 
 @media print, screen and (max-width: 740px) { section { padding: 0em 1em; } }
+
 .tags { list-style: none; margin: 0; overflow: hidden; padding: 0; }
+
 .tags li { float: left; margin: 0; }
 
 .tag { background: #C6EAFA; color: #000; display: inline-block; padding: 0 1em 0 1em; margin: 0 0.5em 0.5em 0; text-decoration: none; }
+
 .tag:hover { background-color: #DEDEDE; color: #069; }
 
 .tag-title, .archive-title { float: left; }
@@ -107,6 +126,11 @@ nav li.active a:hover { background: #fafafa; }
 kbd { display: inline-block; margin: 0 .1em; padding: .1em .6em; font-size: 14px; line-height: 1.4; color: #242729; text-shadow: 0 1px 0 #FFF; background-color: #e1e3e5; border: 1px solid #adb3b9; border-radius: 3px; box-shadow: 0 1px 0 rgba(12, 13, 14, 0.2), 0 0 0 2px #FFF inset; white-space: nowrap; }
 
 .load-comments { display: block; text-align: center; text-decoration: underline; color: #069; cursor: pointer; font-weight: bold; border-style: solid; border-width: 2px; border-radius: 5px; padding: 0.1em; margin-bottom: 0.1em; }
+
 .load-comments:hover, .load-comments:active { background-color: #c6eafa; }
 
 .post { margin-bottom: 0.75em; }
+
+iframe.scribbled { zoom: 4; }
+
+/*# sourceMappingURL=styles.css.map */

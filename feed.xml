@@ -1,4 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2021-10-29T22:36:48+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Learning is not (usually) time wasted</title><link href="https://benknoble.github.io/blog/2021/07/09/time-wasted-learning/" rel="alternate" type="text/html" title="Learning is not (usually) time wasted" /><published>2021-07-09T00:00:00+00:00</published><updated>2021-07-09T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/07/09/time-wasted-learning</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/07/09/time-wasted-learning/">&lt;p&gt;Way back in January, YouTube subjected me to an advertisement from Exam Labs.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2021-10-31T17:12:46+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Solving Boggle</title><link href="https://benknoble.github.io/blog/2021/10/27/boggle/" rel="alternate" type="text/html" title="Solving Boggle" /><published>2021-10-27T00:00:00+00:00</published><updated>2021-10-27T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/10/27/boggle</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/10/27/boggle/">&lt;p&gt;I solve Boggle in several languages. The following post is a literate program
+written in Scribble.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://benknoble.github.io/scribblings/2021-10-27-boggle/2021-10-27-boggle.html&quot;&gt;View full size&lt;/a&gt;&lt;/p&gt;
+&lt;iframe class=&quot;scribbled&quot; src=&quot;https://benknoble.github.io/scribblings/2021-10-27-boggle/2021-10-27-boggle.html&quot; title=&quot;Scribbled blog post&quot;&gt;&lt;/iframe&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><summary type="html">I solve Boggle in several languages. The following post is a literate program written in Scribble.</summary></entry><entry><title type="html">Learning is not (usually) time wasted</title><link href="https://benknoble.github.io/blog/2021/07/09/time-wasted-learning/" rel="alternate" type="text/html" title="Learning is not (usually) time wasted" /><published>2021-07-09T00:00:00+00:00</published><updated>2021-07-09T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/07/09/time-wasted-learning</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/07/09/time-wasted-learning/">&lt;p&gt;Way back in January, YouTube subjected me to an advertisement from Exam Labs.
 What follows is a direct quote: “Looking for a job in tech? Don’t waste hundreds
 of hours learning.”&lt;/p&gt;
 
@@ -987,115 +991,4 @@ oddity short of mapping &lt;code class=&quot;language-plaintext highlighter-roug
     &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;nth1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;kamrar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;nth1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])),&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;%8&lt;/span&gt;
     &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;nth1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;corinth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="breaks" /><category term="capital one" /><category term="puzzle" /><category term="prolog" /><category term="prog-langs" /><category term="intern" /><summary type="html">I take a break from my internship with Capital One to solve a puzzle they posed: for a chance to win!</summary></entry><entry><title type="html">Programs invoked by git have libexec/git-core on $PATH</title><link href="https://benknoble.github.io/blog/2020/05/22/libexec-git-core-on-path/" rel="alternate" type="text/html" title="Programs invoked by git have libexec/git-core on $PATH" /><published>2020-05-22T00:00:00+00:00</published><updated>2020-05-22T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/05/22/libexec-git-core-on-path</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/05/22/libexec-git-core-on-path/">&lt;p&gt;I discover a strange edge-case in my usage of git and vim together.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://public-inbox.org/git/CALnO6CDtGRRav8zK2GKi1oHTZWrHFTxZNmnOWu64-ab+oY3_Lw@mail.gmail.com/&quot;&gt;I posted very similar content on the git mailing list as well&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I noticed something odd today—I was working in vim and spawned a new terminal
-with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:terminal&lt;/code&gt;. My shell startup files, which use the location of the git
-binary to reconstruct paths to things like
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;etc/bash_completion.d/git-prompt.sh&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;contrib/git-jump&lt;/code&gt;, suddenly choked.
-The location of the git program was suddenly different than usual!&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;A simple scenario where this might occur is in the following zsh code:&lt;/p&gt;
-
-&lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# zsh allows =cmd to expand to the path of the command, so echo =git is similar&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# to which git or command -v git&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;path_to_git&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;git
-&lt;span class=&quot;c&quot;&gt;# :h:h in an expansion is a lot like appending ../.. to go up two directories&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;path_to_git_jump&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;git&lt;/span&gt;:h:h&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/share/git-core/contrib/git-jump&quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-x&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$path_to_git_jump&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/git-jump &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; path+&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$path_to_git_jump&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Here, I’m find the git executable location, moving up two directories, and then
-descending into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;share/git-core/contrib&lt;/code&gt; to find the git-jump script and add it
-to my path. This is somewhat more portable than assuming &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git-jump&lt;/code&gt; is always in
-the same place, and more convenient than copying that script into my own
-Dotfiles and managing updates for it.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;After some debugging, I came to determine that this occurred, not because of
-vim, but because vim was launched from a git-invoked process (in this case,
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;contrib/git-jump/git-jump&lt;/code&gt;). My own &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git-ed&lt;/code&gt; also suffers from this when
-invoked as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git ed&lt;/code&gt;—most external git commands do &lt;em&gt;not&lt;/em&gt; have this issue when
-run directly (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git-ed&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;The salient git code is &lt;a href=&quot;https://github.com/git/git/blob/87680d32efb6d14f162e54ad3bda4e3d6c908559/exec-cmd.c#L304&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setup_path()&lt;/code&gt; in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exec-cmd.c&lt;/code&gt;&lt;/a&gt; and its call in
-&lt;a href=&quot;https://github.com/git/git/blob/87680d32efb6d14f162e54ad3bda4e3d6c908559/git.c#L868&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git.c&lt;/code&gt;&lt;/a&gt;. They appear to coordinate to prepend the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libexec&lt;/code&gt; directory to
-the environment variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PATH&lt;/code&gt;.  This causes the location of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git&lt;/code&gt; binary
-to be (e.g.) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/local/libexec/git-core/git&lt;/code&gt;, and not (e.g.)
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/local/bin/git&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Because subprocesses inherit environment variables from their parents, my vim
-process inherits the modifications to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PATH&lt;/code&gt; from the above code. That means any
-shell that vim starts inherits the same modification! The net
-result is that if I run, say, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git jump grep foo&lt;/code&gt; and then try to invoke
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:terminal&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:shell&lt;/code&gt;, my shell complains—the git binary path is so
-different that it cannot properly find the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git-jump&lt;/code&gt; script.&lt;/p&gt;
-
-&lt;p&gt;Unfortunately, this modification propagates to all child processes, as this
-simple test-case demonstrates:&lt;/p&gt;
-
-&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# printf &apos;%s\n&apos; &apos;#!/bin/sh&apos; &quot;printenv PATH | tr : &apos;\n&apos; | grep git-core&quot; &amp;gt; git-show-env&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# chmod u+x git-show-env&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# PATH=.:$PATH git show-env&lt;/span&gt;
-/usr/local/Cellar/git/2.26.2/libexec/git-core
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;While it would be &lt;em&gt;nice&lt;/em&gt; if git didn’t modify &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PATH&lt;/code&gt; in such a way that it
-affected all subprocesses (i.e., if it was somehow scoped to only processes that
-need it), I suspect this is at best difficult and at worst highly-error prone or
-likely to break things.&lt;/p&gt;
-
-&lt;p&gt;In the (possibly eternal) interim, I would like to share some vimscript that
-“fixes” &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$PATH&lt;/code&gt; in vim when it detects this case. The easiest use is to drop the
-code in your vimrc file (usually &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.vim/vimrc&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.vimrc&lt;/code&gt;). I’ve tried to
-keep it portable in terms of path separators and file paths, but I do not have a
-Windows box to test on.&lt;/p&gt;
-
-&lt;p&gt;Actually, it’s a little more aggressive than I suggested; it strips out &lt;em&gt;all&lt;/em&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PATH&lt;/code&gt; entries ending in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libexec/git-core,&lt;/code&gt; not just the first. But I never
-have &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libexec/git-core&lt;/code&gt; on my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PATH&lt;/code&gt; anyway, so I’m not bothered by that. One
-could modify this function to only check the first entry (the one git would have
-prepended).&lt;/p&gt;
-
-&lt;p&gt;P.S. Does anyone know what the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libexec/git-core&lt;/code&gt; equivalent is on Windows?
-&lt;a href=&quot;https://wilsonmar.github.io/git-custom-commands/&quot;&gt;This person&lt;/a&gt; alludes to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libexec\git-core&lt;/code&gt;, which I &lt;em&gt;think&lt;/em&gt; is handled by my code.&lt;/p&gt;
-
-&lt;p&gt;P.P.S. If your vim is old and does not have &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;const&lt;/code&gt;, you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;let&lt;/code&gt; instead.
-You may need to change out the lambda &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{_, d -&amp;gt; ... }&lt;/code&gt; for a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v:val&lt;/code&gt; string as
-well.&lt;/p&gt;
-
-&lt;div class=&quot;language-vim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&quot; When git starts up, it prepends it&apos;s libexec dir to PATH to allow it to find&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; external commands.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; Thus, if vim is invoked via a git process (such as the contrib git-jump, my&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; own git-ed, or any other usage of GIT_EDITOR/VISUAL/EDITOR in git commands, be&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; they scripts or internals--with the exception of manually invoking the script&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; yourself, without using git: sh .../git-jump), $PATH will contain something&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; like libexec/git-core.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; We don&apos;t generally want it in vim&apos;s $PATH, though, as it is passed down to&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; *all* subprocesses, including shells started with :terminal or :shell.&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;s:fix_git_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; abort
-  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; slash &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;has&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;win32&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; ? &lt;span class=&quot;s1&quot;&gt;&apos;\&apos; : &apos;&lt;/span&gt;/&apos;
-  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; git_core_base &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;libexec%sgit-core&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; slash&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;c&quot;&gt;&quot; optimization: early return&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; $PATH &lt;span class=&quot;p&quot;&gt;!~&lt;/span&gt;# &lt;span class=&quot;s1&quot;&gt;&apos;.*&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;git_core_base&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;.*&apos;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;endif&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; path_sep &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;has&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;win32&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; ? &lt;span class=&quot;s1&quot;&gt;&apos;;&apos;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;:&apos;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;$PATH&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; path_sep&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; path_sans_libexec_git_core &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;_&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;!~&lt;/span&gt;# &lt;span class=&quot;s1&quot;&gt;&apos;.*&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;git_core_base&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; new_path &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;path_sans_libexec_git_core&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; path_sep&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; $PATH &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; new_path
-&lt;span class=&quot;k&quot;&gt;endfunction&lt;/span&gt;
-
-augroup fix_git_path
-  autocmd&lt;span class=&quot;p&quot;&gt;!&lt;/span&gt;
-  autocmd &lt;span class=&quot;nb&quot;&gt;VimEnter&lt;/span&gt; * &lt;span class=&quot;k&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;s:fix_git_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-augroup END
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="dotfiles" /><category term="git" /><category term="shell" /><category term="vim" /><summary type="html">I discover a strange edge-case in my usage of git and vim together.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="breaks" /><category term="capital one" /><category term="puzzle" /><category term="prolog" /><category term="prog-langs" /><category term="intern" /><summary type="html">I take a break from my internship with Capital One to solve a puzzle they posed: for a chance to win!</summary></entry></feed>
