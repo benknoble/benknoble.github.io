@@ -18,7 +18,7 @@ $(BUILD):
 	$(JEKYLL) build $(BUILD_OPTS)
 
 serve: $(DEPS)
-	$(JEKYLL) serve --watch --livereload $(SERVE_OPTS)
+	$(JEKYLL) serve --watch --livereload --host localhost --port 4000 $(SERVE_OPTS)
 
 local: JEKYLL_ENV = development
 local: SERVE_OPTS += --incremental
