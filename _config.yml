@@ -14,6 +14,7 @@ kramdown:
 future: false
 jailed: false
 gfm_quirks: paragraph_end
+github: [metadata]
 
 exclude:
   - Gemfile
@@ -25,24 +26,6 @@ exclude:
   - subs/
   - tags-list
   - vendor/
-
-plugins:
-  - jekyll-feed
-  - jekyll-mentions
-  - jekyll-redirect-from
-  - jekyll-sitemap
-  - jemoji
-
-  # gh pages
-  # - jekyll-coffeescript
-  # - jekyll-default-layout
-  # - jekyll-gist
-  # - jekyll-github-metadata
-  # - jekyll-optional-front-matter
-  # - jekyll-paginate
-  # - jekyll-readme-index
-  # - jekyll-relative-links
-  # - jekyll-titles-from-headings
 
 defaults:
   -
