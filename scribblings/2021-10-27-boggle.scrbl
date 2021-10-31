@@ -2,8 +2,8 @@
 
 @(require (for-label
             (except-in racket _)
-            racklog
-            rackunit racket/generator
+            rackunit
+            racket/generator
             racklog))
 
 @title{Solving Boggle}
