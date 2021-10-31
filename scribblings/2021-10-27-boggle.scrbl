@@ -6,7 +6,7 @@
             rackunit racket/generator
             racklog))
 
-@title{Finding words in Boggle}
+@title{Solving Boggle}
 @author{D. Ben Knoble}
 
 Having recently read Jay McCarthy's

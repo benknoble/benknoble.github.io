@@ -22,6 +22,7 @@ exclude:
   - Makefile
   - README.md
   - Session.vim
+  - scribblings/
   - serve
   - subs/
   - tags-list
