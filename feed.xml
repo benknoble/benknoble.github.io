@@ -1,994 +1,994 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2021-11-01T16:01:48+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Solving Boggle</title><link href="https://benknoble.github.io/blog/2021/10/27/boggle/" rel="alternate" type="text/html" title="Solving Boggle" /><published>2021-10-27T00:00:00+00:00</published><updated>2021-10-27T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/10/27/boggle</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/10/27/boggle/">&lt;p&gt;I solve Boggle in several languages. The following post is a literate program
-written in Scribble.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2022-01-14T20:59:50+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Solving Boggle</title><link href="https://benknoble.github.io/blog/2021/10/27/boggle/" rel="alternate" type="text/html" title="Solving Boggle" /><published>2021-10-27T00:00:00+00:00</published><updated>2021-10-27T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/10/27/boggle</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/10/27/boggle/"><![CDATA[<p>I solve Boggle in several languages. The following post is a literate program
+written in Scribble.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://benknoble.github.io/scribblings/2021-10-27-boggle/2021-10-27-boggle.html&quot;&gt;View full size&lt;/a&gt;&lt;/p&gt;
-&lt;iframe class=&quot;scribbled&quot; src=&quot;https://benknoble.github.io/scribblings/2021-10-27-boggle/2021-10-27-boggle.html&quot; title=&quot;Scribbled blog post&quot;&gt;&lt;/iframe&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="literate-programming" /><category term="prog-langs" /><category term="prolog" /><category term="racket" /><category term="racklog" /><summary type="html">I solve Boggle in several languages. The following post is a literate program written in Scribble.</summary></entry><entry><title type="html">Learning is not (usually) time wasted</title><link href="https://benknoble.github.io/blog/2021/07/09/time-wasted-learning/" rel="alternate" type="text/html" title="Learning is not (usually) time wasted" /><published>2021-07-09T00:00:00+00:00</published><updated>2021-07-09T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/07/09/time-wasted-learning</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/07/09/time-wasted-learning/">&lt;p&gt;Way back in January, YouTube subjected me to an advertisement from Exam Labs.
+<p><a href="https://benknoble.github.io/scribblings/2021-10-27-boggle/2021-10-27-boggle.html">View full size</a></p>
+<iframe class="scribbled" src="https://benknoble.github.io/scribblings/2021-10-27-boggle/2021-10-27-boggle.html" title="Scribbled blog post"></iframe>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="literate-programming" /><category term="prog-langs" /><category term="prolog" /><category term="racket" /><category term="racklog" /><summary type="html"><![CDATA[I solve Boggle in several languages. The following post is a literate program written in Scribble.]]></summary></entry><entry><title type="html">Learning is not (usually) time wasted</title><link href="https://benknoble.github.io/blog/2021/07/09/time-wasted-learning/" rel="alternate" type="text/html" title="Learning is not (usually) time wasted" /><published>2021-07-09T00:00:00+00:00</published><updated>2021-07-09T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/07/09/time-wasted-learning</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/07/09/time-wasted-learning/"><![CDATA[<p>Way back in January, YouTube subjected me to an advertisement from Exam Labs.
 What follows is a direct quote: “Looking for a job in tech? Don’t waste hundreds
-of hours learning.”&lt;/p&gt;
+of hours learning.”</p>
 
-&lt;p&gt;Exam Labs, if you read this—you do technology a disservice. You need only
+<p>Exam Labs, if you read this—you do technology a disservice. You need only
 examine the recent cyber attacks and the various flaws in our technology to
 understand that solving problems without adequate understanding ends in
-disaster.&lt;/p&gt;
+disaster.</p>
 
-&lt;p&gt;I have no idea what your business model is (I have not linked to you or visited
+<p>I have no idea what your business model is (I have not linked to you or visited
 your website—I do not wish to give you undeserved web points in the form of
 traffic). I suspect, based on the quote and name, that it does your clients a
-disservice. Depriving anyone of the opportunity to learn is a disservice.&lt;/p&gt;
+disservice. Depriving anyone of the opportunity to learn is a disservice.</p>
 
-&lt;p&gt;Assuming you charge a fee to pass exams (be they certifying or collegiate), you
+<p>Assuming you charge a fee to pass exams (be they certifying or collegiate), you
 do society a disservice. Money cannot buy skill, cannot buy expertise, cannot
 build technology. Sending the message that money can buy a job reinforces
-structures built only in the name of inequity.&lt;/p&gt;
+structures built only in the name of inequity.</p>
 
-&lt;h2 id=&quot;learning-is-a-crucial-technology-skill&quot;&gt;Learning is a crucial technology skill&lt;/h2&gt;
+<h2 id="learning-is-a-crucial-technology-skill">Learning is a crucial technology skill</h2>
 
-&lt;p&gt;If you disagree with this header, well, I cannot see why. When was the last time
+<p>If you disagree with this header, well, I cannot see why. When was the last time
 you sat down to work with a piece of technology and learned nothing in the
 process? When did you last use a new piece of technology without learning about
-it?&lt;/p&gt;
+it?</p>
 
-&lt;p&gt;It should be obvious that learning is a crucial skill in &lt;em&gt;all&lt;/em&gt; jobs—in all of
-life, really. I won’t belabor this point.&lt;/p&gt;
+<p>It should be obvious that learning is a crucial skill in <em>all</em> jobs—in all of
+life, really. I won’t belabor this point.</p>
 
-&lt;p&gt;Becoming an expert does not mean you stop learning. Invention and discovery are
+<p>Becoming an expert does not mean you stop learning. Invention and discovery are
 educational activities. Expertise often means you know how to learn quickly in a
 domain (in addition to being able to sift through and connect relevant bits of
 information). Expertise in one domain often translates to others; expertise in
-learning always translates.&lt;/p&gt;
+learning always translates.</p>
 
-&lt;p&gt;The hundreds of hours Exam Labs (falsely) equated with learning are hundreds of
-hours spent becoming an expert in anything (see, for example, &lt;em&gt;The Art of
-Learning&lt;/em&gt; by Joshua Waitzkin). Developing a skill takes time.&lt;/p&gt;
+<p>The hundreds of hours Exam Labs (falsely) equated with learning are hundreds of
+hours spent becoming an expert in anything (see, for example, <em>The Art of
+Learning</em> by Joshua Waitzkin). Developing a skill takes time.</p>
 
-&lt;h2 id=&quot;how-else-will-you-acquire-fundamental-technology-skills&quot;&gt;How else will you acquire fundamental technology skills?&lt;/h2&gt;
+<h2 id="how-else-will-you-acquire-fundamental-technology-skills">How else will you acquire fundamental technology skills?</h2>
 
-&lt;p&gt;Most jobs are in technology these days. Most of us learn on the job—we have
+<p>Most jobs are in technology these days. Most of us learn on the job—we have
 to. That is the nature of adapting to fluid situations, the nature of solving
-problems, the nature of creative human beings.&lt;/p&gt;
+problems, the nature of creative human beings.</p>
 
-&lt;p&gt;“On the job” is not a good time to learn the fundamentals unless the job is
-“trainee” or “student” or similar.&lt;/p&gt;
+<p>“On the job” is not a good time to learn the fundamentals unless the job is
+“trainee” or “student” or similar.</p>
 
-&lt;p&gt;You may be hired for your strengths in a core business domain. You are very
+<p>You may be hired for your strengths in a core business domain. You are very
 likely to be hired for your fundamental skills and ability to learn the core
 business domain. There you may apply your fundamental skills alongside your
-unique skills.&lt;/p&gt;
+unique skills.</p>
 
-&lt;h2 id=&quot;not-everything-is-google-able&quot;&gt;Not everything is Google-able&lt;/h2&gt;
+<h2 id="not-everything-is-google-able">Not everything is Google-able</h2>
 
-&lt;p&gt;Yes, I know StackOverflow exists. I help people solve problems on affiliated
+<p>Yes, I know StackOverflow exists. I help people solve problems on affiliated
 sites almost daily. I cannot often Google the answer to the question. Even
 when I can, the results invariably mean I have to combine separate pieces of
-knowledge into a cohesive whole. This requires learning those pieces.&lt;/p&gt;
+knowledge into a cohesive whole. This requires learning those pieces.</p>
 
-&lt;p&gt;Ever tried to solve a problem before? Did you first study the problem, or dive
+<p>Ever tried to solve a problem before? Did you first study the problem, or dive
 in with no knowledge of it? (Most of us have probably done both.) Which approach
-lead to a better solution (for some definition of better)?&lt;/p&gt;
+lead to a better solution (for some definition of better)?</p>
 
-&lt;h2 id=&quot;learning-looks-different-for-everyone&quot;&gt;Learning looks different for everyone&lt;/h2&gt;
+<h2 id="learning-looks-different-for-everyone">Learning looks different for everyone</h2>
 
-&lt;p&gt;I’m not suggesting that we all get 4-year degrees in Computer Science (how
+<p>I’m not suggesting that we all get 4-year degrees in Computer Science (how
 elitist that would be). Nor am I suggesting we all get 4-year degrees! Education
 does not need to mean various lower schools to high school to college. How many
-of our passions are self-taught, self-discovered?&lt;/p&gt;
+of our passions are self-taught, self-discovered?</p>
 
-&lt;p&gt;Experimentation is a form of learning I practice regularly. Using something
-breeds intimate knowledge of it.&lt;/p&gt;
+<p>Experimentation is a form of learning I practice regularly. Using something
+breeds intimate knowledge of it.</p>
 
-&lt;p&gt;&lt;em&gt;No&lt;/em&gt; learning, however, is not learning. Shortcut learning is often not
-learning (or at least, not learning the right skills).&lt;/p&gt;
+<p><em>No</em> learning, however, is not learning. Shortcut learning is often not
+learning (or at least, not learning the right skills).</p>
 
-&lt;h2 id=&quot;learning-does-not-equal-hundreds-of-hours&quot;&gt;Learning does not equal hundreds of hours&lt;/h2&gt;
+<h2 id="learning-does-not-equal-hundreds-of-hours">Learning does not equal hundreds of hours</h2>
 
-&lt;p&gt;Learning something adjacent to my expertise is often a matter of minutes or a
-few hours.&lt;/p&gt;
+<p>Learning something adjacent to my expertise is often a matter of minutes or a
+few hours.</p>
 
-&lt;p&gt;Learning something completely new to me can range from days to a lifetime.&lt;/p&gt;
+<p>Learning something completely new to me can range from days to a lifetime.</p>
 
-&lt;p&gt;This false equivalence suggests that learning, because it requires so much time,
+<p>This false equivalence suggests that learning, because it requires so much time,
 must be a waste. This is only fallacious. Plenty of things (sleep, hobbies,
-cleaning, conversation) require large amounts of time—they are not a waste.&lt;/p&gt;
+cleaning, conversation) require large amounts of time—they are not a waste.</p>
 
-&lt;p&gt;Admittedly, one does not become a black belt in mere days.&lt;/p&gt;
+<p>Admittedly, one does not become a black belt in mere days.</p>
 
-&lt;h2 id=&quot;i-dont-want-to-work-with-anyone-who-always-skips-learning&quot;&gt;I don’t want to work with anyone who always skips learning&lt;/h2&gt;
+<h2 id="i-dont-want-to-work-with-anyone-who-always-skips-learning">I don’t want to work with anyone who always skips learning</h2>
 
-&lt;p&gt;And why should I? The habit of skipped learning is arrogant: it says, “I know
-everything I need.”&lt;/p&gt;
+<p>And why should I? The habit of skipped learning is arrogant: it says, “I know
+everything I need.”</p>
 
-&lt;p&gt;I must emphasize that skipped school is not always skipped learning:
+<p>I must emphasize that skipped school is not always skipped learning:
 it may be learning a different trade, a different way. Early Americans had time
 off school for the harvest (or at least, so I was taught—I find it hard to
-rely on my education of American History in the details).&lt;/p&gt;
+rely on my education of American History in the details).</p>
 
-&lt;p&gt;I must also emphasize that skipping learning occasionally is acceptable. For
+<p>I must also emphasize that skipping learning occasionally is acceptable. For
 example: A new feature in a framework you’ve mastered may not be relevant to you
 immediately. Skip it and get the job done. (You may want to revisit it later,
 though.) It is the habit that says, “Learning is beneath me” that I find
-deplorable.&lt;/p&gt;
+deplorable.</p>
 
-&lt;p&gt;Do not skip the fundamentals. They are so-called for a reason. One does not build
-a tower on sand.&lt;/p&gt;
+<p>Do not skip the fundamentals. They are so-called for a reason. One does not build
+a tower on sand.</p>
 
-&lt;p&gt;Do not skip the problem. One does not solve the unknown.&lt;/p&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="learning" /><category term="rants" /><category term="time" /><summary type="html">Way back in January, YouTube subjected me to an advertisement from Exam Labs. What follows is a direct quote: “Looking for a job in tech? Don’t waste hundreds of hours learning.”</summary></entry><entry><title type="html">Feedburner burned</title><link href="https://benknoble.github.io/announcement/2021/04/14/no-more-subscribe/" rel="alternate" type="text/html" title="Feedburner burned" /><published>2021-04-14T00:00:00+00:00</published><updated>2021-04-14T00:00:00+00:00</updated><id>https://benknoble.github.io/announcement/2021/04/14/no-more-subscribe</id><content type="html" xml:base="https://benknoble.github.io/announcement/2021/04/14/no-more-subscribe/">&lt;p&gt;&lt;a href=&quot;https://support.google.com/feedburner/answer/10483501&quot;&gt;Feedburner gets rid of email
-subscriptions&lt;/a&gt;, and I
+<p>Do not skip the problem. One does not solve the unknown.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="learning" /><category term="rants" /><category term="time" /><summary type="html"><![CDATA[Way back in January, YouTube subjected me to an advertisement from Exam Labs. What follows is a direct quote: “Looking for a job in tech? Don’t waste hundreds of hours learning.”]]></summary></entry><entry><title type="html">Feedburner burned</title><link href="https://benknoble.github.io/announcement/2021/04/14/no-more-subscribe/" rel="alternate" type="text/html" title="Feedburner burned" /><published>2021-04-14T00:00:00+00:00</published><updated>2021-04-14T00:00:00+00:00</updated><id>https://benknoble.github.io/announcement/2021/04/14/no-more-subscribe</id><content type="html" xml:base="https://benknoble.github.io/announcement/2021/04/14/no-more-subscribe/"><![CDATA[<p><a href="https://support.google.com/feedburner/answer/10483501">Feedburner gets rid of email
+subscriptions</a>, and I
 must follow suit. Fortunately, I was the only subscriber, so no one needs to
 take any action. You can still get the RSS feed from the footer, and comments
-are still working.&lt;/p&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Announcement&quot;]" /><category term="blog" /><summary type="html">Feedburner gets rid of email subscriptions, and I must follow suit. Fortunately, I was the only subscriber, so no one needs to take any action. You can still get the RSS feed from the footer, and comments are still working.</summary></entry><entry><title type="html">2021 Resolutions</title><link href="https://benknoble.github.io/blog/2021/01/12/new-years-resolutions/" rel="alternate" type="text/html" title="2021 Resolutions" /><published>2021-01-12T00:00:00+00:00</published><updated>2021-01-12T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/01/12/new-years-resolutions</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/01/12/new-years-resolutions/">&lt;p&gt;I haven’t done (or kept) New Year’s Resolutions in a long time. &lt;a href=&quot;https://theangrygm.com/adios-2020-guten-tag-2021/&quot;&gt;This
-article&lt;/a&gt; from the &lt;a href=&quot;https://theangrygm.com/&quot;&gt;Angry GM&lt;/a&gt; inspired me to do them differently.&lt;/p&gt;
+are still working.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Announcement&quot;]" /><category term="blog" /><summary type="html"><![CDATA[Feedburner gets rid of email subscriptions, and I must follow suit. Fortunately, I was the only subscriber, so no one needs to take any action. You can still get the RSS feed from the footer, and comments are still working.]]></summary></entry><entry><title type="html">2021 Resolutions</title><link href="https://benknoble.github.io/blog/2021/01/12/new-years-resolutions/" rel="alternate" type="text/html" title="2021 Resolutions" /><published>2021-01-12T00:00:00+00:00</published><updated>2021-01-12T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/01/12/new-years-resolutions</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/01/12/new-years-resolutions/"><![CDATA[<p>I haven’t done (or kept) New Year’s Resolutions in a long time. <a href="https://theangrygm.com/adios-2020-guten-tag-2021/">This
+article</a> from the <a href="https://theangrygm.com/">Angry GM</a> inspired me to do them differently.</p>
 
-&lt;h2 id=&quot;what-am-i-doing&quot;&gt;What am I doing?&lt;/h2&gt;
+<h2 id="what-am-i-doing">What am I doing?</h2>
 
-&lt;p&gt;Angry, in typically sardonic fashion, writes&lt;/p&gt;
+<p>Angry, in typically sardonic fashion, writes</p>
 
-&lt;blockquote&gt;
-  &lt;p&gt;In short, I completely understand that there is zero value in setting aside a
+<blockquote>
+  <p>In short, I completely understand that there is zero value in setting aside a
 specific date to take stock of your life. There’s no point in examining the
 good and the bad over the past year. Nothing to be gained from identifying the
 stuff in your life worth a little gratitude and definitely no reason to
 acknowledge there are things you’re not happy about. No good comes from asking
 yourself what you could personally do differently to change the things you’re
 not happy about. And, in the end, you’re just going to fail, so why even
-bother setting specific, actionable goals.&lt;/p&gt;
-&lt;/blockquote&gt;
+bother setting specific, actionable goals.</p>
+</blockquote>
 
-&lt;p&gt;And it’s this last bit that really gets me: how often have I discussed
+<p>And it’s this last bit that really gets me: how often have I discussed
 goal-setting frameworks (SMART, from Boy Scouts of America; a myriad of
 Health/fitness classes; the list goes on)? And how many of them emphasize the
-&lt;em&gt;specific&lt;/em&gt;-ness and the &lt;em&gt;actionable&lt;/em&gt;-ness of goals? (Hint: all of them.)&lt;/p&gt;
+<em>specific</em>-ness and the <em>actionable</em>-ness of goals? (Hint: all of them.)</p>
 
-&lt;p&gt;Worse, how often have I set goals and not relied on the frameworks I have in
-front of me?&lt;/p&gt;
+<p>Worse, how often have I set goals and not relied on the frameworks I have in
+front of me?</p>
 
-&lt;p&gt;To that end, I am setting resolutions a bit differently this year. And, in the
-vein of Angry, I am making them public. As Angry says:&lt;/p&gt;
+<p>To that end, I am setting resolutions a bit differently this year. And, in the
+vein of Angry, I am making them public. As Angry says:</p>
 
-&lt;blockquote&gt;
-  &lt;p&gt;I’m just using myself as an example. […] Look around, figure out what’s wrong,
-figure out what’s within your power to change—there is always &lt;strong&gt;something&lt;/strong&gt;
+<blockquote>
+  <p>I’m just using myself as an example. […] Look around, figure out what’s wrong,
+figure out what’s within your power to change—there is always <strong>something</strong>
 you can change, even if it’s you—and then resolve to change it. And then, you
-know, actually make the f$&amp;amp;%ing change. Or die trying.&lt;/p&gt;
-&lt;/blockquote&gt;
+know, actually make the f$&amp;%ing change. Or die trying.</p>
+</blockquote>
 
-&lt;p&gt;Here we go. What you’re seeing is the raw 2021 resolutions document (powered by
-my &lt;a href=&quot;https://github.com/benknoble/wiki-md&quot;&gt;wiki system&lt;/a&gt;). I’ll update it from time to time, but it’s a bit manual at
+<p>Here we go. What you’re seeing is the raw 2021 resolutions document (powered by
+my <a href="https://github.com/benknoble/wiki-md">wiki system</a>). I’ll update it from time to time, but it’s a bit manual at
 the moment (well, manual in-as-much as I open this post’s source, navigate to
-this line:&lt;/p&gt;
+this line:</p>
 
-&lt;div class=&quot;language-vim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;sr&quot;&gt;/\V{% comment %} Do not edit below this line {% endcomment %}/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;$ &lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;read&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.wiki/&lt;/span&gt;projects&lt;span class=&quot;sr&quot;&gt;/resolutions/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2021&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;md
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">/\V{% comment %} Do not edit below this line {% endcomment %}/</span><span class="p">+</span><span class="m">2</span><span class="p">,</span>$ <span class="k">delete</span> <span class="p">|</span> <span class="k">read</span> <span class="p">~</span><span class="sr">/.wiki/</span>projects<span class="sr">/resolutions/</span><span class="m">2021</span><span class="p">.</span>md
+</code></pre></div></div>
 
-&lt;p&gt;and run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:exec getline(&apos;.&apos;)&lt;/code&gt; in vim).&lt;/p&gt;
+<p>and run <code class="language-plaintext highlighter-rouge">:exec getline('.')</code> in vim).</p>
 
-&lt;h1 id=&quot;finish-a-50-mile-ride-before-i-graduate&quot;&gt;Finish a 50 mile ride before I graduate&lt;/h1&gt;
+<h1 id="finish-a-50-mile-ride-before-i-graduate">Finish a 50 mile ride before I graduate</h1>
 
-&lt;p&gt;&lt;em&gt;Completion date:&lt;/em&gt; May 1, 2020&lt;/p&gt;
+<p><em>Completion date:</em> May 1, 2020</p>
 
-&lt;h2 id=&quot;plan&quot;&gt;Plan&lt;/h2&gt;
+<h2 id="plan">Plan</h2>
 
-&lt;ul class=&quot;task-list&quot;&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Early January: Clean Machine checkup&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;January: short (&amp;lt;5 mile) rides&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;del&gt;[ ] February: longer (10-15 mile?) rides (need to do some more short ones first)&lt;/del&gt;&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;del&gt;[ ] March: shorter rides (5-10 mile?)&lt;/del&gt;&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;del&gt;[ ] March: able to ride to Mapleview&lt;/del&gt;&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;del&gt;[ ] April: able to ride to Jordan Lake&lt;/del&gt;&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;del&gt;[ ] May: combined March + April&lt;/del&gt;&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;June: Fitness center rides&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;July: Fitness center &amp;amp; local rides&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;August: To/from work&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;September: To/from work&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;October: To/from work&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;November: To/from work&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;December: To/from work&lt;/li&gt;
-&lt;/ul&gt;
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Early January: Clean Machine checkup</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />January: short (&lt;5 mile) rides</li>
+  <li class="task-list-item"><del>[ ] February: longer (10-15 mile?) rides (need to do some more short ones first)</del></li>
+  <li class="task-list-item"><del>[ ] March: shorter rides (5-10 mile?)</del></li>
+  <li class="task-list-item"><del>[ ] March: able to ride to Mapleview</del></li>
+  <li class="task-list-item"><del>[ ] April: able to ride to Jordan Lake</del></li>
+  <li class="task-list-item"><del>[ ] May: combined March + April</del></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />June: Fitness center rides</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />July: Fitness center &amp; local rides</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />August: To/from work</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />September: To/from work</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />October: To/from work</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />November: To/from work</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />December: To/from work</li>
+</ul>
 
-&lt;h1 id=&quot;play-or-run-a-game-of-dd-or-other-rpg-at-least-once-a-month&quot;&gt;Play or run a game of D&amp;amp;D (or other RPG) at least once a month&lt;/h1&gt;
+<h1 id="play-or-run-a-game-of-dd-or-other-rpg-at-least-once-a-month">Play or run a game of D&amp;D (or other RPG) at least once a month</h1>
 
-&lt;h2 id=&quot;plan-1&quot;&gt;Plan&lt;/h2&gt;
+<h2 id="plan-1">Plan</h2>
 
-&lt;ul class=&quot;task-list&quot;&gt;
-  &lt;li&gt;&lt;del&gt;[ ] Early January: re-read/note &lt;em&gt;Game Angry&lt;/em&gt;&lt;/del&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;del&gt;[ ] Late January: acquire &lt;em&gt;The Fall of Silverpine Watch&lt;/em&gt; and run it&lt;/del&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;del&gt;[ ] February: find a game&lt;/del&gt;&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;March: acquire &lt;em&gt;The Fall of Silverpine Watch&lt;/em&gt; and run it (partial)&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;del&gt;[ ] March: find a game&lt;/del&gt;&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;del&gt;[ ] April: find a game&lt;/del&gt;&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;del&gt;[ ] May: find a game&lt;/del&gt;&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;June: find a game&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;July: find a game&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;August: find a game&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;September: find a game&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;October: find a game&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;November: find a game&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;December: find a game&lt;/li&gt;
-&lt;/ul&gt;
+<ul class="task-list">
+  <li><del>[ ] Early January: re-read/note <em>Game Angry</em></del></li>
+  <li><del>[ ] Late January: acquire <em>The Fall of Silverpine Watch</em> and run it</del></li>
+  <li><del>[ ] February: find a game</del></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />March: acquire <em>The Fall of Silverpine Watch</em> and run it (partial)</li>
+  <li class="task-list-item"><del>[ ] March: find a game</del></li>
+  <li class="task-list-item"><del>[ ] April: find a game</del></li>
+  <li class="task-list-item"><del>[ ] May: find a game</del></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />June: find a game</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />July: find a game</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />August: find a game</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />September: find a game</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />October: find a game</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />November: find a game</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />December: find a game</li>
+</ul>
 
-&lt;h1 id=&quot;take-a-project-bullet-and-spike-it-plandesign-it-or-scrapcomplete-it-at-least-every-week&quot;&gt;Take a project bullet and spike it, plan/design it, or scrap/complete it at least every week&lt;/h1&gt;
+<h1 id="take-a-project-bullet-and-spike-it-plandesign-it-or-scrapcomplete-it-at-least-every-week">Take a project bullet and spike it, plan/design it, or scrap/complete it at least every week</h1>
 
-&lt;ul class=&quot;task-list&quot;&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;new bullets can be added, but don’t start a new bullet until the current one
-is finished!&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><summary type="html">I haven’t done (or kept) New Year’s Resolutions in a long time. This article from the Angry GM inspired me to do them differently.</summary></entry><entry><title type="html">The State of Dis-union</title><link href="https://benknoble.github.io/blog/2021/01/11/state-of-dis-union/" rel="alternate" type="text/html" title="The State of Dis-union" /><published>2021-01-11T00:00:00+00:00</published><updated>2021-01-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/01/11/state-of-dis-union</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/01/11/state-of-dis-union/">&lt;p&gt;While Ben has other articles planned for upcoming technical topics, we feel that
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />new bullets can be added, but don’t start a new bullet until the current one
+is finished!</li>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><summary type="html"><![CDATA[I haven’t done (or kept) New Year’s Resolutions in a long time. This article from the Angry GM inspired me to do them differently.]]></summary></entry><entry><title type="html">The State of Dis-union</title><link href="https://benknoble.github.io/blog/2021/01/11/state-of-dis-union/" rel="alternate" type="text/html" title="The State of Dis-union" /><published>2021-01-11T00:00:00+00:00</published><updated>2021-01-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/01/11/state-of-dis-union</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/01/11/state-of-dis-union/"><![CDATA[<p>While Ben has other articles planned for upcoming technical topics, we feel that
 now, in the wake of the January 6th terrorist attack on the US Capitol by US
 citizens, is a time for reflection on a scary political landscape and a time for
-the explicit condemnation of white supremacy.&lt;/p&gt;
+the explicit condemnation of white supremacy.</p>
 
-&lt;h2 id=&quot;on-the-attack&quot;&gt;On the attack&lt;/h2&gt;
+<h2 id="on-the-attack">On the attack</h2>
 
-&lt;p&gt;While there have been many actions in the last 4 years that threatened the
+<p>While there have been many actions in the last 4 years that threatened the
 safety of Americans, this was the most personal for us. We don’t wish to
-invalidate the experiences of others.&lt;/p&gt;
+invalidate the experiences of others.</p>
 
-&lt;p&gt;Wednesday morning, we were shocked, scared, and frustrated by the breaking news
+<p>Wednesday morning, we were shocked, scared, and frustrated by the breaking news
 that Americans had breached the US Capitol, seat of the US government and symbol
-of the shifting presidency.&lt;/p&gt;
+of the shifting presidency.</p>
 
-&lt;p&gt;While we acknowledge the extreme polarization of the United States, we never
+<p>While we acknowledge the extreme polarization of the United States, we never
 imagined that a sitting President could actively incite such extreme violence.
 Worse, before the 2020 election, we never believed that election results could
 come under such intense and baseless accusations of fraud. We certainly never
 imagined that such accusations (a) would come from the President and (b) would
-lead to such unrest.&lt;/p&gt;
+lead to such unrest.</p>
 
-&lt;p&gt;We feel called to actively condemn&lt;/p&gt;
+<p>We feel called to actively condemn</p>
 
-&lt;ul&gt;
-  &lt;li&gt;racism,&lt;/li&gt;
-  &lt;li&gt;white supremacy,&lt;/li&gt;
-  &lt;li&gt;violence, especially in the name of silencing others,&lt;/li&gt;
-  &lt;li&gt;ignorance of white privilege and autonomy,&lt;/li&gt;
-  &lt;li&gt;and the use of the presidential platform to spread misinformation and
-encourage violence&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>racism,</li>
+  <li>white supremacy,</li>
+  <li>violence, especially in the name of silencing others,</li>
+  <li>ignorance of white privilege and autonomy,</li>
+  <li>and the use of the presidential platform to spread misinformation and
+encourage violence</li>
+</ul>
 
-&lt;h2 id=&quot;on-the-response-to-the-attack&quot;&gt;On the response to the attack&lt;/h2&gt;
+<h2 id="on-the-response-to-the-attack">On the response to the attack</h2>
 
-&lt;p&gt;The response to this attack blatantly displayed the white privilege enjoyed by
-rioters. The increased surge of &lt;a href=&quot;https://blacklivesmatter.com&quot;&gt;Black Lives
-Matter&lt;/a&gt; protesters this summer saw the peace of
+<p>The response to this attack blatantly displayed the white privilege enjoyed by
+rioters. The increased surge of <a href="https://blacklivesmatter.com">Black Lives
+Matter</a> protesters this summer saw the peace of
 demonstrators meet with violent suppression from multiple parties, including the
 police and extremists. In contrast, the response to what can only be called a
 terrorist attack on January 6th overwhelmingly appears to lack appropriate
 action. Whereas one group is met with unnecessary aggression, another is met
-with none of the expected.&lt;/p&gt;
+with none of the expected.</p>
 
-&lt;p&gt;We are shocked and outraged by the response to this attack. We would regret any
+<p>We are shocked and outraged by the response to this attack. We would regret any
 loss of life for any reason, but we do believe in the responsibility of law
-enforcement to secure the safety of our nation’s government.&lt;/p&gt;
+enforcement to secure the safety of our nation’s government.</p>
 
-&lt;p&gt;We cannot remain too surprised, however, for America as a nation has always
+<p>We cannot remain too surprised, however, for America as a nation has always
 valued the lives of its white citizens over those of its
-&lt;a href=&quot;https://www.nytimes.com/article/what-is-bipoc.html&quot;&gt;people of color&lt;/a&gt; counterparts.&lt;/p&gt;
+<a href="https://www.nytimes.com/article/what-is-bipoc.html">people of color</a> counterparts.</p>
 
-&lt;h2 id=&quot;on-our-stance-as-privileged-white-citizens&quot;&gt;On our stance as privileged white citizens&lt;/h2&gt;
+<h2 id="on-our-stance-as-privileged-white-citizens">On our stance as privileged white citizens</h2>
 
-&lt;p&gt;We recognize that from the first our reactions are informed by our unique
+<p>We recognize that from the first our reactions are informed by our unique
 cultural, social, political, and spatiotemporal identities. This necessarily
 includes our whiteness. In even writing that this has been the “most personal”
 feeling threat to us, we are forced to concede that many other events have
-likely felt far more personal to those whom we wish to support.&lt;/p&gt;
+likely felt far more personal to those whom we wish to support.</p>
 
-&lt;p&gt;We recognize that discussions of race often make white people uncomfortable;
+<p>We recognize that discussions of race often make white people uncomfortable;
 this includes ourselves. We are actively working to normalize these
 conversations between ourselves and within our friend groups. We believe that
-this a way toward better communication and mutual trust.&lt;/p&gt;
+this a way toward better communication and mutual trust.</p>
 
-&lt;p&gt;Now more than ever, acting as a white ally for people of color requires actively
+<p>Now more than ever, acting as a white ally for people of color requires actively
 condemning attempts to silence their voices, suppress their rights, or subjugate
 their bodies. It is not enough that we remain silent behind the front lines; nor
 is it right that we speak for others. It is time to lift our voices in support
-of theirs and to glorify their right to those voices.&lt;/p&gt;
+of theirs and to glorify their right to those voices.</p>
 
-&lt;p&gt;We recognize that this requires much learning. Savannah, as a Sociology major
-and Social &amp;amp; Economic Justice minor, and her many teachers, professors and
+<p>We recognize that this requires much learning. Savannah, as a Sociology major
+and Social &amp; Economic Justice minor, and her many teachers, professors and
 practitioners, are a testament to the wealth of resources available to educate
 us. With that in mind, as we embark on a renewed journey of empathy and
 understanding, we would like to leave a list of suggested books for the
-interested.&lt;/p&gt;
+interested.</p>
 
-&lt;h2 id=&quot;suggested-reading-from-savannah&quot;&gt;Suggested reading from Savannah&lt;/h2&gt;
+<h2 id="suggested-reading-from-savannah">Suggested reading from Savannah</h2>
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.robindiangelo.com&quot;&gt;White Fragility by Robin DiAngelo&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://knopfdoubleday.com/book/37354/women-race-class/&quot;&gt;Women, Race &amp;amp; Class by Angela Davis&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://scholar.princeton.edu/matthewdesmond/&quot;&gt;Evicted by Matthew Desmond&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.haymarketbooks.org/books/780-freedom-is-a-constant-struggle&quot;&gt;Freedom is a Constant Struggle by Angela Davis&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://newjimcrow.com/about-the-author&quot;&gt;The New Jim Crow by Michelle Alexander&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://eji.org/bryan-stevenson/&quot;&gt;Just Mercy by Bryan Stevenson&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.ibramxkendi.com&quot;&gt;How to be an Antiracist by Ibram X. Kendi&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.jasonwritesbooks.com&quot;&gt;Stamped: Racism, Antiracism, and You by Jason Reynolds and Ibram X. Kendi&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="equal rights" /><category term="learning" /><category term="safety" /><category term="race" /><summary type="html">While Ben has other articles planned for upcoming technical topics, we feel that now, in the wake of the January 6th terrorist attack on the US Capitol by US citizens, is a time for reflection on a scary political landscape and a time for the explicit condemnation of white supremacy.</summary></entry><entry><title type="html">Please *do* generate man-pages</title><link href="https://benknoble.github.io/blog/2020/12/07/man-pages-please/" rel="alternate" type="text/html" title="Please *do* generate man-pages" /><published>2020-12-07T00:00:00+00:00</published><updated>2020-12-07T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/12/07/man-pages-please</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/12/07/man-pages-please/">&lt;p&gt;The recent trend of not including man-pages with command-line “apps” (“tools” or
-“programs” are better words!) irks me.&lt;/p&gt;
+<ul>
+  <li><a href="https://www.robindiangelo.com">White Fragility by Robin DiAngelo</a></li>
+  <li><a href="http://knopfdoubleday.com/book/37354/women-race-class/">Women, Race &amp; Class by Angela Davis</a></li>
+  <li><a href="https://scholar.princeton.edu/matthewdesmond/">Evicted by Matthew Desmond</a></li>
+  <li><a href="https://www.haymarketbooks.org/books/780-freedom-is-a-constant-struggle">Freedom is a Constant Struggle by Angela Davis</a></li>
+  <li><a href="https://newjimcrow.com/about-the-author">The New Jim Crow by Michelle Alexander</a></li>
+  <li><a href="https://eji.org/bryan-stevenson/">Just Mercy by Bryan Stevenson</a></li>
+  <li><a href="https://www.ibramxkendi.com">How to be an Antiracist by Ibram X. Kendi</a></li>
+  <li><a href="https://www.jasonwritesbooks.com">Stamped: Racism, Antiracism, and You by Jason Reynolds and Ibram X. Kendi</a></li>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="equal rights" /><category term="learning" /><category term="safety" /><category term="race" /><summary type="html"><![CDATA[While Ben has other articles planned for upcoming technical topics, we feel that now, in the wake of the January 6th terrorist attack on the US Capitol by US citizens, is a time for reflection on a scary political landscape and a time for the explicit condemnation of white supremacy.]]></summary></entry><entry><title type="html">Please *do* generate man-pages</title><link href="https://benknoble.github.io/blog/2020/12/07/man-pages-please/" rel="alternate" type="text/html" title="Please *do* generate man-pages" /><published>2020-12-07T00:00:00+00:00</published><updated>2020-12-07T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/12/07/man-pages-please</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/12/07/man-pages-please/"><![CDATA[<p>The recent trend of not including man-pages with command-line “apps” (“tools” or
+“programs” are better words!) irks me.</p>
 
-&lt;h2 id=&quot;where-is-this-coming-from&quot;&gt;Where is this coming from?&lt;/h2&gt;
+<h2 id="where-is-this-coming-from">Where is this coming from?</h2>
 
-&lt;p&gt;Many places. Specifically:&lt;/p&gt;
+<p>Many places. Specifically:</p>
 
-&lt;ul&gt;
-  &lt;li&gt;personal observation of the trend that many command-line programs don’t
-support &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man &amp;lt;program&amp;gt;&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;the &lt;a href=&quot;https://clig.dev/&quot;&gt;otherwise-full-of-solid-advice &lt;em&gt;Command Line
-Guidelines&lt;/em&gt;&lt;/a&gt;, which says&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>personal observation of the trend that many command-line programs don’t
+support <code class="language-plaintext highlighter-rouge">man &lt;program&gt;</code></li>
+  <li>the <a href="https://clig.dev/">otherwise-full-of-solid-advice <em>Command Line
+Guidelines</em></a>, which says</li>
+</ul>
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Don’t bother with man pages&lt;/strong&gt;. We believe that if you’re following these
+<blockquote>
+  <p><strong>Don’t bother with man pages</strong>. We believe that if you’re following these
 guidelines for help and documentation, you won’t need man pages. Not enough
 people use man pages, and they don’t work on Windows. If your CLI framework
 and package manager make it easy to output man pages, go for it, but otherwise
-your time is best spent improving web docs and built-in help text.&lt;/p&gt;
+your time is best spent improving web docs and built-in help text.</p>
 
-  &lt;p&gt;&lt;em&gt;Citation: &lt;a href=&quot;https://medium.com/@jdxcode/12-factor-cli-apps-dd3c227a0e46&quot;&gt;12 Factor CLI Apps&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+  <p><em>Citation: <a href="https://medium.com/@jdxcode/12-factor-cli-apps-dd3c227a0e46">12 Factor CLI Apps</a>.</em></p>
+</blockquote>
 
-&lt;p&gt;(Emphasis in original)&lt;/p&gt;
+<p>(Emphasis in original)</p>
 
-&lt;ul&gt;
-  &lt;li&gt;and the “original” &lt;a href=&quot;https://medium.com/@jdxcode/12-factor-cli-apps-dd3c227a0e46&quot;&gt;12 Factor CLI
-Apps&lt;/a&gt; from Heroku:&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>and the “original” <a href="https://medium.com/@jdxcode/12-factor-cli-apps-dd3c227a0e46">12 Factor CLI
+Apps</a> from Heroku:</li>
+</ul>
 
-&lt;blockquote&gt;
-  &lt;p&gt;Unless you already know your users will want man pages, I wouldn’t bother also
+<blockquote>
+  <p>Unless you already know your users will want man pages, I wouldn’t bother also
 outputting them as they just aren’t used often enough anymore. Novice
 developers are unaware of them and they don’t work on Windows. Offline support
 isn’t necessary if you already have in-CLI help. Still, man page support is
 coming to oclif because in a framework I think it makes sense. It can be
-solved once for all oclif CLIs to reap the benefits.&lt;/p&gt;
-&lt;/blockquote&gt;
+solved once for all oclif CLIs to reap the benefits.</p>
+</blockquote>
 
-&lt;h2 id=&quot;whats-wrong-with-no-man-pages&quot;&gt;What’s wrong with no man-pages?&lt;/h2&gt;
+<h2 id="whats-wrong-with-no-man-pages">What’s wrong with no man-pages?</h2>
 
-&lt;p&gt;Let’s start with “what’s &lt;em&gt;right&lt;/em&gt; about no man-pages?”. My answer: absolutely
+<p>Let’s start with “what’s <em>right</em> about no man-pages?”. My answer: absolutely
 nothing. It’s laziness (and maybe a lack of good tooling). But if asciidoc and
-other markup languages can convert to man-pages, it’s time your program did too.&lt;/p&gt;
+other markup languages can convert to man-pages, it’s time your program did too.</p>
 
-&lt;p&gt;Now, what’s actually wrong with not having them? Well, to answer that question,
-I need to talk about how I use them.&lt;/p&gt;
+<p>Now, what’s actually wrong with not having them? Well, to answer that question,
+I need to talk about how I use them.</p>
 
-&lt;p&gt;I use man-pages for &lt;em&gt;reference&lt;/em&gt;. Many of the best-written man-pages become
+<p>I use man-pages for <em>reference</em>. Many of the best-written man-pages become
 well-known, to the point where I can quickly navigate to the appropriate
-section. Man-pages are nearly uniformly laid out for a reason.&lt;/p&gt;
+section. Man-pages are nearly uniformly laid out for a reason.</p>
 
-&lt;p&gt;I use man-pages for &lt;em&gt;convenience&lt;/em&gt;. They are perfect when I just want to
-double-check a flag without breaking my flow (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--help&lt;/code&gt; isn’t awful, but half the
+<p>I use man-pages for <em>convenience</em>. They are perfect when I just want to
+double-check a flag without breaking my flow (<code class="language-plaintext highlighter-rouge">--help</code> isn’t awful, but half the
 time it takes me too many invocations to get the right help!). Opening a
 web-browser is the epitome of breaking that flow: I actually left my work
 context (the terminal, where the program is going to run), and I have to flip
 between browser and terminal. Not hard on a wide screen, but on my laptop it’s
 not ideal. With a man-page, I know I can fire up a tmux pane or vim-split (thank
-you, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:Man&lt;/code&gt;) to browse without disturbing my current context. Man-pages are
-nearly uniformly laid out for a reason.&lt;/p&gt;
+you, <code class="language-plaintext highlighter-rouge">:Man</code>) to browse without disturbing my current context. Man-pages are
+nearly uniformly laid out for a reason.</p>
 
-&lt;p&gt;Just to emphasize this, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:Man&lt;/code&gt; ships with vim. In any vim, I can run that
-command (possibly prefaced by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:runtime ftplugin/man.vim&lt;/code&gt;) and get a man-page.
-Conversely, it is harder to get the output of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--help&lt;/code&gt; and friends where I want
-it. Some options:&lt;/p&gt;
+<p>Just to emphasize this, <code class="language-plaintext highlighter-rouge">:Man</code> ships with vim. In any vim, I can run that
+command (possibly prefaced by <code class="language-plaintext highlighter-rouge">:runtime ftplugin/man.vim</code>) and get a man-page.
+Conversely, it is harder to get the output of <code class="language-plaintext highlighter-rouge">--help</code> and friends where I want
+it. Some options:</p>
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;c&quot;&gt;&quot; 1. put it directly in the buffer&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;read&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;!&lt;/span&gt;program &lt;span class=&quot;p&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;help&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; clutters the buffer… so,&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; 2. new buffer&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;read&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;!&lt;/span&gt;program &lt;span class=&quot;p&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;help&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; too much typing…&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; 3. a plugin, such as Clam&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;Clam program &lt;span class=&quot;p&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;help&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&quot; not portable, and still extra typing (though only by 6 characters)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+<figure class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="c">" 1. put it directly in the buffer</span>
+<span class="p">:</span><span class="k">read</span> <span class="p">!</span>program <span class="p">--</span><span class="k">help</span>
+<span class="c">" clutters the buffer… so,</span>
+<span class="c">" 2. new buffer</span>
+<span class="p">:</span><span class="k">new</span> <span class="p">|</span> <span class="k">read</span> <span class="p">!</span>program <span class="p">--</span><span class="k">help</span>
+<span class="c">" too much typing…</span>
+<span class="c">" 3. a plugin, such as Clam</span>
+<span class="p">:</span>Clam program <span class="p">--</span><span class="k">help</span>
+<span class="c">" not portable, and still extra typing (though only by 6 characters)</span></code></pre></figure>
 
-&lt;blockquote&gt;
-  &lt;p&gt;Aside: this is a pain-point for me when I start working with certain
-languages. With C, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;K&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keywordprg=:Man&lt;/code&gt; is usually good enough (and tags
-make up the difference). With Rust &amp;amp; Python, it’s been a hack-filled journey
+<blockquote>
+  <p>Aside: this is a pain-point for me when I start working with certain
+languages. With C, <code class="language-plaintext highlighter-rouge">K</code> and <code class="language-plaintext highlighter-rouge">keywordprg=:Man</code> is usually good enough (and tags
+make up the difference). With Rust &amp; Python, it’s been a hack-filled journey
 to get decent in-editor documentation support (and for Rust I almost always
 have to open a web-browser, even if it’s with a hot-key). For my workhorse
 SML, the only docs are web-browsed or local HTML pages. For lots of other
 languages, there’s just not much. Is it too much to ask programming-language
 designers to support local, text-based documentation in a program-consumable
-format? It doesn’t have to be a man-page, but &lt;em&gt;something&lt;/em&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+format? It doesn’t have to be a man-page, but <em>something</em>.</p>
+</blockquote>
 
-&lt;p&gt;I use man-pages for &lt;em&gt;search-ability&lt;/em&gt; and general text-manipulation. I have
-configured &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MANPAGER&lt;/code&gt; to use vim, so I have a powerful set of tools to deal
-with programs and their documentation. I even have maps for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_&lt;/code&gt; to start
-searching for short (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-x&lt;/code&gt;) and long (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--x…&lt;/code&gt;) flags, which makes for a quick
-browse (when formatted appropriately). I can’t do that with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--help&lt;/code&gt; as easily
-(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grep&lt;/code&gt;ping doesn’t usually cut it), and even &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less&lt;/code&gt; as a pager has pretty poor
+<p>I use man-pages for <em>search-ability</em> and general text-manipulation. I have
+configured <code class="language-plaintext highlighter-rouge">MANPAGER</code> to use vim, so I have a powerful set of tools to deal
+with programs and their documentation. I even have maps for <code class="language-plaintext highlighter-rouge">-</code> and <code class="language-plaintext highlighter-rouge">_</code> to start
+searching for short (<code class="language-plaintext highlighter-rouge">-x</code>) and long (<code class="language-plaintext highlighter-rouge">--x…</code>) flags, which makes for a quick
+browse (when formatted appropriately). I can’t do that with <code class="language-plaintext highlighter-rouge">--help</code> as easily
+(<code class="language-plaintext highlighter-rouge">grep</code>ping doesn’t usually cut it), and even <code class="language-plaintext highlighter-rouge">less</code> as a pager has pretty poor
 search ability. Say it with me: Man-pages are nearly uniformly laid out for a
-reason.&lt;/p&gt;
+reason.</p>
 
-&lt;p&gt;Personally, I use man-pages to &lt;em&gt;learn&lt;/em&gt;. When I’m not sure how something works, I
-can usually figure out from a good &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man thing&lt;/code&gt;. This isn’t really a selling
+<p>Personally, I use man-pages to <em>learn</em>. When I’m not sure how something works, I
+can usually figure out from a good <code class="language-plaintext highlighter-rouge">man thing</code>. This isn’t really a selling
 point, but it is a part of many workflows. “Man” stands for “manual,” after all:
-or do people not read those anymore?&lt;/p&gt;
+or do people not read those anymore?</p>
 
-&lt;p&gt;All this to say that what’s wrong with no man-pages is a lack of these things,
-particularly convenience and non-workflow-breaking-documentation.&lt;/p&gt;
+<p>All this to say that what’s wrong with no man-pages is a lack of these things,
+particularly convenience and non-workflow-breaking-documentation.</p>
 
-&lt;h2 id=&quot;no-man-page-is-better-than-a-bad-one&quot;&gt;No man-page is better than a bad one&lt;/h2&gt;
+<h2 id="no-man-page-is-better-than-a-bad-one">No man-page is better than a bad one</h2>
 
-&lt;p&gt;I’m looking at you &lt;a href=&quot;https://cli.github.com&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gh&lt;/code&gt;&lt;/a&gt;. Your documentation, frankly,
+<p>I’m looking at you <a href="https://cli.github.com"><code class="language-plaintext highlighter-rouge">gh</code></a>. Your documentation, frankly,
 is atrocious. Only a sentence at worst that doesn’t actually tell me what you
 do! And the flag documentation is frankly so ambiguous that I’ve written
 commands with mutually exclusive flags set because it wasn’t at all clear that
-only one was allowed. (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gh repo fork --clone false --remote true&lt;/code&gt; seems
-reasonable, no?).&lt;/p&gt;
+only one was allowed. (<code class="language-plaintext highlighter-rouge">gh repo fork --clone false --remote true</code> seems
+reasonable, no?).</p>
 
-&lt;p&gt;So, don’t provide a man-page if it’s poor. But maybe find a way to write some
-good documentation that could be converted to a man-page (or vice-versa)?&lt;/p&gt;
+<p>So, don’t provide a man-page if it’s poor. But maybe find a way to write some
+good documentation that could be converted to a man-page (or vice-versa)?</p>
 
-&lt;h2 id=&quot;if-not-a-man-page&quot;&gt;If not a man-page…&lt;/h2&gt;
+<h2 id="if-not-a-man-page">If not a man-page…</h2>
 
-&lt;p&gt;Well, something like vim’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:help&lt;/code&gt; is &lt;em&gt;fantastic&lt;/em&gt;. It’s not for every program,
+<p>Well, something like vim’s <code class="language-plaintext highlighter-rouge">:help</code> is <em>fantastic</em>. It’s not for every program,
 but any seriously interactive (especially full-screen) program should consider
 something of the sort. It helps that the system is extendable and plain text,
-too.&lt;/p&gt;
+too.</p>
 
-&lt;h2 id=&quot;a-few-considered-counter-arguments&quot;&gt;A few considered counter-arguments&lt;/h2&gt;
+<h2 id="a-few-considered-counter-arguments">A few considered counter-arguments</h2>
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;“Doesn’t work on Windows”: valid point. But what does? (Joking aside, surely
-there’s &lt;em&gt;something&lt;/em&gt; that works as a documentation format for the Windows
-terminal besides HTML?)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;“Novices aren’t aware”: so educate them. Part of CLIG’s shtick was to educate
+<ul>
+  <li>
+    <p>“Doesn’t work on Windows”: valid point. But what does? (Joking aside, surely
+there’s <em>something</em> that works as a documentation format for the Windows
+terminal besides HTML?)</p>
+  </li>
+  <li>
+    <p>“Novices aren’t aware”: so educate them. Part of CLIG’s shtick was to educate
 users when they make a mistake with your command. It’s as easy as keeping
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--help&lt;/code&gt; brief with a pointer to “see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man program&lt;/code&gt; for more details”.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+<code class="language-plaintext highlighter-rouge">--help</code> brief with a pointer to “see <code class="language-plaintext highlighter-rouge">man program</code> for more details”.</p>
+  </li>
+</ul>
 
-&lt;p&gt;Following up on that, I don’t consider &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--help&lt;/code&gt; to the end-all-be-all of
-documentation, as you’ve probably noticed. I only type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--help&lt;/code&gt; when I’m sure it
+<p>Following up on that, I don’t consider <code class="language-plaintext highlighter-rouge">--help</code> to the end-all-be-all of
+documentation, as you’ve probably noticed. I only type <code class="language-plaintext highlighter-rouge">--help</code> when I’m sure it
 will be quick and useful: generally, a usage summary and a “Top 5” common
 options/invocations. Sometimes it’s to re-assure myself that the command does
 what I think it does, like when I use one of the more obscure git commands. When
-I want the whole book, I go to the man-page. Too-long &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--help&lt;/code&gt; is “saying too
-much” in the words of CLIG.&lt;/p&gt;
+I want the whole book, I go to the man-page. Too-long <code class="language-plaintext highlighter-rouge">--help</code> is “saying too
+much” in the words of CLIG.</p>
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;“Offline support isn’t necessary if you already have in-CLI help”: false. (Or
+<ul>
+  <li>
+    <p>“Offline support isn’t necessary if you already have in-CLI help”: false. (Or
 at least, I disagree.) Solution proposed: generate man-pages from in-CLI help or
 vice-versa. I favor the latter, actually, but I’m probably in the minority on
 that. I find that it’s nicer to write documentation in a textual format rather
 than in strings in code, especially in some languages. (Newlines? Continuations?
-Leading spaces? Ugh. Format it for me—I don’t want to have to care.)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;“otherwise your time is best spent improving web docs and built-in help text”:
+Leading spaces? Ugh. Format it for me—I don’t want to have to care.)</p>
+  </li>
+  <li>
+    <p>“otherwise your time is best spent improving web docs and built-in help text”:
 see above solution. They could all be one and the same (or at least tied
 together: sure, a tutorial might not be a good candidate for a man-page, at
 least for smaller programs. But it could link to an HTML version of the page
-that lives in my terminal.).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rants" /><category term="design" /><category term="docs" /><category term="productivity" /><category term="open-source" /><category term="shell" /><summary type="html">The recent trend of not including man-pages with command-line “apps” (“tools” or “programs” are better words!) irks me.</summary></entry><entry><title type="html">Excel for Mac cannot simultaneously edit files with the same basename</title><link href="https://benknoble.github.io/blog/2020/09/29/excel-duplicate-files/" rel="alternate" type="text/html" title="Excel for Mac cannot simultaneously edit files with the same basename" /><published>2020-09-29T00:00:00+00:00</published><updated>2020-09-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/09/29/excel-duplicate-files</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/09/29/excel-duplicate-files/">&lt;p&gt;Yes, you read that right: you can’t open (e.g.) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Documents/budget.xlsx&lt;/code&gt; &lt;em&gt;and&lt;/em&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Work/budget.xlsx&lt;/code&gt; at the same time.&lt;/p&gt;
+that lives in my terminal.).</p>
+  </li>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rants" /><category term="design" /><category term="docs" /><category term="productivity" /><category term="open-source" /><category term="shell" /><summary type="html"><![CDATA[The recent trend of not including man-pages with command-line “apps” (“tools” or “programs” are better words!) irks me.]]></summary></entry><entry><title type="html">Excel for Mac cannot simultaneously edit files with the same basename</title><link href="https://benknoble.github.io/blog/2020/09/29/excel-duplicate-files/" rel="alternate" type="text/html" title="Excel for Mac cannot simultaneously edit files with the same basename" /><published>2020-09-29T00:00:00+00:00</published><updated>2020-09-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/09/29/excel-duplicate-files</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/09/29/excel-duplicate-files/"><![CDATA[<p>Yes, you read that right: you can’t open (e.g.) <code class="language-plaintext highlighter-rouge">Documents/budget.xlsx</code> <em>and</em>
+<code class="language-plaintext highlighter-rouge">Work/budget.xlsx</code> at the same time.</p>
 
-&lt;h2 id=&quot;what-the-f&quot;&gt;What the f@#$?&lt;/h2&gt;
+<h2 id="what-the-f">What the f@#$?</h2>
 
-&lt;p&gt;Yeah, that was my reaction, too. At first, it doesn’t make any sense.&lt;/p&gt;
+<p>Yeah, that was my reaction, too. At first, it doesn’t make any sense.</p>
 
-&lt;p&gt;Here’s the best explanation I have, as an educated programmer: the basenames
-(that would be the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;budget.xlsx&lt;/code&gt; part—I haven’t tested differing extensions
+<p>Here’s the best explanation I have, as an educated programmer: the basenames
+(that would be the <code class="language-plaintext highlighter-rouge">budget.xlsx</code> part—I haven’t tested differing extensions
 yet) are probably stored in a duplicate-disallowing structure. Normally, we’d
 call that a set. I suspect they’re probably actually keys in a map of filenames
 to in-memory buffers of contents or data or some-such. The keys of a map must be
-a set, so that would also track.&lt;/p&gt;
+a set, so that would also track.</p>
 
-&lt;h2 id=&quot;fix-it&quot;&gt;Fix it!&lt;/h2&gt;
+<h2 id="fix-it">Fix it!</h2>
 
-&lt;p&gt;I wish I could. Stupid closed-source bloatware… I mean, sure, it’s a nice tool
-for spreadsheets.&lt;/p&gt;
+<p>I wish I could. Stupid closed-source bloatware… I mean, sure, it’s a nice tool
+for spreadsheets.</p>
 
-&lt;p&gt;Ironically, the fix is probably easy: use absolute paths as the entries in
-whatever this set is. I cannot fathom a single reason not to do so.&lt;/p&gt;
+<p>Ironically, the fix is probably easy: use absolute paths as the entries in
+whatever this set is. I cannot fathom a single reason not to do so.</p>
 
-&lt;p&gt;This might not solve the problem if two documents have the same absolute path on
+<p>This might not solve the problem if two documents have the same absolute path on
 two different file-systems (e.g., my hard drive and a network-mounted file-share
-or some other storage medium), but we could either&lt;/p&gt;
+or some other storage medium), but we could either</p>
 
-&lt;ul&gt;
-  &lt;li&gt;include the medium name in the entry, or&lt;/li&gt;
-  &lt;li&gt;include the mount point in the entry.&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>include the medium name in the entry, or</li>
+  <li>include the mount point in the entry.</li>
+</ul>
 
-&lt;p&gt;Again, what the f@#$.&lt;/p&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rants" /><category term="ms-excel" /><summary type="html">Yes, you read that right: you can’t open (e.g.) Documents/budget.xlsx and Work/budget.xlsx at the same time.</summary></entry><entry><title type="html">Stop, sed i!</title><link href="https://benknoble.github.io/blog/2020/08/06/stop-sed-i/" rel="alternate" type="text/html" title="Stop, sed i!" /><published>2020-08-06T00:00:00+00:00</published><updated>2020-08-06T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/08/06/stop-sed-i</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/08/06/stop-sed-i/">&lt;p&gt;Right tool for the job people, right tool for the job :roll_eyes:&lt;/p&gt;
+<p>Again, what the f@#$.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rants" /><category term="ms-excel" /><summary type="html"><![CDATA[Yes, you read that right: you can’t open (e.g.) Documents/budget.xlsx and Work/budget.xlsx at the same time.]]></summary></entry><entry><title type="html">Stop, sed i!</title><link href="https://benknoble.github.io/blog/2020/08/06/stop-sed-i/" rel="alternate" type="text/html" title="Stop, sed i!" /><published>2020-08-06T00:00:00+00:00</published><updated>2020-08-06T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/08/06/stop-sed-i</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/08/06/stop-sed-i/"><![CDATA[<p>Right tool for the job people, right tool for the job :roll_eyes:</p>
 
-&lt;h2 id=&quot;what-am-i-talking-about&quot;&gt;What am I talking about?&lt;/h2&gt;
+<h2 id="what-am-i-talking-about">What am I talking about?</h2>
 
-&lt;p&gt;I’m referring to all the use of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed -i&lt;/code&gt; spread wantonly on the internet, &lt;em&gt;sans&lt;/em&gt;
-appropriate caveats.&lt;/p&gt;
+<p>I’m referring to all the use of <code class="language-plaintext highlighter-rouge">sed -i</code> spread wantonly on the internet, <em>sans</em>
+appropriate caveats.</p>
 
-&lt;blockquote&gt;
-  &lt;p&gt;Background: most implementations of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-i&lt;/code&gt; flag allow &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; to edit files in
+<blockquote>
+  <p>Background: most implementations of the <code class="language-plaintext highlighter-rouge">-i</code> flag allow <code class="language-plaintext highlighter-rouge">sed</code> to edit files in
 place; by default, it edits standard in and writes to standard out, so you end
-up having to do &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;file sed ... &amp;gt;file.new &amp;amp;&amp;amp; mv file.new file&lt;/code&gt;. Trying to
-redirect back into the file (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;file sed ... &amp;gt;file&lt;/code&gt;) fails because the file is
-truncated before &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; gets to read it!&lt;/p&gt;
-&lt;/blockquote&gt;
+up having to do <code class="language-plaintext highlighter-rouge">&lt;file sed ... &gt;file.new &amp;&amp; mv file.new file</code>. Trying to
+redirect back into the file (<code class="language-plaintext highlighter-rouge">&lt;file sed ... &gt;file</code>) fails because the file is
+truncated before <code class="language-plaintext highlighter-rouge">sed</code> gets to read it!</p>
+</blockquote>
 
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-i&lt;/code&gt; flag is &lt;a href=&quot;https://pubs.opengroup.org/onlinepubs/9699919799/&quot;&gt;not specified by
-POSIX&lt;/a&gt;, which makes it
-non-portable. This isn’t such a big deal, &lt;em&gt;except&lt;/em&gt; that different &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt;s require
-different arguments! GNU &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; edits in place, no argument provided. BSD &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt;,
-such as the one on macOS, requires a suffix:&lt;/p&gt;
+<p>The <code class="language-plaintext highlighter-rouge">-i</code> flag is <a href="https://pubs.opengroup.org/onlinepubs/9699919799/">not specified by
+POSIX</a>, which makes it
+non-portable. This isn’t such a big deal, <em>except</em> that different <code class="language-plaintext highlighter-rouge">sed</code>s require
+different arguments! GNU <code class="language-plaintext highlighter-rouge">sed</code> edits in place, no argument provided. BSD <code class="language-plaintext highlighter-rouge">sed</code>,
+such as the one on macOS, requires a suffix:</p>
 
-&lt;ul&gt;
-  &lt;li&gt;if the suffix is non-empty, it places the original file at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file.suffix&lt;/code&gt; and
-the new contents in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file&lt;/code&gt;;&lt;/li&gt;
-  &lt;li&gt;if the suffix is empty, no backup is made.&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>if the suffix is non-empty, it places the original file at <code class="language-plaintext highlighter-rouge">file.suffix</code> and
+the new contents in <code class="language-plaintext highlighter-rouge">file</code>;</li>
+  <li>if the suffix is empty, no backup is made.</li>
+</ul>
 
-&lt;p&gt;So now, every &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed -i&lt;/code&gt; solution to a problem needs to &lt;em&gt;at least&lt;/em&gt;&lt;/p&gt;
+<p>So now, every <code class="language-plaintext highlighter-rouge">sed -i</code> solution to a problem needs to <em>at least</em></p>
 
-&lt;ul&gt;
-  &lt;li&gt;mention non portability, and&lt;/li&gt;
-  &lt;li&gt;mention two different implementations and how they handle it.&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>mention non portability, and</li>
+  <li>mention two different implementations and how they handle it.</li>
+</ul>
 
-&lt;p&gt;I don’t know about you, but I wonder if the solution to editing files in place
-is a lot simpler… :thinking:&lt;/p&gt;
+<p>I don’t know about you, but I wonder if the solution to editing files in place
+is a lot simpler… :thinking:</p>
 
-&lt;h2 id=&quot;sed-for-streams-ed-for-files&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; for streams, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt; for files&lt;/h2&gt;
+<h2 id="sed-for-streams-ed-for-files"><code class="language-plaintext highlighter-rouge">sed</code> for streams, <code class="language-plaintext highlighter-rouge">ed</code> for files</h2>
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; stands for “stream editor.” It was designed based on the text-editor
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt;’s commands! &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt; is built to edit files.&lt;/p&gt;
+<p><code class="language-plaintext highlighter-rouge">sed</code> stands for “stream editor.” It was designed based on the text-editor
+<code class="language-plaintext highlighter-rouge">ed</code>’s commands! <code class="language-plaintext highlighter-rouge">ed</code> is built to edit files.</p>
 
-&lt;ul&gt;
-  &lt;li&gt;If you need to edit a file in place, use POSIX &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt; (or the improved
-POSIX-specified &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ex&lt;/code&gt;);&lt;/li&gt;
-  &lt;li&gt;if you need to transform a stream, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; is an option.&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>If you need to edit a file in place, use POSIX <code class="language-plaintext highlighter-rouge">ed</code> (or the improved
+POSIX-specified <code class="language-plaintext highlighter-rouge">ex</code>);</li>
+  <li>if you need to transform a stream, <code class="language-plaintext highlighter-rouge">sed</code> is an option.</li>
+</ul>
 
-&lt;p&gt;I cannot emphasize this enough. Trying to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed -i&lt;/code&gt; in any kind of portable
-anything is likely to break; worse was the thought that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; should ever be
+<p>I cannot emphasize this enough. Trying to use <code class="language-plaintext highlighter-rouge">sed -i</code> in any kind of portable
+anything is likely to break; worse was the thought that <code class="language-plaintext highlighter-rouge">sed</code> should ever be
 used for editing files! Use a text-editor: if you thought “I’m automating, I
-don’t want to run a text-editor to automate,” well, remember:&lt;/p&gt;
+don’t want to run a text-editor to automate,” well, remember:</p>
 
-&lt;ul&gt;
-  &lt;li&gt;it is entirely possible to automate (read: script) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ex&lt;/code&gt;, and&lt;/li&gt;
-  &lt;li&gt;people today fire up entire web browsers in their desktop applications in
+<ul>
+  <li>it is entirely possible to automate (read: script) <code class="language-plaintext highlighter-rouge">ed</code> and <code class="language-plaintext highlighter-rouge">ex</code>, and</li>
+  <li>people today fire up entire web browsers in their desktop applications in
 order to automate things—running a tiny text-editor is the least of your
-worries.&lt;/li&gt;
-&lt;/ul&gt;
+worries.</li>
+</ul>
 
-&lt;h2 id=&quot;addendum-scripting-ed&quot;&gt;Addendum: scripting ed&lt;/h2&gt;
+<h2 id="addendum-scripting-ed">Addendum: scripting ed</h2>
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt; takes commands on standard in. It can be made silent with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-s&lt;/code&gt;, and the
-argument is a file to edit. I ignore &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p&lt;/code&gt; for now because it isn’t useful for
-scripting/automation. So, to script &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt;, generate a list of commands and pipe
-it in!&lt;/p&gt;
+<p><code class="language-plaintext highlighter-rouge">ed</code> takes commands on standard in. It can be made silent with <code class="language-plaintext highlighter-rouge">-s</code>, and the
+argument is a file to edit. I ignore <code class="language-plaintext highlighter-rouge">-p</code> for now because it isn’t useful for
+scripting/automation. So, to script <code class="language-plaintext highlighter-rouge">ed</code>, generate a list of commands and pipe
+it in!</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;%s\n&apos;&lt;/span&gt; g/abc/d w q | ed &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; file
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">printf</span> <span class="s1">'%s\n'</span> g/abc/d w q | ed <span class="nt">-s</span> file
+</code></pre></div></div>
 
-&lt;p&gt;That’s the most portable, but &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bash&lt;/code&gt; users can probably do&lt;/p&gt;
+<p>That’s the most portable, but <code class="language-plaintext highlighter-rouge">bash</code> users can probably do</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ed &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; file &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOF&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ed <span class="nt">-s</span> file <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
 g/abc/d
 w
 q
-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOF
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</span><span class="no">EOF
+</span></code></pre></div></div>
 
-&lt;p&gt;There is quite a bit of flexibility here; the left-hand side could actually be
-another &lt;em&gt;program&lt;/em&gt; that generates &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt; commands on standard out! It turns out,
-this is what &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;diff&lt;/code&gt; does: in its default output mode, we have&lt;/p&gt;
+<p>There is quite a bit of flexibility here; the left-hand side could actually be
+another <em>program</em> that generates <code class="language-plaintext highlighter-rouge">ed</code> commands on standard out! It turns out,
+this is what <code class="language-plaintext highlighter-rouge">diff</code> does: in its default output mode, we have</p>
 
-&lt;blockquote&gt;
-  &lt;p&gt;These lines resemble &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt; subcommands to convert &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file1&lt;/code&gt; into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file2&lt;/code&gt;. The
-line numbers before the action letters shall pertain to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file1&lt;/code&gt;; those after
-shall pertain to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file2&lt;/code&gt;. Thus, by exchanging &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt; for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;d&lt;/code&gt; and reading the line
-in reverse order, one can also determine how to convert &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file2&lt;/code&gt; into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file1&lt;/code&gt;.
-As in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt;, identical pairs (where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;num1=num2&lt;/code&gt;) are abbreviated as a single
-number.&lt;/p&gt;
-&lt;/blockquote&gt;
+<blockquote>
+  <p>These lines resemble <code class="language-plaintext highlighter-rouge">ed</code> subcommands to convert <code class="language-plaintext highlighter-rouge">file1</code> into <code class="language-plaintext highlighter-rouge">file2</code>. The
+line numbers before the action letters shall pertain to <code class="language-plaintext highlighter-rouge">file1</code>; those after
+shall pertain to <code class="language-plaintext highlighter-rouge">file2</code>. Thus, by exchanging <code class="language-plaintext highlighter-rouge">a</code> for <code class="language-plaintext highlighter-rouge">d</code> and reading the line
+in reverse order, one can also determine how to convert <code class="language-plaintext highlighter-rouge">file2</code> into <code class="language-plaintext highlighter-rouge">file1</code>.
+As in <code class="language-plaintext highlighter-rouge">ed</code>, identical pairs (where <code class="language-plaintext highlighter-rouge">num1=num2</code>) are abbreviated as a single
+number.</p>
+</blockquote>
 
-&lt;p&gt;And when we ask for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-e&lt;/code&gt; output mode:&lt;/p&gt;
+<p>And when we ask for the <code class="language-plaintext highlighter-rouge">-e</code> output mode:</p>
 
-&lt;blockquote&gt;
-  &lt;p&gt;With the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-e&lt;/code&gt; option, a script shall be produced that shall, when provided as
-input to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt;, along with an appended &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;w&lt;/code&gt; (write) command, convert &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file1&lt;/code&gt;
-into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file2&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+<blockquote>
+  <p>With the <code class="language-plaintext highlighter-rouge">-e</code> option, a script shall be produced that shall, when provided as
+input to <code class="language-plaintext highlighter-rouge">ed</code>, along with an appended <code class="language-plaintext highlighter-rouge">w</code> (write) command, convert <code class="language-plaintext highlighter-rouge">file1</code>
+into <code class="language-plaintext highlighter-rouge">file2</code>.</p>
+</blockquote>
 
-&lt;p&gt;So now, you can probably write a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;patch&lt;/code&gt; command :smile: you parse the output
-from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;diff&lt;/code&gt;, with maybe slight modification, and then pass it as input to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ed&lt;/code&gt;!&lt;/p&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="shell" /><category term="sed" /><category term="rants" /><category term="posix" /><summary type="html">Right tool for the job people, right tool for the job :roll_eyes:</summary></entry><entry><title type="html">Making mass-edits to many repos via shell pipelines</title><link href="https://benknoble.github.io/blog/2020/07/16/parallel-git-pipelines/" rel="alternate" type="text/html" title="Making mass-edits to many repos via shell pipelines" /><published>2020-07-16T00:00:00+00:00</published><updated>2020-07-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/07/16/parallel-git-pipelines</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/07/16/parallel-git-pipelines/">&lt;p&gt;I spend 1 day to save 3 immediately, and more long-term, by scripting git into
-pipelines.&lt;/p&gt;
+<p>So now, you can probably write a <code class="language-plaintext highlighter-rouge">patch</code> command :smile: you parse the output
+from <code class="language-plaintext highlighter-rouge">diff</code>, with maybe slight modification, and then pass it as input to <code class="language-plaintext highlighter-rouge">ed</code>!</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="shell" /><category term="sed" /><category term="rants" /><category term="posix" /><summary type="html"><![CDATA[Right tool for the job people, right tool for the job :roll_eyes:]]></summary></entry><entry><title type="html">Making mass-edits to many repos via shell pipelines</title><link href="https://benknoble.github.io/blog/2020/07/16/parallel-git-pipelines/" rel="alternate" type="text/html" title="Making mass-edits to many repos via shell pipelines" /><published>2020-07-16T00:00:00+00:00</published><updated>2020-07-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/07/16/parallel-git-pipelines</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/07/16/parallel-git-pipelines/"><![CDATA[<p>I spend 1 day to save 3 immediately, and more long-term, by scripting git into
+pipelines.</p>
 
-&lt;h2 id=&quot;prelude&quot;&gt;Prelude&lt;/h2&gt;
+<h2 id="prelude">Prelude</h2>
 
-&lt;p&gt;Imagine you have a task before you that requires you to update 15 or so
+<p>Imagine you have a task before you that requires you to update 15 or so
 repositories on GitHub with the same or similar one-line changes in several
-different files. How do you solve it?&lt;/p&gt;
+different files. How do you solve it?</p>
 
-&lt;p&gt;In my case, I had a list of 16 repository URLs in the file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;URLs&lt;/code&gt;; I collected
+<p>In my case, I had a list of 16 repository URLs in the file <code class="language-plaintext highlighter-rouge">URLs</code>; I collected
 these after figuring out which YAML variables to correct in order to fix an
 installation problem with a part of our infrastructure. And I knew I could clone
 them all, fork them, do the changes, and open the pull-requests, but it would
-take forever! Too many manual steps.&lt;/p&gt;
+take forever! Too many manual steps.</p>
 
-&lt;p&gt;So I got clever.&lt;/p&gt;
+<p>So I got clever.</p>
 
-&lt;blockquote&gt;
-  &lt;p&gt;If you aren’t sure how &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xargs&lt;/code&gt; works, you will be by the end of this post:
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xargs&lt;/code&gt; is a filter that takes its standard in and uses it as arguments for
-another command. In essence, it can replace &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;while read&lt;/code&gt; loops, when used
-right.&lt;/p&gt;
-&lt;/blockquote&gt;
+<blockquote>
+  <p>If you aren’t sure how <code class="language-plaintext highlighter-rouge">xargs</code> works, you will be by the end of this post:
+<code class="language-plaintext highlighter-rouge">xargs</code> is a filter that takes its standard in and uses it as arguments for
+another command. In essence, it can replace <code class="language-plaintext highlighter-rouge">while read</code> loops, when used
+right.</p>
+</blockquote>
 
-&lt;h2 id=&quot;kitchen-cutleryor-ratherforks&quot;&gt;Kitchen Cutlery—or rather—Forks&lt;/h2&gt;
+<h2 id="kitchen-cutleryor-ratherforks">Kitchen Cutlery—or rather—Forks</h2>
 
-&lt;p&gt;My first step was to figure out how to fork all those repos! I knew about &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hub
-fork&lt;/code&gt;, but it only works from inside an already cloned repo. Then there’s the
-new GitHub CLI &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gh repo fork&lt;/code&gt;, but it doesn’t support enterprise GitHub yet.
-Darn!&lt;/p&gt;
+<p>My first step was to figure out how to fork all those repos! I knew about <code class="language-plaintext highlighter-rouge">hub
+fork</code>, but it only works from inside an already cloned repo. Then there’s the
+new GitHub CLI <code class="language-plaintext highlighter-rouge">gh repo fork</code>, but it doesn’t support enterprise GitHub yet.
+Darn!</p>
 
-&lt;p&gt;I really wanted to do this separately, so I &lt;a href=&quot;https://github.com/benknoble/Dotfiles/blob/master/links/bin/git-fork-repo&quot;&gt;whipped up a forking
-script&lt;/a&gt;.
-In the process, I had to learn how to use the GitHub API and &lt;a href=&quot;https://github.com/github/hub/issues/2576&quot;&gt;workaround a bug
-in hub’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;api&lt;/code&gt; command on enterprise
-hosts&lt;/a&gt;. The script outputs the URL of
-the fork for downstream consumption (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;open&lt;/code&gt; on a Mac).&lt;/p&gt;
+<p>I really wanted to do this separately, so I <a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/git-fork-repo">whipped up a forking
+script</a>.
+In the process, I had to learn how to use the GitHub API and <a href="https://github.com/github/hub/issues/2576">workaround a bug
+in hub’s <code class="language-plaintext highlighter-rouge">api</code> command on enterprise
+hosts</a>. The script outputs the URL of
+the fork for downstream consumption (e.g., <code class="language-plaintext highlighter-rouge">open</code> on a Mac).</p>
 
-&lt;p&gt;After testing the script, I was ready to create all the forks!&lt;/p&gt;
+<p>After testing the script, I was ready to create all the forks!</p>
 
-&lt;p&gt;Well, not exactly. I designed the script to take parameters &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;owner repo&lt;/code&gt;, not
+<p>Well, not exactly. I designed the script to take parameters <code class="language-plaintext highlighter-rouge">owner repo</code>, not
 URL… it is specific to GitHub, after all. So I needed to transform the URLs. I
-probably could have done a combination of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;basename&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dirname&lt;/code&gt;, but for this
-task I wrote an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;awk&lt;/code&gt; script:&lt;/p&gt;
+probably could have done a combination of <code class="language-plaintext highlighter-rouge">basename</code> and <code class="language-plaintext highlighter-rouge">dirname</code>, but for this
+task I wrote an <code class="language-plaintext highlighter-rouge">awk</code> script:</p>
 
-&lt;div class=&quot;language-awk highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#! /usr/bin/env awk -f&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# mk-forkable.awk&lt;/span&gt;
+<div class="language-awk highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#! /usr/bin/env awk -f</span>
+<span class="c1"># mk-forkable.awk</span>
 
-&lt;span class=&quot;kr&quot;&gt;BEGIN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;FS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<span class="kr">BEGIN</span> <span class="p">{</span> <span class="kc">FS</span><span class="o">=</span><span class="s2">"/"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="k">print</span> <span class="nv">$4</span><span class="p">,</span> <span class="nv">$5</span> <span class="p">}</span>
+</code></pre></div></div>
 
-&lt;p&gt;This enabled step one, forking:&lt;/p&gt;
+<p>This enabled step one, forking:</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;URLs ./mk-forkable.awk | xargs &lt;span class=&quot;nt&quot;&gt;-L1&lt;/span&gt; git fork-repo &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;forks
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;URLs ./mk-forkable.awk | xargs <span class="nt">-L1</span> git fork-repo <span class="o">&gt;</span>forks
+</code></pre></div></div>
 
-&lt;p&gt;This gives me a list of fork URLs in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;forks&lt;/code&gt; and creates the forks on GitHub.&lt;/p&gt;
+<p>This gives me a list of fork URLs in <code class="language-plaintext highlighter-rouge">forks</code> and creates the forks on GitHub.</p>
 
-&lt;h2 id=&quot;mass-changes&quot;&gt;Mass changes&lt;/h2&gt;
+<h2 id="mass-changes">Mass changes</h2>
 
-&lt;p&gt;And no, I’m not talking about &lt;em&gt;weight&lt;/em&gt; changes—I mean being able to make
+<p>And no, I’m not talking about <em>weight</em> changes—I mean being able to make
 changes to all the repos! What I really wanted, I realized, was the ability to
 pipe in the list of repositories to a script that would clone them, make the
 changes on a new branch, push that branch, and spit out the repository URL again
-so I could open it up.&lt;/p&gt;
+so I could open it up.</p>
 
-&lt;p&gt;Thus, &lt;a href=&quot;https://github.com/benknoble/Dotfiles/blob/master/links/bin/git-mass-edit&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git-mass-edit&lt;/code&gt; was
-born&lt;/a&gt;.
-The usage really sums up the intended use- and design-case:&lt;/p&gt;
+<p>Thus, <a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/git-mass-edit"><code class="language-plaintext highlighter-rouge">git-mass-edit</code> was
+born</a>.
+The usage really sums up the intended use- and design-case:</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;usage: $0 [-b &amp;lt;branch-name&amp;gt;] [-m &amp;lt;message&amp;gt;] [-r &amp;lt;remote-name&amp;gt;] &amp;lt;edit-command&amp;gt; &amp;lt;repo&amp;gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usage: $0 [-b &lt;branch-name&gt;] [-m &lt;message&gt;] [-r &lt;remote-name&gt;] &lt;edit-command&gt; &lt;repo&gt;
 Executes the following steps:
-  - If &amp;lt;repo&amp;gt; doesn&apos;t exist, clones it
-  - Creates a new branch named &amp;lt;branch-name&amp;gt;
-  - Runs &amp;lt;edit-command&amp;gt; inside the repo
-  - Commits using &amp;lt;message&amp;gt;
-  - Pushes to &amp;lt;branch-name&amp;gt; on &amp;lt;remote-name&amp;gt;
-  - Outputs &amp;lt;repo&amp;gt;
+  - If &lt;repo&gt; doesn't exist, clones it
+  - Creates a new branch named &lt;branch-name&gt;
+  - Runs &lt;edit-command&gt; inside the repo
+  - Commits using &lt;message&gt;
+  - Pushes to &lt;branch-name&gt; on &lt;remote-name&gt;
+  - Outputs &lt;repo&gt;
 Default values:
-  &amp;lt;branch-name&amp;gt;  mass-edit
-  &amp;lt;message&amp;gt;      mass-edit
-  &amp;lt;remote-name&amp;gt;  origin
+  &lt;branch-name&gt;  mass-edit
+  &lt;message&gt;      mass-edit
+  &lt;remote-name&gt;  origin
 Designed to be attached to xargs(1) and an input stream of repos to mass-edit.
 For example, if you have a list of github URLs you want to edit the same way and
 then open up in a browser:
-&amp;lt;URLs xargs -n1 [-P...] git-mass-edit [...] edit-command | xargs open
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;URLs xargs -n1 [-P...] git-mass-edit [...] edit-command | xargs open
+</code></pre></div></div>
 
-&lt;p&gt;All that was left was to build an editing script, which mostly delegates to a
-silenced and nerfed vim, which uses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git-grep&lt;/code&gt; to build a list of lines to
-change and then changes them with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cdo&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;substitute&lt;/code&gt;:&lt;/p&gt;
+<p>All that was left was to build an editing script, which mostly delegates to a
+silenced and nerfed vim, which uses <code class="language-plaintext highlighter-rouge">git-grep</code> to build a list of lines to
+change and then changes them with <code class="language-plaintext highlighter-rouge">cdo</code> and <code class="language-plaintext highlighter-rouge">substitute</code>:</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#! /usr/bin/env bash&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# fix-yaml-var&lt;/span&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /usr/bin/env bash</span>
+<span class="c"># fix-yaml-var</span>
 
-&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-euo&lt;/span&gt; pipefail
+<span class="nb">set</span> <span class="nt">-euo</span> pipefail
 
-log&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;%s\n&apos;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&amp;amp;2
+log<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+<span class="o">}</span> <span class="o">&gt;</span>&amp;2
 
-die&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ex&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+die<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local </span><span class="nv">ex</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">1</span><span class="k">:-</span><span class="nv">1</span><span class="k">}</span><span class="s2">"</span>
+  <span class="nb">exit</span> <span class="s2">"</span><span class="nv">$ex</span><span class="s2">"</span>
+<span class="o">}</span>
 
-main&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  git config user.name &lt;span class=&quot;s1&quot;&gt;&apos;David Knoble&apos;&lt;/span&gt;
-  git config user.email &lt;span class=&quot;s1&quot;&gt;&apos;david.knoble@WORK&apos;&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;oldkey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;old_key
-  &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;newkey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;new_key
-  &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;does-not-exist
-  &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;newval&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;our-new-val
-  vim &lt;span class=&quot;nt&quot;&gt;-es&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-N&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; NONE &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; NONE &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; &amp;lt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DOG&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
+main<span class="o">()</span> <span class="o">{</span>
+  git config user.name <span class="s1">'David Knoble'</span>
+  git config user.email <span class="s1">'david.knoble@WORK'</span>
+  <span class="nb">local </span><span class="nv">oldkey</span><span class="o">=</span>old_key
+  <span class="nb">local </span><span class="nv">newkey</span><span class="o">=</span>new_key
+  <span class="nb">local </span><span class="nv">skip</span><span class="o">=</span>does-not-exist
+  <span class="nb">local </span><span class="nv">newval</span><span class="o">=</span>our-new-val
+  vim <span class="nt">-es</span> <span class="nt">-N</span> <span class="nt">-u</span> NONE <span class="nt">-i</span> NONE <span class="nt">-S</span> &lt;<span class="o">(</span><span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">DOG</span><span class="sh">
   set hidden
-  if !exists(&apos;:Cfilter&apos;) | packadd cfilter | endif
-  let &amp;amp;grepprg = &apos;git grep -n&apos;
-  silent! grep &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$oldkey&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
-  silent! cdo substitute/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$oldkey&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$newkey&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;/g
-  Cfilter! /&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$skip&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;/
-  Cfilter /&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$oldkey&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;:/
-  silent! cdo substitute^:.*^: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$newval&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;^
+  if !exists(':Cfilter') | packadd cfilter | endif
+  let &amp;grepprg = 'git grep -n'
+  silent! grep </span><span class="nv">$oldkey</span><span class="sh">
+  silent! cdo substitute/</span><span class="nv">$oldkey</span><span class="sh">/</span><span class="nv">$newkey</span><span class="sh">/g
+  Cfilter! /</span><span class="nv">$skip</span><span class="sh">/
+  Cfilter /</span><span class="nv">$oldkey</span><span class="sh">:/
+  silent! cdo substitute^:.*^: </span><span class="nv">$newval</span><span class="sh">^
   wall
   quit
-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DOG
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+</span><span class="no">DOG
+</span><span class="o">)</span>
+<span class="o">}</span>
 
-main &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+main <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+</code></pre></div></div>
 
-&lt;p&gt;Finally, I launched the script!&lt;/p&gt;
+<p>Finally, I launched the script!</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;forks xargs &lt;span class=&quot;nt&quot;&gt;-n1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-P8&lt;/span&gt;  git-mass-edit &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; fix-yaml-var &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;some message&apos;&lt;/span&gt; &lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;realpath&lt;/span&gt; ./fix-yaml-var&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt; | xargs &lt;span class=&quot;nt&quot;&gt;-L1&lt;/span&gt;  open
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;forks xargs <span class="nt">-n1</span> <span class="nt">-P8</span>  git-mass-edit <span class="nt">-b</span> fix-yaml-var <span class="nt">-m</span> <span class="s1">'some message'</span> <span class="si">$(</span><span class="nb">realpath</span> ./fix-yaml-var<span class="si">)</span> | xargs <span class="nt">-L1</span>  open
+</code></pre></div></div>
 
-&lt;p&gt;From here, I did the (very manual) process of opening all the PRs. If I had
-been a bit smarter, I would have you used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hub pull-request&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-F&lt;/code&gt; to do
-these, but this might have required additional setup.&lt;/p&gt;
+<p>From here, I did the (very manual) process of opening all the PRs. If I had
+been a bit smarter, I would have you used <code class="language-plaintext highlighter-rouge">hub pull-request</code> with <code class="language-plaintext highlighter-rouge">-F</code> to do
+these, but this might have required additional setup.</p>
 
-&lt;h2 id=&quot;but-wait-theres-more&quot;&gt;But wait, there’s more!&lt;/h2&gt;
+<h2 id="but-wait-theres-more">But wait, there’s more!</h2>
 
-&lt;p&gt;I wanted to collect a list of PRs without trying to web-scrape them off my PRs
-page. I had the repos, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hub&lt;/code&gt;’s command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pr&lt;/code&gt; can show the URL. I needed to
-do some setup, though, because &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hub pr&lt;/code&gt; only works when the remote is the
-upstream repository!&lt;/p&gt;
+<p>I wanted to collect a list of PRs without trying to web-scrape them off my PRs
+page. I had the repos, and <code class="language-plaintext highlighter-rouge">hub</code>’s command <code class="language-plaintext highlighter-rouge">pr</code> can show the URL. I needed to
+do some setup, though, because <code class="language-plaintext highlighter-rouge">hub pr</code> only works when the remote is the
+upstream repository!</p>
 
-&lt;p&gt;First, move the old repos out of the way:&lt;/p&gt;
+<p>First, move the old repos out of the way:</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;forks xargs &lt;span class=&quot;nb&quot;&gt;basename&lt;/span&gt; | xargs &lt;span class=&quot;nt&quot;&gt;-n1&lt;/span&gt; bash &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;mv &quot;$1&quot; benknoble-&quot;$1&quot;&apos;&lt;/span&gt; sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;forks xargs <span class="nb">basename</span> | xargs <span class="nt">-n1</span> bash <span class="nt">-c</span> <span class="s1">'mv "$1" benknoble-"$1"'</span> sh
+</code></pre></div></div>
 
-&lt;p&gt;(Thank goodness &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;basename&lt;/code&gt; works on URLs! Coincidence?)&lt;/p&gt;
+<p>(Thank goodness <code class="language-plaintext highlighter-rouge">basename</code> works on URLs! Coincidence?)</p>
 
-&lt;p&gt;Next, clone the proper repositories:&lt;/p&gt;
+<p>Next, clone the proper repositories:</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;URLs xargs &lt;span class=&quot;nt&quot;&gt;-L1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-P&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;wc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; &amp;lt;URLS&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt; git clone &lt;span class=&quot;nt&quot;&gt;--quiet&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;URLs xargs <span class="nt">-L1</span> <span class="nt">-P</span><span class="si">$(</span><span class="nb">wc</span> <span class="nt">-l</span> &lt;URLS<span class="si">)</span> git clone <span class="nt">--quiet</span>
+</code></pre></div></div>
 
-&lt;p&gt;In parallel, this goes pretty quickly.&lt;/p&gt;
+<p>In parallel, this goes pretty quickly.</p>
 
-&lt;p&gt;Lastly, grab the URLs. Oh, wait, I had to script that too:&lt;/p&gt;
+<p>Lastly, grab the URLs. Oh, wait, I had to script that too:</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#! /bin/sh&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; hub &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;show &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;hub &lt;span class=&quot;nb&quot;&gt;pr &lt;/span&gt;list | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;the PR title&apos;&lt;/span&gt; | fields 1 | &lt;span class=&quot;nb&quot;&gt;cut&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c2-3&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/sh</span>
+<span class="nb">cd</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> hub <span class="nb">pr </span>show <span class="nt">-u</span> <span class="s2">"</span><span class="si">$(</span>hub <span class="nb">pr </span>list | <span class="nb">grep</span> <span class="s1">'the PR title'</span> | fields 1 | <span class="nb">cut</span> <span class="nt">-c2-3</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
 
-&lt;p&gt;Looking back on it, this only works for 2-digit PR numbers :thinking:&lt;/p&gt;
+<p>Looking back on it, this only works for 2-digit PR numbers :thinking:</p>
 
-&lt;p&gt;OK, let’s actually grab those PR numbers:&lt;/p&gt;
+<p>OK, let’s actually grab those PR numbers:</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;URLs xargs &lt;span class=&quot;nt&quot;&gt;-L1&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;basename&lt;/span&gt; | xargs &lt;span class=&quot;nt&quot;&gt;-L1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-P&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;wc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; &amp;lt;URLs&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt; ./get-pr-url &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;prs
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;URLs xargs <span class="nt">-L1</span> <span class="nb">basename</span> | xargs <span class="nt">-L1</span> <span class="nt">-P</span><span class="si">$(</span><span class="nb">wc</span> <span class="nt">-l</span> &lt;URLs<span class="si">)</span> ./get-pr-url <span class="o">&gt;</span>prs
+</code></pre></div></div>
 
-&lt;h2 id=&quot;addendum&quot;&gt;Addendum&lt;/h2&gt;
+<h2 id="addendum">Addendum</h2>
 
-&lt;p&gt;I later had to make some quick fixes, which I did with slightly less up-front
+<p>I later had to make some quick fixes, which I did with slightly less up-front
 automation work. I had to grab the fixes to be made from PR branches, but
 actually make them in the upstream repos in order to pull in the merged changes.
 So the first bit was to grab all the right spots and dumps them to the file
-fixes:&lt;/p&gt;
+fixes:</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;URLs xargs &lt;span class=&quot;nb&quot;&gt;basename&lt;/span&gt; | xargs &lt;span class=&quot;nt&quot;&gt;-n1&lt;/span&gt; bash &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;git -C benknoble-&quot;$1&quot; grep newkey | xargs -L1 echo &quot;$1/&quot;&apos;&lt;/span&gt; sh | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; thing | &lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;s/ //&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;fixes
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;URLs xargs <span class="nb">basename</span> | xargs <span class="nt">-n1</span> bash <span class="nt">-c</span> <span class="s1">'git -C benknoble-"$1" grep newkey | xargs -L1 echo "$1/"'</span> sh | <span class="nb">grep</span> <span class="nt">-w</span> thing | <span class="nb">sed</span> <span class="s1">'s/ //'</span> <span class="o">&gt;</span>fixes
+</code></pre></div></div>
 
-&lt;p&gt;Note the nested &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xargs&lt;/code&gt; to process the grep results and prepend the repository
-name!&lt;/p&gt;
+<p>Note the nested <code class="language-plaintext highlighter-rouge">xargs</code> to process the grep results and prepend the repository
+name!</p>
 
-&lt;p&gt;I loaded this in vim with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-q&lt;/code&gt; flag for the quickfix list and made the edit:&lt;/p&gt;
+<p>I loaded this in vim with the <code class="language-plaintext highlighter-rouge">-q</code> flag for the quickfix list and made the edit:</p>
 
-&lt;div class=&quot;language-vim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&quot; vim -q fixes&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;cdo&lt;/span&gt; s&lt;span class=&quot;sr&quot;&gt;/newkey: \zs.*/&lt;/span&gt;fixed&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;value
-&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;wall&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;q&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">" vim -q fixes</span>
+<span class="p">:</span><span class="k">cdo</span> s<span class="sr">/newkey: \zs.*/</span>fixed<span class="p">-</span>value
+<span class="p">:</span><span class="k">wall</span> <span class="p">|</span> <span class="k">q</span>
+</code></pre></div></div>
 
-&lt;p&gt;Then I created a list of repos that needed the fixes using &lt;a href=&quot;/blog/2019/09/11/fields/&quot;&gt;my old fields
-script&lt;/a&gt;, and used that to create the
-commits. A push to the PR branch and I was good to go.&lt;/p&gt;
+<p>Then I created a list of repos that needed the fixes using <a href="/blog/2019/09/11/fields/">my old fields
+script</a>, and used that to create the
+commits. A push to the PR branch and I was good to go.</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;fixes fields &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt;: 1 | fields &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt;/ 1 | &lt;span class=&quot;nb&quot;&gt;sort&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; fixed-repos
-&amp;lt;fixed-repos xargs &lt;span class=&quot;nt&quot;&gt;-L1&lt;/span&gt; bash &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;cd &quot;$1&quot; &amp;amp;&amp;amp; git add . &amp;amp;&amp;amp; git commit -m &quot;fix the thing&quot;&apos;&lt;/span&gt; sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="dotfiles" /><category term="git" /><category term="github" /><category term="github-workflow" /><category term="json" /><category term="productivity" /><category term="project-management" /><category term="shell" /><summary type="html">I spend 1 day to save 3 immediately, and more long-term, by scripting git into pipelines.</summary></entry><entry><title type="html">Solving a logic puzzle the right way™</title><link href="https://benknoble.github.io/blog/2020/06/22/logic-puzzle-race/" rel="alternate" type="text/html" title="Solving a logic puzzle the right way™" /><published>2020-06-22T00:00:00+00:00</published><updated>2020-06-22T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/06/22/logic-puzzle-race</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/06/22/logic-puzzle-race/">&lt;p&gt;I take a break from my internship with Capital One to solve a puzzle they posed:
-for a chance to win!&lt;/p&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;fixes fields <span class="nt">-f</span>: 1 | fields <span class="nt">-f</span>/ 1 | <span class="nb">sort</span> <span class="nt">-u</span> <span class="o">&gt;</span> fixed-repos
+&lt;fixed-repos xargs <span class="nt">-L1</span> bash <span class="nt">-c</span> <span class="s1">'cd "$1" &amp;&amp; git add . &amp;&amp; git commit -m "fix the thing"'</span> sh
+</code></pre></div></div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="dotfiles" /><category term="git" /><category term="github" /><category term="github-workflow" /><category term="json" /><category term="productivity" /><category term="project-management" /><category term="shell" /><summary type="html"><![CDATA[I spend 1 day to save 3 immediately, and more long-term, by scripting git into pipelines.]]></summary></entry><entry><title type="html">Solving a logic puzzle the right way™</title><link href="https://benknoble.github.io/blog/2020/06/22/logic-puzzle-race/" rel="alternate" type="text/html" title="Solving a logic puzzle the right way™" /><published>2020-06-22T00:00:00+00:00</published><updated>2020-06-22T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/06/22/logic-puzzle-race</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/06/22/logic-puzzle-race/"><![CDATA[<p>I take a break from my internship with Capital One to solve a puzzle they posed:
+for a chance to win!</p>
 
-&lt;p&gt;Today, the intern group sent out a logic puzzle—correct submissions are
+<p>Today, the intern group sent out a logic puzzle—correct submissions are
 entered into a raffle to win prizes. What I really want to do, though, is show
-how I solved it (and discuss some pitfalls along the way).&lt;/p&gt;
+how I solved it (and discuss some pitfalls along the way).</p>
 
-&lt;p&gt;Without further ado, the puzzle:&lt;/p&gt;
+<p>Without further ado, the puzzle:</p>
 
-&lt;blockquote&gt;
-  &lt;p&gt;Valero’s 5k Fun Run was held yesterday in the downtown district. Determine the
+<blockquote>
+  <p>Valero’s 5k Fun Run was held yesterday in the downtown district. Determine the
 shirt color and hometown of each of the top runners, and match each to their
-finishing time.&lt;/p&gt;
+finishing time.</p>
 
-  &lt;p&gt;Clues&lt;/p&gt;
+  <p>Clues</p>
 
-  &lt;ol&gt;
-    &lt;li&gt;Mathew finished 1 minute after Anthony.&lt;/li&gt;
-    &lt;li&gt;The contestant in the white shirt was either Anthony or the runner who
-finished in 22 minutes.&lt;/li&gt;
-    &lt;li&gt;The competitor from Kamrar finished sometime after the runner from Pierson.&lt;/li&gt;
-    &lt;li&gt;Salvador finished 1 minute after the runner in the maroon shirt.&lt;/li&gt;
-    &lt;li&gt;Greg finished 1 minute before the competitor in the white shirt.&lt;/li&gt;
-    &lt;li&gt;The contestant from Corinth didn’t wear the pink shirt.&lt;/li&gt;
-    &lt;li&gt;The contestant who finished in 22 minutes was either the contestant from
-Kamrar or the contestant in the pink shirt.&lt;/li&gt;
-    &lt;li&gt;The competitor who finished in 23 minutes wasn’t from Corinth.&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
+  <ol>
+    <li>Mathew finished 1 minute after Anthony.</li>
+    <li>The contestant in the white shirt was either Anthony or the runner who
+finished in 22 minutes.</li>
+    <li>The competitor from Kamrar finished sometime after the runner from Pierson.</li>
+    <li>Salvador finished 1 minute after the runner in the maroon shirt.</li>
+    <li>Greg finished 1 minute before the competitor in the white shirt.</li>
+    <li>The contestant from Corinth didn’t wear the pink shirt.</li>
+    <li>The contestant who finished in 22 minutes was either the contestant from
+Kamrar or the contestant in the pink shirt.</li>
+    <li>The competitor who finished in 23 minutes wasn’t from Corinth.</li>
+  </ol>
+</blockquote>
 
-&lt;p&gt;What’s not clear from the description is that there is a fourth color
+<p>What’s not clear from the description is that there is a fourth color
 (aquamarine), that no two runners have the same color shirt, nor are any two
 from the same town. (This becomes somewhat more obvious in the grid we were
-given as an aid.)&lt;/p&gt;
+given as an aid.)</p>
 
-&lt;p&gt;The most egregious ambiguity, however, I will save for later.&lt;/p&gt;
+<p>The most egregious ambiguity, however, I will save for later.</p>
 
-&lt;h2 id=&quot;cracking-the-puzzle-in-prolog&quot;&gt;Cracking the puzzle in prolog&lt;/h2&gt;
+<h2 id="cracking-the-puzzle-in-prolog">Cracking the puzzle in prolog</h2>
 
-&lt;p&gt;Prolog is a logic programming language: source code consists of facts and
+<p>Prolog is a logic programming language: source code consists of facts and
 predicates (also called functors; not to be confused with category theory).
-Predicates are often notated &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;name/3&lt;/code&gt; to mean that the predicate &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;name&lt;/code&gt; has 3
-parameters. A simple example:&lt;/p&gt;
+Predicates are often notated <code class="language-plaintext highlighter-rouge">name/3</code> to mean that the predicate <code class="language-plaintext highlighter-rouge">name</code> has 3
+parameters. A simple example:</p>
 
-&lt;div class=&quot;language-prolog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ss&quot;&gt;man&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;socrates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;% socrates is a man&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;mortal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:-&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;man&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;% X is mortal if X is a man&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">man</span><span class="p">(</span><span class="ss">socrates</span><span class="p">).</span> <span class="c1">% socrates is a man</span>
+<span class="ss">mortal</span><span class="p">(</span><span class="nv">X</span><span class="p">)</span> <span class="p">:-</span> <span class="ss">man</span><span class="p">(</span><span class="nv">X</span><span class="p">).</span> <span class="c1">% X is mortal if X is a man</span>
+</code></pre></div></div>
 
-&lt;p&gt;Firing up the interpreter, we can ask questions about the universe, given a set
-of facts and queries:&lt;/p&gt;
+<p>Firing up the interpreter, we can ask questions about the universe, given a set
+of facts and queries:</p>
 
-&lt;div class=&quot;language-prolog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;socrates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;% This is how you load files (omit the .pl extension)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;mortal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;socrates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;man&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;socrates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;mortal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;socrates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">?-</span> <span class="p">[</span><span class="ss">socrates</span><span class="p">].</span> <span class="c1">% This is how you load files (omit the .pl extension)</span>
+<span class="o">?-</span> <span class="ss">mortal</span><span class="p">(</span><span class="ss">socrates</span><span class="p">).</span>
+<span class="ss">true</span><span class="p">.</span>
+<span class="o">?-</span> <span class="ss">man</span><span class="p">(</span><span class="nv">X</span><span class="p">).</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="ss">socrates</span><span class="p">.</span>
+<span class="o">?-</span> <span class="ss">mortal</span><span class="p">(</span><span class="nv">X</span><span class="p">).</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="ss">socrates</span><span class="p">.</span>
+</code></pre></div></div>
 
-&lt;p&gt;Different interpreters give slight different truth/false values.&lt;/p&gt;
+<p>Different interpreters give slight different truth/false values.</p>
 
-&lt;p&gt;Note that not only can we ask if a predicate is true for a value, but we can
+<p>Note that not only can we ask if a predicate is true for a value, but we can
 ask which values satisfy a predicate! With properly coded predicates, this can
 be used to generate solutions to a problem. (The process by which this occurs is
 called unification, an algorithm that also lies at the heart of the
 Hindley-Milner type system and inference algorithm used in Standard ML, the
-precursor to OCaml and Haskell.)&lt;/p&gt;
+precursor to OCaml and Haskell.)</p>
 
-&lt;p&gt;A quick example of a built-in functor, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;member/2&lt;/code&gt; (in some prologs, this
-requires loading a library, but only when used in source-code):&lt;/p&gt;
+<p>A quick example of a built-in functor, <code class="language-plaintext highlighter-rouge">member/2</code> (in some prologs, this
+requires loading a library, but only when used in source-code):</p>
 
-&lt;div class=&quot;language-prolog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;Y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">?-</span> <span class="ss">member</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">]).</span>
+<span class="ss">true</span><span class="p">.</span>
+<span class="o">?-</span> <span class="ss">member</span><span class="p">(</span><span class="nv">X</span><span class="p">,</span> <span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">]).</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="m">1</span> <span class="p">;</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="m">2</span> <span class="p">;</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="m">3</span><span class="p">.</span>
+<span class="o">?-</span> <span class="ss">member</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="p">[</span><span class="nv">X</span><span class="p">,</span><span class="nv">Y</span><span class="p">]).</span>
+<span class="nv">X</span> <span class="o">=</span> <span class="m">1</span> <span class="p">;</span>
+<span class="nv">Y</span> <span class="o">=</span> <span class="m">1</span><span class="p">.</span>
+</code></pre></div></div>
 
-&lt;p&gt;Note that lower-case words are atoms (along with numbers and strings and such),
+<p>Note that lower-case words are atoms (along with numbers and strings and such),
 while upper-case words are variables for unification. And lists have the
-somewhat universal &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[]&lt;/code&gt; syntax.&lt;/p&gt;
+somewhat universal <code class="language-plaintext highlighter-rouge">[]</code> syntax.</p>
 
-&lt;p&gt;Onto the puzzle. We first decide on a representation of the solution: since we
+<p>Onto the puzzle. We first decide on a representation of the solution: since we
 care about the order the 4 people finished in, we’ll use a list to hold the
 runners in order of finish time. Each item will be a list of their name, shirt
-color, and town:&lt;/p&gt;
+color, and town:</p>
 
-&lt;div class=&quot;language-prolog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;% Sol = [[Name, Color, Town] times 4]&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;% the list is ordered by finish time, which is then mapped to 21,22,23,24&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;solve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:-&lt;/span&gt;
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Sol = [[Name, Color, Town] times 4]</span>
+<span class="c1">% the list is ordered by finish time, which is then mapped to 21,22,23,24</span>
+<span class="ss">solve</span><span class="p">(</span><span class="nv">Sol</span><span class="p">)</span> <span class="p">:-</span>
 
-    &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Name1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Name2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Name3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Name4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+    <span class="nv">Sol</span> <span class="o">=</span> <span class="p">[[</span><span class="nv">Name1</span><span class="p">,</span> <span class="nv">Color1</span><span class="p">,</span> <span class="nv">Town1</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name2</span><span class="p">,</span> <span class="nv">Color2</span><span class="p">,</span> <span class="nv">Town2</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name3</span><span class="p">,</span> <span class="nv">Color3</span><span class="p">,</span> <span class="nv">Town3</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name4</span><span class="p">,</span> <span class="nv">Color4</span><span class="p">,</span> <span class="nv">Town4</span><span class="p">]],</span>
+</code></pre></div></div>
 
-&lt;p&gt;Then, we add some uniqueness constraints:&lt;/p&gt;
+<p>Then, we add some uniqueness constraints:</p>
 
-&lt;div class=&quot;language-prolog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;c1&quot;&gt;% puzzle constraints&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;permutation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Name1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Name2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Name3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Name4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;anthony&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;greg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;mathew&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;salvador&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;permutation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Color1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;aquamarine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;maroon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;permutation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Town1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;corinth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;janesville&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;kamrar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pierson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">% puzzle constraints</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Name1</span><span class="p">,</span> <span class="nv">Name2</span><span class="p">,</span> <span class="nv">Name3</span><span class="p">,</span> <span class="nv">Name4</span><span class="p">],</span> <span class="p">[</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">greg</span><span class="p">,</span> <span class="ss">mathew</span><span class="p">,</span> <span class="ss">salvador</span><span class="p">]),</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Color1</span><span class="p">,</span> <span class="nv">Color2</span><span class="p">,</span> <span class="nv">Color3</span><span class="p">,</span> <span class="nv">Color4</span><span class="p">],</span> <span class="p">[</span><span class="ss">aquamarine</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">white</span><span class="p">]),</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Town1</span><span class="p">,</span> <span class="nv">Town2</span><span class="p">,</span> <span class="nv">Town3</span><span class="p">,</span> <span class="nv">Town4</span><span class="p">],</span> <span class="p">[</span><span class="ss">corinth</span><span class="p">,</span> <span class="ss">janesville</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">]),</span>
+</code></pre></div></div>
 
-&lt;p&gt;Then we iterate the puzzle constraints:&lt;/p&gt;
+<p>Then we iterate the puzzle constraints:</p>
 
-&lt;div class=&quot;language-prolog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;c1&quot;&gt;%1&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;nextto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;anthony&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;mathew&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%2&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;anthony&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;nth1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%3&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;ss&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pierson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;ss&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;kamrar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%4&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;nextto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;maroon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;salvador&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%5&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;nextto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;greg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%6&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;corinth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%7&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;nth1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;kamrar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;nth1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%8&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;nth1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;corinth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">%1</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="ss">anthony</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="ss">mathew</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%2</span>
+    <span class="p">(</span><span class="ss">member</span><span class="p">([</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">)</span> <span class="p">;</span> <span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">])),</span>
+    <span class="c1">%3</span>
+    <span class="p">(</span><span class="ss">append</span><span class="p">(</span><span class="nv">Left</span><span class="p">,</span> <span class="nv">Right</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">),</span>
+        <span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">],</span> <span class="nv">Left</span><span class="p">),</span>
+        <span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">],</span> <span class="nv">Right</span><span class="p">)),</span>
+    <span class="c1">%4</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="ss">salvador</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%5</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="ss">greg</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%6</span>
+    <span class="err">\</span><span class="o">+</span><span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%7</span>
+    <span class="p">(</span><span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">])</span> <span class="p">;</span> <span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="nv">_</span><span class="p">])),</span>
+    <span class="c1">%8</span>
+    <span class="err">\</span><span class="o">+</span><span class="ss">nth1</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">]).</span>
+</code></pre></div></div>
 
-&lt;p&gt;Or at least, so we think.&lt;/p&gt;
+<p>Or at least, so we think.</p>
 
-&lt;p&gt;In one early version of this solution, I had the argument order for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nth1/3&lt;/code&gt;
+<p>In one early version of this solution, I had the argument order for <code class="language-plaintext highlighter-rouge">nth1/3</code>
 backwards, giving me bogus answers. In another, I had forgotten to encode the
 uniqueness of the shirt colors and towns, so my solutions had more than one
 person in the same shirt or from the same town!  (Aside: I would love to know if
 there’s a more elegant way to encode those than completely destructing the
-solution.)&lt;/p&gt;
+solution.)</p>
 
-&lt;p&gt;But the really, truly, frustrating thing is that the interpreter gives two
-solutions to these constraints!&lt;/p&gt;
+<p>But the really, truly, frustrating thing is that the interpreter gives two
+solutions to these constraints!</p>
 
-&lt;div class=&quot;language-prolog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;race&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;?-&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;solve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;greg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pierson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;anthony&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;kamrar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;mathew&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;maroon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;janesville&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;salvador&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;aquamarine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;corinth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;greg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;maroon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pierson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;salvador&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;kamrar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;anthony&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;janesville&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;mathew&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;aquamarine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;corinth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">?-</span> <span class="p">[</span><span class="ss">race</span><span class="p">].</span>
+<span class="o">?-</span> <span class="ss">solve</span><span class="p">(</span><span class="nv">S</span><span class="p">).</span>
+<span class="nv">S</span> <span class="o">=</span> <span class="p">[[</span><span class="ss">greg</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">],</span> <span class="p">[</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">],</span> <span class="p">[</span><span class="ss">mathew</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="ss">janesville</span><span class="p">],</span> <span class="p">[</span><span class="ss">salvador</span><span class="p">,</span> <span class="ss">aquamarine</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">]]</span> <span class="p">;</span>
+<span class="nv">S</span> <span class="o">=</span> <span class="p">[[</span><span class="ss">greg</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">],</span> <span class="p">[</span><span class="ss">salvador</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">],</span> <span class="p">[</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">janesville</span><span class="p">],</span> <span class="p">[</span><span class="ss">mathew</span><span class="p">,</span> <span class="ss">aquamarine</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">]]</span> <span class="p">;</span>
+</code></pre></div></div>
 
-&lt;p&gt;Worse, working through the constraints, both are entirely valid—unless you
-read &lt;em&gt;or&lt;/em&gt; as &lt;em&gt;exclusive or&lt;/em&gt;! Then, Anthony can no longer be wearing the white
-shirt, and the second solution is the only valid one. Some claim &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;;&lt;/code&gt; is supposed
+<p>Worse, working through the constraints, both are entirely valid—unless you
+read <em>or</em> as <em>exclusive or</em>! Then, Anthony can no longer be wearing the white
+shirt, and the second solution is the only valid one. Some claim <code class="language-plaintext highlighter-rouge">;</code> is supposed
 to mean exclusive or, others that is logical or (which isn’t exclusive). Alas,
 I found no easy way to rectify the final code (below) to account for this
-oddity short of mapping &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a ; b&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(a, \+b ; b, \+a)&lt;/code&gt;, which I find ugly.&lt;/p&gt;
+oddity short of mapping <code class="language-plaintext highlighter-rouge">a ; b</code> to <code class="language-plaintext highlighter-rouge">(a, \+b ; b, \+a)</code>, which I find ugly.</p>
 
-&lt;div class=&quot;language-prolog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;% vim: ft=prolog&lt;/span&gt;
+<div class="language-prolog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% vim: ft=prolog</span>
 
-&lt;span class=&quot;p&quot;&gt;:-&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;use_module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;lists&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;
+<span class="p">:-</span> <span class="ss">use_module</span><span class="p">(</span><span class="ss">library</span><span class="p">(</span><span class="ss">lists</span><span class="p">)).</span>
 
-&lt;span class=&quot;c1&quot;&gt;% Sol = [[Name, Color, Town] times 4]&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;% the list is ordered by finish time, which is then mapped to 21,22,23,24&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;solve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:-&lt;/span&gt;
+<span class="c1">% Sol = [[Name, Color, Town] times 4]</span>
+<span class="c1">% the list is ordered by finish time, which is then mapped to 21,22,23,24</span>
+<span class="ss">solve</span><span class="p">(</span><span class="nv">Sol</span><span class="p">)</span> <span class="p">:-</span>
 
-    &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Name1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Name2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Name3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-           &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Name4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt;
+    <span class="nv">Sol</span> <span class="o">=</span> <span class="p">[[</span><span class="nv">Name1</span><span class="p">,</span> <span class="nv">Color1</span><span class="p">,</span> <span class="nv">Town1</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name2</span><span class="p">,</span> <span class="nv">Color2</span><span class="p">,</span> <span class="nv">Town2</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name3</span><span class="p">,</span> <span class="nv">Color3</span><span class="p">,</span> <span class="nv">Town3</span><span class="p">],</span>
+           <span class="p">[</span><span class="nv">Name4</span><span class="p">,</span> <span class="nv">Color4</span><span class="p">,</span> <span class="nv">Town4</span><span class="p">]],</span>
 
-    &lt;span class=&quot;c1&quot;&gt;% puzzle constraints&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;permutation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Name1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Name2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Name3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Name4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;anthony&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;greg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;mathew&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;salvador&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;permutation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Color1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Color4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;aquamarine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;maroon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;permutation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Town1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Town4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;corinth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;janesville&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;kamrar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pierson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;
+    <span class="c1">% puzzle constraints</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Name1</span><span class="p">,</span> <span class="nv">Name2</span><span class="p">,</span> <span class="nv">Name3</span><span class="p">,</span> <span class="nv">Name4</span><span class="p">],</span> <span class="p">[</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">greg</span><span class="p">,</span> <span class="ss">mathew</span><span class="p">,</span> <span class="ss">salvador</span><span class="p">]),</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Color1</span><span class="p">,</span> <span class="nv">Color2</span><span class="p">,</span> <span class="nv">Color3</span><span class="p">,</span> <span class="nv">Color4</span><span class="p">],</span> <span class="p">[</span><span class="ss">aquamarine</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">white</span><span class="p">]),</span>
+    <span class="ss">permutation</span><span class="p">([</span><span class="nv">Town1</span><span class="p">,</span> <span class="nv">Town2</span><span class="p">,</span> <span class="nv">Town3</span><span class="p">,</span> <span class="nv">Town4</span><span class="p">],</span> <span class="p">[</span><span class="ss">corinth</span><span class="p">,</span> <span class="ss">janesville</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">]),</span>
 
-    &lt;span class=&quot;c1&quot;&gt;%1&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;nextto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;anthony&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;mathew&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%2&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;anthony&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;nth1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%3&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;ss&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pierson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;ss&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;kamrar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%4&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;nextto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;maroon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;salvador&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%5&lt;/span&gt;
-    &lt;span class=&quot;ss&quot;&gt;nextto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;greg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%6&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;corinth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%7&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;nth1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;kamrar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;nth1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])),&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;%8&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;nth1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Sol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;corinth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="breaks" /><category term="capital one" /><category term="puzzle" /><category term="prolog" /><category term="prog-langs" /><category term="intern" /><summary type="html">I take a break from my internship with Capital One to solve a puzzle they posed: for a chance to win!</summary></entry></feed>
+    <span class="c1">%1</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="ss">anthony</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="ss">mathew</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%2</span>
+    <span class="p">(</span><span class="ss">member</span><span class="p">([</span><span class="ss">anthony</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">)</span> <span class="p">;</span> <span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">])),</span>
+    <span class="c1">%3</span>
+    <span class="p">(</span><span class="ss">append</span><span class="p">(</span><span class="nv">Left</span><span class="p">,</span> <span class="nv">Right</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">),</span>
+        <span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">pierson</span><span class="p">],</span> <span class="nv">Left</span><span class="p">),</span>
+        <span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">],</span> <span class="nv">Right</span><span class="p">)),</span>
+    <span class="c1">%4</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="ss">maroon</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="ss">salvador</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%5</span>
+    <span class="ss">nextto</span><span class="p">([</span><span class="ss">greg</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">white</span><span class="p">,</span> <span class="nv">_</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%6</span>
+    <span class="err">\</span><span class="o">+</span><span class="ss">member</span><span class="p">([</span><span class="nv">_</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">],</span> <span class="nv">Sol</span><span class="p">),</span>
+    <span class="c1">%7</span>
+    <span class="p">(</span><span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">kamrar</span><span class="p">])</span> <span class="p">;</span> <span class="ss">nth1</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="ss">pink</span><span class="p">,</span> <span class="nv">_</span><span class="p">])),</span>
+    <span class="c1">%8</span>
+    <span class="err">\</span><span class="o">+</span><span class="ss">nth1</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="nv">Sol</span><span class="p">,</span> <span class="p">[</span><span class="nv">_</span><span class="p">,</span> <span class="nv">_</span><span class="p">,</span> <span class="ss">corinth</span><span class="p">]).</span>
+</code></pre></div></div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="breaks" /><category term="capital one" /><category term="puzzle" /><category term="prolog" /><category term="prog-langs" /><category term="intern" /><summary type="html"><![CDATA[I take a break from my internship with Capital One to solve a puzzle they posed: for a chance to win!]]></summary></entry></feed>
