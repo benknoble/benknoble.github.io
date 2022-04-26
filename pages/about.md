@@ -44,6 +44,7 @@ the Stack Exchange network (primarly [vim][vim], though I still use
 
 {% include SO_flair.html %}
 {% include github_flair.html %}
+{% include aws_badge.html %}
 
 Please [contact me][contact] with questions, corrections, or to chat.
 
