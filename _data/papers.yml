@@ -13,6 +13,20 @@
         school = {UNC Chapel Hill},
         url = {https://doi.org/10.17615/0ynq-9r07}
     }
+- title: On the State of Verified Programs Research
+  authors: ['D. Ben Knoble']
+  url: https://github.com/benknoble/ms-report/releases/tag/submitted-report
+  date: 2021-04-18
+  citation: |
+    @thesis{Knoble_2021,
+        type = {Master's Thesis},
+        author = {D. Ben Knoble},
+        year = 2021,
+        month = 4,
+        title = {On the State of Verified Programs Research},
+        school = {UNC Chapel Hill},
+        url = {https://github.com/benknoble/ms-report/releases/tag/submitted-report}
+    }
 - title: Early Prediction of Autism Spectrum Disorder at 12 months of Age from Brain Morphometry
   authors: ['D. Ben Knoble']
   url: https://cdr.lib.unc.edu/concern/honors_theses/xg94hv802
