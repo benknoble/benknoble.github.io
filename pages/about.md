@@ -33,6 +33,8 @@ biggest personal interests in the computer science sphere are programming
 languages and programming tools. Outside of that, I'm an avid biker,
 clarinetist, martial artist, reader, and gamer.
 
+[By a wonderful fluke, my Erdős number is 4.](https://sites.google.com/site/dicksites/)
+
 I'm keeping track of my "developer level" via a [set of challenges that span a
 broad array of programming, development, learning, and teaching
 categories](https://benknoble.github.io/level-up/).
