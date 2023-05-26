@@ -16,7 +16,7 @@ module LiterateProgramming
       site = context.registers[:site]
       output_dir = @scribble_doc.sub(/\.scrbl$/, '')
       full_output_dir = File.join(site.config['source'], output_dir)
-      FileUtils.mkdir_p(full_output_dir) unless File.exists?(full_output_dir)
+      FileUtils.mkdir_p(full_output_dir) unless File.exist?(full_output_dir)
 
       redirect_url = "https://docs.racket-lang.org/local-redirect/index.html"
       scribble_command = "raco scribble --html +m --redirect #{redirect_url} --dest #{full_output_dir} #{@scribble_doc}"
@@ -27,7 +27,7 @@ module LiterateProgramming
         site.static_files << Jekyll::StaticFile.new(site, site.config['source'], output_dir, File.basename(file))
       end
       Jekyll::Hooks.register :site, :post_write do |_|
-        if File.exists?(full_output_dir)
+        if File.exist?(full_output_dir)
           Jekyll.logger.info "Scribbler:", "Cleaning up #{full_output_dir}"
           FileUtils.rm_r(full_output_dir, secure: true)
         end
