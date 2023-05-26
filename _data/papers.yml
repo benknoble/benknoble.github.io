@@ -1,4 +1,24 @@
 ---
+- title: '"I Could Be Unemployed the Rest of the Year": Unprecedented Times and the Challenges of "Making More"'
+  authors: ['Alexandrea J. Ravenelle', 'Savannah Knoble']
+  url: https://www.rsfjournal.org/content/9/3/110
+  date: 2023-05-26
+  citation: |
+    @article{Ravenelle_23,
+        author = {Alexandrea J. Ravenelle and Savannah Knoble},
+        title = {``I Could Be Unemployed the Rest of the Year'': Unprecedented Times and the Challenges of ``Making More''},
+        volume = {9},
+        number = {3},
+        pages = {110--131},
+        year = {2023},
+        month = {5},
+        doi = {10.7758/RSF.2023.9.3.05},
+        publisher = {RSF: The Russell Sage Foundation Journal of the Social Sciences},
+        issn = {2377-8253},
+        URL = {https://www.rsfjournal.org/content/9/3/110},
+        eprint = {https://www.rsfjournal.org/content/9/3/110.full.pdf},
+        journal = {RSF: The Russell Sage Foundation Journal of the Social Sciences}
+    }
 - title: From Mass Incarceration to Invisible Incarceration
   authors: ['Savannah Newton']
   url: https://doi.org/10.17615/0ynq-9r07
