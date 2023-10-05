@@ -1,4 +1,25 @@
 ---
+- title: Functional Shell and Reusable Components for Easy GUIs
+  authors: ['D. Ben Knoble', 'Bogdan Popa']
+  url: https://racket.discourse.group/t/funarch-2023-functional-shell-and-reusable-components-for-easy-guis/2288
+  date: 2023-08-31
+  citation: |
+    @inproceedings{10.1145/3609025.3609478,
+        author = {Knoble, D. Ben and Popa, Bogdan},
+        title = {Functional Shell and Reusable Components for Easy GUIs},
+        year = {2023},
+        isbn = {9798400702976},
+        publisher = {Association for Computing Machinery},
+        address = {New York, NY, USA},
+        url = {https://doi.org/10.1145/3609025.3609478},
+        doi = {10.1145/3609025.3609478},
+        booktitle = {Proceedings of the 1st ACM SIGPLAN International Workshop on Functional Software Architecture},
+        pages = {20–28},
+        numpages = {9},
+        keywords = {Functional wrapper, Reactive GUI},
+        location = {Seattle, WA, USA},
+        series = {FUNARCH 2023}
+    }
 - title: '"I Could Be Unemployed the Rest of the Year": Unprecedented Times and the Challenges of "Making More"'
   authors: ['Alexandrea J. Ravenelle', 'Savannah Knoble']
   url: https://www.rsfjournal.org/content/9/3/110
