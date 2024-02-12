@@ -19,6 +19,14 @@ the input a word in the grid" algorithm. This relates to McCarthy's solver,
 which generates words with a similar flood-fill and tests for their presence in
 a trie-like dictionary.
 
+Notes: according to @hyperlink["https://oeis.org/A236690"]{OEIS: Number of
+simple directed paths on an n X n king graph}, there are 12029640 possible paths
+in a @math{4x4} Boggle board. The first version of the racket generator, when
+asked to generate all words with length between 0 and 16 characters, finds
+exactly that many words (in about 25 seconds; checking each word takes far
+longer). When limited to words between 3 and 8 characters, the generator finds
+283300 words (correctly?) in about half a second.
+
 @section[#:style 'non-toc]{Setup}
 
 We'll use McCarthy's board representation, which is a hash mapping
@@ -124,8 +132,10 @@ board.
 The general structure will be something like this.
 
 @chunk[<tests>
-        (for ([word (find-words board maximum-word-length)])
-          (check-in-board word board))]
+        (for/fold ([count 0])
+          ([word (find-words board maximum-word-length)])
+          (check-in-board word board)
+          (add1 count))]
 
 And @racket[check-in-board] is straightforward.
 
@@ -624,7 +634,7 @@ Put the code in this order.
 
         <check-in-board>
         <check-not-in-board>
-        <tests>
+        (time (displayln <tests>))
 
         <racklog-machine>
         <racklog-core>

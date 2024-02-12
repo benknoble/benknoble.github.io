@@ -69,12 +69,12 @@ and run `:exec getline('.')` in vim).
 - ~~[ ] April: able to ride to Jordan Lake~~
 - ~~[ ] May: combined March + April~~
 - [x] June: Fitness center rides
-- [ ] July: Fitness center & local rides
-- [ ] August: To/from work
-- [ ] September: To/from work
-- [ ] October: To/from work
-- [ ] November: To/from work
-- [ ] December: To/from work
+- [x] July: Fitness center & local rides
+- [ ] August: Fitness center & local rides
+- [x] September: Fitness center & local rides
+- [ ] October: Fitness center & local rides
+- [ ] November: Fitness center & local rides
+- [x] December: Fitness center & local rides
 
 # Play or run a game of D&D (or other RPG) at least once a month
 
@@ -87,13 +87,13 @@ and run `:exec getline('.')` in vim).
 - ~~[ ] March: find a game~~
 - ~~[ ] April: find a game~~
 - ~~[ ] May: find a game~~
-- [ ] June: find a game
-- [ ] July: find a game
+- ~~[ ] June: find a game~~
+- ~~[ ] July: find a game~~
 - [ ] August: find a game
 - [ ] September: find a game
 - [ ] October: find a game
 - [ ] November: find a game
-- [ ] December: find a game
+- [x] December: Start a game
 
 # Take a project bullet and spike it, plan/design it, or scrap/complete it at least every week
 
