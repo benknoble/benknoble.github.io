@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Solving Boggle</title>
+  <title>Junk Drawer : A Strategy to Change Core Data Structures in Programs</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -67,21 +67,94 @@
   </ul>
 </nav>
 
-      <h1>Solving Boggle</h1>
+      <h1>A Strategy to Change Core Data Structures in Programs</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 27 Oct 2021 in Blog</p>
+ on 13 Feb 2024 in Blog</p>
 <div id="post">
-  <p>I solve Boggle in several languages. The following post is a literate program
-written in Scribble.</p>
+  <p>This relates to the refactoring rule “Make the change easy, then make
+the easy change” from Kent Beck. He warns that the first step may be hard. I
+present one strategy to make the first step easier for data structure
+presentations.</p>
 
-<p><a href="https://benknoble.github.io/scribblings/2021-10-27-boggle/2021-10-27-boggle.html">View full size</a></p>
-<iframe class="scribbled" src="https://benknoble.github.io/scribblings/2021-10-27-boggle/2021-10-27-boggle.html" title="Scribbled blog post"></iframe>
+<p>It sounds so simple when you say it out loud: change either the data structure
+or the data-processing programs, one at a time.</p>
 
+<h2 id="motivation">Motivation</h2>
+
+<p>Imagine you have a data structure that maps decks of cards to numbers as a core
+piece of a program. This represents some way of constructing a mixed deck by
+drawing cards from each of the decks. Naturally you have some programs that
+manipulate this data. You might have</p>
+<ul>
+  <li>a program to convert the mapping into a mixed deck</li>
+  <li>a program to update the mapping</li>
+  <li>a program to display the mapping in a graphical interface</li>
+  <li>etc.</li>
+</ul>
+
+<p>Now suppose you need to make a change to support enhancing specific cards in the
+decks.</p>
+
+<p>You could make this change by adding a program to update the mapping by finding
+the deck, converting it to a new deck with the enhanced card, and swapping the
+key (keeping the old value). Let’s say that poses several challenges and has
+some negative trade-offs.</p>
+
+<p>Another way to solve the problem is to split your data structure into 2 pieces:</p>
+<ul>
+  <li>a mapping from card <em>types</em> to numbers (how many cards of that type in the
+mixed deck)</li>
+  <li>a mapping from card <em>types</em> to decks (what deck to draw from)
+See, each relation in the original mapping had an implicit 3rd component: the
+type of cards in the relationship. With this split, the programs above need
+changes. The program to enhance cards need only update the second mapping to
+point to an enhanced deck, though, and is simpler to reason about.</li>
+</ul>
+
+<p>How do you make this change incrementally (with small, focused commits) and keep
+your tests passing?</p>
+
+<p>In case the benefits of this approach aren’t obvious:</p>
+<ul>
+  <li>Small focused commits makes review easier. Large commits are hard to reason
+about.</li>
+  <li>Passing tests at all commits increases my confidence that I’m not breaking the
+system as I make changes.</li>
+  <li>I also have to keep less in my head at a time, and have a cleaner pause point
+if I need to take a break or to deal with an interruption.</li>
+</ul>
+
+<h2 id="the-2-part-strategy">The 2-part Strategy</h2>
+
+<ol>
+  <li>Change either the data structure <em>or</em> the contract of all the programs that
+manipulate it. Add adapters as necessary.</li>
+  <li>Change the other.</li>
+</ol>
+
+<p>Changing everything at once is hard. <a href="https://github.com/benknoble/frosthaven-manager/commit/11494ba86888ef84901def135c26656410abcbc8">In a recent merge, I changed the programs
+first and then split the
+data</a>.
+The full diff looks quite large, but <a href="https://github.com/benknoble/frosthaven-manager/compare/feca028...3c56606">the individual commits in that
+range</a>
+are quite focused.</p>
+
+<p>Let’s say you change the contract of the programs first. This means accepting
+arguments for the split data structures and manipulating those. It also requires
+adapting the old data structure into the new ones somehow, so you’ll end up with
+code to convert old to new at the call-site. And everything should still work,
+though you probably haven’t written the enhancement program yet.</p>
+
+<p>Now you can change the data structure, which allows you to throw away the
+adapter code at call-sites because the new structures line up with the existing
+contracts.</p>
+
+<p>Finally, you can write the easy program you wanted to for enhancement.</p>
 
 </div>
 <hr/>
@@ -89,20 +162,14 @@ written in Scribble.</p>
 <ul class="tags">
   
     <li>
-      <a href="https://benknoble.github.io/tags#literate-programming" class="tag">
-        literate-programming
+      <a href="https://benknoble.github.io/tags#refactor" class="tag">
+        refactor
       </a>
     </li>
   
     <li>
-      <a href="https://benknoble.github.io/tags#prog-langs" class="tag">
-        prog-langs
-      </a>
-    </li>
-  
-    <li>
-      <a href="https://benknoble.github.io/tags#prolog" class="tag">
-        prolog
+      <a href="https://benknoble.github.io/tags#advice" class="tag">
+        advice
       </a>
     </li>
   
@@ -113,8 +180,8 @@ written in Scribble.</p>
     </li>
   
     <li>
-      <a href="https://benknoble.github.io/tags#racklog" class="tag">
-        racklog
+      <a href="https://benknoble.github.io/tags#frosthaven-manager" class="tag">
+        frosthaven-manager
       </a>
     </li>
   
@@ -134,8 +201,8 @@ written in Scribble.</p>
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2021/10/27/boggle/";
-    this.page.identifier = "/blog/2021/10/27/boggle";
+    this.page.url = "https://benknoble.github.io/blog/2024/02/13/data-structure/";
+    this.page.identifier = "/blog/2024/02/13/data-structure";
   };
 
   function load_comments(div) {
@@ -154,21 +221,17 @@ written in Scribble.</p>
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2021/07/09/time-wasted-learning/"
-      title="Learning is not (usually) time wasted">
+    <a href="https://benknoble.github.io/blog/2021/10/27/boggle/"
+      title="Solving Boggle">
       Previous</a>
   </span>
   
   
-  <span id="next">
-    <a href="https://benknoble.github.io/blog/2024/02/13/data-structure/"
-       title="A Strategy to Change Core Data Structures in Programs">
-      Next</a>
-  </span>
+  <span id="no-next">Next</span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#solving-boggle">
+  <a href="/categories/#a-strategy-to-change-core-data-structures-in-programs">
     Back to posts</a>
 </div>
 
