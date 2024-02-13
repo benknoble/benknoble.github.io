@@ -26,9 +26,9 @@ jobs:
         run: raco pkg install scribble-lp2-manual
 
       - name: Setup ruby
-        uses: ruby/setup-ruby@v1.76.0
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0'
+          ruby-version: '3.2'
           bundler-cache: true
 
       - name: Build
