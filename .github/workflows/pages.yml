@@ -10,12 +10,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: true
 
       - name: Install Racket
-        uses: Bogdanp/setup-racket@v0.11
+        uses: Bogdanp/setup-racket@v1.11
         with:
           architecture: 'x64'
           distribution: 'full'

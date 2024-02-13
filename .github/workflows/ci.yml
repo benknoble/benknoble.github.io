@@ -10,7 +10,7 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - uses: ruby/setup-ruby@v1
@@ -19,7 +19,7 @@ jobs:
           bundler-cache: true
 
       - name: Install Racket
-        uses: Bogdanp/setup-racket@v0.11
+        uses: Bogdanp/setup-racket@v1.11
         with:
           architecture: 'x64'
           distribution: 'full'
