@@ -7,7 +7,7 @@ category: [ Blog ]
 This relates to the refactoring rule "Make the change easy, then make
 the easy change" from Kent Beck. He warns that the first step may be hard. I
 present one strategy to make the first step easier for data structure
-presentations.
+changes.
 
 It sounds so simple when you say it out loud: change either the data structure
 or the data-processing programs, one at a time.
