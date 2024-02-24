@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Performance of Racket Pict Comparison</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Performance of Racket Pict Comparison</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 15 Feb 2024 in Blog</p>
+<div id="post">
+  <p>I get a brief glimpse of the performance characteristics of two methods for
+comparing <code class="language-plaintext highlighter-rouge">pict</code>s for equality.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>For recent work in the <a href="https://benknoble.github.io/frosthaven-manager">Frosthaven
+Manager</a>, I want to quickly and
+accurately compare two generated pictures (called
+<a href="https://docs.racket-lang.org/pict/index.html"><code class="language-plaintext highlighter-rouge">pict</code></a>s in Racket parlance) for
+equality. This must be accurate and fast to solve a user-experience problem:
+interacting with onscreen elements of the Frosthaven Manager causes unrelated
+items to flicker. I initially solved this in commit <a href="https://github.com/benknoble/frosthaven-manager/commit/8e6da623b613d286a8d24765c37307ccadba4981">8e6da62 (rich-text-view:
+skip updates when content hasn’t changed,
+2024-02-04)</a>
+by comparing new content with old content to avoid re-rendering the same stuff.
+But since pixel-for-pixel equivalent <code class="language-plaintext highlighter-rouge">pict</code>s may differ according to <code class="language-plaintext highlighter-rouge">equal?</code>, I
+need a transformation <code class="language-plaintext highlighter-rouge">f</code> such that <code class="language-plaintext highlighter-rouge">(equal? (f p) (f q))</code> is true for
+equivalent <code class="language-plaintext highlighter-rouge">pict</code>s <code class="language-plaintext highlighter-rouge">p</code> and <code class="language-plaintext highlighter-rouge">q</code>.</p>
+
+<p>I believe such <code class="language-plaintext highlighter-rouge">pict</code>s are currently compared for pointer equality only (that
+is, using <code class="language-plaintext highlighter-rouge">eq?</code> semantics) because a <code class="language-plaintext highlighter-rouge">pict</code> is a non-transparent structure. In
+addition it is documented to contain something that is roughly like a procedure.
+Procedures are compared for pointer equality, too; <code class="language-plaintext highlighter-rouge">(equal? (λ (x) x) (λ (x)
+x))</code> does not hold.</p>
+
+<p>A brief documentation search produced two promising candidates:</p>
+<ol>
+  <li>The procedure
+<a href="https://docs.racket-lang.org/pict/Rendering.html#%28def._%28%28lib._pict%2Fmain..rkt%29._pict-~3eargb-pixels%29%29"><code class="language-plaintext highlighter-rouge">pict-&gt;argb-pixels</code></a>
+returns the byte-vector corresponding to a bitmap of the picture.
+Byte-vectors can be compared for equality. While I expect that bitmaps lose
+fidelity compared to the internal representation, for the images used by the
+Frosthaven Manager the fidelity of the bitmap is sufficient. Below, I refer
+to this as the “bytes” method of comparison and the “bytes” transformer.</li>
+  <li>The class <a href="https://docs.racket-lang.org/draw/record-dc_.html"><code class="language-plaintext highlighter-rouge">record-dc%</code></a>
+behaves like a normal drawing context except that it records drawing actions.
+These recorded actions can be replayed to another context or extracted into a
+serializable format. This format is, coincidentally, suitable for comparison
+by <code class="language-plaintext highlighter-rouge">equal?</code> directly. Unlike <code class="language-plaintext highlighter-rouge">pict-&gt;argb-pixels</code>, using a <code class="language-plaintext highlighter-rouge">record-dc%</code>
+requires a little extra code:
+    <div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">p</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="nf">dc</span> <span class="p">(</span><span class="nf">new</span> <span class="nv">record-dc%</span><span class="p">)])</span>
+    <span class="p">(</span><span class="nf">draw-pict</span> <span class="nv">p</span> <span class="nv">dc</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">send</span> <span class="nv">dc</span> <span class="nv">get-recorded-datum</span><span class="p">)))</span>
+</code></pre></div>    </div>
+    <p>I refer to this as the “record-dc” method of comparison and the “record-dc”
+transformer.</p>
+  </li>
+</ol>
+
+<h2 id="hypotheses">Hypotheses</h2>
+
+<p>Recall that I have 2 requirements for the equality comparison: it must be
+<em>accurate</em> (I don’t want to skip a needed redraw or perform an unnecessary one)
+and <em>fast</em> (it can’t delay the rest of the application noticeably). As I thought
+about the methods I was considering, I added an extra desideratum: because these
+transformations will generate values that will be garbage post-comparison, the
+results should not be wasteful with memory and therefore trigger more frequent
+garbage collection that could result in an unresponsive application.
+Fortunately, the application mostly operates at human timescales and has “idle”
+time. Unfortunately, I cannot control the collector (or the duration of the
+“idle” time) to guarantee that GC pauses only occur when they would go
+completely unnoticed.</p>
+
+<p>With these factors in mind, I formed the following hypotheses:</p>
+<ol>
+  <li>The bytes method and the record-dc method perform at roughly equal speeds.</li>
+  <li>The record-dc method uses more memory.</li>
+</ol>
+
+<p>Hypotheses (1) is supported. In a shocking twist, it appears that the bytes
+method uses marginally more memory (but this is “eyeball” statistics: I have not
+performed a statistical test; I do not have a p-value; this does not generalize
+beyond my dataset).</p>
+
+<p>I arrived at these hypotheses by noting that both methods perform a similar
+transformation: draw the picture and extract some comparable information. I
+expected the bytes method to perform slightly faster on the assumption that
+byte-vector comparison is fast and that the comparable values from the record-dc
+transformer would be large enough in memory to slow down comparison. This latter
+expectation is not supported by my data; indeed, the inverse (that the record-dc
+method is faster) is.</p>
+
+<h2 id="experimental-method">Experimental Method</h2>
+
+<p>I constructed a benchmarking program that could be run in a matrix of modes. A
+parameter \(N\) controls the number of iterations of each mode; what follows
+describes a single iteration for each mode. The four modes are:</p>
+<ol>
+  <li>A time benchmark using the bytes method.</li>
+  <li>A time benchmark using the memory method.</li>
+  <li>A memory benchmark using the bytes method.</li>
+  <li>A memory benchmark using the memory method.</li>
+</ol>
+
+<p>Since each iteration executes independent of the method, I will describe each
+benchmark mode in terms of a general method \(M\).</p>
+
+<p>Each benchmark used a table of <code class="language-plaintext highlighter-rouge">pict</code> comparisons with 582 entries. This
+resulted in 1164 applications of transformers per run. Each benchmark was run a
+minimum of 10 times by <code class="language-plaintext highlighter-rouge">hyperfine</code>.</p>
+
+<h3 id="time-benchmarks">Time Benchmarks</h3>
+
+<p>The time benchmark iterates the table of <code class="language-plaintext highlighter-rouge">pict</code> comparisons \(N\) times; for
+each, it compares two <code class="language-plaintext highlighter-rouge">pict</code>s (outputting timing information of the entire
+comparison, which includes the use of the transformers, using the <code class="language-plaintext highlighter-rouge">time</code> form)
+and checks that the result of the comparison is as expected.</p>
+
+<p>Since <code class="language-plaintext highlighter-rouge">hyperfine</code> ran the time benchmarks 10 times with \(N=1\), this results in
+5820 data-points for each method for each of real, cpu, and gc time, for a grand
+total of 11640 points.</p>
+
+<h3 id="memory-benchmarks">Memory Benchmarks</h3>
+
+<p>The memory benchmark iterates the table of <code class="language-plaintext highlighter-rouge">pict</code> comparisons \(N\) times. For
+each iteration of the table, we perform the ritualistic GC dance (call
+<code class="language-plaintext highlighter-rouge">collect-garbage</code> 3 times) and measure current memory use. Then we construct the
+objects that would be compared using the transformer under benchmark. Finally,
+we print the difference of current memory use (after constructing the objects)
+and original memory use (after garbage collection).</p>
+
+<p>I cannot guarantee that GC does not occur during the iteration of the table,
+which would skew results. An earlier version of the memory benchmark only
+collected garbage before iterating the entire table and likely had to GC midway.
+The current version may still GC midway, but it is far less likely now.</p>
+
+<p>Since <code class="language-plaintext highlighter-rouge">hyperfine</code> ran the time benchmarks 10 times with \(N=1\), this results in
+5820 data-points for each method for a grand total of 11640 points.</p>
+
+<h2 id="results">Results</h2>
+
+<p>Pretty pictures first. These are box and whisker plots that show mean, IQR, and
+outliers.</p>
+
+<p><img src="/assets/img/pict-bench-time.svg" alt="Time spent comparing picts" /></p>
+
+<p>The time chart is segmented by where the time was spent. In real and cpu time,
+the record-dc averages 2ms faster. Most gc times are 0.</p>
+
+<p><img src="/assets/img/pict-bench-memory.svg" alt="Memory use by pict transformers for comparison" /></p>
+
+<p>The memory chart shows that the record-dc averages less than 250KiB less memory
+use, which is easier to see on a chart with no outliers.</p>
+
+<p><img src="/assets/img/pict-bench-memory2.svg" alt="Memory use by pict transformers for comparison without outliers" /></p>
+
+<p>Here are the <code class="language-plaintext highlighter-rouge">hyperfine</code> outputs at various commits.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 00366fdb3712bf4359c5a7dc551de2a0fc33e716
+hyperfine 'racket bench.rkt --time --bytes -n 1 &gt;&gt; time-bytes' 'racket bench.rkt --time --record-dc -n 1 &gt;&gt; time-record-dc'
+Benchmark 1: racket bench.rkt --time --bytes -n 1 &gt;&gt; time-bytes
+  Time (mean ± σ):     10.036 s ±  0.044 s    [User: 9.491 s, System: 0.285 s]
+  Range (min … max):    9.962 s … 10.086 s    10 runs
+
+Benchmark 2: racket bench.rkt --time --record-dc -n 1 &gt;&gt; time-record-dc
+  Time (mean ± σ):      8.798 s ±  0.049 s    [User: 8.283 s, System: 0.267 s]
+  Range (min … max):    8.717 s …  8.851 s    10 runs
+
+Summary
+  racket bench.rkt --time --record-dc -n 1 &gt;&gt; time-record-dc ran
+    1.14 ± 0.01 times faster than racket bench.rkt --time --bytes -n 1 &gt;&gt; time-bytes
+</code></pre></div></div>
+
+<p>This demonstrates that the record-dc method is slightly faster than the bytes
+method.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit a327c06ceb84b69daa6732ba698ffe6acc22e512
+hyperfine 'racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes' 'racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc'
+Benchmark 1: racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes
+  Time (mean ± σ):     10.493 s ±  0.064 s    [User: 9.948 s, System: 0.286 s]
+  Range (min … max):   10.383 s … 10.586 s    10 runs
+
+Benchmark 2: racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc
+  Time (mean ± σ):      9.213 s ±  0.053 s    [User: 8.700 s, System: 0.265 s]
+  Range (min … max):    9.130 s …  9.303 s    10 runs
+
+Summary
+  racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc ran
+    1.14 ± 0.01 times faster than racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes
+
+commit 2fb05847453641fcfa400dfa34d2fa67beb7096b
+hyperfine 'racket bench.rkt --memory --bytes -n 10 &gt;&gt; memory-bytes' 'racket bench.rkt --memory --record-dc -n 10 &gt;&gt; memory-record-dc'
+Benchmark 1: racket bench.rkt --memory --bytes -n 10 &gt;&gt; memory-bytes
+  Time (mean ± σ):     39.261 s ±  0.418 s    [User: 38.181 s, System: 0.544 s]
+  Range (min … max):   38.926 s … 40.364 s    10 runs
+
+Benchmark 2: racket bench.rkt --memory --record-dc -n 10 &gt;&gt; memory-record-dc
+  Time (mean ± σ):     26.965 s ±  0.514 s    [User: 26.161 s, System: 0.378 s]
+  Range (min … max):   26.271 s … 28.015 s    10 runs
+
+Summary
+  racket bench.rkt --memory --record-dc -n 10 &gt;&gt; memory-record-dc ran
+    1.46 ± 0.03 times faster than racket bench.rkt --memory --bytes -n 10 &gt;&gt; memory-bytes
+
+commit 4767dced4be0a77f4aab62f69f114d713fb19d7f
+hyperfine 'racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes' 'racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc'
+Benchmark 1: racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes
+  Time (mean ± σ):     267.591 s ±  5.458 s    [User: 266.095 s, System: 0.851 s]
+  Range (min … max):   258.180 s … 274.836 s    10 runs
+
+Benchmark 2: racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc
+  Time (mean ± σ):     269.610 s ±  2.811 s    [User: 267.713 s, System: 1.014 s]
+  Range (min … max):   265.525 s … 274.013 s    10 runs
+
+Summary
+  racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes ran
+    1.01 ± 0.02 times faster than racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc
+</code></pre></div></div>
+
+<p>These only demonstrate the speed (or lack thereof) of various versions of the
+memory benchmarks. The last run produced the data-points described in
+<a href="#experimental-method">Experimental Method</a>.</p>
+
+<h2 id="analysis">Analysis</h2>
+
+<p>I find it hard to believe that constructing the comparison objects for 2 <code class="language-plaintext highlighter-rouge">pict</code>s
+used 500–750KiB of memory regardless of method; that seems like too much. On the
+other hand, I don’t know Racket’s memory model well.</p>
+
+<p>It is clear that, for this sample, the record-dc method is more performant on
+all axes I considered.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I’ll be adding record-dc method code to Frosthaven Manager soon.</p>
+
+<h3 id="appendix-machine-information">Appendix: Machine Information</h3>
+
+<ul>
+  <li>OS: macOS 12.7.2 21G1974 x86_64</li>
+  <li>Kernel: 21.6.0</li>
+  <li>CPU: Intel i7-4870HQ (8) @ 2.50GHz</li>
+  <li>GPU: Intel Iris Pro, AMD Radeon R9 M370X</li>
+  <li>Memory: 16384MiB</li>
+</ul>
+
+<p>Benchmarks were run while the machine was under low load.</p>
+
+<h3 id="appendix-full-benchmark-program">Appendix: Full Benchmark Program</h3>
+
+<p><a href="https://github.com/benknoble/pict-equal-bench">The code is available on GitHub.</a></p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="nv">lang</span> <span class="nv">racket/base</span>
+
+<span class="p">(</span><span class="k">require</span> <span class="nv">pict</span>
+         <span class="nv">racket/draw</span>
+         <span class="nv">racket/class</span>
+         <span class="nv">racket/match</span>
+         <span class="nv">rackunit</span>
+         <span class="nv">frosthaven-manager/elements</span>
+         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/ring1</span>
+                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test1</span><span class="p">])</span>
+         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/drag-down</span>
+                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test2</span><span class="p">])</span>
+         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/speartip</span>
+                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test3</span><span class="p">])</span>
+         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/unbreakable-wall</span>
+                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test4</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pequal-bytes?</span> <span class="nv">p</span> <span class="nv">q</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">equal?</span> <span class="p">(</span><span class="nf">pict-&gt;argb-pixels</span> <span class="nv">p</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">pict-&gt;argb-pixels</span> <span class="nv">q</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">p</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="nf">dc</span> <span class="p">(</span><span class="nf">new</span> <span class="nv">record-dc%</span><span class="p">)])</span>
+    <span class="p">(</span><span class="nf">draw-pict</span> <span class="nv">p</span> <span class="nv">dc</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">send</span> <span class="nv">dc</span> <span class="nv">get-recorded-datum</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pequal-dc?</span> <span class="nv">p</span> <span class="nv">q</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">equal?</span> <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">p</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">q</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="nv">checks</span>
+  <span class="p">(</span><span class="nb">append</span>
+   <span class="p">(</span><span class="nb">list</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test1</span><span class="p">)</span> <span class="p">(</span><span class="nf">test1</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test2</span><span class="p">)</span> <span class="p">(</span><span class="nf">test2</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test3</span><span class="p">)</span> <span class="p">(</span><span class="nf">test3</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test4</span><span class="p">)</span> <span class="p">(</span><span class="nf">test4</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test1</span><span class="p">)</span> <span class="p">(</span><span class="nf">test4</span><span class="p">)</span> <span class="no">#f</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test2</span><span class="p">)</span> <span class="p">(</span><span class="nf">test3</span><span class="p">)</span> <span class="no">#f</span><span class="p">))</span>
+   <span class="p">(</span><span class="nf">for*/list</span> <span class="p">([</span><span class="nf">element1</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">fire</span> <span class="nv">ice</span> <span class="nv">earth</span> <span class="nv">air</span> <span class="nv">light</span> <span class="nv">dark</span><span class="p">)]</span>
+               <span class="p">[</span><span class="nf">element2</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">fire</span> <span class="nv">ice</span> <span class="nv">earth</span> <span class="nv">air</span> <span class="nv">light</span> <span class="nv">dark</span><span class="p">)]</span>
+               <span class="p">[</span><span class="nf">procedure1</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">element-pics-infused</span>
+                                 <span class="nv">element-pics-waning</span>
+                                 <span class="nv">element-pics-unfused</span>
+                                 <span class="nv">element-pics-consume</span><span class="p">)]</span>
+               <span class="p">[</span><span class="nf">procedure2</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">element-pics-infused</span>
+                                 <span class="nv">element-pics-waning</span>
+                                 <span class="nv">element-pics-unfused</span>
+                                 <span class="nv">element-pics-consume</span><span class="p">)])</span>
+     <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">procedure1</span> <span class="p">(</span><span class="nf">element1</span><span class="p">))</span>
+           <span class="p">(</span><span class="nf">procedure2</span> <span class="p">(</span><span class="nf">element2</span><span class="p">))</span>
+           <span class="p">(</span><span class="k">and</span> <span class="p">(</span><span class="nb">equal?</span> <span class="nv">procedure1</span> <span class="nv">procedure2</span><span class="p">)</span>
+                <span class="p">(</span><span class="nb">equal?</span> <span class="nv">element1</span> <span class="nv">element2</span><span class="p">))))))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">run-time-bench</span> <span class="nv">n</span> <span class="nv">pequal?</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">_i</span> <span class="p">(</span><span class="nf">in-range</span> <span class="nv">n</span><span class="p">)])</span>
+    <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">check</span> <span class="p">(</span><span class="nf">in-list</span> <span class="nv">checks</span><span class="p">)])</span>
+      <span class="p">(</span><span class="nf">match-define</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">p</span> <span class="nv">q</span> <span class="nv">expected</span><span class="p">)</span> <span class="nv">check</span><span class="p">)</span>
+      <span class="p">(</span><span class="nf">check-equal?</span> <span class="p">(</span><span class="k">time</span> <span class="p">(</span><span class="nf">pequal?</span> <span class="nv">p</span> <span class="nv">q</span><span class="p">))</span> <span class="nv">expected</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">run-memory-bench</span> <span class="nv">n</span> <span class="nv">constructor</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">_i</span> <span class="p">(</span><span class="nf">in-range</span> <span class="nv">n</span><span class="p">)])</span>
+    <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">check</span> <span class="p">(</span><span class="nf">in-list</span> <span class="nv">checks</span><span class="p">)])</span>
+      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">define</span> <span class="nv">old</span> <span class="p">(</span><span class="nb">current-memory-use</span><span class="p">))</span>
+      <span class="p">(</span><span class="nf">match-define</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">p</span> <span class="nv">q</span> <span class="nv">_expected</span><span class="p">)</span> <span class="nv">check</span><span class="p">)</span>
+      <span class="p">(</span><span class="nf">constructor</span> <span class="nv">p</span><span class="p">)</span>
+      <span class="p">(</span><span class="nf">constructor</span> <span class="nv">q</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">define</span> <span class="nv">new</span> <span class="p">(</span><span class="nb">current-memory-use</span><span class="p">))</span>
+      <span class="p">(</span><span class="nf">println</span> <span class="p">(</span><span class="nb">-</span> <span class="nv">new</span> <span class="nv">old</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="nf">module+</span> <span class="nv">main</span>
+  <span class="p">(</span><span class="k">require</span> <span class="nv">racket/cmdline</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="nv">constructor</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="nv">comparator</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="nv">bench</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="nv">n</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="mi">10</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="nv">arg</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
+  <span class="p">(</span><span class="nf">command-line</span>
+   <span class="nt">#:once-any</span>
+   <span class="p">[(</span><span class="nf">"--bytes"</span><span class="p">)</span> <span class="s">"Benchmark using bytes"</span>
+                <span class="p">(</span><span class="nf">constructor</span> <span class="nv">pict-&gt;argb-pixels</span><span class="p">)</span>
+                <span class="p">(</span><span class="nf">comparator</span> <span class="nv">pequal-bytes?</span><span class="p">)]</span>
+   <span class="p">[(</span><span class="nf">"--record-dc"</span><span class="p">)</span> <span class="s">"Benchmark using record-dc%"</span>
+                <span class="p">(</span><span class="nf">constructor</span> <span class="nv">pict-&gt;recorded-datum</span><span class="p">)</span>
+                <span class="p">(</span><span class="nf">comparator</span> <span class="nv">pequal-dc?</span><span class="p">)]</span>
+   <span class="nt">#:once-any</span>
+   <span class="p">[(</span><span class="nf">"--time"</span><span class="p">)</span> <span class="s">"Benchmark timing"</span>
+               <span class="p">(</span><span class="nf">bench</span> <span class="nv">run-time-bench</span><span class="p">)</span>
+               <span class="p">(</span><span class="nf">arg</span> <span class="nv">comparator</span><span class="p">)]</span>
+   <span class="p">[(</span><span class="nf">"--memory"</span><span class="p">)</span> <span class="s">"Benchmark memory"</span>
+                 <span class="p">(</span><span class="nf">bench</span> <span class="nv">run-memory-bench</span><span class="p">)</span>
+                 <span class="p">(</span><span class="nf">arg</span> <span class="nv">constructor</span><span class="p">)]</span>
+   <span class="nt">#:once-each</span>
+   <span class="p">[(</span><span class="nf">"-n"</span><span class="p">)</span> <span class="nv">N</span> <span class="s">"Number of iterations [10]"</span> <span class="p">(</span><span class="nf">n</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="nv">N</span><span class="p">))]</span>
+   <span class="nt">#:args</span> <span class="p">()</span>
+   <span class="p">(</span><span class="k">unless</span> <span class="p">(</span><span class="k">and</span> <span class="p">(</span><span class="nf">bench</span><span class="p">)</span> <span class="p">(</span><span class="nf">n</span><span class="p">)</span> <span class="p">(</span><span class="nf">arg</span><span class="p">)</span> <span class="p">((</span><span class="nf">arg</span><span class="p">)))</span>
+     <span class="p">(</span><span class="nb">raise-user-error</span> <span class="s">"Missing arguments"</span><span class="p">))</span>
+   <span class="p">((</span><span class="nf">bench</span><span class="p">)</span> <span class="p">(</span><span class="nf">n</span><span class="p">)</span> <span class="p">((</span><span class="nf">arg</span><span class="p">)))))</span>
+</code></pre></div></div>
+
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#racket" class="tag">
+        racket
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#performance" class="tag">
+        performance
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality/";
+    this.page.identifier = "/blog/2024/02/15/benchmarking-pict-equality";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2024/02/13/data-structure/"
+      title="A Strategy to Change Core Data Structures in Programs">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#performance-of-racket-pict-comparison">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright © D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

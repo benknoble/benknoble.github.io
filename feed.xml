@@ -1,4 +1,349 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-02-13T17:34:43+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A Strategy to Change Core Data Structures in Programs</title><link href="https://benknoble.github.io/blog/2024/02/13/data-structure/" rel="alternate" type="text/html" title="A Strategy to Change Core Data Structures in Programs" /><published>2024-02-13T00:00:00+00:00</published><updated>2024-02-13T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/02/13/data-structure</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/02/13/data-structure/"><![CDATA[<p>This relates to the refactoring rule “Make the change easy, then make
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-02-24T02:19:06+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Performance of Racket Pict Comparison</title><link href="https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality/" rel="alternate" type="text/html" title="Performance of Racket Pict Comparison" /><published>2024-02-15T00:00:00+00:00</published><updated>2024-02-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality/"><![CDATA[<p>I get a brief glimpse of the performance characteristics of two methods for
+comparing <code class="language-plaintext highlighter-rouge">pict</code>s for equality.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>For recent work in the <a href="https://benknoble.github.io/frosthaven-manager">Frosthaven
+Manager</a>, I want to quickly and
+accurately compare two generated pictures (called
+<a href="https://docs.racket-lang.org/pict/index.html"><code class="language-plaintext highlighter-rouge">pict</code></a>s in Racket parlance) for
+equality. This must be accurate and fast to solve a user-experience problem:
+interacting with onscreen elements of the Frosthaven Manager causes unrelated
+items to flicker. I initially solved this in commit <a href="https://github.com/benknoble/frosthaven-manager/commit/8e6da623b613d286a8d24765c37307ccadba4981">8e6da62 (rich-text-view:
+skip updates when content hasn’t changed,
+2024-02-04)</a>
+by comparing new content with old content to avoid re-rendering the same stuff.
+But since pixel-for-pixel equivalent <code class="language-plaintext highlighter-rouge">pict</code>s may differ according to <code class="language-plaintext highlighter-rouge">equal?</code>, I
+need a transformation <code class="language-plaintext highlighter-rouge">f</code> such that <code class="language-plaintext highlighter-rouge">(equal? (f p) (f q))</code> is true for
+equivalent <code class="language-plaintext highlighter-rouge">pict</code>s <code class="language-plaintext highlighter-rouge">p</code> and <code class="language-plaintext highlighter-rouge">q</code>.</p>
+
+<p>I believe such <code class="language-plaintext highlighter-rouge">pict</code>s are currently compared for pointer equality only (that
+is, using <code class="language-plaintext highlighter-rouge">eq?</code> semantics) because a <code class="language-plaintext highlighter-rouge">pict</code> is a non-transparent structure. In
+addition it is documented to contain something that is roughly like a procedure.
+Procedures are compared for pointer equality, too; <code class="language-plaintext highlighter-rouge">(equal? (λ (x) x) (λ (x)
+x))</code> does not hold.</p>
+
+<p>A brief documentation search produced two promising candidates:</p>
+<ol>
+  <li>The procedure
+<a href="https://docs.racket-lang.org/pict/Rendering.html#%28def._%28%28lib._pict%2Fmain..rkt%29._pict-~3eargb-pixels%29%29"><code class="language-plaintext highlighter-rouge">pict-&gt;argb-pixels</code></a>
+returns the byte-vector corresponding to a bitmap of the picture.
+Byte-vectors can be compared for equality. While I expect that bitmaps lose
+fidelity compared to the internal representation, for the images used by the
+Frosthaven Manager the fidelity of the bitmap is sufficient. Below, I refer
+to this as the “bytes” method of comparison and the “bytes” transformer.</li>
+  <li>The class <a href="https://docs.racket-lang.org/draw/record-dc_.html"><code class="language-plaintext highlighter-rouge">record-dc%</code></a>
+behaves like a normal drawing context except that it records drawing actions.
+These recorded actions can be replayed to another context or extracted into a
+serializable format. This format is, coincidentally, suitable for comparison
+by <code class="language-plaintext highlighter-rouge">equal?</code> directly. Unlike <code class="language-plaintext highlighter-rouge">pict-&gt;argb-pixels</code>, using a <code class="language-plaintext highlighter-rouge">record-dc%</code>
+requires a little extra code:
+    <div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">p</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="nf">dc</span> <span class="p">(</span><span class="nf">new</span> <span class="nv">record-dc%</span><span class="p">)])</span>
+    <span class="p">(</span><span class="nf">draw-pict</span> <span class="nv">p</span> <span class="nv">dc</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">send</span> <span class="nv">dc</span> <span class="nv">get-recorded-datum</span><span class="p">)))</span>
+</code></pre></div>    </div>
+    <p>I refer to this as the “record-dc” method of comparison and the “record-dc”
+transformer.</p>
+  </li>
+</ol>
+
+<h2 id="hypotheses">Hypotheses</h2>
+
+<p>Recall that I have 2 requirements for the equality comparison: it must be
+<em>accurate</em> (I don’t want to skip a needed redraw or perform an unnecessary one)
+and <em>fast</em> (it can’t delay the rest of the application noticeably). As I thought
+about the methods I was considering, I added an extra desideratum: because these
+transformations will generate values that will be garbage post-comparison, the
+results should not be wasteful with memory and therefore trigger more frequent
+garbage collection that could result in an unresponsive application.
+Fortunately, the application mostly operates at human timescales and has “idle”
+time. Unfortunately, I cannot control the collector (or the duration of the
+“idle” time) to guarantee that GC pauses only occur when they would go
+completely unnoticed.</p>
+
+<p>With these factors in mind, I formed the following hypotheses:</p>
+<ol>
+  <li>The bytes method and the record-dc method perform at roughly equal speeds.</li>
+  <li>The record-dc method uses more memory.</li>
+</ol>
+
+<p>Hypotheses (1) is supported. In a shocking twist, it appears that the bytes
+method uses marginally more memory (but this is “eyeball” statistics: I have not
+performed a statistical test; I do not have a p-value; this does not generalize
+beyond my dataset).</p>
+
+<p>I arrived at these hypotheses by noting that both methods perform a similar
+transformation: draw the picture and extract some comparable information. I
+expected the bytes method to perform slightly faster on the assumption that
+byte-vector comparison is fast and that the comparable values from the record-dc
+transformer would be large enough in memory to slow down comparison. This latter
+expectation is not supported by my data; indeed, the inverse (that the record-dc
+method is faster) is.</p>
+
+<h2 id="experimental-method">Experimental Method</h2>
+
+<p>I constructed a benchmarking program that could be run in a matrix of modes. A
+parameter \(N\) controls the number of iterations of each mode; what follows
+describes a single iteration for each mode. The four modes are:</p>
+<ol>
+  <li>A time benchmark using the bytes method.</li>
+  <li>A time benchmark using the memory method.</li>
+  <li>A memory benchmark using the bytes method.</li>
+  <li>A memory benchmark using the memory method.</li>
+</ol>
+
+<p>Since each iteration executes independent of the method, I will describe each
+benchmark mode in terms of a general method \(M\).</p>
+
+<p>Each benchmark used a table of <code class="language-plaintext highlighter-rouge">pict</code> comparisons with 582 entries. This
+resulted in 1164 applications of transformers per run. Each benchmark was run a
+minimum of 10 times by <code class="language-plaintext highlighter-rouge">hyperfine</code>.</p>
+
+<h3 id="time-benchmarks">Time Benchmarks</h3>
+
+<p>The time benchmark iterates the table of <code class="language-plaintext highlighter-rouge">pict</code> comparisons \(N\) times; for
+each, it compares two <code class="language-plaintext highlighter-rouge">pict</code>s (outputting timing information of the entire
+comparison, which includes the use of the transformers, using the <code class="language-plaintext highlighter-rouge">time</code> form)
+and checks that the result of the comparison is as expected.</p>
+
+<p>Since <code class="language-plaintext highlighter-rouge">hyperfine</code> ran the time benchmarks 10 times with \(N=1\), this results in
+5820 data-points for each method for each of real, cpu, and gc time, for a grand
+total of 11640 points.</p>
+
+<h3 id="memory-benchmarks">Memory Benchmarks</h3>
+
+<p>The memory benchmark iterates the table of <code class="language-plaintext highlighter-rouge">pict</code> comparisons \(N\) times. For
+each iteration of the table, we perform the ritualistic GC dance (call
+<code class="language-plaintext highlighter-rouge">collect-garbage</code> 3 times) and measure current memory use. Then we construct the
+objects that would be compared using the transformer under benchmark. Finally,
+we print the difference of current memory use (after constructing the objects)
+and original memory use (after garbage collection).</p>
+
+<p>I cannot guarantee that GC does not occur during the iteration of the table,
+which would skew results. An earlier version of the memory benchmark only
+collected garbage before iterating the entire table and likely had to GC midway.
+The current version may still GC midway, but it is far less likely now.</p>
+
+<p>Since <code class="language-plaintext highlighter-rouge">hyperfine</code> ran the time benchmarks 10 times with \(N=1\), this results in
+5820 data-points for each method for a grand total of 11640 points.</p>
+
+<h2 id="results">Results</h2>
+
+<p>Pretty pictures first. These are box and whisker plots that show mean, IQR, and
+outliers.</p>
+
+<p><img src="/assets/img/pict-bench-time.svg" alt="Time spent comparing picts" /></p>
+
+<p>The time chart is segmented by where the time was spent. In real and cpu time,
+the record-dc averages 2ms faster. Most gc times are 0.</p>
+
+<p><img src="/assets/img/pict-bench-memory.svg" alt="Memory use by pict transformers for comparison" /></p>
+
+<p>The memory chart shows that the record-dc averages less than 250KiB less memory
+use, which is easier to see on a chart with no outliers.</p>
+
+<p><img src="/assets/img/pict-bench-memory2.svg" alt="Memory use by pict transformers for comparison without outliers" /></p>
+
+<p>Here are the <code class="language-plaintext highlighter-rouge">hyperfine</code> outputs at various commits.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 00366fdb3712bf4359c5a7dc551de2a0fc33e716
+hyperfine 'racket bench.rkt --time --bytes -n 1 &gt;&gt; time-bytes' 'racket bench.rkt --time --record-dc -n 1 &gt;&gt; time-record-dc'
+Benchmark 1: racket bench.rkt --time --bytes -n 1 &gt;&gt; time-bytes
+  Time (mean ± σ):     10.036 s ±  0.044 s    [User: 9.491 s, System: 0.285 s]
+  Range (min … max):    9.962 s … 10.086 s    10 runs
+
+Benchmark 2: racket bench.rkt --time --record-dc -n 1 &gt;&gt; time-record-dc
+  Time (mean ± σ):      8.798 s ±  0.049 s    [User: 8.283 s, System: 0.267 s]
+  Range (min … max):    8.717 s …  8.851 s    10 runs
+
+Summary
+  racket bench.rkt --time --record-dc -n 1 &gt;&gt; time-record-dc ran
+    1.14 ± 0.01 times faster than racket bench.rkt --time --bytes -n 1 &gt;&gt; time-bytes
+</code></pre></div></div>
+
+<p>This demonstrates that the record-dc method is slightly faster than the bytes
+method.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit a327c06ceb84b69daa6732ba698ffe6acc22e512
+hyperfine 'racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes' 'racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc'
+Benchmark 1: racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes
+  Time (mean ± σ):     10.493 s ±  0.064 s    [User: 9.948 s, System: 0.286 s]
+  Range (min … max):   10.383 s … 10.586 s    10 runs
+
+Benchmark 2: racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc
+  Time (mean ± σ):      9.213 s ±  0.053 s    [User: 8.700 s, System: 0.265 s]
+  Range (min … max):    9.130 s …  9.303 s    10 runs
+
+Summary
+  racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc ran
+    1.14 ± 0.01 times faster than racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes
+
+commit 2fb05847453641fcfa400dfa34d2fa67beb7096b
+hyperfine 'racket bench.rkt --memory --bytes -n 10 &gt;&gt; memory-bytes' 'racket bench.rkt --memory --record-dc -n 10 &gt;&gt; memory-record-dc'
+Benchmark 1: racket bench.rkt --memory --bytes -n 10 &gt;&gt; memory-bytes
+  Time (mean ± σ):     39.261 s ±  0.418 s    [User: 38.181 s, System: 0.544 s]
+  Range (min … max):   38.926 s … 40.364 s    10 runs
+
+Benchmark 2: racket bench.rkt --memory --record-dc -n 10 &gt;&gt; memory-record-dc
+  Time (mean ± σ):     26.965 s ±  0.514 s    [User: 26.161 s, System: 0.378 s]
+  Range (min … max):   26.271 s … 28.015 s    10 runs
+
+Summary
+  racket bench.rkt --memory --record-dc -n 10 &gt;&gt; memory-record-dc ran
+    1.46 ± 0.03 times faster than racket bench.rkt --memory --bytes -n 10 &gt;&gt; memory-bytes
+
+commit 4767dced4be0a77f4aab62f69f114d713fb19d7f
+hyperfine 'racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes' 'racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc'
+Benchmark 1: racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes
+  Time (mean ± σ):     267.591 s ±  5.458 s    [User: 266.095 s, System: 0.851 s]
+  Range (min … max):   258.180 s … 274.836 s    10 runs
+
+Benchmark 2: racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc
+  Time (mean ± σ):     269.610 s ±  2.811 s    [User: 267.713 s, System: 1.014 s]
+  Range (min … max):   265.525 s … 274.013 s    10 runs
+
+Summary
+  racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes ran
+    1.01 ± 0.02 times faster than racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc
+</code></pre></div></div>
+
+<p>These only demonstrate the speed (or lack thereof) of various versions of the
+memory benchmarks. The last run produced the data-points described in
+<a href="#experimental-method">Experimental Method</a>.</p>
+
+<h2 id="analysis">Analysis</h2>
+
+<p>I find it hard to believe that constructing the comparison objects for 2 <code class="language-plaintext highlighter-rouge">pict</code>s
+used 500–750KiB of memory regardless of method; that seems like too much. On the
+other hand, I don’t know Racket’s memory model well.</p>
+
+<p>It is clear that, for this sample, the record-dc method is more performant on
+all axes I considered.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I’ll be adding record-dc method code to Frosthaven Manager soon.</p>
+
+<h3 id="appendix-machine-information">Appendix: Machine Information</h3>
+
+<ul>
+  <li>OS: macOS 12.7.2 21G1974 x86_64</li>
+  <li>Kernel: 21.6.0</li>
+  <li>CPU: Intel i7-4870HQ (8) @ 2.50GHz</li>
+  <li>GPU: Intel Iris Pro, AMD Radeon R9 M370X</li>
+  <li>Memory: 16384MiB</li>
+</ul>
+
+<p>Benchmarks were run while the machine was under low load.</p>
+
+<h3 id="appendix-full-benchmark-program">Appendix: Full Benchmark Program</h3>
+
+<p><a href="https://github.com/benknoble/pict-equal-bench">The code is available on GitHub.</a></p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="nv">lang</span> <span class="nv">racket/base</span>
+
+<span class="p">(</span><span class="k">require</span> <span class="nv">pict</span>
+         <span class="nv">racket/draw</span>
+         <span class="nv">racket/class</span>
+         <span class="nv">racket/match</span>
+         <span class="nv">rackunit</span>
+         <span class="nv">frosthaven-manager/elements</span>
+         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/ring1</span>
+                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test1</span><span class="p">])</span>
+         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/drag-down</span>
+                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test2</span><span class="p">])</span>
+         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/speartip</span>
+                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test3</span><span class="p">])</span>
+         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/unbreakable-wall</span>
+                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test4</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pequal-bytes?</span> <span class="nv">p</span> <span class="nv">q</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">equal?</span> <span class="p">(</span><span class="nf">pict-&gt;argb-pixels</span> <span class="nv">p</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">pict-&gt;argb-pixels</span> <span class="nv">q</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">p</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="nf">dc</span> <span class="p">(</span><span class="nf">new</span> <span class="nv">record-dc%</span><span class="p">)])</span>
+    <span class="p">(</span><span class="nf">draw-pict</span> <span class="nv">p</span> <span class="nv">dc</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">send</span> <span class="nv">dc</span> <span class="nv">get-recorded-datum</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pequal-dc?</span> <span class="nv">p</span> <span class="nv">q</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">equal?</span> <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">p</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">q</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="nv">checks</span>
+  <span class="p">(</span><span class="nb">append</span>
+   <span class="p">(</span><span class="nb">list</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test1</span><span class="p">)</span> <span class="p">(</span><span class="nf">test1</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test2</span><span class="p">)</span> <span class="p">(</span><span class="nf">test2</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test3</span><span class="p">)</span> <span class="p">(</span><span class="nf">test3</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test4</span><span class="p">)</span> <span class="p">(</span><span class="nf">test4</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test1</span><span class="p">)</span> <span class="p">(</span><span class="nf">test4</span><span class="p">)</span> <span class="no">#f</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test2</span><span class="p">)</span> <span class="p">(</span><span class="nf">test3</span><span class="p">)</span> <span class="no">#f</span><span class="p">))</span>
+   <span class="p">(</span><span class="nf">for*/list</span> <span class="p">([</span><span class="nf">element1</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">fire</span> <span class="nv">ice</span> <span class="nv">earth</span> <span class="nv">air</span> <span class="nv">light</span> <span class="nv">dark</span><span class="p">)]</span>
+               <span class="p">[</span><span class="nf">element2</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">fire</span> <span class="nv">ice</span> <span class="nv">earth</span> <span class="nv">air</span> <span class="nv">light</span> <span class="nv">dark</span><span class="p">)]</span>
+               <span class="p">[</span><span class="nf">procedure1</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">element-pics-infused</span>
+                                 <span class="nv">element-pics-waning</span>
+                                 <span class="nv">element-pics-unfused</span>
+                                 <span class="nv">element-pics-consume</span><span class="p">)]</span>
+               <span class="p">[</span><span class="nf">procedure2</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">element-pics-infused</span>
+                                 <span class="nv">element-pics-waning</span>
+                                 <span class="nv">element-pics-unfused</span>
+                                 <span class="nv">element-pics-consume</span><span class="p">)])</span>
+     <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">procedure1</span> <span class="p">(</span><span class="nf">element1</span><span class="p">))</span>
+           <span class="p">(</span><span class="nf">procedure2</span> <span class="p">(</span><span class="nf">element2</span><span class="p">))</span>
+           <span class="p">(</span><span class="k">and</span> <span class="p">(</span><span class="nb">equal?</span> <span class="nv">procedure1</span> <span class="nv">procedure2</span><span class="p">)</span>
+                <span class="p">(</span><span class="nb">equal?</span> <span class="nv">element1</span> <span class="nv">element2</span><span class="p">))))))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">run-time-bench</span> <span class="nv">n</span> <span class="nv">pequal?</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">_i</span> <span class="p">(</span><span class="nf">in-range</span> <span class="nv">n</span><span class="p">)])</span>
+    <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">check</span> <span class="p">(</span><span class="nf">in-list</span> <span class="nv">checks</span><span class="p">)])</span>
+      <span class="p">(</span><span class="nf">match-define</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">p</span> <span class="nv">q</span> <span class="nv">expected</span><span class="p">)</span> <span class="nv">check</span><span class="p">)</span>
+      <span class="p">(</span><span class="nf">check-equal?</span> <span class="p">(</span><span class="k">time</span> <span class="p">(</span><span class="nf">pequal?</span> <span class="nv">p</span> <span class="nv">q</span><span class="p">))</span> <span class="nv">expected</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">run-memory-bench</span> <span class="nv">n</span> <span class="nv">constructor</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">_i</span> <span class="p">(</span><span class="nf">in-range</span> <span class="nv">n</span><span class="p">)])</span>
+    <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">check</span> <span class="p">(</span><span class="nf">in-list</span> <span class="nv">checks</span><span class="p">)])</span>
+      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">define</span> <span class="nv">old</span> <span class="p">(</span><span class="nb">current-memory-use</span><span class="p">))</span>
+      <span class="p">(</span><span class="nf">match-define</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">p</span> <span class="nv">q</span> <span class="nv">_expected</span><span class="p">)</span> <span class="nv">check</span><span class="p">)</span>
+      <span class="p">(</span><span class="nf">constructor</span> <span class="nv">p</span><span class="p">)</span>
+      <span class="p">(</span><span class="nf">constructor</span> <span class="nv">q</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">define</span> <span class="nv">new</span> <span class="p">(</span><span class="nb">current-memory-use</span><span class="p">))</span>
+      <span class="p">(</span><span class="nf">println</span> <span class="p">(</span><span class="nb">-</span> <span class="nv">new</span> <span class="nv">old</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="nf">module+</span> <span class="nv">main</span>
+  <span class="p">(</span><span class="k">require</span> <span class="nv">racket/cmdline</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="nv">constructor</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="nv">comparator</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="nv">bench</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="nv">n</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="mi">10</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="nv">arg</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
+  <span class="p">(</span><span class="nf">command-line</span>
+   <span class="nt">#:once-any</span>
+   <span class="p">[(</span><span class="nf">"--bytes"</span><span class="p">)</span> <span class="s">"Benchmark using bytes"</span>
+                <span class="p">(</span><span class="nf">constructor</span> <span class="nv">pict-&gt;argb-pixels</span><span class="p">)</span>
+                <span class="p">(</span><span class="nf">comparator</span> <span class="nv">pequal-bytes?</span><span class="p">)]</span>
+   <span class="p">[(</span><span class="nf">"--record-dc"</span><span class="p">)</span> <span class="s">"Benchmark using record-dc%"</span>
+                <span class="p">(</span><span class="nf">constructor</span> <span class="nv">pict-&gt;recorded-datum</span><span class="p">)</span>
+                <span class="p">(</span><span class="nf">comparator</span> <span class="nv">pequal-dc?</span><span class="p">)]</span>
+   <span class="nt">#:once-any</span>
+   <span class="p">[(</span><span class="nf">"--time"</span><span class="p">)</span> <span class="s">"Benchmark timing"</span>
+               <span class="p">(</span><span class="nf">bench</span> <span class="nv">run-time-bench</span><span class="p">)</span>
+               <span class="p">(</span><span class="nf">arg</span> <span class="nv">comparator</span><span class="p">)]</span>
+   <span class="p">[(</span><span class="nf">"--memory"</span><span class="p">)</span> <span class="s">"Benchmark memory"</span>
+                 <span class="p">(</span><span class="nf">bench</span> <span class="nv">run-memory-bench</span><span class="p">)</span>
+                 <span class="p">(</span><span class="nf">arg</span> <span class="nv">constructor</span><span class="p">)]</span>
+   <span class="nt">#:once-each</span>
+   <span class="p">[(</span><span class="nf">"-n"</span><span class="p">)</span> <span class="nv">N</span> <span class="s">"Number of iterations [10]"</span> <span class="p">(</span><span class="nf">n</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="nv">N</span><span class="p">))]</span>
+   <span class="nt">#:args</span> <span class="p">()</span>
+   <span class="p">(</span><span class="k">unless</span> <span class="p">(</span><span class="k">and</span> <span class="p">(</span><span class="nf">bench</span><span class="p">)</span> <span class="p">(</span><span class="nf">n</span><span class="p">)</span> <span class="p">(</span><span class="nf">arg</span><span class="p">)</span> <span class="p">((</span><span class="nf">arg</span><span class="p">)))</span>
+     <span class="p">(</span><span class="nb">raise-user-error</span> <span class="s">"Missing arguments"</span><span class="p">))</span>
+   <span class="p">((</span><span class="nf">bench</span><span class="p">)</span> <span class="p">(</span><span class="nf">n</span><span class="p">)</span> <span class="p">((</span><span class="nf">arg</span><span class="p">)))))</span>
+</code></pre></div></div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><category term="performance" /><summary type="html"><![CDATA[I get a brief glimpse of the performance characteristics of two methods for comparing picts for equality.]]></summary></entry><entry><title type="html">A Strategy to Change Core Data Structures in Programs</title><link href="https://benknoble.github.io/blog/2024/02/13/data-structure/" rel="alternate" type="text/html" title="A Strategy to Change Core Data Structures in Programs" /><published>2024-02-13T00:00:00+00:00</published><updated>2024-02-13T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/02/13/data-structure</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/02/13/data-structure/"><![CDATA[<p>This relates to the refactoring rule “Make the change easy, then make
 the easy change” from Kent Beck. He warns that the first step may be hard. I
 present one strategy to make the first step easier for data structure
 changes.</p>
@@ -674,206 +1019,4 @@ into <code class="language-plaintext highlighter-rouge">file2</code>.</p>
 </blockquote>
 
 <p>So now, you can probably write a <code class="language-plaintext highlighter-rouge">patch</code> command :smile: you parse the output
-from <code class="language-plaintext highlighter-rouge">diff</code>, with maybe slight modification, and then pass it as input to <code class="language-plaintext highlighter-rouge">ed</code>!</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="shell" /><category term="sed" /><category term="rants" /><category term="posix" /><summary type="html"><![CDATA[Right tool for the job people, right tool for the job :roll_eyes:]]></summary></entry><entry><title type="html">Making mass-edits to many repos via shell pipelines</title><link href="https://benknoble.github.io/blog/2020/07/16/parallel-git-pipelines/" rel="alternate" type="text/html" title="Making mass-edits to many repos via shell pipelines" /><published>2020-07-16T00:00:00+00:00</published><updated>2020-07-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/07/16/parallel-git-pipelines</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/07/16/parallel-git-pipelines/"><![CDATA[<p>I spend 1 day to save 3 immediately, and more long-term, by scripting git into
-pipelines.</p>
-
-<h2 id="prelude">Prelude</h2>
-
-<p>Imagine you have a task before you that requires you to update 15 or so
-repositories on GitHub with the same or similar one-line changes in several
-different files. How do you solve it?</p>
-
-<p>In my case, I had a list of 16 repository URLs in the file <code class="language-plaintext highlighter-rouge">URLs</code>; I collected
-these after figuring out which YAML variables to correct in order to fix an
-installation problem with a part of our infrastructure. And I knew I could clone
-them all, fork them, do the changes, and open the pull-requests, but it would
-take forever! Too many manual steps.</p>
-
-<p>So I got clever.</p>
-
-<blockquote>
-  <p>If you aren’t sure how <code class="language-plaintext highlighter-rouge">xargs</code> works, you will be by the end of this post:
-<code class="language-plaintext highlighter-rouge">xargs</code> is a filter that takes its standard in and uses it as arguments for
-another command. In essence, it can replace <code class="language-plaintext highlighter-rouge">while read</code> loops, when used
-right.</p>
-</blockquote>
-
-<h2 id="kitchen-cutleryor-ratherforks">Kitchen Cutlery—or rather—Forks</h2>
-
-<p>My first step was to figure out how to fork all those repos! I knew about <code class="language-plaintext highlighter-rouge">hub
-fork</code>, but it only works from inside an already cloned repo. Then there’s the
-new GitHub CLI <code class="language-plaintext highlighter-rouge">gh repo fork</code>, but it doesn’t support enterprise GitHub yet.
-Darn!</p>
-
-<p>I really wanted to do this separately, so I <a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/git-fork-repo">whipped up a forking
-script</a>.
-In the process, I had to learn how to use the GitHub API and <a href="https://github.com/github/hub/issues/2576">workaround a bug
-in hub’s <code class="language-plaintext highlighter-rouge">api</code> command on enterprise
-hosts</a>. The script outputs the URL of
-the fork for downstream consumption (e.g., <code class="language-plaintext highlighter-rouge">open</code> on a Mac).</p>
-
-<p>After testing the script, I was ready to create all the forks!</p>
-
-<p>Well, not exactly. I designed the script to take parameters <code class="language-plaintext highlighter-rouge">owner repo</code>, not
-URL… it is specific to GitHub, after all. So I needed to transform the URLs. I
-probably could have done a combination of <code class="language-plaintext highlighter-rouge">basename</code> and <code class="language-plaintext highlighter-rouge">dirname</code>, but for this
-task I wrote an <code class="language-plaintext highlighter-rouge">awk</code> script:</p>
-
-<div class="language-awk highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#! /usr/bin/env awk -f</span>
-<span class="c1"># mk-forkable.awk</span>
-
-<span class="kr">BEGIN</span> <span class="p">{</span> <span class="kc">FS</span><span class="o">=</span><span class="s2">"/"</span> <span class="p">}</span>
-<span class="p">{</span> <span class="k">print</span> <span class="nv">$4</span><span class="p">,</span> <span class="nv">$5</span> <span class="p">}</span>
-</code></pre></div></div>
-
-<p>This enabled step one, forking:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;URLs ./mk-forkable.awk | xargs <span class="nt">-L1</span> git fork-repo <span class="o">&gt;</span>forks
-</code></pre></div></div>
-
-<p>This gives me a list of fork URLs in <code class="language-plaintext highlighter-rouge">forks</code> and creates the forks on GitHub.</p>
-
-<h2 id="mass-changes">Mass changes</h2>
-
-<p>And no, I’m not talking about <em>weight</em> changes—I mean being able to make
-changes to all the repos! What I really wanted, I realized, was the ability to
-pipe in the list of repositories to a script that would clone them, make the
-changes on a new branch, push that branch, and spit out the repository URL again
-so I could open it up.</p>
-
-<p>Thus, <a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/git-mass-edit"><code class="language-plaintext highlighter-rouge">git-mass-edit</code> was
-born</a>.
-The usage really sums up the intended use- and design-case:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usage: $0 [-b &lt;branch-name&gt;] [-m &lt;message&gt;] [-r &lt;remote-name&gt;] &lt;edit-command&gt; &lt;repo&gt;
-Executes the following steps:
-  - If &lt;repo&gt; doesn't exist, clones it
-  - Creates a new branch named &lt;branch-name&gt;
-  - Runs &lt;edit-command&gt; inside the repo
-  - Commits using &lt;message&gt;
-  - Pushes to &lt;branch-name&gt; on &lt;remote-name&gt;
-  - Outputs &lt;repo&gt;
-Default values:
-  &lt;branch-name&gt;  mass-edit
-  &lt;message&gt;      mass-edit
-  &lt;remote-name&gt;  origin
-Designed to be attached to xargs(1) and an input stream of repos to mass-edit.
-For example, if you have a list of github URLs you want to edit the same way and
-then open up in a browser:
-&lt;URLs xargs -n1 [-P...] git-mass-edit [...] edit-command | xargs open
-</code></pre></div></div>
-
-<p>All that was left was to build an editing script, which mostly delegates to a
-silenced and nerfed vim, which uses <code class="language-plaintext highlighter-rouge">git-grep</code> to build a list of lines to
-change and then changes them with <code class="language-plaintext highlighter-rouge">cdo</code> and <code class="language-plaintext highlighter-rouge">substitute</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /usr/bin/env bash</span>
-<span class="c"># fix-yaml-var</span>
-
-<span class="nb">set</span> <span class="nt">-euo</span> pipefail
-
-log<span class="o">()</span> <span class="o">{</span>
-  <span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
-<span class="o">}</span> <span class="o">&gt;</span>&amp;2
-
-die<span class="o">()</span> <span class="o">{</span>
-  <span class="nb">local </span><span class="nv">ex</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">1</span><span class="k">:-</span><span class="nv">1</span><span class="k">}</span><span class="s2">"</span>
-  <span class="nb">exit</span> <span class="s2">"</span><span class="nv">$ex</span><span class="s2">"</span>
-<span class="o">}</span>
-
-main<span class="o">()</span> <span class="o">{</span>
-  git config user.name <span class="s1">'David Knoble'</span>
-  git config user.email <span class="s1">'david.knoble@WORK'</span>
-  <span class="nb">local </span><span class="nv">oldkey</span><span class="o">=</span>old_key
-  <span class="nb">local </span><span class="nv">newkey</span><span class="o">=</span>new_key
-  <span class="nb">local </span><span class="nv">skip</span><span class="o">=</span>does-not-exist
-  <span class="nb">local </span><span class="nv">newval</span><span class="o">=</span>our-new-val
-  vim <span class="nt">-es</span> <span class="nt">-N</span> <span class="nt">-u</span> NONE <span class="nt">-i</span> NONE <span class="nt">-S</span> &lt;<span class="o">(</span><span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">DOG</span><span class="sh">
-  set hidden
-  if !exists(':Cfilter') | packadd cfilter | endif
-  let &amp;grepprg = 'git grep -n'
-  silent! grep </span><span class="nv">$oldkey</span><span class="sh">
-  silent! cdo substitute/</span><span class="nv">$oldkey</span><span class="sh">/</span><span class="nv">$newkey</span><span class="sh">/g
-  Cfilter! /</span><span class="nv">$skip</span><span class="sh">/
-  Cfilter /</span><span class="nv">$oldkey</span><span class="sh">:/
-  silent! cdo substitute^:.*^: </span><span class="nv">$newval</span><span class="sh">^
-  wall
-  quit
-</span><span class="no">DOG
-</span><span class="o">)</span>
-<span class="o">}</span>
-
-main <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
-</code></pre></div></div>
-
-<p>Finally, I launched the script!</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;forks xargs <span class="nt">-n1</span> <span class="nt">-P8</span>  git-mass-edit <span class="nt">-b</span> fix-yaml-var <span class="nt">-m</span> <span class="s1">'some message'</span> <span class="si">$(</span><span class="nb">realpath</span> ./fix-yaml-var<span class="si">)</span> | xargs <span class="nt">-L1</span>  open
-</code></pre></div></div>
-
-<p>From here, I did the (very manual) process of opening all the PRs. If I had
-been a bit smarter, I would have you used <code class="language-plaintext highlighter-rouge">hub pull-request</code> with <code class="language-plaintext highlighter-rouge">-F</code> to do
-these, but this might have required additional setup.</p>
-
-<h2 id="but-wait-theres-more">But wait, there’s more!</h2>
-
-<p>I wanted to collect a list of PRs without trying to web-scrape them off my PRs
-page. I had the repos, and <code class="language-plaintext highlighter-rouge">hub</code>’s command <code class="language-plaintext highlighter-rouge">pr</code> can show the URL. I needed to
-do some setup, though, because <code class="language-plaintext highlighter-rouge">hub pr</code> only works when the remote is the
-upstream repository!</p>
-
-<p>First, move the old repos out of the way:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;forks xargs <span class="nb">basename</span> | xargs <span class="nt">-n1</span> bash <span class="nt">-c</span> <span class="s1">'mv "$1" benknoble-"$1"'</span> sh
-</code></pre></div></div>
-
-<p>(Thank goodness <code class="language-plaintext highlighter-rouge">basename</code> works on URLs! Coincidence?)</p>
-
-<p>Next, clone the proper repositories:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;URLs xargs <span class="nt">-L1</span> <span class="nt">-P</span><span class="si">$(</span><span class="nb">wc</span> <span class="nt">-l</span> &lt;URLS<span class="si">)</span> git clone <span class="nt">--quiet</span>
-</code></pre></div></div>
-
-<p>In parallel, this goes pretty quickly.</p>
-
-<p>Lastly, grab the URLs. Oh, wait, I had to script that too:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/sh</span>
-<span class="nb">cd</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> hub <span class="nb">pr </span>show <span class="nt">-u</span> <span class="s2">"</span><span class="si">$(</span>hub <span class="nb">pr </span>list | <span class="nb">grep</span> <span class="s1">'the PR title'</span> | fields 1 | <span class="nb">cut</span> <span class="nt">-c2-3</span><span class="si">)</span><span class="s2">"</span>
-</code></pre></div></div>
-
-<p>Looking back on it, this only works for 2-digit PR numbers :thinking:</p>
-
-<p>OK, let’s actually grab those PR numbers:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;URLs xargs <span class="nt">-L1</span> <span class="nb">basename</span> | xargs <span class="nt">-L1</span> <span class="nt">-P</span><span class="si">$(</span><span class="nb">wc</span> <span class="nt">-l</span> &lt;URLs<span class="si">)</span> ./get-pr-url <span class="o">&gt;</span>prs
-</code></pre></div></div>
-
-<h2 id="addendum">Addendum</h2>
-
-<p>I later had to make some quick fixes, which I did with slightly less up-front
-automation work. I had to grab the fixes to be made from PR branches, but
-actually make them in the upstream repos in order to pull in the merged changes.
-So the first bit was to grab all the right spots and dumps them to the file
-fixes:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;URLs xargs <span class="nb">basename</span> | xargs <span class="nt">-n1</span> bash <span class="nt">-c</span> <span class="s1">'git -C benknoble-"$1" grep newkey | xargs -L1 echo "$1/"'</span> sh | <span class="nb">grep</span> <span class="nt">-w</span> thing | <span class="nb">sed</span> <span class="s1">'s/ //'</span> <span class="o">&gt;</span>fixes
-</code></pre></div></div>
-
-<p>Note the nested <code class="language-plaintext highlighter-rouge">xargs</code> to process the grep results and prepend the repository
-name!</p>
-
-<p>I loaded this in vim with the <code class="language-plaintext highlighter-rouge">-q</code> flag for the quickfix list and made the edit:</p>
-
-<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">" vim -q fixes</span>
-<span class="p">:</span><span class="k">cdo</span> s<span class="sr">/newkey: \zs.*/</span>fixed<span class="p">-</span>value
-<span class="p">:</span><span class="k">wall</span> <span class="p">|</span> <span class="k">q</span>
-</code></pre></div></div>
-
-<p>Then I created a list of repos that needed the fixes using <a href="/blog/2019/09/11/fields/">my old fields
-script</a>, and used that to create the
-commits. A push to the PR branch and I was good to go.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;fixes fields <span class="nt">-f</span>: 1 | fields <span class="nt">-f</span>/ 1 | <span class="nb">sort</span> <span class="nt">-u</span> <span class="o">&gt;</span> fixed-repos
-&lt;fixed-repos xargs <span class="nt">-L1</span> bash <span class="nt">-c</span> <span class="s1">'cd "$1" &amp;&amp; git add . &amp;&amp; git commit -m "fix the thing"'</span> sh
-</code></pre></div></div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="dotfiles" /><category term="git" /><category term="github" /><category term="github-workflow" /><category term="json" /><category term="productivity" /><category term="project-management" /><category term="shell" /><summary type="html"><![CDATA[I spend 1 day to save 3 immediately, and more long-term, by scripting git into pipelines.]]></summary></entry></feed>
+from <code class="language-plaintext highlighter-rouge">diff</code>, with maybe slight modification, and then pass it as input to <code class="language-plaintext highlighter-rouge">ed</code>!</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="shell" /><category term="sed" /><category term="rants" /><category term="posix" /><summary type="html"><![CDATA[Right tool for the job people, right tool for the job :roll_eyes:]]></summary></entry></feed>
