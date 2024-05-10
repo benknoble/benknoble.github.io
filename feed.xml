@@ -1,4 +1,266 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-04-22T19:51:29+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Performance of Racket Pict Comparison</title><link href="https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality/" rel="alternate" type="text/html" title="Performance of Racket Pict Comparison" /><published>2024-02-15T00:00:00+00:00</published><updated>2024-02-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality/"><![CDATA[<p>I get a brief glimpse of the performance characteristics of two methods for
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-05-10T18:15:52+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Extracting Ourselves from GitHub = Git</title><link href="https://benknoble.github.io/blog/2024/04/30/extracting-ourselves-from-github-equals-git/" rel="alternate" type="text/html" title="Extracting Ourselves from GitHub = Git" /><published>2024-04-30T00:00:00+00:00</published><updated>2024-04-30T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/04/30/extracting-ourselves-from-github-equals-git</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/04/30/extracting-ourselves-from-github-equals-git/"><![CDATA[<p>It’s time to remind ourselves that GitHub and Git are not synonyms.</p>
+
+<p>A word of caution: this may all seem like pedantry to you, dear developer, who
+wants to write some code, get paid, and move on. That’s fine. Software
+development is for many just a job. What makes this pedantry worthwhile is the
+essence of dictionaries: speaking a common language enables more effective
+communication. Communication is critical to productivity.</p>
+
+<p>I thus invite you to think of this article as an introductory language crash
+course. “Git &amp; GitHub 101,” if you will.</p>
+
+<h2 id="a-brief-history-lesson">A Brief History Lesson</h2>
+
+<p>Git was first released in April 2005 with commit <a href="https://github.com/git/git/commit/e83c516331">e83c516331 (Initial revision
+of “git”, the information manager from hell,
+2005-04-07)</a>. Version 1.0 followed
+by the end of that same year.</p>
+
+<p>I won’t recount the history of Git’s invention here. There are plenty of other
+places for that:</p>
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Git#History">https://en.wikipedia.org/wiki/Git#History</a></li>
+  <li><a href="https://www.linuxjournal.com/content/git-origin-story">https://www.linuxjournal.com/content/git-origin-story</a></li>
+  <li><a href="https://lore.kernel.org/lkml/Pine.LNX.4.58.0504060800280.2215@ppc970.osdl.org/T/#u">Kernel SCM saga thread</a>, with <a href="https://lore.kernel.org/lkml/Pine.LNX.4.58.0504072127250.28951@ppc970.osdl.org/">the very first mention</a></li>
+</ul>
+
+<p>I will briefly mention that predecessors such as
+<a href="https://en.wikipedia.org/wiki/Source_Code_Control_System">SCSS</a> go back all the
+way to the 1960s and 70s, and the design of SCSS,
+<a href="https://en.wikipedia.org/wiki/Revision_Control_System">RCS</a>,
+<a href="https://en.wikipedia.org/wiki/Concurrent_Versions_System">CVS</a>, and <a href="https://en.wikipedia.org/wiki/Apache_Subversion">Apache
+Subversion</a> played a role in
+shaping Git and its peers<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>. See also <a href="https://en.wikipedia.org/wiki/Version_control#History">a brief history of version
+control</a>.</p>
+
+<p>Finally, GitHub didn’t emerge until 2008. It, too was shaped by its peers,
+notably such <a href="https://en.wikipedia.org/wiki/Forge_(software)">forges</a> as
+<a href="https://en.wikipedia.org/wiki/SourceForge">SourceForge</a>.</p>
+
+<p>The differences between a forge and a version control system are the primary
+concern of this article, using Git and GitHub as the exemplaries. That we
+categorize Git and GitHub differently should make it clear they are distinct
+entities.</p>
+
+<h2 id="common-mistakes">Common Mistakes</h2>
+
+<p>This section covers some of the most common mistakes I see working with
+developers every day, roughly in order of commonality and importance.</p>
+
+<ul>
+  <li>Git is not GitHub. This is the point of the whole article: don’t say one when
+you mean the other. If you’re not sure which you mean, find out if it exists as
+a major concept in the <a href="https://git-scm.com/doc">documentation for Git</a>; that’s
+usually a good <a href="https://en.wikipedia.org/wiki/Philosophical_razor">razor</a> to
+separate one from the other.</li>
+  <li>There is no such thing as a “Git issue.” GitHub has
+<a href="https://docs.github.com/en/issues">Issues</a>, and many other forges have
+bug-tracking features. Some projects even use tools outside of software forges
+to track bugs. <em>Bug tracking is not a Git feature or principle: Git is for
+version control.</em></li>
+  <li>Corollary: GitHub issue references are not permanent. Referring to <code class="language-plaintext highlighter-rouge">#1234</code> in
+a commit or elsewhere may conveniently create a link in GitHub, but if you ever
+switch systems that won’t be helpful. I thus advise using the full link
+<code class="language-plaintext highlighter-rouge">https://github.com/&lt;org&gt;/&lt;project&gt;/issue/1234</code> <em>and</em> including the relevant
+context with the link.</li>
+  <li>Git has no notion of pull requests. This one is, admittedly, an easy mistake
+to make: Git has a command called
+<a href="https://git-scm.com/docs/git-request-pull"><code class="language-plaintext highlighter-rouge">request-pull</code></a> to “Generate a
+request asking your upstream project to pull changes into their tree.” That is
+essentially what a GitHub Pull Request is: a request for one repository to pull
+changes from another repository’s accessible branch. On GitHub, a PR is forced
+to specify a destination branch, too, but in distributed workflows it may be
+that multiple upstream branches should pull from the source branch.</li>
+  <li>GitHub is not Git. I already said this, but let’s take a different angle: I
+think GitHub’s enormous market share confuses people. There are actually <em>many</em>
+different ways to host Git repositories so that they are accessible for
+development, open-source or otherwise. For example, <a href="https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols">Pro Git describes some
+aspects of hosting a Git
+server</a>, in
+addition to the builtin visualizer
+<a href="https://git-scm.com/book/en/v2/Git-on-the-Server-GitWeb">GitWeb</a>, the GitHub
+competitor <a href="https://git-scm.com/book/en/v2/Git-on-the-Server-GitLab">GitLab</a>,
+and other <a href="https://git-scm.com/book/en/v2/Git-on-the-Server-Third-Party-Hosted-Options">third-party
+options</a>
+like <a href="https://about.gitea.com">Gitea</a> and <a href="https://sourcehut.org">SourceHut</a>.
+Some projects, including Git, do most development on mailing lists and don’t use
+most of the major forge features. Many of the options mentioned here are
+open-source themselves and can also be self-hosted.</li>
+</ul>
+
+<h2 id="forks-and-branches">Forks and Branches</h2>
+
+<p>I see many, many developers confuse these two terms, and I’m going to attempt
+the impossible: to disambiguate them. I suspect that most of the confusion is
+due to age: many of my peers didn’t experience the history that gives these
+terms such specific meanings, and most don’t read the documentation or historic
+notes that explain them. So, for your benefit, dear reader, I’ve done what
+research I need to extricate these terms and point you towards more details.
+Here are the fruits of that labor (roughly in order of importance?).</p>
+
+<p>Most importantly: Forks and branches are entirely orthogonal concepts. A
+<a href="https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefbranchabranch">branch</a>
+is a kind of
+<a href="https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefrefaref">reference</a>,
+also called a <code class="language-plaintext highlighter-rouge">ref</code> in Git’s documentation. Git’s documentation actually
+considers a branch an entire history of commits; in practice, we typically mean
+the reference <code class="language-plaintext highlighter-rouge">my-feature</code> when we talk about the branch <code class="language-plaintext highlighter-rouge">my-feature</code>, not the
+list of commits produced by <code class="language-plaintext highlighter-rouge">git rev-list my-feature</code>.</p>
+
+<p>A fork… well, here’s where it gets tricky. I’m going to walk you through a
+useful set of working definitions, then tease apart some history and nuance.</p>
+
+<h3 id="different-kinds-of-forks">Different Kinds of Forks</h3>
+
+<p>I’m going to distinguish 3 kinds of forks: forks, Forks, and divergent forks.</p>
+
+<ul>
+  <li>A fork is a URL<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup> that points to a related<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup> repository. In a non-bare
+local fork, we typically keep track of other forks as remotes. Notice that I’ve
+referred to a “local fork”: a clone is “just another fork.”</li>
+  <li>A Fork is a <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks">GitHub
+feature</a>
+for making contributions easier (more on this later). GitHub says a Fork is “a
+new repository that shares code” with the “upstream” repository. This is close
+to what a fork is, actually, and most Forks are useful forks, too. A few
+clarifications are in order. First, GitHub said the Fork and its upstream
+repository share code, but actually they share a common commit history. Second,
+GitHub relegates Forks to 2nd-class status by not enabling certain other
+features in its UI or otherwise for Forks.</li>
+  <li>A divergent fork is my term for distinguishing forks that take a social stance
+on what repository is considered canonical. More on this later, but if you’re
+thinking “OpenTofu forked Terraform,” I’d call that a “divergent fork” in this
+article. In practice, the open source community just calls these forks, and I
+need the “divergent” label only to usefully distinguish these kinds of forks for
+this article.</li>
+</ul>
+
+<p>To recap: every copy of a repository is a fork. GitHub provides a way to create
+special forks for contribution via their platform that I call Forks. Some
+projects diverge meaningfully from a shared history, and these are also called
+forks.</p>
+
+<p>The distinction between a fork and a divergent fork is that one is technical and
+the other is social. We’ll cover the social area later.</p>
+
+<h3 id="history-of-the-term-fork">History of the Term “fork”</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Fork_(software_development)">The word “fork” goes back to at least 1980</a>. Over time, it has
+been used for a variety of purposes, including things that are closer to what
+Git calls a branch or repository. In the Jargon File, it is explicitly about
+divergent forks (with a serious negative connotation): historically, divergent
+forks were seen as fragmenting the ecosystem, which was A Bad Thing™. In modern
+open source development, the proliferation and competition of related ideas and
+works via distributed development is widely considered a good thing, and
+divergent forks are generally not frowned upon unless they are antagonistic.</p>
+
+<p>It is telling that the only mentions of the word “fork” in Git’s documentation
+are in documents describing GitHub interactions: there is nothing technically
+inherent about the concept of forks (or Forks) in Git’s design. This is part of
+what makes Git distributed: all that matters is copies of the commit history and
+how to refer to them.</p>
+
+<h3 id="contributing-to-a-project-forks-and-branches">Contributing to a Project: forks and branches</h3>
+
+<p>There are two kinds of contributions: those for yourself and those for others.</p>
+
+<p>A contribution for yourself (where license permits) only requires a copy of the
+source code (and typically its history). That is, you need a fork. Then you edit
+the code. Committing is not even strictly necessary.</p>
+
+<p>To share that contribution with others, you need to either</p>
+<ul>
+  <li>Make a branch of history available somewhere that other interested parties can
+pull from</li>
+  <li>Send others a patch series, such as from <code class="language-plaintext highlighter-rouge">git format-patch</code></li>
+</ul>
+
+<p>In the end, you are taking your work and sending it to others with a request
+that they pull from your line of work. A Fork is a convenient place to make
+branches available to others, and that is what makes GitHub Forks a useful
+feature for contributing to projects. But you still want a line of commit
+history somewhere; this typically resides in a branch.</p>
+
+<h3 id="the-social-aspect">The Social Aspect</h3>
+
+<p>Git treats all forks the same: they are equally unprivileged. Only social
+processes privilege some forks as canonical over others.</p>
+
+<p>For example, it is widely agreed that Torvalds’s Linux kernel repository is
+canonical. There is nothing in Git that enforces this, only social convention!
+Similar arguments apply to the GitHub mirrors git/git and gitster/git, along
+with the divergent fork microsoft/git.</p>
+
+<p>Following this to its conclusion, when <a href="https://opentofu.org">OpenTofu.org</a> says</p>
+
+<blockquote>
+  <p>Open Tofu is a fork of Terraform</p>
+</blockquote>
+
+<p>what they roughly mean is</p>
+
+<blockquote>
+  <p>We have a Git repository that contains some shared history with the canonical
+Terraform repository. We have technical differences A,B,C and social
+differences X,Y,Z; these make us interesting because of MN and you should
+consider using our project.</p>
+</blockquote>
+
+<p>They might or might not mean they want to supplant an existing canonical
+repository as dominant via social process; that is, they <em>may</em> intend to become
+the defacto hub for Terraform-like software, but the primary message conveyed is
+one of commit history and technical features.</p>
+
+<p>Most Forks and forks have a similar message: “I have something interesting you
+should look at. It’s better than other repositories with shared history because
+A, so you should use it, too.” A request to other maintainers of other
+repositories (forks) to pull in those changes (GitHub: a PR) is a way of saying
+“You should pull changes from my fork because they will improve yours.” That is,
+<em>collaboration is all social.</em> The technical bits of Git support this kind of
+collaboration because they were designed to for Linux kernel development, but
+they serve other kinds of social contribution models, too.</p>
+
+<p>Sometimes forks maintain parallel development with each having different
+features. Vim and neovim can be viewed this way. Another example is
+microsoft/git, which contributed the <code class="language-plaintext highlighter-rouge">scalar</code> tool back to git/git but still has
+other microsoft-specific changes. It continues to integrate upstream git/git
+changes to maintain feature parity. Packaging software, such as for a Linux
+distribution, is similar because of patching: patches might add
+platform-specific changes but try to maintain feature parity with the original
+code base.</p>
+
+<p>This is all part of what makes Git distributed.</p>
+
+<h2 id="recap">Recap</h2>
+
+<p>In a nutshell, there’s a lot of Git and GitHub that work together, but they are
+fundamentally separate objects. Git is primarily a technical tool for
+distributed version control; GitHub facilitates some of the social parts of
+collaborating on software, but is not the only way to do so. Keeping these
+concerns separate allows us to better untangle the nature of forks and branches.
+It might seem pedantic, yet sharing common language and understanding helps us
+develop better software, together.</p>
+
+<h4 id="footnotes">Footnotes</h4>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Didn’t you know? There’s a whole <a href="https://en.wikipedia.org/wiki/List_of_version-control_software#Distributed_model">family of distributed version control
+systems</a>.
+There’s even work on new systems being done today. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Any kind of remote can be a fork, really, including other clones over
+different storage systems, local or otherwise. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>It’s not strictly necessary for the histories to be related at the
+commit-graph level: <code class="language-plaintext highlighter-rouge">git merge</code> accepts <code class="language-plaintext highlighter-rouge">--allow-unrelated-histories</code> for a
+reason. Read related in a social, “this is relevant to me” sense. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="github" /><category term="rants" /><category term="open-source" /><summary type="html"><![CDATA[It’s time to remind ourselves that GitHub and Git are not synonyms.]]></summary></entry><entry><title type="html">Performance of Racket Pict Comparison</title><link href="https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality/" rel="alternate" type="text/html" title="Performance of Racket Pict Comparison" /><published>2024-02-15T00:00:00+00:00</published><updated>2024-02-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality/"><![CDATA[<p>I get a brief glimpse of the performance characteristics of two methods for
 comparing <code class="language-plaintext highlighter-rouge">pict</code>s for equality.</p>
 
 <h2 id="motivation">Motivation</h2>
@@ -918,105 +1180,4 @@ or some other storage medium), but we could either</p>
   <li>include the mount point in the entry.</li>
 </ul>
 
-<p>Again, what the f@#$.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rants" /><category term="ms-excel" /><summary type="html"><![CDATA[Yes, you read that right: you can’t open (e.g.) Documents/budget.xlsx and Work/budget.xlsx at the same time.]]></summary></entry><entry><title type="html">Stop, sed i!</title><link href="https://benknoble.github.io/blog/2020/08/06/stop-sed-i/" rel="alternate" type="text/html" title="Stop, sed i!" /><published>2020-08-06T00:00:00+00:00</published><updated>2020-08-06T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/08/06/stop-sed-i</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/08/06/stop-sed-i/"><![CDATA[<p>Right tool for the job people, right tool for the job :roll_eyes:</p>
-
-<h2 id="what-am-i-talking-about">What am I talking about?</h2>
-
-<p>I’m referring to all the use of <code class="language-plaintext highlighter-rouge">sed -i</code> spread wantonly on the internet, <em>sans</em>
-appropriate caveats.</p>
-
-<blockquote>
-  <p>Background: most implementations of the <code class="language-plaintext highlighter-rouge">-i</code> flag allow <code class="language-plaintext highlighter-rouge">sed</code> to edit files in
-place; by default, it edits standard in and writes to standard out, so you end
-up having to do <code class="language-plaintext highlighter-rouge">&lt;file sed ... &gt;file.new &amp;&amp; mv file.new file</code>. Trying to
-redirect back into the file (<code class="language-plaintext highlighter-rouge">&lt;file sed ... &gt;file</code>) fails because the file is
-truncated before <code class="language-plaintext highlighter-rouge">sed</code> gets to read it!</p>
-</blockquote>
-
-<p>The <code class="language-plaintext highlighter-rouge">-i</code> flag is <a href="https://pubs.opengroup.org/onlinepubs/9699919799/">not specified by
-POSIX</a>, which makes it
-non-portable. This isn’t such a big deal, <em>except</em> that different <code class="language-plaintext highlighter-rouge">sed</code>s require
-different arguments! GNU <code class="language-plaintext highlighter-rouge">sed</code> edits in place, no argument provided. BSD <code class="language-plaintext highlighter-rouge">sed</code>,
-such as the one on macOS, requires a suffix:</p>
-
-<ul>
-  <li>if the suffix is non-empty, it places the original file at <code class="language-plaintext highlighter-rouge">file.suffix</code> and
-the new contents in <code class="language-plaintext highlighter-rouge">file</code>;</li>
-  <li>if the suffix is empty, no backup is made.</li>
-</ul>
-
-<p>So now, every <code class="language-plaintext highlighter-rouge">sed -i</code> solution to a problem needs to <em>at least</em></p>
-
-<ul>
-  <li>mention non portability, and</li>
-  <li>mention two different implementations and how they handle it.</li>
-</ul>
-
-<p>I don’t know about you, but I wonder if the solution to editing files in place
-is a lot simpler… :thinking:</p>
-
-<h2 id="sed-for-streams-ed-for-files"><code class="language-plaintext highlighter-rouge">sed</code> for streams, <code class="language-plaintext highlighter-rouge">ed</code> for files</h2>
-
-<p><code class="language-plaintext highlighter-rouge">sed</code> stands for “stream editor.” It was designed based on the text-editor
-<code class="language-plaintext highlighter-rouge">ed</code>’s commands! <code class="language-plaintext highlighter-rouge">ed</code> is built to edit files.</p>
-
-<ul>
-  <li>If you need to edit a file in place, use POSIX <code class="language-plaintext highlighter-rouge">ed</code> (or the improved
-POSIX-specified <code class="language-plaintext highlighter-rouge">ex</code>);</li>
-  <li>if you need to transform a stream, <code class="language-plaintext highlighter-rouge">sed</code> is an option.</li>
-</ul>
-
-<p>I cannot emphasize this enough. Trying to use <code class="language-plaintext highlighter-rouge">sed -i</code> in any kind of portable
-anything is likely to break; worse was the thought that <code class="language-plaintext highlighter-rouge">sed</code> should ever be
-used for editing files! Use a text-editor: if you thought “I’m automating, I
-don’t want to run a text-editor to automate,” well, remember:</p>
-
-<ul>
-  <li>it is entirely possible to automate (read: script) <code class="language-plaintext highlighter-rouge">ed</code> and <code class="language-plaintext highlighter-rouge">ex</code>, and</li>
-  <li>people today fire up entire web browsers in their desktop applications in
-order to automate things—running a tiny text-editor is the least of your
-worries.</li>
-</ul>
-
-<h2 id="addendum-scripting-ed">Addendum: scripting ed</h2>
-
-<p><code class="language-plaintext highlighter-rouge">ed</code> takes commands on standard in. It can be made silent with <code class="language-plaintext highlighter-rouge">-s</code>, and the
-argument is a file to edit. I ignore <code class="language-plaintext highlighter-rouge">-p</code> for now because it isn’t useful for
-scripting/automation. So, to script <code class="language-plaintext highlighter-rouge">ed</code>, generate a list of commands and pipe
-it in!</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">printf</span> <span class="s1">'%s\n'</span> g/abc/d w q | ed <span class="nt">-s</span> file
-</code></pre></div></div>
-
-<p>That’s the most portable, but <code class="language-plaintext highlighter-rouge">bash</code> users can probably do</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ed <span class="nt">-s</span> file <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
-g/abc/d
-w
-q
-</span><span class="no">EOF
-</span></code></pre></div></div>
-
-<p>There is quite a bit of flexibility here; the left-hand side could actually be
-another <em>program</em> that generates <code class="language-plaintext highlighter-rouge">ed</code> commands on standard out! It turns out,
-this is what <code class="language-plaintext highlighter-rouge">diff</code> does: in its default output mode, we have</p>
-
-<blockquote>
-  <p>These lines resemble <code class="language-plaintext highlighter-rouge">ed</code> subcommands to convert <code class="language-plaintext highlighter-rouge">file1</code> into <code class="language-plaintext highlighter-rouge">file2</code>. The
-line numbers before the action letters shall pertain to <code class="language-plaintext highlighter-rouge">file1</code>; those after
-shall pertain to <code class="language-plaintext highlighter-rouge">file2</code>. Thus, by exchanging <code class="language-plaintext highlighter-rouge">a</code> for <code class="language-plaintext highlighter-rouge">d</code> and reading the line
-in reverse order, one can also determine how to convert <code class="language-plaintext highlighter-rouge">file2</code> into <code class="language-plaintext highlighter-rouge">file1</code>.
-As in <code class="language-plaintext highlighter-rouge">ed</code>, identical pairs (where <code class="language-plaintext highlighter-rouge">num1=num2</code>) are abbreviated as a single
-number.</p>
-</blockquote>
-
-<p>And when we ask for the <code class="language-plaintext highlighter-rouge">-e</code> output mode:</p>
-
-<blockquote>
-  <p>With the <code class="language-plaintext highlighter-rouge">-e</code> option, a script shall be produced that shall, when provided as
-input to <code class="language-plaintext highlighter-rouge">ed</code>, along with an appended <code class="language-plaintext highlighter-rouge">w</code> (write) command, convert <code class="language-plaintext highlighter-rouge">file1</code>
-into <code class="language-plaintext highlighter-rouge">file2</code>.</p>
-</blockquote>
-
-<p>So now, you can probably write a <code class="language-plaintext highlighter-rouge">patch</code> command :smile: you parse the output
-from <code class="language-plaintext highlighter-rouge">diff</code>, with maybe slight modification, and then pass it as input to <code class="language-plaintext highlighter-rouge">ed</code>!</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="shell" /><category term="sed" /><category term="rants" /><category term="posix" /><summary type="html"><![CDATA[Right tool for the job people, right tool for the job :roll_eyes:]]></summary></entry></feed>
+<p>Again, what the f@#$.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rants" /><category term="ms-excel" /><summary type="html"><![CDATA[Yes, you read that right: you can’t open (e.g.) Documents/budget.xlsx and Work/budget.xlsx at the same time.]]></summary></entry></feed>
