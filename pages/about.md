@@ -103,6 +103,12 @@ facto standard.
 - Favorite **keyboard**: my Ergodox EZ. Here's my
 [layout](https://configure.zsa.io/ergodox-ez/layouts/BNalB/latest/0).
 
+- Favorite _colorscheme_: I've been using Dracula for years. If you like
+Dracula, too, consider [purchasing the Pro version through my affiliate
+link](https://gumroad.com/a/968545299/tPfIDt). Dracula is used on this website
+for code blocks, and I've contributed a lot to various open-source and Pro
+components of the theme.
+
 <!-- Links -->
 [github]: https://github.com/
 [jekyll]: http://jekyllrb.com
