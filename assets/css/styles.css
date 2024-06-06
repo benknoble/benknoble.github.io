@@ -18,7 +18,6 @@
 /*
  * Styles
  */
-@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i");
 @import url("https://cdn.jsdelivr.net/npm/victormono@latest/dist/index.min.css");
 .highlight {
   background: #282a36;
@@ -141,8 +140,7 @@
 }
 
 body {
-  font: 16px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #444;
+  font: 18px Charter, Charter Bitstream, serif;
   background: #fafafa;
   margin: 0;
 }
@@ -195,9 +193,8 @@ h3,
 h4,
 h5,
 h6 {
-  color: #222;
   padding: 0;
-  margin: 0 0 1em;
+  margin: 40px 0;
   line-height: 1.2;
 }
 
@@ -210,27 +207,18 @@ dl {
   margin: 0 0 1em;
 }
 
-h1 {
-  font-size: 2em;
-}
-
-h2 {
-  color: #393939;
-}
-
-h3,
-h4,
-h5,
-h6 {
-  color: #494949;
+h1, h2, h3, h4, h5, h6 {
+  font-size: 20px;
 }
 
 blockquote {
-  padding: 1em 1em 0.1em 1em;
+  padding: 1em;
   font-style: italic;
-  background: rgba(0, 0, 0, 0.06);
-  color: #222;
-  margin: auto;
+  margin: 0 0 1em 2em;
+  font-size: 16px;
+}
+blockquote p {
+  margin: 0;
 }
 
 figure {
@@ -245,7 +233,7 @@ code,
 pre {
   font-family: "Victor Mono", monospace;
   font-variant-ligatures: no-contextual;
-  font-size: 0.95em;
+  font-size: 16px;
   overflow-x: auto;
 }
 
