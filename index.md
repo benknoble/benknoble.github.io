@@ -2,7 +2,7 @@
 title: Home
 ---
 
-    "Do you keep your junk drawer full of fun and creative things?"
+_Do you keep your junk drawer full of fun and creative things?_
 
 ## Latest Post
 {% assign latest = site.posts.first %}
