@@ -34,7 +34,8 @@ I rely on a healthy mix of self-taught experimentation and formal class training
 for anything I do, including programming. Being self-taught keeps me curious. My
 biggest personal interests in the computer science sphere are programming
 languages and programming tools. Outside of that, I'm an avid biker,
-clarinetist, martial artist, reader, and gamer.
+clarinetist, martial artist, reader, and gamer (board, tabletop, role-playing,
+and video).
 
 [By a wonderful fluke, my Erdős number is 4.](https://sites.google.com/site/dicksites/)
 
