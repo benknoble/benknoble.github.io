@@ -8,5 +8,7 @@ links:
     url: /sitemap.xml
   - title: RSS Feed
     url: /feed.xml
+  - title: Colophon
+    url: /colophon/
   - title: "Copyright D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script>"
     url: https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE
