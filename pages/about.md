@@ -25,7 +25,8 @@ To see my virtual Junk Drawer on GitHub, visit [benknoble/JunkDrawer][junk].
 
 I'm D. Ben Knoble, a Software Engineer at Capital One. I completed a Master's in
 CS in 2021. I have also completed my undergraduate degree in CS and French, with
-a minor in Mathematics, which I completed in 2020.
+a minor in Mathematics, which I completed in 2020. [See what others say about
+me]({% link pages/testimonials.md %}).
 
 I believe that simple questions have complex, nuanced answers. Read [Adam Gordon
 Bell's article for Earthly](https://earthly.dev/blog/thought-leaders/) to learn
