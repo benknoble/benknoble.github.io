@@ -72,10 +72,15 @@ h6 {
 p,
 ul,
 ol,
+li,
 table,
 pre,
 dl {
   margin: 0 0 1em;
+}
+
+li pre {
+  margin: 1em 0 1em;
 }
 
 h1, h2, h3, h4, h5, h6 {
