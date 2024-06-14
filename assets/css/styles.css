@@ -141,6 +141,7 @@
 
 body {
   font: 18px Charter, Charter Bitstream, serif;
+  line-height: 1.4;
   background: #fafafa;
   margin: 0;
 }
@@ -194,20 +195,29 @@ h4,
 h5,
 h6 {
   padding: 0;
-  margin: 40px 0;
+  margin: 2.3em 0 1.3em 0;
   line-height: 1.2;
 }
 
 p,
 ul,
 ol,
+li,
 table,
 pre,
 dl {
   margin: 0 0 1em;
 }
 
-h1, h2, h3, h4, h5, h6 {
+li pre {
+  margin: 1em 0 1em;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2, h3, h4, h5, h6 {
   font-size: 20px;
 }
 
@@ -393,6 +403,10 @@ nav a:hover {
 
 .meta {
   font-style: italic;
+}
+
+p.meta {
+  padding-left: 3em;
 }
 
 .authors {
