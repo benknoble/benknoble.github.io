@@ -13,6 +13,8 @@ body {
   // color: #444;
   background: #fafafa;
   margin: 0;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern";
 }
 
 header,
