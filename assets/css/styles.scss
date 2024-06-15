@@ -80,6 +80,18 @@ h2, h3, h4, h5, h6 {
   font-size: 20px;
 }
 
+@each $h in [h1, h2, h3, h4, h5, h6] {
+  section #{$h} {
+    position: relative;
+    &::before {
+      content: '' + $h + '.';
+      position: absolute;
+      left: -2em;
+      color: grey;
+    }
+  }
+}
+
 p,
 ul,
 ol,
