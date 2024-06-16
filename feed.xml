@@ -1,4 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-06-16T00:13:20+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Re: Beautiful Python Monsters</title><link href="https://benknoble.github.io/blog/2024/06/15/beautiful-python-monsters/" rel="alternate" type="text/html" title="Re: Beautiful Python Monsters" /><published>2024-06-15T00:00:00+00:00</published><updated>2024-06-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/06/15/beautiful-python-monsters</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/06/15/beautiful-python-monsters/"><![CDATA[<p>Making flaky tests pass cries out for functional-programming idioms.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-06-16T14:04:37+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Em-dashes are not spaced hyphens</title><link href="https://benknoble.github.io/blog/2024/06/16/em-dashes/" rel="alternate" type="text/html" title="Em-dashes are not spaced hyphens" /><published>2024-06-16T00:00:00+00:00</published><updated>2024-06-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/06/16/em-dashes</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/06/16/em-dashes/"><![CDATA[<p>Please use an em-dash—like this one—for parenthetical asides or for a gentler
+colon. <s>Do not use spaced hyphens - like this - they are wrong.</s></p>
+
+<p>I don’t know where this trend came from or how to stop it. I suspect</p>
+
+<ul>
+  <li>Poor education for effective punctuation and grammar means fewer people know
+about the <a href="https://practicaltypography.com/hyphens-and-dashes.html">different kinds of
+dashes</a>.</li>
+  <li>Keyboard and editor interfaces hide away <a href="https://practicaltypography.com/type-composition.html">various typographic
+characters</a>, including
+en- and em- dashes, making them less discoverable.</li>
+  <li>In the twist of self-reinforcing trends, publicly visible uses make this
+mistake more acceptable.</li>
+</ul>
+
+<p>I can’t top Butterick on explanations, so please review <a href="https://practicaltypography.com/hyphens-and-dashes.html">Hyphens and
+Dashes</a> for the
+different kinds and uses. I’m going to mention some input methods he omitted:</p>
+
+<ul>
+  <li>On an iPhone keyboard, holding the hyphen gives you options for dashes of
+different lengths, including en- and em- dashes.</li>
+  <li>(Programmers) In
+<a href="https://jekyllrb.com/docs/configuration/markdown/#kramdown">Jekyll</a>- or
+<a href="https://kramdown.gettalong.org/syntax.html#typographic-symbols">Kramdown</a>-
+processed Markdown, the code <code class="language-plaintext highlighter-rouge">---</code> becomes an em-dash and <code class="language-plaintext highlighter-rouge">--</code> becomes an
+en-dash, thanks to <a href="https://practicaltypography.com/typewriter-habits.html">Typewriter
+Habits</a>. Note that
+they must appear within text not to be confused with the horizontal rule
+shorthand.</li>
+  <li>(Programmers) In Vim, the digraphs <code class="language-plaintext highlighter-rouge">-N</code> and <code class="language-plaintext highlighter-rouge">-M</code> (enter with
+<kbd>Ctrl</kbd>+<kbd>k</kbd>) produce en- and em- dashes, respectively.</li>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rants" /><category term="typograhpy" /><summary type="html"><![CDATA[Please use an em-dash—like this one—for parenthetical asides or for a gentler colon. Do not use spaced hyphens - like this - they are wrong.]]></summary></entry><entry><title type="html">Re: The Functional Programming Hiring Problem</title><link href="https://benknoble.github.io/blog/2024/06/16/fp-hiring/" rel="alternate" type="text/html" title="Re: The Functional Programming Hiring Problem" /><published>2024-06-16T00:00:00+00:00</published><updated>2024-06-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/06/16/fp-hiring</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/06/16/fp-hiring/"><![CDATA[<p>The identified problem may be missing the mark.</p>
+
+<p><a href="https://blog.janissary.xyz/posts/hiring-functional-programming">Noah Snelson articulates a common theme of functional programming (FP)
+discussions</a>:
+the (dis)advantages of hiring engineers for less-well-known FP languages. I
+personally appreciated the time Snelson spent crafting their article, but I’ve
+got one issue with it: I think they missed a class of candidates.</p>
+
+<p>Snelson believes that when hiring for languages such as the fictional Gooby, you
+have 3 pools of applicants:</p>
+
+<ol>
+  <li>The résumé-spammers.</li>
+  <li>Bright undergrads recently converted to the “One True Way.”</li>
+  <li>Senior engineers who only care about Gooby.</li>
+</ol>
+
+<p>I agree that these are 3 types of potential Gooby applicants! I disagree that
+there’s a meaningful difference between converted undergraduates and senior
+engineers <em>in the context of the article’s problems.</em></p>
+
+<h2 id="are-these-senior-engineers-behaving-like-senior-engineers">Are these senior engineers behaving like senior engineers?</h2>
+
+<p>The senior engineers certainly have more Gooby expertise than the converted
+undergraduates. Snelson’s characterizations reveal that these engineers are
+still drinking the Kool-Aid, though:</p>
+
+<ul>
+  <li>They “<em>insist</em> on using a functional language at every moment possible”
+(emphasis original).</li>
+  <li>They “threaten to quit if their next project wasn’t written in their language
+of choice.”</li>
+  <li>They appeal to the authority of
+<a href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life">BDFL</a>s “as a kind
+of trump-card argument in technical discussions.”</li>
+</ul>
+
+<p>This does not, in my mind, a senior engineer make.</p>
+
+<h2 id="another-kind-of-engineer">Another kind of engineer</h2>
+
+<p>All the noise of technical obsession obscures the missing 4th class of
+applicants: those who have the nuance of thought we expect from leaders. Those
+who understand that <a href="/about/#me">simple questions have complex answers</a>.</p>
+
+<p>The obsessed-senior problem is not particular to FP, either. Languages that
+encourage imperative or OO style  have the same type of zealots (JavaScript,
+Java, C, C++, etc.). Rust has its own zealotry and is markedly harder to
+classify. <a href="https://cs.brown.edu/courses/cs173/2012/Videos/2012-09-05/2012-09-05.m4v">Shriram Krishnamurthi argues that such classifications are not a
+useful concept: the features of a language and how they interact provides a
+better discussion
+frame.</a>
+(I recommend the <a href="https://cs.brown.edu/courses/csci1730/2012/Videos/">whole video
+series</a>).</p>
+
+<p>This raises the question: if you’re selecting for problematic “senior”
+engineers, are you selecting right? The problems of zealotry are correctly
+identified (my personal experience agrees), but maybe “not selecting for
+zealots” doesn’t mean “not selecting for language experts.” Selecting for senior
+Gooby engineers does not require relaxing criteria for critical thinking.</p>
+
+<p>If your hiring process filters for “personnel issues” of the kind Snelson
+describes, then fix the hiring process. Look for candidates who consider
+multiple angles and respond “it depends.”</p>
+
+<p>Snelson concludes by citing Cromwell and a Tumblr user as a reminder that
+sometimes we are wrong. Ironically, the Tumblr post’s “it depends” aligns with
+exactly my argument: hire developers who understand and appreciate nuance. <em>They
+are probably still deep experts of some domain</em>. Nuance typically comes from
+expertise.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="fp" /><summary type="html"><![CDATA[The identified problem may be missing the mark.]]></summary></entry><entry><title type="html">Re: Beautiful Python Monsters</title><link href="https://benknoble.github.io/blog/2024/06/15/beautiful-python-monsters/" rel="alternate" type="text/html" title="Re: Beautiful Python Monsters" /><published>2024-06-15T00:00:00+00:00</published><updated>2024-06-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/06/15/beautiful-python-monsters</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/06/15/beautiful-python-monsters/"><![CDATA[<p>Making flaky tests pass cries out for functional-programming idioms.</p>
 
 <p>While reading <a href="https://treyhunner.com/2024/06/a-beautiful-python-monstrosity/">A beautiful Python
 monstrosity</a>, I
@@ -998,258 +1100,4 @@ this line:</p>
 <ul class="task-list">
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />new bullets can be added, but don’t start a new bullet until the current one
 is finished!</li>
-</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><summary type="html"><![CDATA[I haven’t done (or kept) New Year’s Resolutions in a long time. This article from the Angry GM inspired me to do them differently.]]></summary></entry><entry><title type="html">The State of Dis-union</title><link href="https://benknoble.github.io/blog/2021/01/11/state-of-dis-union/" rel="alternate" type="text/html" title="The State of Dis-union" /><published>2021-01-11T00:00:00+00:00</published><updated>2021-01-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/01/11/state-of-dis-union</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/01/11/state-of-dis-union/"><![CDATA[<p>While Ben has other articles planned for upcoming technical topics, we feel that
-now, in the wake of the January 6th terrorist attack on the US Capitol by US
-citizens, is a time for reflection on a scary political landscape and a time for
-the explicit condemnation of white supremacy.</p>
-
-<h2 id="on-the-attack">On the attack</h2>
-
-<p>While there have been many actions in the last 4 years that threatened the
-safety of Americans, this was the most personal for us. We don’t wish to
-invalidate the experiences of others.</p>
-
-<p>Wednesday morning, we were shocked, scared, and frustrated by the breaking news
-that Americans had breached the US Capitol, seat of the US government and symbol
-of the shifting presidency.</p>
-
-<p>While we acknowledge the extreme polarization of the United States, we never
-imagined that a sitting President could actively incite such extreme violence.
-Worse, before the 2020 election, we never believed that election results could
-come under such intense and baseless accusations of fraud. We certainly never
-imagined that such accusations (a) would come from the President and (b) would
-lead to such unrest.</p>
-
-<p>We feel called to actively condemn</p>
-
-<ul>
-  <li>racism,</li>
-  <li>white supremacy,</li>
-  <li>violence, especially in the name of silencing others,</li>
-  <li>ignorance of white privilege and autonomy,</li>
-  <li>and the use of the presidential platform to spread misinformation and
-encourage violence</li>
-</ul>
-
-<h2 id="on-the-response-to-the-attack">On the response to the attack</h2>
-
-<p>The response to this attack blatantly displayed the white privilege enjoyed by
-rioters. The increased surge of <a href="https://blacklivesmatter.com">Black Lives
-Matter</a> protesters this summer saw the peace of
-demonstrators meet with violent suppression from multiple parties, including the
-police and extremists. In contrast, the response to what can only be called a
-terrorist attack on January 6th overwhelmingly appears to lack appropriate
-action. Whereas one group is met with unnecessary aggression, another is met
-with none of the expected.</p>
-
-<p>We are shocked and outraged by the response to this attack. We would regret any
-loss of life for any reason, but we do believe in the responsibility of law
-enforcement to secure the safety of our nation’s government.</p>
-
-<p>We cannot remain too surprised, however, for America as a nation has always
-valued the lives of its white citizens over those of its
-<a href="https://www.nytimes.com/article/what-is-bipoc.html">people of color</a> counterparts.</p>
-
-<h2 id="on-our-stance-as-privileged-white-citizens">On our stance as privileged white citizens</h2>
-
-<p>We recognize that from the first our reactions are informed by our unique
-cultural, social, political, and spatiotemporal identities. This necessarily
-includes our whiteness. In even writing that this has been the “most personal”
-feeling threat to us, we are forced to concede that many other events have
-likely felt far more personal to those whom we wish to support.</p>
-
-<p>We recognize that discussions of race often make white people uncomfortable;
-this includes ourselves. We are actively working to normalize these
-conversations between ourselves and within our friend groups. We believe that
-this a way toward better communication and mutual trust.</p>
-
-<p>Now more than ever, acting as a white ally for people of color requires actively
-condemning attempts to silence their voices, suppress their rights, or subjugate
-their bodies. It is not enough that we remain silent behind the front lines; nor
-is it right that we speak for others. It is time to lift our voices in support
-of theirs and to glorify their right to those voices.</p>
-
-<p>We recognize that this requires much learning. Savannah, as a Sociology major
-and Social &amp; Economic Justice minor, and her many teachers, professors and
-practitioners, are a testament to the wealth of resources available to educate
-us. With that in mind, as we embark on a renewed journey of empathy and
-understanding, we would like to leave a list of suggested books for the
-interested.</p>
-
-<h2 id="suggested-reading-from-savannah">Suggested reading from Savannah</h2>
-
-<ul>
-  <li><a href="https://www.robindiangelo.com">White Fragility by Robin DiAngelo</a></li>
-  <li><a href="http://knopfdoubleday.com/book/37354/women-race-class/">Women, Race &amp; Class by Angela Davis</a></li>
-  <li><a href="https://scholar.princeton.edu/matthewdesmond/">Evicted by Matthew Desmond</a></li>
-  <li><a href="https://www.haymarketbooks.org/books/780-freedom-is-a-constant-struggle">Freedom is a Constant Struggle by Angela Davis</a></li>
-  <li><a href="https://newjimcrow.com/about-the-author">The New Jim Crow by Michelle Alexander</a></li>
-  <li><a href="https://eji.org/bryan-stevenson/">Just Mercy by Bryan Stevenson</a></li>
-  <li><a href="https://www.ibramxkendi.com">How to be an Antiracist by Ibram X. Kendi</a></li>
-  <li><a href="https://www.jasonwritesbooks.com">Stamped: Racism, Antiracism, and You by Jason Reynolds and Ibram X. Kendi</a></li>
-</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="equal rights" /><category term="learning" /><category term="safety" /><category term="race" /><summary type="html"><![CDATA[While Ben has other articles planned for upcoming technical topics, we feel that now, in the wake of the January 6th terrorist attack on the US Capitol by US citizens, is a time for reflection on a scary political landscape and a time for the explicit condemnation of white supremacy.]]></summary></entry><entry><title type="html">Please *do* generate man-pages</title><link href="https://benknoble.github.io/blog/2020/12/07/man-pages-please/" rel="alternate" type="text/html" title="Please *do* generate man-pages" /><published>2020-12-07T00:00:00+00:00</published><updated>2020-12-07T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2020/12/07/man-pages-please</id><content type="html" xml:base="https://benknoble.github.io/blog/2020/12/07/man-pages-please/"><![CDATA[<p>The recent trend of not including man-pages with command-line “apps” (“tools” or
-“programs” are better words!) irks me.</p>
-
-<h2 id="where-is-this-coming-from">Where is this coming from?</h2>
-
-<p>Many places. Specifically:</p>
-
-<ul>
-  <li>personal observation of the trend that many command-line programs don’t
-support <code class="language-plaintext highlighter-rouge">man &lt;program&gt;</code></li>
-  <li>the <a href="https://clig.dev/">otherwise-full-of-solid-advice <em>Command Line
-Guidelines</em></a>, which says</li>
-</ul>
-
-<blockquote>
-  <p><strong>Don’t bother with man pages</strong>. We believe that if you’re following these
-guidelines for help and documentation, you won’t need man pages. Not enough
-people use man pages, and they don’t work on Windows. If your CLI framework
-and package manager make it easy to output man pages, go for it, but otherwise
-your time is best spent improving web docs and built-in help text.</p>
-
-  <p><em>Citation: <a href="https://medium.com/@jdxcode/12-factor-cli-apps-dd3c227a0e46">12 Factor CLI Apps</a>.</em></p>
-</blockquote>
-
-<p>(Emphasis in original)</p>
-
-<ul>
-  <li>and the “original” <a href="https://medium.com/@jdxcode/12-factor-cli-apps-dd3c227a0e46">12 Factor CLI
-Apps</a> from Heroku:</li>
-</ul>
-
-<blockquote>
-  <p>Unless you already know your users will want man pages, I wouldn’t bother also
-outputting them as they just aren’t used often enough anymore. Novice
-developers are unaware of them and they don’t work on Windows. Offline support
-isn’t necessary if you already have in-CLI help. Still, man page support is
-coming to oclif because in a framework I think it makes sense. It can be
-solved once for all oclif CLIs to reap the benefits.</p>
-</blockquote>
-
-<h2 id="whats-wrong-with-no-man-pages">What’s wrong with no man-pages?</h2>
-
-<p>Let’s start with “what’s <em>right</em> about no man-pages?”. My answer: absolutely
-nothing. It’s laziness (and maybe a lack of good tooling). But if asciidoc and
-other markup languages can convert to man-pages, it’s time your program did too.</p>
-
-<p>Now, what’s actually wrong with not having them? Well, to answer that question,
-I need to talk about how I use them.</p>
-
-<p>I use man-pages for <em>reference</em>. Many of the best-written man-pages become
-well-known, to the point where I can quickly navigate to the appropriate
-section. Man-pages are nearly uniformly laid out for a reason.</p>
-
-<p>I use man-pages for <em>convenience</em>. They are perfect when I just want to
-double-check a flag without breaking my flow (<code class="language-plaintext highlighter-rouge">--help</code> isn’t awful, but half the
-time it takes me too many invocations to get the right help!). Opening a
-web-browser is the epitome of breaking that flow: I actually left my work
-context (the terminal, where the program is going to run), and I have to flip
-between browser and terminal. Not hard on a wide screen, but on my laptop it’s
-not ideal. With a man-page, I know I can fire up a tmux pane or vim-split (thank
-you, <code class="language-plaintext highlighter-rouge">:Man</code>) to browse without disturbing my current context. Man-pages are
-nearly uniformly laid out for a reason.</p>
-
-<p>Just to emphasize this, <code class="language-plaintext highlighter-rouge">:Man</code> ships with vim. In any vim, I can run that
-command (possibly prefaced by <code class="language-plaintext highlighter-rouge">:runtime ftplugin/man.vim</code>) and get a man-page.
-Conversely, it is harder to get the output of <code class="language-plaintext highlighter-rouge">--help</code> and friends where I want
-it. Some options:</p>
-
-<figure class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="c">" 1. put it directly in the buffer</span>
-<span class="p">:</span><span class="k">read</span> <span class="p">!</span>program <span class="p">--</span><span class="k">help</span>
-<span class="c">" clutters the buffer… so,</span>
-<span class="c">" 2. new buffer</span>
-<span class="p">:</span><span class="k">new</span> <span class="p">|</span> <span class="k">read</span> <span class="p">!</span>program <span class="p">--</span><span class="k">help</span>
-<span class="c">" too much typing…</span>
-<span class="c">" 3. a plugin, such as Clam</span>
-<span class="p">:</span>Clam program <span class="p">--</span><span class="k">help</span>
-<span class="c">" not portable, and still extra typing (though only by 6 characters)</span></code></pre></figure>
-
-<blockquote>
-  <p>Aside: this is a pain-point for me when I start working with certain
-languages. With C, <code class="language-plaintext highlighter-rouge">K</code> and <code class="language-plaintext highlighter-rouge">keywordprg=:Man</code> is usually good enough (and tags
-make up the difference). With Rust &amp; Python, it’s been a hack-filled journey
-to get decent in-editor documentation support (and for Rust I almost always
-have to open a web-browser, even if it’s with a hot-key). For my workhorse
-SML, the only docs are web-browsed or local HTML pages. For lots of other
-languages, there’s just not much. Is it too much to ask programming-language
-designers to support local, text-based documentation in a program-consumable
-format? It doesn’t have to be a man-page, but <em>something</em>.</p>
-</blockquote>
-
-<p>I use man-pages for <em>search-ability</em> and general text-manipulation. I have
-configured <code class="language-plaintext highlighter-rouge">MANPAGER</code> to use vim, so I have a powerful set of tools to deal
-with programs and their documentation. I even have maps for <code class="language-plaintext highlighter-rouge">-</code> and <code class="language-plaintext highlighter-rouge">_</code> to start
-searching for short (<code class="language-plaintext highlighter-rouge">-x</code>) and long (<code class="language-plaintext highlighter-rouge">--x…</code>) flags, which makes for a quick
-browse (when formatted appropriately). I can’t do that with <code class="language-plaintext highlighter-rouge">--help</code> as easily
-(<code class="language-plaintext highlighter-rouge">grep</code>ping doesn’t usually cut it), and even <code class="language-plaintext highlighter-rouge">less</code> as a pager has pretty poor
-search ability. Say it with me: Man-pages are nearly uniformly laid out for a
-reason.</p>
-
-<p>Personally, I use man-pages to <em>learn</em>. When I’m not sure how something works, I
-can usually figure out from a good <code class="language-plaintext highlighter-rouge">man thing</code>. This isn’t really a selling
-point, but it is a part of many workflows. “Man” stands for “manual,” after all:
-or do people not read those anymore?</p>
-
-<p>All this to say that what’s wrong with no man-pages is a lack of these things,
-particularly convenience and non-workflow-breaking-documentation.</p>
-
-<h2 id="no-man-page-is-better-than-a-bad-one">No man-page is better than a bad one</h2>
-
-<p>I’m looking at you <a href="https://cli.github.com"><code class="language-plaintext highlighter-rouge">gh</code></a>. Your documentation, frankly,
-is atrocious. Only a sentence at worst that doesn’t actually tell me what you
-do! And the flag documentation is frankly so ambiguous that I’ve written
-commands with mutually exclusive flags set because it wasn’t at all clear that
-only one was allowed. (<code class="language-plaintext highlighter-rouge">gh repo fork --clone false --remote true</code> seems
-reasonable, no?).</p>
-
-<p>So, don’t provide a man-page if it’s poor. But maybe find a way to write some
-good documentation that could be converted to a man-page (or vice-versa)?</p>
-
-<h2 id="if-not-a-man-page">If not a man-page…</h2>
-
-<p>Well, something like vim’s <code class="language-plaintext highlighter-rouge">:help</code> is <em>fantastic</em>. It’s not for every program,
-but any seriously interactive (especially full-screen) program should consider
-something of the sort. It helps that the system is extendable and plain text,
-too.</p>
-
-<h2 id="a-few-considered-counter-arguments">A few considered counter-arguments</h2>
-
-<ul>
-  <li>
-    <p>“Doesn’t work on Windows”: valid point. But what does? (Joking aside, surely
-there’s <em>something</em> that works as a documentation format for the Windows
-terminal besides HTML?)</p>
-  </li>
-  <li>
-    <p>“Novices aren’t aware”: so educate them. Part of CLIG’s shtick was to educate
-users when they make a mistake with your command. It’s as easy as keeping
-<code class="language-plaintext highlighter-rouge">--help</code> brief with a pointer to “see <code class="language-plaintext highlighter-rouge">man program</code> for more details”.</p>
-  </li>
-</ul>
-
-<p>Following up on that, I don’t consider <code class="language-plaintext highlighter-rouge">--help</code> to the end-all-be-all of
-documentation, as you’ve probably noticed. I only type <code class="language-plaintext highlighter-rouge">--help</code> when I’m sure it
-will be quick and useful: generally, a usage summary and a “Top 5” common
-options/invocations. Sometimes it’s to re-assure myself that the command does
-what I think it does, like when I use one of the more obscure git commands. When
-I want the whole book, I go to the man-page. Too-long <code class="language-plaintext highlighter-rouge">--help</code> is “saying too
-much” in the words of CLIG.</p>
-
-<ul>
-  <li>
-    <p>“Offline support isn’t necessary if you already have in-CLI help”: false. (Or
-at least, I disagree.) Solution proposed: generate man-pages from in-CLI help or
-vice-versa. I favor the latter, actually, but I’m probably in the minority on
-that. I find that it’s nicer to write documentation in a textual format rather
-than in strings in code, especially in some languages. (Newlines? Continuations?
-Leading spaces? Ugh. Format it for me—I don’t want to have to care.)</p>
-  </li>
-  <li>
-    <p>“otherwise your time is best spent improving web docs and built-in help text”:
-see above solution. They could all be one and the same (or at least tied
-together: sure, a tutorial might not be a good candidate for a man-page, at
-least for smaller programs. But it could link to an HTML version of the page
-that lives in my terminal.).</p>
-  </li>
-</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rants" /><category term="design" /><category term="docs" /><category term="productivity" /><category term="open-source" /><category term="shell" /><summary type="html"><![CDATA[The recent trend of not including man-pages with command-line “apps” (“tools” or “programs” are better words!) irks me.]]></summary></entry></feed>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><summary type="html"><![CDATA[I haven’t done (or kept) New Year’s Resolutions in a long time. This article from the Angry GM inspired me to do them differently.]]></summary></entry></feed>
