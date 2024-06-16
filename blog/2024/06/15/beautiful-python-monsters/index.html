@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Re: Beautiful Python Monsters</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Re: Beautiful Python Monsters</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 15 Jun 2024 in Blog</p>
+<div id="post">
+  <p>Making flaky tests pass cries out for functional-programming idioms.</p>
+
+<p>While reading <a href="https://treyhunner.com/2024/06/a-beautiful-python-monstrosity/">A beautiful Python
+monstrosity</a>, I
+was struck by several thoughts. Perhaps performance tests shouldn’t be automated
+with the same tools as unit tests? Is there a better way to write flaky tests?</p>
+
+<h2 id="automatic-performance-tests">Automatic performance tests</h2>
+
+<p>A unit test doesn’t seem to be the best way to describe a performance test. More
+likely, we want to set up a benchmarking harness, run the programs, and measure
+various performance indicators. <a href="https://github.com/drym-org/qi/blob/070ffc5e0d2e3a581a1bc11acd391e980dbdd328/.github/workflows/benchmarks.yml">This can be done automatically in a build
+pipeline</a>,
+for example.</p>
+
+<p>If these measurements are collected on each run we can perform analyses. For
+example:</p>
+
+<ul>
+  <li>Graph each run (with suitable titles) or make a <a href="https://drym-org.github.io/qi/benchmarks/">trend
+analysis</a>.</li>
+  <li>Perform <a href="https://chelseatroy.com/2021/02/26/data-safety-for-programmers/">statistical
+tests</a>
+between runs to see if the change was meaningful.</li>
+</ul>
+
+<p>All of this can also be automated. I wouldn’t write any of it as a unit test,
+however.</p>
+
+<p>The examples in the original post also seem to concentrate on algorithmic (time)
+complexity; this can be done with statistical tests, too, given a wealth of
+data. It’s not something I want to run as part of the (local) unit tests,
+though. If it’s important enough to block PRs, put it in the build pipeline (and
+I should be capable of running it locally; it shouldn’t be on by default,
+though).</p>
+
+<h2 id="flaky-tests">Flaky tests</h2>
+
+<p>An orthogonal concept: How do we make flaky tests less flaky? We should engineer
+the tests to be less reliant on flakiness, but automatically repeating the tests
+is a reasonable hack in the meantime.</p>
+
+<p>Here’s my transcribed Racket <code class="language-plaintext highlighter-rouge">repeat-flaky</code> procedure, which doesn’t require
+decorators or other ideas:</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">repeat-flaky</span> <span class="nv">test</span> <span class="p">[</span><span class="nf">n</span> <span class="mi">10</span><span class="p">])</span>
+  <span class="p">(</span><span class="nf">match</span> <span class="nv">n</span>
+    <span class="p">[</span><span class="nf">0</span> <span class="p">(</span><span class="nf">test</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="nf">?</span> <span class="nv">positive?</span> <span class="nv">m</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">with-handlers</span> <span class="p">([</span><span class="nb">exn:fail?</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="nf">_exn</span><span class="p">)</span> <span class="p">(</span><span class="nf">repeat-flaky</span> <span class="nv">test</span> <span class="p">(</span><span class="nb">sub1</span> <span class="nv">n</span><span class="p">)))])</span>
+       <span class="p">(</span><span class="nf">test</span><span class="p">))]))</span>
+
+<span class="c1">;; Example:</span>
+<span class="p">(</span><span class="nf">repeat-flaky</span> <span class="p">(</span><span class="nf">thunk</span> <span class="p">(</span><span class="nf">check-equal?</span> <span class="p">(</span><span class="nb">random</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="nb">random</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p>The core idea is to pass functions around. Python makes this hard because its
+<code class="language-plaintext highlighter-rouge">lambda</code> doesn’t permit arbitrary functions; the decorator over an unnamed
+function is essentially recreating higher-order functions receiving anonymous
+functions. This is thus the essence of repeating fallible tests; a
+generalization allows the <code class="language-plaintext highlighter-rouge">exn:fail?</code> test to be replaced by the client or for
+subsequent invocations to know about the caught exception by having it passed as
+an optional argument.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">thunk</code> could be eliminated (from surface syntax) by a macro if desired.</p>
+
+<p>This works without needing <code class="language-plaintext highlighter-rouge">nonlocal</code>, by the way, since the Racket equivalent
+of Python’s <code class="language-plaintext highlighter-rouge">a = 1</code> that automatically introduces <code class="language-plaintext highlighter-rouge">a</code> is <code class="language-plaintext highlighter-rouge">(let ([a 1]) …)</code> or
+<code class="language-plaintext highlighter-rouge">(define a 1)</code>. This isn’t mutation, it’s binding. Further, if you want to refer
+to <code class="language-plaintext highlighter-rouge">a</code> from a higher scope, you do so by writing <code class="language-plaintext highlighter-rouge">a</code> (as long it isn’t
+shadowed), even with <code class="language-plaintext highlighter-rouge">set!</code>. Lexical scoping rules give you predictable control
+of which identifiers refer to which bindings in each part of the program text.</p>
+
+<p>The ability to properly nest <code class="language-plaintext highlighter-rouge">repeat-flaky</code> makes a lot of the need for mutation
+(and thus complicated scope references) go away, though:</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">repeat-flaky</span>
+  <span class="p">(</span><span class="nf">thunk</span>
+    <span class="p">(</span><span class="k">define</span> <span class="nv">micro-time</span> <span class="nv">…</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define</span> <span class="nv">tiny-time</span> <span class="nv">…</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">check</span> <span class="nv">…</span> <span class="nv">micro-time</span> <span class="nv">tiny-time</span> <span class="nv">…</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">repeat-flaky</span>
+      <span class="p">(</span><span class="nf">thunk</span>
+        <span class="p">(</span><span class="k">define</span> <span class="nv">small-time</span> <span class="nv">…</span><span class="p">)</span>
+        <span class="c1">;; we have access to micro, tiny here</span>
+        <span class="p">(</span><span class="nf">check</span> <span class="nv">…</span> <span class="nv">micro-time</span> <span class="nv">tiny-time</span> <span class="nv">small-time</span> <span class="nv">…</span><span class="p">)))))</span>
+</code></pre></div></div>
+
+<p>Each nesting is repeated, however, so this singly-nested flaky test could run up
+to 25 times (instead of the original’s 5). This could be a feature, though, and
+can be controlled with the optional repeat argument.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<ol>
+  <li>Take a hard look at what your goals for performance tests are. The original
+post wanted them to predictably, consistently pass and fail like unit tests
+and run quickly. I’m not sure that’s the best methodology for comparing
+performance or for testing algorithmic time complexity.</li>
+  <li>The essence of repeating fallible tests can be implemented by higher order
+functions. An abuse of Python’s decorators allows Python to pass unnamed
+functions to higher-order functions, working around a language deficiency.
+Python’s <code class="language-plaintext highlighter-rouge">lambda</code> is not.</li>
+</ol>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#python" class="tag">
+        python
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#racket" class="tag">
+        racket
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#fp" class="tag">
+        fp
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2024/06/15/beautiful-python-monsters/";
+    this.page.identifier = "/blog/2024/06/15/beautiful-python-monsters";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2024/04/30/extracting-ourselves-from-github-equals-git/"
+      title="Extracting Ourselves from GitHub = Git">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#re-beautiful-python-monsters">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

@@ -144,6 +144,8 @@ body {
   line-height: 1.4;
   background: #fafafa;
   margin: 0;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern";
 }
 
 header,
@@ -199,6 +201,74 @@ h6 {
   line-height: 1.2;
 }
 
+h1 {
+  font-size: 30px;
+}
+
+h2, h3, h4, h5, h6 {
+  font-size: 20px;
+}
+
+section h1 {
+  position: relative;
+}
+section h1::before {
+  content: "h1.";
+  position: absolute;
+  left: -2em;
+  color: grey;
+}
+
+section h2 {
+  position: relative;
+}
+section h2::before {
+  content: "h2.";
+  position: absolute;
+  left: -2em;
+  color: grey;
+}
+
+section h3 {
+  position: relative;
+}
+section h3::before {
+  content: "h3.";
+  position: absolute;
+  left: -2em;
+  color: grey;
+}
+
+section h4 {
+  position: relative;
+}
+section h4::before {
+  content: "h4.";
+  position: absolute;
+  left: -2em;
+  color: grey;
+}
+
+section h5 {
+  position: relative;
+}
+section h5::before {
+  content: "h5.";
+  position: absolute;
+  left: -2em;
+  color: grey;
+}
+
+section h6 {
+  position: relative;
+}
+section h6::before {
+  content: "h6.";
+  position: absolute;
+  left: -2em;
+  color: grey;
+}
+
 p,
 ul,
 ol,
@@ -211,14 +281,6 @@ dl {
 
 li pre {
   margin: 1em 0 1em;
-}
-
-h1 {
-  font-size: 30px;
-}
-
-h2, h3, h4, h5, h6 {
-  font-size: 20px;
 }
 
 blockquote {
