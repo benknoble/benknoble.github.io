@@ -1,5 +1,5 @@
 ---
-title: Week 7--Code and Communication
+title: Week 7—Code and Communication
 tags: [ til, infra, intern ]
 category: Blog
 ---
@@ -12,7 +12,7 @@ snowballing it all together._
 ## This Week I Learned
 
 1. How it feels when a plan comes together
-2. How to build programs with `git`-like subcommands using `argparse`
+2. How to build programs with `git`-like sub-commands using `argparse`
 3. Communication is essential
 
 I also spent time in the lab racking, stacking, lacing, and labeling servers,
@@ -29,7 +29,7 @@ all my tests, implements all the desired "version one" features, and is nearly
 ready to integrate. I am still working on the command-line interface, but the
 project is coming to a close.
 
-The students in raleigh have been offered time to present, demo, or whiteboard
+The students in Raleigh have been offered time to present, demo, or whiteboard
 anything they want from their summer. It could be a challenge, a project, or
 something they learned. I will be presenting and demoing my caching project,
 provided I finish it. And I'm very excited.

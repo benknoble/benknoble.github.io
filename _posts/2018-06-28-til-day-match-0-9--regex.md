@@ -1,5 +1,5 @@
 ---
-title: Day match [0-9]--Regex
+title: Day match [0-9]—Regex
 tags: [ til, infra, intern, tcl, regex, posix ]
 category: Blog
 ---

@@ -1,5 +1,5 @@
 ---
-title: Day 01010--Everything Runs on Cycles
+title: Day 01010—Everything Runs on Cycles
 tags: [ til, infra, intern, vm, ssh, github, git ]
 category: Blog
 ---

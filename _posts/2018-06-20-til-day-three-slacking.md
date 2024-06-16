@@ -1,5 +1,5 @@
 ---
-title: Day Three--Slacking
+title: Day Three—Slacking
 tags: [ til, infra, intern, make ]
 category: Blog
 ---

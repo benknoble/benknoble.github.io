@@ -1,5 +1,5 @@
 ---
-title: Secrets from a Freshman--Survival Skills, Chapter 2
+title: Secrets from a Freshman—Survival Skills, Chapter 2
 tags: [ college ]
 category: Blog
 ---

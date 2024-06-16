@@ -1,5 +1,5 @@
 ---
-title: Day 16--The Three Pieces of Software
+title: Day 16—The Three Pieces of Software
 tags: [ til, infra, intern ]
 category: Blog
 ---
