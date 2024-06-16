@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-06-16T14:04:37+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Em-dashes are not spaced hyphens</title><link href="https://benknoble.github.io/blog/2024/06/16/em-dashes/" rel="alternate" type="text/html" title="Em-dashes are not spaced hyphens" /><published>2024-06-16T00:00:00+00:00</published><updated>2024-06-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/06/16/em-dashes</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/06/16/em-dashes/"><![CDATA[<p>Please use an em-dash—like this one—for parenthetical asides or for a gentler
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-06-16T20:40:44+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Em-dashes are not spaced hyphens</title><link href="https://benknoble.github.io/blog/2024/06/16/em-dashes/" rel="alternate" type="text/html" title="Em-dashes are not spaced hyphens" /><published>2024-06-16T00:00:00+00:00</published><updated>2024-06-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/06/16/em-dashes</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/06/16/em-dashes/"><![CDATA[<p>Please use an em-dash—like this one—for parenthetical asides or for a gentler
 colon. <s>Do not use spaced hyphens - like this - they are wrong.</s></p>
 
 <p>I don’t know where this trend came from or how to stop it. I suspect</p>
@@ -31,6 +31,23 @@ they must appear within text not to be confused with the horizontal rule
 shorthand.</li>
   <li>(Programmers) In Vim, the digraphs <code class="language-plaintext highlighter-rouge">-N</code> and <code class="language-plaintext highlighter-rouge">-M</code> (enter with
 <kbd>Ctrl</kbd>+<kbd>k</kbd>) produce en- and em- dashes, respectively.</li>
+</ul>
+
+<h2 id="collected-examples">Collected examples</h2>
+
+<p>I accept submissions.</p>
+
+<ul>
+  <li>
+    <p>A <a href="https://web.archive.org/web/20240530222028/https://fortellergames.com/blogs/news/short-and-long-term-app-plans">Foreteller Companion App post</a> reads:</p>
+
+    <blockquote>
+      <ul>
+        <li>Growing concerns on regulations and legal ramifications - which trickle down into new policies to adhere to and shorter deadlines to implement, which puts our product development on hold</li>
+        <li>App Store presence doesn’t help our niche audience - while ASO is important in most industries, we have qualitative data that shows overwhelmingly our installs come from direct installs from links, QRs, conventions</li>
+      </ul>
+    </blockquote>
+  </li>
 </ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rants" /><category term="typograhpy" /><summary type="html"><![CDATA[Please use an em-dash—like this one—for parenthetical asides or for a gentler colon. Do not use spaced hyphens - like this - they are wrong.]]></summary></entry><entry><title type="html">Re: The Functional Programming Hiring Problem</title><link href="https://benknoble.github.io/blog/2024/06/16/fp-hiring/" rel="alternate" type="text/html" title="Re: The Functional Programming Hiring Problem" /><published>2024-06-16T00:00:00+00:00</published><updated>2024-06-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/06/16/fp-hiring</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/06/16/fp-hiring/"><![CDATA[<p>The identified problem may be missing the mark.</p>
 
 <p><a href="https://blog.janissary.xyz/posts/hiring-functional-programming">Noah Snelson articulates a common theme of functional programming (FP)
