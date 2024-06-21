@@ -394,6 +394,30 @@ nav a:hover {
   section {
     padding: 0em 1em;
   }
+  section h1::before {
+    left: 0em;
+    top: -1em;
+  }
+  section h2::before {
+    left: 0em;
+    top: -1em;
+  }
+  section h3::before {
+    left: 0em;
+    top: -1em;
+  }
+  section h4::before {
+    left: 0em;
+    top: -1em;
+  }
+  section h5::before {
+    left: 0em;
+    top: -1em;
+  }
+  section h6::before {
+    left: 0em;
+    top: -1em;
+  }
 }
 .tags {
   list-style: none;
