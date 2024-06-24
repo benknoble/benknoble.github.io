@@ -3,6 +3,31 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "I am excited to work with Ben: he is a great teacher and sets an amazing
+  example for the platform."
+- "Ben showed me some new tools and techniques that enabled me to write cleaner,
+  more intuitive code. He was receptive of feedback when I reviewed his work and
+  always open to two-way dialogue to work towards the best possible solution. He
+  gave his full attention whenever we met even though the work was outside his
+  normal scope."
+- "Provides incredibly thoughtful feedback"
+- "Sometimes folks like to sit there and point fingers but not offer to help.
+  Ben does not fall into this category: he actively partners with others to
+  call out opportunities, bolster user experience, and add new features."
+- "A pleasure to work with"
+- "The first thing I noticed about Ben was his attention to detail and
+  commitment to producing the highest quality code. Ben is able to get up to
+  speed on the most complex services and contribute thoughtful comments and
+  suggestions via PR reviews. He always provides detailed explanations and
+  background in his PRs, which helps us to learn and to understand the changes
+  and the though process behind them."
+- "Always brings a lot of energy to solving problems"
+- "Willing to share his deep knowledge of Git"
+- "Contributes in a style I wish I saw more of. Not afraid to try something even
+  if it doesn't pan out, and it often leads to great things."
+- "Ben goes above and beyond to make Capital One a great place to work."
+- "Ben displays endless generosity, passionate and effective communication, and
+  remarkable influence."
 - "One of the best engineers on the platform"
 - "I’m impressed by his code quality, attention to detail, critical thinking,
   and initiative to improve."
