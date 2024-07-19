@@ -3,6 +3,19 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "Ben's work educating our developers on Git is outstanding and sets an example
+  for how engineers can own how they work and contribute back in a meaningful
+  way."
+- "Ben shows up where most engineers back away from the opportunity. Partnering
+  with central teams to provide feedback and then 'do the work', contributing
+  directly, builds his credibility and sets him apart from many other engineers."
+- "Ben speaks with the right level of technical depth and context, tailoring his
+  communication well working with Director+, senior associates, tech or product,
+  etc."
+- "We depend on contributors like Ben with deep expertise in innersource, a
+  language, or development practices to drive improvements that benefit
+  engineers across the entire enterprise. Ben has quickly become one of the most
+  influential external contributors."
 - "I am excited to work with Ben: he is a great teacher and sets an amazing
   example for the platform."
 - "Ben showed me some new tools and techniques that enabled me to write cleaner,
