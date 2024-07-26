@@ -91,3 +91,7 @@ interested.
 - [Just Mercy by Bryan Stevenson](https://eji.org/bryan-stevenson/)
 - [How to be an Antiracist by Ibram X. Kendi](https://www.ibramxkendi.com)
 - [Stamped: Racism, Antiracism, and You by Jason Reynolds and Ibram X. Kendi](https://www.jasonwritesbooks.com)
+
+## Suggested reading from Ben
+
+- [Race After Technology](https://www.ruhabenjamin.com/race-after-technology)
