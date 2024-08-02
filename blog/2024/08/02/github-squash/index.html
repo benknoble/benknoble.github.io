@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : The case against squashing to merge via GitHub</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>The case against squashing to merge via GitHub</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 02 Aug 2024 in Blog</p>
+<div id="post">
+  <p>Squash and merge is a bad default action, and it grates when it’s the <em>only</em>
+permitted merge option.</p>
+
+<p>Squash and merge collapses even carefully crafted PRs and commits into a giant
+blob (pun intended). All the juicy information we know how to unlock with tools
+like <code class="language-plaintext highlighter-rouge">git log</code> and <code class="language-plaintext highlighter-rouge">git blame</code> is now gone, made useless by the squash. It even
+hurts <code class="language-plaintext highlighter-rouge">git bisect</code>: pinpointing a squashed merge is unlikely to help if you
+still have to wade through 6000 lines of changes instead of 600 or 60. Even if
+you can recover the original branch using GitHub’s <code class="language-plaintext highlighter-rouge">refs/pull/N/head</code> namespace,
+which isn’t guaranteed on other vendors, it can still be harmful to hit the
+squash fence.</p>
+
+<p>Worse, squashing to merge traps you in a vicious cycle. In an ideal world, good
+commits help us fall into a virtuous cycle of success: they provide more
+information so that our tools are more useful, which encourages us to use our
+tools more, which reveals more opportunities to pack information into commits,
+and so on. Meanwhile, squashing everything by default traps us in the antithesis
+of this cycle—commit messages are useless if they’ll be squashed, so they become
+useless in a self-fulfilling prophecy, encouraging squash and merge ad nauseum.
+We remove incentives to use our information-gathering tools; not using them
+blinds us to their power, keeping them from being useful.</p>
+
+<p>No other investment that we make pays off as long as good commits. Good commits
+pay dividends for the entire lifetime of a project and become more valuable the
+longer the project lives. This might as well be an exponential curve of payoff.
+Nothing is free, but the expected value of any single commit dwarfs the cost of
+the minutes involved in crafting its message. Squash and merge as a default
+eliminates those benefits and any incentives to reap them. Outside of a few
+narrow use cases, I recommend against it.</p>
+
+<p>Discuss with your teams and projects: decide what’s right for you. Don’t default
+to squash and merge because it seems easy or commonplace. One of the trade-offs
+is giving up useful commits (unless whoever merges takes the time to craft a
+good squash message, which in many circles is rare thanks to GitHub defaults).
+If you intentionally choose this trade-off, you probably needing to be getting
+equivalent dividends from whatever the other trade-offs are. The benefits of
+commits are hard to measure up against.</p>
+
+<p>One case squash might be useful: squashing messy external contributions gives
+maintainers an expedient way to accept otherwise good code and bring the commit
+up to project standards. Ideally this is paired with resources for the
+contributor to learn how to do better next time, including both Git knowledge
+and project standards knowledge. Mentoring a new contributor through the process
+to fix the commits themselves is a valuable and laudable task, but it is costly.</p>
+
+<p>On the other hand, moving slowly is not so bad as it seems, despite all FAANG
+would have you believe.</p>
+
+<p>Don’t forget: GitHub foisted the squash and merge option upon us with bad
+defaults to back it up. To do the equivalent in Git requires knowledge of
+interactive rebase or the <code class="language-plaintext highlighter-rouge">cherry-pick</code> command. Git knows how to merge and
+rebase via commands of the same name and flags to <code class="language-plaintext highlighter-rouge">pull</code>. Squash and merge is a
+convenient button when needed, but the need is so infrequent that its only
+mention in Git proper is the <code class="language-plaintext highlighter-rouge">squash</code> verb in the lexicon of interactive rebase.</p>
+
+<p>You tread this route at your own peril.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#rants" class="tag">
+        rants
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2024/08/02/github-squash/";
+    this.page.identifier = "/blog/2024/08/02/github-squash";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2024/08/02/git-commit/"
+      title="What everyone should know about git commit">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#the-case-against-squashing-to-merge-via-github">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Re: The Functional Programming Hiring Problem</title>
+  <title>Junk Drawer : What everyone should know about git commit</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -67,85 +67,50 @@
   </ul>
 </nav>
 
-      <h1>Re: The Functional Programming Hiring Problem</h1>
+      <h1>What everyone should know about git commit</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 16 Jun 2024 in Blog</p>
+ on 02 Aug 2024 in Blog</p>
 <div id="post">
-  <p>The identified problem may be missing the mark.</p>
-
-<p><a href="https://blog.janissary.xyz/posts/hiring-functional-programming">Noah Snelson articulates a common theme of functional programming (FP)
-discussions</a>:
-the (dis)advantages of hiring engineers for less-well-known FP languages. I
-personally appreciated the time Snelson spent crafting their article, but I’ve
-got one issue with it: I think they missed a class of candidates.</p>
-
-<p>Snelson believes that when hiring for languages such as the fictional Gooby, you
-have 3 pools of applicants:</p>
+  <p>These tips make it easier to write better commit messages.</p>
 
 <ol>
-  <li>The résumé-spammers.</li>
-  <li>Bright undergrads recently converted to the “One True Way.”</li>
-  <li>Senior engineers who only care about Gooby.</li>
+  <li>Stop using <code class="language-plaintext highlighter-rouge">-m</code> (configure a proper editor)</li>
+  <li>Write while looking at the diff with <code class="language-plaintext highlighter-rouge">-v</code></li>
 </ol>
 
-<p>I agree that these are 3 types of potential Gooby applicants! I disagree that
-there’s a meaningful difference between converted undergraduates and senior
-engineers <em>in the context of the article’s problems.</em></p>
+<h2 id="stop-using-git-commit--m">Stop using <code class="language-plaintext highlighter-rouge">git commit -m</code></h2>
 
-<h2 id="are-these-senior-engineers-behaving-like-senior-engineers">Are these senior engineers behaving like senior engineers?</h2>
+<p>Using <code class="language-plaintext highlighter-rouge">-m</code> encourages short commit messages that don’t give meaningful
+information. Did you know that omitting <code class="language-plaintext highlighter-rouge">-m</code> gives you a chance to write your
+commit in your favorite editor? I think many people assume that <code class="language-plaintext highlighter-rouge">-m</code> is the only
+way to avoid being dropped in to Vi (oh, the horror… <a href="/about/">I guess</a>…), but you can <a href="https://git-scm.com/book/en/v2/Appendix-C%3A-Git-Commands-Setup-and-Config">make Git use any editor you
+want</a>.
+Now you have room to write those <a href="https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">standard formatted commit
+messages</a>.</p>
 
-<p>The senior engineers certainly have more Gooby expertise than the converted
-undergraduates. Snelson’s characterizations reveal that these engineers are
-still drinking the Kool-Aid, though:</p>
+<p>The <code class="language-plaintext highlighter-rouge">-m</code> flag is convenient for <code class="language-plaintext highlighter-rouge">wip</code>-style save-my-progress commits that you’ll
+rebase and reword. You will reword them, won’t you?</p>
+
+<h2 id="use--v-to-see-your-changes-in-the-commit-message-template">Use <code class="language-plaintext highlighter-rouge">-v</code> to see your changes in the commit message template</h2>
+
+<p>You’re writing your commit message and you want to review the changes to make
+sure you commented on everything. What do you do?</p>
 
 <ul>
-  <li>They “<em>insist</em> on using a functional language at every moment possible”
-(emphasis original).</li>
-  <li>They “threaten to quit if their next project wasn’t written in their language
-of choice.”</li>
-  <li>They appeal to the authority of
-<a href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life">BDFL</a>s “as a kind
-of trump-card argument in technical discussions.”</li>
+  <li>I run <a href="https://github.com/benknoble/Dotfiles/blob/2ba059a73eb38b96225cc770f8e7d4d05b970306/links/vim/after/ftplugin/gitcommit.vim#L16"><code class="language-plaintext highlighter-rouge">:DiffGitCached</code> with
+<code class="language-plaintext highlighter-rouge">\v</code></a>,
+personally. Or <code class="language-plaintext highlighter-rouge">:Git --paginate diff --cached</code>.</li>
+  <li>Use your terminal to do <code class="language-plaintext highlighter-rouge">git diff --cached</code>.</li>
+  <li>Scroll to the bottom, because you used <code class="language-plaintext highlighter-rouge">--verbose</code>.</li>
 </ul>
 
-<p>This does not, in my mind, a senior engineer make.</p>
-
-<h2 id="another-kind-of-engineer">Another kind of engineer</h2>
-
-<p>All the noise of technical obsession obscures the missing 4th class of
-applicants: those who have the nuance of thought we expect from leaders. Those
-who understand that <a href="/about/#me">simple questions have complex answers</a>.</p>
-
-<p>The obsessed-senior problem is not particular to FP, either. Languages that
-encourage imperative or OO style  have the same type of zealots (JavaScript,
-Java, C, C++, etc.). Rust has its own zealotry and is markedly harder to
-classify. <a href="https://cs.brown.edu/courses/cs173/2012/Videos/2012-09-05/2012-09-05.m4v">Shriram Krishnamurthi argues that such classifications are not a
-useful concept: the features of a language and how they interact provides a
-better discussion
-frame.</a>
-(I recommend the <a href="https://cs.brown.edu/courses/csci1730/2012/Videos/">whole video
-series</a>).</p>
-
-<p>This raises the question: if you’re selecting for problematic “senior”
-engineers, are you selecting right? The problems of zealotry are correctly
-identified (my personal experience agrees), but maybe “not selecting for
-zealots” doesn’t mean “not selecting for language experts.” Selecting for senior
-Gooby engineers does not require relaxing criteria for critical thinking.</p>
-
-<p>If your hiring process filters for “personnel issues” of the kind Snelson
-describes, then fix the hiring process. Look for candidates who consider
-multiple angles and respond “it depends.”</p>
-
-<p>Snelson concludes by citing Cromwell and a Tumblr user as a reminder that
-sometimes we are wrong. Ironically, the Tumblr post’s “it depends” aligns with
-exactly my argument: hire developers who understand and appreciate nuance. <em>They
-are probably still deep experts of some domain</em>. Nuance typically comes from
-expertise.</p>
+<p>See that last one? If you need to, turn on <code class="language-plaintext highlighter-rouge">commit.verbose</code>; then Git will
+include the diff in your commit message template for you to refer to.</p>
 
 </div>
 <hr/>
@@ -153,8 +118,8 @@ expertise.</p>
 <ul class="tags">
   
     <li>
-      <a href="https://benknoble.github.io/tags#fp" class="tag">
-        fp
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
       </a>
     </li>
   
@@ -174,8 +139,8 @@ expertise.</p>
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2024/06/16/fp-hiring/";
-    this.page.identifier = "/blog/2024/06/16/fp-hiring";
+    this.page.url = "https://benknoble.github.io/blog/2024/08/02/git-commit/";
+    this.page.identifier = "/blog/2024/08/02/git-commit";
   };
 
   function load_comments(div) {
@@ -194,21 +159,21 @@ expertise.</p>
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2024/06/16/em-dashes/"
-      title="Em-dashes are not spaced hyphens">
+    <a href="https://benknoble.github.io/blog/2024/06/16/fp-hiring/"
+      title="Re: The Functional Programming Hiring Problem">
       Previous</a>
   </span>
   
   
   <span id="next">
-    <a href="https://benknoble.github.io/blog/2024/08/02/git-commit/"
-       title="What everyone should know about git commit">
+    <a href="https://benknoble.github.io/blog/2024/08/02/github-squash/"
+       title="The case against squashing to merge via GitHub">
       Next</a>
   </span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#re-the-functional-programming-hiring-problem">
+  <a href="/categories/#what-everyone-should-know-about-git-commit">
     Back to posts</a>
 </div>
 

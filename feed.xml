@@ -1,4 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-07-26T15:33:35+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Em-dashes are not spaced hyphens</title><link href="https://benknoble.github.io/blog/2024/06/16/em-dashes/" rel="alternate" type="text/html" title="Em-dashes are not spaced hyphens" /><published>2024-06-16T00:00:00+00:00</published><updated>2024-06-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/06/16/em-dashes</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/06/16/em-dashes/"><![CDATA[<p>Please use an em-dash—like this one—for parenthetical asides or for a gentler
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-08-02T20:01:06+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">What everyone should know about git commit</title><link href="https://benknoble.github.io/blog/2024/08/02/git-commit/" rel="alternate" type="text/html" title="What everyone should know about git commit" /><published>2024-08-02T00:00:00+00:00</published><updated>2024-08-02T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/08/02/git-commit</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/08/02/git-commit/"><![CDATA[<p>These tips make it easier to write better commit messages.</p>
+
+<ol>
+  <li>Stop using <code class="language-plaintext highlighter-rouge">-m</code> (configure a proper editor)</li>
+  <li>Write while looking at the diff with <code class="language-plaintext highlighter-rouge">-v</code></li>
+</ol>
+
+<h2 id="stop-using-git-commit--m">Stop using <code class="language-plaintext highlighter-rouge">git commit -m</code></h2>
+
+<p>Using <code class="language-plaintext highlighter-rouge">-m</code> encourages short commit messages that don’t give meaningful
+information. Did you know that omitting <code class="language-plaintext highlighter-rouge">-m</code> gives you a chance to write your
+commit in your favorite editor? I think many people assume that <code class="language-plaintext highlighter-rouge">-m</code> is the only
+way to avoid being dropped in to Vi (oh, the horror… <a href="/about/">I guess</a>…), but you can <a href="https://git-scm.com/book/en/v2/Appendix-C%3A-Git-Commands-Setup-and-Config">make Git use any editor you
+want</a>.
+Now you have room to write those <a href="https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">standard formatted commit
+messages</a>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">-m</code> flag is convenient for <code class="language-plaintext highlighter-rouge">wip</code>-style save-my-progress commits that you’ll
+rebase and reword. You will reword them, won’t you?</p>
+
+<h2 id="use--v-to-see-your-changes-in-the-commit-message-template">Use <code class="language-plaintext highlighter-rouge">-v</code> to see your changes in the commit message template</h2>
+
+<p>You’re writing your commit message and you want to review the changes to make
+sure you commented on everything. What do you do?</p>
+
+<ul>
+  <li>I run <a href="https://github.com/benknoble/Dotfiles/blob/2ba059a73eb38b96225cc770f8e7d4d05b970306/links/vim/after/ftplugin/gitcommit.vim#L16"><code class="language-plaintext highlighter-rouge">:DiffGitCached</code> with
+<code class="language-plaintext highlighter-rouge">\v</code></a>,
+personally. Or <code class="language-plaintext highlighter-rouge">:Git --paginate diff --cached</code>.</li>
+  <li>Use your terminal to do <code class="language-plaintext highlighter-rouge">git diff --cached</code>.</li>
+  <li>Scroll to the bottom, because you used <code class="language-plaintext highlighter-rouge">--verbose</code>.</li>
+</ul>
+
+<p>See that last one? If you need to, turn on <code class="language-plaintext highlighter-rouge">commit.verbose</code>; then Git will
+include the diff in your commit message template for you to refer to.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[These tips make it easier to write better commit messages.]]></summary></entry><entry><title type="html">The case against squashing to merge via GitHub</title><link href="https://benknoble.github.io/blog/2024/08/02/github-squash/" rel="alternate" type="text/html" title="The case against squashing to merge via GitHub" /><published>2024-08-02T00:00:00+00:00</published><updated>2024-08-02T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/08/02/github-squash</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/08/02/github-squash/"><![CDATA[<p>Squash and merge is a bad default action, and it grates when it’s the <em>only</em>
+permitted merge option.</p>
+
+<p>Squash and merge collapses even carefully crafted PRs and commits into a giant
+blob (pun intended). All the juicy information we know how to unlock with tools
+like <code class="language-plaintext highlighter-rouge">git log</code> and <code class="language-plaintext highlighter-rouge">git blame</code> is now gone, made useless by the squash. It even
+hurts <code class="language-plaintext highlighter-rouge">git bisect</code>: pinpointing a squashed merge is unlikely to help if you
+still have to wade through 6000 lines of changes instead of 600 or 60. Even if
+you can recover the original branch using GitHub’s <code class="language-plaintext highlighter-rouge">refs/pull/N/head</code> namespace,
+which isn’t guaranteed on other vendors, it can still be harmful to hit the
+squash fence.</p>
+
+<p>Worse, squashing to merge traps you in a vicious cycle. In an ideal world, good
+commits help us fall into a virtuous cycle of success: they provide more
+information so that our tools are more useful, which encourages us to use our
+tools more, which reveals more opportunities to pack information into commits,
+and so on. Meanwhile, squashing everything by default traps us in the antithesis
+of this cycle—commit messages are useless if they’ll be squashed, so they become
+useless in a self-fulfilling prophecy, encouraging squash and merge ad nauseum.
+We remove incentives to use our information-gathering tools; not using them
+blinds us to their power, keeping them from being useful.</p>
+
+<p>No other investment that we make pays off as long as good commits. Good commits
+pay dividends for the entire lifetime of a project and become more valuable the
+longer the project lives. This might as well be an exponential curve of payoff.
+Nothing is free, but the expected value of any single commit dwarfs the cost of
+the minutes involved in crafting its message. Squash and merge as a default
+eliminates those benefits and any incentives to reap them. Outside of a few
+narrow use cases, I recommend against it.</p>
+
+<p>Discuss with your teams and projects: decide what’s right for you. Don’t default
+to squash and merge because it seems easy or commonplace. One of the trade-offs
+is giving up useful commits (unless whoever merges takes the time to craft a
+good squash message, which in many circles is rare thanks to GitHub defaults).
+If you intentionally choose this trade-off, you probably needing to be getting
+equivalent dividends from whatever the other trade-offs are. The benefits of
+commits are hard to measure up against.</p>
+
+<p>One case squash might be useful: squashing messy external contributions gives
+maintainers an expedient way to accept otherwise good code and bring the commit
+up to project standards. Ideally this is paired with resources for the
+contributor to learn how to do better next time, including both Git knowledge
+and project standards knowledge. Mentoring a new contributor through the process
+to fix the commits themselves is a valuable and laudable task, but it is costly.</p>
+
+<p>On the other hand, moving slowly is not so bad as it seems, despite all FAANG
+would have you believe.</p>
+
+<p>Don’t forget: GitHub foisted the squash and merge option upon us with bad
+defaults to back it up. To do the equivalent in Git requires knowledge of
+interactive rebase or the <code class="language-plaintext highlighter-rouge">cherry-pick</code> command. Git knows how to merge and
+rebase via commands of the same name and flags to <code class="language-plaintext highlighter-rouge">pull</code>. Squash and merge is a
+convenient button when needed, but the need is so infrequent that its only
+mention in Git proper is the <code class="language-plaintext highlighter-rouge">squash</code> verb in the lexicon of interactive rebase.</p>
+
+<p>You tread this route at your own peril.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="rants" /><summary type="html"><![CDATA[Squash and merge is a bad default action, and it grates when it’s the only permitted merge option.]]></summary></entry><entry><title type="html">Em-dashes are not spaced hyphens</title><link href="https://benknoble.github.io/blog/2024/06/16/em-dashes/" rel="alternate" type="text/html" title="Em-dashes are not spaced hyphens" /><published>2024-06-16T00:00:00+00:00</published><updated>2024-06-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/06/16/em-dashes</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/06/16/em-dashes/"><![CDATA[<p>Please use an em-dash—like this one—for parenthetical asides or for a gentler
 colon. <s>Do not use spaced hyphens - like this - they are wrong.</s></p>
 
 <p>I don’t know where this trend came from or how to stop it. I suspect</p>
@@ -1018,103 +1107,4 @@ deplorable.</p>
 <p>Do not skip the fundamentals. They are so-called for a reason. One does not build
 a tower on sand.</p>
 
-<p>Do not skip the problem. One does not solve the unknown.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="learning" /><category term="rants" /><category term="time" /><summary type="html"><![CDATA[Way back in January, YouTube subjected me to an advertisement from Exam Labs. What follows is a direct quote: “Looking for a job in tech? Don’t waste hundreds of hours learning.”]]></summary></entry><entry><title type="html">Feedburner burned</title><link href="https://benknoble.github.io/announcement/2021/04/14/no-more-subscribe/" rel="alternate" type="text/html" title="Feedburner burned" /><published>2021-04-14T00:00:00+00:00</published><updated>2021-04-14T00:00:00+00:00</updated><id>https://benknoble.github.io/announcement/2021/04/14/no-more-subscribe</id><content type="html" xml:base="https://benknoble.github.io/announcement/2021/04/14/no-more-subscribe/"><![CDATA[<p><a href="https://support.google.com/feedburner/answer/10483501">Feedburner gets rid of email
-subscriptions</a>, and I
-must follow suit. Fortunately, I was the only subscriber, so no one needs to
-take any action. You can still get the RSS feed from the footer, and comments
-are still working.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Announcement&quot;]" /><category term="blog" /><summary type="html"><![CDATA[Feedburner gets rid of email subscriptions, and I must follow suit. Fortunately, I was the only subscriber, so no one needs to take any action. You can still get the RSS feed from the footer, and comments are still working.]]></summary></entry><entry><title type="html">2021 Resolutions</title><link href="https://benknoble.github.io/blog/2021/01/12/new-years-resolutions/" rel="alternate" type="text/html" title="2021 Resolutions" /><published>2021-01-12T00:00:00+00:00</published><updated>2021-01-12T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/01/12/new-years-resolutions</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/01/12/new-years-resolutions/"><![CDATA[<p>I haven’t done (or kept) New Year’s Resolutions in a long time. <a href="https://theangrygm.com/adios-2020-guten-tag-2021/">This
-article</a> from the <a href="https://theangrygm.com/">Angry GM</a> inspired me to do them differently.</p>
-
-<h2 id="what-am-i-doing">What am I doing?</h2>
-
-<p>Angry, in typically sardonic fashion, writes</p>
-
-<blockquote>
-  <p>In short, I completely understand that there is zero value in setting aside a
-specific date to take stock of your life. There’s no point in examining the
-good and the bad over the past year. Nothing to be gained from identifying the
-stuff in your life worth a little gratitude and definitely no reason to
-acknowledge there are things you’re not happy about. No good comes from asking
-yourself what you could personally do differently to change the things you’re
-not happy about. And, in the end, you’re just going to fail, so why even
-bother setting specific, actionable goals.</p>
-</blockquote>
-
-<p>And it’s this last bit that really gets me: how often have I discussed
-goal-setting frameworks (SMART, from Boy Scouts of America; a myriad of
-Health/fitness classes; the list goes on)? And how many of them emphasize the
-<em>specific</em>-ness and the <em>actionable</em>-ness of goals? (Hint: all of them.)</p>
-
-<p>Worse, how often have I set goals and not relied on the frameworks I have in
-front of me?</p>
-
-<p>To that end, I am setting resolutions a bit differently this year. And, in the
-vein of Angry, I am making them public. As Angry says:</p>
-
-<blockquote>
-  <p>I’m just using myself as an example. […] Look around, figure out what’s wrong,
-figure out what’s within your power to change—there is always <strong>something</strong>
-you can change, even if it’s you—and then resolve to change it. And then, you
-know, actually make the f$&amp;%ing change. Or die trying.</p>
-</blockquote>
-
-<p>Here we go. What you’re seeing is the raw 2021 resolutions document (powered by
-my <a href="https://github.com/benknoble/wiki-md">wiki system</a>). I’ll update it from time to time, but it’s a bit manual at
-the moment (well, manual in-as-much as I open this post’s source, navigate to
-this line:</p>
-
-<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">/\V{% comment %} Do not edit below this line {% endcomment %}/</span><span class="p">+</span><span class="m">2</span><span class="p">,</span>$ <span class="k">delete</span> <span class="p">|</span> <span class="k">read</span> <span class="p">~</span><span class="sr">/.wiki/</span>projects<span class="sr">/resolutions/</span><span class="m">2021</span><span class="p">.</span>md
-</code></pre></div></div>
-
-<p>and run <code class="language-plaintext highlighter-rouge">:exec getline('.')</code> in vim).</p>
-
-<h1 id="finish-a-50-mile-ride-before-i-graduate">Finish a 50 mile ride before I graduate</h1>
-
-<p><em>Completion date:</em> May 1, 2020</p>
-
-<h2 id="plan">Plan</h2>
-
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Early January: Clean Machine checkup</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />January: short (&lt;5 mile) rides</li>
-  <li class="task-list-item"><del>[ ] February: longer (10-15 mile?) rides (need to do some more short ones first)</del></li>
-  <li class="task-list-item"><del>[ ] March: shorter rides (5-10 mile?)</del></li>
-  <li class="task-list-item"><del>[ ] March: able to ride to Mapleview</del></li>
-  <li class="task-list-item"><del>[ ] April: able to ride to Jordan Lake</del></li>
-  <li class="task-list-item"><del>[ ] May: combined March + April</del></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />June: Fitness center rides</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />July: Fitness center &amp; local rides</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />August: Fitness center &amp; local rides</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />September: Fitness center &amp; local rides</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />October: Fitness center &amp; local rides</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />November: Fitness center &amp; local rides</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />December: Fitness center &amp; local rides</li>
-</ul>
-
-<h1 id="play-or-run-a-game-of-dd-or-other-rpg-at-least-once-a-month">Play or run a game of D&amp;D (or other RPG) at least once a month</h1>
-
-<h2 id="plan-1">Plan</h2>
-
-<ul class="task-list">
-  <li><del>[ ] Early January: re-read/note <em>Game Angry</em></del></li>
-  <li><del>[ ] Late January: acquire <em>The Fall of Silverpine Watch</em> and run it</del></li>
-  <li><del>[ ] February: find a game</del></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />March: acquire <em>The Fall of Silverpine Watch</em> and run it (partial)</li>
-  <li class="task-list-item"><del>[ ] March: find a game</del></li>
-  <li class="task-list-item"><del>[ ] April: find a game</del></li>
-  <li class="task-list-item"><del>[ ] May: find a game</del></li>
-  <li class="task-list-item"><del>[ ] June: find a game</del></li>
-  <li class="task-list-item"><del>[ ] July: find a game</del></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />August: find a game</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />September: find a game</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />October: find a game</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />November: find a game</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />December: Start a game</li>
-</ul>
-
-<h1 id="take-a-project-bullet-and-spike-it-plandesign-it-or-scrapcomplete-it-at-least-every-week">Take a project bullet and spike it, plan/design it, or scrap/complete it at least every week</h1>
-
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />new bullets can be added, but don’t start a new bullet until the current one
-is finished!</li>
-</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><summary type="html"><![CDATA[I haven’t done (or kept) New Year’s Resolutions in a long time. This article from the Angry GM inspired me to do them differently.]]></summary></entry></feed>
+<p>Do not skip the problem. One does not solve the unknown.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="learning" /><category term="rants" /><category term="time" /><summary type="html"><![CDATA[Way back in January, YouTube subjected me to an advertisement from Exam Labs. What follows is a direct quote: “Looking for a job in tech? Don’t waste hundreds of hours learning.”]]></summary></entry></feed>
