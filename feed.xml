@@ -1,4 +1,189 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-08-02T20:01:06+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">What everyone should know about git commit</title><link href="https://benknoble.github.io/blog/2024/08/02/git-commit/" rel="alternate" type="text/html" title="What everyone should know about git commit" /><published>2024-08-02T00:00:00+00:00</published><updated>2024-08-02T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/08/02/git-commit</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/08/02/git-commit/"><![CDATA[<p>These tips make it easier to write better commit messages.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-08-03T15:59:15+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Developer Experience, Redux</title><link href="https://benknoble.github.io/blog/2024/08/03/devex-redux/" rel="alternate" type="text/html" title="Developer Experience, Redux" /><published>2024-08-03T00:00:00+00:00</published><updated>2024-08-03T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/08/03/devex-redux</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/08/03/devex-redux/"><![CDATA[<p>I pull excerpts from recent <em>Communications of the ACM</em> articles relevant to
+developer experience advocates and add my own commentary.</p>
+
+<h2 id="resistance-is-your-friend">Resistance is your friend</h2>
+
+<p>Our first article<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> is an opinion piece on the nature of resistance to change.
+Denning and Lyons argue that human communities prefer equilibrium to disruption
+and present a framework for using that resistance to build a better case for
+your new idea, disruption, or innovation. In particular, they note that only
+changes in a communities otherwise-satisfied concerns will open the community to
+a new equilibrium:</p>
+
+<blockquote>
+  <p>An innovation leader proposing a change of practice needs to understand and
+address those concerns. Rather than run away from the resistance or trying to
+overcome it by force, leaders move toward the resistance with curiosity and
+humility to understand why people are committed to the current equilibrium.
+The goal is discover latent concerns, which when brought to their awareness
+will motivate people to move toward the proposed change. You will not find a
+cause for the resistance by looking at external circumstances. You will find
+its causes in the everyday conversations of people in the community.</p>
+</blockquote>
+
+<p>They write that their experience demonstrates that the best leaders “bend” with
+resistance:</p>
+
+<blockquote>
+  <p>Flow with the resistance, seeking to understand the concerns behind it and
+revising offers to take care of those concerns. Mobilize followers to build
+social power behind your offers and neutralize the social power of the
+resistance.</p>
+</blockquote>
+
+<p>What does this tell us about developer experience? Developer tools cannot be
+imposed by fiat or mandate: you risk a resistance movement that outlives any
+particular persons ability to declare “the way.” Worse, you don’t have the
+support of the community. There may be a period of perceived success, but it
+usually eventually crumbles.</p>
+
+<p>Instead, developer tools are best created by motivating the community, listening
+to their problems, and solving them together. This allows you to mobilize
+excited early adopters to pave the way for majority adopters.</p>
+
+<h2 id="devex-in-action">DevEx in Action</h2>
+
+<p>Our next article<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup> is a study of “developer experience and its tangible
+impact.” My one critique is that the article doesn’t seem to consider team
+turnover and the possible impacts to developer experience there: experience
+suffers when picking up a project whose authors are no longer around regardless
+of the state of anything else, but certain practices make this easier than
+others.</p>
+
+<p>This article uses surveys and statistical techniques to examine a proposed model
+of developer experience concerns and relate improvements in developer experience
+to tangible individual, team, and organizational outcomes. The statistical
+connection provides powerful motivation for business to improve developer
+experience:</p>
+
+<blockquote>
+  <p>Now that you are sold on improving DevEx, how can you convince your
+organization to buy in? First, have them read this article. Then, joke aside,
+here are five important steps that can help you advocate for continuous
+improvements by keeping your arguments grounded in data.</p>
+</blockquote>
+
+<p>The proposed model incorporates flow state, feedback loops, and cognitive load
+as the concerns of developer experience. Studied individual factors include
+learning, job performance, and creativity. Team factors include code
+quality and technical debt. Organizational factors include retention and
+profitability. The statistical findings indicate that, for their sample, flow
+state and cognitive load positively impacts all outcomes. Feedback loops
+influence team outcomes but not individual or organizational outcomes (see the
+article for full details).</p>
+
+<p>Here are a few topics I want to highlight.</p>
+
+<h3 id="git">Git</h3>
+
+<p>As many of my <a href="/tags#capital+one" class="tag">Capital One</a> coworkers
+know, I have spent a lot of time talking about the many ways in which <a href="/tags#git" class="tag">Git</a> can improve developer experience if only we
+spent the time to take advantage of our tools.</p>
+
+<p>Speed and quality of information (“How often it takes &gt;10min to have a question
+answered”) is an important aspect of the article’s conception of feedback loops;
+this is supported by prior research. I have long argued that Git as a version
+control system tracks <em>by default</em> the who, what, when, and where. Arguably the
+how can be captured as well when the patches include mechanisms. The only person
+who can answer <em>why</em> is the commit author: take the time to write down why the
+changes are necessary or important! Then Git becomes the ultimate speedy
+answerer: search techniques from code search with <code class="language-plaintext highlighter-rouge">git grep</code> to sophisticated
+history searches with <code class="language-plaintext highlighter-rouge">git log</code> and <code class="language-plaintext highlighter-rouge">-G</code>, <code class="language-plaintext highlighter-rouge">-S</code>, or <code class="language-plaintext highlighter-rouge">--grep</code> empower us to find
+more information or more threads to tug on from the comfort of our workstation
+and development environments. Even <code class="language-plaintext highlighter-rouge">git blame</code> has a role to play in helping us
+understand our work. The authors write:</p>
+
+<blockquote>
+  <p>Teams that provide fast responses to developers’ questions report 50% less
+technical debt than teams whose responses are slow. It pays to document
+repeated developer questions and/or put tooling in place so developers can
+easily and quickly navigate to the response they need and integrate good
+coding practices and solutions as they write their code, which creates less
+technical debt.</p>
+</blockquote>
+
+<p>Certainly version control is not the only place for such Q&amp;A documentation, but
+it should be treated as the wealth of information that it is. This also suggests
+that how to find answers to questions is a major (and trainable) skill.</p>
+
+<p>Git shines not only in feedback loops: Git helps offload cognitive burdens, too.
+We know that the human brain tends to hold on to incomplete tasks and create
+stress while it is able to quickly erase completed tasks and associated stress.
+Writing down our thoughts in a commit message is a form of completing the task,
+relieving stress. It further enables us to search, not sort, our information:
+sorting information is a maintenance intensive burden that doesn’t always lead
+to the information being easy to find. Commit messages offload our thoughts into
+a kind of searchable exobrain that we share with our teams and our future
+colleagues, whether we’re around to work with them or not. Finally, commit
+messages assist developers who want to understand code, which is an important
+factor in the article’s consideration of cognitive load.</p>
+
+<h3 id="impact">Impact</h3>
+
+<p>I’m not sure much else needs said here:</p>
+
+<blockquote>
+  <p>To improve developer outcomes, deep work and engaging work have the biggest
+potential impact. To improve organizational outcomes, several items have the
+potential for big impact: deep work, engaging work, intuitive processes, and
+intuitive developer tools</p>
+</blockquote>
+
+<p>By the way, the opposite also holds true:</p>
+
+<blockquote>
+  <p>Developers who find their tools and work processes intuitive and easy to use
+feel they are 50% more innovative compared with those with opaque or
+hard-to-understand processes. Unintuitive tools and processes can be both a
+time sink and a source of frustration—in either case, a severe hindrance to
+individuals’ and teams’ creativity.</p>
+</blockquote>
+
+<p>Since I have otherwise less to say about a third article<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup>, I’ll quote its
+knowledge of automation processes such as CI (see original for citations):</p>
+
+<blockquote>
+  <p>However, an immature automation process can result in negative outcomes, such
+as cost and schedule overruns, slow feedback loops, and delayed releases.</p>
+</blockquote>
+
+<p>“DevEx in Action” presents a framework for making an impact consists of 5 steps,
+which I’ll summarize here:</p>
+
+<blockquote>
+  <ol>
+    <li>Get data on the current developer experience.</li>
+    <li>Set goals based on your DevEx data.</li>
+    <li>Set your team up for success.</li>
+    <li>Share progress and validate investments.</li>
+    <li>Repeat the process.</li>
+  </ol>
+</blockquote>
+
+<p>Coupled with the previous article’s direction on resistance, this provides a
+powerful roadmap from which to iterate and improve outcomes.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p><a href="https://cacm.acm.org/opinion/resistance-is-your-friend/">Peter Denning and Todd Lyons. 2024. Resistance Is Your Friend. <em>Commun.
+ACM 67</em>, 6 (June 2024), 26–29.
+https://doi.org/10.1145/3654696</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p><a href="https://cacm.acm.org/practice/devex-in-action/">Nicole Forsgren, Eirini Kalliamvakou, Abi Noda, Michaela Greiler, Brian
+Houck, and Margaret-Anne Storey. 2024. DevEx in Action. <em>Commun. ACM 67</em>, 6
+(June 2024), 42–51.
+https://doi.org/10.1145/3643140</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p><a href="https://cacm.acm.org/research/a-roadmap-for-using-continuous-integration-environments/">Liang Yu, Emil Alégroth, Panagiota Chatzipetrou, and Tony Gorschek. 2024.
+A Roadmap for Using Continuous Integration Environments. Commun. ACM 67, 6
+(June 2024), 82–90.
+https://doi.org/10.1145/3631519</a> <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="developer experience" /><category term="acm" /><summary type="html"><![CDATA[I pull excerpts from recent Communications of the ACM articles relevant to developer experience advocates and add my own commentary.]]></summary></entry><entry><title type="html">What everyone should know about git commit</title><link href="https://benknoble.github.io/blog/2024/08/02/git-commit/" rel="alternate" type="text/html" title="What everyone should know about git commit" /><published>2024-08-02T00:00:00+00:00</published><updated>2024-08-02T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/08/02/git-commit</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/08/02/git-commit/"><![CDATA[<p>These tips make it easier to write better commit messages.</p>
 
 <ol>
   <li>Stop using <code class="language-plaintext highlighter-rouge">-m</code> (configure a proper editor)</li>
@@ -998,113 +1183,4 @@ contracts.</p>
 written in Scribble.</p>
 
 <p><a href="https://benknoble.github.io/scribblings/2021-10-27-boggle/2021-10-27-boggle.html">View full size</a></p>
-<iframe class="scribbled" src="https://benknoble.github.io/scribblings/2021-10-27-boggle/2021-10-27-boggle.html" title="Scribbled blog post"></iframe>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="literate-programming" /><category term="prog-langs" /><category term="prolog" /><category term="racket" /><category term="racklog" /><summary type="html"><![CDATA[I solve Boggle in several languages. The following post is a literate program written in Scribble.]]></summary></entry><entry><title type="html">Learning is not (usually) time wasted</title><link href="https://benknoble.github.io/blog/2021/07/09/time-wasted-learning/" rel="alternate" type="text/html" title="Learning is not (usually) time wasted" /><published>2021-07-09T00:00:00+00:00</published><updated>2021-07-09T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2021/07/09/time-wasted-learning</id><content type="html" xml:base="https://benknoble.github.io/blog/2021/07/09/time-wasted-learning/"><![CDATA[<p>Way back in January, YouTube subjected me to an advertisement from Exam Labs.
-What follows is a direct quote: “Looking for a job in tech? Don’t waste hundreds
-of hours learning.”</p>
-
-<p>Exam Labs, if you read this—you do technology a disservice. You need only
-examine the recent cyber attacks and the various flaws in our technology to
-understand that solving problems without adequate understanding ends in
-disaster.</p>
-
-<p>I have no idea what your business model is (I have not linked to you or visited
-your website—I do not wish to give you undeserved web points in the form of
-traffic). I suspect, based on the quote and name, that it does your clients a
-disservice. Depriving anyone of the opportunity to learn is a disservice.</p>
-
-<p>Assuming you charge a fee to pass exams (be they certifying or collegiate), you
-do society a disservice. Money cannot buy skill, cannot buy expertise, cannot
-build technology. Sending the message that money can buy a job reinforces
-structures built only in the name of inequity.</p>
-
-<h2 id="learning-is-a-crucial-technology-skill">Learning is a crucial technology skill</h2>
-
-<p>If you disagree with this header, well, I cannot see why. When was the last time
-you sat down to work with a piece of technology and learned nothing in the
-process? When did you last use a new piece of technology without learning about
-it?</p>
-
-<p>It should be obvious that learning is a crucial skill in <em>all</em> jobs—in all of
-life, really. I won’t belabor this point.</p>
-
-<p>Becoming an expert does not mean you stop learning. Invention and discovery are
-educational activities. Expertise often means you know how to learn quickly in a
-domain (in addition to being able to sift through and connect relevant bits of
-information). Expertise in one domain often translates to others; expertise in
-learning always translates.</p>
-
-<p>The hundreds of hours Exam Labs (falsely) equated with learning are hundreds of
-hours spent becoming an expert in anything (see, for example, <em>The Art of
-Learning</em> by Joshua Waitzkin). Developing a skill takes time.</p>
-
-<h2 id="how-else-will-you-acquire-fundamental-technology-skills">How else will you acquire fundamental technology skills?</h2>
-
-<p>Most jobs are in technology these days. Most of us learn on the job—we have
-to. That is the nature of adapting to fluid situations, the nature of solving
-problems, the nature of creative human beings.</p>
-
-<p>“On the job” is not a good time to learn the fundamentals unless the job is
-“trainee” or “student” or similar.</p>
-
-<p>You may be hired for your strengths in a core business domain. You are very
-likely to be hired for your fundamental skills and ability to learn the core
-business domain. There you may apply your fundamental skills alongside your
-unique skills.</p>
-
-<h2 id="not-everything-is-google-able">Not everything is Google-able</h2>
-
-<p>Yes, I know StackOverflow exists. I help people solve problems on affiliated
-sites almost daily. I cannot often Google the answer to the question. Even
-when I can, the results invariably mean I have to combine separate pieces of
-knowledge into a cohesive whole. This requires learning those pieces.</p>
-
-<p>Ever tried to solve a problem before? Did you first study the problem, or dive
-in with no knowledge of it? (Most of us have probably done both.) Which approach
-lead to a better solution (for some definition of better)?</p>
-
-<h2 id="learning-looks-different-for-everyone">Learning looks different for everyone</h2>
-
-<p>I’m not suggesting that we all get 4-year degrees in Computer Science (how
-elitist that would be). Nor am I suggesting we all get 4-year degrees! Education
-does not need to mean various lower schools to high school to college. How many
-of our passions are self-taught, self-discovered?</p>
-
-<p>Experimentation is a form of learning I practice regularly. Using something
-breeds intimate knowledge of it.</p>
-
-<p><em>No</em> learning, however, is not learning. Shortcut learning is often not
-learning (or at least, not learning the right skills).</p>
-
-<h2 id="learning-does-not-equal-hundreds-of-hours">Learning does not equal hundreds of hours</h2>
-
-<p>Learning something adjacent to my expertise is often a matter of minutes or a
-few hours.</p>
-
-<p>Learning something completely new to me can range from days to a lifetime.</p>
-
-<p>This false equivalence suggests that learning, because it requires so much time,
-must be a waste. This is only fallacious. Plenty of things (sleep, hobbies,
-cleaning, conversation) require large amounts of time—they are not a waste.</p>
-
-<p>Admittedly, one does not become a black belt in mere days.</p>
-
-<h2 id="i-dont-want-to-work-with-anyone-who-always-skips-learning">I don’t want to work with anyone who always skips learning</h2>
-
-<p>And why should I? The habit of skipped learning is arrogant: it says, “I know
-everything I need.”</p>
-
-<p>I must emphasize that skipped school is not always skipped learning:
-it may be learning a different trade, a different way. Early Americans had time
-off school for the harvest (or at least, so I was taught—I find it hard to
-rely on my education of American History in the details).</p>
-
-<p>I must also emphasize that skipping learning occasionally is acceptable. For
-example: A new feature in a framework you’ve mastered may not be relevant to you
-immediately. Skip it and get the job done. (You may want to revisit it later,
-though.) It is the habit that says, “Learning is beneath me” that I find
-deplorable.</p>
-
-<p>Do not skip the fundamentals. They are so-called for a reason. One does not build
-a tower on sand.</p>
-
-<p>Do not skip the problem. One does not solve the unknown.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="learning" /><category term="rants" /><category term="time" /><summary type="html"><![CDATA[Way back in January, YouTube subjected me to an advertisement from Exam Labs. What follows is a direct quote: “Looking for a job in tech? Don’t waste hundreds of hours learning.”]]></summary></entry></feed>
+<iframe class="scribbled" src="https://benknoble.github.io/scribblings/2021-10-27-boggle/2021-10-27-boggle.html" title="Scribbled blog post"></iframe>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="literate-programming" /><category term="prog-langs" /><category term="prolog" /><category term="racket" /><category term="racklog" /><summary type="html"><![CDATA[I solve Boggle in several languages. The following post is a literate program written in Scribble.]]></summary></entry></feed>

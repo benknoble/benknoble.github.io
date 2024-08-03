@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Developer Experience, Redux</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Developer Experience, Redux</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 03 Aug 2024 in Blog</p>
+<div id="post">
+  <p>I pull excerpts from recent <em>Communications of the ACM</em> articles relevant to
+developer experience advocates and add my own commentary.</p>
+
+<h2 id="resistance-is-your-friend">Resistance is your friend</h2>
+
+<p>Our first article<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> is an opinion piece on the nature of resistance to change.
+Denning and Lyons argue that human communities prefer equilibrium to disruption
+and present a framework for using that resistance to build a better case for
+your new idea, disruption, or innovation. In particular, they note that only
+changes in a communities otherwise-satisfied concerns will open the community to
+a new equilibrium:</p>
+
+<blockquote>
+  <p>An innovation leader proposing a change of practice needs to understand and
+address those concerns. Rather than run away from the resistance or trying to
+overcome it by force, leaders move toward the resistance with curiosity and
+humility to understand why people are committed to the current equilibrium.
+The goal is discover latent concerns, which when brought to their awareness
+will motivate people to move toward the proposed change. You will not find a
+cause for the resistance by looking at external circumstances. You will find
+its causes in the everyday conversations of people in the community.</p>
+</blockquote>
+
+<p>They write that their experience demonstrates that the best leaders “bend” with
+resistance:</p>
+
+<blockquote>
+  <p>Flow with the resistance, seeking to understand the concerns behind it and
+revising offers to take care of those concerns. Mobilize followers to build
+social power behind your offers and neutralize the social power of the
+resistance.</p>
+</blockquote>
+
+<p>What does this tell us about developer experience? Developer tools cannot be
+imposed by fiat or mandate: you risk a resistance movement that outlives any
+particular persons ability to declare “the way.” Worse, you don’t have the
+support of the community. There may be a period of perceived success, but it
+usually eventually crumbles.</p>
+
+<p>Instead, developer tools are best created by motivating the community, listening
+to their problems, and solving them together. This allows you to mobilize
+excited early adopters to pave the way for majority adopters.</p>
+
+<h2 id="devex-in-action">DevEx in Action</h2>
+
+<p>Our next article<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup> is a study of “developer experience and its tangible
+impact.” My one critique is that the article doesn’t seem to consider team
+turnover and the possible impacts to developer experience there: experience
+suffers when picking up a project whose authors are no longer around regardless
+of the state of anything else, but certain practices make this easier than
+others.</p>
+
+<p>This article uses surveys and statistical techniques to examine a proposed model
+of developer experience concerns and relate improvements in developer experience
+to tangible individual, team, and organizational outcomes. The statistical
+connection provides powerful motivation for business to improve developer
+experience:</p>
+
+<blockquote>
+  <p>Now that you are sold on improving DevEx, how can you convince your
+organization to buy in? First, have them read this article. Then, joke aside,
+here are five important steps that can help you advocate for continuous
+improvements by keeping your arguments grounded in data.</p>
+</blockquote>
+
+<p>The proposed model incorporates flow state, feedback loops, and cognitive load
+as the concerns of developer experience. Studied individual factors include
+learning, job performance, and creativity. Team factors include code
+quality and technical debt. Organizational factors include retention and
+profitability. The statistical findings indicate that, for their sample, flow
+state and cognitive load positively impacts all outcomes. Feedback loops
+influence team outcomes but not individual or organizational outcomes (see the
+article for full details).</p>
+
+<p>Here are a few topics I want to highlight.</p>
+
+<h3 id="git">Git</h3>
+
+<p>As many of my <a href="/tags#capital+one" class="tag">Capital One</a> coworkers
+know, I have spent a lot of time talking about the many ways in which <a href="/tags#git" class="tag">Git</a> can improve developer experience if only we
+spent the time to take advantage of our tools.</p>
+
+<p>Speed and quality of information (“How often it takes &gt;10min to have a question
+answered”) is an important aspect of the article’s conception of feedback loops;
+this is supported by prior research. I have long argued that Git as a version
+control system tracks <em>by default</em> the who, what, when, and where. Arguably the
+how can be captured as well when the patches include mechanisms. The only person
+who can answer <em>why</em> is the commit author: take the time to write down why the
+changes are necessary or important! Then Git becomes the ultimate speedy
+answerer: search techniques from code search with <code class="language-plaintext highlighter-rouge">git grep</code> to sophisticated
+history searches with <code class="language-plaintext highlighter-rouge">git log</code> and <code class="language-plaintext highlighter-rouge">-G</code>, <code class="language-plaintext highlighter-rouge">-S</code>, or <code class="language-plaintext highlighter-rouge">--grep</code> empower us to find
+more information or more threads to tug on from the comfort of our workstation
+and development environments. Even <code class="language-plaintext highlighter-rouge">git blame</code> has a role to play in helping us
+understand our work. The authors write:</p>
+
+<blockquote>
+  <p>Teams that provide fast responses to developers’ questions report 50% less
+technical debt than teams whose responses are slow. It pays to document
+repeated developer questions and/or put tooling in place so developers can
+easily and quickly navigate to the response they need and integrate good
+coding practices and solutions as they write their code, which creates less
+technical debt.</p>
+</blockquote>
+
+<p>Certainly version control is not the only place for such Q&amp;A documentation, but
+it should be treated as the wealth of information that it is. This also suggests
+that how to find answers to questions is a major (and trainable) skill.</p>
+
+<p>Git shines not only in feedback loops: Git helps offload cognitive burdens, too.
+We know that the human brain tends to hold on to incomplete tasks and create
+stress while it is able to quickly erase completed tasks and associated stress.
+Writing down our thoughts in a commit message is a form of completing the task,
+relieving stress. It further enables us to search, not sort, our information:
+sorting information is a maintenance intensive burden that doesn’t always lead
+to the information being easy to find. Commit messages offload our thoughts into
+a kind of searchable exobrain that we share with our teams and our future
+colleagues, whether we’re around to work with them or not. Finally, commit
+messages assist developers who want to understand code, which is an important
+factor in the article’s consideration of cognitive load.</p>
+
+<h3 id="impact">Impact</h3>
+
+<p>I’m not sure much else needs said here:</p>
+
+<blockquote>
+  <p>To improve developer outcomes, deep work and engaging work have the biggest
+potential impact. To improve organizational outcomes, several items have the
+potential for big impact: deep work, engaging work, intuitive processes, and
+intuitive developer tools</p>
+</blockquote>
+
+<p>By the way, the opposite also holds true:</p>
+
+<blockquote>
+  <p>Developers who find their tools and work processes intuitive and easy to use
+feel they are 50% more innovative compared with those with opaque or
+hard-to-understand processes. Unintuitive tools and processes can be both a
+time sink and a source of frustration—in either case, a severe hindrance to
+individuals’ and teams’ creativity.</p>
+</blockquote>
+
+<p>Since I have otherwise less to say about a third article<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup>, I’ll quote its
+knowledge of automation processes such as CI (see original for citations):</p>
+
+<blockquote>
+  <p>However, an immature automation process can result in negative outcomes, such
+as cost and schedule overruns, slow feedback loops, and delayed releases.</p>
+</blockquote>
+
+<p>“DevEx in Action” presents a framework for making an impact consists of 5 steps,
+which I’ll summarize here:</p>
+
+<blockquote>
+  <ol>
+    <li>Get data on the current developer experience.</li>
+    <li>Set goals based on your DevEx data.</li>
+    <li>Set your team up for success.</li>
+    <li>Share progress and validate investments.</li>
+    <li>Repeat the process.</li>
+  </ol>
+</blockquote>
+
+<p>Coupled with the previous article’s direction on resistance, this provides a
+powerful roadmap from which to iterate and improve outcomes.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p><a href="https://cacm.acm.org/opinion/resistance-is-your-friend/">Peter Denning and Todd Lyons. 2024. Resistance Is Your Friend. <em>Commun.
+ACM 67</em>, 6 (June 2024), 26–29.
+https://doi.org/10.1145/3654696</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p><a href="https://cacm.acm.org/practice/devex-in-action/">Nicole Forsgren, Eirini Kalliamvakou, Abi Noda, Michaela Greiler, Brian
+Houck, and Margaret-Anne Storey. 2024. DevEx in Action. <em>Commun. ACM 67</em>, 6
+(June 2024), 42–51.
+https://doi.org/10.1145/3643140</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p><a href="https://cacm.acm.org/research/a-roadmap-for-using-continuous-integration-environments/">Liang Yu, Emil Alégroth, Panagiota Chatzipetrou, and Tony Gorschek. 2024.
+A Roadmap for Using Continuous Integration Environments. Commun. ACM 67, 6
+(June 2024), 82–90.
+https://doi.org/10.1145/3631519</a> <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#developer+experience" class="tag">
+        developer experience
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#acm" class="tag">
+        acm
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2024/08/03/devex-redux/";
+    this.page.identifier = "/blog/2024/08/03/devex-redux";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2024/08/02/github-squash/"
+      title="The case against squashing to merge via GitHub">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#developer-experience-redux">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
