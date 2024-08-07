@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Churn and Weight</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Churn and Weight</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 07 Aug 2024 in Blog</p>
+<div id="post">
+  <p>I examine a metric that might be correlated with churn, and I posit a new
+concept for code bases called weight. I also call attention to 2 tools for
+measuring churn and weight.</p>
+
+<h2 id="churn">Churn</h2>
+
+<p>Churn is an attribute of functions and modules: those which tend to change
+frequently are said to undergo heavy churn. This is typically a symptom of tight
+coupling.</p>
+
+<p>Measuring churn can be done, for example, by looking at how often files change
+in Git history. In 2018 I stole <a href="https://github.com/garybernhardt/dotfiles/blob/main/bin/git-churn">Gary Bernhardt’s
+<code class="language-plaintext highlighter-rouge">git-churn</code></a>
+and <a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/git-churn">made it my
+own</a>. For
+example, here’s what it says on Frosthaven Manager:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># git churn | head</span>
+ 117 scribblings/reference.scrbl
+ 101 server.rkt
+  94 gui/manager.rkt
+  90 gui/monsters.rkt
+  77 defns.rkt
+  73 info.rkt
+  66 monster-db.rkt
+  49 manager/state.rkt
+  44 manager.rkt
+  35 elements.rkt
+</code></pre></div></div>
+
+<p>Unsurprisingly, the reference documentation and web server change the most
+frequently, followed closely by 2 of the largest and most important GUI
+components (the composite whole and the monsters). The reference documentation
+changes whenever a module is added, moved, or renamed, and the web server is
+changing rapidly in response to player feedback.</p>
+
+<p>Let’s examine a related idea: <em>weight</em>.</p>
+
+<h2 id="weight">Weight</h2>
+
+<p>I’m using the word “weight” to refer to both how heavy a module or function is
+in terms of essential complexity and to how load-bearing it is in terms of
+making the system do what it does. In a mature project, we probably expect to
+find a few core modules to be heavy, with a (possibly long) tail of light
+supplements.</p>
+
+<p>Since heavy modules often sit at the core of the system, they are likely to have
+either lots of churn (frequent changes to the core system) or little (a stable
+core with frequent changes to the supplements). In other words, churn on heavy
+core modules can give us an idea of how stable our core is: having the wrong
+core design is a serious challenge to the life of the project.</p>
+
+<p>How do we measure weight? As a start, I’ll use <em>relative percentages of the
+code.</em> This sounds like lines of code, but it has a subtle difference: 10k lines
+of code is only 1% of a codebase with 1 million lines, but dwarfs any system
+with a mere few hundred. It’s not size that matters, it’s relative size.</p>
+
+<p>Using my
+<a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/code-percent"><code class="language-plaintext highlighter-rouge">code-percent</code></a>
+program, we can tabulate relevant percentages and their cumulative effects.
+Here’s how it runs on Frosthaven Manager:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># git ls-files | code-percent</span>
+RowNumber  File                                      PercentTotal  CumulativePercentTotal
+1          server.rkt                                7.47149       7.47149
+2          gui/monsters.rkt                          6.37762       13.8491
+3          scribblings/programming-scenario.scrbl    4.56775       18.4169
+4          manager/state.rkt                         3.9048        22.3217
+5          defns/monsters.rkt                        3.62636       25.948
+6          gui/manager.rkt                           2.87059       28.8186
+7          gui/player-info.rkt                       2.27393       31.0925
+8          gui/markdown.rkt                          2.11482       33.2074
+9          elements.rkt                              1.93583       35.1432
+10         scribblings/how-to-play.scrbl             1.9292        37.0724
+<span class="c"># [snip]</span>
+162        README.md                                 0.0265182     100
+</code></pre></div></div>
+
+<p>This gives a different picture of the code. The reference has disappeared
+(supplanted by large documents), being a mere 30 lines relative to the 15k
+total. But a few core pieces of functionality (state, game definitions, and GUI
+pieces) have drifted to the surface, collectively taking up roughly one third of
+the size of the code. Indeed, we might now question if <code class="language-plaintext highlighter-rouge">gui/markdown.rkt</code>, which
+implements a “good enough for me” Markdown-to-GUI-text widget, is holding its
+weight. Conversely, it might be time to try refactoring the server or monsters
+GUI again. The server is not core in the layering of pieces, but it is core to
+the app’s experience. It might even contain its own core of domain pieces, which
+explains its weight.</p>
+
+<p>One other trick we can do: we can get a neat idea of the size of the tail by
+showing only the rows that bump us over major (cumulative) thresholds. For
+example:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># git ls-files | code-percent | awk 'BEGIN { target = 25; } NR == 1 { print; next; } $4 &gt;= target { print; target += 25; }'</span>
+RowNumber  File                                      PercentTotal  CumulativePercentTotal
+5          defns/monsters.rkt                        3,62636       25,948
+19         defns/scenario.rkt                        1,18006       50,3116
+50         gui/table.rkt                             0,550252      75,4243
+162        README.md                                 0,0265182     100
+</code></pre></div></div>
+
+<p>While the first 5 files account for 25% of the code, it takes almost another 15
+to reach 50%, then another 30 to reach 75% followed by a whopping 110 to
+conclude. This matches at least our expectation of a long tail.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#project-management" class="tag">
+        project-management
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#frosthaven-manager" class="tag">
+        frosthaven-manager
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#racket" class="tag">
+        racket
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2024/08/07/churn-and-weight/";
+    this.page.identifier = "/blog/2024/08/07/churn-and-weight";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2024/08/03/devex-redux/"
+      title="Developer Experience, Redux">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#churn-and-weight">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
