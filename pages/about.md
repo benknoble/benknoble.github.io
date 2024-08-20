@@ -30,7 +30,9 @@ me]({% link pages/testimonials.md %}).
 
 I believe that simple questions have complex, nuanced answers. Read [Adam Gordon
 Bell's article for Earthly](https://earthly.dev/blog/thought-leaders/) to learn
-why.
+why. As it turns out, [we don't know much about software
+engineering](https://www.hillelwayne.com/talks/ese/). See also [Another kind of
+engineer]({% link _posts/2024-06-16-fp-hiring.md %}#another-kind-of-engineer).
 
 I rely on a healthy mix of self-taught experimentation and formal class training
 for anything I do, including programming. Being self-taught keeps me curious. My
