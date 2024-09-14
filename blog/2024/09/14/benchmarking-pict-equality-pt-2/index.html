@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Performance of Racket Pict Comparison, Part 2</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Performance of Racket Pict Comparison, Part 2</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 14 Sep 2024 in Blog</p>
+<div id="post">
+  <p>I eliminate “eyeball statistics” from <a href="/blog/2024/02/15/benchmarking-pict-equality/">part 1</a>. This post is based on
+<a href="https://chelseatroy.com/2021/02/26/data-safety-for-programmers/">Chelsea Troy’s “Data Safety”
+series</a>,
+especially <a href="https://chelseatroy.com/2021/03/12/quantitative-programming-knife-skills-part-2/">Quantitative Programming Knife Skills, Part
+2</a>.</p>
+
+<p>As usual, all code is <a href="https://github.com/benknoble/pict-equal-bench">available on GitHub</a>.</p>
+
+<h2 id="problems">Problems</h2>
+
+<p>In the previous post, I eyeballed distributions from box-and-whisker plots (in
+addition to relying on reported timings from hyperfine) to determine which is
+faster. Today, we’ll look at addressing two limitations of that approach:</p>
+
+<ol>
+  <li>How confident are we that the true mean of relevant measurements is captured
+by the mean of our sample distribution? We’ll compute confidence intervals
+for an appropriate distribution.</li>
+  <li>How likely is it that the distributions actually differ for a reason other
+than random chance? We’ll use statistical tests to measure the probability of
+difference being attributable to random chance (the “null hypothesis”).</li>
+</ol>
+
+<p>First, though, we’ve got to talk about distributions.</p>
+
+<h2 id="distributions">Distributions</h2>
+
+<p>We have (by computation) a mean and standard deviation for various facets of our
+<a href="https://github.com/benknoble/pict-equal-bench">data</a>. We have enough data that assuming a normal distribution is not
+unreasonable; let’s take a look. For the time benchmark data, the following code</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">require</span> <span class="nv">sawzall</span>
+         <span class="nv">data-frame</span>
+         <span class="nv">threading</span>
+         <span class="nv">math/statistics</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">v-μ</span> <span class="nv">xs</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">exact-&gt;inexact</span> <span class="p">(</span><span class="nf">mean</span> <span class="p">(</span><span class="nb">vector-&gt;list</span> <span class="nv">xs</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">v-σ</span> <span class="nv">xs</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">stddev</span> <span class="p">(</span><span class="nb">vector-&gt;list</span> <span class="nv">xs</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="nv">t-short</span> <span class="p">(</span><span class="nf">df-read/csv</span> <span class="s">"time.csv"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">t-short</span>
+    <span class="p">(</span><span class="nf">group-with</span> <span class="s">"bench"</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">aggregate</span> <span class="p">[</span><span class="nf">cpu-μ</span> <span class="p">(</span><span class="nf">cpu</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-μ</span> <span class="nv">cpu</span><span class="p">)]</span>
+               <span class="p">[</span><span class="nf">cpu-σ</span> <span class="p">(</span><span class="nf">cpu</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-σ</span> <span class="nv">cpu</span><span class="p">)]</span>
+               <span class="p">[</span><span class="nf">real-μ</span> <span class="p">(</span><span class="nf">real</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-μ</span> <span class="nv">real</span><span class="p">)]</span>
+               <span class="p">[</span><span class="nf">real-σ</span> <span class="p">(</span><span class="nf">real</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-σ</span> <span class="nv">real</span><span class="p">)]</span>
+               <span class="p">[</span><span class="nf">gc-μ</span> <span class="p">(</span><span class="nf">gc</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-μ</span> <span class="nv">gc</span><span class="p">)]</span>
+               <span class="p">[</span><span class="nf">gc-σ</span> <span class="p">(</span><span class="nf">gc</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-σ</span> <span class="nv">gc</span><span class="p">)])</span>
+    <span class="p">(</span><span class="nf">show</span> <span class="nv">everything</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>produces</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data-frame: 2 rows x 7 columns
+┌──────────────────┬─────────┬──────────────────┬──────────────────┬─────────────────┬───────────────────┬────────────────────┐
+│cpu-σ             │bench    │real-μ            │real-σ            │cpu-μ            │gc-σ               │gc-μ                │
+├──────────────────┼─────────┼──────────────────┼──────────────────┼─────────────────┼───────────────────┼────────────────────┤
+│1.477002129744432 │bytes    │4.225773195876289 │1.4978411739022484│4.175601374570447│0.15933274204104092│0.006529209621993127│
+├──────────────────┼─────────┼──────────────────┼──────────────────┼─────────────────┼───────────────────┼────────────────────┤
+│1.1370657205199777│record-dc│2.0853951890034366│1.148475651239016 │2.05893470790378 │0.16564821501258256│0.007216494845360825│
+└──────────────────┴─────────┴──────────────────┴──────────────────┴─────────────────┴───────────────────┴────────────────────┘
+</code></pre></div></div>
+
+<p>Let’s plot these (<a href="https://github.com/benknoble/pict-equal-bench">code</a>):</p>
+
+<p><img src="/assets/img/pict-time-bench-cpu-normal.svg" alt="CPU time normal distributions">
+<img src="/assets/img/pict-time-bench-real-normal.svg" alt="Real time normal distributions">
+<img src="/assets/img/pict-time-bench-gc-normal.svg" alt="GC time normal distributions"></p>
+
+<p>By now you might have realized that negative times don’t make sense… this
+suggests the normal distribution is not an appropriate distribution for
+comparison. <a href="https://stats.stackexchange.com/a/203958">It appears that the exponential or Weibull distributions might
+model this process better</a>, but for
+now we’ll continue taking timings and memory usage to be normally distributed
+for simplification.</p>
+
+<p>Here are the equivalent values and plots for memory (all in MiB):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data-frame: 2 rows x 3 columns
+┌───────────────────┬──────────────────┬─────────┐
+│memory-σ           │memory-μ          │bench    │
+├───────────────────┼──────────────────┼─────────┤
+│0.22898033579570978│0.6772037663410619│bytes    │
+├───────────────────┼──────────────────┼─────────┤
+│0.23704268897914643│0.5486571085821722│record-dc│
+└───────────────────┴──────────────────┴─────────┘
+</code></pre></div></div>
+
+<p><img src="/assets/img/pict-time-bench-memory-normal.svg" alt="Memory normal distributions in MiB"></p>
+
+<h2 id="confidence-intervals">Confidence Intervals</h2>
+
+<p>To compute a confidence interval, we’ll take the distributions to be
+t-distributed and compute properties of the t-statistic (for \(\alpha = 0.05\),
+a 95% confidence interval). This interval tells us where the true mean falls
+with 95% probability.</p>
+
+<p>Let’s use a critical value of 1.96, which corresponds to an assumption that the
+distributions are normal (given our large sample size, the t-distribution is
+close to normal) and a 95% confidence interval. The formula (letting \(s\) be
+the sample standard deviation, \(\bar{x}\) the sample mean, and \(N\) the number
+of samples) is</p>
+
+\[\bar{x} \pm 1.96 \frac{s}{N}\]
+
+<p>Here are the low and high offsets of the intervals for memory and time:</p>
+
+<ul>
+  <li>memory
+    <ul>
+      <li>bytes: [0.6771 MiB, 0.6773 MiB]</li>
+      <li>record-dc: [0.5486 MiB, 0.5487 MiB]</li>
+    </ul>
+
+    <p><img src="/assets/img/pict-time-bench-memory-confidence.svg" alt="Memory confidence intervals in MiB"></p>
+  </li>
+  <li>cpu
+    <ul>
+      <li>bytes: [4.175, 4.176]</li>
+      <li>record-dc: [2.0586, 2.0593]</li>
+    </ul>
+
+    <p><img src="/assets/img/pict-time-bench-cpu-confidence.svg" alt="CPU time confidence intervals"></p>
+  </li>
+  <li>real
+    <ul>
+      <li>bytes: [4.225, 4.226]</li>
+      <li>record-dc: [2.085, 2.086]</li>
+    </ul>
+
+    <p><img src="/assets/img/pict-time-bench-real-confidence.svg" alt="Real time confidence intervals"></p>
+  </li>
+  <li>gc
+    <ul>
+      <li>bytes: [0.00648, 0.00658]</li>
+      <li>record-dc: [0.00716, 0.00727]</li>
+    </ul>
+
+    <p><img src="/assets/img/pict-time-bench-gc-confidence.svg" alt="GC time confidence intervals"></p>
+  </li>
+</ul>
+
+<p>The plots are zoomed in because the intervals are so narrow thanks to our high
+number of samples. We can be very confident that our sample means are close to
+the true mean.</p>
+
+<h2 id="statistical-tests">Statistical tests</h2>
+
+<p>We want to compare the memory distributions across both benchmarks, and each of
+the real, cpu, and gc times across both benchmarks. We’ll use the
+<a href="https://docs.racket-lang.org/t-test/index.html"><code class="language-plaintext highlighter-rouge">welch-t-test</code> function from the <code class="language-plaintext highlighter-rouge">t-test</code>
+library</a><sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>, since we can’t assume
+the variances are equal (though eyeball statistics suggests that gc variance is,
+which is sensible since most gc times are 0).</p>
+
+<p>The code to compute a t-test for memory distributions is short:</p>
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">require</span> <span class="nv">threading</span>
+         <span class="nv">data-frame</span>
+         <span class="nv">sawzall</span>
+         <span class="nv">t-test</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="nv">m</span>
+  <span class="p">(</span><span class="nf">~&gt;</span> <span class="s">"memory.csv"</span> <span class="nv">df-read/csv</span>
+      <span class="p">(</span><span class="nf">create</span> <span class="p">[</span><span class="nf">memory</span> <span class="p">(</span><span class="nf">memory</span><span class="p">)</span> <span class="p">(</span><span class="nb">/</span> <span class="nv">memory</span> <span class="p">(</span><span class="nb">expt</span> <span class="mi">2</span> <span class="mi">20</span><span class="p">))])))</span>
+
+<span class="p">(</span><span class="nb">apply</span>
+ <span class="nv">welch-t-test</span>
+ <span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">m</span>
+     <span class="p">(</span><span class="nf">split-with</span> <span class="s">"bench"</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">map</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="nf">df</span><span class="p">)</span>
+            <span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">df</span>
+                <span class="p">(</span><span class="nf">slice</span> <span class="p">[</span><span class="nf">"memory"</span><span class="p">])</span>
+                <span class="p">(</span><span class="nf">df-select</span> <span class="s">"memory"</span><span class="p">)))</span>
+          <span class="nv">_</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>The result for a p-value of \(0.01\) is \(1.53 \times 10^{-187}\). That is, we
+can be extremely confident that the distributions have different means: we
+reject the null hypothesis that the distributions have the same mean as the
+likelihood of this sample occurring given said hypothesis is nearly 0.</p>
+
+<p>Of note, this test suggests the distributions are different <em>despite
+having close means</em>: the difference between the means (0.12854665775888974) is
+23.42% of the smaller of the two means and 18.98% of the larger.</p>
+
+<p>The code for time distributions is parameterized on the column:</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">require</span> <span class="nv">threading</span>
+         <span class="nv">data-frame</span>
+         <span class="nv">sawzall</span>
+         <span class="nv">t-test</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="nv">t</span> <span class="p">(</span><span class="nf">df-read/csv</span> <span class="s">"time.csv"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nf">for/list</span> <span class="p">([</span><span class="nf">column</span> <span class="o">'</span><span class="p">(</span><span class="nf">"cpu"</span> <span class="s">"real"</span> <span class="s">"gc"</span><span class="p">)])</span>
+  <span class="p">(</span><span class="nb">list</span> <span class="nv">column</span>
+        <span class="p">(</span><span class="nb">apply</span>
+         <span class="nv">welch-t-test</span>
+         <span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">t</span>
+             <span class="p">(</span><span class="nf">slice</span> <span class="p">(</span><span class="nf">all-in</span> <span class="p">(</span><span class="nb">list</span> <span class="s">"bench"</span> <span class="nv">column</span><span class="p">)))</span>
+             <span class="p">(</span><span class="nf">split-with</span> <span class="s">"bench"</span><span class="p">)</span>
+             <span class="p">(</span><span class="nb">map</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="nf">df</span><span class="p">)</span>
+                    <span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">df</span>
+                        <span class="p">(</span><span class="nf">slice</span> <span class="nv">column</span><span class="p">)</span>
+                        <span class="p">(</span><span class="nf">df-select</span> <span class="nv">column</span><span class="p">)))</span>
+                  <span class="nv">_</span><span class="p">)))))</span>
+</code></pre></div></div>
+
+<p>The results (again with p-value \(0.01\)):</p>
+<ul>
+  <li>cpu: \(0.0\)</li>
+  <li>real: \(0.0\)</li>
+  <li>gc: \(0.8196\)</li>
+</ul>
+
+<p>I’m actually shocked that the procedure produced an (inexact) 0, and I checked
+the data being fed in. I can’t explain the result beyond gesturing at floating
+point math; there’s no statistical realm where we accept that this occurrence is
+impossible. For now, I’ll content myself with supposing that the calculation
+produces such a small number that even Racket can’t keep up, and reject the null
+hypothesis for CPU and real times (there is a statistically meaningful
+difference in the time the two procedures take).</p>
+
+<p>For GC times, of course, there is insufficient evidence to reject the null
+hypothesis <em>as expected</em>. Most GC times are 0! It’s reasonably more likely that
+the underlying distributions are actually the same one.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I feel justified in my choice of method based on the data from last time and
+satisfied that I’m not relying entirely on eyeball statistics. The lack of
+explanation for \(0.0\) is dissatisfying…</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>There have been <a href="https://racket.discourse.group/t/could-the-t-student-distribution-be-included-in-the-math-module/2999">several interesting conversations about performing
+t-tests within Racket
+lately</a>,
+which lead to me include these additional links: <a href="https://onecompiler.com/racket/42j3n4wdn">pasted
+code</a>, <a href="https://github.com/soegaard/math/blob/student-t/math-lib/math/private/distributions/impl/student-t.rkt">@soegaard’s
+fork</a>
+<a href="https://math.stackexchange.com/questions/4367570/transform-students-t-distribution-to-beta-distribution">how to build the distribution from its
+parts</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">↩</a></p>
+    </li>
+  </ol>
+</div>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#racket" class="tag">
+        racket
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#performance" class="tag">
+        performance
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#statistics" class="tag">
+        statistics
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/";
+    this.page.identifier = "/blog/2024/09/14/benchmarking-pict-equality-pt-2";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2024/08/07/churn-and-weight/" title="Churn and Weight">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#performance-of-racket-pict-comparison-part-2">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
