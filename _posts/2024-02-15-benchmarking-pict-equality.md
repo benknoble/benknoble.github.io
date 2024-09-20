@@ -7,6 +7,11 @@ category: [ Blog ]
 I get a brief glimpse of the performance characteristics of two methods for
 comparing `pict`s for equality.
 
+_Update 2024 September 20: Jacqueline Firth pointed out that `record-dc` might
+win in pathological cases of superimposed picts. Many of the test pictures in
+this benchmark, notably the elements, are constructed primarily by
+superimposition._
+
 ## Motivation
 
 For recent work in the [Frosthaven

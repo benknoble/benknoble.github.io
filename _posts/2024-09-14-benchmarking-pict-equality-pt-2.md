@@ -15,8 +15,9 @@ As usual, all code is [available on GitHub](https://github.com/benknoble/pict-eq
 ## Problems
 
 In the previous post, I eyeballed distributions from box-and-whisker plots (in
-addition to relying on reported timings from hyperfine) to determine which is
-faster. Today, we'll look at addressing two limitations of that approach:
+addition to relying on reported timings from hyperfine) to determine which
+method of comparing `pict`s is faster. Today, we'll look at addressing two
+limitations of that approach:
 
 1. How confident are we that the true mean of relevant measurements is captured
    by the mean of our sample distribution? We'll compute confidence intervals
