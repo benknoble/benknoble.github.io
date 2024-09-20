@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-09-14T22:35:51+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Performance of Racket Pict Comparison, Part 2</title><link href="https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/" rel="alternate" type="text/html" title="Performance of Racket Pict Comparison, Part 2" /><published>2024-09-14T00:00:00+00:00</published><updated>2024-09-14T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/"><![CDATA[<p>I eliminate “eyeball statistics” from <a href="/blog/2024/02/15/benchmarking-pict-equality/">part 1</a>. This post is based on
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-09-20T16:38:12+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Performance of Racket Pict Comparison, Part 2</title><link href="https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/" rel="alternate" type="text/html" title="Performance of Racket Pict Comparison, Part 2" /><published>2024-09-14T00:00:00+00:00</published><updated>2024-09-14T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/"><![CDATA[<p>I eliminate “eyeball statistics” from <a href="/blog/2024/02/15/benchmarking-pict-equality/">part 1</a>. This post is based on
 <a href="https://chelseatroy.com/2021/02/26/data-safety-for-programmers/">Chelsea Troy’s “Data Safety”
 series</a>,
 especially <a href="https://chelseatroy.com/2021/03/12/quantitative-programming-knife-skills-part-2/">Quantitative Programming Knife Skills, Part
@@ -9,8 +9,9 @@ especially <a href="https://chelseatroy.com/2021/03/12/quantitative-programming-
 <h2 id="problems">Problems</h2>
 
 <p>In the previous post, I eyeballed distributions from box-and-whisker plots (in
-addition to relying on reported timings from hyperfine) to determine which is
-faster. Today, we’ll look at addressing two limitations of that approach:</p>
+addition to relying on reported timings from hyperfine) to determine which
+method of comparing <code class="language-plaintext highlighter-rouge">pict</code>s is faster. Today, we’ll look at addressing two
+limitations of that approach:</p>
 
 <ol>
   <li>How confident are we that the true mean of relevant measurements is captured
@@ -1113,6 +1114,11 @@ reason. Read related in a social, “this is relevant to me” sense. <a href="
   </ol>
 </div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="github" /><category term="rants" /><category term="open-source" /><summary type="html"><![CDATA[It’s time to remind ourselves that GitHub and Git are not synonyms.]]></summary></entry><entry><title type="html">Performance of Racket Pict Comparison</title><link href="https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality/" rel="alternate" type="text/html" title="Performance of Racket Pict Comparison" /><published>2024-02-15T00:00:00+00:00</published><updated>2024-02-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality/"><![CDATA[<p>I get a brief glimpse of the performance characteristics of two methods for
 comparing <code class="language-plaintext highlighter-rouge">pict</code>s for equality.</p>
+
+<p><em>Update 2024 September 20: Jacqueline Firth pointed out that <code class="language-plaintext highlighter-rouge">record-dc</code> might
+win in pathological cases of superimposed picts. Many of the test pictures in
+this benchmark, notably the elements, are constructed primarily by
+superimposition.</em></p>
 
 <h2 id="motivation">Motivation</h2>
 
