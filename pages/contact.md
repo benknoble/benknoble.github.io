@@ -15,7 +15,7 @@ permalink: /contact/
 |--------|---------|
 | github | [@benknoble][github] |
 | gitlab | [@benknoble][gitlab] |
-| stack overflow | [David Ben Knoble][stack] |
+| stack overflow | [D. Ben Knoble][stack] |
 | linkedin | [ben-knoble][linkedin] |
 | portfolio (outdated) | [git showcase][portfolio] |
 
