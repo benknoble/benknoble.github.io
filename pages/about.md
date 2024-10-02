@@ -23,40 +23,44 @@ To see my virtual Junk Drawer on GitHub, visit [benknoble/JunkDrawer][junk].
 
 ### Me
 
-I'm D. Ben Knoble, a Software Engineer at Capital One. I completed a Master's in
-CS in 2021. I have also completed my undergraduate degree in CS and French, with
-a minor in Mathematics, which I completed in 2020. [See what others say about
-me]({% link pages/testimonials.md %}).
+Hi, I'm Ben :wave: and my pronouns are he/him/his.
 
-I believe that simple questions have complex, nuanced answers. Read [Adam Gordon
-Bell's article for Earthly](https://earthly.dev/blog/thought-leaders/) to learn
-why. As it turns out, [we don't know much about software
-engineering](https://www.hillelwayne.com/talks/ese/). See also [Another kind of
-engineer]({% link _posts/2024-06-16-fp-hiring.md %}#another-kind-of-engineer).
+- I'm D. Ben Knoble, a Software Engineer at Capital One. I'm also [an active
+  open source contributor][benknoble]. [See what others say about me]({% link
+  pages/testimonials.md %}).
+- I break down complex answers to simple questions. Read [Adam Gordon Bell's
+  article for Earthly](https://earthly.dev/blog/thought-leaders/) to learn why.
+  As it turns out, [we don't know much about software
+  engineering](https://www.hillelwayne.com/talks/ese/). See also [Another kind
+  of engineer]({% link _posts/2024-06-16-fp-hiring.md %}#another-kind-of-engineer).
+- My hobbies include: Vim, Git, and the shell; games of all kinds; painting;
+  cycling; martial arts; Clarinet; and French. Ask me anything about these!
+- I believe in critically examining power structures wherever they appear. Ask
+  me about my current reading, discussion groups, or how I'm trying to get
+  involved in my community.
+- I rely on a healthy mix of self-taught experimentation and formal class
+  training for anything I do, including programming. Being self-taught keeps me
+  curious. My biggest personal interests in the computer science sphere are
+  programming languages and programming tools.
+    - I completed a Master's in CS in 2021. I have also completed my
+      undergraduate degree in CS and French, with a minor in Mathematics, which
+      I completed in 2020.
+- [By a wonderful fluke, my Erdős number is 4.](https://sites.google.com/site/dicksites/)
+- I'm keeping track of my "developer level" via a [set of challenges that span a
+  broad array of programming, development, learning, and teaching
+  categories](https://benknoble.github.io/level-up/).
+- For some of the projects I'm working on, check out
+  [benknoble@GitHub][benknoble], or try my [showcase][showcase]. I'm also on the
+  Stack Exchange network (primarly [vim][vim], though I still use
+  [StackOverflow][stack_overflow] as well as a few others).
 
-I rely on a healthy mix of self-taught experimentation and formal class training
-for anything I do, including programming. Being self-taught keeps me curious. My
-biggest personal interests in the computer science sphere are programming
-languages and programming tools. Outside of that, I'm an avid biker,
-clarinetist, martial artist, reader, and gamer (board, tabletop, role-playing,
-and video).
+Please [contact me][contact] with questions, corrections, or to chat.
 
-[By a wonderful fluke, my Erdős number is 4.](https://sites.google.com/site/dicksites/)
-
-I'm keeping track of my "developer level" via a [set of challenges that span a
-broad array of programming, development, learning, and teaching
-categories](https://benknoble.github.io/level-up/).
-
-For some of the projects I'm working on, check out
-[benknoble@GitHub][benknoble], or try my [showcase][showcase]. I'm also on
-the Stack Exchange network (primarly [vim][vim], though I still use
-[StackOverflow][stack_overflow] as well as a few others).
+Here's some flair:
 
 {% include SO_flair.html %}
 {% include github_flair.html %}
 {% include aws_badge.html %}
-
-Please [contact me][contact] with questions, corrections, or to chat.
 
 ### Technical
 
@@ -82,8 +86,8 @@ many non-portable-isms. I do wish sh would get proper (associative) arrays.
 I have [switched to zsh]({% link _posts/2020-05-21-switch-zsh.md %}) for
 interactive use, but bash and sh are still my automation go-tos.
 
-- Favorite __languages__: a mix of `shell`, `make`, `vimscript`, and the
-functional stuff (especially `racket`).
+- Favorite __languages__: a mix of shell, Make, Vimscript, and the
+functional stuff (especially Racket).
 
 I've written enough SML to really enjoy it (see my entries for the 2019 Advent
 of Code, for example). Scala and Clojure are fun, but the JVM dependence makes
@@ -92,17 +96,17 @@ have learned a lot from it. Haskell and Rust are next on my list. Then some new
 paradigms: maybe true logic programming or something. After that, something
 older and something esoteric.
 
-(Languages I'm tired of? `python` and `javascript` make the top of the list. The
+(Languages I'm tired of? Python and JavaScript make the top of the list. The
 former is everywhere, but it's functional-language side isn't on par with things
 like SML or Clojure. The latter is, well, broken, though Deno seems to be making
 progress.)
 
-- Favorite __OS__: `macOS`.
+- Favorite __OS__: macOS.
 
-I've been using a macbook since 2012 and it's here to stay. I'm not convinced on
+I've been using a MacBook since 2012 and it's here to stay. I'm not convinced on
 the new touchbar thing yet though.
 
-- Favorite __version control__: definitely `git`.
+- Favorite __version control__: definitely Git.
 
 I think some people prefer the mercurial (hg) interface, but I'm not sold. Git
 has outgrown its historical reputation for a complex interface, and is the de
@@ -111,7 +115,7 @@ facto standard.
 - Favorite **keyboard**: my Ergodox EZ. Here's my
 [layout](https://configure.zsa.io/ergodox-ez/layouts/BNalB/latest/0).
 
-- Favorite _colorscheme_: I've been using Dracula for years. If you like
+- Favorite __colorscheme__: I've been using Dracula for years. If you like
 Dracula, too, consider [purchasing the Pro version through my affiliate
 link](https://gumroad.com/a/968545299/tPfIDt). Dracula is used on this website
 for code blocks, and I've contributed a lot to various open-source and Pro
