@@ -1,4 +1,110 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-10-02T21:00:47+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Performance of Racket Pict Comparison, Part 2</title><link href="https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/" rel="alternate" type="text/html" title="Performance of Racket Pict Comparison, Part 2" /><published>2024-09-14T00:00:00+00:00</published><updated>2024-09-14T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/"><![CDATA[<p>I eliminate “eyeball statistics” from <a href="/blog/2024/02/15/benchmarking-pict-equality/">part 1</a>. This post is based on
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-10-05T00:28:14+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Copying a git-range-diff to GitHub</title><link href="https://benknoble.github.io/blog/2024/10/04/copy-range-diff/" rel="alternate" type="text/html" title="Copying a git-range-diff to GitHub" /><published>2024-10-04T00:00:00+00:00</published><updated>2024-10-04T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/10/04/copy-range-diff</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/10/04/copy-range-diff/"><![CDATA[<p>I’ve been using <code class="language-plaintext highlighter-rouge">git range-diff</code> for the past few months to explain changes
+between versions of a patch series, such as different versions of a branch after
+responding to review comments on a Pull Request. This post explains how I use
+post the output for Markdown-ish consumption on GitHub.</p>
+
+<h2 id="primer">Primer</h2>
+
+<p>If you didn’t know, <code class="language-plaintext highlighter-rouge">git range-diff</code> is the standard way in Git to document
+changes between versions of a patch series such as you might find sent to a
+development mailing list. For example, <code class="language-plaintext highlighter-rouge">git format-patch</code> can include it
+automatically in the email so that, when responding to review comments with a
+new version, reviewers understand what’s changed.</p>
+
+<p>This all seems only relevant to email-driven workflows, but I argue that it is
+also useful for GitHub- or other web- driven workflows. For example: I work on a
+branch and submit a Pull Request on GitHub. After some review comments, I may
+create some <code class="language-plaintext highlighter-rouge">--fixup</code> commits and <code class="language-plaintext highlighter-rouge">rebase --autosquash</code> them in, perhaps editing
+commit messages, or make any number of other changes. When the time comes to
+<code class="language-plaintext highlighter-rouge">push --force-with-lease --force-if-includes</code>, the only recourse my reviewers
+have to understand the changes is GitHub’s “View changes” button, which attempts
+a textual diff between the files at the old and new branch tip.</p>
+
+<p>Yet a range-diff can capture so much more! Consider, for example, this
+range-diff from a Racket PR I submitted:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1:  907d3ea366 = 1:  35c19f1e83 docs: capitalize the noun Git
+2:  665e037505 ! 2:  6088cd1567 docs: mention the Vi command to add sections
+    @@ pkgs/racket-doc/scribblings/style/textual.scrbl: read code on monitors that acco
+     +So, when you create a file, add a line with @litchar{;; } followed by ctrl-U 99
+     +and @litchar{-}. @margin-note*{In Vi, the command is 99a- followed by Esc.} When
+     +you separate "sections" of code in a file, insert the same line. These lines
+    -+help both writers and readers to orient themselves in a file. In scribble use
+    ++help both writers and readers to orient themselves in a file. In Scribble use
+     +@litchar|{@; }| as the prefix.
+
+      @; -----------------------------------------------------------------------------
+3:  808676897e = 3:  1e7b35da0a docs: link fx+ and unsafe-fx+
+4:  ca7d2a2a56 = 4:  c3e32a5afa docs: correct Git pull command
+5:  1108c95343 = 5:  372bbd4ad5 docs: unquote "merge commit"
+6:  1374b3b095 &lt; -:  ---------- docs: italicize "e.g."
+7:  8f3f1cd517 = 6:  e48525eeb7 docs: correct macro body
+-:  ---------- &gt; 7:  38b3c0a75e docs: make explicit the convention for Latin
+</code></pre></div></div>
+
+<p>GitHub won’t show you this difference: I capitalized a word in an old commit
+message, removed the commit that italicized Latin abbreviations and added one
+that clarified said convention. I prefer to provide my reviewers with this
+information to help them understand the changes I’ve made (and to help future
+readers who may be curious, though I admit this is unlikely in most cases).</p>
+
+<h2 id="sharing-a-range-diff-in-markdown-format">Sharing a range-diff in Markdown format</h2>
+
+<p>A range-diff can get quite large if there are substantial code
+changes—arguably, the patch series should become a new branch/PR at such a
+point, but that is not often how things operate in practice. I used to paste
+range-diffs in code blocks like you see above, but with length and GitHub’s
+comment/review interface they became unwieldy.</p>
+
+<p>Instead, I’ve started pasting them inside an HTML <code class="language-plaintext highlighter-rouge">details</code> block so that they
+may be collapsed, summarized, and expanded as desired. I often did this by hand,
+but <a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/copy-range-diff">here’s the script I now use called <code class="language-plaintext highlighter-rouge">copy-range-diff</code></a>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#! /bin/sh
+
+{
+  printf '%s\n' '&lt;details&gt;&lt;summary&gt;range-diff:&lt;/summary&gt;' '' '```'
+  cat
+  printf '%s\n' '```' '' '&lt;/details&gt;'
+} | pbcopy
+</code></pre></div></div>
+
+<p>This script reads standard in and pipes a modified version of it to a clipboard
+command (Linux users probably prefer an <code class="language-plaintext highlighter-rouge">xsel</code> variant). Placed on the clipboard
+after <code class="language-plaintext highlighter-rouge">git range-diff … | copy-range-diff</code> is an HTML <code class="language-plaintext highlighter-rouge">details</code> block containing
+a Markdown code-fence which is easy to paste into GitHub or similar interfaces.
+Sometimes I will add a short summary to the summary tag; other times, I leave
+just the mention of a range-diff.</p>
+
+<p>A small tweak should work for pure HTML output so that instead of triple-tick
+Markdown fences we emit <code class="language-plaintext highlighter-rouge">&lt;pre&gt;</code> tags.</p>
+
+<details><summary>Here's the earlier range-diff, in a details block</summary>
+
+<!-- For some reason, Jekyll doesn't know how to process Markdown fences here,
+     so trick it with HTML. -->
+
+<pre class="highlight">
+<code>1:  907d3ea366 = 1:  35c19f1e83 docs: capitalize the noun Git
+2:  665e037505 ! 2:  6088cd1567 docs: mention the Vi command to add sections
+    @@ pkgs/racket-doc/scribblings/style/textual.scrbl: read code on monitors that acco
+     +So, when you create a file, add a line with @litchar{;; } followed by ctrl-U 99
+     +and @litchar{-}. @margin-note*{In Vi, the command is 99a- followed by Esc.} When
+     +you separate "sections" of code in a file, insert the same line. These lines
+    -+help both writers and readers to orient themselves in a file. In scribble use
+    ++help both writers and readers to orient themselves in a file. In Scribble use
+     +@litchar|{@; }| as the prefix.
+
+      @; -----------------------------------------------------------------------------
+3:  808676897e = 3:  1e7b35da0a docs: link fx+ and unsafe-fx+
+4:  ca7d2a2a56 = 4:  c3e32a5afa docs: correct Git pull command
+5:  1108c95343 = 5:  372bbd4ad5 docs: unquote "merge commit"
+6:  1374b3b095 &lt; -:  ---------- docs: italicize "e.g."
+7:  8f3f1cd517 = 6:  e48525eeb7 docs: correct macro body
+-:  ---------- &gt; 7:  38b3c0a75e docs: make explicit the convention for Latin</code>
+</pre>
+
+</details>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve been using git range-diff for the past few months to explain changes between versions of a patch series, such as different versions of a branch after responding to review comments on a Pull Request. This post explains how I use post the output for Markdown-ish consumption on GitHub.]]></summary></entry><entry><title type="html">Performance of Racket Pict Comparison, Part 2</title><link href="https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/" rel="alternate" type="text/html" title="Performance of Racket Pict Comparison, Part 2" /><published>2024-09-14T00:00:00+00:00</published><updated>2024-09-14T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/"><![CDATA[<p>I eliminate “eyeball statistics” from <a href="/blog/2024/02/15/benchmarking-pict-equality/">part 1</a>. This post is based on
 <a href="https://chelseatroy.com/2021/02/26/data-safety-for-programmers/">Chelsea Troy’s “Data Safety”
 series</a>,
 especially <a href="https://chelseatroy.com/2021/03/12/quantitative-programming-knife-skills-part-2/">Quantitative Programming Knife Skills, Part
@@ -1112,354 +1218,4 @@ commit-graph level: <code class="language-plaintext highlighter-rouge">git merge
 reason. Read related in a social, “this is relevant to me” sense. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="github" /><category term="rants" /><category term="open-source" /><summary type="html"><![CDATA[It’s time to remind ourselves that GitHub and Git are not synonyms.]]></summary></entry><entry><title type="html">Performance of Racket Pict Comparison</title><link href="https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality/" rel="alternate" type="text/html" title="Performance of Racket Pict Comparison" /><published>2024-02-15T00:00:00+00:00</published><updated>2024-02-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/02/15/benchmarking-pict-equality/"><![CDATA[<p>I get a brief glimpse of the performance characteristics of two methods for
-comparing <code class="language-plaintext highlighter-rouge">pict</code>s for equality.</p>
-
-<p><em>Update 2024 September 20: Jacqueline Firth pointed out that <code class="language-plaintext highlighter-rouge">record-dc</code> might
-win in pathological cases of superimposed picts. Many of the test pictures in
-this benchmark, notably the elements, are constructed primarily by
-superimposition.</em></p>
-
-<h2 id="motivation">Motivation</h2>
-
-<p>For recent work in the <a href="https://benknoble.github.io/frosthaven-manager">Frosthaven
-Manager</a>, I want to quickly and
-accurately compare two generated pictures (called
-<a href="https://docs.racket-lang.org/pict/index.html"><code class="language-plaintext highlighter-rouge">pict</code></a>s in Racket parlance) for
-equality. This must be accurate and fast to solve a user-experience problem:
-interacting with onscreen elements of the Frosthaven Manager causes unrelated
-items to flicker. I initially solved this in commit <a href="https://github.com/benknoble/frosthaven-manager/commit/8e6da623b613d286a8d24765c37307ccadba4981">8e6da62 (rich-text-view:
-skip updates when content hasn’t changed,
-2024-02-04)</a>
-by comparing new content with old content to avoid re-rendering the same stuff.
-But since pixel-for-pixel equivalent <code class="language-plaintext highlighter-rouge">pict</code>s may differ according to <code class="language-plaintext highlighter-rouge">equal?</code>, I
-need a transformation <code class="language-plaintext highlighter-rouge">f</code> such that <code class="language-plaintext highlighter-rouge">(equal? (f p) (f q))</code> is true for
-equivalent <code class="language-plaintext highlighter-rouge">pict</code>s <code class="language-plaintext highlighter-rouge">p</code> and <code class="language-plaintext highlighter-rouge">q</code>.</p>
-
-<p>I believe such <code class="language-plaintext highlighter-rouge">pict</code>s are currently compared for pointer equality only (that
-is, using <code class="language-plaintext highlighter-rouge">eq?</code> semantics) because a <code class="language-plaintext highlighter-rouge">pict</code> is a non-transparent structure. In
-addition it is documented to contain something that is roughly like a procedure.
-Procedures are compared for pointer equality, too; <code class="language-plaintext highlighter-rouge">(equal? (λ (x) x) (λ (x)
-x))</code> does not hold.</p>
-
-<p>A brief documentation search produced two promising candidates:</p>
-<ol>
-  <li>The procedure
-<a href="https://docs.racket-lang.org/pict/Rendering.html#%28def._%28%28lib._pict%2Fmain..rkt%29._pict-~3eargb-pixels%29%29"><code class="language-plaintext highlighter-rouge">pict-&gt;argb-pixels</code></a>
-returns the byte-vector corresponding to a bitmap of the picture.
-Byte-vectors can be compared for equality. While I expect that bitmaps lose
-fidelity compared to the internal representation, for the images used by the
-Frosthaven Manager the fidelity of the bitmap is sufficient. Below, I refer
-to this as the “bytes” method of comparison and the “bytes” transformer.</li>
-  <li>The class <a href="https://docs.racket-lang.org/draw/record-dc_.html"><code class="language-plaintext highlighter-rouge">record-dc%</code></a>
-behaves like a normal drawing context except that it records drawing actions.
-These recorded actions can be replayed to another context or extracted into a
-serializable format. This format is, coincidentally, suitable for comparison
-by <code class="language-plaintext highlighter-rouge">equal?</code> directly. Unlike <code class="language-plaintext highlighter-rouge">pict-&gt;argb-pixels</code>, using a <code class="language-plaintext highlighter-rouge">record-dc%</code>
-requires a little extra code:
-    <div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">p</span><span class="p">)</span>
-  <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="nf">dc</span> <span class="p">(</span><span class="nf">new</span> <span class="nv">record-dc%</span><span class="p">)])</span>
-    <span class="p">(</span><span class="nf">draw-pict</span> <span class="nv">p</span> <span class="nv">dc</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="p">(</span><span class="nf">send</span> <span class="nv">dc</span> <span class="nv">get-recorded-datum</span><span class="p">)))</span>
-</code></pre></div>    </div>
-    <p>I refer to this as the “record-dc” method of comparison and the “record-dc”
-transformer.</p>
-  </li>
-</ol>
-
-<h2 id="hypotheses">Hypotheses</h2>
-
-<p>Recall that I have 2 requirements for the equality comparison: it must be
-<em>accurate</em> (I don’t want to skip a needed redraw or perform an unnecessary one)
-and <em>fast</em> (it can’t delay the rest of the application noticeably). As I thought
-about the methods I was considering, I added an extra desideratum: because these
-transformations will generate values that will be garbage post-comparison, the
-results should not be wasteful with memory and therefore trigger more frequent
-garbage collection that could result in an unresponsive application.
-Fortunately, the application mostly operates at human timescales and has “idle”
-time. Unfortunately, I cannot control the collector (or the duration of the
-“idle” time) to guarantee that GC pauses only occur when they would go
-completely unnoticed.</p>
-
-<p>With these factors in mind, I formed the following hypotheses:</p>
-<ol>
-  <li>The bytes method and the record-dc method perform at roughly equal speeds.</li>
-  <li>The record-dc method uses more memory.</li>
-</ol>
-
-<p>Hypotheses (1) is supported. In a shocking twist, it appears that the bytes
-method uses marginally more memory (but this is “eyeball” statistics: I have not
-performed a statistical test; I do not have a p-value; this does not generalize
-beyond my dataset).</p>
-
-<p>I arrived at these hypotheses by noting that both methods perform a similar
-transformation: draw the picture and extract some comparable information. I
-expected the bytes method to perform slightly faster on the assumption that
-byte-vector comparison is fast and that the comparable values from the record-dc
-transformer would be large enough in memory to slow down comparison. This latter
-expectation is not supported by my data; indeed, the inverse (that the record-dc
-method is faster) is.</p>
-
-<h2 id="experimental-method">Experimental Method</h2>
-
-<p>I constructed a benchmarking program that could be run in a matrix of modes. A
-parameter \(N\) controls the number of iterations of each mode; what follows
-describes a single iteration for each mode. The four modes are:</p>
-<ol>
-  <li>A time benchmark using the bytes method.</li>
-  <li>A time benchmark using the memory method.</li>
-  <li>A memory benchmark using the bytes method.</li>
-  <li>A memory benchmark using the memory method.</li>
-</ol>
-
-<p>Since each iteration executes independent of the method, I will describe each
-benchmark mode in terms of a general method \(M\).</p>
-
-<p>Each benchmark used a table of <code class="language-plaintext highlighter-rouge">pict</code> comparisons with 582 entries. This
-resulted in 1164 applications of transformers per run. Each benchmark was run a
-minimum of 10 times by <code class="language-plaintext highlighter-rouge">hyperfine</code>.</p>
-
-<h3 id="time-benchmarks">Time Benchmarks</h3>
-
-<p>The time benchmark iterates the table of <code class="language-plaintext highlighter-rouge">pict</code> comparisons \(N\) times; for
-each, it compares two <code class="language-plaintext highlighter-rouge">pict</code>s (outputting timing information of the entire
-comparison, which includes the use of the transformers, using the <code class="language-plaintext highlighter-rouge">time</code> form)
-and checks that the result of the comparison is as expected.</p>
-
-<p>Since <code class="language-plaintext highlighter-rouge">hyperfine</code> ran the time benchmarks 10 times with \(N=1\), this results in
-5820 data-points for each method for each of real, cpu, and gc time, for a grand
-total of 11640 points.</p>
-
-<h3 id="memory-benchmarks">Memory Benchmarks</h3>
-
-<p>The memory benchmark iterates the table of <code class="language-plaintext highlighter-rouge">pict</code> comparisons \(N\) times. For
-each iteration of the table, we perform the ritualistic GC dance (call
-<code class="language-plaintext highlighter-rouge">collect-garbage</code> 3 times) and measure current memory use. Then we construct the
-objects that would be compared using the transformer under benchmark. Finally,
-we print the difference of current memory use (after constructing the objects)
-and original memory use (after garbage collection).</p>
-
-<p>I cannot guarantee that GC does not occur during the iteration of the table,
-which would skew results. An earlier version of the memory benchmark only
-collected garbage before iterating the entire table and likely had to GC midway.
-The current version may still GC midway, but it is far less likely now.</p>
-
-<p>Since <code class="language-plaintext highlighter-rouge">hyperfine</code> ran the time benchmarks 10 times with \(N=1\), this results in
-5820 data-points for each method for a grand total of 11640 points.</p>
-
-<h2 id="results">Results</h2>
-
-<p>Pretty pictures first. These are box and whisker plots that show mean, IQR, and
-outliers.</p>
-
-<p><img src="/assets/img/pict-bench-time.svg" alt="Time spent comparing picts" /></p>
-
-<p>The time chart is segmented by where the time was spent. In real and cpu time,
-the record-dc averages 2ms faster. Most gc times are 0.</p>
-
-<p><img src="/assets/img/pict-bench-memory.svg" alt="Memory use by pict transformers for comparison" /></p>
-
-<p>The memory chart shows that the record-dc averages less than 250KiB less memory
-use, which is easier to see on a chart with no outliers.</p>
-
-<p><img src="/assets/img/pict-bench-memory2.svg" alt="Memory use by pict transformers for comparison without outliers" /></p>
-
-<p>Here are the <code class="language-plaintext highlighter-rouge">hyperfine</code> outputs at various commits.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 00366fdb3712bf4359c5a7dc551de2a0fc33e716
-hyperfine 'racket bench.rkt --time --bytes -n 1 &gt;&gt; time-bytes' 'racket bench.rkt --time --record-dc -n 1 &gt;&gt; time-record-dc'
-Benchmark 1: racket bench.rkt --time --bytes -n 1 &gt;&gt; time-bytes
-  Time (mean ± σ):     10.036 s ±  0.044 s    [User: 9.491 s, System: 0.285 s]
-  Range (min … max):    9.962 s … 10.086 s    10 runs
-
-Benchmark 2: racket bench.rkt --time --record-dc -n 1 &gt;&gt; time-record-dc
-  Time (mean ± σ):      8.798 s ±  0.049 s    [User: 8.283 s, System: 0.267 s]
-  Range (min … max):    8.717 s …  8.851 s    10 runs
-
-Summary
-  racket bench.rkt --time --record-dc -n 1 &gt;&gt; time-record-dc ran
-    1.14 ± 0.01 times faster than racket bench.rkt --time --bytes -n 1 &gt;&gt; time-bytes
-</code></pre></div></div>
-
-<p>This demonstrates that the record-dc method is slightly faster than the bytes
-method.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit a327c06ceb84b69daa6732ba698ffe6acc22e512
-hyperfine 'racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes' 'racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc'
-Benchmark 1: racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes
-  Time (mean ± σ):     10.493 s ±  0.064 s    [User: 9.948 s, System: 0.286 s]
-  Range (min … max):   10.383 s … 10.586 s    10 runs
-
-Benchmark 2: racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc
-  Time (mean ± σ):      9.213 s ±  0.053 s    [User: 8.700 s, System: 0.265 s]
-  Range (min … max):    9.130 s …  9.303 s    10 runs
-
-Summary
-  racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc ran
-    1.14 ± 0.01 times faster than racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes
-
-commit 2fb05847453641fcfa400dfa34d2fa67beb7096b
-hyperfine 'racket bench.rkt --memory --bytes -n 10 &gt;&gt; memory-bytes' 'racket bench.rkt --memory --record-dc -n 10 &gt;&gt; memory-record-dc'
-Benchmark 1: racket bench.rkt --memory --bytes -n 10 &gt;&gt; memory-bytes
-  Time (mean ± σ):     39.261 s ±  0.418 s    [User: 38.181 s, System: 0.544 s]
-  Range (min … max):   38.926 s … 40.364 s    10 runs
-
-Benchmark 2: racket bench.rkt --memory --record-dc -n 10 &gt;&gt; memory-record-dc
-  Time (mean ± σ):     26.965 s ±  0.514 s    [User: 26.161 s, System: 0.378 s]
-  Range (min … max):   26.271 s … 28.015 s    10 runs
-
-Summary
-  racket bench.rkt --memory --record-dc -n 10 &gt;&gt; memory-record-dc ran
-    1.46 ± 0.03 times faster than racket bench.rkt --memory --bytes -n 10 &gt;&gt; memory-bytes
-
-commit 4767dced4be0a77f4aab62f69f114d713fb19d7f
-hyperfine 'racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes' 'racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc'
-Benchmark 1: racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes
-  Time (mean ± σ):     267.591 s ±  5.458 s    [User: 266.095 s, System: 0.851 s]
-  Range (min … max):   258.180 s … 274.836 s    10 runs
-
-Benchmark 2: racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc
-  Time (mean ± σ):     269.610 s ±  2.811 s    [User: 267.713 s, System: 1.014 s]
-  Range (min … max):   265.525 s … 274.013 s    10 runs
-
-Summary
-  racket bench.rkt --memory --bytes -n 1 &gt;&gt; memory-bytes ran
-    1.01 ± 0.02 times faster than racket bench.rkt --memory --record-dc -n 1 &gt;&gt; memory-record-dc
-</code></pre></div></div>
-
-<p>These only demonstrate the speed (or lack thereof) of various versions of the
-memory benchmarks. The last run produced the data-points described in
-<a href="#experimental-method">Experimental Method</a>.</p>
-
-<h2 id="analysis">Analysis</h2>
-
-<p>I find it hard to believe that constructing the comparison objects for 2 <code class="language-plaintext highlighter-rouge">pict</code>s
-used 500–750KiB of memory regardless of method; that seems like too much. On the
-other hand, I don’t know Racket’s memory model well.</p>
-
-<p>It is clear that, for this sample, the record-dc method is more performant on
-all axes I considered.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>I’ll be adding record-dc method code to Frosthaven Manager soon.</p>
-
-<h3 id="appendix-machine-information">Appendix: Machine Information</h3>
-
-<ul>
-  <li>OS: macOS 12.7.2 21G1974 x86_64</li>
-  <li>Kernel: 21.6.0</li>
-  <li>CPU: Intel i7-4870HQ (8) @ 2.50GHz</li>
-  <li>GPU: Intel Iris Pro, AMD Radeon R9 M370X</li>
-  <li>Memory: 16384MiB</li>
-</ul>
-
-<p>Benchmarks were run while the machine was under low load.</p>
-
-<h3 id="appendix-full-benchmark-program">Appendix: Full Benchmark Program</h3>
-
-<p><a href="https://github.com/benknoble/pict-equal-bench">The code is available on GitHub.</a></p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="nv">lang</span> <span class="nv">racket/base</span>
-
-<span class="p">(</span><span class="k">require</span> <span class="nv">pict</span>
-         <span class="nv">racket/draw</span>
-         <span class="nv">racket/class</span>
-         <span class="nv">racket/match</span>
-         <span class="nv">rackunit</span>
-         <span class="nv">frosthaven-manager/elements</span>
-         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/ring1</span>
-                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test1</span><span class="p">])</span>
-         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/drag-down</span>
-                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test2</span><span class="p">])</span>
-         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/speartip</span>
-                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test3</span><span class="p">])</span>
-         <span class="p">(</span><span class="nf">rename-in</span> <span class="nv">frosthaven-manager/testfiles/aoes/unbreakable-wall</span>
-                    <span class="p">[</span><span class="nf">aoe</span> <span class="nv">test4</span><span class="p">]))</span>
-
-<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pequal-bytes?</span> <span class="nv">p</span> <span class="nv">q</span><span class="p">)</span>
-  <span class="p">(</span><span class="nb">equal?</span> <span class="p">(</span><span class="nf">pict-&gt;argb-pixels</span> <span class="nv">p</span><span class="p">)</span>
-          <span class="p">(</span><span class="nf">pict-&gt;argb-pixels</span> <span class="nv">q</span><span class="p">)))</span>
-
-<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">p</span><span class="p">)</span>
-  <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="nf">dc</span> <span class="p">(</span><span class="nf">new</span> <span class="nv">record-dc%</span><span class="p">)])</span>
-    <span class="p">(</span><span class="nf">draw-pict</span> <span class="nv">p</span> <span class="nv">dc</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="p">(</span><span class="nf">send</span> <span class="nv">dc</span> <span class="nv">get-recorded-datum</span><span class="p">)))</span>
-
-<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">pequal-dc?</span> <span class="nv">p</span> <span class="nv">q</span><span class="p">)</span>
-  <span class="p">(</span><span class="nb">equal?</span> <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">p</span><span class="p">)</span>
-          <span class="p">(</span><span class="nf">pict-&gt;recorded-datum</span> <span class="nv">q</span><span class="p">)))</span>
-
-<span class="p">(</span><span class="k">define</span> <span class="nv">checks</span>
-  <span class="p">(</span><span class="nb">append</span>
-   <span class="p">(</span><span class="nb">list</span>
-    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test1</span><span class="p">)</span> <span class="p">(</span><span class="nf">test1</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
-    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test2</span><span class="p">)</span> <span class="p">(</span><span class="nf">test2</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
-    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test3</span><span class="p">)</span> <span class="p">(</span><span class="nf">test3</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
-    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test4</span><span class="p">)</span> <span class="p">(</span><span class="nf">test4</span><span class="p">)</span> <span class="no">#t</span><span class="p">)</span>
-    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test1</span><span class="p">)</span> <span class="p">(</span><span class="nf">test4</span><span class="p">)</span> <span class="no">#f</span><span class="p">)</span>
-    <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">test2</span><span class="p">)</span> <span class="p">(</span><span class="nf">test3</span><span class="p">)</span> <span class="no">#f</span><span class="p">))</span>
-   <span class="p">(</span><span class="nf">for*/list</span> <span class="p">([</span><span class="nf">element1</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">fire</span> <span class="nv">ice</span> <span class="nv">earth</span> <span class="nv">air</span> <span class="nv">light</span> <span class="nv">dark</span><span class="p">)]</span>
-               <span class="p">[</span><span class="nf">element2</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">fire</span> <span class="nv">ice</span> <span class="nv">earth</span> <span class="nv">air</span> <span class="nv">light</span> <span class="nv">dark</span><span class="p">)]</span>
-               <span class="p">[</span><span class="nf">procedure1</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">element-pics-infused</span>
-                                 <span class="nv">element-pics-waning</span>
-                                 <span class="nv">element-pics-unfused</span>
-                                 <span class="nv">element-pics-consume</span><span class="p">)]</span>
-               <span class="p">[</span><span class="nf">procedure2</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">element-pics-infused</span>
-                                 <span class="nv">element-pics-waning</span>
-                                 <span class="nv">element-pics-unfused</span>
-                                 <span class="nv">element-pics-consume</span><span class="p">)])</span>
-     <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">procedure1</span> <span class="p">(</span><span class="nf">element1</span><span class="p">))</span>
-           <span class="p">(</span><span class="nf">procedure2</span> <span class="p">(</span><span class="nf">element2</span><span class="p">))</span>
-           <span class="p">(</span><span class="k">and</span> <span class="p">(</span><span class="nb">equal?</span> <span class="nv">procedure1</span> <span class="nv">procedure2</span><span class="p">)</span>
-                <span class="p">(</span><span class="nb">equal?</span> <span class="nv">element1</span> <span class="nv">element2</span><span class="p">))))))</span>
-
-<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">run-time-bench</span> <span class="nv">n</span> <span class="nv">pequal?</span><span class="p">)</span>
-  <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">_i</span> <span class="p">(</span><span class="nf">in-range</span> <span class="nv">n</span><span class="p">)])</span>
-    <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">check</span> <span class="p">(</span><span class="nf">in-list</span> <span class="nv">checks</span><span class="p">)])</span>
-      <span class="p">(</span><span class="nf">match-define</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">p</span> <span class="nv">q</span> <span class="nv">expected</span><span class="p">)</span> <span class="nv">check</span><span class="p">)</span>
-      <span class="p">(</span><span class="nf">check-equal?</span> <span class="p">(</span><span class="k">time</span> <span class="p">(</span><span class="nf">pequal?</span> <span class="nv">p</span> <span class="nv">q</span><span class="p">))</span> <span class="nv">expected</span><span class="p">))))</span>
-
-<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">run-memory-bench</span> <span class="nv">n</span> <span class="nv">constructor</span><span class="p">)</span>
-  <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">_i</span> <span class="p">(</span><span class="nf">in-range</span> <span class="nv">n</span><span class="p">)])</span>
-    <span class="p">(</span><span class="nf">for</span> <span class="p">([</span><span class="nf">check</span> <span class="p">(</span><span class="nf">in-list</span> <span class="nv">checks</span><span class="p">)])</span>
-      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
-      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
-      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
-      <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
-      <span class="p">(</span><span class="k">define</span> <span class="nv">old</span> <span class="p">(</span><span class="nb">current-memory-use</span><span class="p">))</span>
-      <span class="p">(</span><span class="nf">match-define</span> <span class="p">(</span><span class="nb">list</span> <span class="nv">p</span> <span class="nv">q</span> <span class="nv">_expected</span><span class="p">)</span> <span class="nv">check</span><span class="p">)</span>
-      <span class="p">(</span><span class="nf">constructor</span> <span class="nv">p</span><span class="p">)</span>
-      <span class="p">(</span><span class="nf">constructor</span> <span class="nv">q</span><span class="p">)</span>
-      <span class="p">(</span><span class="k">define</span> <span class="nv">new</span> <span class="p">(</span><span class="nb">current-memory-use</span><span class="p">))</span>
-      <span class="p">(</span><span class="nf">println</span> <span class="p">(</span><span class="nb">-</span> <span class="nv">new</span> <span class="nv">old</span><span class="p">)))))</span>
-
-<span class="p">(</span><span class="nf">module+</span> <span class="nv">main</span>
-  <span class="p">(</span><span class="k">require</span> <span class="nv">racket/cmdline</span><span class="p">)</span>
-  <span class="p">(</span><span class="k">define</span> <span class="nv">constructor</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
-  <span class="p">(</span><span class="k">define</span> <span class="nv">comparator</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
-  <span class="p">(</span><span class="k">define</span> <span class="nv">bench</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
-  <span class="p">(</span><span class="k">define</span> <span class="nv">n</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="mi">10</span><span class="p">))</span>
-  <span class="p">(</span><span class="k">define</span> <span class="nv">arg</span> <span class="p">(</span><span class="nb">make-parameter</span> <span class="no">#f</span><span class="p">))</span>
-  <span class="p">(</span><span class="nf">command-line</span>
-   <span class="nt">#:once-any</span>
-   <span class="p">[(</span><span class="nf">"--bytes"</span><span class="p">)</span> <span class="s">"Benchmark using bytes"</span>
-                <span class="p">(</span><span class="nf">constructor</span> <span class="nv">pict-&gt;argb-pixels</span><span class="p">)</span>
-                <span class="p">(</span><span class="nf">comparator</span> <span class="nv">pequal-bytes?</span><span class="p">)]</span>
-   <span class="p">[(</span><span class="nf">"--record-dc"</span><span class="p">)</span> <span class="s">"Benchmark using record-dc%"</span>
-                    <span class="p">(</span><span class="nf">constructor</span> <span class="nv">pict-&gt;recorded-datum</span><span class="p">)</span>
-                    <span class="p">(</span><span class="nf">comparator</span> <span class="nv">pequal-dc?</span><span class="p">)]</span>
-   <span class="nt">#:once-any</span>
-   <span class="p">[(</span><span class="nf">"--time"</span><span class="p">)</span> <span class="s">"Benchmark timing"</span>
-               <span class="p">(</span><span class="nf">bench</span> <span class="nv">run-time-bench</span><span class="p">)</span>
-               <span class="p">(</span><span class="nf">arg</span> <span class="nv">comparator</span><span class="p">)]</span>
-   <span class="p">[(</span><span class="nf">"--memory"</span><span class="p">)</span> <span class="s">"Benchmark memory"</span>
-                 <span class="p">(</span><span class="nf">bench</span> <span class="nv">run-memory-bench</span><span class="p">)</span>
-                 <span class="p">(</span><span class="nf">arg</span> <span class="nv">constructor</span><span class="p">)]</span>
-   <span class="nt">#:once-each</span>
-   <span class="p">[(</span><span class="nf">"-n"</span><span class="p">)</span> <span class="nv">N</span> <span class="s">"Number of iterations [10]"</span> <span class="p">(</span><span class="nf">n</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="nv">N</span><span class="p">))]</span>
-   <span class="nt">#:args</span> <span class="p">()</span>
-   <span class="p">(</span><span class="k">unless</span> <span class="p">(</span><span class="k">and</span> <span class="p">(</span><span class="nf">bench</span><span class="p">)</span> <span class="p">(</span><span class="nf">n</span><span class="p">)</span> <span class="p">(</span><span class="nf">arg</span><span class="p">)</span> <span class="p">((</span><span class="nf">arg</span><span class="p">)))</span>
-     <span class="p">(</span><span class="nb">raise-user-error</span> <span class="s">"Missing arguments"</span><span class="p">))</span>
-   <span class="p">((</span><span class="nf">bench</span><span class="p">)</span> <span class="p">(</span><span class="nf">n</span><span class="p">)</span> <span class="p">((</span><span class="nf">arg</span><span class="p">)))))</span>
-</code></pre></div></div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><category term="performance" /><summary type="html"><![CDATA[I get a brief glimpse of the performance characteristics of two methods for comparing picts for equality.]]></summary></entry></feed>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="github" /><category term="rants" /><category term="open-source" /><summary type="html"><![CDATA[It’s time to remind ourselves that GitHub and Git are not synonyms.]]></summary></entry></feed>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Copying a git-range-diff to GitHub</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Copying a git-range-diff to GitHub</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 04 Oct 2024 in Blog</p>
+<div id="post">
+  <p>I’ve been using <code class="language-plaintext highlighter-rouge">git range-diff</code> for the past few months to explain changes
+between versions of a patch series, such as different versions of a branch after
+responding to review comments on a Pull Request. This post explains how I use
+post the output for Markdown-ish consumption on GitHub.</p>
+
+<h2 id="primer">Primer</h2>
+
+<p>If you didn’t know, <code class="language-plaintext highlighter-rouge">git range-diff</code> is the standard way in Git to document
+changes between versions of a patch series such as you might find sent to a
+development mailing list. For example, <code class="language-plaintext highlighter-rouge">git format-patch</code> can include it
+automatically in the email so that, when responding to review comments with a
+new version, reviewers understand what’s changed.</p>
+
+<p>This all seems only relevant to email-driven workflows, but I argue that it is
+also useful for GitHub- or other web- driven workflows. For example: I work on a
+branch and submit a Pull Request on GitHub. After some review comments, I may
+create some <code class="language-plaintext highlighter-rouge">--fixup</code> commits and <code class="language-plaintext highlighter-rouge">rebase --autosquash</code> them in, perhaps editing
+commit messages, or make any number of other changes. When the time comes to
+<code class="language-plaintext highlighter-rouge">push --force-with-lease --force-if-includes</code>, the only recourse my reviewers
+have to understand the changes is GitHub’s “View changes” button, which attempts
+a textual diff between the files at the old and new branch tip.</p>
+
+<p>Yet a range-diff can capture so much more! Consider, for example, this
+range-diff from a Racket PR I submitted:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1:  907d3ea366 = 1:  35c19f1e83 docs: capitalize the noun Git
+2:  665e037505 ! 2:  6088cd1567 docs: mention the Vi command to add sections
+    @@ pkgs/racket-doc/scribblings/style/textual.scrbl: read code on monitors that acco
+     +So, when you create a file, add a line with @litchar{;; } followed by ctrl-U 99
+     +and @litchar{-}. @margin-note*{In Vi, the command is 99a- followed by Esc.} When
+     +you separate "sections" of code in a file, insert the same line. These lines
+    -+help both writers and readers to orient themselves in a file. In scribble use
+    ++help both writers and readers to orient themselves in a file. In Scribble use
+     +@litchar|{@; }| as the prefix.
+
+      @; -----------------------------------------------------------------------------
+3:  808676897e = 3:  1e7b35da0a docs: link fx+ and unsafe-fx+
+4:  ca7d2a2a56 = 4:  c3e32a5afa docs: correct Git pull command
+5:  1108c95343 = 5:  372bbd4ad5 docs: unquote "merge commit"
+6:  1374b3b095 &lt; -:  ---------- docs: italicize "e.g."
+7:  8f3f1cd517 = 6:  e48525eeb7 docs: correct macro body
+-:  ---------- &gt; 7:  38b3c0a75e docs: make explicit the convention for Latin
+</code></pre></div></div>
+
+<p>GitHub won’t show you this difference: I capitalized a word in an old commit
+message, removed the commit that italicized Latin abbreviations and added one
+that clarified said convention. I prefer to provide my reviewers with this
+information to help them understand the changes I’ve made (and to help future
+readers who may be curious, though I admit this is unlikely in most cases).</p>
+
+<h2 id="sharing-a-range-diff-in-markdown-format">Sharing a range-diff in Markdown format</h2>
+
+<p>A range-diff can get quite large if there are substantial code
+changes—arguably, the patch series should become a new branch/PR at such a
+point, but that is not often how things operate in practice. I used to paste
+range-diffs in code blocks like you see above, but with length and GitHub’s
+comment/review interface they became unwieldy.</p>
+
+<p>Instead, I’ve started pasting them inside an HTML <code class="language-plaintext highlighter-rouge">details</code> block so that they
+may be collapsed, summarized, and expanded as desired. I often did this by hand,
+but <a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/copy-range-diff">here’s the script I now use called <code class="language-plaintext highlighter-rouge">copy-range-diff</code></a>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#! /bin/sh
+
+{
+  printf '%s\n' '&lt;details&gt;&lt;summary&gt;range-diff:&lt;/summary&gt;' '' '```'
+  cat
+  printf '%s\n' '```' '' '&lt;/details&gt;'
+} | pbcopy
+</code></pre></div></div>
+
+<p>This script reads standard in and pipes a modified version of it to a clipboard
+command (Linux users probably prefer an <code class="language-plaintext highlighter-rouge">xsel</code> variant). Placed on the clipboard
+after <code class="language-plaintext highlighter-rouge">git range-diff … | copy-range-diff</code> is an HTML <code class="language-plaintext highlighter-rouge">details</code> block containing
+a Markdown code-fence which is easy to paste into GitHub or similar interfaces.
+Sometimes I will add a short summary to the summary tag; other times, I leave
+just the mention of a range-diff.</p>
+
+<p>A small tweak should work for pure HTML output so that instead of triple-tick
+Markdown fences we emit <code class="language-plaintext highlighter-rouge">&lt;pre&gt;</code> tags.</p>
+
+<details><summary>Here's the earlier range-diff, in a details block</summary>
+
+<!-- For some reason, Jekyll doesn't know how to process Markdown fences here,
+     so trick it with HTML. -->
+
+<pre class="highlight">
+<code>1:  907d3ea366 = 1:  35c19f1e83 docs: capitalize the noun Git
+2:  665e037505 ! 2:  6088cd1567 docs: mention the Vi command to add sections
+    @@ pkgs/racket-doc/scribblings/style/textual.scrbl: read code on monitors that acco
+     +So, when you create a file, add a line with @litchar{;; } followed by ctrl-U 99
+     +and @litchar{-}. @margin-note*{In Vi, the command is 99a- followed by Esc.} When
+     +you separate "sections" of code in a file, insert the same line. These lines
+    -+help both writers and readers to orient themselves in a file. In scribble use
+    ++help both writers and readers to orient themselves in a file. In Scribble use
+     +@litchar|{@; }| as the prefix.
+
+      @; -----------------------------------------------------------------------------
+3:  808676897e = 3:  1e7b35da0a docs: link fx+ and unsafe-fx+
+4:  ca7d2a2a56 = 4:  c3e32a5afa docs: correct Git pull command
+5:  1108c95343 = 5:  372bbd4ad5 docs: unquote "merge commit"
+6:  1374b3b095 &lt; -:  ---------- docs: italicize "e.g."
+7:  8f3f1cd517 = 6:  e48525eeb7 docs: correct macro body
+-:  ---------- &gt; 7:  38b3c0a75e docs: make explicit the convention for Latin</code>
+</pre>
+
+</details>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2024/10/04/copy-range-diff/";
+    this.page.identifier = "/blog/2024/10/04/copy-range-diff";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/" title="Performance of Racket Pict Comparison, Part 2">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#copying-a-git-range-diff-to-github">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
