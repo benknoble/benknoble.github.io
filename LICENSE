@@ -1,3 +1,21 @@
+The content of this repo and site is licensed under the CC BY-NC-SA 4.0. To
+view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+"Content" means the text and images in the following directories:
+
+- _drafts/
+- _posts/
+- _workshops/
+- _writings/
+- assets/img/
+- pages/
+- scribblings/
+
+This corresponds to the primary textual and image content of the website
+https://benknoble.github.io that you would view with a web browser.
+
+All other code or information is licensed under the MIT license:
+
 MIT License
 
 Copyright (c) 2018 David Ben Knoble
