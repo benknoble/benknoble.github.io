@@ -1,0 +1,15 @@
+#! /bin/sh
+
+set -e
+
+# strategy:
+# - build a list of repeated month-day combinations
+# - convert those to find predicates like "find _posts -false -or -name *mm-dd* -or …
+# - sort the results by month and day for overlap
+
+find _posts |
+  fields -f - 2 3 |
+  sort | uniq -c |
+  awk '$1 > 1 { print "-or -name *" $2 "-" $3 "*"; }' |
+  xargs find _posts -false |
+  sort -t - -k2,3
