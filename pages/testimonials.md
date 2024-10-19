@@ -33,7 +33,7 @@ permalink: /testimonials/
   speed on the most complex services and contribute thoughtful comments and
   suggestions via PR reviews. He always provides detailed explanations and
   background in his PRs, which helps us to learn and to understand the changes
-  and the though process behind them."
+  and the thought process behind them."
 - "Always brings a lot of energy to solving problems"
 - "Willing to share his deep knowledge of Git"
 - "Contributes in a style I wish I saw more of. Not afraid to try something even
