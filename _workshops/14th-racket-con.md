@@ -3,7 +3,8 @@ title: '14th RacketCon: Frosthaven Manager: Built by the Community'
 date: 2024-10-05
 ---
 
-[Material](https://github.com/benknoble/racket-con-2024) and [more
+[Talk](https://youtu.be/O33NK52ZmUk?si=0YryG3CiZKhCDtBf),
+[slides](https://github.com/benknoble/racket-con-2024) and [more
 information](https://con.racket-lang.org).
 
 Originally given at the 14th Racket Con to say "thank you," showcase some neat
