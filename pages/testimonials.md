@@ -99,3 +99,27 @@ permalink: /testimonials/
   expertise to encourage adoption of proposed ideas."
 - "[Ben is] diligent and open to learn [and is] an impressive addition to the
   team."
+- "I worked with Ben remotely. He was an intern in the infrastructure team at
+  Nuage Networks. Being on the infra team meant exposure to the 'full-stack' our
+  systems at Nuage; from racking, stacking, and cabling in the lab, tracing and
+  debugging virtualization and networking issues, and improving reliability of
+  different aspects of the CI/CD pipeline.
+
+    "During the interview process it was clear Ben was a bright developer.
+    During his first few weeks, he was able to reduce the build time of one of
+    the components most built by half (from 20 minutes to 10 minutes).
+
+    "Later on, he built a general purpose caching system for improving the speed
+    of some of a more convoluted build process.
+
+    "He is a master of git, and was willing to tutor and mentor those who needed
+    help. His communication skills were of the highest quality, in chat, by
+    phone, video, and documentation of proposed projects and in code.
+
+    "His ability to dive into and work on 'legacy' codebases was impressive and
+    admirable. He quickly became the person sought after for code reviews
+    because of his sharp insight and intuition.
+
+    "I feel very happy to have worked with Ben. And I am very happy to have the
+    chance to recommend him for all the great work he has done." (John Naulty
+    via LinkedIn)
