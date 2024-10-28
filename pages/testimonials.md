@@ -3,6 +3,14 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "Ben is able to bring together a diverse audience into a conversation rather
+  than just regurgitate information from slides. Helping facilitate different
+  viewpoints will really assist Ben as he moves forward in his career."
+- "Ben's communication style is effective, pragmatic, and fact-based. He is able
+  to communicate in an easy-to-understand way for the technical and developer
+  experience areas I have witnessed him in. I pulled Ben into discussions around
+  Engineering Integrity with Distinguished Engineers knowing that he would be
+  able to help craft a message for all audiences."
 - "The next [Will Slattum](https://github.com/wrslatz)"
 - "Ben models working across silos by the level of his involvement with the
   innersource community. Known in the top 10 active participants, Ben is sought
