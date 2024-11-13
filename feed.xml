@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-11-13T00:14:41+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Perspective on software development models</title><link href="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/" rel="alternate" type="text/html" title="Perspective on software development models" /><published>2024-11-11T00:00:00+00:00</published><updated>2024-11-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/"><![CDATA[<p>If I believe <a href="/about/#me">simple questions have complex answers</a>, then it’s no surprise that I have a complicated take on the following
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-11-13T22:42:05+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Perspective on software development models</title><link href="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/" rel="alternate" type="text/html" title="Perspective on software development models" /><published>2024-11-11T00:00:00+00:00</published><updated>2024-11-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/"><![CDATA[<p>If I believe <a href="/about/#me">simple questions have complex answers</a>, then it’s no surprise that I have a complicated take on the following
 question: branch-based or trunk-based development? Which is better, and why?</p>
 
 <p>As usual, though, <em>we’re asking the wrong questions.</em> For spoilers, jump to the
@@ -237,8 +237,8 @@ communities who don’t mind core devs committing directly.</li>
 <blockquote>
   <p>Any failures there are seen and addressed promptly, reducing the risk of nasty
 failures. It’s usually easy to track down which changes caused the problem. If
-the issue can’t be fixed immediately, you can back the specific changes that
-caused it.</p>
+the issue can’t be fixed immediately, you can back [sic] the specific changes
+that caused it.</p>
 </blockquote>
 
 <p>As may by now be clear, <strong>this is independent of workflow.</strong> Tools like <code class="language-plaintext highlighter-rouge">git
@@ -312,8 +312,8 @@ apply equally to branch-based development! What happened? Presumptuously, I
 suspect Gee spent time with branch-based teams that didn’t observe this culture
 of commit hygiene and time with trunk-based teams that did. That kind of
 anecdata can taint our view of a workflow <em>even when most of the salient
-problems are workflow-independent</em> by <a href="#strawman">creating strawmen out of poor
-habits</a>.</p>
+problems are workflow-independent</em>, which <a href="#strawman">leads us to create strawmen out of
+poor habits</a>.</p>
 
 <p>I leave you with the following thoughts:</p>
 <ul>
