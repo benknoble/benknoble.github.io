@@ -13,9 +13,13 @@ As usual, though, _we're asking the wrong questions._ For spoilers, jump to the
 
 ## Impetus: opinion and advantage without mechanism or goal
 
-This post is largely a reply to posts like [Trisha Gee's "Why I prefer
+Part of this post is a reply to posts like [Trisha Gee's "Why I prefer
 trunk-based
 development"](https://trishagee.com/2023/05/29/why-i-prefer-trunk-based-development/).
+If you don't care for musings on that, skip to [the beginning of my
+analysis](#analysis) for the rest of the post, which examines the tradeoffs of
+branch-based and trunk-based development in light of 5 pillars.
+
 Gee outshines many of her peers with her titular framing: the article explores
 _her_ preferences based on _her_ experience. Too many answers to the question
 of "to branch or not to branch" want to convince you of their absolute
@@ -31,15 +35,18 @@ Gee stands out, then, for speaking personally and from professional experience.
 Her introduction winds you up for a "when I was at X and we did Y, we found Z"
 tale. These stories form the basis of mature programmer thinking: I learn from
 your experience and can better judge appropriate tradeoffs thanks to your lived
-and earned wisdom.
+and earned wisdom. **From Gee's analysis of tradeoffs, I hoped to learn and to
+be better equipped to analyze my own.** The results might be measurable or gut
+feelings, and we would learn from both.
 
 The main article falls flat.
 
 Teed up for story time, we find instead a collection of opinion presented as
-fact. There must be memories that inform Gee's opinions (or else we are reading
-another cargo-cult piece, and I want to extend the benefit of the doubt here).
-We can't extricate our opinions from the experiences that shape us. Thus Gee
-speaks from experience but shares none of it. For example, Gee claims
+fact. This being the internet, of course we find opinion: there must be memories
+that inform Gee's opinions (or else we are reading another cargo-cult piece, and
+I want to assume positive intent of Gee, whom I don't know). We can't extricate
+our opinions from the experiences that shape us. Thus Gee speaks from experience
+but shares none of it[^3]. For example, Gee claims
 
 > Integrating small changes regularly into your code is usually less painful
 > than a big merge at the end of a longer period of time.
@@ -56,16 +63,23 @@ lack
 - a set of goals or desires against which we can judge the tradeoffs of
   different approaches and their effects.
 
-I grant that there is plenty of other material about the mechanisms of branch-
-and trunk-based workflows. [Pro Git even covers
+We don't seek analysis to ground our precious art in hard-to-find evidence[^4]
+or to participate in [empiricism
+washing](https://pluralistic.net/2024/10/29/hobbesian-slop/)[^2]; rather, we aim
+to derive from shared opinions lessons we apply to our own situations. We
+welcome opinion. For claims of advantage, we insist on analysis in order to
+integrate that opinion.
+
+There is other material about the mechanisms of branch- and trunk-based
+workflows. [Pro Git even covers
 some](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows), as
 does [`git help workflows`](https://git-scm.com/docs/gitworkflows). Still I want
 to mix discussion of tradeoff with implementation mechanism: I find this
 clarifies my thoughts.
 
-We'll take Gee's 5 points for trunk-based workflows and distill both mechanism
-and tradeoff for branch- and trunk-based workflows. By the end, you'll see how I
-view the wide world of Git use.
+<a id="analysis"></a>We'll take Gee's 5 points for trunk-based workflows and
+distill both mechanism and tradeoff for branch- and trunk-based workflows. By
+the end, you'll see how I view the wide world of Git use.
 
 ## Speed and Efficiency
 
@@ -148,10 +162,10 @@ Gee claims that trunk-based development
 
 Gee argues that more commits (by proxy of "more time") lead to a higher chance
 of conflicts, which I agree with above and for which I suggested a mitigation.
-Then she constructs a strawman version of the branching model: to compare
-_well-run_ trunk-based development, we should also use _well-run_ branch-based
-development, in which ready branches are frequently reviewed and either merged
-or rejected[^1].
+Then she constructs a <a id="strawman"></a>**strawman** version of the branching
+model: to compare _well-run_ trunk-based development, we should also use
+_well-run_ branch-based development, in which ready branches are frequently
+reviewed and either merged or rejected[^1].
 
 In a well-run branch model, buggy merges are infrequent. Said another way, a
 trunk-based developer who hasn't pulled in a while and creates a large merge
@@ -234,8 +248,10 @@ models: fundamentally it's a tooling failure, however, because we don't have
 per-PR environments. So to test a deployed PR I might be stomping on some
 other PR's dev or QA environment.
 
-Heavily regulated environments may not be able to treat each push as a
-deployment to customers.
+Heavily regulated environments (such as my current workplace) may not be able to
+treat each push as a deployment to customers: instead, in some domains we have
+to be careful about when we release even if we merge frequently. For our
+internal customers, release on push often works fine.
 
 ## Reduced Technical Debt
 
@@ -274,7 +290,8 @@ apply equally to branch-based development! What happened? Presumptuously, I
 suspect Gee spent time with branch-based teams that didn't observe this culture
 of commit hygiene and time with trunk-based teams that did. That kind of
 anecdata can taint our view of a workflow _even when most of the salient
-problems are workflow-independent_.
+problems are workflow-independent_ by [creating strawmen out of poor
+habits](#strawman).
 
 I leave you with the following thoughts:
 - After analysis, the major tradeoffs of either workflow are needed tooling,
@@ -287,8 +304,15 @@ I leave you with the following thoughts:
   commit hygiene. My analysis in this article suggests that good commit hygiene
   undergirds most of the advantages Gee ascribes to trunk-based development.
   Maybe that's the real change we need to convince people to make?
+- It _may_ be the case that trunk-based development acts as a stronger forcing
+  function for well-tested code, commit hygiene, and all the rest. Gee makes
+  some claims to this effect, and I cannot personally evaluate them. I have seen
+  struggling branch-based teams who adopt better test and commit hygiene come to
+  benefit---the poster children of good branch-based development would be Git,
+  Vim, Rust, and similar projects. Which style is more likely to force what
+  practices is a very different article and set of claims, though![^5]
 
-PS Gee later writes in comments:
+<a id="postscript"></a>PS Gee later writes in comments:
 
 > It all comes down to discipline, and the team. For me, I prefer to see
 > IMMEDIATELY if there are any problems caused by any developer’s commit. I
@@ -319,3 +343,22 @@ situations---keep an eye on the RSS feed for that!
     email-driven "v1/2/3" workflows even when working with GitHub's UI and
     rebases. On GitHub, you might also close a PR and start a new one if the new
     work is significantly different from the old, whether you rebase or not.
+
+[^2]: See also [Cory Doctorow's essay on Qualia](https://locusmag.com/2021/05/cory-doctorow-qualia/)
+
+[^3]: See [the postscript](#postscript) for a shift: in the comments, we see
+    more of Gee's thought process.
+
+[^4]: Though evidence is certainly welcome to inform tradeoffs. See for example
+    [performance comparisons]({% link
+    _posts/2024-09-14-benchmarking-pict-equality-pt-2.md %}) or [What we know we
+    don't know](https://www.hillelwayne.com/talks/ese/).
+
+[^5]: Evaluating them has to be sensitive to seniority, too: if you only have
+    senior engineers in your trunk pool and juniors in your branch pool, well,
+    that's the correlation you measure. And I suspect that many of us that are
+    in poor branch-based communities now are surrounded by juniors in corporate
+    environments that don't reward well the teams who spend time on these
+    considerations; when we move to a pod of seniors that have already adopted
+    the baseline assumptions (commit hygiene, etc.), whether they choose
+    trunk-based or branch-based development, the model surely shines.
