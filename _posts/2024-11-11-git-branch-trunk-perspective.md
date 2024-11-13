@@ -224,8 +224,8 @@ Gee claims trunk-based development helps CI/CD because
 
 > Any failures there are seen and addressed promptly, reducing the risk of nasty
 > failures. It's usually easy to track down which changes caused the problem. If
-> the issue can't be fixed immediately, you can back the specific changes that
-> caused it.
+> the issue can't be fixed immediately, you can back [sic] the specific changes
+> that caused it.
 
 As may by now be clear, **this is independent of workflow.** Tools like `git
 blame` and `git bisect` are essential to tracking changes, and CI on PRs can
@@ -290,8 +290,8 @@ apply equally to branch-based development! What happened? Presumptuously, I
 suspect Gee spent time with branch-based teams that didn't observe this culture
 of commit hygiene and time with trunk-based teams that did. That kind of
 anecdata can taint our view of a workflow _even when most of the salient
-problems are workflow-independent_ by [creating strawmen out of poor
-habits](#strawman).
+problems are workflow-independent_, which [leads us to create strawmen out of
+poor habits](#strawman).
 
 I leave you with the following thoughts:
 - After analysis, the major tradeoffs of either workflow are needed tooling,
