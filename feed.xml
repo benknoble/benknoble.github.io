@@ -1,4 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-11-13T22:42:05+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Perspective on software development models</title><link href="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/" rel="alternate" type="text/html" title="Perspective on software development models" /><published>2024-11-11T00:00:00+00:00</published><updated>2024-11-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/"><![CDATA[<p>If I believe <a href="/about/#me">simple questions have complex answers</a>, then it’s no surprise that I have a complicated take on the following
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-11-15T16:01:44+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Tip: use symmetric differences with git-range-diff</title><link href="https://benknoble.github.io/blog/2024/11/15/til-range-diff/" rel="alternate" type="text/html" title="Tip: use symmetric differences with git-range-diff" /><published>2024-11-15T00:00:00+00:00</published><updated>2024-11-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/15/til-range-diff</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/15/til-range-diff/"><![CDATA[<p>I’ve <a href="/blog/2024/10/04/copy-range-diff/">been using <code class="language-plaintext highlighter-rouge">range-diff</code> for a while now</a>, but I’d been stuck with a long input
+method for arguments. Today I learned a shortcut.</p>
+
+<h2 id="primer">Primer</h2>
+
+<p>Recall that <code class="language-plaintext highlighter-rouge">git range-diff</code> looks at the differences between two ranges:
+commonly, we pass the two ranges explicitly; or, we can pass a base and two tips
+to have the same effect as <code class="language-plaintext highlighter-rouge">&lt;base&gt;..&lt;tip1&gt; &lt;base&gt;..&lt;tip2&gt;</code>. The <a href="https://git-scm.com/docs/git-range-diff#Documentation/git-range-diff.txt-ltbasegtltrev1gtltrev2gt">manual
+explaining this notation</a> gives the following example: “after
+rebasing a branch <code class="language-plaintext highlighter-rouge">my-topic</code>, <code class="language-plaintext highlighter-rouge">git range-diff my-topic@{u} my-topic@{1}
+my-topic</code> would show the differences introduced by the rebase.” So I’ve been
+writing</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g range-diff @{u} @{1} @
+</code></pre></div></div>
+
+<p>and similar variants for several months. I actually recently switched to
+<a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault"><code class="language-plaintext highlighter-rouge">push.default = current</code></a> where my <code class="language-plaintext highlighter-rouge">@{upstream}</code> is the branch I
+want to pull from (often some version of <code class="language-plaintext highlighter-rouge">origin/main</code> or <code class="language-plaintext highlighter-rouge">upstream/main</code>) and
+Git provides (after I push) <code class="language-plaintext highlighter-rouge">@{push}</code> as the branch I’m pushing to (<em>e.g.</em>,
+<code class="language-plaintext highlighter-rouge">origin/topic</code>). With this layout, I run</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g range-diff @{u} @{push} @
+</code></pre></div></div>
+
+<p>(There is no abbreviation for <code class="language-plaintext highlighter-rouge">@{push}</code>, sadly.)</p>
+
+<h2 id="symmetric-diff">Symmetric diff</h2>
+
+<p>Now, I knew that <code class="language-plaintext highlighter-rouge">git range-diff</code> also accepts a <a href="https://git-scm.com/docs/git-range-diff#Documentation/git-range-diff.txt-ltrev1gt82308203ltrev2gt">three-dot symmetric difference
+notation</a>, so</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g range-diff &lt;left&gt;...&lt;right&gt;
+    -- becomes --&gt;
+g range-diff &lt;right&gt;..&lt;left&gt; &lt;left&gt;..&lt;right&gt;
+</code></pre></div></div>
+<p>But in the past, especially prior to <code class="language-plaintext highlighter-rouge">push.default = current</code>, I had not found
+this terribly useful. I was probably holding it wrong.</p>
+
+<p>Today, I write (before pushing)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g range-diff @{push}... | copy-range-diff
+</code></pre></div></div>
+
+<p>and all is well. Use <code class="language-plaintext highlighter-rouge">git log [--oneline] --graph --boundary --left-right --cherry-mark
+@{push}...</code> to get a feel for what ranges are being compared.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve been using range-diff for a while now, but I’d been stuck with a long input method for arguments. Today I learned a shortcut.]]></summary></entry><entry><title type="html">Perspective on software development models</title><link href="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/" rel="alternate" type="text/html" title="Perspective on software development models" /><published>2024-11-11T00:00:00+00:00</published><updated>2024-11-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/"><![CDATA[<p>If I believe <a href="/about/#me">simple questions have complex answers</a>, then it’s no surprise that I have a complicated take on the following
 question: branch-based or trunk-based development? Which is better, and why?</p>
 
 <p>As usual, though, <em>we’re asking the wrong questions.</em> For spoilers, jump to the
@@ -1251,107 +1295,4 @@ wrong.”</a></p>
 sometimes we are wrong. Ironically, the Tumblr post’s “it depends” aligns with
 exactly my argument: hire developers who understand and appreciate nuance. <em>They
 are probably still deep experts of some domain</em>. Nuance typically comes from
-expertise.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="fp" /><summary type="html"><![CDATA[The identified problem may be missing the mark.]]></summary></entry><entry><title type="html">Re: Beautiful Python Monsters</title><link href="https://benknoble.github.io/blog/2024/06/15/beautiful-python-monsters/" rel="alternate" type="text/html" title="Re: Beautiful Python Monsters" /><published>2024-06-15T00:00:00+00:00</published><updated>2024-06-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/06/15/beautiful-python-monsters</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/06/15/beautiful-python-monsters/"><![CDATA[<p>Making flaky tests pass cries out for functional-programming idioms.</p>
-
-<p>While reading <a href="https://treyhunner.com/2024/06/a-beautiful-python-monstrosity/">A beautiful Python
-monstrosity</a>, I
-was struck by several thoughts. Perhaps performance tests shouldn’t be automated
-with the same tools as unit tests? Is there a better way to write flaky tests?</p>
-
-<h2 id="automatic-performance-tests">Automatic performance tests</h2>
-
-<p>A unit test doesn’t seem to be the best way to describe a performance test. More
-likely, we want to set up a benchmarking harness, run the programs, and measure
-various performance indicators. <a href="https://github.com/drym-org/qi/blob/070ffc5e0d2e3a581a1bc11acd391e980dbdd328/.github/workflows/benchmarks.yml">This can be done automatically in a build
-pipeline</a>,
-for example.</p>
-
-<p>If these measurements are collected on each run we can perform analyses. For
-example:</p>
-
-<ul>
-  <li>Graph each run (with suitable titles) or make a <a href="https://drym-org.github.io/qi/benchmarks/">trend
-analysis</a>.</li>
-  <li>Perform <a href="https://chelseatroy.com/2021/02/26/data-safety-for-programmers/">statistical
-tests</a>
-between runs to see if the change was meaningful.</li>
-</ul>
-
-<p>All of this can also be automated. I wouldn’t write any of it as a unit test,
-however.</p>
-
-<p>The examples in the original post also seem to concentrate on algorithmic (time)
-complexity; this can be done with statistical tests, too, given a wealth of
-data. It’s not something I want to run as part of the (local) unit tests,
-though. If it’s important enough to block PRs, put it in the build pipeline (and
-I should be capable of running it locally; it shouldn’t be on by default,
-though).</p>
-
-<h2 id="flaky-tests">Flaky tests</h2>
-
-<p>An orthogonal concept: How do we make flaky tests less flaky? We should engineer
-the tests to be less reliant on flakiness, but automatically repeating the tests
-is a reasonable hack in the meantime.</p>
-
-<p>Here’s my transcribed Racket <code class="language-plaintext highlighter-rouge">repeat-flaky</code> procedure, which doesn’t require
-decorators or other ideas:</p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">repeat-flaky</span> <span class="nv">test</span> <span class="p">[</span><span class="nf">n</span> <span class="mi">10</span><span class="p">])</span>
-  <span class="p">(</span><span class="nf">match</span> <span class="nv">n</span>
-    <span class="p">[</span><span class="nf">0</span> <span class="p">(</span><span class="nf">test</span><span class="p">)]</span>
-    <span class="p">[(</span><span class="nf">?</span> <span class="nv">positive?</span> <span class="nv">m</span><span class="p">)</span>
-     <span class="p">(</span><span class="k">with-handlers</span> <span class="p">([</span><span class="nb">exn:fail?</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="nf">_exn</span><span class="p">)</span> <span class="p">(</span><span class="nf">repeat-flaky</span> <span class="nv">test</span> <span class="p">(</span><span class="nb">sub1</span> <span class="nv">n</span><span class="p">)))])</span>
-       <span class="p">(</span><span class="nf">test</span><span class="p">))]))</span>
-
-<span class="c1">;; Example:</span>
-<span class="p">(</span><span class="nf">repeat-flaky</span> <span class="p">(</span><span class="nf">thunk</span> <span class="p">(</span><span class="nf">check-equal?</span> <span class="p">(</span><span class="nb">random</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="nb">random</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">))))</span>
-</code></pre></div></div>
-
-<p>The core idea is to pass functions around. Python makes this hard because its
-<code class="language-plaintext highlighter-rouge">lambda</code> doesn’t permit arbitrary functions; the decorator over an unnamed
-function is essentially recreating higher-order functions receiving anonymous
-functions. This is thus the essence of repeating fallible tests; a
-generalization allows the <code class="language-plaintext highlighter-rouge">exn:fail?</code> test to be replaced by the client or for
-subsequent invocations to know about the caught exception by having it passed as
-an optional argument.</p>
-
-<p>The <code class="language-plaintext highlighter-rouge">thunk</code> could be eliminated (from surface syntax) by a macro if desired.</p>
-
-<p>This works without needing <code class="language-plaintext highlighter-rouge">nonlocal</code>, by the way, since the Racket equivalent
-of Python’s <code class="language-plaintext highlighter-rouge">a = 1</code> that automatically introduces <code class="language-plaintext highlighter-rouge">a</code> is <code class="language-plaintext highlighter-rouge">(let ([a 1]) …)</code> or
-<code class="language-plaintext highlighter-rouge">(define a 1)</code>. This isn’t mutation, it’s binding. Further, if you want to refer
-to <code class="language-plaintext highlighter-rouge">a</code> from a higher scope, you do so by writing <code class="language-plaintext highlighter-rouge">a</code> (as long it isn’t
-shadowed), even with <code class="language-plaintext highlighter-rouge">set!</code>. Lexical scoping rules give you predictable control
-of which identifiers refer to which bindings in each part of the program text.</p>
-
-<p>The ability to properly nest <code class="language-plaintext highlighter-rouge">repeat-flaky</code> makes a lot of the need for mutation
-(and thus complicated scope references) go away, though:</p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">repeat-flaky</span>
-  <span class="p">(</span><span class="nf">thunk</span>
-    <span class="p">(</span><span class="k">define</span> <span class="nv">micro-time</span> <span class="nv">…</span><span class="p">)</span>
-    <span class="p">(</span><span class="k">define</span> <span class="nv">tiny-time</span> <span class="nv">…</span><span class="p">)</span>
-    <span class="p">(</span><span class="nf">check</span> <span class="nv">…</span> <span class="nv">micro-time</span> <span class="nv">tiny-time</span> <span class="nv">…</span><span class="p">)</span>
-    <span class="p">(</span><span class="nf">repeat-flaky</span>
-      <span class="p">(</span><span class="nf">thunk</span>
-        <span class="p">(</span><span class="k">define</span> <span class="nv">small-time</span> <span class="nv">…</span><span class="p">)</span>
-        <span class="c1">;; we have access to micro, tiny here</span>
-        <span class="p">(</span><span class="nf">check</span> <span class="nv">…</span> <span class="nv">micro-time</span> <span class="nv">tiny-time</span> <span class="nv">small-time</span> <span class="nv">…</span><span class="p">)))))</span>
-</code></pre></div></div>
-
-<p>Each nesting is repeated, however, so this singly-nested flaky test could run up
-to 25 times (instead of the original’s 5). This could be a feature, though, and
-can be controlled with the optional repeat argument.</p>
-
-<h2 id="conclusions">Conclusions</h2>
-
-<ol>
-  <li>Take a hard look at what your goals for performance tests are. The original
-post wanted them to predictably, consistently pass and fail like unit tests
-and run quickly. I’m not sure that’s the best methodology for comparing
-performance or for testing algorithmic time complexity.</li>
-  <li>The essence of repeating fallible tests can be implemented by higher order
-functions. An abuse of Python’s decorators allows Python to pass unnamed
-functions to higher-order functions, working around a language deficiency.
-Python’s <code class="language-plaintext highlighter-rouge">lambda</code> is not.</li>
-</ol>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="python" /><category term="racket" /><category term="fp" /><summary type="html"><![CDATA[Making flaky tests pass cries out for functional-programming idioms.]]></summary></entry></feed>
+expertise.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="fp" /><summary type="html"><![CDATA[The identified problem may be missing the mark.]]></summary></entry></feed>
