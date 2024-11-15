@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-11-15T16:01:44+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Tip: use symmetric differences with git-range-diff</title><link href="https://benknoble.github.io/blog/2024/11/15/til-range-diff/" rel="alternate" type="text/html" title="Tip: use symmetric differences with git-range-diff" /><published>2024-11-15T00:00:00+00:00</published><updated>2024-11-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/15/til-range-diff</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/15/til-range-diff/"><![CDATA[<p>I’ve <a href="/blog/2024/10/04/copy-range-diff/">been using <code class="language-plaintext highlighter-rouge">range-diff</code> for a while now</a>, but I’d been stuck with a long input
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-11-15T19:18:03+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Tip: use symmetric differences with git-range-diff</title><link href="https://benknoble.github.io/blog/2024/11/15/til-range-diff/" rel="alternate" type="text/html" title="Tip: use symmetric differences with git-range-diff" /><published>2024-11-15T00:00:00+00:00</published><updated>2024-11-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/15/til-range-diff</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/15/til-range-diff/"><![CDATA[<p>I’ve <a href="/blog/2024/10/04/copy-range-diff/">been using <code class="language-plaintext highlighter-rouge">range-diff</code> for a while now</a>, but I’d been stuck with a long input
 method for arguments. Today I learned a shortcut.</p>
 
 <h2 id="primer">Primer</h2>
@@ -42,7 +42,43 @@ this terribly useful. I was probably holding it wrong.</p>
 </code></pre></div></div>
 
 <p>and all is well. Use <code class="language-plaintext highlighter-rouge">git log [--oneline] --graph --boundary --left-right --cherry-mark
-@{push}...</code> to get a feel for what ranges are being compared.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve been using range-diff for a while now, but I’d been stuck with a long input method for arguments. Today I learned a shortcut.]]></summary></entry><entry><title type="html">Perspective on software development models</title><link href="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/" rel="alternate" type="text/html" title="Perspective on software development models" /><published>2024-11-11T00:00:00+00:00</published><updated>2024-11-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/"><![CDATA[<p>If I believe <a href="/about/#me">simple questions have complex answers</a>, then it’s no surprise that I have a complicated take on the following
+@{push}...</code> to get a feel for what ranges are being compared.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve been using range-diff for a while now, but I’d been stuck with a long input method for arguments. Today I learned a shortcut.]]></summary></entry><entry><title type="html">Little utilities</title><link href="https://benknoble.github.io/blog/2024/11/15/useful-utilities/" rel="alternate" type="text/html" title="Little utilities" /><published>2024-11-15T00:00:00+00:00</published><updated>2024-11-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/15/useful-utilities</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/15/useful-utilities/"><![CDATA[<p>Like many other full-time shell users, I write small utilities to add to my
+toolbox. Let’s compare.</p>
+
+<h2 id="parallel-thoughts">Parallel thoughts</h2>
+
+<p>I stumbled on <a href="https://blog.plover.com/">MJD’s blog</a> via a <a href="">Git Rev News</a>
+article from last year and found <a href="https://blog.plover.com/prog/runN.html">a post about little
+utilities</a>. Clearly great minds think
+alike:</p>
+
+<ul>
+  <li>MJD explains an <code class="language-plaintext highlighter-rouge">f</code> command to extract a single field. It’s written in Perl. I
+have a <a href="/blog/2019/09/11/fields/"><code class="language-plaintext highlighter-rouge">fields</code> script</a> that uses
+dynamically-generated AWK to extract as many fields as you want. It’s a longer
+name but useful in more situations.</li>
+  <li>The post goes on to mention <code class="language-plaintext highlighter-rouge">runN</code>, a (mostly sequential but sometimes
+parallel) command runner that replaces some simple loops. But this is a
+straightforward variation on <a href="https://joeyh.name/code/moreutils/">moreutils</a>
+<code class="language-plaintext highlighter-rouge">parallel</code> command<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>, so that’s what I use when I remember to.</li>
+</ul>
+
+<p>In the words of moreutils: there’s room for more little unix utilities!</p>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>The <a href="https://joeyh.name/code/moreutils/">moreutils</a> syntax and manual I
+vastly prefer to <a href="https://savannah.gnu.org/projects/parallel/">GNU <code class="language-plaintext highlighter-rouge">parallel</code></a>,
+although GNU parallel supports niceties like a job log, retries, output
+syndication, etc. For “heavy lifting,” I am forced to use GNU parallel (I
+try to write detailed notes on expected uses then), but for short one-liners
+I prefer the moreutils version. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="shell" /><summary type="html"><![CDATA[Like many other full-time shell users, I write small utilities to add to my toolbox. Let’s compare.]]></summary></entry><entry><title type="html">Perspective on software development models</title><link href="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/" rel="alternate" type="text/html" title="Perspective on software development models" /><published>2024-11-11T00:00:00+00:00</published><updated>2024-11-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/"><![CDATA[<p>If I believe <a href="/about/#me">simple questions have complex answers</a>, then it’s no surprise that I have a complicated take on the following
 question: branch-based or trunk-based development? Which is better, and why?</p>
 
 <p>As usual, though, <em>we’re asking the wrong questions.</em> For spoilers, jump to the
@@ -1224,75 +1260,4 @@ shorthand.</li>
       </ul>
     </blockquote>
   </li>
-</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rants" /><category term="typography" /><summary type="html"><![CDATA[Please use an em-dash—like this one—for parenthetical asides or for a gentler colon. Do not use spaced hyphens - like this - they are wrong.]]></summary></entry><entry><title type="html">Re: The Functional Programming Hiring Problem</title><link href="https://benknoble.github.io/blog/2024/06/16/fp-hiring/" rel="alternate" type="text/html" title="Re: The Functional Programming Hiring Problem" /><published>2024-06-16T00:00:00+00:00</published><updated>2024-06-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/06/16/fp-hiring</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/06/16/fp-hiring/"><![CDATA[<p>The identified problem may be missing the mark.</p>
-
-<p><a href="https://blog.janissary.xyz/posts/hiring-functional-programming">Noah Snelson articulates a common theme of functional programming (FP)
-discussions</a>:
-the (dis)advantages of hiring engineers for less-well-known FP languages. I
-personally appreciated the time Snelson spent crafting their article, but I’ve
-got one issue with it: I think they missed a class of candidates.</p>
-
-<p>Snelson believes that when hiring for languages such as the fictional Gooby, you
-have 3 pools of applicants:</p>
-
-<ol>
-  <li>The résumé-spammers.</li>
-  <li>Bright undergrads recently converted to the “One True Way.”</li>
-  <li>Senior engineers who only care about Gooby.</li>
-</ol>
-
-<p>I agree that these are 3 types of potential Gooby applicants! I disagree that
-there’s a meaningful difference between converted undergraduates and senior
-engineers <em>in the context of the article’s problems.</em></p>
-
-<h2 id="are-these-senior-engineers-behaving-like-senior-engineers">Are these senior engineers behaving like senior engineers?</h2>
-
-<p>The senior engineers certainly have more Gooby expertise than the converted
-undergraduates. Snelson’s characterizations reveal that these engineers are
-still drinking the Kool-Aid, though:</p>
-
-<ul>
-  <li>They “<em>insist</em> on using a functional language at every moment possible”
-(emphasis original).</li>
-  <li>They “threaten to quit if their next project wasn’t written in their language
-of choice.”</li>
-  <li>They appeal to the authority of
-<a href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life">BDFL</a>s “as a kind
-of trump-card argument in technical discussions.”</li>
-</ul>
-
-<p>This does not, in my mind, a senior engineer make.</p>
-
-<h2 id="another-kind-of-engineer">Another kind of engineer</h2>
-
-<p>All the noise of technical obsession obscures the missing 4th class of
-applicants: those who have the nuance of thought we expect from leaders. Those
-who understand that <a href="/about/#me">simple questions have complex answers</a>.</p>
-
-<p>The obsessed-senior problem is not particular to FP, either. Languages that
-encourage imperative or OO style  have the same type of zealots (JavaScript,
-Java, C, C++, etc.). Rust has its own zealotry and is markedly harder to
-classify. <a href="https://cs.brown.edu/courses/cs173/2012/Videos/2012-09-05/2012-09-05.m4v">Shriram Krishnamurthi argues that such classifications are not a
-useful concept: the features of a language and how they interact provides a
-better discussion
-frame.</a>
-(I recommend the <a href="https://cs.brown.edu/courses/csci1730/2012/Videos/">whole video
-series</a>).</p>
-
-<p>This raises the question: if you’re selecting for problematic “senior”
-engineers, are you selecting right? The problems of zealotry are correctly
-identified (my personal experience agrees), but maybe “not selecting for
-zealots” doesn’t mean “not selecting for language experts.” Selecting for senior
-Gooby engineers does not require relaxing criteria for critical thinking.</p>
-
-<p>If your hiring process filters for “personnel issues” of the kind Snelson
-describes, then fix the hiring process. Look for candidates who consider
-multiple angles and respond “it depends.” <a href="https://www.hillelwayne.com/talks/ese/">“Anyone who is certain about what is
-and isn’t true about software is probably
-wrong.”</a></p>
-
-<p>Snelson concludes by citing Cromwell and a Tumblr user as a reminder that
-sometimes we are wrong. Ironically, the Tumblr post’s “it depends” aligns with
-exactly my argument: hire developers who understand and appreciate nuance. <em>They
-are probably still deep experts of some domain</em>. Nuance typically comes from
-expertise.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="fp" /><summary type="html"><![CDATA[The identified problem may be missing the mark.]]></summary></entry></feed>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rants" /><category term="typography" /><summary type="html"><![CDATA[Please use an em-dash—like this one—for parenthetical asides or for a gentler colon. Do not use spaced hyphens - like this - they are wrong.]]></summary></entry></feed>
