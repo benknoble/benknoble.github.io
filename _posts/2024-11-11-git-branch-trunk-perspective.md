@@ -4,6 +4,10 @@ tags: [git]
 category: [ Blog ]
 ---
 
+**Update 2024 November 22: I may have some misunderstandings about trunk-based
+development, and this article needs a (as-of-yet incomplete) rewrite as a
+result.**
+
 If I believe [simple questions have complex answers]({% link pages/about.md
 %}#me), then it's no surprise that I have a complicated take on the following
 question: branch-based or trunk-based development? Which is better, and why?
