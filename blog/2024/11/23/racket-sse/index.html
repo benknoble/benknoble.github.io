@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Server-sent events with Racket</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Server-sent events with Racket</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 23 Nov 2024 in Blog</p>
+<div id="post">
+  <p>A small amount of server-side Racket and client-side JavaScript give me a
+passable version of a reactive front-end.</p>
+
+<h2 id="background">Background</h2>
+
+<p>In my <a href="/workshops/14th-racket-con/">talk for 14th RacketCon</a> I
+mentioned that the Frosthaven Manager can spawn a web-server for my friends and
+players to interact with the app on their mobile devices. I run the entire
+program on my machine, so all the state is stored in-process in one place. Edits
+in the desktop GUI are propagated to my players web pages live, and their
+actions translate back to the GUI in turn.</p>
+
+<p>There’s no JavaScript framework on either the back-end or front-end. So how does
+it all work?</p>
+
+<p>There are 3 pieces to the puzzle:</p>
+
+<ol>
+  <li>The web-server does all the HTML generation: it embeds <code class="language-plaintext highlighter-rouge">fetch</code> calls in
+<code class="language-plaintext highlighter-rouge">onclick</code> handlers that send POST requests back to the server, which the
+server translates into actions the rest of the program knows how to handle
+(but which, as mentioned in the talk, are shunted back to the GUI execution
+loop rather than executed in the concurrent web-server handler threads). So
+while my players mostly <em>see</em> the rendered HTML content returned by the
+servers primary route, it actually supports a limited kind of
+<code class="language-plaintext highlighter-rouge">URLSearchParams</code>-backed API. If you know what routes to hit, you could write
+your own client to trigger game events. I’ve done so with
+<a href="https://hurl.dev"><code class="language-plaintext highlighter-rouge">hurl</code></a> when playing with new features just to try it.</li>
+  <li>Because I’m using <a href="https://docs.racket-lang.org/gui-easy/index.html">GUI
+Easy</a>, all my game state is
+<a href="https://docs.racket-lang.org/gui-easy/index.html#%28part._.Observables%29"><em>observable</em></a>.
+This gives me a simple hook to subscribe to all the changes in my game’s
+state, <a href="https://github.com/benknoble/frosthaven-manager/commit/7b8b4e7ed558454f373d296ca501c2fc3484776b">though it risks being too
+fine-grained</a>
+and I’ve been considering other options for generating notifications of
+game-level events. Whatever mechanism there is, the web-server knows when
+state has changed and it ought to propagate those changes to clients.</li>
+  <li>The client and server agree to a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">server-sent
+event</a>
+protocol: this does require JavaScript enabled on the client (as do the click
+handlers above). The protocol allows the server to retain a communication
+channel to the client, which the client can use to update its view.</li>
+</ol>
+
+<p>This post focuses on the server-sent event implementation, or primarily the
+latter 2 pieces.</p>
+
+<p><strong>Note</strong>: Rather than embed the full code in those post, I’m going to link to
+the implementation as it was at time of writing. Follow the links to get the
+full details.</p>
+
+<h2 id="server-sent-events">Server-sent events</h2>
+
+<blockquote>
+  <p>With server-sent events, it’s possible for a server to send new data to a web
+page at any time, by pushing messages to the web page.
+(<a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">MDN</a>)</p>
+</blockquote>
+
+<p>SSEs are one-way connections from server to client. Clients point a standard
+JavaScript API <code class="language-plaintext highlighter-rouge">EventSource</code> at a URL that will produce a SSE-compatible
+response and then attach event listeners. These listeners can operate over
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_message_events">generic
+events</a>
+or <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#listening_for_custom_events">named
+events</a>.
+Messages can have <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#data">arbitrary data
+fields</a>
+which the client must parse to decide how to use.</p>
+
+<p>The server implements SSEs by responding with the correct MIME type and raw
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format">response
+format</a>.</p>
+
+<h3 id="my-sse-protocol-for-the-frosthaven-manager">My SSE protocol for the Frosthaven Manager</h3>
+
+<p>Before we look at implementation details, let’s get a grasp on the fundamentals
+of the protocol my web-server uses atop SSEs.</p>
+
+<ul>
+  <li>All events use JSON as the interchange format for <code class="language-plaintext highlighter-rouge">data</code> fields. Racket is
+capable of emitting standard JSON and JavaScript of parsing it, so this
+simplifies communication.</li>
+  <li>Events that manipulate the DOM <em>should</em> contain an HTML id pointing to the
+node to manipulate. This simplifies the client code for finding the right node
+and requires the server to consistently tag modifiable nodes with an
+identifier (<code class="language-plaintext highlighter-rouge">id</code> attribute).</li>
+  <li>Events that manipulate the DOM <em>should</em> contain strings that encode HTML that
+can replace the <code class="language-plaintext highlighter-rouge">innerHTML</code> as needed.</li>
+</ul>
+
+<p>The last point is important: it avoids performing duplicate calculations in the
+client (when a player’s HP changes, we send the new number, not an event
+requesting that the HP be incremented or decremented), which makes keeping the
+state in sync more reliable.</p>
+
+<p>The simplest events in my protocol are <code class="language-plaintext highlighter-rouge">number</code> and <code class="language-plaintext highlighter-rouge">text</code>: they send an id and
+a number or string that should replace the named node’s <code class="language-plaintext highlighter-rouge">innerHTML</code>. They
+actually have nearly identical <a href="https://github.com/benknoble/frosthaven-manager/blob/4fb7ad6d36890478a078ce5efc97fe06cd6c1520/static/events.js#L64-L73">client
+implementations</a>
+and <a href="https://github.com/benknoble/frosthaven-manager/blob/4fb7ad6d36890478a078ce5efc97fe06cd6c1520/server.rkt#L890-L899">server
+implementations</a>.</p>
+
+<p>Other events are more complicated and outside the scope of this article. As an
+example, the <code class="language-plaintext highlighter-rouge">player</code> event is triggered when a player object changes: ignoring
+the summon data, it receives an HTML id, a mapping of sub-components to HTML
+strings, and a complete HTML node. The complete node is used if the player
+doesn’t already exist, allowing it to be inserted wholesale into the display.
+Otherwise, we update the sub-nodes based on the mapping of HTML strings. The
+<code class="language-plaintext highlighter-rouge">monster-group</code> event is similar.</p>
+
+<h3 id="implementation-details">Implementation Details</h3>
+
+<p>As we said earlier, the <a href="https://github.com/benknoble/frosthaven-manager/blob/4fb7ad6d36890478a078ce5efc97fe06cd6c1520/static/events.js#L1">client opens a new event
+source</a>
+and attaches event handlers. We <a href="https://github.com/benknoble/frosthaven-manager/blob/4fb7ad6d36890478a078ce5efc97fe06cd6c1520/server.rkt#L320">include the script on the main
+page</a>.
+Sending events is the server’s responsibility.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">evtSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EventSource</span><span class="p">(</span><span class="dl">"</span><span class="s2">events</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">evtSource</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>The server subscribes to the GUI observables<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>: when they change, the subscribers
+place structured data in a <a href="https://docs.racket-lang.org/alexis-multicast/index.html">multicast
+channel</a>
+(<a href="https://github.com/benknoble/frosthaven-manager/blob/4fb7ad6d36890478a078ce5efc97fe06cd6c1520/server.rkt#L181-L188">example</a>).
+We need a multicast channel because we create one per server (usually just one),
+but each client request handler needs to be able to be able to read from it
+(usually one per event source connection).</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="nv">ch</span> <span class="p">(</span><span class="nf">make-multicast-channel</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">obs-observe!</span> <span class="nv">@state</span>
+              <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="nf">state</span><span class="p">)</span>
+                <span class="p">(</span><span class="nf">multicast-channel-put</span> <span class="nv">ch</span> <span class="p">(</span><span class="nf">state-event</span> <span class="nv">state</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p>Then, the server <a href="https://github.com/benknoble/frosthaven-manager/blob/4fb7ad6d36890478a078ce5efc97fe06cd6c1520/server.rkt#L254">establishes a route which implements the
+SSEs</a>.
+This is the same path that forms part of the URL that the client will connect
+to. The route’s implementation <a href="https://github.com/benknoble/frosthaven-manager/blob/4fb7ad6d36890478a078ce5efc97fe06cd6c1520/server.rkt#L816-L825">responds with appropriate
+headers</a>.
+It also <a href="https://docs.racket-lang.org/web-server/http.html#%28def._%28%28lib._web-server%2Fhttp%2Fresponse-structs..rkt%29._response%2Foutput%29%29">gets an output
+port</a>
+it can use to write to the client.</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="p">((</span><span class="nf">event-source</span> <span class="nv">ch</span><span class="p">)</span> <span class="nv">_req</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="nv">receiver</span> <span class="p">(</span><span class="nf">make-multicast-receiver</span> <span class="nv">ch</span><span class="p">))</span>
+  <span class="p">(</span><span class="nf">response/output</span>
+    <span class="nt">#:headers</span> <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nf">header</span> <span class="o">#</span><span class="s">"Cache-Control"</span> <span class="o">#</span><span class="s">"no-store"</span><span class="p">)</span>
+                    <span class="p">(</span><span class="nf">header</span> <span class="o">#</span><span class="s">"Content-Type"</span> <span class="o">#</span><span class="s">"text/event-stream"</span><span class="p">)</span>
+                    <span class="c1">;; Don't use Connection in HTTP/2 or HTTP/3, but Racket's</span>
+                    <span class="c1">;; web-server is HTTP/1.1 as confirmed by</span>
+                    <span class="c1">;; `curl -vso /dev/null --http2 &lt;addr&gt;`.</span>
+                    <span class="p">(</span><span class="nf">header</span> <span class="o">#</span><span class="s">"Connection"</span> <span class="o">#</span><span class="s">"keep-alive"</span><span class="p">)</span>
+                    <span class="c1">;; Pairs with Connection; since our event source sends data</span>
+                    <span class="c1">;; every 5 seconds at minimum, this 10s timeout should be</span>
+                    <span class="c1">;; sufficient.</span>
+                    <span class="p">(</span><span class="nf">header</span> <span class="o">#</span><span class="s">"Keep-Alive"</span> <span class="o">#</span><span class="s">"timeout=10"</span><span class="p">))</span>
+    <span class="p">(</span><span class="nf">sse-output</span> <span class="nv">receiver</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>The main loop of the response handler is to wait on the channel to produce data:
+when it does, <a href="https://github.com/benknoble/frosthaven-manager/blob/4fb7ad6d36890478a078ce5efc97fe06cd6c1520/server.rkt#L833">a separate
+function</a>
+transforms that data into SSE format and shoves it through the port. If we don’t
+get a response in time, we send a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format">comment to prevent connection
+timeout</a>.</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">see-output</span> <span class="nv">receiver</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="nf">out</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let</span> <span class="nv">loop</span> <span class="p">()</span>
+      <span class="p">(</span><span class="k">cond</span>
+        <span class="p">[(</span><span class="nb">sync/timeout</span> <span class="mi">5</span> <span class="nv">receiver</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">event-stream</span> <span class="nv">out</span><span class="p">)]</span>
+        <span class="p">[</span><span class="nf">else</span> <span class="p">(</span><span class="nb">displayln</span> <span class="s">":"</span> <span class="nv">out</span><span class="p">)])</span>
+      <span class="p">(</span><span class="nf">loop</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p>That’s all there is to it! I’m hoping to find a way to extract the two pieces
+(client-side code and server-side implementation) into a library for other
+Racket applications to use to implement server-side events more easily. Ideally
+it will handle the basics of SSEs while remaining agnostic to how the
+application generates and handles events. We <em>might</em> be able to be
+concurrency-agnostic, though: while Racket’s <code class="language-plaintext highlighter-rouge">sync</code> is generic, most
+applications probably need a single-producer multi-consumer channel. Still,
+allowing any event that produces data a consumer can transform into SSE-data
+might work and allow other patterns.</p>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>For performance reasons, some subscribers spawn a thread that sends the
+message. Since GUI Easy subscribers execute serially, moving expensive work
+out of the main loop quickly can help avoid bottlenecks. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">↩</a></p>
+    </li>
+  </ol>
+</div>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#racket" class="tag">
+        racket
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#web" class="tag">
+        web
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2024/11/23/racket-sse/";
+    this.page.identifier = "/blog/2024/11/23/racket-sse";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2024/11/15/useful-utilities/" title="Little utilities">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#server-sent-events-with-racket">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble <script type="text/javascript">document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
