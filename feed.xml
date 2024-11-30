@@ -1,4 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-11-23T20:43:20+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Server-sent events with Racket</title><link href="https://benknoble.github.io/blog/2024/11/23/racket-sse/" rel="alternate" type="text/html" title="Server-sent events with Racket" /><published>2024-11-23T00:00:00+00:00</published><updated>2024-11-23T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/23/racket-sse</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/23/racket-sse/"><![CDATA[<p>A small amount of server-side Racket and client-side JavaScript give me a
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2024-11-30T16:41:37+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Sapling Cage</title><link href="https://benknoble.github.io/blog/2024/11/27/sapling-cage/" rel="alternate" type="text/html" title="Sapling Cage" /><published>2024-11-27T00:00:00+00:00</published><updated>2024-11-27T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/27/sapling-cage</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/27/sapling-cage/"><![CDATA[<p>My thoughts on Margaret Killjoy’s <em>Sapling Cage</em>.</p>
+
+<h2 id="balance-in-all-things">Balance in all things</h2>
+
+<p>Reading <em>Sapling Cage</em> took me back to reading fantasy as a preteen. Simply
+written for a younger audience, it’s a page-turner for (nominally) grown adults,
+too. Killjoy hooked me in to a world in the grips of dynamic power struggles
+without complex dialogue, elaborate descriptions, or impossible backdrops. In
+fact, except for the violence and a certain caldera, it all feels rather
+mundane. This leaves room for the excitement of the coming of age tale, the
+making of friends, the fear of discovery.</p>
+
+<h2 id="words-actions-magic">Words, actions, magic</h2>
+
+<p>Each of these has power. A witch must use all three.</p>
+
+<p>Indeed, our main character Lorel observes and experiences violence for what it
+is: hard, traumatic, gory, mournful. Yet she also experiences other powerful
+actions: tentative allies unite against a threat; witches defend and enfold
+someone who is other; a knight speaks for the weak.</p>
+
+<p>Even on the very beginning of a journey into magic, we all learn something about
+finding our power.</p>
+
+<h2 id="as-a-cisgender-man">As a cisgender man</h2>
+
+<p>I witnessed through Killjoy’s narrative a story of complexity: growing up as a
+boy while being a girl. The main character struggles to figure out what to make
+of her body—would it be easier if it matched the expectations of others? Would
+such a change make her less attractive to a crush? Is this not her body,
+imperfect as it is? <em>Is it ok not to like her body?</em></p>
+
+<p>Moreover, she navigates fear and uncertainty: the fear of being found out, which
+might be deadly. The uncertainty of who she can trust. Simultaneously her heart
+swells with joy each time she is “girl” or “she.” Like Lorel’s friends (and even
+rivals), we can all listen, learn, and love.</p>
+
+<p>Killjoy reminds me that these questions—Lorel’s questions—are worth asking
+of ourselves, and that we all experience their answers differently.</p>
+
+<p>I highly recommend <em>Sapling Cage</em> (and my thanks to Cory Doctorow, whose
+recommendation put it on my reading list).</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="books" /><summary type="html"><![CDATA[My thoughts on Margaret Killjoy’s Sapling Cage.]]></summary></entry><entry><title type="html">Server-sent events with Racket</title><link href="https://benknoble.github.io/blog/2024/11/23/racket-sse/" rel="alternate" type="text/html" title="Server-sent events with Racket" /><published>2024-11-23T00:00:00+00:00</published><updated>2024-11-23T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/23/racket-sse</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/23/racket-sse/"><![CDATA[<p>A small amount of server-side Racket and client-side JavaScript give me a
 passable version of a reactive front-end.</p>
 
 <h2 id="background">Background</h2>
@@ -1379,59 +1420,4 @@ personally. Or <code class="language-plaintext highlighter-rouge">:Git --paginat
 </ul>
 
 <p>See that last one? If you need to, turn on <code class="language-plaintext highlighter-rouge">commit.verbose</code>; then Git will
-include the diff in your commit message template for you to refer to.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[These tips make it easier to write better commit messages.]]></summary></entry><entry><title type="html">The case against squashing to merge via GitHub</title><link href="https://benknoble.github.io/blog/2024/08/02/github-squash/" rel="alternate" type="text/html" title="The case against squashing to merge via GitHub" /><published>2024-08-02T00:00:00+00:00</published><updated>2024-08-02T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/08/02/github-squash</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/08/02/github-squash/"><![CDATA[<p>Squash and merge is a bad default action, and it grates when it’s the <em>only</em>
-permitted merge option.</p>
-
-<p>Squash and merge collapses even carefully crafted PRs and commits into a giant
-blob (pun intended). All the juicy information we know how to unlock with tools
-like <code class="language-plaintext highlighter-rouge">git log</code> and <code class="language-plaintext highlighter-rouge">git blame</code> is now gone, made useless by the squash. It even
-hurts <code class="language-plaintext highlighter-rouge">git bisect</code>: pinpointing a squashed merge is unlikely to help if you
-still have to wade through 6000 lines of changes instead of 600 or 60. Even if
-you can recover the original branch using GitHub’s <code class="language-plaintext highlighter-rouge">refs/pull/N/head</code> namespace,
-which isn’t guaranteed on other vendors, it can still be harmful to hit the
-squash fence.</p>
-
-<p>Worse, squashing to merge traps you in a vicious cycle. In an ideal world, good
-commits help us fall into a virtuous cycle of success: they provide more
-information so that our tools are more useful, which encourages us to use our
-tools more, which reveals more opportunities to pack information into commits,
-and so on. Meanwhile, squashing everything by default traps us in the antithesis
-of this cycle—commit messages are useless if they’ll be squashed, so they become
-useless in a self-fulfilling prophecy, encouraging squash and merge ad nauseum.
-We remove incentives to use our information-gathering tools; not using them
-blinds us to their power, keeping them from being useful.</p>
-
-<p>No other investment that we make pays off as long as good commits. Good commits
-pay dividends for the entire lifetime of a project and become more valuable the
-longer the project lives. This might as well be an exponential curve of payoff.
-Nothing is free, but the expected value of any single commit dwarfs the cost of
-the minutes involved in crafting its message. Squash and merge as a default
-eliminates those benefits and any incentives to reap them. Outside of a few
-narrow use cases, I recommend against it.</p>
-
-<p>Discuss with your teams and projects: decide what’s right for you. Don’t default
-to squash and merge because it seems easy or commonplace. One of the trade-offs
-is giving up useful commits (unless whoever merges takes the time to craft a
-good squash message, which in many circles is rare thanks to GitHub defaults).
-If you intentionally choose this trade-off, you probably needing to be getting
-equivalent dividends from whatever the other trade-offs are. The benefits of
-commits are hard to measure up against.</p>
-
-<p>One case squash might be useful: squashing messy external contributions gives
-maintainers an expedient way to accept otherwise good code and bring the commit
-up to project standards. Ideally this is paired with resources for the
-contributor to learn how to do better next time, including both Git knowledge
-and project standards knowledge. Mentoring a new contributor through the process
-to fix the commits themselves is a valuable and laudable task, but it is costly.</p>
-
-<p>On the other hand, moving slowly is not so bad as it seems, despite all FAANG
-would have you believe.</p>
-
-<p>Don’t forget: GitHub foisted the squash and merge option upon us with bad
-defaults to back it up. To do the equivalent in Git requires knowledge of
-interactive rebase or the <code class="language-plaintext highlighter-rouge">cherry-pick</code> command. Git knows how to merge and
-rebase via commands of the same name and flags to <code class="language-plaintext highlighter-rouge">pull</code>. Squash and merge is a
-convenient button when needed, but the need is so infrequent that its only
-mention in Git proper is the <code class="language-plaintext highlighter-rouge">squash</code> verb in the lexicon of interactive rebase.</p>
-
-<p>You tread this route at your own peril.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="rants" /><summary type="html"><![CDATA[Squash and merge is a bad default action, and it grates when it’s the only permitted merge option.]]></summary></entry></feed>
+include the diff in your commit message template for you to refer to.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[These tips make it easier to write better commit messages.]]></summary></entry></feed>
