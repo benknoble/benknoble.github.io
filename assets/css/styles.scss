@@ -112,7 +112,7 @@ blockquote {
   margin: 0 0 1em 2em;
   font-size: 16px;
 
-  p {
+  p:last-child {
     margin: 0;
   }
 }
