@@ -363,3 +363,27 @@ div.language-racket {
     }
   }
 }
+
+.highlight {
+  .c,
+  .ch,
+  .cm,
+  .cpf,
+  .c1,
+  .cs {
+    font-style: italic;
+    color: $dt-blue;
+  }
+
+  .bp,
+  .kd,
+  .nb,
+  .nl,
+  .nv,
+  .vc,
+  .vg,
+  .vi,
+  .vm {
+    font-style: normal;
+  }
+}
