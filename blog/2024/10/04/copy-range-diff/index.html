@@ -139,13 +139,13 @@ comment/review interface they became unwieldy.</p>
 may be collapsed, summarized, and expanded as desired. I often did this by hand,
 but <a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/copy-range-diff">here’s the script I now use called <code class="language-plaintext highlighter-rouge">copy-range-diff</code></a>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#! /bin/sh
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/sh</span>
 
-{
-  printf '%s\n' '&lt;details&gt;&lt;summary&gt;range-diff:&lt;/summary&gt;' '' '```'
-  cat
-  printf '%s\n' '```' '' '&lt;/details&gt;'
-} | pbcopy
+<span class="o">{</span>
+  <span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">'&lt;details&gt;&lt;summary&gt;range-diff:&lt;/summary&gt;'</span> <span class="s1">''</span> <span class="s1">'```'</span>
+  <span class="nb">cat
+  printf</span> <span class="s1">'%s\n'</span> <span class="s1">'```'</span> <span class="s1">''</span> <span class="s1">'&lt;/details&gt;'</span>
+<span class="o">}</span> | pbcopy
 </code></pre></div></div>
 
 <p>This script reads standard in and pipes a modified version of it to a clipboard

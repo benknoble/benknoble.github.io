@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Scraping XML sitemaps with Racket</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Scraping XML sitemaps with Racket</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 02 Dec 2024 in Blog</p>
+<div id="post">
+  <p>Day 2 of “Advent of Racket”</p>
+
+<h2 id="the-project">The project</h2>
+
+<p>Many of the smartest people I know keep an external cortex or exobrain: notes, a
+<a href="https://github.com/benknoble/wiki-md">personal wiki</a>, or even a blog. Inspired
+by <a href="https://pluralistic.net/2021/05/09/the-memex-method/">Cory Doctorow’s “memex
+method”</a> and a
+<a href="https://con.racket-lang.org">RacketCon</a> question, I’m writing again when the
+mood strikes—see the uptick in posts since the middle of this year.</p>
+
+<p>The advantage of a memex or external digital cortex is several-fold. The act of
+setting my thoughts out for an audience helps me to elucidate what otherwise
+might be a 10-word bullet, filed away and forgotten about. For Cory Doctorow, it
+keeps information connected in a tangled web that eventually crystallizes or
+nucleates into a bigger form. (<a href="/writings/blankboards/">Sound familiar? I’ve written about how my brain
+often works that way, too.</a>)</p>
+
+<h3 id="learning-from-the-past-to-look-towards-the-future">Learning from the past to look towards the future</h3>
+
+<p>If you made it this far, you’re probably wandering what this has to do with
+scraping sitemaps… as Cory Doctorow writes, “systematically reviewing your older
+work” is “hugely beneficial.” Looking at the patterns (wrong and right) is a
+“useful process of introspection” to improve our abilities to “spot and avoid”
+pitfalls.</p>
+
+<p>Doctorow revisits “this day in history” on the major anniversaries:</p>
+
+<blockquote>
+  <p>For more than a decade, I’ve revisited “this day in history” from my own
+blogging archive, looking back one year, five years, ten years (and then,
+eventually, 15 years and 20 years). Every day, I roll back my blog archives to
+this day in years gone past, pull out the most interesting headlines and
+publish a quick blog post linking back to them.</p>
+
+  <p>This structured, daily work of looking back on where I’ve been is more
+valuable to helping me think about where I’m going than I can say.</p>
+</blockquote>
+
+<p>This review idea fascinated me. While I don’t have the online tenure that
+Doctorow does, I do have some old writing. So the idea to add a program to my
+daily life to show me that writing was born.</p>
+
+<p>The program should take a month and day (defaulting to the current) and show me
+<em>every</em> post that I’ve written on that day. URLs are sufficient; I can click
+them or pipe them to <code class="language-plaintext highlighter-rouge">xargs -L1 open</code>. I don’t need to worry about the year, at
+least not yet. It would be an easy modification to add later though. Since I
+publish an XML sitemap on my blog, we’ll scrape that rather than the raw HTML.</p>
+
+<h2 id="the-code">The code</h2>
+
+<p>The most up-to-date version of the script will always be in my <a href="https://github.com/benknoble/Dotfiles">Dotfiles</a>; <a href="https://github.com/benknoble/Dotfiles/blob/4f5f9cde16829914fff1ad43965f2e3e46e52c50/links/bin/blog-posts-on">here’s a permalink to the version at
+time of
+writing</a>.</p>
+
+<p>We start with a stanza to make this executable by the shell but written in
+Racket (and we make sure to let Vim know what to do with it, since my
+<a href="https://github.com/benknoble/vim-racket/blob/master/ftdetect/racket.vim">filetype-detection
+code</a>
+for Racket <a href="https://github.com/benknoble/vim-racket/issues/5">doesn’t work with <code class="language-plaintext highlighter-rouge">#!</code> lines
+yet</a>):</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#! /usr/bin/env racket</span>
+<span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
+<span class="c1">; vim: ft=racket</span>
+</code></pre></div></div>
+
+<p>Now we require a few libraries from the main distribution; that means this
+program should work with most non-minimal Racket installations without depending
+on other packages being installed:</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">require</span> <span class="nv">xml</span>
+         <span class="nv">xml/path</span>
+         <span class="nv">net/http-client</span>
+         <span class="nv">racket/date</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We need to know the month and day to use for our scraping; as mentioned, we’ll
+default to the current day but optionally parse values out of the command line:</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="nv">now</span> <span class="p">(</span><span class="nf">current-date</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="nf">month</span> <span class="nv">day</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">command-line</span>
+   <span class="nt">#:args</span> <span class="p">([</span><span class="nf">month</span> <span class="p">(</span><span class="nf">~a</span> <span class="p">(</span><span class="nb">date-month</span> <span class="nv">now</span><span class="p">))]</span> <span class="p">[</span><span class="nf">day</span> <span class="p">(</span><span class="nf">~a</span> <span class="p">(</span><span class="nb">date-day</span> <span class="nv">now</span><span class="p">))])</span>
+   <span class="p">(</span><span class="k">unless</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="nv">month</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">error</span> <span class="s">"month should be numeric: "</span> <span class="nv">month</span><span class="p">))</span>
+   <span class="p">(</span><span class="k">unless</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="nv">day</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">error</span> <span class="s">"day should be numeric: "</span> <span class="nv">day</span><span class="p">))</span>
+   <span class="p">(</span><span class="nb">values</span> <span class="p">(</span><span class="nf">~r</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="nv">month</span><span class="p">)</span> <span class="nt">#:min-width</span> <span class="mi">2</span> <span class="nt">#:pad-string</span> <span class="s">"0"</span><span class="p">)</span>
+           <span class="p">(</span><span class="nf">~r</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="nv">day</span><span class="p">)</span> <span class="nt">#:min-width</span> <span class="mi">2</span> <span class="nt">#:pad-string</span> <span class="s">"0"</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p>The duplication is a bit bothersome, but in a ~40-line program I’m not
+concerned for the moment. It <em>is</em> important that we pad the dates to match my
+site’s URL format, which uses 2-digit months and days everywhere.</p>
+
+<p>Next, we fire off a request to the sitemap. Notice the lack of error handling:
+this doesn’t need to be production grade, so we’ll assume the request succeeds.</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="nf">_status</span> <span class="nv">_headers</span> <span class="nv">response</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">http-sendrecv</span> <span class="s">"benknoble.github.io"</span> <span class="s">"/sitemap.xml"</span> <span class="nt">#:ssl?</span> <span class="no">#t</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Now <code class="language-plaintext highlighter-rouge">response</code> is an <a href="https://docs.racket-lang.org/reference/ports.html#%28tech._input._port%29"><em>input
+port</em></a>:
+we can read from it, but we haven’t materialized a full (byte)string yet. We
+know it contains an XML document, so let’s read it as XML, extract the main
+document, and turn that into an
+<a href="https://docs.racket-lang.org/xml/index.html#%28def._%28%28lib._xml%2Fprivate%2Fxexpr-core..rkt%29._xexpr~3f%29%29">xexpr</a>:</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="nv">doc</span>
+  <span class="p">(</span><span class="nf">xml-&gt;xexpr</span> <span class="p">(</span><span class="nf">document-element</span> <span class="p">(</span><span class="nf">read-xml</span> <span class="nv">response</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p>Almost done: we can query the document for the URLs (which happen to be <code class="language-plaintext highlighter-rouge">loc</code>
+elements) and filter them by our month-day combo:</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="nv">locations</span>
+  <span class="p">(</span><span class="nf">se-path*/list</span> <span class="o">'</span><span class="p">(</span><span class="nf">loc</span><span class="p">)</span> <span class="nv">doc</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="nv">posts</span>
+  <span class="p">(</span><span class="nf">filter-map</span>
+   <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="nf">loc</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">regexp-match</span> <span class="p">(</span><span class="nb">pregexp</span> <span class="p">(</span><span class="nf">~a</span> <span class="s">".*"</span> <span class="nv">month</span> <span class="s">"/"</span> <span class="nv">day</span> <span class="s">".*"</span><span class="p">))</span> <span class="nv">loc</span><span class="p">))</span>
+   <span class="nv">locations</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Note how useful <code class="language-plaintext highlighter-rouge">filter-map</code> is with <code class="language-plaintext highlighter-rouge">regexp-match</code>: <code class="language-plaintext highlighter-rouge">filter-map</code> discards any
+<code class="language-plaintext highlighter-rouge">#f</code> results from the mapping function, while <code class="language-plaintext highlighter-rouge">regexp-match</code> returns <code class="language-plaintext highlighter-rouge">#f</code> for
+any inputs that don’t match. Simultaneously it transforms matching inputs to
+describe the matches.</p>
+
+<p>Finally, we display all the (newline-separated) results! We use <code class="language-plaintext highlighter-rouge">first</code> to
+extract the full original input string because the earlier <code class="language-plaintext highlighter-rouge">regexp-match</code>
+produces <code class="language-plaintext highlighter-rouge">(list full-match sub-group ...)</code>; our <code class="language-plaintext highlighter-rouge">full-match</code> is the whole string
+because we bracket <code class="language-plaintext highlighter-rouge">month/day</code> with <code class="language-plaintext highlighter-rouge">.*</code> patterns.</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">for-each</span> <span class="p">(</span><span class="nf">compose1</span> <span class="nv">displayln</span> <span class="nv">first</span><span class="p">)</span> <span class="nv">posts</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And that’s a wrap!</p>
+
+<h3 id="use">Use</h3>
+
+<p>In practice, I try to run <code class="language-plaintext highlighter-rouge">blog-posts-on</code> (the name of the script) once a day.
+Sometimes I forget, so I build up a range of month/day combinations with
+something like (Zsh):</p>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print <span class="nt">-l</span> <span class="nt">--</span> 11<span class="se">\ </span><span class="o">{</span>17..22<span class="o">}</span> | xargs <span class="nt">-L1</span> blog-posts-on
+</code></pre></div></div>
+
+<p>That gets me the posts for November 17th through 22nd, for example. If I want to
+open them all immediately, I pipe that to <code class="language-plaintext highlighter-rouge">xargs -L1 open</code> as mentioned
+(substitute <code class="language-plaintext highlighter-rouge">xdg-open</code> or equivalent on your operating system).</p>
+
+<h3 id="full-code">Full code</h3>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#! /usr/bin/env racket</span>
+<span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
+<span class="c1">; vim: ft=racket</span>
+
+<span class="p">(</span><span class="k">require</span> <span class="nv">xml</span>
+         <span class="nv">xml/path</span>
+         <span class="nv">net/http-client</span>
+         <span class="nv">racket/date</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="nv">now</span> <span class="p">(</span><span class="nf">current-date</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="nf">month</span> <span class="nv">day</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">command-line</span>
+   <span class="nt">#:args</span> <span class="p">([</span><span class="nf">month</span> <span class="p">(</span><span class="nf">~a</span> <span class="p">(</span><span class="nb">date-month</span> <span class="nv">now</span><span class="p">))]</span> <span class="p">[</span><span class="nf">day</span> <span class="p">(</span><span class="nf">~a</span> <span class="p">(</span><span class="nb">date-day</span> <span class="nv">now</span><span class="p">))])</span>
+   <span class="p">(</span><span class="k">unless</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="nv">month</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">error</span> <span class="s">"month should be numeric: "</span> <span class="nv">month</span><span class="p">))</span>
+   <span class="p">(</span><span class="k">unless</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="nv">day</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">error</span> <span class="s">"day should be numeric: "</span> <span class="nv">day</span><span class="p">))</span>
+   <span class="p">(</span><span class="nb">values</span> <span class="p">(</span><span class="nf">~r</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="nv">month</span><span class="p">)</span> <span class="nt">#:min-width</span> <span class="mi">2</span> <span class="nt">#:pad-string</span> <span class="s">"0"</span><span class="p">)</span>
+           <span class="p">(</span><span class="nf">~r</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="nv">day</span><span class="p">)</span> <span class="nt">#:min-width</span> <span class="mi">2</span> <span class="nt">#:pad-string</span> <span class="s">"0"</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="nf">_status</span> <span class="nv">_headers</span> <span class="nv">response</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">http-sendrecv</span> <span class="s">"benknoble.github.io"</span> <span class="s">"/sitemap.xml"</span> <span class="nt">#:ssl?</span> <span class="no">#t</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="nv">doc</span>
+  <span class="p">(</span><span class="nf">xml-&gt;xexpr</span> <span class="p">(</span><span class="nf">document-element</span> <span class="p">(</span><span class="nf">read-xml</span> <span class="nv">response</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="nv">locations</span>
+  <span class="p">(</span><span class="nf">se-path*/list</span> <span class="o">'</span><span class="p">(</span><span class="nf">loc</span><span class="p">)</span> <span class="nv">doc</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="nv">posts</span>
+  <span class="p">(</span><span class="nf">filter-map</span>
+   <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="nf">loc</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">regexp-match</span> <span class="p">(</span><span class="nb">pregexp</span> <span class="p">(</span><span class="nf">~a</span> <span class="s">".*"</span> <span class="nv">month</span> <span class="s">"/"</span> <span class="nv">day</span> <span class="s">".*"</span><span class="p">))</span> <span class="nv">loc</span><span class="p">))</span>
+   <span class="nv">locations</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">for-each</span> <span class="p">(</span><span class="nf">compose1</span> <span class="nv">displayln</span> <span class="nv">first</span><span class="p">)</span> <span class="nv">posts</span><span class="p">)</span>
+</code></pre></div></div>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#racket" class="tag">
+        racket
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2024/12/02/advent-of-racket/";
+    this.page.identifier = "/blog/2024/12/02/advent-of-racket";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2024/11/27/sapling-cage/"
+      title="Sapling Cage">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#scraping-xml-sitemaps-with-racket">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script></a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
