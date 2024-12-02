@@ -354,3 +354,12 @@ kbd {
 iframe.scribbled {
   zoom: 4;
 }
+
+// dim Racket parens
+div.language-racket {
+  .highlight {
+    .p {
+      color: $dt-blue;
+    }
+  }
+}
