@@ -67,7 +67,7 @@ Instead, I've started pasting them inside an HTML `details` block so that they
 may be collapsed, summarized, and expanded as desired. I often did this by hand,
 but [here's the script I now use called `copy-range-diff`](https://github.com/benknoble/Dotfiles/blob/master/links/bin/copy-range-diff):
 
-```
+```shell
 #! /bin/sh
 
 {
