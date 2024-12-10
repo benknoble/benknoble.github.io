@@ -115,6 +115,8 @@ permalink: /testimonials/
 - "Ben is a good example [of] how to take ownership of tasks."
 - "Ben has an exemplary personality and tremendous knowledge anyone can learn
   from."
+- "I remembered Ben from my internship---he was always jumping around in Slack
+  and helping folks out."
 - "Ben is very focused on ensuring that his designs and his code meets or
   exceeds requirements, meet high indicators for quality, and seamlessly
   integrate with the application architecture."
