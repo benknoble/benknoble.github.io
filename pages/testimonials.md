@@ -3,6 +3,8 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "Ben stood out by being able to engage on so many different topics at the same
+  time."
 - "Ben's feedback was crucial for delivering high quality code that would be
   easily maintainable for his team when they took over the service. I appreciate
   his comments on the deprecation of an internal library, which identified
