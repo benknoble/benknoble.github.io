@@ -4,7 +4,7 @@ tags: [ rants, ms-excel, ]
 category: [ Blog ]
 ---
 
-Yes, you read that right: you can't open (e.g.) `Documents/budget.xlsx` *and*
+Yes, you read that right: you can't open (_e.g._) `Documents/budget.xlsx` *and*
 `Work/budget.xlsx` at the same time.
 
 ## What the f@#$?
@@ -27,8 +27,8 @@ Ironically, the fix is probably easy: use absolute paths as the entries in
 whatever this set is. I cannot fathom a single reason not to do so.
 
 This might not solve the problem if two documents have the same absolute path on
-two different file-systems (e.g., my hard drive and a network-mounted file-share
-or some other storage medium), but we could either
+two different file-systems (_e.g._, my hard drive and a network-mounted
+file-share or some other storage medium), but we could either
 
 - include the medium name in the entry, or
 - include the mount point in the entry.
