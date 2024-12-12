@@ -132,13 +132,13 @@ terminal besides HTML?)
 users when they make a mistake with your command. It's as easy as keeping
 `--help` brief with a pointer to "see `man program` for more details".
 
-Following up on that, I don't consider `--help` to the end-all-be-all of
-documentation, as you've probably noticed. I only type `--help` when I'm sure it
-will be quick and useful: generally, a usage summary and a "Top 5" common
-options/invocations. Sometimes it's to re-assure myself that the command does
-what I think it does, like when I use one of the more obscure git commands. When
-I want the whole book, I go to the man-page. Too-long `--help` is "saying too
-much" in the words of CLIG.
+    Following up on that, I don't consider `--help` to the end-all-be-all of
+    documentation, as you've probably noticed. I only type `--help` when I'm
+    sure it will be quick and useful: generally, a usage summary and a "Top 5"
+    common options/invocations. Sometimes it's to re-assure myself that the
+    command does what I think it does, like when I use one of the more obscure
+    git commands. When I want the whole book, I go to the man-page. Too-long
+    `--help` is "saying too much" in the words of CLIG.
 
 - "Offline support isn't necessary if you already have in-CLI help": false. (Or
 at least, I disagree.) Solution proposed: generate man-pages from in-CLI help or
