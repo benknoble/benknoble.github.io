@@ -76,7 +76,16 @@
 </span>
  on 01 Jan 2017 in Blog</p>
 <div id="post">
-  <p>Sometimes, you need to do a particular operation on every single branch in a
+  <p><strong>Update 2025 January 02:</strong> This post is full of my bad, immature scripting
+ideas; see <a href="https://mywiki.wooledge.org/EnglishFrontPage">the BashGuide wiki</a> or
+<a href="https://www.shellcheck.net">Shellcheck</a> for just a few. For repeated operations
+on many branches, try <a href="https://git-scm.com/docs/git-for-each-ref"><code class="language-plaintext highlighter-rouge">git
+for-each-ref</code></a>. For pushes
+specifically, you might be able to use the <a href="https://git-scm.com/docs/git-push#Documentation/git-push.txt-codegitpushorigincode-1">refspec
+magic</a>
+<code class="language-plaintext highlighter-rouge">git push &lt;remote&gt; :</code>. Otherwise, I’d ignore the rest of this article.</p>
+
+<p>Sometimes, you need to do a particular operation on every single branch in a
 repo, like pushing or merging. I thought it would be difficult. It’s not.</p>
 
 <h2 id="the-code-script">The Code (Script)</h2>
@@ -89,6 +98,10 @@ may not apply to everyone. I’m looking at you, Windows people.</p>
     <span class="c"># git operation on branch</span>
 <span class="k">done</span>
 </code></pre></div></div>
+
+<p><strong>Update 2025 January 02:</strong> The <code class="language-plaintext highlighter-rouge">basename</code> trick below breaks as soon as you use
+branches with a “directory structure,” like <code class="language-plaintext highlighter-rouge">bk/my-work</code>. See the top of the
+post for better recommendations.</p>
 
 <p><em>Update</em> It has come to my attention that rather than parsing <code class="language-plaintext highlighter-rouge">ls</code> output, we
 can use globs.</p>
@@ -106,6 +119,10 @@ can use globs.</p>
 loops on files this way, but we’re actually using filenames as branch names, and
 this is far more readable than using <code class="language-plaintext highlighter-rouge">find</code>.</p>
 
+<p><strong>Update 2025 January 02:</strong> <a href="https://unix.stackexchange.com/q/128985/301073">Don’t parse
+<code class="language-plaintext highlighter-rouge">ls</code></a>. Just
+<a href="https://mywiki.wooledge.org/ParsingLs">don’t</a>.</p>
+
 <p>The tricky part is <code class="language-plaintext highlighter-rouge">$(ls .git/refs/heads)</code>. The <code class="language-plaintext highlighter-rouge">$()</code> bit means evaluate the
 parentheses as a shell command. The <code class="language-plaintext highlighter-rouge">ls .git/refs/heads</code> bit lists the files in
 .git/refs/heads, whose names are the names of branches.</p>
@@ -115,6 +132,9 @@ to git cli users; simply checkout the branch. Then perform any operations on it
 you’d like. <code class="language-plaintext highlighter-rouge">done</code> signals the end of the loop.</p>
 
 <h3 id="variations">Variations</h3>
+
+<p><strong>Update 2025 January 02:</strong> The <a href="https://unix.stackexchange.com/q/171346/301073">semantics with and without quotes are
+different</a>. Know what you want.</p>
 
 <p>You can optionally quote the branch listing into <code class="language-plaintext highlighter-rouge">"$(ls .git/refs/heads)"</code>.</p>
 
