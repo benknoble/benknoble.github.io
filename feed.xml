@@ -1,4 +1,232 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-01-04T17:00:01+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Roundup of Mother Jones articles from the 2025 January issue</title><link href="https://benknoble.github.io/blog/2025/01/02/mj-roundup/" rel="alternate" type="text/html" title="Roundup of Mother Jones articles from the 2025 January issue" /><published>2025-01-02T00:00:00+00:00</published><updated>2025-01-02T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/02/mj-roundup</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/02/mj-roundup/"><![CDATA[<p>Here’s my reactions to a few articles from the January 2025 issue of <a href="https://www.motherjones.com"><em>Mother
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-01-04T20:08:19+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Day one on a new team</title><link href="https://benknoble.github.io/blog/2025/01/04/day1/" rel="alternate" type="text/html" title="Day one on a new team" /><published>2025-01-04T00:00:00+00:00</published><updated>2025-01-04T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/04/day1</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/04/day1/"><![CDATA[<p>This is my shortlist of “Day 1 questions” for new teams to help me get up to
+speed. In no particular order:</p>
+
+<ol>
+  <li>Domain &amp; Design</li>
+  <li>Performance budget</li>
+  <li>Expected scale factors</li>
+  <li>Customer success</li>
+  <li>Team norms and culture</li>
+</ol>
+
+<p>Examples drawn from real work.</p>
+
+<h2 id="domain--design">Domain &amp; Design</h2>
+
+<p>What do we do? How do we accomplish it?</p>
+
+<p>This could be things like “manage case lifecycles via tenant-configured platform
+services,” “keep data flowing with automatically managed Kafka instances,” or
+“provide cost recommendations to clients by analyzing data ingested from their
+systems.”</p>
+
+<p>Ideally this comes with a domain breakdown of key terms. Examples: tokenized
+plastic/PAN; drain/kill/rehydrate; Snowflake contract and connection details.</p>
+
+<h2 id="performance-budget">Performance budget</h2>
+
+<p>What is the budget? I want to know the total expectations and by subsystem (we
+should have those, right?). How do we know if we are (not) meeting those
+budgets? What characteristics do we measure (mean, stddev, IQR, p90, shape of
+distribution<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, etc.) and what are they? What are our target specs end-to-end
+(our hardware and our clients’ hardware, with a focus on the clients).</p>
+
+<p>See <a href="https://infrequently.org/series/performance-inequality">Performance inequality on the
+web</a> for what happens
+when we get this right (or wrong).</p>
+
+<h2 id="expected-scale-factors">Expected scale factors</h2>
+
+<p>Scale factors are the things whose increase will be felt across the system.
+Examples might be number of customers, objects, transactions, queries, etc.. How
+have we designed to meet changing needs with scale? How do we know if we are
+(not)?</p>
+
+<p>We may be planning to reimplement and rearchitect if we can’t meet new scale
+requirements, and that’s an acceptable answer as long as we understand the cost
+and know when (preferably before) we hit those points.</p>
+
+<h2 id="customer-success">Customer success</h2>
+
+<p>How do we know what our customers need? How do we know if those needs are (not)
+met? How do we know when something goes wrong and what it is? How do we get
+side-by-side feedback? How is customer engagement or success incorporated back
+into the product?</p>
+
+<h2 id="team-norms-and-culture">Team norms and culture</h2>
+
+<p>How do we communicate (meetings, chat, email)? How do we track work-to-do, work
+done, priorities, and roadblocks?</p>
+
+<p>How do we develop and deploy code or land it in main? This includes</p>
+
+<ul>
+  <li>important areas of review focus</li>
+  <li>what PRs/pushes look like (and whether we use PRs or something else)</li>
+  <li>commit hygiene standards (<a href="https://cbea.ms/git-commit/">an example set of hygiene
+standards</a>, though it doesn’t cover scoping
+changes or branch/PR hygiene)</li>
+  <li>code quality (what’s automated and what’s not)</li>
+  <li>local setup and development</li>
+  <li>test data</li>
+  <li>pairing/mobbing norms</li>
+</ul>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>We must not commit crimes of statistics, after all. Don’t assume unimodal,
+Normal distributions. Please provide a measure of spread with a measure of
+central tendency. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="software-engineering" /><summary type="html"><![CDATA[This is my shortlist of “Day 1 questions” for new teams to help me get up to speed. In no particular order:]]></summary></entry><entry><title type="html">Commit subject case in Git history</title><link href="https://benknoble.github.io/blog/2025/01/04/git-subject-case/" rel="alternate" type="text/html" title="Commit subject case in Git history" /><published>2025-01-04T00:00:00+00:00</published><updated>2025-01-04T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/04/git-subject-case</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/04/git-subject-case/"><![CDATA[<p><a href="https://cbea.ms/git-commit/#capitalize">Some insist that commit subjects be
+capitalized</a>. Does this actually happen
+in practice?</p>
+
+<p>Here’s a quick analysis of the Git source repository (see <a href="/blog/2019/09/11/fields/">my fields script</a> or <a href="/blog/2024/11/15/useful-utilities/#parallel-thoughts">use your own</a>):</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--oneline</span> <span class="nt">--no-decorate</span> | fields 2 |
+    <span class="nb">tee</span> <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:lower:]]'</span> <span class="o">&gt;</span>lower<span class="o">)</span> <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:upper:]]'</span> <span class="o">&gt;</span>upper<span class="o">)</span> <span class="o">&gt;</span>/dev/null
+diff <span class="nt">-y</span> lower upper
+<span class="c"># =&gt; 44019 | 30636</span>
+</code></pre></div></div>
+
+<p>Looks roughly even, with a slight preference for lower case words (~59%). But if
+we filter out automatic messages from merges and reverts:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--oneline</span> <span class="nt">--no-decorate</span> | fields 2 |
+    <span class="nb">tee</span> <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:lower:]]'</span> <span class="o">&gt;</span>lower<span class="o">)</span> <span class="se">\</span>
+      <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-v</span> <span class="nt">-e</span> Merge <span class="nt">-e</span> Revert | <span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:upper:]]'</span> <span class="o">&gt;</span>upper<span class="o">)</span> <span class="o">&gt;</span>/dev/null
+diff <span class="nt">-y</span> lower upper
+<span class="c"># =&gt; 44019 | 11423</span>
+</code></pre></div></div>
+
+<p>Well, that’s just above 79% preference for lowercase.</p>
+
+<p>Measurements taken from the branch I happened to be on, which is <a href="https://github.com/benknoble/git/commit/daee7636106ecf9a7eb445038bf87348e0105478">daee763610
+(completion: repair config completion for Zsh,
+2024-12-29)</a>.</p>
+
+<p>Note that the total from the first report (74655) undercounts the number of
+commits by about 1109 according to <code class="language-plaintext highlighter-rouge">git rev-list --count HEAD</code>. This is exactly
+the number of commits output by</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--oneline</span> <span class="nt">--no-decorate</span> | fields 2 | <span class="nb">grep</span> <span class="nt">-cv</span> <span class="nt">-e</span> <span class="s1">'^[[:lower:]]'</span> <span class="nt">-e</span> <span class="s1">'^[[:upper:]]'</span>
+</code></pre></div></div>
+
+<p>Here’s a histogram of the starts that got omitted by my simple measure (remove
+<code class="language-plaintext highlighter-rouge">-c</code> on the previous <code class="language-plaintext highlighter-rouge">grep</code> and pipe to <code class="language-plaintext highlighter-rouge">sort | uniq -c | sort -rn</code>):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 892 [PATCH]
+  36 .mailmap:
+  19 [PATCH
+  14 "git
+  12 .gitignore:
+   9 .gitattributes:
+   4 __attribute__:
+   4 2.36
+   4 *:
+   3 [patch]
+   3 .mailmap
+   3 --walk-reflogs:
+   3 --pretty=format:
+   3 *.sh:
+   3 *.h:
+   3 *.c
+   3 *.[ch]:
+   3 'git
+   3 "log
+   3 "Assume
+   2 {fetch,upload}-pack:
+   2 0th
+   2 -u
+   2 --dirstat:
+   2 *.[ch]
+   2 (trivial)
+   2 $EMAIL
+   2 "remote
+   2 "rebase
+   2 "make
+   1 {upload,receive}-pack
+   1 {reset,merge}:
+   1 {lock,commit,rollback}_packed_refs():
+   1 {cvs,svn}import:
+   1 {builtin/*,repository}.c:
+   1 `git
+   1 _XOPEN_SOURCE
+   1 _GIT_INDEX_OUTPUT:
+   1 \n
+   1 [fr]
+   1 ?alloc:
+   1 3%
+   1 2.3.2
+   1 .gitignore
+   1 .github/workflows/main.yml:
+   1 .github/PULL_REQUEST_TEMPLATE.md:
+   1 ./configure.ac:
+   1 -Wuninitialized:
+   1 -Wold-style-definition
+   1 --utf8
+   1 --summary
+   1 --prune
+   1 --name-only,
+   1 --format=pretty:
+   1 --dirstat-by-file:
+   1 --base-path-relaxed
+   1 *config.txt:
+   1 *.h
+   1 (various):
+   1 (squash)
+   1 (short)
+   1 (revert
+   1 (encode_85,
+   1 (cvs|svn)import:
+   1 (Hopefully)
+   1 'make
+   1 'git-merge':
+   1 'build'
+   1 $GIT_COMMON_DIR:
+   1 "test"
+   1 "reset
+   1 "needs
+   1 "lib-diff"
+   1 "init-db"
+   1 "git-tag
+   1 "git-push
+   1 "git-merge":
+   1 "git-fetch
+   1 "git-apply
+   1 "git-add
+   1 "git"
+   1 "format-patch
+   1 "diff
+   1 "current_exec_path"
+   1 "core.sharedrepository
+   1 "color.diff
+   1 "checkout
+   1 "branch
+   1 "blame
+   1 "assume
+   1 "add
+   1 
+</code></pre></div></div>
+
+<p>Just for kicks, if I try the <em>2nd</em> word of the commit message in those cases:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--oneline</span> <span class="nt">--no-decorate</span> | fields 2 3 |
+    <span class="nb">grep</span> <span class="nt">-v</span> <span class="nt">-e</span> <span class="s1">'^[[:lower:]]'</span> <span class="nt">-e</span> <span class="s1">'^[[:upper:]]'</span> | fields 2 |
+    <span class="nb">tee</span> <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:lower:]]'</span> <span class="o">&gt;</span>lower<span class="o">)</span> <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:upper:]]'</span> <span class="o">&gt;</span>upper<span class="o">)</span> <span class="o">&gt;</span>/dev/null
+diff <span class="nt">-y</span> lower upper
+<span class="c"># =&gt; 491 | 567</span>
+</code></pre></div></div>
+
+<p>We’re still undercounting by 51, but the above doesn’t modify our results much
+(essentially still within the rounding I used). The 51 commits ought to be in
+the noise. Even attributing them all as upper case, the rounded percentages
+don’t change.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="statistics" /><summary type="html"><![CDATA[Some insist that commit subjects be capitalized. Does this actually happen in practice?]]></summary></entry><entry><title type="html">Roundup of Mother Jones articles from the 2025 January issue</title><link href="https://benknoble.github.io/blog/2025/01/02/mj-roundup/" rel="alternate" type="text/html" title="Roundup of Mother Jones articles from the 2025 January issue" /><published>2025-01-02T00:00:00+00:00</published><updated>2025-01-02T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/02/mj-roundup</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/02/mj-roundup/"><![CDATA[<p>Here’s my reactions to a few articles from the January 2025 issue of <a href="https://www.motherjones.com"><em>Mother
 Jones</em> magazine</a>. The issue doesn’t look linked
 online yet; I read it through Apple News.</p>
 
@@ -696,358 +924,4 @@ Markdown fences we emit <code class="language-plaintext highlighter-rouge">&lt;p
 -:  ---------- &gt; 7:  38b3c0a75e docs: make explicit the convention for Latin</code>
 </pre>
 
-</details>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve been using git range-diff for the past few months to explain changes between versions of a patch series, such as different versions of a branch after responding to review comments on a Pull Request. This post explains how I use post the output for Markdown-ish consumption on GitHub.]]></summary></entry><entry><title type="html">Performance of Racket Pict Comparison, Part 2</title><link href="https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/" rel="alternate" type="text/html" title="Performance of Racket Pict Comparison, Part 2" /><published>2024-09-14T00:00:00+00:00</published><updated>2024-09-14T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/09/14/benchmarking-pict-equality-pt-2/"><![CDATA[<p>I eliminate “eyeball statistics” from <a href="/blog/2024/02/15/benchmarking-pict-equality/">part 1</a>. This post is based on
-<a href="https://chelseatroy.com/2021/02/26/data-safety-for-programmers/">Chelsea Troy’s “Data Safety”
-series</a>,
-especially <a href="https://chelseatroy.com/2021/03/12/quantitative-programming-knife-skills-part-2/">Quantitative Programming Knife Skills, Part
-2</a>.</p>
-
-<p>As usual, all code is <a href="https://github.com/benknoble/pict-equal-bench">available on GitHub</a>.</p>
-
-<h2 id="problems">Problems</h2>
-
-<p>In the previous post, I eyeballed distributions from box-and-whisker plots (in
-addition to relying on reported timings from hyperfine) to determine which
-method of comparing <code class="language-plaintext highlighter-rouge">pict</code>s is faster. Today, we’ll look at addressing two
-limitations of that approach:</p>
-
-<ol>
-  <li>How confident are we that the true mean of relevant measurements is captured
-by the mean of our sample distribution? We’ll compute confidence intervals
-for an appropriate distribution.</li>
-  <li>How likely is it that the distributions actually differ for a reason other
-than random chance? We’ll use statistical tests to measure the probability of
-difference being attributable to random chance (the “null hypothesis”).</li>
-</ol>
-
-<p>First, though, we’ve got to talk about distributions.</p>
-
-<h2 id="distributions">Distributions</h2>
-
-<p>We have (by computation) a mean and standard deviation for various facets of our
-<a href="https://github.com/benknoble/pict-equal-bench">data</a>. We have enough data that assuming a normal distribution is not
-unreasonable; let’s take a look. For the time benchmark data, the following code</p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">require</span> <span class="nv">sawzall</span>
-         <span class="nv">data-frame</span>
-         <span class="nv">threading</span>
-         <span class="nv">math/statistics</span><span class="p">)</span>
-
-<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">v-μ</span> <span class="nv">xs</span><span class="p">)</span>
-  <span class="p">(</span><span class="nb">exact-&gt;inexact</span> <span class="p">(</span><span class="nf">mean</span> <span class="p">(</span><span class="nb">vector-&gt;list</span> <span class="nv">xs</span><span class="p">))))</span>
-
-<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nf">v-σ</span> <span class="nv">xs</span><span class="p">)</span>
-  <span class="p">(</span><span class="nf">stddev</span> <span class="p">(</span><span class="nb">vector-&gt;list</span> <span class="nv">xs</span><span class="p">)))</span>
-
-<span class="p">(</span><span class="k">define</span> <span class="nv">t-short</span> <span class="p">(</span><span class="nf">df-read/csv</span> <span class="s">"time.csv"</span><span class="p">))</span>
-
-<span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">t-short</span>
-    <span class="p">(</span><span class="nf">group-with</span> <span class="s">"bench"</span><span class="p">)</span>
-    <span class="p">(</span><span class="nf">aggregate</span> <span class="p">[</span><span class="nf">cpu-μ</span> <span class="p">(</span><span class="nf">cpu</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-μ</span> <span class="nv">cpu</span><span class="p">)]</span>
-               <span class="p">[</span><span class="nf">cpu-σ</span> <span class="p">(</span><span class="nf">cpu</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-σ</span> <span class="nv">cpu</span><span class="p">)]</span>
-               <span class="p">[</span><span class="nf">real-μ</span> <span class="p">(</span><span class="nf">real</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-μ</span> <span class="nv">real</span><span class="p">)]</span>
-               <span class="p">[</span><span class="nf">real-σ</span> <span class="p">(</span><span class="nf">real</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-σ</span> <span class="nv">real</span><span class="p">)]</span>
-               <span class="p">[</span><span class="nf">gc-μ</span> <span class="p">(</span><span class="nf">gc</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-μ</span> <span class="nv">gc</span><span class="p">)]</span>
-               <span class="p">[</span><span class="nf">gc-σ</span> <span class="p">(</span><span class="nf">gc</span><span class="p">)</span> <span class="p">(</span><span class="nf">v-σ</span> <span class="nv">gc</span><span class="p">)])</span>
-    <span class="p">(</span><span class="nf">show</span> <span class="nv">everything</span><span class="p">))</span>
-</code></pre></div></div>
-
-<p>produces</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data-frame: 2 rows x 7 columns
-┌──────────────────┬─────────┬──────────────────┬──────────────────┬─────────────────┬───────────────────┬────────────────────┐
-│cpu-σ             │bench    │real-μ            │real-σ            │cpu-μ            │gc-σ               │gc-μ                │
-├──────────────────┼─────────┼──────────────────┼──────────────────┼─────────────────┼───────────────────┼────────────────────┤
-│1.477002129744432 │bytes    │4.225773195876289 │1.4978411739022484│4.175601374570447│0.15933274204104092│0.006529209621993127│
-├──────────────────┼─────────┼──────────────────┼──────────────────┼─────────────────┼───────────────────┼────────────────────┤
-│1.1370657205199777│record-dc│2.0853951890034366│1.148475651239016 │2.05893470790378 │0.16564821501258256│0.007216494845360825│
-└──────────────────┴─────────┴──────────────────┴──────────────────┴─────────────────┴───────────────────┴────────────────────┘
-</code></pre></div></div>
-
-<p>Let’s plot these (<a href="https://github.com/benknoble/pict-equal-bench">code</a>):</p>
-
-<p><img src="/assets/img/pict-time-bench-cpu-normal.svg" alt="CPU time normal distributions" />
-<img src="/assets/img/pict-time-bench-real-normal.svg" alt="Real time normal distributions" />
-<img src="/assets/img/pict-time-bench-gc-normal.svg" alt="GC time normal distributions" /></p>
-
-<p>By now you might have realized that negative times don’t make sense… this
-suggests the normal distribution is not an appropriate distribution for
-comparison. <a href="https://stats.stackexchange.com/a/203958">It appears that the exponential or Weibull distributions might
-model this process better</a>, but for
-now we’ll continue taking timings and memory usage to be normally distributed
-for simplification.</p>
-
-<p>Here are the equivalent values and plots for memory (all in MiB):</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data-frame: 2 rows x 3 columns
-┌───────────────────┬──────────────────┬─────────┐
-│memory-σ           │memory-μ          │bench    │
-├───────────────────┼──────────────────┼─────────┤
-│0.22898033579570978│0.6772037663410619│bytes    │
-├───────────────────┼──────────────────┼─────────┤
-│0.23704268897914643│0.5486571085821722│record-dc│
-└───────────────────┴──────────────────┴─────────┘
-</code></pre></div></div>
-
-<p><img src="/assets/img/pict-time-bench-memory-normal.svg" alt="Memory normal distributions in MiB" /></p>
-
-<h2 id="confidence-intervals">Confidence Intervals</h2>
-
-<p>To compute a confidence interval, we’ll take the distributions to be
-t-distributed and compute properties of the t-statistic (for \(\alpha = 0.05\),
-a 95% confidence interval). This interval tells us where the true mean falls
-with 95% probability.</p>
-
-<p>Let’s use a critical value of 1.96, which corresponds to an assumption that the
-distributions are normal (given our large sample size, the t-distribution is
-close to normal) and a 95% confidence interval. The formula (letting \(s\) be
-the sample standard deviation, \(\bar{x}\) the sample mean, and \(N\) the number
-of samples) is</p>
-
-\[\bar{x} \pm 1.96 \frac{s}{N}\]
-
-<p>Here are the low and high offsets of the intervals for memory and time:</p>
-
-<ul>
-  <li>memory
-    <ul>
-      <li>bytes: [0.6771 MiB, 0.6773 MiB]</li>
-      <li>record-dc: [0.5486 MiB, 0.5487 MiB]</li>
-    </ul>
-
-    <p><img src="/assets/img/pict-time-bench-memory-confidence.svg" alt="Memory confidence intervals in MiB" /></p>
-  </li>
-  <li>cpu
-    <ul>
-      <li>bytes: [4.175, 4.176]</li>
-      <li>record-dc: [2.0586, 2.0593]</li>
-    </ul>
-
-    <p><img src="/assets/img/pict-time-bench-cpu-confidence.svg" alt="CPU time confidence intervals" /></p>
-  </li>
-  <li>real
-    <ul>
-      <li>bytes: [4.225, 4.226]</li>
-      <li>record-dc: [2.085, 2.086]</li>
-    </ul>
-
-    <p><img src="/assets/img/pict-time-bench-real-confidence.svg" alt="Real time confidence intervals" /></p>
-  </li>
-  <li>gc
-    <ul>
-      <li>bytes: [0.00648, 0.00658]</li>
-      <li>record-dc: [0.00716, 0.00727]</li>
-    </ul>
-
-    <p><img src="/assets/img/pict-time-bench-gc-confidence.svg" alt="GC time confidence intervals" /></p>
-  </li>
-</ul>
-
-<p>The plots are zoomed in because the intervals are so narrow thanks to our high
-number of samples. We can be very confident that our sample means are close to
-the true mean.</p>
-
-<h2 id="statistical-tests">Statistical tests</h2>
-
-<p>We want to compare the memory distributions across both benchmarks, and each of
-the real, cpu, and gc times across both benchmarks. We’ll use the
-<a href="https://docs.racket-lang.org/t-test/index.html"><code class="language-plaintext highlighter-rouge">welch-t-test</code> function from the <code class="language-plaintext highlighter-rouge">t-test</code>
-library</a><sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, since we can’t assume
-the variances are equal (though eyeball statistics suggests that gc variance is,
-which is sensible since most gc times are 0).</p>
-
-<p>The code to compute a t-test for memory distributions is short:</p>
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">require</span> <span class="nv">threading</span>
-         <span class="nv">data-frame</span>
-         <span class="nv">sawzall</span>
-         <span class="nv">t-test</span><span class="p">)</span>
-
-<span class="p">(</span><span class="k">define</span> <span class="nv">m</span>
-  <span class="p">(</span><span class="nf">~&gt;</span> <span class="s">"memory.csv"</span> <span class="nv">df-read/csv</span>
-      <span class="p">(</span><span class="nf">create</span> <span class="p">[</span><span class="nf">memory</span> <span class="p">(</span><span class="nf">memory</span><span class="p">)</span> <span class="p">(</span><span class="nb">/</span> <span class="nv">memory</span> <span class="p">(</span><span class="nb">expt</span> <span class="mi">2</span> <span class="mi">20</span><span class="p">))])))</span>
-
-<span class="p">(</span><span class="nb">apply</span>
- <span class="nv">welch-t-test</span>
- <span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">m</span>
-     <span class="p">(</span><span class="nf">split-with</span> <span class="s">"bench"</span><span class="p">)</span>
-     <span class="p">(</span><span class="nb">map</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="nf">df</span><span class="p">)</span>
-            <span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">df</span>
-                <span class="p">(</span><span class="nf">slice</span> <span class="p">[</span><span class="nf">"memory"</span><span class="p">])</span>
-                <span class="p">(</span><span class="nf">df-select</span> <span class="s">"memory"</span><span class="p">)))</span>
-          <span class="nv">_</span><span class="p">)))</span>
-</code></pre></div></div>
-
-<p>The result for a p-value of \(0.01\) is \(1.53 \times 10^{-187}\). That is, we
-can be extremely confident that the distributions have different means: we
-reject the null hypothesis that the distributions have the same mean as the
-likelihood of this sample occurring given said hypothesis is nearly 0.</p>
-
-<p>Of note, this test suggests the distributions are different <em>despite
-having close means</em>: the difference between the means (0.12854665775888974) is
-23.42% of the smaller of the two means and 18.98% of the larger.</p>
-
-<p>The code for time distributions is parameterized on the column:</p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">require</span> <span class="nv">threading</span>
-         <span class="nv">data-frame</span>
-         <span class="nv">sawzall</span>
-         <span class="nv">t-test</span><span class="p">)</span>
-
-<span class="p">(</span><span class="k">define</span> <span class="nv">t</span> <span class="p">(</span><span class="nf">df-read/csv</span> <span class="s">"time.csv"</span><span class="p">))</span>
-
-<span class="p">(</span><span class="nf">for/list</span> <span class="p">([</span><span class="nf">column</span> <span class="o">'</span><span class="p">(</span><span class="nf">"cpu"</span> <span class="s">"real"</span> <span class="s">"gc"</span><span class="p">)])</span>
-  <span class="p">(</span><span class="nb">list</span> <span class="nv">column</span>
-        <span class="p">(</span><span class="nb">apply</span>
-         <span class="nv">welch-t-test</span>
-         <span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">t</span>
-             <span class="p">(</span><span class="nf">slice</span> <span class="p">(</span><span class="nf">all-in</span> <span class="p">(</span><span class="nb">list</span> <span class="s">"bench"</span> <span class="nv">column</span><span class="p">)))</span>
-             <span class="p">(</span><span class="nf">split-with</span> <span class="s">"bench"</span><span class="p">)</span>
-             <span class="p">(</span><span class="nb">map</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="nf">df</span><span class="p">)</span>
-                    <span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">df</span>
-                        <span class="p">(</span><span class="nf">slice</span> <span class="nv">column</span><span class="p">)</span>
-                        <span class="p">(</span><span class="nf">df-select</span> <span class="nv">column</span><span class="p">)))</span>
-                  <span class="nv">_</span><span class="p">)))))</span>
-</code></pre></div></div>
-
-<p>The results (again with p-value \(0.01\)):</p>
-<ul>
-  <li>cpu: \(0.0\)</li>
-  <li>real: \(0.0\)</li>
-  <li>gc: \(0.8196\)</li>
-</ul>
-
-<p>I’m actually shocked that the procedure produced an (inexact) 0, and I checked
-the data being fed in. I can’t explain the result beyond gesturing at floating
-point math; there’s no statistical realm where we accept that this occurrence is
-impossible. For now, I’ll content myself with supposing that the calculation
-produces such a small number that even Racket can’t keep up, and reject the null
-hypothesis for CPU and real times (there is a statistically meaningful
-difference in the time the two procedures take).</p>
-
-<p>For GC times, of course, there is insufficient evidence to reject the null
-hypothesis <em>as expected</em>. Most GC times are 0! It’s reasonably more likely that
-the underlying distributions are actually the same one.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>I feel justified in my choice of method based on the data from last time and
-satisfied that I’m not relying entirely on eyeball statistics. The lack of
-explanation for \(0.0\) is dissatisfying…</p>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p>There have been <a href="https://racket.discourse.group/t/could-the-t-student-distribution-be-included-in-the-math-module/2999">several interesting conversations about performing
-t-tests within Racket
-lately</a>,
-which lead to me include these additional links: <a href="https://onecompiler.com/racket/42j3n4wdn">pasted
-code</a>, <a href="https://github.com/soegaard/math/blob/student-t/math-lib/math/private/distributions/impl/student-t.rkt">@soegaard’s
-fork</a>
-<a href="https://math.stackexchange.com/questions/4367570/transform-students-t-distribution-to-beta-distribution">how to build the distribution from its
-parts</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><category term="performance" /><category term="statistics" /><summary type="html"><![CDATA[I eliminate “eyeball statistics” from part 1. This post is based on Chelsea Troy’s “Data Safety” series, especially Quantitative Programming Knife Skills, Part 2.]]></summary></entry><entry><title type="html">Churn and Weight</title><link href="https://benknoble.github.io/blog/2024/08/07/churn-and-weight/" rel="alternate" type="text/html" title="Churn and Weight" /><published>2024-08-07T00:00:00+00:00</published><updated>2024-08-07T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/08/07/churn-and-weight</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/08/07/churn-and-weight/"><![CDATA[<p>I examine a metric that might be correlated with churn, and I posit a new
-concept for code bases called weight. I also call attention to 2 tools for
-measuring churn and weight.</p>
-
-<h2 id="churn">Churn</h2>
-
-<p>Churn is an attribute of functions and modules: those which tend to change
-frequently are said to undergo heavy churn. This is typically a symptom of tight
-coupling.</p>
-
-<p>Measuring churn can be done, for example, by looking at how often files change
-in Git history. In 2018 I stole <a href="https://github.com/garybernhardt/dotfiles/blob/main/bin/git-churn">Gary Bernhardt’s
-<code class="language-plaintext highlighter-rouge">git-churn</code></a>
-and <a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/git-churn">made it my
-own</a>. For
-example, here’s what it says on Frosthaven Manager:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># git churn | head</span>
- 117 scribblings/reference.scrbl
- 101 server.rkt
-  94 gui/manager.rkt
-  90 gui/monsters.rkt
-  77 defns.rkt
-  73 info.rkt
-  66 monster-db.rkt
-  49 manager/state.rkt
-  44 manager.rkt
-  35 elements.rkt
-</code></pre></div></div>
-
-<p>Unsurprisingly, the reference documentation and web server change the most
-frequently, followed closely by 2 of the largest and most important GUI
-components (the composite whole and the monsters). The reference documentation
-changes whenever a module is added, moved, or renamed, and the web server is
-changing rapidly in response to player feedback.</p>
-
-<p>Let’s examine a related idea: <em>weight</em>.</p>
-
-<h2 id="weight">Weight</h2>
-
-<p>I’m using the word “weight” to refer to both how heavy a module or function is
-in terms of essential complexity and to how load-bearing it is in terms of
-making the system do what it does. In a mature project, we probably expect to
-find a few core modules to be heavy, with a (possibly long) tail of light
-supplements.</p>
-
-<p>Since heavy modules often sit at the core of the system, they are likely to have
-either lots of churn (frequent changes to the core system) or little (a stable
-core with frequent changes to the supplements). In other words, churn on heavy
-core modules can give us an idea of how stable our core is: having the wrong
-core design is a serious challenge to the life of the project.</p>
-
-<p>How do we measure weight? As a start, I’ll use <em>relative percentages of the
-code.</em> This sounds like lines of code, but it has a subtle difference: 10k lines
-of code is only 1% of a codebase with 1 million lines, but dwarfs any system
-with a mere few hundred. It’s not size that matters, it’s relative size.</p>
-
-<p>Using my
-<a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/code-percent"><code class="language-plaintext highlighter-rouge">code-percent</code></a>
-program, we can tabulate relevant percentages and their cumulative effects.
-Here’s how it runs on Frosthaven Manager:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># git ls-files | code-percent</span>
-RowNumber  File                                      PercentTotal  CumulativePercentTotal
-1          server.rkt                                7.47149       7.47149
-2          gui/monsters.rkt                          6.37762       13.8491
-3          scribblings/programming-scenario.scrbl    4.56775       18.4169
-4          manager/state.rkt                         3.9048        22.3217
-5          defns/monsters.rkt                        3.62636       25.948
-6          gui/manager.rkt                           2.87059       28.8186
-7          gui/player-info.rkt                       2.27393       31.0925
-8          gui/markdown.rkt                          2.11482       33.2074
-9          elements.rkt                              1.93583       35.1432
-10         scribblings/how-to-play.scrbl             1.9292        37.0724
-<span class="c"># [snip]</span>
-162        README.md                                 0.0265182     100
-</code></pre></div></div>
-
-<p>This gives a different picture of the code. The reference has disappeared
-(supplanted by large documents), being a mere 30 lines relative to the 15k
-total. But a few core pieces of functionality (state, game definitions, and GUI
-pieces) have drifted to the surface, collectively taking up roughly one third of
-the size of the code. Indeed, we might now question if <code class="language-plaintext highlighter-rouge">gui/markdown.rkt</code>, which
-implements a “good enough for me” Markdown-to-GUI-text widget, is holding its
-weight. Conversely, it might be time to try refactoring the server or monsters
-GUI again. The server is not core in the layering of pieces, but it is core to
-the app’s experience. It might even contain its own core of domain pieces, which
-explains its weight.</p>
-
-<p>One other trick we can do: we can get a neat idea of the size of the tail by
-showing only the rows that bump us over major (cumulative) thresholds. For
-example:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># git ls-files | code-percent | awk 'BEGIN { target = 25; } NR == 1 { print; next; } $4 &gt;= target { print; target += 25; }'</span>
-RowNumber  File                                      PercentTotal  CumulativePercentTotal
-5          defns/monsters.rkt                        3,62636       25,948
-19         defns/scenario.rkt                        1,18006       50,3116
-50         gui/table.rkt                             0,550252      75,4243
-162        README.md                                 0,0265182     100
-</code></pre></div></div>
-
-<p>While the first 5 files account for 25% of the code, it takes almost another 15
-to reach 50%, then another 30 to reach 75% followed by a whopping 110 to
-conclude. This matches at least our expectation of a long tail.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="project-management" /><category term="git" /><category term="frosthaven-manager" /><category term="racket" /><summary type="html"><![CDATA[I examine a metric that might be correlated with churn, and I posit a new concept for code bases called weight. I also call attention to 2 tools for measuring churn and weight.]]></summary></entry></feed>
+</details>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve been using git range-diff for the past few months to explain changes between versions of a patch series, such as different versions of a branch after responding to review comments on a Pull Request. This post explains how I use post the output for Markdown-ish consumption on GitHub.]]></summary></entry></feed>

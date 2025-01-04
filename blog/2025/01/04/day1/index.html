@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Roundup of Mother Jones articles from the 2025 January issue</title>
+  <title>Junk Drawer : Day one on a new team</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -67,67 +67,100 @@
   </ul>
 </nav>
 
-      <h1>Roundup of Mother Jones articles from the 2025 January issue</h1>
+      <h1>Day one on a new team</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 02 Jan 2025 in Blog</p>
+ on 04 Jan 2025 in Blog</p>
 <div id="post">
-  <p>Here’s my reactions to a few articles from the January 2025 issue of <a href="https://www.motherjones.com"><em>Mother
-Jones</em> magazine</a>. The issue doesn’t look linked
-online yet; I read it through Apple News.</p>
+  <p>This is my shortlist of “Day 1 questions” for new teams to help me get up to
+speed. In no particular order:</p>
 
-<h2 id="settling-the-score-by-emi-nietfeld">“Settling the Score” by Emi Nietfeld</h2>
+<ol>
+  <li>Domain &amp; Design</li>
+  <li>Performance budget</li>
+  <li>Expected scale factors</li>
+  <li>Customer success</li>
+  <li>Team norms and culture</li>
+</ol>
 
-<p>Nietfeld examines the contradictory popularity and flaws of Bessel van der
-Kolk’s <em>The Body Keeps the Score</em>. In particular, Nietfeld points out both the
-mischaracterization of academic research (a gentle way to say “lies”) and the
-shaming of survivors broken bodies which, according to the text, may be
-irreparable.</p>
+<p>Examples drawn from real work.</p>
 
-<p>Nietfeld suggests alternative texts, which I want to collect here for my own
-future reference:</p>
+<h2 id="domain--design">Domain &amp; Design</h2>
+
+<p>What do we do? How do we accomplish it?</p>
+
+<p>This could be things like “manage case lifecycles via tenant-configured platform
+services,” “keep data flowing with automatically managed Kafka instances,” or
+“provide cost recommendations to clients by analyzing data ingested from their
+systems.”</p>
+
+<p>Ideally this comes with a domain breakdown of key terms. Examples: tokenized
+plastic/PAN; drain/kill/rehydrate; Snowflake contract and connection details.</p>
+
+<h2 id="performance-budget">Performance budget</h2>
+
+<p>What is the budget? I want to know the total expectations and by subsystem (we
+should have those, right?). How do we know if we are (not) meeting those
+budgets? What characteristics do we measure (mean, stddev, IQR, p90, shape of
+distribution<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, etc.) and what are they? What are our target specs end-to-end
+(our hardware and our clients’ hardware, with a focus on the clients).</p>
+
+<p>See <a href="https://infrequently.org/series/performance-inequality">Performance inequality on the
+web</a> for what happens
+when we get this right (or wrong).</p>
+
+<h2 id="expected-scale-factors">Expected scale factors</h2>
+
+<p>Scale factors are the things whose increase will be felt across the system.
+Examples might be number of customers, objects, transactions, queries, etc.. How
+have we designed to meet changing needs with scale? How do we know if we are
+(not)?</p>
+
+<p>We may be planning to reimplement and rearchitect if we can’t meet new scale
+requirements, and that’s an acceptable answer as long as we understand the cost
+and know when (preferably before) we hit those points.</p>
+
+<h2 id="customer-success">Customer success</h2>
+
+<p>How do we know what our customers need? How do we know if those needs are (not)
+met? How do we know when something goes wrong and what it is? How do we get
+side-by-side feedback? How is customer engagement or success incorporated back
+into the product?</p>
+
+<h2 id="team-norms-and-culture">Team norms and culture</h2>
+
+<p>How do we communicate (meetings, chat, email)? How do we track work-to-do, work
+done, priorities, and roadblocks?</p>
+
+<p>How do we develop and deploy code or land it in main? This includes</p>
 
 <ul>
-  <li><em>Trauma &amp; Recovery</em> by Judith Herman</li>
-  <li><em>What My Bones Know</em> by Stephanie Foo</li>
-  <li><em>The End of Trauma</em> by George A. Bonanno</li>
+  <li>important areas of review focus</li>
+  <li>what PRs/pushes look like (and whether we use PRs or something else)</li>
+  <li>commit hygiene standards (<a href="https://cbea.ms/git-commit/">an example set of hygiene
+standards</a>, though it doesn’t cover scoping
+changes or branch/PR hygiene)</li>
+  <li>code quality (what’s automated and what’s not)</li>
+  <li>local setup and development</li>
+  <li>test data</li>
+  <li>pairing/mobbing norms</li>
 </ul>
 
-<p>My own thoughts: trauma may (and probably does) live in the body, <strong>and</strong> CBT
-(Cognitive Behavioral Therapy) is effective, <strong>and</strong> victims are not irreparably
-damaged (healing is possible).</p>
+<h2 id="notes">Notes</h2>
 
-<h2 id="hog-wild-by-miranda-lipton">“Hog Wild” by Miranda Lipton</h2>
-
-<p>According to Lipton’s research, meat prices are up not (only) because of
-inflation: Agri Stats effectively brokers data-sharing between competitors in a
-way that creates price-fixing without the industry leaders’ direct contact. The
-DoJ sued in 2023 alleging violation of the Sherman Antitrust Act.</p>
-
-<p>The arrangement is just like the <a href="https://www.justice.gov/opa/pr/justice-department-sues-realpage-algorithmic-pricing-scheme-harms-millions-american-renters">RealPage price-fixing for landlords to rig
-rents</a>,
-which I think I first learned about from <a href="https://pluralistic.net/2024/07/24/gouging-the-all-seeing-eye/#i-spy">Cory Doctorow’s article on
-surveillance
-pricing</a>.</p>
-
-<p>Both Doctorow and Lipton connect the dots that centralized data sharing and
-price “recommendations,” combined with lax antitrust regulation due to Reagan
-and Milton Friedman and with conglomerate mergers (4 companies control 85% of
-the meat supply chain), leads inexorably to controlled cartel pricing.</p>
-
-<p>Fortunately, the data sharing guidelines which permitted the old behavior were
-rescinded in 2023, writes Lipton: so the DoJ can go after Agri Stats, too.</p>
-
-<p>You might not know that this follows a familiar cycle: the Sherman Antitrust Act
-dates to 1890. The Packers and Stockyards Act of 1921 prohibited unfair pricing
-in meat-packing as a direct consequence of monopolistic behavior!</p>
-
-<p>It’s time to re-enforce existing laws. Loosening them 4 decades ago led to
-predictable consequences.</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>We must not commit crimes of statistics, after all. Don’t assume unimodal,
+Normal distributions. Please provide a measure of spread with a measure of
+central tendency. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
 </div>
 <hr/>
@@ -135,14 +168,8 @@ predictable consequences.</p>
 <ul class="tags">
   
     <li>
-      <a href="https://benknoble.github.io/tags#news" class="tag">
-        news
-      </a>
-    </li>
-  
-    <li>
-      <a href="https://benknoble.github.io/tags#monopoly" class="tag">
-        monopoly
+      <a href="https://benknoble.github.io/tags#software-engineering" class="tag">
+        software-engineering
       </a>
     </li>
   
@@ -162,8 +189,8 @@ predictable consequences.</p>
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2025/01/02/mj-roundup/";
-    this.page.identifier = "/blog/2025/01/02/mj-roundup";
+    this.page.url = "https://benknoble.github.io/blog/2025/01/04/day1/";
+    this.page.identifier = "/blog/2025/01/04/day1";
   };
 
   function load_comments(div) {
@@ -182,21 +209,21 @@ predictable consequences.</p>
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2024/12/02/advent-of-racket/"
-      title="Scraping XML sitemaps with Racket">
+    <a href="https://benknoble.github.io/blog/2025/01/02/mj-roundup/"
+      title="Roundup of Mother Jones articles from the 2025 January issue">
       Previous</a>
   </span>
   
   
   <span id="next">
-    <a href="https://benknoble.github.io/blog/2025/01/04/day1/"
-       title="Day one on a new team">
+    <a href="https://benknoble.github.io/blog/2025/01/04/git-subject-case/"
+       title="Commit subject case in Git history">
       Next</a>
   </span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#roundup-of-mother-jones-articles-from-the-2025-january-issue">
+  <a href="/categories/#day-one-on-a-new-team">
     Back to posts</a>
 </div>
 

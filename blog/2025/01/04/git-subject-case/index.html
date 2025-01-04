@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Commit subject case in Git history</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Commit subject case in Git history</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 04 Jan 2025 in Blog</p>
+<div id="post">
+  <p><a href="https://cbea.ms/git-commit/#capitalize">Some insist that commit subjects be
+capitalized</a>. Does this actually happen
+in practice?</p>
+
+<p>Here’s a quick analysis of the Git source repository (see <a href="/blog/2019/09/11/fields/">my fields script</a> or <a href="/blog/2024/11/15/useful-utilities/#parallel-thoughts">use your own</a>):</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--oneline</span> <span class="nt">--no-decorate</span> | fields 2 |
+    <span class="nb">tee</span> <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:lower:]]'</span> <span class="o">&gt;</span>lower<span class="o">)</span> <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:upper:]]'</span> <span class="o">&gt;</span>upper<span class="o">)</span> <span class="o">&gt;</span>/dev/null
+diff <span class="nt">-y</span> lower upper
+<span class="c"># =&gt; 44019 | 30636</span>
+</code></pre></div></div>
+
+<p>Looks roughly even, with a slight preference for lower case words (~59%). But if
+we filter out automatic messages from merges and reverts:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--oneline</span> <span class="nt">--no-decorate</span> | fields 2 |
+    <span class="nb">tee</span> <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:lower:]]'</span> <span class="o">&gt;</span>lower<span class="o">)</span> <span class="se">\</span>
+      <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-v</span> <span class="nt">-e</span> Merge <span class="nt">-e</span> Revert | <span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:upper:]]'</span> <span class="o">&gt;</span>upper<span class="o">)</span> <span class="o">&gt;</span>/dev/null
+diff <span class="nt">-y</span> lower upper
+<span class="c"># =&gt; 44019 | 11423</span>
+</code></pre></div></div>
+
+<p>Well, that’s just above 79% preference for lowercase.</p>
+
+<p>Measurements taken from the branch I happened to be on, which is <a href="https://github.com/benknoble/git/commit/daee7636106ecf9a7eb445038bf87348e0105478">daee763610
+(completion: repair config completion for Zsh,
+2024-12-29)</a>.</p>
+
+<p>Note that the total from the first report (74655) undercounts the number of
+commits by about 1109 according to <code class="language-plaintext highlighter-rouge">git rev-list --count HEAD</code>. This is exactly
+the number of commits output by</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--oneline</span> <span class="nt">--no-decorate</span> | fields 2 | <span class="nb">grep</span> <span class="nt">-cv</span> <span class="nt">-e</span> <span class="s1">'^[[:lower:]]'</span> <span class="nt">-e</span> <span class="s1">'^[[:upper:]]'</span>
+</code></pre></div></div>
+
+<p>Here’s a histogram of the starts that got omitted by my simple measure (remove
+<code class="language-plaintext highlighter-rouge">-c</code> on the previous <code class="language-plaintext highlighter-rouge">grep</code> and pipe to <code class="language-plaintext highlighter-rouge">sort | uniq -c | sort -rn</code>):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 892 [PATCH]
+  36 .mailmap:
+  19 [PATCH
+  14 "git
+  12 .gitignore:
+   9 .gitattributes:
+   4 __attribute__:
+   4 2.36
+   4 *:
+   3 [patch]
+   3 .mailmap
+   3 --walk-reflogs:
+   3 --pretty=format:
+   3 *.sh:
+   3 *.h:
+   3 *.c
+   3 *.[ch]:
+   3 'git
+   3 "log
+   3 "Assume
+   2 {fetch,upload}-pack:
+   2 0th
+   2 -u
+   2 --dirstat:
+   2 *.[ch]
+   2 (trivial)
+   2 $EMAIL
+   2 "remote
+   2 "rebase
+   2 "make
+   1 {upload,receive}-pack
+   1 {reset,merge}:
+   1 {lock,commit,rollback}_packed_refs():
+   1 {cvs,svn}import:
+   1 {builtin/*,repository}.c:
+   1 `git
+   1 _XOPEN_SOURCE
+   1 _GIT_INDEX_OUTPUT:
+   1 \n
+   1 [fr]
+   1 ?alloc:
+   1 3%
+   1 2.3.2
+   1 .gitignore
+   1 .github/workflows/main.yml:
+   1 .github/PULL_REQUEST_TEMPLATE.md:
+   1 ./configure.ac:
+   1 -Wuninitialized:
+   1 -Wold-style-definition
+   1 --utf8
+   1 --summary
+   1 --prune
+   1 --name-only,
+   1 --format=pretty:
+   1 --dirstat-by-file:
+   1 --base-path-relaxed
+   1 *config.txt:
+   1 *.h
+   1 (various):
+   1 (squash)
+   1 (short)
+   1 (revert
+   1 (encode_85,
+   1 (cvs|svn)import:
+   1 (Hopefully)
+   1 'make
+   1 'git-merge':
+   1 'build'
+   1 $GIT_COMMON_DIR:
+   1 "test"
+   1 "reset
+   1 "needs
+   1 "lib-diff"
+   1 "init-db"
+   1 "git-tag
+   1 "git-push
+   1 "git-merge":
+   1 "git-fetch
+   1 "git-apply
+   1 "git-add
+   1 "git"
+   1 "format-patch
+   1 "diff
+   1 "current_exec_path"
+   1 "core.sharedrepository
+   1 "color.diff
+   1 "checkout
+   1 "branch
+   1 "blame
+   1 "assume
+   1 "add
+   1 
+</code></pre></div></div>
+
+<p>Just for kicks, if I try the <em>2nd</em> word of the commit message in those cases:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--oneline</span> <span class="nt">--no-decorate</span> | fields 2 3 |
+    <span class="nb">grep</span> <span class="nt">-v</span> <span class="nt">-e</span> <span class="s1">'^[[:lower:]]'</span> <span class="nt">-e</span> <span class="s1">'^[[:upper:]]'</span> | fields 2 |
+    <span class="nb">tee</span> <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:lower:]]'</span> <span class="o">&gt;</span>lower<span class="o">)</span> <span class="o">&gt;(</span><span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'^[[:upper:]]'</span> <span class="o">&gt;</span>upper<span class="o">)</span> <span class="o">&gt;</span>/dev/null
+diff <span class="nt">-y</span> lower upper
+<span class="c"># =&gt; 491 | 567</span>
+</code></pre></div></div>
+
+<p>We’re still undercounting by 51, but the above doesn’t modify our results much
+(essentially still within the rounding I used). The 51 commits ought to be in
+the noise. Even attributing them all as upper case, the rounded percentages
+don’t change.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#statistics" class="tag">
+        statistics
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2025/01/04/git-subject-case/";
+    this.page.identifier = "/blog/2025/01/04/git-subject-case";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2025/01/04/day1/"
+      title="Day one on a new team">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#commit-subject-case-in-git-history">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
