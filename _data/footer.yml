@@ -10,5 +10,5 @@ links:
     url: /feed.xml
   - title: Colophon
     url: /colophon/
-  - title: "Copyright D. Ben Knoble <script type='text/javascript'>document.write(new Date().getFullYear())</script>"
+  - title: "Copyright D. Ben Knoble"
     url: https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE
