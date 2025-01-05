@@ -1,4 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-01-05T00:09:53+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Day one on a new team</title><link href="https://benknoble.github.io/blog/2025/01/04/day1/" rel="alternate" type="text/html" title="Day one on a new team" /><published>2025-01-04T00:00:00+00:00</published><updated>2025-01-04T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/04/day1</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/04/day1/"><![CDATA[<p>This is my shortlist of “Day 1 questions” for new teams to help me get up to
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-01-05T16:34:10+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Nospend 2025</title><link href="https://benknoble.github.io/blog/2025/01/05/nospend/" rel="alternate" type="text/html" title="Nospend 2025" /><published>2025-01-05T00:00:00+00:00</published><updated>2025-01-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/05/nospend</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/05/nospend/"><![CDATA[<p>My wife and I want to be (even more) intentional with our spending this year as
+we work through the purchase of a home. Here are our ideas.</p>
+
+<p>The goal is not to keep to these perfectly, but to use them as strong guidelines
+when evaluating spending decisions in these categories. This should keep us
+conscious of where our money goes (alongside our usual budgeting) without
+feeling punitive.</p>
+
+<h2 id="guidelines-this-year">Guidelines this year</h2>
+
+<ol>
+  <li>No coffee out unless it is building a relationship (<em>e.g.</em>, friend, family,
+coworker).</li>
+  <li>No new clothes or shoes unless replacing items that are worn out or do not
+fit.</li>
+  <li>No books except book of the month or book club books that cannot be found at
+the library.</li>
+  <li>No new cosmetics or toiletries except replacements.</li>
+  <li>No new cleaning or household supplies except replacements.</li>
+  <li>Eat out 6 times or fewer per month unless building a relationship.</li>
+  <li>Maximum 3 treats per month.</li>
+  <li>No new cups, mugs, water bottles, etc.</li>
+  <li>No new board games, video games, Lego, etc.</li>
+</ol>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="financial" /><summary type="html"><![CDATA[My wife and I want to be (even more) intentional with our spending this year as we work through the purchase of a home. Here are our ideas.]]></summary></entry><entry><title type="html">Day one on a new team</title><link href="https://benknoble.github.io/blog/2025/01/04/day1/" rel="alternate" type="text/html" title="Day one on a new team" /><published>2025-01-04T00:00:00+00:00</published><updated>2025-01-04T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/04/day1</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/04/day1/"><![CDATA[<p>This is my shortlist of “Day 1 questions” for new teams to help me get up to
 speed. In no particular order:</p>
 
 <ol>
@@ -818,110 +841,4 @@ development, and this article needs a (as-of-yet incomplete) rewrite as a
 result.</strong></p>
 
 <p>Pending said rewrites, the <a href="https://github.com/benknoble/benknoble.github.io/blob/248b8898789f8071a546458604e8f73458d6f7f5/_posts/2024-11-11-git-branch-trunk-perspective.md?plain=1">main content</a> has been removed as a “draft.”
-You can find the <a href="https://github.com/benknoble/benknoble.github.io/blob/248b8898789f8071a546458604e8f73458d6f7f5/_posts/2024-11-11-git-branch-trunk-perspective.md?plain=1">original post</a> on <a href="https://github.com/benknoble/benknoble.github.io/blob/248b8898789f8071a546458604e8f73458d6f7f5/_posts/2024-11-11-git-branch-trunk-perspective.md?plain=1">GitHub</a>.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[Update 2024 November 22: I may have some misunderstandings about trunk-based development, and this article needs a (as-of-yet incomplete) rewrite as a result.]]></summary></entry><entry><title type="html">Copying a git-range-diff to GitHub</title><link href="https://benknoble.github.io/blog/2024/10/04/copy-range-diff/" rel="alternate" type="text/html" title="Copying a git-range-diff to GitHub" /><published>2024-10-04T00:00:00+00:00</published><updated>2024-10-04T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/10/04/copy-range-diff</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/10/04/copy-range-diff/"><![CDATA[<p>I’ve been using <code class="language-plaintext highlighter-rouge">git range-diff</code> for the past few months to explain changes
-between versions of a patch series, such as different versions of a branch after
-responding to review comments on a Pull Request. This post explains how I use
-post the output for Markdown-ish consumption on GitHub.</p>
-
-<h2 id="primer">Primer</h2>
-
-<p>If you didn’t know, <code class="language-plaintext highlighter-rouge">git range-diff</code> is the standard way in Git to document
-changes between versions of a patch series such as you might find sent to a
-development mailing list. For example, <code class="language-plaintext highlighter-rouge">git format-patch</code> can include it
-automatically in the email so that, when responding to review comments with a
-new version, reviewers understand what’s changed.</p>
-
-<p>This all seems only relevant to email-driven workflows, but I argue that it is
-also useful for GitHub- or other web- driven workflows. For example: I work on a
-branch and submit a Pull Request on GitHub. After some review comments, I may
-create some <code class="language-plaintext highlighter-rouge">--fixup</code> commits and <code class="language-plaintext highlighter-rouge">rebase --autosquash</code> them in, perhaps editing
-commit messages, or make any number of other changes. When the time comes to
-<code class="language-plaintext highlighter-rouge">push --force-with-lease --force-if-includes</code>, the only recourse my reviewers
-have to understand the changes is GitHub’s “View changes” button, which attempts
-a textual diff between the files at the old and new branch tip.</p>
-
-<p>Yet a range-diff can capture so much more! Consider, for example, this
-range-diff from a Racket PR I submitted:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1:  907d3ea366 = 1:  35c19f1e83 docs: capitalize the noun Git
-2:  665e037505 ! 2:  6088cd1567 docs: mention the Vi command to add sections
-    @@ pkgs/racket-doc/scribblings/style/textual.scrbl: read code on monitors that acco
-     +So, when you create a file, add a line with @litchar{;; } followed by ctrl-U 99
-     +and @litchar{-}. @margin-note*{In Vi, the command is 99a- followed by Esc.} When
-     +you separate "sections" of code in a file, insert the same line. These lines
-    -+help both writers and readers to orient themselves in a file. In scribble use
-    ++help both writers and readers to orient themselves in a file. In Scribble use
-     +@litchar|{@; }| as the prefix.
-
-      @; -----------------------------------------------------------------------------
-3:  808676897e = 3:  1e7b35da0a docs: link fx+ and unsafe-fx+
-4:  ca7d2a2a56 = 4:  c3e32a5afa docs: correct Git pull command
-5:  1108c95343 = 5:  372bbd4ad5 docs: unquote "merge commit"
-6:  1374b3b095 &lt; -:  ---------- docs: italicize "e.g."
-7:  8f3f1cd517 = 6:  e48525eeb7 docs: correct macro body
--:  ---------- &gt; 7:  38b3c0a75e docs: make explicit the convention for Latin
-</code></pre></div></div>
-
-<p>GitHub won’t show you this difference: I capitalized a word in an old commit
-message, removed the commit that italicized Latin abbreviations and added one
-that clarified said convention. I prefer to provide my reviewers with this
-information to help them understand the changes I’ve made (and to help future
-readers who may be curious, though I admit this is unlikely in most cases).</p>
-
-<h2 id="sharing-a-range-diff-in-markdown-format">Sharing a range-diff in Markdown format</h2>
-
-<p>A range-diff can get quite large if there are substantial code
-changes—arguably, the patch series should become a new branch/PR at such a
-point, but that is not often how things operate in practice. I used to paste
-range-diffs in code blocks like you see above, but with length and GitHub’s
-comment/review interface they became unwieldy.</p>
-
-<p>Instead, I’ve started pasting them inside an HTML <code class="language-plaintext highlighter-rouge">details</code> block so that they
-may be collapsed, summarized, and expanded as desired. I often did this by hand,
-but <a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/copy-range-diff">here’s the script I now use called <code class="language-plaintext highlighter-rouge">copy-range-diff</code></a>:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/sh</span>
-
-<span class="o">{</span>
-  <span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">'&lt;details&gt;&lt;summary&gt;range-diff:&lt;/summary&gt;'</span> <span class="s1">''</span> <span class="s1">'```'</span>
-  <span class="nb">cat
-  printf</span> <span class="s1">'%s\n'</span> <span class="s1">'```'</span> <span class="s1">''</span> <span class="s1">'&lt;/details&gt;'</span>
-<span class="o">}</span> | pbcopy
-</code></pre></div></div>
-
-<p>This script reads standard in and pipes a modified version of it to a clipboard
-command (Linux users probably prefer an <code class="language-plaintext highlighter-rouge">xsel</code> variant). Placed on the clipboard
-after <code class="language-plaintext highlighter-rouge">git range-diff … | copy-range-diff</code> is an HTML <code class="language-plaintext highlighter-rouge">details</code> block containing
-a Markdown code-fence which is easy to paste into GitHub or similar interfaces.
-Sometimes I will add a short summary to the summary tag; other times, I leave
-just the mention of a range-diff.</p>
-
-<p>A small tweak should work for pure HTML output so that instead of triple-tick
-Markdown fences we emit <code class="language-plaintext highlighter-rouge">&lt;pre&gt;</code> tags.</p>
-
-<details><summary>Here's the earlier range-diff, in a details block</summary>
-
-<!-- For some reason, Jekyll doesn't know how to process Markdown fences here,
-     so trick it with HTML. -->
-
-<pre class="highlight">
-<code>1:  907d3ea366 = 1:  35c19f1e83 docs: capitalize the noun Git
-2:  665e037505 ! 2:  6088cd1567 docs: mention the Vi command to add sections
-    @@ pkgs/racket-doc/scribblings/style/textual.scrbl: read code on monitors that acco
-     +So, when you create a file, add a line with @litchar{;; } followed by ctrl-U 99
-     +and @litchar{-}. @margin-note*{In Vi, the command is 99a- followed by Esc.} When
-     +you separate "sections" of code in a file, insert the same line. These lines
-    -+help both writers and readers to orient themselves in a file. In scribble use
-    ++help both writers and readers to orient themselves in a file. In Scribble use
-     +@litchar|{@; }| as the prefix.
-
-      @; -----------------------------------------------------------------------------
-3:  808676897e = 3:  1e7b35da0a docs: link fx+ and unsafe-fx+
-4:  ca7d2a2a56 = 4:  c3e32a5afa docs: correct Git pull command
-5:  1108c95343 = 5:  372bbd4ad5 docs: unquote "merge commit"
-6:  1374b3b095 &lt; -:  ---------- docs: italicize "e.g."
-7:  8f3f1cd517 = 6:  e48525eeb7 docs: correct macro body
--:  ---------- &gt; 7:  38b3c0a75e docs: make explicit the convention for Latin</code>
-</pre>
-
-</details>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve been using git range-diff for the past few months to explain changes between versions of a patch series, such as different versions of a branch after responding to review comments on a Pull Request. This post explains how I use post the output for Markdown-ish consumption on GitHub.]]></summary></entry></feed>
+You can find the <a href="https://github.com/benknoble/benknoble.github.io/blob/248b8898789f8071a546458604e8f73458d6f7f5/_posts/2024-11-11-git-branch-trunk-perspective.md?plain=1">original post</a> on <a href="https://github.com/benknoble/benknoble.github.io/blob/248b8898789f8071a546458604e8f73458d6f7f5/_posts/2024-11-11-git-branch-trunk-perspective.md?plain=1">GitHub</a>.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[Update 2024 November 22: I may have some misunderstandings about trunk-based development, and this article needs a (as-of-yet incomplete) rewrite as a result.]]></summary></entry></feed>
