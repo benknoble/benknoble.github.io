@@ -1,4 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-01-05T17:10:07+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">iMessage contact sync</title><link href="https://benknoble.github.io/blog/2025/01/05/imessage/" rel="alternate" type="text/html" title="iMessage contact sync" /><published>2025-01-05T00:00:00+00:00</published><updated>2025-01-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/05/imessage</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/05/imessage/"><![CDATA[<p>My wife’s iMessage on her Macbook devices had refused to show names for people
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-01-05T19:31:20+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">2025 Goals</title><link href="https://benknoble.github.io/blog/2025/01/05/goals/" rel="alternate" type="text/html" title="2025 Goals" /><published>2025-01-05T00:00:00+00:00</published><updated>2025-01-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/05/goals</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/05/goals/"><![CDATA[<p>A short, probably only-sensible-to-me list of goals. Timeboxed.</p>
+
+<p>Guiding principles:</p>
+<ul>
+  <li>Meet good people. Do good work.</li>
+  <li>Think about what kind of parent I want to be.</li>
+</ul>
+
+<p>Timeboxed:</p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />January: Onboard to new work team</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />February: learn to paint blood on minis</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />March: move to Charlotte</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />April: see a specialist about my shoulder</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />May: step down as vi.se moderator</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />June: local political involvement (“active” allyship)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />July: explore digital privacy/control options (VPN, browsers, email, GitHub alternatives, colocated hosting for anything I decide to host?)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />August: rewrite mosaic program to create gifts</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />September: ???</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />October: ???</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />November: ???</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />December: <em>Star Wars: Imperial Assault</em> painted. Minimum 1 squad completed/mo.
+    <ul class="task-list">
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />January: Jetpack troopers</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />February: ???</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />March: ???</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />April: ???</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />May: ???</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />June: ???</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />July: ???</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />August: ???</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />September: ???</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />October: ???</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />November: ???</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />December: ???</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Generally:</p>
+<ul>
+  <li>make time for boardgames</li>
+  <li>go to USK 2–3 times/week</li>
+  <li>write more (1/week?)
+    <ul>
+      <li>start my book on GUI applications in Racket</li>
+      <li>write about our experience reshaping digital lives</li>
+      <li>share our general personal computing expertise/experience</li>
+    </ul>
+  </li>
+  <li>keep writing fun, useful programs.
+    <ul>
+      <li>think about where to direct open-source energy</li>
+      <li>cabin-mixer</li>
+    </ul>
+  </li>
+  <li>turn down the bed for S</li>
+  <li>knock down todo list priorities</li>
+</ul>
+
+<p>Political ways I can get involved:</p>
+<ul>
+  <li>book access and general literacy</li>
+  <li>digital/mathematical literacy</li>
+  <li>LGBTQIA+ support</li>
+  <li>local reporting</li>
+  <li>digital control/privacy; personal computing</li>
+  <li>de-toxifying masculinity</li>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="goals" /><summary type="html"><![CDATA[A short, probably only-sensible-to-me list of goals. Timeboxed.]]></summary></entry><entry><title type="html">iMessage contact sync</title><link href="https://benknoble.github.io/blog/2025/01/05/imessage/" rel="alternate" type="text/html" title="iMessage contact sync" /><published>2025-01-05T00:00:00+00:00</published><updated>2025-01-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/05/imessage</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/05/imessage/"><![CDATA[<p>My wife’s iMessage on her Macbook devices had refused to show names for people
 in her contacts for a while. Mine started doing the same thing, and I finally
 solved the problem.</p>
 
@@ -788,62 +856,4 @@ this terribly useful. I was probably holding it wrong.</p>
 </code></pre></div></div>
 
 <p>and all is well. Use <code class="language-plaintext highlighter-rouge">git log [--oneline] --graph --boundary --left-right --cherry-mark
-@{push}...</code> to get a feel for what ranges are being compared.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve been using range-diff for a while now, but I’d been stuck with a long input method for arguments. Today I learned a shortcut.]]></summary></entry><entry><title type="html">Little utilities</title><link href="https://benknoble.github.io/blog/2024/11/15/useful-utilities/" rel="alternate" type="text/html" title="Little utilities" /><published>2024-11-15T00:00:00+00:00</published><updated>2024-11-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/15/useful-utilities</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/15/useful-utilities/"><![CDATA[<p>Like many other full-time shell users, I write small utilities to add to my
-toolbox. Let’s compare.</p>
-
-<p><strong>Update 2024 November 17:</strong> Add notes on <code class="language-plaintext highlighter-rouge">git-q</code> and <code class="language-plaintext highlighter-rouge">git-vee</code>.</p>
-
-<h2 id="parallel-thoughts">Parallel thoughts</h2>
-
-<p>I stumbled on <a href="https://blog.plover.com/">MJD’s blog</a> via a <a href="https://git.github.io/rev_news/">Git Rev
-News</a> article from last year and found <a href="https://blog.plover.com/prog/runN.html">a post
-about little utilities</a>. Clearly great
-minds think alike:</p>
-
-<ul>
-  <li>MJD explains an <code class="language-plaintext highlighter-rouge">f</code> command to extract a single field. It’s written in Perl. I
-have a <a href="/blog/2019/09/11/fields/"><code class="language-plaintext highlighter-rouge">fields</code> script</a> that uses
-dynamically-generated AWK to extract as many fields as you want. It’s a longer
-name but useful in more situations.</li>
-  <li>The post goes on to mention <code class="language-plaintext highlighter-rouge">runN</code>, a (mostly sequential but sometimes
-parallel) command runner that replaces some simple loops. But this is a
-straightforward variation on <a href="https://joeyh.name/code/moreutils/">moreutils</a>
-<code class="language-plaintext highlighter-rouge">parallel</code> command<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, so that’s what I use when I remember to.</li>
-</ul>
-
-<h2 id="git">Git</h2>
-
-<p>In <a href="https://blog.plover.com/prog/git-q.html">another post</a>, MJD mentions two Git
-utilities:</p>
-
-<ul>
-  <li>Using <code class="language-plaintext highlighter-rouge">git vee</code> as a wrapper around <code class="language-plaintext highlighter-rouge">git log</code> over a symmetric difference
-shows how branches have diverged. <a href="https://github.com/benknoble/Dotfiles/commit/e0ca3d3402b00edb8ea3580afa1d171d07b6e246">My take, <code class="language-plaintext highlighter-rouge">git
-div</code></a>
-infers the arguments that I would normally pass (like <code class="language-plaintext highlighter-rouge">base...upstream</code>) and
-allows to specify them, but the inference is intentionally unsophisticated. I
-consider this a companion to <code class="language-plaintext highlighter-rouge">git sbup</code> (<code class="language-plaintext highlighter-rouge">git show-branch HEAD HEAD@{upstream}
-HEAD@{push}</code>).</li>
-  <li>Query object information with <code class="language-plaintext highlighter-rouge">git q</code>: <a href="https://github.com/benknoble/Dotfiles/commit/79a27b666323494b0fdcc82dbb1d0b5f73b556e2">my
-take</a>
-is pure shell and only runs a single subprocess rather than one for each ref.
-This collapses equivalent refs but is ~50x more performant (see hyperfine
-output in the commit).</li>
-</ul>
-
-<p>In the words of moreutils: there’s room for more little unix utilities!</p>
-
-<h2 id="notes">Notes</h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p>The <a href="https://joeyh.name/code/moreutils/">moreutils</a> syntax and manual I
-vastly prefer to <a href="https://savannah.gnu.org/projects/parallel/">GNU <code class="language-plaintext highlighter-rouge">parallel</code></a>,
-although GNU parallel supports niceties like a job log, retries, output
-syndication, etc. For “heavy lifting,” I am forced to use GNU parallel (I
-try to write detailed notes on expected uses then), but for short one-liners
-I prefer the moreutils version. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="shell" /><summary type="html"><![CDATA[Like many other full-time shell users, I write small utilities to add to my toolbox. Let’s compare.]]></summary></entry></feed>
+@{push}...</code> to get a feel for what ranges are being compared.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve been using range-diff for a while now, but I’d been stuck with a long input method for arguments. Today I learned a shortcut.]]></summary></entry></feed>
