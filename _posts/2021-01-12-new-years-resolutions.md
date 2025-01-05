@@ -1,6 +1,6 @@
 ---
 title: '2021 Resolutions'
-tags: []
+tags: [ goals ]
 category: [ Blog ]
 ---
 
