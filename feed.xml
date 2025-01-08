@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-01-05T19:36:42+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">2025 Goals</title><link href="https://benknoble.github.io/blog/2025/01/05/goals/" rel="alternate" type="text/html" title="2025 Goals" /><published>2025-01-05T00:00:00+00:00</published><updated>2025-01-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/05/goals</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/05/goals/"><![CDATA[<p>A short, probably only-sensible-to-me list of goals. Timeboxed.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-01-08T02:15:46+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">2025 Goals</title><link href="https://benknoble.github.io/blog/2025/01/05/goals/" rel="alternate" type="text/html" title="2025 Goals" /><published>2025-01-05T00:00:00+00:00</published><updated>2025-01-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/05/goals</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/05/goals/"><![CDATA[<p>A short, probably only-sensible-to-me list of goals. Timeboxed.</p>
 
 <p>Guiding principles:</p>
 <ul>
@@ -8,7 +8,18 @@
 
 <p>Timeboxed:</p>
 <ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />January: Onboard to new work team</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />January: Onboard to new work team. <a href="https://randsinrepose.com/archives/ninety-days/">Inspiration: 90 days</a>
+    <ul class="task-list">
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Stay late. Show up early.</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Accept every lunch invitation you get.</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Always ask about acronyms.</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Say something really stupid.</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Have a drink.</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Tell someone what to do.</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Have an argument.</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Find your inner circle.</li>
+    </ul>
+  </li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />February: learn to paint blood on minis</li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />March: move to Charlotte</li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />April: see a specialist about my shoulder</li>
