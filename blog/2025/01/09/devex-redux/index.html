@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Nospend 2025</title>
+  <title>Junk Drawer : Developer Experience, Redux</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -67,39 +67,114 @@
   </ul>
 </nav>
 
-      <h1>Nospend 2025</h1>
+      <h1>Developer Experience, Redux</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 05 Jan 2025 in Blog</p>
+ on 09 Jan 2025 in Blog</p>
 <div id="post">
-  <p>My wife and I want to be (even more) intentional with our spending this year as
-we work through the purchase of a home. Here are our ideas.</p>
+  <p>Another redux of some DevEx-relevant articles.</p>
 
-<p>The goal is not to keep to these perfectly, but to use them as strong guidelines
-when evaluating spending decisions in these categories. This should keep us
-conscious of where our money goes (alongside our usual budgeting) without
-feeling punitive.</p>
+<h2 id="normalization-of-deviance"><a href="http://danluu.com/wat/">Normalization of Deviance</a></h2>
 
-<h2 id="guidelines-this-year">Guidelines this year</h2>
+<p>Many parts of this post are focused on unregulated environments (so not my
+workplace, which is tied to banking and credit cards). Still, some things
+resonate:</p>
 
-<ol>
-  <li>No coffee out unless it is building a relationship (<em>e.g.</em>, friend, family,
-coworker).</li>
-  <li>No new clothes or shoes unless replacing items that are worn out or do not
-fit.</li>
-  <li>No books except book of the month or book club books that cannot be found at
-the library.</li>
-  <li>No new cosmetics or toiletries except replacements.</li>
-  <li>No new cleaning or household supplies except replacements.</li>
-  <li>Eat out 6 times or fewer per month unless building a relationship.</li>
-  <li>Maximum 3 treats per month.</li>
-  <li>No new cups, mugs, water bottles, etc.</li>
-  <li>No new board games, video games, Lego, etc.</li>
-</ol>
+<blockquote>
+  <p>Often, they try to fix things, and then leave when they can’t make a dent.</p>
+</blockquote>
+
+<blockquote>
+  <p>The data are clear that humans are really bad at taking the time to do things
+that are well understood to incontrovertibly reduce the risk of rare but
+catastrophic events. We will rationalize that taking shortcuts is the right,
+reasonable thing to do. There’s a term for this: the normalization of
+deviance. It’s well studied in a number of other contexts including
+healthcare, aviation, mechanical engineering, aerospace engineering, and civil
+engineering, but we don’t see it discussed in the context of software. In
+fact, I’ve never seen the term used in the context of software.</p>
+</blockquote>
+
+<blockquote>
+  <p>Turning off or ignoring notifications because there are too many of them and
+they’re too annoying? An erroneous manual operation?</p>
+</blockquote>
+
+<blockquote>
+  <p>How many technical postmortems start off with “someone skipped some steps
+because they’re inefficient”, e.g., “the programmer force pushed a bad config
+or bad code because they were sure nothing could go wrong and skipped
+staging/testing”?</p>
+</blockquote>
+
+<blockquote>
+  <p>People don’t automatically know what should be normal, and when new people are
+onboarded, they can just as easily learn deviant processes that have become
+normalized as reasonable processes.</p>
+</blockquote>
+
+<p>And the list of examples goes on! One conclusion seems clear: building reliable
+software demands rooting these out mercilessly. That means efficiency (hello,
+developer experience!) and guardrails around manual operations that demand
+sanity-checks.</p>
+
+<p>Finally, do this:</p>
+
+<blockquote>
+  <ul>
+    <li>Pay attention to weak signals</li>
+    <li>Resist the urge to be unreasonably optimistic</li>
+    <li>Teach employees how to conduct emotionally uncomfortable conversations</li>
+    <li>System operators need to feel safe in speaking up</li>
+    <li>Realize that oversight and monitoring are never-ending</li>
+  </ul>
+</blockquote>
+
+<p>If I don’t have much to add, it’s because there isn’t, frankly, much else to
+say. Go read the original.</p>
+
+<h2 id="the-chilling-effect-versus-attempts-to-fix-things"><a href="https://rachelbythebay.com/w/2021/04/30/speech/">The chilling effect versus attempts to fix things</a></h2>
+
+<p>Building on the previous article: we’ve got to talk about things and then fix
+them. When you have “WTF” moments—see above—say something. <em>Create a weak
+signal.</em> (And then pay attention to and amplify others.)</p>
+
+<h2 id="the-honest-troubleshooting-code-of-conduct"><a href="https://rachelbythebay.com/w/2021/05/01/code/">The Honest Troubleshooting Code of Conduct</a></h2>
+
+<p>I think Bryan Cantrill would agree with this sentiment: the resounding theme of
+the CoC above is “We are here to make things better.” We are here to improve the
+customers lives. That comes above all, and treating that as shared vision will
+get us much further than bickering about blame or passing off issues on other
+folks.</p>
+
+<h2 id="baking-those-potatoes-with-microservices-and-vendors"><a href="https://rachelbythebay.com/w/2020/08/17/potato/">Baking those potatoes with microservices and vendors</a></h2>
+
+<p>Accountability! Rawr!</p>
+
+<p>This is more of the same, actually: own the problem and fix it, even if you
+think it comes from another place. Don’t toss the hot potato to the next person.</p>
+
+<p>Don’t create gaps in responsibility. Fill them.</p>
+
+<h2 id="infra-teams-good-bad-or-none-at-all"><a href="https://rachelbythebay.com/w/2020/05/19/abc/">Infra teams: good, bad, or none at all</a></h2>
+
+<p>Strong language makes a point, even if I don’t appreciate the ad hominem
+(“pathetic mass of losers”). My workplace feels like it went from C to something
+that resembles this part of B:</p>
+
+<blockquote>
+  <p>Random product people now have to know about arbitrary crap enforced by
+someone else like “kubelets” and “Jenkins”. They burn their cycles and sanity
+on terrible systems instead of improving the experience for the company’s end
+user.</p>
+</blockquote>
+
+<p>We keep making improvements, but getting to A requires more than a series of
+band-aids: it requires deep investment that we just aren’t seeing be made.</p>
 
 </div>
 <hr/>
@@ -107,8 +182,8 @@ the library.</li>
 <ul class="tags">
   
     <li>
-      <a href="https://benknoble.github.io/tags#financial" class="tag">
-        financial
+      <a href="https://benknoble.github.io/tags#developer+experience" class="tag">
+        developer experience
       </a>
     </li>
   
@@ -128,8 +203,8 @@ the library.</li>
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2025/01/05/nospend/";
-    this.page.identifier = "/blog/2025/01/05/nospend";
+    this.page.url = "https://benknoble.github.io/blog/2025/01/09/devex-redux/";
+    this.page.identifier = "/blog/2025/01/09/devex-redux";
   };
 
   function load_comments(div) {
@@ -148,21 +223,17 @@ the library.</li>
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2025/01/05/imessage/"
-      title="iMessage contact sync">
+    <a href="https://benknoble.github.io/blog/2025/01/05/nospend/"
+      title="Nospend 2025">
       Previous</a>
   </span>
   
   
-  <span id="next">
-    <a href="https://benknoble.github.io/blog/2025/01/09/devex-redux/"
-       title="Developer Experience, Redux">
-      Next</a>
-  </span>
+  <span id="no-next">Next</span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#nospend-2025">
+  <a href="/categories/#developer-experience-redux">
     Back to posts</a>
 </div>
 
