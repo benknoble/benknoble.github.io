@@ -43,6 +43,9 @@ Here is my short list of steps for digital control.
   browsers from [Mozilla](https://www.mozilla.org/firefox/) (though Firefox has
   been [under some fire
   lately](https://www.reuters.com/technology/mozilla-hit-with-privacy-complaint-over-firefox-user-tracking-2024-09-25/)).
+- Claw back privacy from invasive trackers. The [EFF published a guide on how to
+  limit what Meta can do with your
+  data](https://www.eff.org/deeplinks/2025/01/mad-meta-dont-let-them-collect-and-monetize-your-personal-data).
 - Be aware of how much time you spend on individual sites (esp. the usual social
   suspects like Twitter, Instagram, the [cesspit that is
   Facebook](https://www.wheresyoured.at/the-slop-society/), YouTube, etc.)
