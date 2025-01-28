@@ -1,4 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-01-23T18:56:26+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Steps to reclaim digital control</title><link href="https://benknoble.github.io/blog/2025/01/18/digital-control/" rel="alternate" type="text/html" title="Steps to reclaim digital control" /><published>2025-01-18T00:00:00+00:00</published><updated>2025-01-18T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/18/digital-control</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/18/digital-control/"><![CDATA[<p>Here is my short list of steps for digital control.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-01-28T03:18:17+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Letter to the editor: Populism is not the answer to monopoly and fraud</title><link href="https://benknoble.github.io/blog/2025/01/27/satisfaction/" rel="alternate" type="text/html" title="Letter to the editor: Populism is not the answer to monopoly and fraud" /><published>2025-01-27T00:00:00+00:00</published><updated>2025-01-27T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/27/satisfaction</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/27/satisfaction/"><![CDATA[<p>In a <em>Wall Street Journal</em> opinion piece titled <a href="https://www.wsj.com/opinion/american-society-was-built-for-populism-not-elitism-nature-and-history-prove-technocrats-wrong-cf9e7a2f?page=1">“American Society Was Built for
+Populism, Not
+Elitism”</a>
+(paywalled), Karl Zinsmeister argues that power has concentrated largely in
+the hands of experts and authorities “indoctrinated in universities” (in other
+words, too liberal for the mainstream).</p>
+
+<p>While he correctly assess a backlash to authoritarian and central control, he
+misses both symptom and cause. The backlash is not against a supposedly
+left-leaning power network, but rather against an oligarchic class whose waves
+of corrupt money have undue influence in American life. <a href="https://www.ftc.gov/system/files/ftc_gov/pdf/bedoya-statement-emergency-motion.pdf">FTC Commissioner Alvaro
+M. Bedoya understands what people
+need</a>:</p>
+
+<blockquote>
+  <p>What they [working class people] do talk about is how powerful companies are
+skirting or abusing the law to force farmers, workers, and small businessmen
+to do what they want, when they want, or else. How the government isn’t doing
+anything about it. And how they’re going broke because of it.</p>
+</blockquote>
+
+<p>If there is also a backlash against the scientific institutions of universities,
+it is due to a <a href="https://pluralistic.net/2024/09/25/epistemological-chaos/">protracted campaign against
+epistemology</a> by big
+business. Oligarchs have an easier time staying rich in a world muddied by
+misinformation. Meanwhile, we explicitly <em>want</em> to delegate fact-finding to the
+experts: that creates <a href="https://pluralistic.net/2024/11/21/policy-based-evidence/">evidence-based
+policy</a>.</p>
+
+<p>What is Zinsmeister’s solution to his spectre of centralized liberal control?
+Hand over federal programs to private control: his writing on American
+philanthropy indicates to me that he believes a wealthy élite will rule instead.
+Same centralized control, different powerful controllers.</p>
+
+<p>The answer is neither populism nor technocracy nor oligarchy. The answer is
+regulation of power and markets and strong institutional science (necessarily
+separated from government).</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="politics" /><summary type="html"><![CDATA[In a Wall Street Journal opinion piece titled “American Society Was Built for Populism, Not Elitism” (paywalled), Karl Zinsmeister argues that power has concentrated largely in the hands of experts and authorities “indoctrinated in universities” (in other words, too liberal for the mainstream).]]></summary></entry><entry><title type="html">Steps to reclaim digital control</title><link href="https://benknoble.github.io/blog/2025/01/18/digital-control/" rel="alternate" type="text/html" title="Steps to reclaim digital control" /><published>2025-01-18T00:00:00+00:00</published><updated>2025-01-18T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/18/digital-control</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/18/digital-control/"><![CDATA[<p>Here is my short list of steps for digital control.</p>
 
 <h2 id="basics">Basics</h2>
 
@@ -792,45 +828,4 @@ open them all immediately, I pipe that to <code class="language-plaintext highli
    <span class="nv">locations</span><span class="p">))</span>
 
 <span class="p">(</span><span class="nb">for-each</span> <span class="p">(</span><span class="nf">compose1</span> <span class="nv">displayln</span> <span class="nv">first</span><span class="p">)</span> <span class="nv">posts</span><span class="p">)</span>
-</code></pre></div></div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[Day 2 of “Advent of Racket”]]></summary></entry><entry><title type="html">Sapling Cage</title><link href="https://benknoble.github.io/blog/2024/11/27/sapling-cage/" rel="alternate" type="text/html" title="Sapling Cage" /><published>2024-11-27T00:00:00+00:00</published><updated>2024-11-27T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2024/11/27/sapling-cage</id><content type="html" xml:base="https://benknoble.github.io/blog/2024/11/27/sapling-cage/"><![CDATA[<p>My thoughts on Margaret Killjoy’s <em>Sapling Cage</em>.</p>
-
-<h2 id="balance-in-all-things">Balance in all things</h2>
-
-<p>Reading <em>Sapling Cage</em> took me back to reading fantasy as a preteen. Simply
-written for a younger audience, it’s a page-turner for (nominally) grown adults,
-too. Killjoy hooked me in to a world in the grips of dynamic power struggles
-without complex dialogue, elaborate descriptions, or impossible backdrops. In
-fact, except for the violence and a certain caldera, it all feels rather
-mundane. This leaves room for the excitement of the coming of age tale, the
-making of friends, the fear of discovery.</p>
-
-<h2 id="words-actions-magic">Words, actions, magic</h2>
-
-<p>Each of these has power. A witch must use all three.</p>
-
-<p>Indeed, our main character Lorel observes and experiences violence for what it
-is: hard, traumatic, gory, mournful. Yet she also experiences other powerful
-actions: tentative allies unite against a threat; witches defend and enfold
-someone who is other; a knight speaks for the weak.</p>
-
-<p>Even on the very beginning of a journey into magic, we all learn something about
-finding our power.</p>
-
-<h2 id="as-a-cisgender-man">As a cisgender man</h2>
-
-<p>I witnessed through Killjoy’s narrative a story of complexity: growing up as a
-boy while being a girl. The main character struggles to figure out what to make
-of her body—would it be easier if it matched the expectations of others? Would
-such a change make her less attractive to a crush? Is this not her body,
-imperfect as it is? <em>Is it ok not to like her body?</em></p>
-
-<p>Moreover, she navigates fear and uncertainty: the fear of being found out, which
-might be deadly. The uncertainty of who she can trust. Simultaneously her heart
-swells with joy each time she is “girl” or “she.” Like Lorel’s friends (and even
-rivals), we can all listen, learn, and love.</p>
-
-<p>Killjoy reminds me that these questions—Lorel’s questions—are worth asking
-of ourselves, and that we all experience their answers differently.</p>
-
-<p>I highly recommend <em>Sapling Cage</em> (and my thanks to Cory Doctorow, whose
-recommendation put it on my reading list).</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="books" /><summary type="html"><![CDATA[My thoughts on Margaret Killjoy’s Sapling Cage.]]></summary></entry></feed>
+</code></pre></div></div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[Day 2 of “Advent of Racket”]]></summary></entry></feed>
