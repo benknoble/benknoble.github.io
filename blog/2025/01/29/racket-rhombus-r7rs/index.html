@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Home</title>
+  <title>Junk Drawer : Collected chats about Racket</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -67,35 +67,115 @@
   </ul>
 </nav>
 
-      <h1>Home</h1>
-      <p><em>Do you keep your junk drawer full of fun and creative things?</em></p>
-
-<p>On this site, <a href="/about/#me">I break down complex answers to simple questions</a>.</p>
-
-<h2 id="latest-post">Latest Post</h2>
-
-<p><a href="/blog/2025/01/29/racket-rhombus-r7rs/">Collected chats about Racket</a> posted on 29 January 2025</p>
-
-<p>Excerpt:</p>
-
-<blockquote>
+      <h1>Collected chats about Racket</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 29 Jan 2025 in Blog</p>
+<div id="post">
   <p>This post serves primarily to host an indexable copy of some chat replies about
 the Racket programming language.</p>
-</blockquote>
 
-<h2 id="recent-posts">Recent Posts</h2>
+<h2 id="questions-about-r7rs-implicit-phasing">Questions about <a href="https://codeberg.org/scheme/r7rs/issues/217">R7RS implicit phasing</a></h2>
+
 <ul>
-
   <li>
-  <a href="/blog/2025/01/27/satisfaction/">Letter to the editor: Populism is not the answer to monopoly and fraud</a> posted on 27 January 2025
+    <p><em>a</em>: hm. what stops a <code class="language-plaintext highlighter-rouge">#lang</code> from reimplementing whatever algorithm a
+r7rs-large compiler does?</p>
   </li>
-
   <li>
-  <a href="/blog/2025/01/18/digital-control/">Steps to reclaim digital control</a> posted on 18 January 2025
+    <p><em>b</em>: in particular, nobody has yet worked out a way to maintain the Separate
+Compilation Guarantee™ when the compiler does phasing automatically</p>
   </li>
+  <li>
+    <p><em>c</em>: You can certainly implement that (the same way that algol60 is
+implemented) but you would lose the kind of integration between r7rs
+modules/macros and racket modules/macros that eg the <code class="language-plaintext highlighter-rouge">#lang r6rs</code>
+implementation has</p>
+  </li>
+  <li>
+    <p><em>me</em>: Would you have to? I’m hand-waving and clearly a non-expert, but it
+seems like it should be possible (procedural macros!) to implement enough of
+the compiler and expander as a compile-time process of the lang, and then
+eventually expand into an equivalent Racket module with all the relevant
+annotations added.</p>
 
+    <p>This doesn’t seem efficient (since it’s sort of like expanding the whole program
+  twice, or worse possibly in some quadratic way), but IUIC typed racket has to do
+  something similar in terms of duplicate expansions. Obviously the effort to
+  implement this way would be higher (?).</p>
+  </li>
+  <li>
+    <p><em>c</em>: You might be able to do this especially for a single module, but it’s not
+obvious if you could get the necessary information from other modules. It’s
+possible you could build a lot of infrastructure to do it, but I’m not
+certain.</p>
+  </li>
 </ul>
 
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#racket" class="tag">
+        racket
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2025/01/29/racket-rhombus-r7rs/";
+    this.page.identifier = "/blog/2025/01/29/racket-rhombus-r7rs";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2025/01/27/satisfaction/"
+      title="Letter to the editor: Populism is not the answer to monopoly and fraud">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#collected-chats-about-racket">
+    Back to posts</a>
+</div>
 
     </section>
     <footer>
