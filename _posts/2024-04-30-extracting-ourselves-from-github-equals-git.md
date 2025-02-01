@@ -114,6 +114,14 @@ useful set of working definitions, then tease apart some history and nuance.
 
 ### Different Kinds of Forks
 
+**Update 2025 February 2nd**: What I call "forks, Forks, and divergent forks"
+below, [Drew DeVault calls "trees, Forks, and
+forks"](https://drewdevault.com/2019/05/24/What-is-a-fork.html)[^4]. This is
+much closer to the historically used terminology, and I've started using "tree"
+and "fork" interchangeably. DeVault also wonderfully explains how all these
+forks---trees---are part of what make Git distributed and why GitHub co-opted
+the meaning. I highly recommend his article.
+
 I'm going to distinguish 3 kinds of forks: forks, Forks, and divergent forks.
 
 - A fork is a URL[^2] that points to a related[^3] repository. In a non-bare
@@ -247,5 +255,8 @@ develop better software, together.
 [^3]: It's not strictly necessary for the histories to be related at the
     commit-graph level: `git merge` accepts `--allow-unrelated-histories` for a
     reason. Read related in a social, "this is relevant to me" sense.
+
+[^4]: Well, he doesn't capitalize "Fork" when referring to GitHub, but I will to
+    make it visually distinct.
 
 [fork_history]: https://en.wikipedia.org/wiki/Fork_(software_development)
