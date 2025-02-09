@@ -16,15 +16,16 @@ you can recover the original branch using GitHub's `refs/pull/N/head` namespace,
 which isn't guaranteed on other vendors, it can still be harmful to hit the
 squash fence.
 
-Worse, squashing to merge traps you in a vicious cycle. In an ideal world, good
-commits help us fall into a virtuous cycle of success: they provide more
-information so that our tools are more useful, which encourages us to use our
-tools more, which reveals more opportunities to pack information into commits,
-and so on. Meanwhile, squashing everything by default traps us in the antithesis
-of this cycle—commit messages are useless if they'll be squashed, so they become
-useless in a self-fulfilling prophecy, encouraging squash and merge ad nauseum.
-We remove incentives to use our information-gathering tools; not using them
-blinds us to their power, keeping them from being useful.
+Worse, [squashing to merge traps you in a vicious
+cycle](https://cbea.ms/git-commit/). In an ideal world, good commits help us
+fall into a virtuous cycle of success: they provide more information so that our
+tools are more useful, which encourages us to use our tools more, which reveals
+more opportunities to pack information into commits, and so on. Meanwhile,
+squashing everything by default traps us in the antithesis of this cycle—commit
+messages are useless if they'll be squashed, so they become useless in a
+self-fulfilling prophecy, encouraging squash and merge ad nauseum. We remove
+incentives to use our information-gathering tools; not using them blinds us to
+their power, keeping them from being useful.
 
 No other investment that we make pays off as long as good commits. Good commits
 pay dividends for the entire lifetime of a project and become more valuable the
@@ -54,9 +55,20 @@ would have you believe.
 
 Don't forget: GitHub foisted the squash and merge option upon us with bad
 defaults to back it up. To do the equivalent in Git requires knowledge of
-interactive rebase or the `cherry-pick` command. Git knows how to merge and
-rebase via commands of the same name and flags to `pull`. Squash and merge is a
-convenient button when needed, but the need is so infrequent that its only
-mention in Git proper is the `squash` verb in the lexicon of interactive rebase.
+interactive rebase, the `cherry-pick` command, or (**Update 2025-02-08**) `git
+merge --squash` (which doesn't even create the final commit[^1]). Git knows how to
+merge and rebase via commands of the same name and flags to `pull`. "Squash and
+merge" is a convenient button when needed, but the need is so infrequent that
+its only mention in Git proper is the `squash` verb in the lexicon of
+interactive rebase and the `--squash` option to `git merge`. Git itself gives
+almost no compelling use case and little air-time to the merge option.
 
 You tread this route at your own peril.
+
+## Notes
+
+[^1]: In fact, it seems operationally equivalent to `git merge` followed by `git
+    reset HEAD^`, without the extra commit object floating around.
+    Unfortunately, I was wrong in my original rendition to suggest this came
+    _only_ from GitHub. See [commit 7d0c68871a (git-merge --squash,
+    2006-06-23)](https://github.com/git/git/commit/7d0c68871a).
