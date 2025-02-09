@@ -88,15 +88,16 @@ you can recover the original branch using GitHub’s <code class="language-plain
 which isn’t guaranteed on other vendors, it can still be harmful to hit the
 squash fence.</p>
 
-<p>Worse, squashing to merge traps you in a vicious cycle. In an ideal world, good
-commits help us fall into a virtuous cycle of success: they provide more
-information so that our tools are more useful, which encourages us to use our
-tools more, which reveals more opportunities to pack information into commits,
-and so on. Meanwhile, squashing everything by default traps us in the antithesis
-of this cycle—commit messages are useless if they’ll be squashed, so they become
-useless in a self-fulfilling prophecy, encouraging squash and merge ad nauseum.
-We remove incentives to use our information-gathering tools; not using them
-blinds us to their power, keeping them from being useful.</p>
+<p>Worse, <a href="https://cbea.ms/git-commit/">squashing to merge traps you in a vicious
+cycle</a>. In an ideal world, good commits help us
+fall into a virtuous cycle of success: they provide more information so that our
+tools are more useful, which encourages us to use our tools more, which reveals
+more opportunities to pack information into commits, and so on. Meanwhile,
+squashing everything by default traps us in the antithesis of this cycle—commit
+messages are useless if they’ll be squashed, so they become useless in a
+self-fulfilling prophecy, encouraging squash and merge ad nauseum. We remove
+incentives to use our information-gathering tools; not using them blinds us to
+their power, keeping them from being useful.</p>
 
 <p>No other investment that we make pays off as long as good commits. Good commits
 pay dividends for the entire lifetime of a project and become more valuable the
@@ -126,12 +127,29 @@ would have you believe.</p>
 
 <p>Don’t forget: GitHub foisted the squash and merge option upon us with bad
 defaults to back it up. To do the equivalent in Git requires knowledge of
-interactive rebase or the <code class="language-plaintext highlighter-rouge">cherry-pick</code> command. Git knows how to merge and
-rebase via commands of the same name and flags to <code class="language-plaintext highlighter-rouge">pull</code>. Squash and merge is a
-convenient button when needed, but the need is so infrequent that its only
-mention in Git proper is the <code class="language-plaintext highlighter-rouge">squash</code> verb in the lexicon of interactive rebase.</p>
+interactive rebase, the <code class="language-plaintext highlighter-rouge">cherry-pick</code> command, or (<strong>Update 2025-02-08</strong>) <code class="language-plaintext highlighter-rouge">git
+merge --squash</code> (which doesn’t even create the final commit<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>). Git knows how to
+merge and rebase via commands of the same name and flags to <code class="language-plaintext highlighter-rouge">pull</code>. “Squash and
+merge” is a convenient button when needed, but the need is so infrequent that
+its only mention in Git proper is the <code class="language-plaintext highlighter-rouge">squash</code> verb in the lexicon of
+interactive rebase and the <code class="language-plaintext highlighter-rouge">--squash</code> option to <code class="language-plaintext highlighter-rouge">git merge</code>. Git itself gives
+almost no compelling use case and little air-time to the merge option.</p>
 
 <p>You tread this route at your own peril.</p>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>In fact, it seems operationally equivalent to <code class="language-plaintext highlighter-rouge">git merge</code> followed by <code class="language-plaintext highlighter-rouge">git
+reset HEAD^</code>, without the extra commit object floating around.
+Unfortunately, I was wrong in my original rendition to suggest this came
+<em>only</em> from GitHub. See <a href="https://github.com/git/git/commit/7d0c68871a">commit 7d0c68871a (git-merge –squash,
+2006-06-23)</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
 </div>
 <hr/>
