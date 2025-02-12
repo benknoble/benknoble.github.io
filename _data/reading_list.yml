@@ -256,3 +256,9 @@
   url: http://thecodelesscode.com/contents
 - title: Basic Things for Software Projects
   url: https://matklad.github.io/2024/03/22/basic-things.html
+- title: Accidentally Turing-Complete
+  url: https://beza1e1.tuxen.de/articles/accidentally_turing_complete.html
+- title: Incompleteness Ex Machina
+  url: https://arxiv.org/abs/1909.04569
+- title: Postmortem lessons
+  url: https://github.com/danluu/post-mortems
