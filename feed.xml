@@ -1,4 +1,140 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-02-09T02:51:05+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Why I still prefer Vim</title><link href="https://benknoble.github.io/blog/2025/02/05/neovim/" rel="alternate" type="text/html" title="Why I still prefer Vim" /><published>2025-02-05T00:00:00+00:00</published><updated>2025-02-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/05/neovim</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/05/neovim/"><![CDATA[<p>It turns out I might have only written this down once, so here it is.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-02-12T01:01:44+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">RE: the Commit Crunch: StackOverflow blog hosts naked corporate interests alongside misinformation</title><link href="https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest/" rel="alternate" type="text/html" title="RE: the Commit Crunch: StackOverflow blog hosts naked corporate interests alongside misinformation" /><published>2025-02-10T00:00:00+00:00</published><updated>2025-02-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest/"><![CDATA[<p>Following mention of a new diff algorithm in <a href="https://git.github.io/rev_news/2024/08/31/edition-114/">Edition 114 of Git Rev
+News</a>, I dissect
+problems with the post <a href="https://stackoverflow.blog/2024/12/20/this-developer-tool-is-40-years-old-can-it-be-improved/">“This developer tool is 40 years old: can it be
+improved?”</a>.
+I offer clarifications for the misinformation in the article, and I mention
+free, builtin ways to get diff improvements.</p>
+
+<h2 id="on-dates">On dates</h2>
+
+<p>Bill Harding writes:</p>
+
+<blockquote>
+  <p>Since IDEs are refreshed every few years, maybe you’ve guessed that your
+oldest tool in active use is “git.” It was first released nearly 20 years ago,
+back in 2005. Or maybe you prefer to code with the classic old-school text
+editors, like Sublime Text (2008) or vim (1991).</p>
+</blockquote>
+
+<p>Yet Vim and Git are under active development, getting “refreshed” perhaps more
+regularly than other major (unnamed?) IDEs due to their distributed,
+collaborative open-source practices. The core model may have changed little, but
+Vim 9.1 in 2025 is not your 1991 Vim, nor is Git 2.48.1 in 2025 your Git from
+2005.</p>
+
+<p>It is true that the Myers diff algorithm (no air quotes necessary, thank you)
+originates in 1986, but the colors on GitHub are not its byproduct; rather, I
+believe an <a href="/blog/2020/08/06/stop-sed-i/#addendum-scripting-ed">edit script is the typical output</a>. This is also
+demonstrated on page 3, the same figure which Harding cites.</p>
+
+<h2 id="on-research">On research</h2>
+
+<p>As Git Rev News mentions, Git supports other algorithms including
+<a href="https://github.com/git/git/commit/3443546f6"><code class="language-plaintext highlighter-rouge">minimal</code></a>,
+<a href="https://github.com/git/git/commit/92b7de93fb7801"><code class="language-plaintext highlighter-rouge">patience</code></a>, and
+<a href="https://github.com/git/git/commit/8c912eea94a"><code class="language-plaintext highlighter-rouge">histogram</code></a>. <a href="/blog/2025/02/01/git-roundup/#how-different-are-different-diff-algorithms-in-git">Some research
+exists on their properties</a>.</p>
+
+<p>This remains an active area of improvement, I believe.</p>
+
+<h2 id="on-diffs">On diffs</h2>
+
+<p>Harding writes:</p>
+
+<blockquote>
+  <p>The Myers diff algorithm classifies all code change lines as binary: either
+“add” or “delete.”</p>
+
+  <p>The Commit Cruncher algorithm tested recognizes three times more types of
+changed operations: Added, Deleted, Updated, Moved, Find/Replaced, and
+Copy/Pasted</p>
+</blockquote>
+
+<p>Yet Git can detect moved lines with <code class="language-plaintext highlighter-rouge">--color-moved</code> (enable by default with
+<a href="https://github.com/benknoble/Dotfiles/blob/151d67dd2002f00d01c3f4fc1130815ae522116a/links/gitconfig#L101"><code class="language-plaintext highlighter-rouge">diff.colorMoved =
+default</code></a>).</p>
+
+<p>Or consider</p>
+
+<blockquote>
+  <p>One example where Myers requires more work by a reviewer is when a code change
+involves white space, like the change shown earlier in this post:</p>
+</blockquote>
+
+<p>Yet Git has <em>several</em> modes for making whitespace easier to review, like
+<code class="language-plaintext highlighter-rouge">--ignore-space-change</code>, <code class="language-plaintext highlighter-rouge">--ingore-space-at-eol</code>, and <code class="language-plaintext highlighter-rouge">--ignore-all-space</code>. This
+also typically shortcuts the complex changes from extracting methods, depending
+on how far the new function is relocated. In Harding’s example, I think
+<code class="language-plaintext highlighter-rouge">--ignore-space-change</code> would produce a similar diff (but we’ll never know
+because sources for the diffs are not given).</p>
+
+<p>Then there’s “incremental updates” (whatever that means in this context):</p>
+
+<blockquote>
+  <p>The same diff through a GitClear lens condenses the incremental update to a
+single line, where the new (or removed) characters are shown inline:</p>
+</blockquote>
+
+<p>Git has a <code class="language-plaintext highlighter-rouge">--word-diff</code> mode that does the same thing and can be configured
+per-invocation depending on where you want to consider interesting boundaries.
+In my experience, it trivializes Harding’s example diff, too.</p>
+
+<p>Harding later tries to explain Commit Cruncher and writes:</p>
+
+<blockquote>
+  <p>The Myers diff algorithm works by inspecting two inputs: the repo state before
+commit A and the state after commit C.</p>
+</blockquote>
+
+<p>This is imprecise, just like the earlier formulation</p>
+
+<blockquote>
+  <p>[Myers] offered what became the canonical solution for representing the
+difference between the state of a git repo “before” and “after” a developer’s
+git commit.</p>
+</blockquote>
+
+<p>Git can generate diffs between blobs, trees, commits, and commit ranges. Harding
+is either being intentionally imprecise (why?) or doesn’t know much about Git’s
+diffs, the very thing his company’s product is trying to improve.</p>
+
+<h2 id="on-presentation">On presentation</h2>
+
+<p>I’ve written before that GitHub’s UI has problems<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, but this highlights one
+more: GitHub has very poor support for examining diffs.</p>
+
+<ul>
+  <li>GitHub does not natively support proper range-diffs. When a branch is
+force-pushed, GitHub only offers its standard difference between the commits,
+which shows a flat tree diff rather than a commit-by-commit comparison,
+including commit messages. In short, <a href="/blog/2025/02/01/git-roundup/#reorient-github-pull-requests-around-changesets">you can’t see how the PR evolved</a>.</li>
+  <li>GitHub doesn’t support diff options beyond “ignore whitespace” (and I believe
+it tries to automatically do something akin to <code class="language-plaintext highlighter-rouge">--word-diff</code>). <strong>This includes
+<code class="language-plaintext highlighter-rouge">--color-moved</code> for showing moved lines.</strong> In practice, developers creating
+commits may have a good idea about how to communicate the diff (<a href="https://lore.kernel.org/git/CALnO6CDqHJP_wa_8eKHBkU+_1vQ6D+C=QRZyW1FKnG71wDxnnQ@mail.gmail.com/">I and others
+have experimented with communicating these options in
+commits</a>).</li>
+</ul>
+
+<p>Improving these situations or moving away from GitHub as your primary diff
+viewer would be free alternatives to a Harding’s tool.</p>
+
+<h2 id="in-conclusion">In conclusion</h2>
+
+<p>The StackOverflow blog shamelessly shills for a company to get you to buy a
+product you probably don’t need. What’s new?</p>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="/blog/2024/10/04/copy-range-diff/">PR reviews</a> lack
+<a href="/blog/2025/02/01/git-roundup/#reorient-github-pull-requests-around-changesets">threading</a>, and it has <a href="/blog/2024/08/02/github-squash/">bad
+defaults for some kinds of merges</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><summary type="html"><![CDATA[Following mention of a new diff algorithm in Edition 114 of Git Rev News, I dissect problems with the post “This developer tool is 40 years old: can it be improved?”. I offer clarifications for the misinformation in the article, and I mention free, builtin ways to get diff improvements.]]></summary></entry><entry><title type="html">Why I still prefer Vim</title><link href="https://benknoble.github.io/blog/2025/02/05/neovim/" rel="alternate" type="text/html" title="Why I still prefer Vim" /><published>2025-02-05T00:00:00+00:00</published><updated>2025-02-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/05/neovim</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/05/neovim/"><![CDATA[<p>It turns out I might have only written this down once, so here it is.</p>
 
 <p>The short version is I use Vim</p>
 <ul>
@@ -683,88 +819,4 @@ the library.</li>
   <li>Maximum 3 treats per month.</li>
   <li>No new cups, mugs, water bottles, etc.</li>
   <li>No new board games, video games, Lego, etc.</li>
-</ol>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="financial" /><summary type="html"><![CDATA[My wife and I want to be (even more) intentional with our spending this year as we work through the purchase of a home. Here are our ideas.]]></summary></entry><entry><title type="html">Day one on a new team</title><link href="https://benknoble.github.io/blog/2025/01/04/day1/" rel="alternate" type="text/html" title="Day one on a new team" /><published>2025-01-04T00:00:00+00:00</published><updated>2025-01-04T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/04/day1</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/04/day1/"><![CDATA[<p>This is my shortlist of “Day 1 questions” for new teams to help me get up to
-speed. In no particular order:</p>
-
-<ol>
-  <li>Domain &amp; Design</li>
-  <li>Performance budget</li>
-  <li>Expected scale factors</li>
-  <li>Customer success</li>
-  <li>Team norms and culture</li>
-</ol>
-
-<p>Examples drawn from real work.</p>
-
-<h2 id="domain--design">Domain &amp; Design</h2>
-
-<p>What do we do? How do we accomplish it?</p>
-
-<p>This could be things like “manage case lifecycles via tenant-configured platform
-services,” “keep data flowing with automatically managed Kafka instances,” or
-“provide cost recommendations to clients by analyzing data ingested from their
-systems.”</p>
-
-<p>Ideally this comes with a domain breakdown of key terms. Examples: tokenized
-plastic/PAN; drain/kill/rehydrate; Snowflake contract and connection details.</p>
-
-<h2 id="performance-budget">Performance budget</h2>
-
-<p>What is the budget? I want to know the total expectations and by subsystem (we
-should have those, right?). How do we know if we are (not) meeting those
-budgets? What characteristics do we measure (mean, stddev, IQR, p90, shape of
-distribution<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, etc.) and what are they? What are our target specs end-to-end
-(our hardware and our clients’ hardware, with a focus on the clients).</p>
-
-<p>See <a href="https://infrequently.org/series/performance-inequality">Performance inequality on the
-web</a> for what happens
-when we get this right (or wrong).</p>
-
-<h2 id="expected-scale-factors">Expected scale factors</h2>
-
-<p>Scale factors are the things whose increase will be felt across the system.
-Examples might be number of customers, objects, transactions, queries, etc.. How
-have we designed to meet changing needs with scale? How do we know if we are
-(not)?</p>
-
-<p>We may be planning to reimplement and rearchitect if we can’t meet new scale
-requirements, and that’s an acceptable answer as long as we understand the cost
-and know when (preferably before) we hit those points.</p>
-
-<h2 id="customer-success">Customer success</h2>
-
-<p>How do we know what our customers need? How do we know if those needs are (not)
-met? How do we know when something goes wrong and what it is? How do we get
-side-by-side feedback? How is customer engagement or success incorporated back
-into the product?</p>
-
-<h2 id="team-norms-and-culture">Team norms and culture</h2>
-
-<p>How do we communicate (meetings, chat, email)? How do we track work-to-do, work
-done, priorities, and roadblocks?</p>
-
-<p>How do we develop and deploy code or land it in main? This includes</p>
-
-<ul>
-  <li>important areas of review focus</li>
-  <li>what PRs/pushes look like (and whether we use PRs or something else)</li>
-  <li>commit hygiene standards (<a href="https://cbea.ms/git-commit/">an example set of hygiene
-standards</a>, though it doesn’t cover scoping
-changes or branch/PR hygiene)</li>
-  <li>code quality (what’s automated and what’s not)</li>
-  <li>local setup and development</li>
-  <li>test data</li>
-  <li>pairing/mobbing norms</li>
-</ul>
-
-<h2 id="notes">Notes</h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p>We must not commit crimes of statistics, after all. Don’t assume unimodal,
-Normal distributions. Please provide a measure of spread with a measure of
-central tendency. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="software-engineering" /><summary type="html"><![CDATA[This is my shortlist of “Day 1 questions” for new teams to help me get up to speed. In no particular order:]]></summary></entry></feed>
+</ol>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="financial" /><summary type="html"><![CDATA[My wife and I want to be (even more) intentional with our spending this year as we work through the purchase of a home. Here are our ideas.]]></summary></entry></feed>

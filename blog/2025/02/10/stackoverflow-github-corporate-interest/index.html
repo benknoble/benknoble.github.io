@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : RE: the Commit Crunch: StackOverflow blog hosts naked corporate interests alongside misinformation</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>RE: the Commit Crunch: StackOverflow blog hosts naked corporate interests alongside misinformation</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 10 Feb 2025 in Blog</p>
+<div id="post">
+  <p>Following mention of a new diff algorithm in <a href="https://git.github.io/rev_news/2024/08/31/edition-114/">Edition 114 of Git Rev
+News</a>, I dissect
+problems with the post <a href="https://stackoverflow.blog/2024/12/20/this-developer-tool-is-40-years-old-can-it-be-improved/">“This developer tool is 40 years old: can it be
+improved?”</a>.
+I offer clarifications for the misinformation in the article, and I mention
+free, builtin ways to get diff improvements.</p>
+
+<h2 id="on-dates">On dates</h2>
+
+<p>Bill Harding writes:</p>
+
+<blockquote>
+  <p>Since IDEs are refreshed every few years, maybe you’ve guessed that your
+oldest tool in active use is “git.” It was first released nearly 20 years ago,
+back in 2005. Or maybe you prefer to code with the classic old-school text
+editors, like Sublime Text (2008) or vim (1991).</p>
+</blockquote>
+
+<p>Yet Vim and Git are under active development, getting “refreshed” perhaps more
+regularly than other major (unnamed?) IDEs due to their distributed,
+collaborative open-source practices. The core model may have changed little, but
+Vim 9.1 in 2025 is not your 1991 Vim, nor is Git 2.48.1 in 2025 your Git from
+2005.</p>
+
+<p>It is true that the Myers diff algorithm (no air quotes necessary, thank you)
+originates in 1986, but the colors on GitHub are not its byproduct; rather, I
+believe an <a href="/blog/2020/08/06/stop-sed-i/#addendum-scripting-ed">edit script is the typical output</a>. This is also
+demonstrated on page 3, the same figure which Harding cites.</p>
+
+<h2 id="on-research">On research</h2>
+
+<p>As Git Rev News mentions, Git supports other algorithms including
+<a href="https://github.com/git/git/commit/3443546f6"><code class="language-plaintext highlighter-rouge">minimal</code></a>,
+<a href="https://github.com/git/git/commit/92b7de93fb7801"><code class="language-plaintext highlighter-rouge">patience</code></a>, and
+<a href="https://github.com/git/git/commit/8c912eea94a"><code class="language-plaintext highlighter-rouge">histogram</code></a>. <a href="/blog/2025/02/01/git-roundup/#how-different-are-different-diff-algorithms-in-git">Some research
+exists on their properties</a>.</p>
+
+<p>This remains an active area of improvement, I believe.</p>
+
+<h2 id="on-diffs">On diffs</h2>
+
+<p>Harding writes:</p>
+
+<blockquote>
+  <p>The Myers diff algorithm classifies all code change lines as binary: either
+“add” or “delete.”</p>
+
+  <p>The Commit Cruncher algorithm tested recognizes three times more types of
+changed operations: Added, Deleted, Updated, Moved, Find/Replaced, and
+Copy/Pasted</p>
+</blockquote>
+
+<p>Yet Git can detect moved lines with <code class="language-plaintext highlighter-rouge">--color-moved</code> (enable by default with
+<a href="https://github.com/benknoble/Dotfiles/blob/151d67dd2002f00d01c3f4fc1130815ae522116a/links/gitconfig#L101"><code class="language-plaintext highlighter-rouge">diff.colorMoved =
+default</code></a>).</p>
+
+<p>Or consider</p>
+
+<blockquote>
+  <p>One example where Myers requires more work by a reviewer is when a code change
+involves white space, like the change shown earlier in this post:</p>
+</blockquote>
+
+<p>Yet Git has <em>several</em> modes for making whitespace easier to review, like
+<code class="language-plaintext highlighter-rouge">--ignore-space-change</code>, <code class="language-plaintext highlighter-rouge">--ingore-space-at-eol</code>, and <code class="language-plaintext highlighter-rouge">--ignore-all-space</code>. This
+also typically shortcuts the complex changes from extracting methods, depending
+on how far the new function is relocated. In Harding’s example, I think
+<code class="language-plaintext highlighter-rouge">--ignore-space-change</code> would produce a similar diff (but we’ll never know
+because sources for the diffs are not given).</p>
+
+<p>Then there’s “incremental updates” (whatever that means in this context):</p>
+
+<blockquote>
+  <p>The same diff through a GitClear lens condenses the incremental update to a
+single line, where the new (or removed) characters are shown inline:</p>
+</blockquote>
+
+<p>Git has a <code class="language-plaintext highlighter-rouge">--word-diff</code> mode that does the same thing and can be configured
+per-invocation depending on where you want to consider interesting boundaries.
+In my experience, it trivializes Harding’s example diff, too.</p>
+
+<p>Harding later tries to explain Commit Cruncher and writes:</p>
+
+<blockquote>
+  <p>The Myers diff algorithm works by inspecting two inputs: the repo state before
+commit A and the state after commit C.</p>
+</blockquote>
+
+<p>This is imprecise, just like the earlier formulation</p>
+
+<blockquote>
+  <p>[Myers] offered what became the canonical solution for representing the
+difference between the state of a git repo “before” and “after” a developer’s
+git commit.</p>
+</blockquote>
+
+<p>Git can generate diffs between blobs, trees, commits, and commit ranges. Harding
+is either being intentionally imprecise (why?) or doesn’t know much about Git’s
+diffs, the very thing his company’s product is trying to improve.</p>
+
+<h2 id="on-presentation">On presentation</h2>
+
+<p>I’ve written before that GitHub’s UI has problems<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, but this highlights one
+more: GitHub has very poor support for examining diffs.</p>
+
+<ul>
+  <li>GitHub does not natively support proper range-diffs. When a branch is
+force-pushed, GitHub only offers its standard difference between the commits,
+which shows a flat tree diff rather than a commit-by-commit comparison,
+including commit messages. In short, <a href="/blog/2025/02/01/git-roundup/#reorient-github-pull-requests-around-changesets">you can’t see how the PR evolved</a>.</li>
+  <li>GitHub doesn’t support diff options beyond “ignore whitespace” (and I believe
+it tries to automatically do something akin to <code class="language-plaintext highlighter-rouge">--word-diff</code>). <strong>This includes
+<code class="language-plaintext highlighter-rouge">--color-moved</code> for showing moved lines.</strong> In practice, developers creating
+commits may have a good idea about how to communicate the diff (<a href="https://lore.kernel.org/git/CALnO6CDqHJP_wa_8eKHBkU+_1vQ6D+C=QRZyW1FKnG71wDxnnQ@mail.gmail.com/">I and others
+have experimented with communicating these options in
+commits</a>).</li>
+</ul>
+
+<p>Improving these situations or moving away from GitHub as your primary diff
+viewer would be free alternatives to a Harding’s tool.</p>
+
+<h2 id="in-conclusion">In conclusion</h2>
+
+<p>The StackOverflow blog shamelessly shills for a company to get you to buy a
+product you probably don’t need. What’s new?</p>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="/blog/2024/10/04/copy-range-diff/">PR reviews</a> lack
+<a href="/blog/2025/02/01/git-roundup/#reorient-github-pull-requests-around-changesets">threading</a>, and it has <a href="/blog/2024/08/02/github-squash/">bad
+defaults for some kinds of merges</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest/";
+    this.page.identifier = "/blog/2025/02/10/stackoverflow-github-corporate-interest";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2025/02/05/neovim/"
+      title="Why I still prefer Vim">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#re-the-commit-crunch-stackoverflow-blog-hosts-naked-corporate-interests-alongside-misinformation">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
