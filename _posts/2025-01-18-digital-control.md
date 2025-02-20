@@ -18,8 +18,10 @@ Here is my short list of steps for digital control.
   fail](https://deadsimpletech.com/blog/abuser_economy).
 - Avoid autoplay and infinite scroll, like YouTube taking you to the next video
   automatically. Disable them or avoid the site.
-- Disable, deny, or mute unimportant notifications. Ditto for location services
-  and ads. (On iPhones, that's usually in "Settings" under each application.)
+- [Disable, deny, or mute unimportant
+  notifications](https://pluralistic.net/2025/02/19/gimme-five/). Ditto for
+  location services and ads. (On iPhones, that's usually in "Settings" under
+  each application.)
 - Report and delete unsolicited DMs or texts from strangers.
 - Silence calls from unknown numbers (use your phone's settings).
 - Practice anti-phishing strategy: check URLs, look for signs of urgency. Here
