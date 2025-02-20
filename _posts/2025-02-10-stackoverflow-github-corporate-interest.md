@@ -1,6 +1,6 @@
 ---
 title: 'RE: the Commit Crunch: StackOverflow blog hosts naked corporate interests alongside misinformation'
-tags: []
+tags: [ git, github ]
 category: [ Blog ]
 ---
 
