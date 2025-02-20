@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-02-20T02:15:55+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Performance still matters</title><link href="https://benknoble.github.io/blog/2025/02/19/performance/" rel="alternate" type="text/html" title="Performance still matters" /><published>2025-02-19T00:00:00+00:00</published><updated>2025-02-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/19/performance</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/19/performance/"><![CDATA[<p>Simplicity is a feature.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-02-20T18:18:53+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Performance still matters</title><link href="https://benknoble.github.io/blog/2025/02/19/performance/" rel="alternate" type="text/html" title="Performance still matters" /><published>2025-02-19T00:00:00+00:00</published><updated>2025-02-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/19/performance</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/19/performance/"><![CDATA[<p>Simplicity is a feature.</p>
 
 <p>I built a tiny FAQ site to help Vimmers understand the idiosyncrasies of using
 Vim at Capital One. A colleague quipped:</p>
@@ -520,8 +520,10 @@ handy when unsubscribe links
 fail</a>.</li>
   <li>Avoid autoplay and infinite scroll, like YouTube taking you to the next video
 automatically. Disable them or avoid the site.</li>
-  <li>Disable, deny, or mute unimportant notifications. Ditto for location services
-and ads. (On iPhones, that’s usually in “Settings” under each application.)</li>
+  <li><a href="https://pluralistic.net/2025/02/19/gimme-five/">Disable, deny, or mute unimportant
+notifications</a>. Ditto for
+location services and ads. (On iPhones, that’s usually in “Settings” under
+each application.)</li>
   <li>Report and delete unsolicited DMs or texts from strangers.</li>
   <li>Silence calls from unknown numbers (use your phone’s settings).</li>
   <li>Practice anti-phishing strategy: check URLs, look for signs of urgency. Here
