@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-02-12T21:19:27+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">RE: the Commit Crunch: StackOverflow blog hosts naked corporate interests alongside misinformation</title><link href="https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest/" rel="alternate" type="text/html" title="RE: the Commit Crunch: StackOverflow blog hosts naked corporate interests alongside misinformation" /><published>2025-02-10T00:00:00+00:00</published><updated>2025-02-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest/"><![CDATA[<p>Following mention of a new diff algorithm in <a href="https://git.github.io/rev_news/2024/08/31/edition-114/">Edition 114 of Git Rev
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-02-20T02:15:55+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Performance still matters</title><link href="https://benknoble.github.io/blog/2025/02/19/performance/" rel="alternate" type="text/html" title="Performance still matters" /><published>2025-02-19T00:00:00+00:00</published><updated>2025-02-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/19/performance</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/19/performance/"><![CDATA[<p>Simplicity is a feature.</p>
+
+<p>I built a tiny FAQ site to help Vimmers understand the idiosyncrasies of using
+Vim at Capital One. A colleague quipped:</p>
+
+<blockquote>
+  <p>This page loads too fast; it’s making me uncomfortable.</p>
+</blockquote>
+
+<p>Indeed—3 or 4 interlinked HTML pages and a single CSS file load quickly in any
+browser <em>because that’s what browsers were designed for.</em></p>
+
+<p><a href="https://infrequently.org/series/performance-inequality">It’s not hard to go fast if you don’t overengineer</a>.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="vim" /><category term="web" /><category term="performance" /><summary type="html"><![CDATA[Simplicity is a feature.]]></summary></entry><entry><title type="html">RE: the Commit Crunch: StackOverflow blog hosts naked corporate interests alongside misinformation</title><link href="https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest/" rel="alternate" type="text/html" title="RE: the Commit Crunch: StackOverflow blog hosts naked corporate interests alongside misinformation" /><published>2025-02-10T00:00:00+00:00</published><updated>2025-02-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest/"><![CDATA[<p>Following mention of a new diff algorithm in <a href="https://git.github.io/rev_news/2024/08/31/edition-114/">Edition 114 of Git Rev
 News</a>, I dissect
 problems with the post <a href="https://stackoverflow.blog/2024/12/20/this-developer-tool-is-40-years-old-can-it-be-improved/">“This developer tool is 40 years old: can it be
 improved?”</a>.
@@ -134,7 +146,7 @@ product you probably don’t need. What’s new?</p>
 defaults for some kinds of merges</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><summary type="html"><![CDATA[Following mention of a new diff algorithm in Edition 114 of Git Rev News, I dissect problems with the post “This developer tool is 40 years old: can it be improved?”. I offer clarifications for the misinformation in the article, and I mention free, builtin ways to get diff improvements.]]></summary></entry><entry><title type="html">Why I still prefer Vim</title><link href="https://benknoble.github.io/blog/2025/02/05/neovim/" rel="alternate" type="text/html" title="Why I still prefer Vim" /><published>2025-02-05T00:00:00+00:00</published><updated>2025-02-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/05/neovim</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/05/neovim/"><![CDATA[<p>It turns out I might have only written this down once, so here it is.</p>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="github" /><summary type="html"><![CDATA[Following mention of a new diff algorithm in Edition 114 of Git Rev News, I dissect problems with the post “This developer tool is 40 years old: can it be improved?”. I offer clarifications for the misinformation in the article, and I mention free, builtin ways to get diff improvements.]]></summary></entry><entry><title type="html">Why I still prefer Vim</title><link href="https://benknoble.github.io/blog/2025/02/05/neovim/" rel="alternate" type="text/html" title="Why I still prefer Vim" /><published>2025-02-05T00:00:00+00:00</published><updated>2025-02-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/05/neovim</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/05/neovim/"><![CDATA[<p>It turns out I might have only written this down once, so here it is.</p>
 
 <p>The short version is I use Vim</p>
 <ul>
@@ -717,7 +729,7 @@ band-aids: it requires deep investment that we just aren’t seeing be made.</p>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Accept every lunch invitation you get.</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Always ask about acronyms.</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Say something really stupid.</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Have a drink.</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Have a drink.</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Tell someone what to do.</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Have an argument.</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Find your inner circle.</li>
@@ -725,8 +737,8 @@ band-aids: it requires deep investment that we just aren’t seeing be made.</p>
   </li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />February: learn to paint blood on minis
     <ul class="task-list">
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Acquire blood paint</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Test on tester minis</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Acquire blood paint</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Test on tester minis</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Do the real thing</li>
     </ul>
   </li>
@@ -796,27 +808,4 @@ iMessage seems to recognize that messages are coming from <code class="language-
 and it can’t match that to a contact with phone number <code class="language-plaintext highlighter-rouge">XXXYYYZZZZ</code> (which is
 how Contacts will display phone numbers sans area codes). Adding an area code
 in Contacts usually triggers a transformation to the standard format and, more
-importantly, allows iMessage to match things.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="macOS" /><summary type="html"><![CDATA[My wife’s iMessage on her Macbook devices had refused to show names for people in her contacts for a while. Mine started doing the same thing, and I finally solved the problem.]]></summary></entry><entry><title type="html">Nospend 2025</title><link href="https://benknoble.github.io/blog/2025/01/05/nospend/" rel="alternate" type="text/html" title="Nospend 2025" /><published>2025-01-05T00:00:00+00:00</published><updated>2025-01-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/05/nospend</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/05/nospend/"><![CDATA[<p>My wife and I want to be (even more) intentional with our spending this year as
-we work through the purchase of a home. Here are our ideas.</p>
-
-<p>The goal is not to keep to these perfectly, but to use them as strong guidelines
-when evaluating spending decisions in these categories. This should keep us
-conscious of where our money goes (alongside our usual budgeting) without
-feeling punitive.</p>
-
-<h2 id="guidelines-this-year">Guidelines this year</h2>
-
-<ol>
-  <li>No coffee out unless it is building a relationship (<em>e.g.</em>, friend, family,
-coworker).</li>
-  <li>No new clothes or shoes unless replacing items that are worn out or do not
-fit.</li>
-  <li>No books except book of the month or book club books that cannot be found at
-the library.</li>
-  <li>No new cosmetics or toiletries except replacements.</li>
-  <li>No new cleaning or household supplies except replacements.</li>
-  <li>Eat out 6 times or fewer per month unless building a relationship.</li>
-  <li>Maximum 3 treats per month.</li>
-  <li>No new cups, mugs, water bottles, etc.</li>
-  <li>No new board games, video games, Lego, etc.</li>
-</ol>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="financial" /><summary type="html"><![CDATA[My wife and I want to be (even more) intentional with our spending this year as we work through the purchase of a home. Here are our ideas.]]></summary></entry></feed>
+importantly, allows iMessage to match things.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="macOS" /><summary type="html"><![CDATA[My wife’s iMessage on her Macbook devices had refused to show names for people in her contacts for a while. Mine started doing the same thing, and I finally solved the problem.]]></summary></entry></feed>
