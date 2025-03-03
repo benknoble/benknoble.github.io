@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-02-20T18:18:53+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Performance still matters</title><link href="https://benknoble.github.io/blog/2025/02/19/performance/" rel="alternate" type="text/html" title="Performance still matters" /><published>2025-02-19T00:00:00+00:00</published><updated>2025-02-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/19/performance</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/19/performance/"><![CDATA[<p>Simplicity is a feature.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-03-03T14:38:36+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Performance still matters</title><link href="https://benknoble.github.io/blog/2025/02/19/performance/" rel="alternate" type="text/html" title="Performance still matters" /><published>2025-02-19T00:00:00+00:00</published><updated>2025-02-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/19/performance</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/19/performance/"><![CDATA[<p>Simplicity is a feature.</p>
 
 <p>I built a tiny FAQ site to help Vimmers understand the idiosyncrasies of using
 Vim at Capital One. A colleague quipped:</p>
@@ -741,7 +741,7 @@ band-aids: it requires deep investment that we just aren’t seeing be made.</p>
     <ul class="task-list">
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Acquire blood paint</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Test on tester minis</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Do the real thing</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />~Do the real thing~: moving complicated this timeline</li>
     </ul>
   </li>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />March: move to Charlotte</li>
@@ -756,9 +756,9 @@ band-aids: it requires deep investment that we just aren’t seeing be made.</p>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />December: <em>Star Wars: Imperial Assault</em> painted. Minimum 1 squad completed/mo.
     <ul class="task-list">
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />January: Jetpack troopers</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />February: Snow, blood, and Jetpack troopers smoke trails</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />March: Gamorrean Guards, Weequay Pirates</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />April: ???</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />February: ~Snow, blood, and Jetpack troopers smoke trails~ practice effects</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />March: Snow, blood, and Jetpack troopers smoke trails</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />April: Gamorrean Guards, Weequay Pirates</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />May: ???</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />June: ???</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />July: ???</li>
