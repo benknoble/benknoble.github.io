@@ -209,6 +209,16 @@ It also wouldn't surprise me if keeping everything together made it easy to
 accidentally send patches out that depend on previous patches without
 remembering this fact or mentioning it, which could become very confusing.
 
+## [Git Trailers](https://alchemists.io/articles/git_trailers)
+
+We're constantly trying to make things machine-readable and hook up different
+applications (GitHub + Jira probably comes to mind if you're in a corporate
+environment): Git makes it easy with trailers. Recently I've been discussing
+`Best-viewed-with`, my WIP name for a trailer that indicates good diff options.
+It could even lead to [automatic application of relevant
+flags](https://lore.kernel.org/git/CALnO6CDqHJP_wa_8eKHBkU+_1vQ6D+C=QRZyW1FKnG71wDxnnQ@mail.gmail.com/)
+if implemented in Git.
+
 ## Notes
 
 [^1]: To add a bit of nuance to this, I don't care what you do in your tree.
