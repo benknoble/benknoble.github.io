@@ -3,6 +3,7 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "Radiates a positive attitude like few people I know."
 - "Ben stood out by being able to engage on so many different topics at the same
   time."
 - "Ben's feedback was crucial for delivering high quality code that would be
