@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-03-13T22:12:13+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Performance still matters</title><link href="https://benknoble.github.io/blog/2025/02/19/performance/" rel="alternate" type="text/html" title="Performance still matters" /><published>2025-02-19T00:00:00+00:00</published><updated>2025-02-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/19/performance</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/19/performance/"><![CDATA[<p>Simplicity is a feature.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-03-15T22:01:59+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">To learn Vim, practice smooth, iterative deepening</title><link href="https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening/" rel="alternate" type="text/html" title="To learn Vim, practice smooth, iterative deepening" /><published>2025-03-15T00:00:00+00:00</published><updated>2025-03-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening/"><![CDATA[<p>You already know to run <code class="language-plaintext highlighter-rouge">vimtutor</code> and read <code class="language-plaintext highlighter-rouge">:help</code>. Here’s why:</p>
+
+<ul>
+  <li><a href="https://smallcultfollowing.com/babysteps/blog/2025/03/10/rust-2025-intro/#smooth-iterative-deepening">Smooth, iterative
+deepening</a>
+means that you can get started with very basic maneuvers: Insert mode, arrow
+keys, <code class="language-plaintext highlighter-rouge">ZZ</code>. Give motions and Normal mode a try. As you find places to improve
+or change the editor, you can do so with advanced <code class="language-plaintext highlighter-rouge">:help</code> topics.</li>
+  <li>As <a href="https://x.com/i/broadcasts/1RDxlzBlnXNGL">Primeagen says</a> around the 1h30
+mark, Vim isn’t hard: it’s just different. We have preconceived notions of
+programming and editors that Vim doesn’t fit into. The first time you learned
+what a file is or how a compiler creates an executable was equally
+foreign—you just don’t remember that. I frankly agree that modern IDEs are
+more confusing and distracting with all the window cruft they bolt on.</li>
+  <li>Vim is ultimately a tinkerer’s tool (in addition to being a ubiquitous Vi):
+learn it or don’t, but don’t expect a completely out-of-the-box experience.
+Tinker!</li>
+</ul>
+
+<p>Oh, and don’t use a distro if you can avoid it. Prime agrees.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="vim" /><summary type="html"><![CDATA[You already know to run vimtutor and read :help. Here’s why:]]></summary></entry><entry><title type="html">Performance still matters</title><link href="https://benknoble.github.io/blog/2025/02/19/performance/" rel="alternate" type="text/html" title="Performance still matters" /><published>2025-02-19T00:00:00+00:00</published><updated>2025-02-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/19/performance</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/19/performance/"><![CDATA[<p>Simplicity is a feature.</p>
 
 <p>I built a tiny FAQ site to help Vimmers understand the idiosyncrasies of using
 Vim at Capital One. A colleague quipped:</p>
@@ -810,14 +829,4 @@ band-aids: it requires deep investment that we just aren’t seeing be made.</p>
   <li>local reporting</li>
   <li>digital control/privacy; personal computing</li>
   <li>de-toxifying masculinity</li>
-</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="goals" /><summary type="html"><![CDATA[A short, probably only-sensible-to-me list of goals. Timeboxed.]]></summary></entry><entry><title type="html">iMessage contact sync</title><link href="https://benknoble.github.io/blog/2025/01/05/imessage/" rel="alternate" type="text/html" title="iMessage contact sync" /><published>2025-01-05T00:00:00+00:00</published><updated>2025-01-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/05/imessage</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/05/imessage/"><![CDATA[<p>My wife’s iMessage on her Macbook devices had refused to show names for people
-in her contacts for a while. Mine started doing the same thing, and I finally
-solved the problem.</p>
-
-<p>If your contacts don’t show names in iMessage, make sure the phone number
-associated with the contact has an area-code prefix (that’s <code class="language-plaintext highlighter-rouge">+1</code> in the US).
-iMessage seems to recognize that messages are coming from <code class="language-plaintext highlighter-rouge">+1 (XXX) YYY-ZZZZ</code>,
-and it can’t match that to a contact with phone number <code class="language-plaintext highlighter-rouge">XXXYYYZZZZ</code> (which is
-how Contacts will display phone numbers sans area codes). Adding an area code
-in Contacts usually triggers a transformation to the standard format and, more
-importantly, allows iMessage to match things.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="macOS" /><summary type="html"><![CDATA[My wife’s iMessage on her Macbook devices had refused to show names for people in her contacts for a while. Mine started doing the same thing, and I finally solved the problem.]]></summary></entry></feed>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="goals" /><summary type="html"><![CDATA[A short, probably only-sensible-to-me list of goals. Timeboxed.]]></summary></entry></feed>
