@@ -46,6 +46,13 @@ g range-diff <right>..<left> <left>..<right>
 But in the past, especially prior to `push.default = current`, I had not found
 this terribly useful. I was probably holding it wrong.
 
+*Update 2025-03-17:* In truth, this works better if I haven't rebased over all
+of upstreams changes; if my branch point changes, the notation with an explict
+base is usually less noisy. Why? The symmetric diff causes `git range-diff` to
+also show all the new commits on my branch that are already upstream (those
+different between my old and new branch points). With an explicit base,
+computing the range-diff is faster and the output is simpler to digest.
+
 Today, I write (before pushing)
 
 ```
