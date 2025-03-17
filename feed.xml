@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-03-15T22:01:59+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">To learn Vim, practice smooth, iterative deepening</title><link href="https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening/" rel="alternate" type="text/html" title="To learn Vim, practice smooth, iterative deepening" /><published>2025-03-15T00:00:00+00:00</published><updated>2025-03-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening/"><![CDATA[<p>You already know to run <code class="language-plaintext highlighter-rouge">vimtutor</code> and read <code class="language-plaintext highlighter-rouge">:help</code>. Here’s why:</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-03-17T23:39:22+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">I am not the first to notice GitHub’s range-diff deficiency; I will not be the last</title><link href="https://benknoble.github.io/blog/2025/03/17/more-range-diff/" rel="alternate" type="text/html" title="I am not the first to notice GitHub’s range-diff deficiency; I will not be the last" /><published>2025-03-17T00:00:00+00:00</published><updated>2025-03-17T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/03/17/more-range-diff</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/03/17/more-range-diff/"><![CDATA[<p>Scott Chacon of Pro Git fame is writing about Git again: this time, with (yet
+another) take on how the company he helped build might be doing it wrong.</p>
+
+<p>In <a href="https://blog.gitbutler.com/interdiff-review-with-git-range-diff/">How to do patch-based review with git
+range-diff</a>,
+Chacon covers the ground on how to perform review in terms of versions of a
+branch, stuff Git developers have been doing for years. See <a href="/blog/2024/10/04/copy-range-diff/#primer">my own primer</a> for details on the
+workflow, especially with GitHub involvement. What’s particularly great about
+Chacon’s post for GitButler is its link to <a href="https://gist.github.com/thoughtpolice/9c45287550a56b2047c6311fbadebed2">Why some of us like “interdiff” code
+review</a>.</p>
+
+<p>This blog post-né-Gist captures many of my own recent thoughts about GitHub:</p>
+
+<ul>
+  <li>GitHub’s UI actively encourages suboptimal development technique<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. In
+practice, that means “diff soup” and “lack of solid tools for reviewers
+outside of the comment interface.”</li>
+  <li>In particular, implicit relationships and information loss abound, which sucks
+for reviewer and future code spelunker.</li>
+  <li>GitHub encourages <em>branch- and merge- heavy thinking</em>. These are not
+necessarily even the easy parts of Git! They can be for a solo developer just
+getting started, but in true distributed settings come with their own
+challenges.</li>
+  <li>Interdiff reviewing requires more knowledge of Git than is typical or average
+(based on my own unscientific view of lots of colleagues), and thus would
+benefit more from UI help than typical branch and merge operations.</li>
+</ul>
+
+<p>It is nice to have language to talk about this. I can just see myself writing
+“Please stop feeding me <a href="https://gist.github.com/thoughtpolice/9c45287550a56b2047c6311fbadebed2?ref=blog.gitbutler.com">diff
+soup</a>:
+I don’t need a feast, but I would like some seasoning.” (Accompanied, of course,
+by details on how to improve!)</p>
+
+<p>PS Chacon’s article mentions that you’ll often need to note an original hash or
+find one in the reflog to compare the old branch version to the new branch
+version. For <code class="language-plaintext highlighter-rouge">git range-diff</code> superpowers, try <a href="/blog/2024/11/15/til-range-diff/#primer">using <code class="language-plaintext highlighter-rouge">git range-diff @{u}
+@{push} @</code> to see what’s changed since you pushed</a>.</p>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>See <a href="/blog/2024/10/04/copy-range-diff/">how GitHub can’t show cross-version changes</a>, <a href="https://mitchellh.com/writing/github-changesets">Reorient GitHub Pull Requests
+Around Changesets</a> and
+commentary in <a href="/blog/2025/02/01/git-roundup/">A grab-bag of Git links</a>, a rant about <a href="/blog/2024/08/02/github-squash/">PR merge messages</a>, and <a href="/blog/2025/02/10/stackoverflow-github-corporate-interest/#on-presentation">notes on GitHub’s diff UI
+presentation</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[Scott Chacon of Pro Git fame is writing about Git again: this time, with (yet another) take on how the company he helped build might be doing it wrong.]]></summary></entry><entry><title type="html">To learn Vim, practice smooth, iterative deepening</title><link href="https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening/" rel="alternate" type="text/html" title="To learn Vim, practice smooth, iterative deepening" /><published>2025-03-15T00:00:00+00:00</published><updated>2025-03-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening/"><![CDATA[<p>You already know to run <code class="language-plaintext highlighter-rouge">vimtutor</code> and read <code class="language-plaintext highlighter-rouge">:help</code>. Here’s why:</p>
 
 <ul>
   <li><a href="https://smallcultfollowing.com/babysteps/blog/2025/03/10/rust-2025-intro/#smooth-iterative-deepening">Smooth, iterative
@@ -744,89 +794,4 @@ user.</p>
 </blockquote>
 
 <p>We keep making improvements, but getting to A requires more than a series of
-band-aids: it requires deep investment that we just aren’t seeing be made.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="developer experience" /><summary type="html"><![CDATA[Another redux of some DevEx-relevant articles.]]></summary></entry><entry><title type="html">2025 Goals</title><link href="https://benknoble.github.io/blog/2025/01/05/goals/" rel="alternate" type="text/html" title="2025 Goals" /><published>2025-01-05T00:00:00+00:00</published><updated>2025-01-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/05/goals</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/05/goals/"><![CDATA[<p>A short, probably only-sensible-to-me list of goals. Timeboxed.</p>
-
-<p>Guiding principles:</p>
-<ul>
-  <li>Meet good people. Do good work.</li>
-  <li>Think about what kind of parent I want to be.</li>
-</ul>
-
-<p>Timeboxed:</p>
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />January: Onboard to new work team. <a href="https://randsinrepose.com/archives/ninety-days/">Inspiration: 90 days</a>
-    <ul class="task-list">
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Stay late. Show up early.</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Accept every lunch invitation you get.</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Always ask about acronyms.</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Say something really stupid.</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Have a drink.</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Tell someone what to do.</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Have an argument.</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Find your inner circle.</li>
-    </ul>
-  </li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />February: learn to paint blood on minis
-    <ul class="task-list">
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Acquire blood paint</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Test on tester minis</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />~Do the real thing~: moving complicated this timeline</li>
-    </ul>
-  </li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />March: move to Charlotte</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />April: see a specialist about my shoulder</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />May: step down as vi.se moderator</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />June: local political involvement (“active” allyship)</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />July: explore digital privacy/control options (VPN, browsers, email, GitHub alternatives, colocated hosting for anything I decide to host?)</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />August: rewrite mosaic program to create gifts</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />September: ???</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />October: ???</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />November: ???</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />December: <em>Star Wars: Imperial Assault</em> painted. Minimum 1 squad completed/mo.
-    <ul class="task-list">
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />January: Jetpack troopers</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />February: ~Snow, blood, and Jetpack troopers smoke trails~ practice effects</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />March: Snow, blood, and Jetpack troopers smoke trails</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />April: Gamorrean Guards, Weequay Pirates</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />May: ???</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />June: ???</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />July: ???</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />August: ???</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />September: ???</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />October: ???</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />November: ???</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />December: ???</li>
-    </ul>
-  </li>
-</ul>
-
-<p>Generally:</p>
-<ul>
-  <li>make time for boardgames</li>
-  <li>go to USK 2–3 times/week</li>
-  <li>write more (1/week?)
-    <ul>
-      <li>start my book on GUI applications in Racket</li>
-      <li>write about our experience reshaping digital lives</li>
-      <li>share our general personal computing expertise/experience</li>
-    </ul>
-  </li>
-  <li>keep writing fun, useful programs.
-    <ul>
-      <li>think about where to direct open-source energy</li>
-      <li>cabin-mixer</li>
-    </ul>
-  </li>
-  <li>turn down the bed for S</li>
-  <li>knock down todo list priorities</li>
-</ul>
-
-<p>Political ways I can get involved:</p>
-<ul>
-  <li>book access and general literacy</li>
-  <li>digital/mathematical literacy</li>
-  <li>LGBTQIA+ support</li>
-  <li>local reporting</li>
-  <li>digital control/privacy; personal computing</li>
-  <li>de-toxifying masculinity</li>
-</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="goals" /><summary type="html"><![CDATA[A short, probably only-sensible-to-me list of goals. Timeboxed.]]></summary></entry></feed>
+band-aids: it requires deep investment that we just aren’t seeing be made.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="developer experience" /><summary type="html"><![CDATA[Another redux of some DevEx-relevant articles.]]></summary></entry></feed>

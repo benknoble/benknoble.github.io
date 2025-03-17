@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Tip: use symmetric differences with git-range-diff</title>
+  <title>Junk Drawer : I am not the first to notice GitHub's range-diff deficiency; I will not be the last</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -67,68 +67,66 @@
   </ul>
 </nav>
 
-      <h1>Tip: use symmetric differences with git-range-diff</h1>
+      <h1>I am not the first to notice GitHub's range-diff deficiency; I will not be the last</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 15 Nov 2024 in Blog</p>
+ on 17 Mar 2025 in Blog</p>
 <div id="post">
-  <p>I’ve <a href="/blog/2024/10/04/copy-range-diff/">been using <code class="language-plaintext highlighter-rouge">range-diff</code> for a while now</a>, but I’d been stuck with a long input
-method for arguments. Today I learned a shortcut.</p>
+  <p>Scott Chacon of Pro Git fame is writing about Git again: this time, with (yet
+another) take on how the company he helped build might be doing it wrong.</p>
 
-<h2 id="primer">Primer</h2>
+<p>In <a href="https://blog.gitbutler.com/interdiff-review-with-git-range-diff/">How to do patch-based review with git
+range-diff</a>,
+Chacon covers the ground on how to perform review in terms of versions of a
+branch, stuff Git developers have been doing for years. See <a href="/blog/2024/10/04/copy-range-diff/#primer">my own primer</a> for details on the
+workflow, especially with GitHub involvement. What’s particularly great about
+Chacon’s post for GitButler is its link to <a href="https://gist.github.com/thoughtpolice/9c45287550a56b2047c6311fbadebed2">Why some of us like “interdiff” code
+review</a>.</p>
 
-<p>Recall that <code class="language-plaintext highlighter-rouge">git range-diff</code> looks at the differences between two ranges:
-commonly, we pass the two ranges explicitly; or, we can pass a base and two tips
-to have the same effect as <code class="language-plaintext highlighter-rouge">&lt;base&gt;..&lt;tip1&gt; &lt;base&gt;..&lt;tip2&gt;</code>. The <a href="https://git-scm.com/docs/git-range-diff#Documentation/git-range-diff.txt-ltbasegtltrev1gtltrev2gt">manual
-explaining this notation</a> gives the following example: “after
-rebasing a branch <code class="language-plaintext highlighter-rouge">my-topic</code>, <code class="language-plaintext highlighter-rouge">git range-diff my-topic@{u} my-topic@{1}
-my-topic</code> would show the differences introduced by the rebase.” So I’ve been
-writing</p>
+<p>This blog post-né-Gist captures many of my own recent thoughts about GitHub:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g range-diff @{u} @{1} @
-</code></pre></div></div>
+<ul>
+  <li>GitHub’s UI actively encourages suboptimal development technique<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. In
+practice, that means “diff soup” and “lack of solid tools for reviewers
+outside of the comment interface.”</li>
+  <li>In particular, implicit relationships and information loss abound, which sucks
+for reviewer and future code spelunker.</li>
+  <li>GitHub encourages <em>branch- and merge- heavy thinking</em>. These are not
+necessarily even the easy parts of Git! They can be for a solo developer just
+getting started, but in true distributed settings come with their own
+challenges.</li>
+  <li>Interdiff reviewing requires more knowledge of Git than is typical or average
+(based on my own unscientific view of lots of colleagues), and thus would
+benefit more from UI help than typical branch and merge operations.</li>
+</ul>
 
-<p>and similar variants for several months. I actually recently switched to
-<a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault"><code class="language-plaintext highlighter-rouge">push.default = current</code></a> where my <code class="language-plaintext highlighter-rouge">@{upstream}</code> is the branch I
-want to pull from (often some version of <code class="language-plaintext highlighter-rouge">origin/main</code> or <code class="language-plaintext highlighter-rouge">upstream/main</code>) and
-Git provides (after I push) <code class="language-plaintext highlighter-rouge">@{push}</code> as the branch I’m pushing to (<em>e.g.</em>,
-<code class="language-plaintext highlighter-rouge">origin/topic</code>). With this layout, I run</p>
+<p>It is nice to have language to talk about this. I can just see myself writing
+“Please stop feeding me <a href="https://gist.github.com/thoughtpolice/9c45287550a56b2047c6311fbadebed2?ref=blog.gitbutler.com">diff
+soup</a>:
+I don’t need a feast, but I would like some seasoning.” (Accompanied, of course,
+by details on how to improve!)</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g range-diff @{u} @{push} @
-</code></pre></div></div>
+<p>PS Chacon’s article mentions that you’ll often need to note an original hash or
+find one in the reflog to compare the old branch version to the new branch
+version. For <code class="language-plaintext highlighter-rouge">git range-diff</code> superpowers, try <a href="/blog/2024/11/15/til-range-diff/#primer">using <code class="language-plaintext highlighter-rouge">git range-diff @{u}
+@{push} @</code> to see what’s changed since you pushed</a>.</p>
 
-<p>(There is no abbreviation for <code class="language-plaintext highlighter-rouge">@{push}</code>, sadly.)</p>
+<h2 id="notes">Notes</h2>
 
-<h2 id="symmetric-diff">Symmetric diff</h2>
-
-<p>Now, I knew that <code class="language-plaintext highlighter-rouge">git range-diff</code> also accepts a <a href="https://git-scm.com/docs/git-range-diff#Documentation/git-range-diff.txt-ltrev1gt82308203ltrev2gt">three-dot symmetric difference
-notation</a>, so</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g range-diff &lt;left&gt;...&lt;right&gt;
-    -- becomes --&gt;
-g range-diff &lt;right&gt;..&lt;left&gt; &lt;left&gt;..&lt;right&gt;
-</code></pre></div></div>
-<p>But in the past, especially prior to <code class="language-plaintext highlighter-rouge">push.default = current</code>, I had not found
-this terribly useful. I was probably holding it wrong.</p>
-
-<p><em>Update 2025-03-17:</em> In truth, this works better if I haven’t rebased over all
-of upstreams changes; if my branch point changes, the notation with an explict
-base is usually less noisy. Why? The symmetric diff causes <code class="language-plaintext highlighter-rouge">git range-diff</code> to
-also show all the new commits on my branch that are already upstream (those
-different between my old and new branch points). With an explicit base,
-computing the range-diff is faster and the output is simpler to digest.</p>
-
-<p>Today, I write (before pushing)</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g range-diff @{push}... | copy-range-diff
-</code></pre></div></div>
-
-<p>and all is well. Use <code class="language-plaintext highlighter-rouge">git log [--oneline] --graph --boundary --left-right --cherry-mark
-@{push}...</code> to get a feel for what ranges are being compared.</p>
-
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>See <a href="/blog/2024/10/04/copy-range-diff/">how GitHub can’t show cross-version changes</a>, <a href="https://mitchellh.com/writing/github-changesets">Reorient GitHub Pull Requests
+Around Changesets</a> and
+commentary in <a href="/blog/2025/02/01/git-roundup/">A grab-bag of Git links</a>, a rant about <a href="/blog/2024/08/02/github-squash/">PR merge messages</a>, and <a href="/blog/2025/02/10/stackoverflow-github-corporate-interest/#on-presentation">notes on GitHub’s diff UI
+presentation</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
 </div>
 <hr/>
@@ -157,8 +155,8 @@ computing the range-diff is faster and the output is simpler to digest.</p>
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2024/11/15/til-range-diff/";
-    this.page.identifier = "/blog/2024/11/15/til-range-diff";
+    this.page.url = "https://benknoble.github.io/blog/2025/03/17/more-range-diff/";
+    this.page.identifier = "/blog/2025/03/17/more-range-diff";
   };
 
   function load_comments(div) {
@@ -177,21 +175,17 @@ computing the range-diff is faster and the output is simpler to digest.</p>
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2024/11/11/git-branch-trunk-perspective/"
-      title="Perspective on software development models">
+    <a href="https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening/"
+      title="To learn Vim, practice smooth, iterative deepening">
       Previous</a>
   </span>
   
   
-  <span id="next">
-    <a href="https://benknoble.github.io/blog/2024/11/15/useful-utilities/"
-       title="Little utilities">
-      Next</a>
-  </span>
+  <span id="no-next">Next</span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#tip-use-symmetric-differences-with-git-range-diff">
+  <a href="/categories/#i-am-not-the-first-to-notice-github-s-range-diff-deficiency-i-will-not-be-the-last">
     Back to posts</a>
 </div>
 
