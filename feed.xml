@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-03-17T23:39:22+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">I am not the first to notice GitHub’s range-diff deficiency; I will not be the last</title><link href="https://benknoble.github.io/blog/2025/03/17/more-range-diff/" rel="alternate" type="text/html" title="I am not the first to notice GitHub’s range-diff deficiency; I will not be the last" /><published>2025-03-17T00:00:00+00:00</published><updated>2025-03-17T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/03/17/more-range-diff</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/03/17/more-range-diff/"><![CDATA[<p>Scott Chacon of Pro Git fame is writing about Git again: this time, with (yet
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-03-29T00:18:15+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A tip on tracking down bound identifiers in Racket</title><link href="https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids/" rel="alternate" type="text/html" title="A tip on tracking down bound identifiers in Racket" /><published>2025-03-28T00:00:00+00:00</published><updated>2025-03-28T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids/"><![CDATA[<p>Straight from the horse’s mouth.</p>
+
+<p>Or in this case, from Racket wizard Matthew Flatt.</p>
+
+<blockquote>
+  <p>DrRacket can usually open the defining file via a right-click on an name. If
+not, or in more restrcted environments, I sometimes use <code class="language-plaintext highlighter-rouge">(identifier-binding
+#'name)</code> to help track down <code class="language-plaintext highlighter-rouge">name</code>, since the binding can identify the source
+module. If I didn’t know where that module resides, I might try
+<code class="language-plaintext highlighter-rouge">(module-path-index-resolve (car (identifier-binding #'name)))</code>.</p>
+</blockquote>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[Straight from the horse’s mouth.]]></summary></entry><entry><title type="html">I am not the first to notice GitHub’s range-diff deficiency; I will not be the last</title><link href="https://benknoble.github.io/blog/2025/03/17/more-range-diff/" rel="alternate" type="text/html" title="I am not the first to notice GitHub’s range-diff deficiency; I will not be the last" /><published>2025-03-17T00:00:00+00:00</published><updated>2025-03-17T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/03/17/more-range-diff</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/03/17/more-range-diff/"><![CDATA[<p>Scott Chacon of Pro Git fame is writing about Git again: this time, with (yet
 another) take on how the company he helped build might be doing it wrong.</p>
 
 <p>In <a href="https://blog.gitbutler.com/interdiff-review-with-git-range-diff/">How to do patch-based review with git
@@ -696,102 +706,4 @@ embedded devices (including parts of the Nintendo Switch and the PS4), try
 underlies the original SteamOS versions 1.0 and 2.0 as well as Ubuntu. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="accessibility" /><category term="internet" /><category term="open-source" /><category term="safety" /><summary type="html"><![CDATA[Here is my short list of steps for digital control.]]></summary></entry><entry><title type="html">Developer Experience, Redux</title><link href="https://benknoble.github.io/blog/2025/01/09/devex-redux/" rel="alternate" type="text/html" title="Developer Experience, Redux" /><published>2025-01-09T00:00:00+00:00</published><updated>2025-01-09T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/09/devex-redux</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/09/devex-redux/"><![CDATA[<p>Another redux of some DevEx-relevant articles.</p>
-
-<h2 id="normalization-of-deviance"><a href="http://danluu.com/wat/">Normalization of Deviance</a></h2>
-
-<p>Many parts of this post are focused on unregulated environments (so not my
-workplace, which is tied to banking and credit cards). Still, some things
-resonate:</p>
-
-<blockquote>
-  <p>Often, they try to fix things, and then leave when they can’t make a dent.</p>
-</blockquote>
-
-<blockquote>
-  <p>The data are clear that humans are really bad at taking the time to do things
-that are well understood to incontrovertibly reduce the risk of rare but
-catastrophic events. We will rationalize that taking shortcuts is the right,
-reasonable thing to do. There’s a term for this: the normalization of
-deviance. It’s well studied in a number of other contexts including
-healthcare, aviation, mechanical engineering, aerospace engineering, and civil
-engineering, but we don’t see it discussed in the context of software. In
-fact, I’ve never seen the term used in the context of software.</p>
-</blockquote>
-
-<blockquote>
-  <p>Turning off or ignoring notifications because there are too many of them and
-they’re too annoying? An erroneous manual operation?</p>
-</blockquote>
-
-<blockquote>
-  <p>How many technical postmortems start off with “someone skipped some steps
-because they’re inefficient”, e.g., “the programmer force pushed a bad config
-or bad code because they were sure nothing could go wrong and skipped
-staging/testing”?</p>
-</blockquote>
-
-<blockquote>
-  <p>People don’t automatically know what should be normal, and when new people are
-onboarded, they can just as easily learn deviant processes that have become
-normalized as reasonable processes.</p>
-</blockquote>
-
-<p>And the list of examples goes on! One conclusion seems clear: building reliable
-software demands rooting these out mercilessly. That means efficiency (hello,
-developer experience!) and guardrails around manual operations that demand
-sanity-checks.</p>
-
-<p>Finally, do this:</p>
-
-<blockquote>
-  <ul>
-    <li>Pay attention to weak signals</li>
-    <li>Resist the urge to be unreasonably optimistic</li>
-    <li>Teach employees how to conduct emotionally uncomfortable conversations</li>
-    <li>System operators need to feel safe in speaking up</li>
-    <li>Realize that oversight and monitoring are never-ending</li>
-  </ul>
-</blockquote>
-
-<p>If I don’t have much to add, it’s because there isn’t, frankly, much else to
-say. Go read the original.</p>
-
-<h2 id="the-chilling-effect-versus-attempts-to-fix-things"><a href="https://rachelbythebay.com/w/2021/04/30/speech/">The chilling effect versus attempts to fix things</a></h2>
-
-<p>Building on the previous article: we’ve got to talk about things and then fix
-them. When you have “WTF” moments—see above—say something. <em>Create a weak
-signal.</em> (And then pay attention to and amplify others.)</p>
-
-<h2 id="the-honest-troubleshooting-code-of-conduct"><a href="https://rachelbythebay.com/w/2021/05/01/code/">The Honest Troubleshooting Code of Conduct</a></h2>
-
-<p>I think Bryan Cantrill would agree with this sentiment: the resounding theme of
-the CoC above is “We are here to make things better.” We are here to improve the
-customers lives. That comes above all, and treating that as shared vision will
-get us much further than bickering about blame or passing off issues on other
-folks.</p>
-
-<h2 id="baking-those-potatoes-with-microservices-and-vendors"><a href="https://rachelbythebay.com/w/2020/08/17/potato/">Baking those potatoes with microservices and vendors</a></h2>
-
-<p>Accountability! Rawr!</p>
-
-<p>This is more of the same, actually: own the problem and fix it, even if you
-think it comes from another place. Don’t toss the hot potato to the next person.</p>
-
-<p>Don’t create gaps in responsibility. Fill them.</p>
-
-<h2 id="infra-teams-good-bad-or-none-at-all"><a href="https://rachelbythebay.com/w/2020/05/19/abc/">Infra teams: good, bad, or none at all</a></h2>
-
-<p>Strong language makes a point, even if I don’t appreciate the ad hominem
-(“pathetic mass of losers”). My workplace feels like it went from C to something
-that resembles this part of B:</p>
-
-<blockquote>
-  <p>Random product people now have to know about arbitrary crap enforced by
-someone else like “kubelets” and “Jenkins”. They burn their cycles and sanity
-on terrible systems instead of improving the experience for the company’s end
-user.</p>
-</blockquote>
-
-<p>We keep making improvements, but getting to A requires more than a series of
-band-aids: it requires deep investment that we just aren’t seeing be made.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="developer experience" /><summary type="html"><![CDATA[Another redux of some DevEx-relevant articles.]]></summary></entry></feed>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="accessibility" /><category term="internet" /><category term="open-source" /><category term="safety" /><summary type="html"><![CDATA[Here is my short list of steps for digital control.]]></summary></entry></feed>

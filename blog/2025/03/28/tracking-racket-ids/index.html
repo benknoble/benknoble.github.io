@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : I am not the first to notice GitHub's range-diff deficiency; I will not be the last</title>
+  <title>Junk Drawer : A tip on tracking down bound identifiers in Racket</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -67,66 +67,26 @@
   </ul>
 </nav>
 
-      <h1>I am not the first to notice GitHub's range-diff deficiency; I will not be the last</h1>
+      <h1>A tip on tracking down bound identifiers in Racket</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 17 Mar 2025 in Blog</p>
+ on 28 Mar 2025 in Blog</p>
 <div id="post">
-  <p>Scott Chacon of Pro Git fame is writing about Git again: this time, with (yet
-another) take on how the company he helped build might be doing it wrong.</p>
+  <p>Straight from the horse’s mouth.</p>
 
-<p>In <a href="https://blog.gitbutler.com/interdiff-review-with-git-range-diff/">How to do patch-based review with git
-range-diff</a>,
-Chacon covers the ground on how to perform review in terms of versions of a
-branch, stuff Git developers have been doing for years. See <a href="/blog/2024/10/04/copy-range-diff/#primer">my own primer</a> for details on the
-workflow, especially with GitHub involvement. What’s particularly great about
-Chacon’s post for GitButler is its link to <a href="https://gist.github.com/thoughtpolice/9c45287550a56b2047c6311fbadebed2">Why some of us like “interdiff” code
-review</a>.</p>
+<p>Or in this case, from Racket wizard Matthew Flatt.</p>
 
-<p>This blog post-né-Gist captures many of my own recent thoughts about GitHub:</p>
-
-<ul>
-  <li>GitHub’s UI actively encourages suboptimal development technique<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. In
-practice, that means “diff soup” and “lack of solid tools for reviewers
-outside of the comment interface.”</li>
-  <li>In particular, implicit relationships and information loss abound, which sucks
-for reviewer and future code spelunker.</li>
-  <li>GitHub encourages <em>branch- and merge- heavy thinking</em>. These are not
-necessarily even the easy parts of Git! They can be for a solo developer just
-getting started, but in true distributed settings come with their own
-challenges.</li>
-  <li>Interdiff reviewing requires more knowledge of Git than is typical or average
-(based on my own unscientific view of lots of colleagues), and thus would
-benefit more from UI help than typical branch and merge operations.</li>
-</ul>
-
-<p>It is nice to have language to talk about this. I can just see myself writing
-“Please stop feeding me <a href="https://gist.github.com/thoughtpolice/9c45287550a56b2047c6311fbadebed2?ref=blog.gitbutler.com">diff
-soup</a>:
-I don’t need a feast, but I would like some seasoning.” (Accompanied, of course,
-by details on how to improve!)</p>
-
-<p>PS Chacon’s article mentions that you’ll often need to note an original hash or
-find one in the reflog to compare the old branch version to the new branch
-version. For <code class="language-plaintext highlighter-rouge">git range-diff</code> superpowers, try <a href="/blog/2024/11/15/til-range-diff/#primer">using <code class="language-plaintext highlighter-rouge">git range-diff @{u}
-@{push} @</code> to see what’s changed since you pushed</a>.</p>
-
-<h2 id="notes">Notes</h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p>See <a href="/blog/2024/10/04/copy-range-diff/">how GitHub can’t show cross-version changes</a>, <a href="https://mitchellh.com/writing/github-changesets">Reorient GitHub Pull Requests
-Around Changesets</a> and
-commentary in <a href="/blog/2025/02/01/git-roundup/">A grab-bag of Git links</a>, a rant about <a href="/blog/2024/08/02/github-squash/">PR merge messages</a>, and <a href="/blog/2025/02/10/stackoverflow-github-corporate-interest/#on-presentation">notes on GitHub’s diff UI
-presentation</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
+<blockquote>
+  <p>DrRacket can usually open the defining file via a right-click on an name. If
+not, or in more restrcted environments, I sometimes use <code class="language-plaintext highlighter-rouge">(identifier-binding
+#'name)</code> to help track down <code class="language-plaintext highlighter-rouge">name</code>, since the binding can identify the source
+module. If I didn’t know where that module resides, I might try
+<code class="language-plaintext highlighter-rouge">(module-path-index-resolve (car (identifier-binding #'name)))</code>.</p>
+</blockquote>
 
 </div>
 <hr/>
@@ -134,8 +94,8 @@ presentation</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink
 <ul class="tags">
   
     <li>
-      <a href="https://benknoble.github.io/tags#git" class="tag">
-        git
+      <a href="https://benknoble.github.io/tags#racket" class="tag">
+        racket
       </a>
     </li>
   
@@ -155,8 +115,8 @@ presentation</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2025/03/17/more-range-diff/";
-    this.page.identifier = "/blog/2025/03/17/more-range-diff";
+    this.page.url = "https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids/";
+    this.page.identifier = "/blog/2025/03/28/tracking-racket-ids";
   };
 
   function load_comments(div) {
@@ -175,21 +135,17 @@ presentation</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening/"
-      title="To learn Vim, practice smooth, iterative deepening">
+    <a href="https://benknoble.github.io/blog/2025/03/17/more-range-diff/"
+      title="I am not the first to notice GitHub's range-diff deficiency; I will not be the last">
       Previous</a>
   </span>
   
   
-  <span id="next">
-    <a href="https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids/"
-       title="A tip on tracking down bound identifiers in Racket">
-      Next</a>
-  </span>
+  <span id="no-next">Next</span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#i-am-not-the-first-to-notice-github-s-range-diff-deficiency-i-will-not-be-the-last">
+  <a href="/categories/#a-tip-on-tracking-down-bound-identifiers-in-racket">
     Back to posts</a>
 </div>
 
