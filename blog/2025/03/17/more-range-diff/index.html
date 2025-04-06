@@ -95,13 +95,13 @@ practice, that means “diff soup” and “lack of solid tools for reviewers
 outside of the comment interface.”</li>
   <li>In particular, implicit relationships and information loss abound, which sucks
 for reviewer and future code spelunker.</li>
-  <li>GitHub encourages <em>branch- and merge- heavy thinking</em>. These are not
+  <li>GitHub encourages <em>branch- and merge- heavy thinking</em><sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>. These are not
 necessarily even the easy parts of Git! They can be for a solo developer just
 getting started, but in true distributed settings come with their own
 challenges.</li>
   <li>Interdiff reviewing requires more knowledge of Git than is typical or average
 (based on my own unscientific view of lots of colleagues), and thus would
-benefit more from UI help than typical branch and merge operations.</li>
+benefit more from UI help<sup id="fnref:3"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">3</a></sup> than typical branch and merge operations.</li>
 </ul>
 
 <p>It is nice to have language to talk about this. I can just see myself writing
@@ -124,6 +124,16 @@ version. For <code class="language-plaintext highlighter-rouge">git range-diff</
 Around Changesets</a> and
 commentary in <a href="/blog/2025/02/01/git-roundup/">A grab-bag of Git links</a>, a rant about <a href="/blog/2024/08/02/github-squash/">PR merge messages</a>, and <a href="/blog/2025/02/10/stackoverflow-github-corporate-interest/#on-presentation">notes on GitHub’s diff UI
 presentation</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Some argue that <a href="https://medium.com/@danielesassoli/how-github-taught-the-world-code-reviews-the-wrong-way-f840a072f5be">GitHub taught us how to do review
+wrong</a>.
+As I reflect on how I use Git now, I find that I agree. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>I don’t know if Gerrit has an interdiff UI, but you can <a href="https://gitenterprise.me/2025/03/10/gerrit-code-review-a-how-to-guide-for-new-users/">find out more
+about how Gerrit’s review UI works in a guide for new
+users</a>. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>
