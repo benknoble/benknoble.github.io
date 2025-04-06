@@ -23,13 +23,13 @@ This blog post-né-Gist captures many of my own recent thoughts about GitHub:
   outside of the comment interface."
 - In particular, implicit relationships and information loss abound, which sucks
   for reviewer and future code spelunker.
-- GitHub encourages _branch- and merge- heavy thinking_. These are not
+- GitHub encourages _branch- and merge- heavy thinking_[^2]. These are not
   necessarily even the easy parts of Git! They can be for a solo developer just
   getting started, but in true distributed settings come with their own
   challenges.
 - Interdiff reviewing requires more knowledge of Git than is typical or average
   (based on my own unscientific view of lots of colleagues), and thus would
-  benefit more from UI help than typical branch and merge operations.
+  benefit more from UI help[^3] than typical branch and merge operations.
 
 It is nice to have language to talk about this. I can just see myself writing
 "Please stop feeding me [diff
@@ -52,3 +52,11 @@ _posts/2024-11-15-til-range-diff.md %}#primer).
     _posts/2025-02-01-git-roundup.md %}), a rant about [PR merge messages]({%
     link _posts/2024-08-02-github-squash.md %}), and [notes on GitHub's diff UI
     presentation]({% link _posts/2025-02-10-stackoverflow-github-corporate-interest.md %}#on-presentation).
+
+[^2]: Some argue that [GitHub taught us how to do review
+    wrong](https://medium.com/@danielesassoli/how-github-taught-the-world-code-reviews-the-wrong-way-f840a072f5be).
+    As I reflect on how I use Git now, I find that I agree.
+
+[^3]: I don't know if Gerrit has an interdiff UI, but you can [find out more
+    about how Gerrit's review UI works in a guide for new
+    users](https://gitenterprise.me/2025/03/10/gerrit-code-review-a-how-to-guide-for-new-users/).
