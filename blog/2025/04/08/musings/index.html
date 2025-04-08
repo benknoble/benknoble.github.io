@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Thoughts from recent conversations on LLMs</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Thoughts from recent conversations on LLMs</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 08 Apr 2025 in Blog</p>
+<div id="post">
+  <p>Some unpolished thoughts from a recent conversation with other software
+engineers.</p>
+
+<p>Responding to claims in <a href="https://www.newsweek.com/ai-impact-interview-yann-lecun-llm-limitations-analysis-2054255">an interview with Meta’s Yann LeCun about LLMs being on
+the
+outs</a>,
+we discussed current trends:</p>
+
+<blockquote>
+  <p><strong>anon1</strong>: is this what a bubble feels like?</p>
+
+  <p><strong>me</strong>:</p>
+  <ul>
+    <li>I can’t help but feel that many who have LLM-based technology foisted upon
+them are not yet well-suited to judge their output</li>
+    <li>I also can’t help but see the economics of AI hype as similar to crypto
+grift or 2008 bubble in the way that all the money is interconnected and
+could go boom with just a little tip</li>
+  </ul>
+</blockquote>
+
+<p>We wondered about “language” and “low dimensionality”:</p>
+
+<blockquote>
+  <p><strong>anon2</strong>:</p>
+  <blockquote>
+    <p>It has come as a surprise to nearly everyone—even experts in
+linguistics—that human language fits this requirement for such a discrete,
+low-dimensional space</p>
+  </blockquote>
+
+  <p>This seems badly wrong. word2vec represents individual words as vectors in a
+high-dimensional space (seems like dozens if not hundreds is common), so it
+makes sense that anything that can produce reasonable text must be very
+high-dimensional.</p>
+</blockquote>
+
+<p>And we pondered important questions about values and ethics in technology:</p>
+
+<blockquote>
+  <p><strong>anon1</strong>: I’ve been slowly reading a collection of essays by anthropologist
+Diana Forsythe called “Studying those who study us” about her anthropological
+research of the research labs designing “expert systems” AI back in the
+80s-90s which feels relevant to that claim. The researchers believed that if
+you just captured the rules of an expert-driven activity, like medical
+diagnosis, you could reproduce it with a logical system. Her research
+critiques this strongly by pointing out all of the unexamined cultural
+context, assumptions, background knowledge, and expectations which are just as
+much a part of the work of an expert as the textbook details the expert
+themselves believed they used to make their decisions. One of her go-to
+examples was a diagnosis system suggesting that a biological male had
+amniocentesis, a pregnancy complication, because biological sex assumptions
+were considered obvious enough (in the 80s at least) as to not mention.</p>
+
+  <p>The larger point is, we may not actually know what information is required to
+take correct action, and the act of attempting to compile that information,
+even the successful reproduction of action by a non-expert using that compiled
+information, does not prove we’ve actually captured the whole picture. Because
+the author and the reader both share a massive collection of conscious and
+unconscious context which it may be difficult or impossible to efficiently and
+accurately identify with the task itself. LeCun’s assertion seems to agree
+with her research. Although the mechanics of AI have changed dramatically, the
+nature of its failures seems to remain in the same category.</p>
+
+  <p>And kudos to the article, and LeCun, for being careful in the delineation of
+the use of the word ‘reason’ – honestly it’s much better reporting than I was
+expecting. It mainly frustrates me how many writers just casually
+anthropomorphize LLMs without any basis, seemingly unaware that the question
+of whether it is reasoning (and what reasoning is) is the entire philisophical
+debate here.</p>
+
+  <p>Finally reading the whole article, I think he’s correct about LLMs and the
+current situation, but I feel there are some blind spots in the predictions
+(like I have any standing to say so, but anyways). I particularly find it
+interesting how close the writer comes to identifying the importance of
+physical embodiment to the mind, intelligence, and personhood… then seems to
+miss the idea. For a moment I was sure the conclusion would be that our AIs
+will need sensory bodies before they can function as “System 2” minds (which I
+personally find at least plausible).</p>
+
+  <p>Additionally I find the end goal kind of horrific, even if it were plausible.
+Is it a good goal for humanity to function as slavedrivers for
+nearly-personalized automatons which we constrain and “take down” when they
+“misbehave?” Regardless of the actual ethics with respect to the computers
+themselves, how does that morally affect <strong>us</strong>?</p>
+
+  <p>I worry that the folks most excited about this future are unconcerned with
+that question, or even trying to somehow sanitize and normalize behavior that
+would normally be considered inhumane if applied to human labor, precisely
+because they would be comfortable as slavedrivers if it were acceptable. I
+know that’s a strong accusation but it’s concerning when they use the same
+language so uncritically.</p>
+
+  <p><strong>me</strong>: Do you have a link to (details about) this collection? I’d like to add
+it to my backlog</p>
+
+  <p><strong>anon1</strong>: I could only find it in hardcopy. It was just a random
+recommendation from the algo on Bluesky and I just pulled the trigger. So far
+it’s been pretty interesting.
+<a href="https://www.sup.org/books/anthropology/studying-those-who-study-us">https://www.sup.org/books/anthropology/studying-those-who-study-us</a></p>
+
+  <p>[ed: in response to a point about how agents should not require boundless
+context to accomplish a task given a technical manual, because the manual is
+“more or less 1 to 1 with reality.”]</p>
+
+  <p><strong>me</strong>: I think we all should suspect that the manual is not 1–1 with reality.
+Further, one concern is that designing systems this way <strong>changes</strong> reality to
+fit the manual, rather than the manual to fit reality. Which of course begs
+the most important question: <strong>who writes the manual</strong>? What values do they
+imbue explicitly, implicitly, intentionally, unintentionally? If you don’t
+think this matters, look at automated policing and the affected populations,
+or many other examples cited by Ruha Benjamin in <strong>Race After Technology</strong>.</p>
+
+  <p><strong>anon1</strong>: You might find this lecure series interesting, too, related to
+“prescriptive technology” –
+<a href="https://www.cbc.ca/radio/ideas/the-1989-cbc-massey-lectures-the-real-world-of-technology-1.2946845">https://www.cbc.ca/radio/ideas/the-1989-cbc-massey-lectures-the-real-world-of-technology-1.2946845</a></p>
+
+  <p>Franklin’s analysis was related to how technology constrains the choices of
+workers, but it also applies to nonhuman agents</p>
+
+  <p>Between those two works I’ve been appreciating feminist analysis of technology
+a lot lately</p>
+
+  <p>(I don’t think you need to be excited about feminism to appreciate them, dunno
+your values, but worth noting it’s a linking factor in both)</p>
+
+  <p><strong>me</strong>: I was surprised that the article pointed out the question:</p>
+
+  <blockquote>
+    <p>Without a lived experience of their own, they will need to be imbued with
+human goals and objectives—but which ones, and whose variants?</p>
+  </blockquote>
+
+  <p>But not surprised (still frustrated) that it stopped short of actually
+engaging the question.</p>
+
+  <p><strong>anon1</strong>: There’s a wealth of questions they did not engage with lol (though
+to be fair to the author, it’s a short piece and evidently part of a series I
+haven’t read)</p>
+
+  <p><strong>me</strong>: Fair!</p>
+</blockquote>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#llm" class="tag">
+        llm
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#unpolished" class="tag">
+        unpolished
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#politics" class="tag">
+        politics
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2025/04/08/musings/";
+    this.page.identifier = "/blog/2025/04/08/musings";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids/"
+      title="A tip on tracking down bound identifiers in Racket">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#thoughts-from-recent-conversations-on-llms">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

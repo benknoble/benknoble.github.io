@@ -1,4 +1,145 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-04-06T19:29:06+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A tip on tracking down bound identifiers in Racket</title><link href="https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids/" rel="alternate" type="text/html" title="A tip on tracking down bound identifiers in Racket" /><published>2025-03-28T00:00:00+00:00</published><updated>2025-03-28T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids/"><![CDATA[<p>Straight from the horse’s mouth.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-04-08T19:59:46+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Thoughts from recent conversations on LLMs</title><link href="https://benknoble.github.io/blog/2025/04/08/musings/" rel="alternate" type="text/html" title="Thoughts from recent conversations on LLMs" /><published>2025-04-08T00:00:00+00:00</published><updated>2025-04-08T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/04/08/musings</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/04/08/musings/"><![CDATA[<p>Some unpolished thoughts from a recent conversation with other software
+engineers.</p>
+
+<p>Responding to claims in <a href="https://www.newsweek.com/ai-impact-interview-yann-lecun-llm-limitations-analysis-2054255">an interview with Meta’s Yann LeCun about LLMs being on
+the
+outs</a>,
+we discussed current trends:</p>
+
+<blockquote>
+  <p><strong>anon1</strong>: is this what a bubble feels like?</p>
+
+  <p><strong>me</strong>:</p>
+  <ul>
+    <li>I can’t help but feel that many who have LLM-based technology foisted upon
+them are not yet well-suited to judge their output</li>
+    <li>I also can’t help but see the economics of AI hype as similar to crypto
+grift or 2008 bubble in the way that all the money is interconnected and
+could go boom with just a little tip</li>
+  </ul>
+</blockquote>
+
+<p>We wondered about “language” and “low dimensionality”:</p>
+
+<blockquote>
+  <p><strong>anon2</strong>:</p>
+  <blockquote>
+    <p>It has come as a surprise to nearly everyone—even experts in
+linguistics—that human language fits this requirement for such a discrete,
+low-dimensional space</p>
+  </blockquote>
+
+  <p>This seems badly wrong. word2vec represents individual words as vectors in a
+high-dimensional space (seems like dozens if not hundreds is common), so it
+makes sense that anything that can produce reasonable text must be very
+high-dimensional.</p>
+</blockquote>
+
+<p>And we pondered important questions about values and ethics in technology:</p>
+
+<blockquote>
+  <p><strong>anon1</strong>: I’ve been slowly reading a collection of essays by anthropologist
+Diana Forsythe called “Studying those who study us” about her anthropological
+research of the research labs designing “expert systems” AI back in the
+80s-90s which feels relevant to that claim. The researchers believed that if
+you just captured the rules of an expert-driven activity, like medical
+diagnosis, you could reproduce it with a logical system. Her research
+critiques this strongly by pointing out all of the unexamined cultural
+context, assumptions, background knowledge, and expectations which are just as
+much a part of the work of an expert as the textbook details the expert
+themselves believed they used to make their decisions. One of her go-to
+examples was a diagnosis system suggesting that a biological male had
+amniocentesis, a pregnancy complication, because biological sex assumptions
+were considered obvious enough (in the 80s at least) as to not mention.</p>
+
+  <p>The larger point is, we may not actually know what information is required to
+take correct action, and the act of attempting to compile that information,
+even the successful reproduction of action by a non-expert using that compiled
+information, does not prove we’ve actually captured the whole picture. Because
+the author and the reader both share a massive collection of conscious and
+unconscious context which it may be difficult or impossible to efficiently and
+accurately identify with the task itself. LeCun’s assertion seems to agree
+with her research. Although the mechanics of AI have changed dramatically, the
+nature of its failures seems to remain in the same category.</p>
+
+  <p>And kudos to the article, and LeCun, for being careful in the delineation of
+the use of the word ‘reason’ – honestly it’s much better reporting than I was
+expecting. It mainly frustrates me how many writers just casually
+anthropomorphize LLMs without any basis, seemingly unaware that the question
+of whether it is reasoning (and what reasoning is) is the entire philisophical
+debate here.</p>
+
+  <p>Finally reading the whole article, I think he’s correct about LLMs and the
+current situation, but I feel there are some blind spots in the predictions
+(like I have any standing to say so, but anyways). I particularly find it
+interesting how close the writer comes to identifying the importance of
+physical embodiment to the mind, intelligence, and personhood… then seems to
+miss the idea. For a moment I was sure the conclusion would be that our AIs
+will need sensory bodies before they can function as “System 2” minds (which I
+personally find at least plausible).</p>
+
+  <p>Additionally I find the end goal kind of horrific, even if it were plausible.
+Is it a good goal for humanity to function as slavedrivers for
+nearly-personalized automatons which we constrain and “take down” when they
+“misbehave?” Regardless of the actual ethics with respect to the computers
+themselves, how does that morally affect <strong>us</strong>?</p>
+
+  <p>I worry that the folks most excited about this future are unconcerned with
+that question, or even trying to somehow sanitize and normalize behavior that
+would normally be considered inhumane if applied to human labor, precisely
+because they would be comfortable as slavedrivers if it were acceptable. I
+know that’s a strong accusation but it’s concerning when they use the same
+language so uncritically.</p>
+
+  <p><strong>me</strong>: Do you have a link to (details about) this collection? I’d like to add
+it to my backlog</p>
+
+  <p><strong>anon1</strong>: I could only find it in hardcopy. It was just a random
+recommendation from the algo on Bluesky and I just pulled the trigger. So far
+it’s been pretty interesting.
+<a href="https://www.sup.org/books/anthropology/studying-those-who-study-us">https://www.sup.org/books/anthropology/studying-those-who-study-us</a></p>
+
+  <p>[ed: in response to a point about how agents should not require boundless
+context to accomplish a task given a technical manual, because the manual is
+“more or less 1 to 1 with reality.”]</p>
+
+  <p><strong>me</strong>: I think we all should suspect that the manual is not 1–1 with reality.
+Further, one concern is that designing systems this way <strong>changes</strong> reality to
+fit the manual, rather than the manual to fit reality. Which of course begs
+the most important question: <strong>who writes the manual</strong>? What values do they
+imbue explicitly, implicitly, intentionally, unintentionally? If you don’t
+think this matters, look at automated policing and the affected populations,
+or many other examples cited by Ruha Benjamin in <strong>Race After Technology</strong>.</p>
+
+  <p><strong>anon1</strong>: You might find this lecure series interesting, too, related to
+“prescriptive technology” –
+<a href="https://www.cbc.ca/radio/ideas/the-1989-cbc-massey-lectures-the-real-world-of-technology-1.2946845">https://www.cbc.ca/radio/ideas/the-1989-cbc-massey-lectures-the-real-world-of-technology-1.2946845</a></p>
+
+  <p>Franklin’s analysis was related to how technology constrains the choices of
+workers, but it also applies to nonhuman agents</p>
+
+  <p>Between those two works I’ve been appreciating feminist analysis of technology
+a lot lately</p>
+
+  <p>(I don’t think you need to be excited about feminism to appreciate them, dunno
+your values, but worth noting it’s a linking factor in both)</p>
+
+  <p><strong>me</strong>: I was surprised that the article pointed out the question:</p>
+
+  <blockquote>
+    <p>Without a lived experience of their own, they will need to be imbued with
+human goals and objectives—but which ones, and whose variants?</p>
+  </blockquote>
+
+  <p>But not surprised (still frustrated) that it stopped short of actually
+engaging the question.</p>
+
+  <p><strong>anon1</strong>: There’s a wealth of questions they did not engage with lol (though
+to be fair to the author, it’s a short piece and evidently part of a series I
+haven’t read)</p>
+
+  <p><strong>me</strong>: Fair!</p>
+</blockquote>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><category term="unpolished" /><category term="politics" /><summary type="html"><![CDATA[Some unpolished thoughts from a recent conversation with other software engineers.]]></summary></entry><entry><title type="html">A tip on tracking down bound identifiers in Racket</title><link href="https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids/" rel="alternate" type="text/html" title="A tip on tracking down bound identifiers in Racket" /><published>2025-03-28T00:00:00+00:00</published><updated>2025-03-28T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/03/28/tracking-racket-ids/"><![CDATA[<p>Straight from the horse’s mouth.</p>
 
 <p>Or in this case, from Racket wizard Matthew Flatt.</p>
 
@@ -604,116 +745,4 @@ Same centralized control, different powerful controllers.</p>
 
 <p>The answer is neither populism nor technocracy nor oligarchy. The answer is
 regulation of power and markets and strong institutional science (necessarily
-separated from government).</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="politics" /><summary type="html"><![CDATA[In a Wall Street Journal opinion piece titled “American Society Was Built for Populism, Not Elitism” (paywalled), Karl Zinsmeister argues that power has concentrated largely in the hands of experts and authorities “indoctrinated in universities” (in other words, too liberal for the mainstream).]]></summary></entry><entry><title type="html">Steps to reclaim digital control</title><link href="https://benknoble.github.io/blog/2025/01/18/digital-control/" rel="alternate" type="text/html" title="Steps to reclaim digital control" /><published>2025-01-18T00:00:00+00:00</published><updated>2025-01-18T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/18/digital-control</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/18/digital-control/"><![CDATA[<p>Here is my short list of steps for digital control.</p>
-
-<h2 id="basics">Basics</h2>
-
-<ul>
-  <li>Reject all cookies. Some sites <a href="https://meta.stackexchange.com/q/367370/389795">make this
-obnoxious</a>, so I wind up
-trying to avoid them if possible. The <a href="https://www.technologylawdispatch.com/2023/11/privacy-data-protection/reject-all-button-in-cookie-consent-banners-an-update-from-the-uk-and-the-eu/">UK’s ICO
-agrees</a>.</li>
-  <li>Unsubscribe from email you don’t want or need (or recognize!). Some email
-clients (like GMail) can do this automatically for you: <a href="https://deadsimpletech.com/blog/abuser_economy">this is especially
-handy when unsubscribe links
-fail</a>.</li>
-  <li>Avoid autoplay and infinite scroll, like YouTube taking you to the next video
-automatically. Disable them or avoid the site.</li>
-  <li><a href="https://pluralistic.net/2025/02/19/gimme-five/">Disable, deny, or mute unimportant
-notifications</a>. Ditto for
-location services and ads. (On iPhones, that’s usually in “Settings” under
-each application.)</li>
-  <li>Report and delete unsolicited DMs or texts from strangers.</li>
-  <li>Silence calls from unknown numbers (use your phone’s settings).</li>
-  <li>Practice anti-phishing strategy: check URLs, look for signs of urgency. Here
-are several informational sites to hone your strategy:
-    <ul>
-      <li><a href="https://www.occ.gov/topics/consumers-and-communities/consumer-protection/fraud-resources/phishing-attack-prevention.html">Office of the Comptroller of the Currency: “Phishing Attack Prevention: How to Identify &amp; Avoid Phishing Scams”</a></li>
-      <li><a href="https://www.ftc.gov/business-guidance/small-businesses/cybersecurity/phishing">FTC: “Phishing”</a></li>
-      <li><a href="https://www.cisa.gov/secure-our-world/recognize-and-report-phishing">America’s Cyber Defense Agency: “Recognize and Report Phishing”</a></li>
-    </ul>
-  </li>
-  <li>Be mindful. Ask yourself: why am I reading, watching, or consuming this? Who
-wrote or created it?</li>
-</ul>
-
-<h2 id="intermediate">Intermediate</h2>
-
-<ul>
-  <li>Try an <a href="https://pluralistic.net/2024/10/16/keep-it-really-simple-stupid/">RSS
-Reader</a>:
-instead of handing out your email address or social handle to have information
-shoved at you, collect a list of links to follow for updates when you want
-them. (Sound too good to be true, like the days when Facebook worked? <a href="https://en.wikipedia.org/wiki/RSS">RSS is
-almost 26 years old as of this article</a>.)</li>
-  <li>Consider alternate browsers and search engines. Recent trends favor engines
-like <a href="https://www.ecosia.org">Ecosia</a> and <a href="https://kagi.com">Kagi</a>, as well as
-browsers from <a href="https://www.mozilla.org/firefox/">Mozilla</a> (though Firefox has
-been <a href="https://www.reuters.com/technology/mozilla-hit-with-privacy-complaint-over-firefox-user-tracking-2024-09-25/">under some fire
-lately</a>).</li>
-  <li>Claw back privacy from invasive trackers. The <a href="https://www.eff.org/deeplinks/2025/01/mad-meta-dont-let-them-collect-and-monetize-your-personal-data">EFF published a guide on how to
-limit what Meta can do with your
-data</a>.</li>
-  <li>Be aware of how much time you spend on individual sites (esp. the usual social
-suspects like Twitter, Instagram, the <a href="https://www.wheresyoured.at/the-slop-society/">cesspit that is
-Facebook</a>, YouTube, etc.)</li>
-  <li>Practice skepticism. Many people have something to sell you: question
-motivations. Study arguments and how and why they are made. Decide for
-yourself if they are persuasive.</li>
-  <li>Find self-awareness: listen to your emotional state as you consume. Are you
-allowing media to exert pathos-directed influence on you? Why? If it’s
-genuine, what action does this prompt?</li>
-  <li>Use Linux. This is not nearly as hard as it used to be!
-<a href="https://ubuntu.com/desktop">Ubuntu</a> is the flagship for “user-friendly”
-distributions, but you might be interested in other variants and
-distributions<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. Get your local techie friends to help (make some if you
-have to). According to Iris Meredith of
-<a href="https://deadsimpletech.com/">deadSimpleTech</a>, so much surveillance happens
-through operating systems today: relying on a system that won’t surveil you
-gives you back control.</li>
-</ul>
-
-<h2 id="advanced">Advanced</h2>
-
-<ul>
-  <li>Invest in digital privacy. Use your local techie friends for these, too. This
-usually becomes the costliest step financially, but should lead to the most
-control. Remember, you don’t have to use most things you don’t want to, and
-there’s often an analog route to what you seek.
-    <ul>
-      <li>You might <a href="https://tailscale.com/">try a VPN</a> or <a href="https://nextdns.io/">set up a network-level
-tracking blocker</a>.</li>
-      <li><a href="https://www.citationneeded.news/wind-the-clock/">What do I do now?</a>:
-Covers privacy/security, forming community, etc.</li>
-      <li><a href="https://www.wired.com/story/the-wired-guide-to-protecting-yourself-from-government-surveillance/">WIRED guide to protecting yourself from government
-surveillance</a></li>
-    </ul>
-  </li>
-  <li>Use more open-source software. If it goes in a direction you dislike, you
-always have the right to the source to build, modify, and run it yourself!
-(This typically comes with an educational cost: you might have to learn to
-build, modify, and run programs!) Corollary: avoid proprietary platform
-lock-in. See for example <a href="https://sfconservancy.org/GiveUpGitHub/">Give Up
-GitHub</a>; I’ve been eyeballing
-<a href="https://sr.ht">sourcehut</a> for a while, personally.</li>
-</ul>
-
-<h2 id="notes">Notes</h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p>For resource-constrained devices or older PCs, you may want to try an
-alternative, lighter-weight <a href="https://wiki.debian.org/DesktopEnvironment">desktop
-environment</a>. Power users might
-be interested in projects like <a href="https://archlinux.org">Arch</a> (which powers
-SteamDeck OS version 3.0), <a href="https://guix.gnu.org">GNU Guix</a> on <a href="https://guix.gnu.org/manual/en/html_node/System-Installation.html">its own
-OS</a> or
-any GNU/Linux distribution of your preference, or <a href="https://nixos.org">Nix on
-NixOS</a>. If you’re curious about the OS that powers most
-embedded devices (including parts of the Nintendo Switch and the PS4), try
-<a href="https://www.freebsd.org">FreeBSD</a>. <a href="https://www.debian.org">Debian</a>
-underlies the original SteamOS versions 1.0 and 2.0 as well as Ubuntu. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="accessibility" /><category term="internet" /><category term="open-source" /><category term="safety" /><summary type="html"><![CDATA[Here is my short list of steps for digital control.]]></summary></entry></feed>
+separated from government).</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="politics" /><summary type="html"><![CDATA[In a Wall Street Journal opinion piece titled “American Society Was Built for Populism, Not Elitism” (paywalled), Karl Zinsmeister argues that power has concentrated largely in the hands of experts and authorities “indoctrinated in universities” (in other words, too liberal for the mainstream).]]></summary></entry></feed>
