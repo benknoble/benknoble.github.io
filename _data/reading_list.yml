@@ -1,264 +1,297 @@
-- title: Communications of the ACM
-  url: https://cacm.acm.org
-- title: Pluralistic
-  url: https://pluralistic.net
-- title: Ed Zitron's Where's Your Ed At
-  url: https://www.wheresyoured.at
-- title: Fabulous Adventures in Code
-  url: https://ericlippert.com
-- title: Joel on Software
-  url: https://www.joelonsoftware.com
-- title: Bastard Operator from Hell (BOFH)
-  url: http://www.bofharchive.com
-- title: The Angry GM
-  url: https://theangrygm.com
-- title: dmerej's Blog
-  url: https://dmerej.info/blog/
-- title: Code Without Rules
-  url: https://codewithoutrules.com
-- title: Linus Akesson
-  url: http://www.linusakesson.net/index.php
-- title: Blog de Lionel Drico
-  url: http://ploum.net
-- title: Coding Horror
-  url: https://blog.codinghorror.com/
-- title: Brave New Geek
-  url: https://bravenewgeek.com
-- title: Destroy All Software
-  url: https://www.destroyallsoftware.com/
-- title: Crocker's Rules
-  url: http://sl4.org/crocker.html
-- title: An interesting approach to résumés
-  url: http://resume.livingston-gray.com/
-- title: Dork Tower
-  url: http://www.dorktower.com/
-- title: Trevor Jim
-  url: http://trevorjim.com/
-- title: Extra Cheese (dead)
-  url: http://blog.extracheese.org/
-- title: t+1
-  url: http://blog.tplus1.com
-- title: Arabesque
-  url: https://sanctum.geek.nz/arabesque/
-- title: Select Start SQL
-  url: https://selectstarsql.com/
-- title: Darts, Dice, and Coins
-  url: http://www.keithschwarz.com/darts-dice-coins/
-- title: Matt Might
-  url: http://matt.might.net
-- title: Crafting Interpreters
-  url: http://www.craftinginterpreters.com/
-- title: Wargames
-  url: http://overthewire.org/wargames/
-- title: Learn You a Haskell
-  url: http://learnyouahaskell.com
-- title: Write You a Haskell
-  url: http://dev.stephendiehl.com/fun/
-- title: Beautiful Racket
-  url: https://beautifulracket.com/
-- title: Practical Typography
-  url: https://practicaltypography.com/
-- title: RubyCon:Adventures in Functional Programming
-  url: http://confreaks.tv/videos/rubyconf2012-y-not-adventures-in-functional-programming
-- title: Programming with Nothing
-  url: http://codon.com/programming-with-nothing
-- title: Unix Haters
-  url: http://web.mit.edu/~simsong/www/ugh.pdf
-- title: Map, map, and flatMap in Scala
-  url: http://www.brunton-spall.co.uk/post/2011/12/02/map-map-and-flatmap-in-scala/
-- title: Learn Vimscript the Hard Way
-  url: http://learnvimscriptthehardway.stevelosh.com/
-- title: Steve Losh
-  url: http://stevelosh.com/blog/
-- title: Vimcasts
-  url: http://vimcasts.org/
-- title: Advanced Bash Scripting Guide
-  url: http://www.tldp.org/LDP/abs/html/abs-guide.html
-- title: Bash Strict Mode
-  url: http://redsymbol.net/articles/unofficial-bash-strict-mode/
-- title: Git Book
-  url: https://git-scm.com/book/en/v2
-- title: THE Note about Git Commit Messages
-  url: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-- title: Object Calisthenics
-  url: https://www.cs.helsinki.fi/u/luontola/tdd-2009/ext/ObjectCalisthenics.pdf
-- title: Things of Interest
-  url: https://qntm.org/
-- title: Robert Melton
-  url: https://www.robertmelton.com
-- title: Bike Shed
-  url: https://shed.bike
-- title: Vim Advent Calendar
-  url: https://vimways.org/2018/
-- title: Epigrams in Programming
-  url: http://www.cs.yale.edu/homes/perlis-alan/quotes.html
-- title: Advent of Code
-  url: https://adventofcode.com
-- title: The Wizard Book
-  url: http://mitpress.mit.edu/sites/default/files/sicp/index.html
-- title: User Error
-  url: https://en.wikipedia.org/wiki/User_error
-- title: The Ultimate Final Exam
-  url: http://www.davedoyle.com/prof/pastProjects/Nerd/humor/ultimate_final.html
-- title: Open Sourcing a Python Project
-  url: https://jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/
-- title: Internal Pointers
-  url: https://www.internalpointers.com/
-- title: Mathematical Writing
-  url: http://www.econ.uiuc.edu/~econ536/Papers/mathwriting.pdf
-- title: Eloquent Javascript
-  url: http://eloquentjavascript.net
-- title: Ruby Koans
-  url: http://rubykoans.com
-- title: Crafting Interpreters
-  url: http://craftinginterpreters.com
-- title: Auto-tools-tutorial
-  url: https://www.seul.org/docs/autotut/
-- title: Richard Gabriel's Dreamsongs
-  url: https://www.dreamsongs.com/index.html
-- title: How to Ask Questions the Smart Way
-  url: http://www.catb.org/~esr/faqs/smart-questions.html
-- title: French-English-and-back Technical Dictionary
-  url: https://bitoduc.fr
-- title: What I Wish I Knew Learning Haskell
-  url: http://dev.stephendiehl.com/hask/
-- title: ESR's Stuff
-  url: http://www.catb.org/esr/
-- title: 'Null Program'
-  url: https://nullprogram.com
-- title: 'Senior Engineering Checklist'
-  url: https://littleblah.com/post/2019-09-01-senior-engineer-checklist/
-- title: '0b10: Two-Bit History'
-  url: https://twobithistory.org/
-- title: 'Always Measure One Level Deeper'
-  url: https://cacm.acm.org/magazines/2018/7/229031-always-measure-one-level-deeper/fulltext
-- title: 'Common causes for seg faults'
-  url: https://www.google.com/amp/s/www.geeksforgeeks.org/core-dump-segmentation-fault-c-cpp/amp/
-- title: 'My favorite git commit'
-  url: https://fatbusinessman.com/2019/my-favourite-git-commit
-- title: 'Masterpiece Collection'
-  url: https://perlweeklychallenge.org/blog/damian-corner/
-- title: 'The Mysterious 500-mile emails'
-  url: http://www.ibiblio.org/harris/500milemail.html
-- title: Books for Software Engineers
-  url: https://jasonroell.com/2015/03/16/12-most-infuential-books-every-software-engineer-needs-to-read/
-- title: Unix Toolbox (somewhat dated)
-  url: http://cb.vu/unixtoolbox.xhtml
-- title: 'Magic: the Gathering is Turing Complete'
-  url: https://arxiv.org/abs/1904.09828
-- title: A Personal History of Modeless Editing and Cut/Copy-Paste
-  url: https://dl.acm.org/doi/pdf/10.1145/2212877.2212896?download=true
-- title: Programming with Categories
-  url: http://brendanfong.com/programmingcats.html
-- title: Category Theory for Programmers
-  url: https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/
-- title: Lecture notes on Types and Programming Languages
-  url: https://www.cs.cmu.edu/~fp/courses/15814-f18/lectures/Notes-15814-f18.pdf
-- title: Parametric Press
-  url: https://parametric.press/
-- title: Bel
-  url: http://paulgraham.com/bel.html
-- title: Haskell wiki
-  url: https://wiki.haskell.org/Haskell
-- title: Operator Etymology
-  url: https://jasdev.me/operators
-- title: 'Cunningham & Cunningham'
-  url: http://c2.com/
-- title: Can Programming Be Liberated from the von Neumann Style? A Functional Style and Its Algebra of Programs
-  url: http://www.thocp.net/biographies/papers/backus_turingaward_lecture.pdf
-- title: argumatronic
-  url: https://argumatronic.com
-- title: Lambda the Ultimate
-  url: http://lambda-the-ultimate.org
-- title: Game Programming Patterns
-  url: https://gameprogrammingpatterns.com/
-- title: Haoyi's Programming Blog
-  url: http://www.lihaoyi.com/
-- title: So long, and thanks for the Ph.D.!
-  url: https://www.cs.unc.edu/~azuma/hitch4.html
-- title: Hillel Wayne's blog (Formal methods)
-  url: https://www.hillelwayne.com/
-- title: "Histogram: You have to know the past to understand the present"
-  url: http://tomasp.net/histogram/
-- title: Essays on programing I think about a lot
-  url: https://www.benkuhn.net/progessays/
-- title: Typing is hard
-  url: https://typing-is-hard.ch/
-- title: Building Lisps
-  url: https://bernsteinbear.com/blog/lisp/
-- title: Let over Lambda
-  url: https://letoverlambda.com
-- title: How to Design Programs
-  url: https://htdp.org
-- title: Programming and Programming Languages
-  url: https://papl.cs.brown.edu/2020/
-- title: A Brief, Incomplete, and Mostly Wrong History of Programming Languages
-  url: https://james-iry.blogspot.com/2009/05/brief-incomplete-and-mostly-wrong.html
-- title: Resources for Amateur Compiler Writers
-  url: https://c9x.me/compile/bib/
-- title: History of Programming Languages
-  url: https://felleisen.org/matthias/7480-s21/index.html
-- title: Lecture Notes on the Lambda Calculus
-  url: https://www.cs.cmu.edu/~fp/courses/15814-f18/lectures/Notes-15814-f18.pdf
-- title: Language-oriented Programming in Racket (A Cultural Anthropology)
-  url: https://gumroad.com/l/lop-in-racket-cultural-anthro
-- title: Logic and Computation Intertwined
-  url: https://cs.uwaterloo.ca/~plragde/flaneries/LACI/
-- title: The Power of Prolog
-  url: https://www.metalevel.at/prolog
-- title: Software Design for Flexibility
-  url: https://mitpress.mit.edu/books/software-design-flexibility
-- title: Essentials of Programming Languages
-  url: http://www.eopl3.com
-- title: This Is Why You Shouldn't Interrupt a Programmer
-  url: https://heeris.id.au/2013/this-is-why-you-shouldnt-interrupt-a-programmer/
-- title: Myths about /dev/urandom
-  url: https://www.2uo.de/myths-about-urandom/
-- title: Functional Programming OCaml (2019)
-  url: https://www.cs.cornell.edu/courses/cs3110/2019sp/textbook/
-- title: Functional Programming OCaml (2021)
-  url: https://www.cs.cornell.edu/courses/cs3110/2021sp/textbook/
-- title: Indiana University Compilers Course
-  url: https://www.cs.cornell.edu/courses/cs3110/2021sp/textbook/
-- title: 'Programming Languages: Application and Interpretation'
-  url: https://www.plai.org
-- title: An Incremental Approach to Compiler Construction
-  url: http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf
-- title: Bibliography of Scheme research (readscheme.org and beyond)
-  url: https://github.com/schemedoc/bibliography
-- title: Lisp in Small Pieces
-  url: https://pages.lip6.fr/Christian.Queinnec/WWW/LiSP.html
-- title: A Data-Centric Introduction to Computing
-  url: https://dcic-world.org/2021-08-21/index.html
-- title: Pyret
-  url: https://www.pyret.org/index.html
-- title: Monads, Arrows, and Idioms
-  url: https://homepages.inf.ed.ac.uk/wadler/topics/monads.html
-- title: Functional Pearls
-  url: https://wiki.haskell.org/Research_papers/Functional_pearls
-- title: Rust for the Polyglot Programmer
-  url: https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/index.html
-- title: A New Medium for Communicating Research on Programming Languages
-  url: https://willcrichton.net/nota/
-- title: Jamie Brandon
-  url: https://scattered-thoughts.net
-- title: The Traditional Vi
-  url: http://ex-vi.sourceforge.net
-- title: Hacker News folk wisdom on visual programming
-  url: https://drossbucket.com/2021/06/30/hacker-news-folk-wisdom-on-visual-programming/
-- title: Math 4120 (Modern Algebra) Fall 2021
-  url: http://www.math.clemson.edu/~macaule/classes/f21_math4120/
-- title: Computer Science was always supposed to be taught to everyone, and it wasn't about getting a job
-  url: https://computinged.wordpress.com/2021/11/26/computer-science-was-always-supposed-to-be-taught-to-everyone-but-not-about-getting-a-job-a-historical-perspective/
-- title: Programming Language Foundations in Agda
-  url: https://plfa.inf.ed.ac.uk
-- title: The Codeless Code
-  url: http://thecodelesscode.com/contents
-- title: Basic Things for Software Projects
-  url: https://matklad.github.io/2024/03/22/basic-things.html
-- title: Accidentally Turing-Complete
-  url: https://beza1e1.tuxen.de/articles/accidentally_turing_complete.html
-- title: Incompleteness Ex Machina
-  url: https://arxiv.org/abs/1909.04569
-- title: Postmortem lessons
-  url: https://github.com/danluu/post-mortems
+new:
+  - title: Pluralistic
+    url: https://pluralistic.net
+  - title: Ed Zitron's Where's Your Ed At
+    url: https://www.wheresyoured.at
+  - title: Ludicity
+    url: https://ludic.mataroa.blog
+  - title: deadSimpleTech
+    url: https://deadsimpletech.com
+  - title: rachelbythebay
+    url: https://rachelbythebay.com/w
+  - title: Drew DeVault's blog
+    url: https://drewdevault.com
+  - title: Git Rev News
+    url: https://git.github.io
+  - title: Julia Evans
+    url: https://jvns.ca
+  - title: Citation Needed
+    url: https://www.citationneeded.news
+  - title: Steve Klabnik's Blog
+    url: https://steveklabnik.com/writing
+  - title: Drew Devault's LinkHut
+    url: https://ln.ht/~ddevault
+  - title: Paperless
+    url: https://paperless.blog
+  - title: cosmic-cow
+    url: https://cosmic-cow.mataroa.blog
+  - title: Sidhion
+    url: https://sidhion.com
+  - title: Lojic Technologies Blog
+    url: https://blog.lojic.com/feeds/all.atom.xml
+  - title: unixdigest.com
+    url: https://unixdigest.com
+  - title: Communications of the ACM
+    url: https://cacm.acm.org
+  - title: ralfj.de
+    url: https://www.ralfj.de/blog/feed.xml
+
+old:
+  - title: Fabulous Adventures in Code
+    url: https://ericlippert.com
+  - title: Joel on Software
+    url: https://www.joelonsoftware.com
+  - title: Bastard Operator from Hell (BOFH)
+    url: http://www.bofharchive.com
+  - title: The Angry GM
+    url: https://theangrygm.com
+  - title: dmerej's Blog
+    url: https://dmerej.info/blog/
+  - title: Code Without Rules
+    url: https://codewithoutrules.com
+  - title: Linus Akesson
+    url: http://www.linusakesson.net/index.php
+  - title: Blog de Lionel Drico
+    url: http://ploum.net
+  - title: Coding Horror
+    url: https://blog.codinghorror.com/
+  - title: Brave New Geek
+    url: https://bravenewgeek.com
+  - title: Destroy All Software
+    url: https://www.destroyallsoftware.com/
+  - title: Crocker's Rules
+    url: http://sl4.org/crocker.html
+  - title: An interesting approach to résumés
+    url: http://resume.livingston-gray.com/
+  - title: Dork Tower
+    url: http://www.dorktower.com/
+  - title: Trevor Jim
+    url: http://trevorjim.com/
+  - title: Extra Cheese (dead)
+    url: http://blog.extracheese.org/
+  - title: t+1
+    url: http://blog.tplus1.com
+  - title: Arabesque
+    url: https://sanctum.geek.nz/arabesque/
+  - title: Select Start SQL
+    url: https://selectstarsql.com/
+  - title: Darts, Dice, and Coins
+    url: http://www.keithschwarz.com/darts-dice-coins/
+  - title: Matt Might
+    url: http://matt.might.net
+  - title: Crafting Interpreters
+    url: http://www.craftinginterpreters.com/
+  - title: Wargames
+    url: http://overthewire.org/wargames/
+  - title: Learn You a Haskell
+    url: http://learnyouahaskell.com
+  - title: Write You a Haskell
+    url: http://dev.stephendiehl.com/fun/
+  - title: Beautiful Racket
+    url: https://beautifulracket.com/
+  - title: Practical Typography
+    url: https://practicaltypography.com/
+  - title: RubyCon:Adventures in Functional Programming
+    url: http://confreaks.tv/videos/rubyconf2012-y-not-adventures-in-functional-programming
+  - title: Programming with Nothing
+    url: http://codon.com/programming-with-nothing
+  - title: Unix Haters
+    url: http://web.mit.edu/~simsong/www/ugh.pdf
+  - title: Map, map, and flatMap in Scala
+    url: http://www.brunton-spall.co.uk/post/2011/12/02/map-map-and-flatmap-in-scala/
+  - title: Learn Vimscript the Hard Way
+    url: http://learnvimscriptthehardway.stevelosh.com/
+  - title: Steve Losh
+    url: http://stevelosh.com/blog/
+  - title: Vimcasts
+    url: http://vimcasts.org/
+  - title: Advanced Bash Scripting Guide
+    url: http://www.tldp.org/LDP/abs/html/abs-guide.html
+  - title: Bash Strict Mode
+    url: http://redsymbol.net/articles/unofficial-bash-strict-mode/
+  - title: Git Book
+    url: https://git-scm.com/book/en/v2
+  - title: THE Note about Git Commit Messages
+    url: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+  - title: Object Calisthenics
+    url: https://www.cs.helsinki.fi/u/luontola/tdd-2009/ext/ObjectCalisthenics.pdf
+  - title: Things of Interest
+    url: https://qntm.org/
+  - title: Robert Melton
+    url: https://www.robertmelton.com
+  - title: Bike Shed
+    url: https://shed.bike
+  - title: Vim Advent Calendar
+    url: https://vimways.org/2018/
+  - title: Epigrams in Programming
+    url: http://www.cs.yale.edu/homes/perlis-alan/quotes.html
+  - title: Advent of Code
+    url: https://adventofcode.com
+  - title: The Wizard Book
+    url: http://mitpress.mit.edu/sites/default/files/sicp/index.html
+  - title: User Error
+    url: https://en.wikipedia.org/wiki/User_error
+  - title: The Ultimate Final Exam
+    url: http://www.davedoyle.com/prof/pastProjects/Nerd/humor/ultimate_final.html
+  - title: Open Sourcing a Python Project
+    url: https://jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/
+  - title: Internal Pointers
+    url: https://www.internalpointers.com/
+  - title: Mathematical Writing
+    url: http://www.econ.uiuc.edu/~econ536/Papers/mathwriting.pdf
+  - title: Eloquent Javascript
+    url: http://eloquentjavascript.net
+  - title: Ruby Koans
+    url: http://rubykoans.com
+  - title: Crafting Interpreters
+    url: http://craftinginterpreters.com
+  - title: Auto-tools-tutorial
+    url: https://www.seul.org/docs/autotut/
+  - title: Richard Gabriel's Dreamsongs
+    url: https://www.dreamsongs.com/index.html
+  - title: How to Ask Questions the Smart Way
+    url: http://www.catb.org/~esr/faqs/smart-questions.html
+  - title: French-English-and-back Technical Dictionary
+    url: https://bitoduc.fr
+  - title: What I Wish I Knew Learning Haskell
+    url: http://dev.stephendiehl.com/hask/
+  - title: ESR's Stuff
+    url: http://www.catb.org/esr/
+  - title: 'Null Program'
+    url: https://nullprogram.com
+  - title: 'Senior Engineering Checklist'
+    url: https://littleblah.com/post/2019-09-01-senior-engineer-checklist/
+  - title: '0b10: Two-Bit History'
+    url: https://twobithistory.org/
+  - title: 'Always Measure One Level Deeper'
+    url: https://cacm.acm.org/magazines/2018/7/229031-always-measure-one-level-deeper/fulltext
+  - title: 'Common causes for seg faults'
+    url: https://www.google.com/amp/s/www.geeksforgeeks.org/core-dump-segmentation-fault-c-cpp/amp/
+  - title: 'My favorite git commit'
+    url: https://fatbusinessman.com/2019/my-favourite-git-commit
+  - title: 'Masterpiece Collection'
+    url: https://perlweeklychallenge.org/blog/damian-corner/
+  - title: 'The Mysterious 500-mile emails'
+    url: http://www.ibiblio.org/harris/500milemail.html
+  - title: Books for Software Engineers
+    url: https://jasonroell.com/2015/03/16/12-most-infuential-books-every-software-engineer-needs-to-read/
+  - title: Unix Toolbox (somewhat dated)
+    url: http://cb.vu/unixtoolbox.xhtml
+  - title: 'Magic: the Gathering is Turing Complete'
+    url: https://arxiv.org/abs/1904.09828
+  - title: A Personal History of Modeless Editing and Cut/Copy-Paste
+    url: https://dl.acm.org/doi/pdf/10.1145/2212877.2212896?download=true
+  - title: Programming with Categories
+    url: http://brendanfong.com/programmingcats.html
+  - title: Category Theory for Programmers
+    url: https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/
+  - title: Lecture notes on Types and Programming Languages
+    url: https://www.cs.cmu.edu/~fp/courses/15814-f18/lectures/Notes-15814-f18.pdf
+  - title: Parametric Press
+    url: https://parametric.press/
+  - title: Bel
+    url: http://paulgraham.com/bel.html
+  - title: Haskell wiki
+    url: https://wiki.haskell.org/Haskell
+  - title: Operator Etymology
+    url: https://jasdev.me/operators
+  - title: 'Cunningham & Cunningham'
+    url: http://c2.com/
+  - title: Can Programming Be Liberated from the von Neumann Style? A Functional Style and Its Algebra of Programs
+    url: http://www.thocp.net/biographies/papers/backus_turingaward_lecture.pdf
+  - title: argumatronic
+    url: https://argumatronic.com
+  - title: Lambda the Ultimate
+    url: http://lambda-the-ultimate.org
+  - title: Game Programming Patterns
+    url: https://gameprogrammingpatterns.com/
+  - title: Haoyi's Programming Blog
+    url: http://www.lihaoyi.com/
+  - title: So long, and thanks for the Ph.D.!
+    url: https://www.cs.unc.edu/~azuma/hitch4.html
+  - title: Hillel Wayne's blog (Formal methods)
+    url: https://www.hillelwayne.com/
+  - title: "Histogram: You have to know the past to understand the present"
+    url: http://tomasp.net/histogram/
+  - title: Essays on programing I think about a lot
+    url: https://www.benkuhn.net/progessays/
+  - title: Typing is hard
+    url: https://typing-is-hard.ch/
+  - title: Building Lisps
+    url: https://bernsteinbear.com/blog/lisp/
+  - title: Let over Lambda
+    url: https://letoverlambda.com
+  - title: How to Design Programs
+    url: https://htdp.org
+  - title: Programming and Programming Languages
+    url: https://papl.cs.brown.edu/2020/
+  - title: A Brief, Incomplete, and Mostly Wrong History of Programming Languages
+    url: https://james-iry.blogspot.com/2009/05/brief-incomplete-and-mostly-wrong.html
+  - title: Resources for Amateur Compiler Writers
+    url: https://c9x.me/compile/bib/
+  - title: History of Programming Languages
+    url: https://felleisen.org/matthias/7480-s21/index.html
+  - title: Lecture Notes on the Lambda Calculus
+    url: https://www.cs.cmu.edu/~fp/courses/15814-f18/lectures/Notes-15814-f18.pdf
+  - title: Language-oriented Programming in Racket (A Cultural Anthropology)
+    url: https://gumroad.com/l/lop-in-racket-cultural-anthro
+  - title: Logic and Computation Intertwined
+    url: https://cs.uwaterloo.ca/~plragde/flaneries/LACI/
+  - title: The Power of Prolog
+    url: https://www.metalevel.at/prolog
+  - title: Software Design for Flexibility
+    url: https://mitpress.mit.edu/books/software-design-flexibility
+  - title: Essentials of Programming Languages
+    url: http://www.eopl3.com
+  - title: This Is Why You Shouldn't Interrupt a Programmer
+    url: https://heeris.id.au/2013/this-is-why-you-shouldnt-interrupt-a-programmer/
+  - title: Myths about /dev/urandom
+    url: https://www.2uo.de/myths-about-urandom/
+  - title: Functional Programming OCaml (2019)
+    url: https://www.cs.cornell.edu/courses/cs3110/2019sp/textbook/
+  - title: Functional Programming OCaml (2021)
+    url: https://www.cs.cornell.edu/courses/cs3110/2021sp/textbook/
+  - title: Indiana University Compilers Course
+    url: https://www.cs.cornell.edu/courses/cs3110/2021sp/textbook/
+  - title: 'Programming Languages: Application and Interpretation'
+    url: https://www.plai.org
+  - title: An Incremental Approach to Compiler Construction
+    url: http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf
+  - title: Bibliography of Scheme research (readscheme.org and beyond)
+    url: https://github.com/schemedoc/bibliography
+  - title: Lisp in Small Pieces
+    url: https://pages.lip6.fr/Christian.Queinnec/WWW/LiSP.html
+  - title: A Data-Centric Introduction to Computing
+    url: https://dcic-world.org/2021-08-21/index.html
+  - title: Pyret
+    url: https://www.pyret.org/index.html
+  - title: Monads, Arrows, and Idioms
+    url: https://homepages.inf.ed.ac.uk/wadler/topics/monads.html
+  - title: Functional Pearls
+    url: https://wiki.haskell.org/Research_papers/Functional_pearls
+  - title: Rust for the Polyglot Programmer
+    url: https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/index.html
+  - title: A New Medium for Communicating Research on Programming Languages
+    url: https://willcrichton.net/nota/
+  - title: Jamie Brandon
+    url: https://scattered-thoughts.net
+  - title: The Traditional Vi
+    url: http://ex-vi.sourceforge.net
+  - title: Hacker News folk wisdom on visual programming
+    url: https://drossbucket.com/2021/06/30/hacker-news-folk-wisdom-on-visual-programming/
+  - title: Math 4120 (Modern Algebra) Fall 2021
+    url: http://www.math.clemson.edu/~macaule/classes/f21_math4120/
+  - title: Computer Science was always supposed to be taught to everyone, and it wasn't about getting a job
+    url: https://computinged.wordpress.com/2021/11/26/computer-science-was-always-supposed-to-be-taught-to-everyone-but-not-about-getting-a-job-a-historical-perspective/
+  - title: Programming Language Foundations in Agda
+    url: https://plfa.inf.ed.ac.uk
+  - title: The Codeless Code
+    url: http://thecodelesscode.com/contents
+  - title: Basic Things for Software Projects
+    url: https://matklad.github.io/2024/03/22/basic-things.html
+  - title: Accidentally Turing-Complete
+    url: https://beza1e1.tuxen.de/articles/accidentally_turing_complete.html
+  - title: Incompleteness Ex Machina
+    url: https://arxiv.org/abs/1909.04569
+  - title: Postmortem lessons
+    url: https://github.com/danluu/post-mortems
