@@ -31,6 +31,9 @@ Here is my short list of steps for digital control.
     - [America's Cyber Defense Agency: "Recognize and Report Phishing"](https://www.cisa.gov/secure-our-world/recognize-and-report-phishing)
 - Be mindful. Ask yourself: why am I reading, watching, or consuming this? Who
   wrote or created it?
+    - Consider creating some [guidelines for Being
+      Online](https://joeldueck.com/being-in-the-graph-mind.html) based on your
+      desired outcomes
 
 ## Intermediate
 
