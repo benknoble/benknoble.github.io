@@ -1,4 +1,157 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-04-11T19:13:38+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Thoughts from recent conversations on LLMs</title><link href="https://benknoble.github.io/blog/2025/04/08/musings/" rel="alternate" type="text/html" title="Thoughts from recent conversations on LLMs" /><published>2025-04-08T00:00:00+00:00</published><updated>2025-04-08T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/04/08/musings</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/04/08/musings/"><![CDATA[<p>Some unpolished thoughts from a recent conversation with other software
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-04-18T18:42:42+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">LLM Skepticism</title><link href="https://benknoble.github.io/blog/2025/04/18/skepticism/" rel="alternate" type="text/html" title="LLM Skepticism" /><published>2025-04-18T00:00:00+00:00</published><updated>2025-04-18T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/04/18/skepticism</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/04/18/skepticism/"><![CDATA[<p>A brief essay to explore the business of producing and selling LLMs.</p>
+
+<p>Hype-driven reporting on LLMs and other self-described AI tools <a href="https://thetechbubble.substack.com/p/the-phony-comforts-of-useful-idiots">lumps together
+junk articles with nuggets of
+“neat”</a>.
+The enthusiast will say that by pointing this out, my skepticism is a matter of
+moving the goalposts. Yet I have never claimed that the LLM does not work (only
+that it is not superhuman). Rather, I have repeatedly pointed—out over and
+over and over again—the LLM does exactly what it is designed to do. Chiefly,
+it generates plausible-seeming text based on a statistical pattern. The problem
+is not that LLMs are not useful tools. The problem is that the development and
+use of LLMs consistently harms along the axes which I care more about.</p>
+
+<p>For example, an enthusiast like Casey Newton can laud himself as a “real and
+dangerous promoter” without engaging in any of the very real harms that exist
+today. What harms? Social injustice; racial profiling; environmental hazards;
+enshittification; economic damage by way of the diverting of funds away from
+productive research and towards Tech, Monopoly, hype, marketing machines, and
+grifts; the diverting of value away from laborers and creators towards their
+bosses; the creation of a fertile breeding ground for a campaign against truth;
+the destruction of a very real and very un-tragic commons; the weaponization of
+data to support racist pseudo-science like eugenics and phrenology;
+participation in a cultural push to over-quantify and under-qualify; and more.</p>
+
+<p>The punchline? Generative AI and large language models are here, are real, and
+are capable of great harm. That is not because they do not work, but rather
+because they function precisely as intended. If the purpose of the system is
+what it does, then the purpose of large language models and generative AI are,
+in addition to neat problems solving tricks, the harms listed above.</p>
+
+<p>Both in their function as a statistical model that replicates reality rather
+than improving it and in their construction requiring vast amounts of energy and
+capital, an LLM and the business that supports it imperils that which I care
+about: a habitable, equitable, empowering world for myself, my peers, and my
+children.</p>
+
+<p>Let’s pause for a moment and take a look at a related tool: low-code or no-code
+environments. I believe that such tools may have the power to enable the
+exploration of new ideas in business, education, and personal computing. My
+experience as a software engineer and a hobby programmer has taught me, however,
+that such tools enable solving 60% to 80% of the problem while obscuring the
+remaining 20% to 40%. In many contexts that is enough of a solution, but is
+fundamentally insufficient in other contexts. If such tools are helpful to my
+goal of the democratization of digital control then I will continue to applaud
+them as I have done in the past. When such tools seek to monopolize digital
+control or enable the monopolization of digital control, then I will continue to
+call that out as antithetical to the modern computing movement.</p>
+
+<p>It is my hope that such tools create a flood of <a href="https://gwern.net/doc/technology/2004-03-30-shirky-situatedsoftware.html">“situated
+software”</a>—that
+is, software which is uniquely situated in its social context. Software often
+has a small, tightly connected pool of users who share context. As a result,
+they can overcome inherent limitations—in either digital technology as a whole
+or in their programming capabilities in the specifics—by social negotiation
+and physical manipulation of the world around them.</p>
+
+<p>To be clear, low-code and no-code tools are not the only ways to create such
+software. Many of my role models create such situated software on a regular
+basis, such as when they improve their development environments by short scripts
+that only makes sense in their specific context. I and many others have also
+built situated software to assist in the pursuit of joyful activities, hobbies,
+art, writing, reading, and many more. For some of these latter cases, more
+sophisticated general purpose programming languages are a better vehicle.</p>
+
+<p>What characterizes situated software is not how it was implemented but who
+implemented it.</p>
+
+<p>Some of the software is used by small communities worldwide; some of it is used
+by small groups in a single small area. None would make sense to anyone without
+the shared social context.</p>
+
+<p>To return to our original theme—skepticism and criticism of generative AI and
+large language models—it is true that some of these low-code and no-code
+environments are predicated on or assisted by LLMs. This is not by itself
+harmful; however, such models as a social artifact cannot exist separately from
+the harms that were enacted upon their creation. Such a separation entails
+willful blindness, intentionally drawing a veil upon ourselves, to separate
+artifact from creator. It is not my intent to suggest that we can never benefit
+from the fruit of the poison tree<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. I do suggest however there are
+alternatives readily available, and that it may take more labor from those of us
+so endowed with digital control to ensure that such alternatives continue to
+exist, are created anew for a modern world, and proliferate intellectually,
+legally, socially, and politically, in order to foster a free ecosystem.</p>
+
+<p>It’s <a href="https://www.wheresyoured.at/optimistic-cowardice/">really hard to be a generative-AI skeptic right
+now</a>, by which I mean it
+takes a lot of effort to back up my skeptical, critical positions compared to
+what it takes to be optimistic. All that said, <a href="https://drewdevault.com/2025/03/17/2025-03-17-Stop-externalizing-your-costs-on-me.html">here’s one example of the cost
+of LLM
+optimism</a>—scraping
+is a tool like any other, which means it can be wielded for good or evil. I
+fundamentally <a href="https://pluralistic.net/2023/09/17/how-to-think-about-scraping/">support the idea of scraping as a productive means of
+accomplishing many different kinds of
+goals</a>. But
+scraping that disrespects <code class="language-plaintext highlighter-rouge">robots.txt</code> and the fundamentals of being good web
+citizens? That stuff wrecks the web, especially smaller systems and their
+admins—scraping should not cause DDoS outages, driving up infrastructure and
+human cost. To quote the article above:</p>
+
+<blockquote>
+  <p>If blasting CO2 into the air and ruining all of our freshwater and
+traumatizing cheap laborers and making every sysadmin you know miserable and
+ripping off code and books and art at scale and ruining our [elided] democracy
+isn’t enough for you to leave this [stuff] alone, what is?</p>
+</blockquote>
+
+<p>I think—along similar lines as Ed Zitron and others—that the AI-hype
+companies are dependent on the hype for revenue in terms of “stock go up.” As
+others have pointed out, that explains the constant pressure to create a
+narrative: the stock price goes up only if investors truly believe these
+companies have found another hyperscaler market, so the companies benefit
+materially from creating the narrative that they have. (See <a href="https://pluralistic.net/2025/03/15/altering-the-deal/">Altering the
+deal</a> for some more info
+on how stock benefits hyperscalers by inflating price/earnings ratio and why
+it’s important that they keep that narrative alive.) Whether or not the market
+exists is actually a separate question for these companies. For us, believing it
+might not is what makes the whole thing feel like a grift (house of cards, tower
+of lies, etc.). Unfortunately, those of us that are skeptical feel like we have
+lots of data (qualitative and quantitative), anecdata, and experts to back up
+our position. Yet media unwilling to push back and ask tough questions coupled
+with expensive, aggressive marketing campaigns drowns that out for normies<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> .
+To be clear: I’m not saying “LLMs don’t work.” I’m saying “they don’t have the
+claimed market” and “they are destructive along many axes I examine” (most of
+which are more important to me than “code faster, worse”).</p>
+
+<p>To judge by reactions of my peers, I’m not the only one who thinks these things.
+I’ll try to keep being brave enough to say them.</p>
+
+<p>If I believe that the industry of LLMs is this harmful, and if I believe that
+there are alternative tools, why would I use them? I hope I’m wrong—I hope one
+day I get to reflect on how this moment encouraged us to repair injustice. In
+the meantime, please stop dismissing my objections as lack of skill or fear of
+change.</p>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>As Cory Doctorow likes to explain it, buying posters and pens from Amazon
+to support your protest is better than not protesting at all. Sometimes we
+have to accept the imperfection of the world we inhabit in order to wage the
+fight against other imperfections. This should not be taken as a version of
+“the ends justify the means.” Rather, this is the pragmatic understanding
+that in all things there are trade-offs. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Which I am emphatically not using in a pejorative sense: see <a href="https://youtu.be/O33NK52ZmUk?si=SNgbdd8CCKK29LRH&amp;t=997">this part of
+a talk I gave last year
+(16:37)</a> about
+democratizing technology’s “elite” label. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[A brief essay to explore the business of producing and selling LLMs.]]></summary></entry><entry><title type="html">Thoughts from recent conversations on LLMs</title><link href="https://benknoble.github.io/blog/2025/04/08/musings/" rel="alternate" type="text/html" title="Thoughts from recent conversations on LLMs" /><published>2025-04-08T00:00:00+00:00</published><updated>2025-04-08T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/04/08/musings</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/04/08/musings/"><![CDATA[<p>Some unpolished thoughts from a recent conversation with other software
 engineers.</p>
 
 <p>Responding to claims in <a href="https://www.newsweek.com/ai-impact-interview-yann-lecun-llm-limitations-analysis-2054255">an interview with Meta’s Yann LeCun about LLMs being on
@@ -709,40 +862,4 @@ obvious if you could get the necessary information from other modules. It’s
 possible you could build a lot of infrastructure to do it, but I’m not
 certain.</p>
   </li>
-</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[This post serves primarily to host an indexable copy of some chat replies about the Racket programming language.]]></summary></entry><entry><title type="html">Letter to the editor: Populism is not the answer to monopoly and fraud</title><link href="https://benknoble.github.io/blog/2025/01/27/satisfaction/" rel="alternate" type="text/html" title="Letter to the editor: Populism is not the answer to monopoly and fraud" /><published>2025-01-27T00:00:00+00:00</published><updated>2025-01-27T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/01/27/satisfaction</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/01/27/satisfaction/"><![CDATA[<p>In a <em>Wall Street Journal</em> opinion piece titled <a href="https://www.wsj.com/opinion/american-society-was-built-for-populism-not-elitism-nature-and-history-prove-technocrats-wrong-cf9e7a2f?page=1">“American Society Was Built for
-Populism, Not
-Elitism”</a>
-(paywalled), Karl Zinsmeister argues that power has concentrated largely in
-the hands of experts and authorities “indoctrinated in universities” (in other
-words, too liberal for the mainstream).</p>
-
-<p>While he correctly assess a backlash to authoritarian and central control, he
-misses both symptom and cause. The backlash is not against a supposedly
-left-leaning power network, but rather against an oligarchic class whose waves
-of corrupt money have undue influence in American life. <a href="https://www.ftc.gov/system/files/ftc_gov/pdf/bedoya-statement-emergency-motion.pdf">FTC Commissioner Alvaro
-M. Bedoya understands what people
-need</a>:</p>
-
-<blockquote>
-  <p>What they [working class people] do talk about is how powerful companies are
-skirting or abusing the law to force farmers, workers, and small businessmen
-to do what they want, when they want, or else. How the government isn’t doing
-anything about it. And how they’re going broke because of it.</p>
-</blockquote>
-
-<p>If there is also a backlash against the scientific institutions of universities,
-it is due to a <a href="https://pluralistic.net/2024/09/25/epistemological-chaos/">protracted campaign against
-epistemology</a> by big
-business. Oligarchs have an easier time staying rich in a world muddied by
-misinformation. Meanwhile, we explicitly <em>want</em> to delegate fact-finding to the
-experts: that creates <a href="https://pluralistic.net/2024/11/21/policy-based-evidence/">evidence-based
-policy</a>.</p>
-
-<p>What is Zinsmeister’s solution to his spectre of centralized liberal control?
-Hand over federal programs to private control: his writing on American
-philanthropy indicates to me that he believes a wealthy élite will rule instead.
-Same centralized control, different powerful controllers.</p>
-
-<p>The answer is neither populism nor technocracy nor oligarchy. The answer is
-regulation of power and markets and strong institutional science (necessarily
-separated from government).</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="politics" /><summary type="html"><![CDATA[In a Wall Street Journal opinion piece titled “American Society Was Built for Populism, Not Elitism” (paywalled), Karl Zinsmeister argues that power has concentrated largely in the hands of experts and authorities “indoctrinated in universities” (in other words, too liberal for the mainstream).]]></summary></entry></feed>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[This post serves primarily to host an indexable copy of some chat replies about the Racket programming language.]]></summary></entry></feed>
