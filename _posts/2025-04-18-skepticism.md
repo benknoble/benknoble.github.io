@@ -44,13 +44,15 @@ Let's pause for a moment and take a look at a related tool: low-code or no-code
 environments. I believe that such tools may have the power to enable the
 exploration of new ideas in business, education, and personal computing. My
 experience as a software engineer and a hobby programmer has taught me, however,
-that such tools enable solving 60% to 80% of the problem while obscuring the
-remaining 20% to 40%. In many contexts that is enough of a solution, but is
-fundamentally insufficient in other contexts. If such tools are helpful to my
-goal of the democratization of digital control then I will continue to applaud
-them as I have done in the past. When such tools seek to monopolize digital
-control or enable the monopolization of digital control, then I will continue to
-call that out as antithetical to the modern computing movement.
+that such tools enable [solving 60% to 80% of the problem while obscuring the
+remaining 20% to
+40%](https://addyo.substack.com/p/the-70-problem-hard-truths-about). In many
+contexts that is enough of a solution, but is fundamentally insufficient in
+other contexts. If such tools are helpful to my goal of the democratization of
+digital control then I will continue to applaud them as I have done in the past.
+When such tools seek to monopolize digital control or enable the monopolization
+of digital control, then I will continue to call that out as antithetical to the
+modern computing movement.
 
 It is my hope that such tools create a flood of ["situated
 software"](https://gwern.net/doc/technology/2004-03-30-shirky-situatedsoftware.html)---that
