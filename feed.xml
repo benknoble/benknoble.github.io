@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-04-18T18:42:42+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">LLM Skepticism</title><link href="https://benknoble.github.io/blog/2025/04/18/skepticism/" rel="alternate" type="text/html" title="LLM Skepticism" /><published>2025-04-18T00:00:00+00:00</published><updated>2025-04-18T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/04/18/skepticism</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/04/18/skepticism/"><![CDATA[<p>A brief essay to explore the business of producing and selling LLMs.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-04-19T14:03:48+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">LLM Skepticism</title><link href="https://benknoble.github.io/blog/2025/04/18/skepticism/" rel="alternate" type="text/html" title="LLM Skepticism" /><published>2025-04-18T00:00:00+00:00</published><updated>2025-04-18T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/04/18/skepticism</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/04/18/skepticism/"><![CDATA[<p>A brief essay to explore the business of producing and selling LLMs.</p>
 
 <p>Hype-driven reporting on LLMs and other self-described AI tools <a href="https://thetechbubble.substack.com/p/the-phony-comforts-of-useful-idiots">lumps together
 junk articles with nuggets of
@@ -38,13 +38,15 @@ children.</p>
 environments. I believe that such tools may have the power to enable the
 exploration of new ideas in business, education, and personal computing. My
 experience as a software engineer and a hobby programmer has taught me, however,
-that such tools enable solving 60% to 80% of the problem while obscuring the
-remaining 20% to 40%. In many contexts that is enough of a solution, but is
-fundamentally insufficient in other contexts. If such tools are helpful to my
-goal of the democratization of digital control then I will continue to applaud
-them as I have done in the past. When such tools seek to monopolize digital
-control or enable the monopolization of digital control, then I will continue to
-call that out as antithetical to the modern computing movement.</p>
+that such tools enable <a href="https://addyo.substack.com/p/the-70-problem-hard-truths-about">solving 60% to 80% of the problem while obscuring the
+remaining 20% to
+40%</a>. In many
+contexts that is enough of a solution, but is fundamentally insufficient in
+other contexts. If such tools are helpful to my goal of the democratization of
+digital control then I will continue to applaud them as I have done in the past.
+When such tools seek to monopolize digital control or enable the monopolization
+of digital control, then I will continue to call that out as antithetical to the
+modern computing movement.</p>
 
 <p>It is my hope that such tools create a flood of <a href="https://gwern.net/doc/technology/2004-03-30-shirky-situatedsoftware.html">“situated
 software”</a>—that
