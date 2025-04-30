@@ -45,7 +45,7 @@ Hi, I'm Ben :wave: and my pronouns are he/him/his.
     - I completed a Master's in CS in 2021. I have also completed my
       undergraduate degree in CS and French, with a minor in Mathematics, which
       I completed in 2020.
-- [By a wonderful fluke, my Erdős number is 4.](https://sites.google.com/site/dicksites/)
+- [By a wonderful fluke, my Erdős number is 4](https://sites.google.com/site/dicksites/). My Top Gun number is 3.
 - I'm keeping track of my "developer level" via a [set of challenges that span a
   broad array of programming, development, learning, and teaching
   categories](https://benknoble.github.io/level-up/).
