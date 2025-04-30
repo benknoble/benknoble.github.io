@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-04-30T15:59:43+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">LLM Skepticism</title><link href="https://benknoble.github.io/blog/2025/04/18/skepticism/" rel="alternate" type="text/html" title="LLM Skepticism" /><published>2025-04-18T00:00:00+00:00</published><updated>2025-04-18T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/04/18/skepticism</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/04/18/skepticism/"><![CDATA[<p>A brief essay to explore the business of producing and selling LLMs.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-04-30T21:40:22+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">LLM Skepticism</title><link href="https://benknoble.github.io/blog/2025/04/18/skepticism/" rel="alternate" type="text/html" title="LLM Skepticism" /><published>2025-04-18T00:00:00+00:00</published><updated>2025-04-18T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/04/18/skepticism</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/04/18/skepticism/"><![CDATA[<p>A brief essay to explore the business of producing and selling LLMs.</p>
+
+<p><strong>Update 2025 April 30th:</strong> The thesis of the following essay—that LLMs are
+more harmful than useful along the axes which I care about—is independent of
+whether we use LLMs for programming tasks or emails or something else. I’ve
+focused on what I know in this essay: programming. Substitute “generate podcast
+audio,” “summarize articles,” “write letters,” or whatever else you want if you
+find yourself thinking I’m too narrowly focused on programming. Besides, there’s
+a definite narrative of LLM use for programming tasks which I don’t think lines
+up with the reality, either in terms of harms or in terms of fitness to task.</p>
 
 <p>Hype-driven reporting on LLMs and other self-described AI tools <a href="https://thetechbubble.substack.com/p/the-phony-comforts-of-useful-idiots">lumps together
 junk articles with nuggets of
@@ -87,7 +96,7 @@ legally, socially, and politically, in order to foster a free ecosystem.</p>
 <p>It’s <a href="https://www.wheresyoured.at/optimistic-cowardice/">really hard to be a generative-AI skeptic right
 now</a>, by which I mean it
 takes a lot of effort to back up my skeptical, critical positions compared to
-what it takes to be optimistic. All that said, <a href="https://drewdevault.com/2025/03/17/2025-03-17-Stop-externalizing-your-costs-on-me.html">here’s one example of the cost
+what it takes to be optimistic<sup id="fnref:3"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>. All that said, <a href="https://drewdevault.com/2025/03/17/2025-03-17-Stop-externalizing-your-costs-on-me.html">here’s one example of the cost
 of LLM
 optimism</a>—scraping
 is a tool like any other, which means it can be wielded for good or evil. I
@@ -112,7 +121,8 @@ others have pointed out, that explains the constant pressure to create a
 narrative: the stock price goes up only if investors truly believe these
 companies have found another hyperscaler market, so the companies benefit
 materially from creating the narrative that they have. (See <a href="https://pluralistic.net/2025/03/15/altering-the-deal/">Altering the
-deal</a> for some more info
+deal</a> or <a href="https://pluralistic.net/2025/03/06/privacy-last/">Big Tech
+economics</a> for some more info
 on how stock benefits hyperscalers by inflating price/earnings ratio and why
 it’s important that they keep that narrative alive.) Whether or not the market
 exists is actually a separate question for these companies. For us, believing it
@@ -120,7 +130,7 @@ might not is what makes the whole thing feel like a grift (house of cards, tower
 of lies, etc.). Unfortunately, those of us that are skeptical feel like we have
 lots of data (qualitative and quantitative), anecdata, and experts to back up
 our position. Yet media unwilling to push back and ask tough questions coupled
-with expensive, aggressive marketing campaigns drowns that out for normies<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> .
+with expensive, aggressive marketing campaigns drowns that out for normies<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">3</a></sup> .
 To be clear: I’m not saying “LLMs don’t work.” I’m saying “they don’t have the
 claimed market” and “they are destructive along many axes I examine” (most of
 which are more important to me than “code faster, worse”).</p>
@@ -145,6 +155,11 @@ have to accept the imperfection of the world we inhabit in order to wage the
 fight against other imperfections. This should not be taken as a version of
 “the ends justify the means.” Rather, this is the pragmatic understanding
 that in all things there are trade-offs. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>Still don’t believe me? <a href="https://ludic.mataroa.blog/blog/get-weird-and-disappear/">“Being seen to deviate is extremely
+hard”</a>. LLM
+skepticism is deviant right now. Being a luddite is <em>deviant</em>. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:2">
       <p>Which I am emphatically not using in a pejorative sense: see <a href="https://youtu.be/O33NK52ZmUk?si=SNgbdd8CCKK29LRH&amp;t=997">this part of
