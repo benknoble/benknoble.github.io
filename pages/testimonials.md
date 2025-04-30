@@ -3,6 +3,7 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "One of the most talented folks I know at the company."
 - "Radiates a positive attitude like few people I know."
 - "Ben stood out by being able to engage on so many different topics at the same
   time."
