@@ -6,6 +6,15 @@ category: [ Blog ]
 
 A brief essay to explore the business of producing and selling LLMs.
 
+**Update 2025 April 30th:** The thesis of the following essay---that LLMs are
+more harmful than useful along the axes which I care about---is independent of
+whether we use LLMs for programming tasks or emails or something else. I've
+focused on what I know in this essay: programming. Substitute "generate podcast
+audio," "summarize articles," "write letters," or whatever else you want if you
+find yourself thinking I'm too narrowly focused on programming. Besides, there’s
+a definite narrative of LLM use for programming tasks which I don’t think lines
+up with the reality, either in terms of harms or in terms of fitness to task.
+
 Hype-driven reporting on LLMs and other self-described AI tools [lumps together
 junk articles with nuggets of
 "neat"](https://thetechbubble.substack.com/p/the-phony-comforts-of-useful-idiots).
@@ -93,7 +102,7 @@ legally, socially, and politically, in order to foster a free ecosystem.
 It's [really hard to be a generative-AI skeptic right
 now](https://www.wheresyoured.at/optimistic-cowardice/), by which I mean it
 takes a lot of effort to back up my skeptical, critical positions compared to
-what it takes to be optimistic. All that said, [here’s one example of the cost
+what it takes to be optimistic[^3]. All that said, [here’s one example of the cost
 of LLM
 optimism](https://drewdevault.com/2025/03/17/2025-03-17-Stop-externalizing-your-costs-on-me.html)---scraping
 is a tool like any other, which means it can be wielded for good or evil. I
@@ -116,7 +125,8 @@ others have pointed out, that explains the constant pressure to create a
 narrative: the stock price goes up only if investors truly believe these
 companies have found another hyperscaler market, so the companies benefit
 materially from creating the narrative that they have. (See [Altering the
-deal](https://pluralistic.net/2025/03/15/altering-the-deal/) for some more info
+deal](https://pluralistic.net/2025/03/15/altering-the-deal/) or [Big Tech
+economics](https://pluralistic.net/2025/03/06/privacy-last/) for some more info
 on how stock benefits hyperscalers by inflating price/earnings ratio and why
 it’s important that they keep that narrative alive.) Whether or not the market
 exists is actually a separate question for these companies. For us, believing it
@@ -151,3 +161,7 @@ change.
     a talk I gave last year
     (16:37)](https://youtu.be/O33NK52ZmUk?si=SNgbdd8CCKK29LRH&t=997) about
     democratizing technology's "elite" label.
+
+[^3]: Still don't believe me? ["Being seen to deviate is extremely
+    hard"](https://ludic.mataroa.blog/blog/get-weird-and-disappear/). LLM
+    skepticism is deviant right now. Being a luddite is _deviant_.
