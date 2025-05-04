@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-04-30T21:40:22+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">LLM Skepticism</title><link href="https://benknoble.github.io/blog/2025/04/18/skepticism/" rel="alternate" type="text/html" title="LLM Skepticism" /><published>2025-04-18T00:00:00+00:00</published><updated>2025-04-18T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/04/18/skepticism</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/04/18/skepticism/"><![CDATA[<p>A brief essay to explore the business of producing and selling LLMs.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-05-04T15:20:53+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">LLM Skepticism</title><link href="https://benknoble.github.io/blog/2025/04/18/skepticism/" rel="alternate" type="text/html" title="LLM Skepticism" /><published>2025-04-18T00:00:00+00:00</published><updated>2025-04-18T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/04/18/skepticism</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/04/18/skepticism/"><![CDATA[<p>A brief essay to explore the business of producing and selling LLMs.</p>
 
 <p><strong>Update 2025 April 30th:</strong> The thesis of the following essay—that LLMs are
 more harmful than useful along the axes which I care about—is independent of
@@ -121,13 +121,14 @@ others have pointed out, that explains the constant pressure to create a
 narrative: the stock price goes up only if investors truly believe these
 companies have found another hyperscaler market, so the companies benefit
 materially from creating the narrative that they have. (See <a href="https://pluralistic.net/2025/03/15/altering-the-deal/">Altering the
-deal</a> or <a href="https://pluralistic.net/2025/03/06/privacy-last/">Big Tech
-economics</a> for some more info
-on how stock benefits hyperscalers by inflating price/earnings ratio and why
-it’s important that they keep that narrative alive.) Whether or not the market
-exists is actually a separate question for these companies. For us, believing it
-might not is what makes the whole thing feel like a grift (house of cards, tower
-of lies, etc.). Unfortunately, those of us that are skeptical feel like we have
+deal</a>, <a href="https://pluralistic.net/2025/03/06/privacy-last/">Big Tech
+economics</a>, or <a href="https://pluralistic.net/2025/05/02/kpis-off/">the fatfinger
+economy</a> for more information on
+how stock benefits hyperscalers by inflating price/earnings ratio and why it’s
+important that they keep that narrative alive.) Whether or not the market exists
+is actually a separate question for these companies. For us, believing it might
+not is what makes the whole thing feel like a grift (house of cards, tower of
+lies, etc.). Unfortunately, those of us that are skeptical feel like we have
 lots of data (qualitative and quantitative), anecdata, and experts to back up
 our position. Yet media unwilling to push back and ask tough questions coupled
 with expensive, aggressive marketing campaigns drowns that out for normies<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">3</a></sup> .
