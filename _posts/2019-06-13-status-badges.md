@@ -10,6 +10,12 @@ on the internet. Here they are.
 > Inspired heavily by [arp242](https://arp242.net/project-status-badges.html).
 > See his post for more details on semantics.
 
+Except for "archived," many of these badges also answer the question ["Is this
+project still
+maintained"](https://dammit.nl/link-is-this-project-still-maintained.html) in
+the affirmative, but that may not mean what you think. See the linked article
+for details.
+
 - [![This project is considered experimental](https://img.shields.io/badge/status-experimental-critical.svg)](https://benknoble.github.io/status/experimental/)
 
   May work, or may sacrifice your first-born to Justin Bieber.
