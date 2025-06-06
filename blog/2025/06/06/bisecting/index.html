@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Bisecting for Fun: Finding a Bugfix in Vim</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <p>
+      I stand for the Constitution, for due process, and for community that
+      takes care of each other.
+      </p>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Bisecting for Fun: Finding a Bugfix in Vim</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 06 Jun 2025 in Blog</p>
+<div id="post">
+  <p>I experienced a non-breaking paper cut-style bug in Vim for the last 6 months or
+so, and I finally tracked down the details.</p>
+
+<h2 id="the-bug">The Bug</h2>
+
+<p>I use <a href="https://github.com/dense-analysis/ale">ALE</a> for linting, and I noticed
+that on many files I was getting errors like</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>E219: Function name required
+E117: Unknown function: &lt;lambda&gt;54
+</code></pre></div></div>
+
+<p>I let it sit for about 6 months, though, because it wasn’t stopping me from
+getting any work done, and it didn’t even seem to be really breaking ALE. It was
+disruptive, though.</p>
+
+<p>I finally managed to get a traceback of the bug using <code class="language-plaintext highlighter-rouge">:debug</code>, but I’ll spare
+you the details. The end result was an expression like</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">" autoload/ale/command.vim</span>
+<span class="k">try</span>
+    <span class="k">if</span> <span class="nb">get</span><span class="p">(</span><span class="k">l</span><span class="p">:</span>result<span class="p">,</span> <span class="s1">'result_callback'</span><span class="p">,</span> <span class="k">v</span><span class="p">:</span>null<span class="p">)</span> isnot <span class="k">v</span><span class="p">:</span>null
+        <span class="k">call</span> <span class="k">call</span><span class="p">(</span><span class="k">l</span><span class="p">:</span>result<span class="p">.</span>result_callback<span class="p">,</span> <span class="p">[</span><span class="k">l</span><span class="p">:</span>value<span class="p">])</span>
+    <span class="k">endif</span>
+<span class="k">finally</span>
+    <span class="k">call</span> ale#command#ResetCwd<span class="p">(</span><span class="nv">a:buffer</span><span class="p">)</span>
+<span class="k">endtry</span>
+</code></pre></div></div>
+
+<p>(For the curious: using the pickaxe <code class="language-plaintext highlighter-rouge">-S</code> for <code class="language-plaintext highlighter-rouge">git log</code>, I managed to track this
+code down to <a href="https://github.com/dense-analysis/ale/commit/b32fdfe8">ALE commit b32fdfe8 (#2132 Implement deferred objects for
+ale#command#Run,
+2019-02-08)</a>.)</p>
+
+<p>In particular, calling the callback through a capital variable (funcref
+requirement) doesn’t work, but calling it without <code class="language-plaintext highlighter-rouge">call()</code> did. Finally, I
+managed to simplify the error:</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">:</span>echo <span class="k">call</span><span class="p">({-&gt;</span><span class="s1">'foo'</span><span class="p">},</span> <span class="p">[])</span>
+</code></pre></div></div>
+
+<p>yielded an error!</p>
+
+<h2 id="the-workaround">The workaround</h2>
+
+<p>Well, not being able to <code class="language-plaintext highlighter-rouge">call()</code> a lambda is pretty fundamental Vim error for
+recent versions of Vim. I happened to be on v9.1.1016, and there had been new
+releases, so I figured I’ll try the usual advice: upgrade.</p>
+
+<p>Once I upgraded to 9.1.1415 (400 patches later!), the error was gone in my small
+repro and in my day to day work. Great!</p>
+
+<p>Now I was curious, though: what happened? When did the bug get introduced, and
+when did it get fixed?</p>
+
+<h2 id="tracking-down-the-fix">Tracking down the fix</h2>
+
+<p>If you know me, this won’t surprise you: <code class="language-plaintext highlighter-rouge">git bisect</code> incoming!</p>
+
+<p>Most uses of bisect are to find the introduction of a bug. Here, though, I had a
+broken version and a newer fixed version, so I’m more interested in finding the
+<em>bugfix</em>. That means the usual <code class="language-plaintext highlighter-rouge">good</code>/<code class="language-plaintext highlighter-rouge">bad</code> terms won’t be useful here, so I
+used <code class="language-plaintext highlighter-rouge">old</code> (has the bug) and <code class="language-plaintext highlighter-rouge">new</code> (fixed the bug) in my bisection.</p>
+
+<p>The first thing I did was setup a script to drive the bisection: it needs to
+exit 0 if the commit is <code class="language-plaintext highlighter-rouge">old</code> and non-zero for <code class="language-plaintext highlighter-rouge">new</code> (except 125 means <code class="language-plaintext highlighter-rouge">skip</code>).
+The script first builds Vim, skipping the commit if it doesn’t build:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./compile <span class="o">||</span> <span class="o">{</span>
+  make distclean <span class="o">&amp;&amp;</span> ./compile
+<span class="o">}</span> <span class="o">||</span> <span class="nb">exit </span>125
+
+<span class="c"># sanity check</span>
+<span class="nb">test</span> <span class="nt">-x</span> src/vim <span class="o">||</span> <span class="nb">exit </span>125
+</code></pre></div></div>
+
+<p>(here the <code class="language-plaintext highlighter-rouge">./compile</code> script is a lightweight version of <a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/compile-vim">my <code class="language-plaintext highlighter-rouge">compile-vim</code>
+script</a>
+that configures without Python, skips testing, and skips installing).</p>
+
+<p>Note that we try compiling twice: I’ve seen some failures in configuring the
+build that are solved by <code class="language-plaintext highlighter-rouge">make distclean</code>.</p>
+
+<p>Then, the script runs our test case:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># negate: looking for bugfix. "old" needs to exit 0, "good" needs non-zero</span>
+<span class="nv">VIMRUNTIME</span><span class="o">=</span>runtime src/vim <span class="nt">--clean</span> <span class="nt">-S</span> &lt;<span class="o">(</span><span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
+try
+	echo call({-&gt;'foo'}, [])
+catch /./
+	quit
+endtry
+cquit
+</span><span class="no">EOF
+</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>I tested this against v9.1.1016, which I expected to be old (exit 0), and
+against the start of my bisection (roughly v9.1.1435), which I expected to be
+new (exit non-zero). It doesn’t help to run a bisection that tests for the wrong
+thing!</p>
+
+<p>Finally, I started the bisection:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect start
+git bisect old v9.1.1016
+git bisect new master
+git bisect run ./bisect
+</code></pre></div></div>
+
+<p>Just a few minutes later, I had my answers. I saved the log for the curious:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect start
+# status : en attente d'un commit bon et d'un commit mauvais
+# old: [1aefe1de0b20fe4966863e07efa14b6aa87323ee] patch 9.1.1016: Not possible to convert string2blob and blob2string
+git bisect old 1aefe1de0b20fe4966863e07efa14b6aa87323ee
+# status : en attente d'un mauvais commit, 1 commit bon connu
+# new: [eb59129d2c06fd6627f537fce4fb8660cc8d0cda] runtime(typescript): remove Fixedgq() function from indent script
+git bisect new eb59129d2c06fd6627f537fce4fb8660cc8d0cda
+# new: [b42b9fc41f27f92aaf4f96cd4149f3160e9fe588] patch 9.1.1233: Coverity warns about NULL pointer when triggering WinResized
+git bisect new b42b9fc41f27f92aaf4f96cd4149f3160e9fe588
+# new: [066a5340e3d7ccc1fd9d1ee3ddf02cdc5ccf2813] CI: Install netbeans on windows to make sure to run test_netbeans.vim
+git bisect new 066a5340e3d7ccc1fd9d1ee3ddf02cdc5ccf2813
+# new: [4a530a632bb220b9aec827a12ab211a563c5583d] runtime(vim): Update base-syntax, match :debuggreedy count prefix
+git bisect new 4a530a632bb220b9aec827a12ab211a563c5583d
+# new: [9601b1435af427382682d923c57731f344e69dc4] translation(sr): Update Serbian messages translation
+git bisect new 9601b1435af427382682d923c57731f344e69dc4
+# new: [b77c5984877c9de816ea6db8865eb3df7bb14b51] patch 9.1.1032: link error when FEAT_SPELL not defined
+git bisect new b77c5984877c9de816ea6db8865eb3df7bb14b51
+# new: [166b1754a9b2046d678f59dedea7a3d693067047] patch 9.1.1025: wrong return type of blob2str()
+git bisect new 166b1754a9b2046d678f59dedea7a3d693067047
+# new: [037b028a2219d09bc97be04b300b2c0490c4268d] patch 9.1.1020: no way to get current selected item in a async context
+git bisect new 037b028a2219d09bc97be04b300b2c0490c4268d
+# new: [6472e583656aced8045fc852282708a684d77cfa] runtime(doc): fix base64 encode/decode examples
+git bisect new 6472e583656aced8045fc852282708a684d77cfa
+# new: [9904cbca4132f7376246a1a31305eb53e9530023] patch 9.1.1017: Vim9: Patch 9.1.1013 causes a few problems
+git bisect new 9904cbca4132f7376246a1a31305eb53e9530023
+# first new commit: [9904cbca4132f7376246a1a31305eb53e9530023] patch 9.1.1017: Vim9: Patch 9.1.1013 causes a few problems
+</code></pre></div></div>
+
+<h2 id="the-fix">The fix</h2>
+
+<p>To my surprise, I was one coincidental patch away from the fix! <a href="https://github.com/vim/vim/pull/16450">Version
+9.1.107</a> fixed a bug from
+<a href="https://github.com/vim/vim/pull/16445">9.1.1013</a> which was reported by
+<a href="https://github.com/vim/vim/issues/16453">#16453</a>. The original patch was yet
+another fix for <a href="https://github.com/vim/vim/issues/16430">a different bug</a>
+introduced by <em>another</em> patch! Phew.</p>
+
+<p>I later found that <a href="https://github.com/vim/vim/issues/16430">the original bug</a>
+contained some discussion on exactly my issue:</p>
+
+<blockquote>
+  <p>Thanks a lot for addressing this!</p>
+
+  <p>I have no issues with the fix, except that you may want to double check the
+workaround suggested by <a href="https://github.com/zzzyxwvut" class="user-mention">@zzzyxwvut</a> in the comment above (using <code class="language-plaintext highlighter-rouge">call(Setup, [])</code>
+instead of <code class="language-plaintext highlighter-rouge">Setup()</code>). With Vim 9.1.1016, using <code class="language-plaintext highlighter-rouge">call()</code> raises an error:</p>
+
+  <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>E129: Function name required
+E117: Unknown function: &lt;lambda&gt;26
+</code></pre></div>  </div>
+</blockquote>
+
+<p>and the <a href="https://github.com/vim/vim/issues/16453">later bug</a> mentioned my repro
+via <code class="language-plaintext highlighter-rouge">{-&gt; 0}</code>.</p>
+
+<p>While I don’t grasp the full details of the fix, I can see tweaks to the C
+function <code class="language-plaintext highlighter-rouge">f_call</code> which presumably implements Vim’s <code class="language-plaintext highlighter-rouge">call()</code> function, and I can
+see that it only “translates” the function name when given a string. Presumably
+that means funcrefs (like those produced by lambdas) remain untranslated, which
+makes sense if I assume that translation means “convert string to funcref.”</p>
+
+<p>Now I know!</p>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#bisect" class="tag">
+        bisect
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#vim" class="tag">
+        vim
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2025/06/06/bisecting/";
+    this.page.identifier = "/blog/2025/06/06/bisecting";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2025/05/10/git-contribution/" title="Contributing to Git">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#bisecting-for-fun-finding-a-bugfix-in-vim">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
