@@ -6,6 +6,16 @@ category: [ Blog ]
 
 I discover a strange edge-case in my usage of Git and Vim together.
 
+**Update 2025 June 7th** While [discussing some patches to change this
+behavior](https://lore.kernel.org/git/20250520193506.95199-1-ben.knoble+github@gmail.com/),
+I decided to [modify my shell
+files](https://github.com/benknoble/Dotfiles/commit/3600435f35761d47920b5a970401ca6bf9f4e52b)
+to make a different assumption about how `contrib` scripts are packaged. Instead
+of assuming they're located at `$prefix/share/git-core/contrib` by deriving
+`$prefix` from the Git path, use Homebrew's prefix as the `$prefix`. This
+resolves most of the issue I describe here, though still leaves modifications to
+`PATH` visible to Git-invoked programs.
+
 **Update 2025 January 4th** This behavior is alluded to in [Git commit
 a0b4507ef7 (stop putting argv[0] dirname at front of PATH,
 2015-04-22)](https://github.com/git/git/commit/a0b4507ef72027052668c11b49f71bed89bcb293)
