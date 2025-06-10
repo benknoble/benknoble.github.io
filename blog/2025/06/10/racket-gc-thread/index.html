@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Home</title>
+  <title>Junk Drawer : A note about Racket's GC for threads</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -71,35 +71,108 @@
   </ul>
 </nav>
 
-      <h1>Home</h1>
-      <p><em>Do you keep your junk drawer full of fun and creative things?</em></p>
-
-<p>On this site, <a href="/about/#me">I break down complex answers to simple questions</a>.</p>
-
-<h2 id="latest-post">Latest Post</h2>
-
-<p><a href="/blog/2025/06/10/racket-gc-thread/">A note about Racket’s GC for threads</a> posted on 10 June 2025</p>
-
-<p>Excerpt:</p>
-
-<blockquote>
+      <h1>A note about Racket's GC for threads</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 10 Jun 2025 in Blog</p>
+<div id="post">
   <p>Yes, Racket will collect as garbage a thread that is blocked on a channel that
 can have no writers (according to Matthew Flatt).</p>
-</blockquote>
 
-<h2 id="recent-posts">Recent Posts</h2>
-<ul>
+<p>This little program demonstrates the effect (I think):</p>
 
-  <li>
-  <a href="/blog/2025/06/06/bisecting/">Bisecting for Fun: Finding a Bugfix in Vim</a> posted on 06 June 2025
-  </li>
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
 
-  <li>
-  <a href="/blog/2025/05/10/git-contribution/">Contributing to Git</a> posted on 10 May 2025
-  </li>
+<span class="c1">;; store a weak reference to the thread, but make sure the channel has no</span>
+<span class="c1">;; writers</span>
+<span class="p">(</span><span class="k">define</span> <span class="nv">t</span>
+  <span class="p">(</span><span class="nb">make-weak-box</span>
+   <span class="p">(</span><span class="k">let</span> <span class="p">()</span>
+     <span class="p">(</span><span class="k">define</span> <span class="nv">c</span> <span class="p">(</span><span class="nb">make-channel</span><span class="p">))</span>
+     <span class="p">(</span><span class="nb">thread</span> <span class="p">(</span><span class="nf">thunk</span> <span class="p">(</span><span class="nb">sync</span> <span class="nv">c</span><span class="p">))))))</span>
 
+<span class="c1">;; wait for the GC to collect…</span>
+<span class="p">(</span><span class="k">let</span> <span class="nv">loop</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nf">match</span> <span class="p">(</span><span class="nb">weak-box-value</span> <span class="nv">t</span><span class="p">)</span>
+    <span class="p">[(</span><span class="nf">?</span> <span class="nv">thread?</span><span class="p">)</span>
+     <span class="c1">;; …by forcing it (but not too aggressively)</span>
+     <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
+     <span class="p">(</span><span class="nf">loop</span><span class="p">)]</span>
+    <span class="p">[</span><span class="nf">#f</span> <span class="p">(</span><span class="nb">displayln</span> <span class="s">"thread was GC'd"</span><span class="p">)]))</span>
+</code></pre></div></div>
+
+<p>It reliably prints and exits within a second or 2 on my machine.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#racket" class="tag">
+        racket
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#concurrency" class="tag">
+        concurrency
+      </a>
+    </li>
+  
 </ul>
 
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/";
+    this.page.identifier = "/blog/2025/06/10/racket-gc-thread";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2025/06/06/bisecting/"
+      title="Bisecting for Fun: Finding a Bugfix in Vim">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#a-note-about-racket-s-gc-for-threads">
+    Back to posts</a>
+</div>
 
     </section>
     <footer>

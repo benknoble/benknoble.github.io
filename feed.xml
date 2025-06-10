@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-06-07T16:31:54+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Bisecting for Fun: Finding a Bugfix in Vim</title><link href="https://benknoble.github.io/blog/2025/06/06/bisecting/" rel="alternate" type="text/html" title="Bisecting for Fun: Finding a Bugfix in Vim" /><published>2025-06-06T00:00:00+00:00</published><updated>2025-06-06T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/06/bisecting</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/06/bisecting/"><![CDATA[<p>I experienced a non-breaking paper cut-style bug in Vim for the last 6 months or
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-06-10T19:10:18+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A note about Racket’s GC for threads</title><link href="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/" rel="alternate" type="text/html" title="A note about Racket’s GC for threads" /><published>2025-06-10T00:00:00+00:00</published><updated>2025-06-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/10/racket-gc-thread</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/"><![CDATA[<p>Yes, Racket will collect as garbage a thread that is blocked on a channel that
+can have no writers (according to Matthew Flatt).</p>
+
+<p>This little program demonstrates the effect (I think):</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
+
+<span class="c1">;; store a weak reference to the thread, but make sure the channel has no</span>
+<span class="c1">;; writers</span>
+<span class="p">(</span><span class="k">define</span> <span class="nv">t</span>
+  <span class="p">(</span><span class="nb">make-weak-box</span>
+   <span class="p">(</span><span class="k">let</span> <span class="p">()</span>
+     <span class="p">(</span><span class="k">define</span> <span class="nv">c</span> <span class="p">(</span><span class="nb">make-channel</span><span class="p">))</span>
+     <span class="p">(</span><span class="nb">thread</span> <span class="p">(</span><span class="nf">thunk</span> <span class="p">(</span><span class="nb">sync</span> <span class="nv">c</span><span class="p">))))))</span>
+
+<span class="c1">;; wait for the GC to collect…</span>
+<span class="p">(</span><span class="k">let</span> <span class="nv">loop</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nf">match</span> <span class="p">(</span><span class="nb">weak-box-value</span> <span class="nv">t</span><span class="p">)</span>
+    <span class="p">[(</span><span class="nf">?</span> <span class="nv">thread?</span><span class="p">)</span>
+     <span class="c1">;; …by forcing it (but not too aggressively)</span>
+     <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
+     <span class="p">(</span><span class="nf">loop</span><span class="p">)]</span>
+    <span class="p">[</span><span class="nf">#f</span> <span class="p">(</span><span class="nb">displayln</span> <span class="s">"thread was GC'd"</span><span class="p">)]))</span>
+</code></pre></div></div>
+
+<p>It reliably prints and exits within a second or 2 on my machine.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><category term="concurrency" /><summary type="html"><![CDATA[Yes, Racket will collect as garbage a thread that is blocked on a channel that can have no writers (according to Matthew Flatt).]]></summary></entry><entry><title type="html">Bisecting for Fun: Finding a Bugfix in Vim</title><link href="https://benknoble.github.io/blog/2025/06/06/bisecting/" rel="alternate" type="text/html" title="Bisecting for Fun: Finding a Bugfix in Vim" /><published>2025-06-06T00:00:00+00:00</published><updated>2025-06-06T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/06/bisecting</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/06/bisecting/"><![CDATA[<p>I experienced a non-breaking paper cut-style bug in Vim for the last 6 months or
 so, and I finally tracked down the details.</p>
 
 <h2 id="the-bug">The Bug</h2>
@@ -629,140 +654,4 @@ Vim at Capital One. A colleague quipped:</p>
 <p>Indeed—3 or 4 interlinked HTML pages and a single CSS file load quickly in any
 browser <em>because that’s what browsers were designed for.</em></p>
 
-<p><a href="https://infrequently.org/series/performance-inequality">It’s not hard to go fast if you don’t overengineer</a>.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="vim" /><category term="web" /><category term="performance" /><summary type="html"><![CDATA[Simplicity is a feature.]]></summary></entry><entry><title type="html">RE: the Commit Crunch: StackOverflow blog hosts naked corporate interests alongside misinformation</title><link href="https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest/" rel="alternate" type="text/html" title="RE: the Commit Crunch: StackOverflow blog hosts naked corporate interests alongside misinformation" /><published>2025-02-10T00:00:00+00:00</published><updated>2025-02-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/10/stackoverflow-github-corporate-interest/"><![CDATA[<p>Following mention of a new diff algorithm in <a href="https://git.github.io/rev_news/2024/08/31/edition-114/">Edition 114 of Git Rev
-News</a>, I dissect
-problems with the post <a href="https://stackoverflow.blog/2024/12/20/this-developer-tool-is-40-years-old-can-it-be-improved/">“This developer tool is 40 years old: can it be
-improved?”</a>.
-I offer clarifications for the misinformation in the article, and I mention
-free, builtin ways to get diff improvements.</p>
-
-<h2 id="on-dates">On dates</h2>
-
-<p>Bill Harding writes:</p>
-
-<blockquote>
-  <p>Since IDEs are refreshed every few years, maybe you’ve guessed that your
-oldest tool in active use is “git.” It was first released nearly 20 years ago,
-back in 2005. Or maybe you prefer to code with the classic old-school text
-editors, like Sublime Text (2008) or vim (1991).</p>
-</blockquote>
-
-<p>Yet Vim and Git are under active development, getting “refreshed” perhaps more
-regularly than other major (unnamed?) IDEs due to their distributed,
-collaborative open-source practices. The core model may have changed little, but
-Vim 9.1 in 2025 is not your 1991 Vim, nor is Git 2.48.1 in 2025 your Git from
-2005.</p>
-
-<p>It is true that the Myers diff algorithm (no air quotes necessary, thank you)
-originates in 1986, but the colors on GitHub are not its byproduct; rather, I
-believe an <a href="/blog/2020/08/06/stop-sed-i/#addendum-scripting-ed">edit script is the typical output</a>. This is also
-demonstrated on page 3, the same figure which Harding cites.</p>
-
-<h2 id="on-research">On research</h2>
-
-<p>As Git Rev News mentions, Git supports other algorithms including
-<a href="https://github.com/git/git/commit/3443546f6"><code class="language-plaintext highlighter-rouge">minimal</code></a>,
-<a href="https://github.com/git/git/commit/92b7de93fb7801"><code class="language-plaintext highlighter-rouge">patience</code></a>, and
-<a href="https://github.com/git/git/commit/8c912eea94a"><code class="language-plaintext highlighter-rouge">histogram</code></a>. <a href="/blog/2025/02/01/git-roundup/#how-different-are-different-diff-algorithms-in-git">Some research
-exists on their properties</a>.</p>
-
-<p>This remains an active area of improvement, I believe.</p>
-
-<h2 id="on-diffs">On diffs</h2>
-
-<p>Harding writes:</p>
-
-<blockquote>
-  <p>The Myers diff algorithm classifies all code change lines as binary: either
-“add” or “delete.”</p>
-
-  <p>The Commit Cruncher algorithm tested recognizes three times more types of
-changed operations: Added, Deleted, Updated, Moved, Find/Replaced, and
-Copy/Pasted</p>
-</blockquote>
-
-<p>Yet Git can detect moved lines with <code class="language-plaintext highlighter-rouge">--color-moved</code> (enable by default with
-<a href="https://github.com/benknoble/Dotfiles/blob/151d67dd2002f00d01c3f4fc1130815ae522116a/links/gitconfig#L101"><code class="language-plaintext highlighter-rouge">diff.colorMoved =
-default</code></a>).</p>
-
-<p>Or consider</p>
-
-<blockquote>
-  <p>One example where Myers requires more work by a reviewer is when a code change
-involves white space, like the change shown earlier in this post:</p>
-</blockquote>
-
-<p>Yet Git has <em>several</em> modes for making whitespace easier to review, like
-<code class="language-plaintext highlighter-rouge">--ignore-space-change</code>, <code class="language-plaintext highlighter-rouge">--ingore-space-at-eol</code>, and <code class="language-plaintext highlighter-rouge">--ignore-all-space</code>. This
-also typically shortcuts the complex changes from extracting methods, depending
-on how far the new function is relocated. In Harding’s example, I think
-<code class="language-plaintext highlighter-rouge">--ignore-space-change</code> would produce a similar diff (but we’ll never know
-because sources for the diffs are not given).</p>
-
-<p>Then there’s “incremental updates” (whatever that means in this context):</p>
-
-<blockquote>
-  <p>The same diff through a GitClear lens condenses the incremental update to a
-single line, where the new (or removed) characters are shown inline:</p>
-</blockquote>
-
-<p>Git has a <code class="language-plaintext highlighter-rouge">--word-diff</code> mode that does the same thing and can be configured
-per-invocation depending on where you want to consider interesting boundaries.
-In my experience, it trivializes Harding’s example diff, too.</p>
-
-<p>Harding later tries to explain Commit Cruncher and writes:</p>
-
-<blockquote>
-  <p>The Myers diff algorithm works by inspecting two inputs: the repo state before
-commit A and the state after commit C.</p>
-</blockquote>
-
-<p>This is imprecise, just like the earlier formulation</p>
-
-<blockquote>
-  <p>[Myers] offered what became the canonical solution for representing the
-difference between the state of a git repo “before” and “after” a developer’s
-git commit.</p>
-</blockquote>
-
-<p>Git can generate diffs between blobs, trees, commits, and commit ranges. Harding
-is either being intentionally imprecise (why?) or doesn’t know much about Git’s
-diffs, the very thing his company’s product is trying to improve.</p>
-
-<h2 id="on-presentation">On presentation</h2>
-
-<p>I’ve written before that GitHub’s UI has problems<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, but this highlights one
-more: GitHub has very poor support for examining diffs.</p>
-
-<ul>
-  <li>GitHub does not natively support proper range-diffs. When a branch is
-force-pushed, GitHub only offers its standard difference between the commits,
-which shows a flat tree diff rather than a commit-by-commit comparison,
-including commit messages. In short, <a href="/blog/2025/02/01/git-roundup/#reorient-github-pull-requests-around-changesets">you can’t see how the PR evolved</a>.</li>
-  <li>GitHub doesn’t support diff options beyond “ignore whitespace” (and I believe
-it tries to automatically do something akin to <code class="language-plaintext highlighter-rouge">--word-diff</code>). <strong>This includes
-<code class="language-plaintext highlighter-rouge">--color-moved</code> for showing moved lines.</strong> In practice, developers creating
-commits may have a good idea about how to communicate the diff (<a href="https://lore.kernel.org/git/CALnO6CDqHJP_wa_8eKHBkU+_1vQ6D+C=QRZyW1FKnG71wDxnnQ@mail.gmail.com/">I and others
-have experimented with communicating these options in
-commits</a>).</li>
-</ul>
-
-<p>Improving these situations or moving away from GitHub as your primary diff
-viewer would be free alternatives to a Harding’s tool.</p>
-
-<h2 id="in-conclusion">In conclusion</h2>
-
-<p>The StackOverflow blog shamelessly shills for a company to get you to buy a
-product you probably don’t need. What’s new?</p>
-
-<h2 id="notes">Notes</h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p><a href="/blog/2024/10/04/copy-range-diff/">PR reviews</a> lack
-<a href="/blog/2025/02/01/git-roundup/#reorient-github-pull-requests-around-changesets">threading</a>, and it has <a href="/blog/2024/08/02/github-squash/">bad
-defaults for some kinds of merges</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="github" /><summary type="html"><![CDATA[Following mention of a new diff algorithm in Edition 114 of Git Rev News, I dissect problems with the post “This developer tool is 40 years old: can it be improved?”. I offer clarifications for the misinformation in the article, and I mention free, builtin ways to get diff improvements.]]></summary></entry></feed>
+<p><a href="https://infrequently.org/series/performance-inequality">It’s not hard to go fast if you don’t overengineer</a>.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="vim" /><category term="web" /><category term="performance" /><summary type="html"><![CDATA[Simplicity is a feature.]]></summary></entry></feed>
