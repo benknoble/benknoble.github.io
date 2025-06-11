@@ -1,7 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-06-11T00:23:08+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A note about Racket’s GC for threads</title><link href="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/" rel="alternate" type="text/html" title="A note about Racket’s GC for threads" /><published>2025-06-10T00:00:00+00:00</published><updated>2025-06-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/10/racket-gc-thread</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/"><![CDATA[<p>Yes, Racket will collect as garbage a thread that is blocked on a channel that
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-06-11T22:36:08+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A note about Racket’s GC for threads</title><link href="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/" rel="alternate" type="text/html" title="A note about Racket’s GC for threads" /><published>2025-06-10T00:00:00+00:00</published><updated>2025-06-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/10/racket-gc-thread</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/"><![CDATA[<p>Yes, Racket will collect as garbage a thread that is blocked on a channel that
 can have no writers (according to Matthew Flatt).</p>
 
-<p>This little program demonstrates the effect (I think):</p>
+<p>Matthew also suggested a nice refinement of my program below that demonstrates
+the effect. I’ll show his first:</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
+
+<span class="c1">;; store a weak reference to the thread, but make sure the channel has no</span>
+<span class="c1">;; writers</span>
+<span class="p">(</span><span class="k">define</span> <span class="nv">t</span>
+  <span class="p">(</span><span class="nb">make-weak-box</span>
+   <span class="p">(</span><span class="k">let</span> <span class="p">()</span>
+     <span class="p">(</span><span class="k">define</span> <span class="nv">c</span> <span class="p">(</span><span class="nb">make-channel</span><span class="p">))</span>
+     <span class="p">(</span><span class="nb">thread</span> <span class="p">(</span><span class="nf">thunk</span> <span class="p">(</span><span class="nb">sync</span> <span class="nv">c</span><span class="p">))))))</span>
+
+<span class="c1">;; The (sync (system-idle-evt)) will not return until the thread has run as far</span>
+<span class="c1">;; as it can, at which point it's GC-able. (The system-idle-evt constructor</span>
+<span class="c1">;; exists essentially only for this kind of test/example.)</span>
+<span class="p">(</span><span class="nb">sync</span> <span class="p">(</span><span class="nb">system-idle-evt</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">weak-box-value</span> <span class="nv">t</span><span class="p">)</span> <span class="c1">;=&gt; #f</span>
+</code></pre></div></div>
+
+<p>My original version was:</p>
 
 <div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
 
