@@ -3,6 +3,94 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "One thing that stands out is the level of intellectual rigor Ben brings to
+  technical discussions. Ben digs deep into problems, asks smart questions, and
+  offers thoughtful solutions that show a solid understanding of both the
+  details and the bigger picture."
+- "Ben has established himself as the subject matter expert when it comes to all
+  things Git! Your knowledge and willingness to help/guide others has been a
+  strong asset to the broader team!"
+- "Ben's communication skills have been exceptional when it comes to working
+  through incidents. He's done a great job coordinating investigations and
+  post-incident reviews---keeping things clear, organized, and moving forward
+  even in high-pressure situations."
+- "Ben's PRs are incredibly clean! He contributes small PRs which are able to be
+  reviewed quicker and more effectively, thereby ensuring that contributions are
+  merged in as quickly as possible and that reviewers are able to very easily
+  understand the changes. His PRs are well documented, and when he makes changes
+  based on feedback to PRs he proactively and clearly communicates with the
+  reviewers."
+- "Ben has been a great champion for PR cleanliness and clear commit messages.
+  When he reviews PRs he's able to effectively coach other engineers around the
+  importance of clear commit messages, thereby sharing the knowledge and
+  positively impacting the broader org. He's able to do so while ensuring that
+  high priority changes are not blocked."
+- "Ben works proactively to ensure that items impacting broader teams are
+  handled in a timely fashion. One example is when a deprecation notice came up
+  […] which wasn't due for several months, Ben started a conversation around
+  that on Slack to promote visibility and worked to remediate the issue as soon
+  as he saw it."
+- "Ben is a reliable and communicative leader for the [internal Git] community.
+  In particular he does an excellent job of balancing structure with
+  flexibility. He provides enough guidance, communication, and logistical
+  organization (_i.e._, scheduling meetings, handling documentation via GitHub,
+  recruiting workshop leads) for the community to sustain itself but allows each
+  participant the freedom to participate in whatever way and to whatever degree
+  they desire. He has actively sought feedback from members of the community and
+  has adjusted programming accordingly, such as adjusting meeting frequency and
+  workshop content.
+
+    "This balance was also reflected in his support of my workshop on the use of
+    `git log`. He proactively checked in to see if I needed any assistance
+    several times throughout the lead up to the workshop and provided advice
+    when asked, but ultimately left all decisions up to me, and I never felt any
+    pressure from him with regards to how much progress I had made or how to
+    design the workshop. Finally, during the workshop he was an active
+    participant and enabled others to participate as well."
+- "Ben's greatest virtue is his genuine approach to mentorship. Each session, it
+  feels like I am gaining valuable information that reveals the true and honest
+  nature of engineering at Capital One. This has always been what makes me
+  respect a person and mentor, and Ben has it in spades. Some key takeaways I
+  have implemented in my own work are:
+
+    - "Research before coding. In one of our discussions, we talked about how
+      useful it is to write down notes and do research before launching into a
+      solution. When I follow this principle closely, my work comes out much
+      cleaner and ironically faster despite spending less time coding.
+    - "Networking. Ben did a great job showing how networking can be engaging and
+      down-to-earth, instead of an awkward exercise. This made it a lot easier
+      to expand my influence in my org.
+    - "Performance management. Ben did a great job outlining the realities and
+      strategy of performance management, especially when it came to noting
+      one's accomplishments over time in a system of record.
+
+    "To this end, Ben is a master-class in effective influence and a living
+    example of Capital One values."
+- "After working with Ben for the last few months, I can confidently say that
+  Ben has supported my growth as an engineer. I would try to model off of Ben
+  for many soft skills like documentation and communications with peers. Ben has
+  great practices for GitHub and Slack and I learn a lot from just observing
+  him. His peer reviews are valuable, often pointing out areas of improvements
+  in a direct and educational manner."
+- "His approach to ramping up—asking precise questions in the broader Slack
+  channel—helped foster open technical dialogue and increased much-needed
+  visibility across our landscape issues within the codebases."
+- "From a technical leadership perspective, he quickly became a strong voice for
+  engineering excellence. He championed best practices, contributed high-quality
+  code, and introduced improvements to Git workflows and our code quality
+  tooling […]. His org-wide contributions […] helped elevate the engineering bar
+  across the team."
+- "Ben joined our team for two sprints as part of a data migration initiative,
+  where he was tasked with designing an automated data sync validation solution.
+  He required virtually no ramp-up time and delivered an elegant, comprehensive
+  solution that leveraged his prior experience effectively. His documentation
+  stood out—it was not only technically thorough but also structured as a clear,
+  narrative walkthrough that made it easy for others to engage with and
+  understand. His documentation also came in handy for broader validation
+  exercises across the org, as it was referenced by multiple teams for multiple
+  incidents/deliverables."
+- "Collaboration with him was seamless. He was communicative, engaged, and
+  thoughtful in his approach."
 - "One of the most talented folks I know at the company."
 - "Radiates a positive attitude like few people I know."
 - "Ben stood out by being able to engage on so many different topics at the same
