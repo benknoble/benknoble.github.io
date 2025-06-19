@@ -94,9 +94,9 @@ the harms that were enacted upon their creation. Such a separation entails
 willful blindness, intentionally drawing a veil upon ourselves, to separate
 artifact from creator. It is not my intent to suggest that we can never benefit
 from the fruit of the poison tree[^1]. I do suggest however there are
-alternatives readily available, and that it may take more labor from those of us
-so endowed with digital control to ensure that such alternatives continue to
-exist, are created anew for a modern world, and proliferate intellectually,
+alternatives[^4] readily available, and that it may take more labor from those
+of us so endowed with digital control to ensure that such alternatives continue
+to exist, are created anew for a modern world, and proliferate intellectually,
 legally, socially, and politically, in order to foster a free ecosystem.
 
 It's [really hard to be a generative-AI skeptic right
@@ -166,3 +166,8 @@ change.
 [^3]: Still don't believe me? ["Being seen to deviate is extremely
     hard"](https://ludic.mataroa.blog/blog/get-weird-and-disappear/). LLM
     skepticism is deviant right now. Being a luddite is _deviant_.
+
+[^4]: Or [waiting to be
+    invented](https://garymarcus.substack.com/p/a-knockout-blow-for-llms), if
+    only we'd pursue things _other_ than "reasoning"-based LLMs that collapse on
+    complexity.
