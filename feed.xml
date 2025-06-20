@@ -1,4 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-06-11T22:36:08+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A note about Racket’s GC for threads</title><link href="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/" rel="alternate" type="text/html" title="A note about Racket’s GC for threads" /><published>2025-06-10T00:00:00+00:00</published><updated>2025-06-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/10/racket-gc-thread</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/"><![CDATA[<p>Yes, Racket will collect as garbage a thread that is blocked on a channel that
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-06-20T13:21:13+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A note about building executables with Racket</title><link href="https://benknoble.github.io/blog/2025/06/19/racket-exe/" rel="alternate" type="text/html" title="A note about building executables with Racket" /><published>2025-06-19T00:00:00+00:00</published><updated>2025-06-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/19/racket-exe</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/19/racket-exe/"><![CDATA[<p>This information is collected from my and other Racketeers dive into the
+documentation in one attempt to form a cohesive picture in response to the
+question “How do I use custom icons with GUI executables?”</p>
+
+<p>The extremely short version: changing the icon is something that happens at the
+point where you build an executable, not when running inside <code class="language-plaintext highlighter-rouge">racket</code>, DrRacket,
+etc. You control this by setting up your project as a package with an
+<code class="language-plaintext highlighter-rouge">info.rkt</code>. See <a href="https://docs.racket-lang.org/raco/setup-info.html">Controlling <code class="language-plaintext highlighter-rouge">raco
+setup</code></a>.</p>
+
+<p>Those docs will give you info for the <code class="language-plaintext highlighter-rouge">gracket-launcher-libraries</code> and
+<code class="language-plaintext highlighter-rouge">gracket-launcher-names</code> directives, which in turn lead you to the
+<code class="language-plaintext highlighter-rouge">racket-launcher-names</code> directive. That directive explains that it makes use of
+<code class="language-plaintext highlighter-rouge">make-racket-launcher</code> under the hood, and you must infer that the <code class="language-plaintext highlighter-rouge">gracket-*</code>
+directives must then use <code class="language-plaintext highlighter-rouge">make-gracket-launcher</code>.</p>
+
+<p>The <a href="https://docs.racket-lang.org/raco/exe.html#(def._((lib._launcher%2Flauncher..rkt)._make-gracket-launcher))">docs for <code class="language-plaintext highlighter-rouge">make-gracket-launcher</code></a> indicate that
+<code class="language-plaintext highlighter-rouge">build-aux-from-file</code> is used to find auxiliary filenames for related assets,
+and if you click through to the <a href="https://docs.racket-lang.org/raco/exe.html#(def._((lib._launcher%2Flauncher..rkt)._build-aux-from-path))">docs for <code class="language-plaintext highlighter-rouge">build-aux-from-file</code></a> it
+confirms that icons are included in those related assets. Ultimately what we
+figured out was that <code class="language-plaintext highlighter-rouge">info.rkt</code> needs to include something like</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="nv">gracket-launcher-names</span> <span class="o">'</span><span class="p">(</span><span class="nf">"My</span> <span class="nv">App</span> <span class="nv">Name</span><span class="o">.</span><span class="nv">app"</span><span class="p">))</span>
+<span class="p">(</span><span class="k">define</span> <span class="nv">gracket-launcher-libraries</span> <span class="o">'</span><span class="p">(</span><span class="nf">"app</span><span class="o">.</span><span class="nv">rkt"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>…where <code class="language-plaintext highlighter-rouge">app.rkt</code> is the file with a <code class="language-plaintext highlighter-rouge">main</code> submodule that starts the app’s GUI.
+And an <code class="language-plaintext highlighter-rouge">app.icns</code> file in the same folder as <code class="language-plaintext highlighter-rouge">app.rkt</code> is used for the program’s
+icon (png for linux).</p>
+
+<p>When you do <code class="language-plaintext highlighter-rouge">raco setup mypackagename</code> it creates the executable with that icon.</p>
+
+<p>Some of this is independently covered by <a href="https://docs.racket-lang.org/raco/exe.html">docs for <code class="language-plaintext highlighter-rouge">raco exe</code></a>, which
+supports <code class="language-plaintext highlighter-rouge">--ico</code> (Windows), <code class="language-plaintext highlighter-rouge">--icns</code> (macOS), and <code class="language-plaintext highlighter-rouge">++aux</code> for general icons and
+auxiliary files (which point you toward yet more docs about what you can give to
+<code class="language-plaintext highlighter-rouge">++aux</code>).</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[This information is collected from my and other Racketeers dive into the documentation in one attempt to form a cohesive picture in response to the question “How do I use custom icons with GUI executables?”]]></summary></entry><entry><title type="html">A note about Racket’s GC for threads</title><link href="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/" rel="alternate" type="text/html" title="A note about Racket’s GC for threads" /><published>2025-06-10T00:00:00+00:00</published><updated>2025-06-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/10/racket-gc-thread</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/"><![CDATA[<p>Yes, Racket will collect as garbage a thread that is blocked on a channel that
 can have no writers (according to Matthew Flatt).</p>
 
 <p>Matthew also suggested a nice refinement of my program below that demonstrates
@@ -352,15 +387,15 @@ the harms that were enacted upon their creation. Such a separation entails
 willful blindness, intentionally drawing a veil upon ourselves, to separate
 artifact from creator. It is not my intent to suggest that we can never benefit
 from the fruit of the poison tree<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. I do suggest however there are
-alternatives readily available, and that it may take more labor from those of us
-so endowed with digital control to ensure that such alternatives continue to
-exist, are created anew for a modern world, and proliferate intellectually,
+alternatives<sup id="fnref:4"><a href="#fn:4" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> readily available, and that it may take more labor from those
+of us so endowed with digital control to ensure that such alternatives continue
+to exist, are created anew for a modern world, and proliferate intellectually,
 legally, socially, and politically, in order to foster a free ecosystem.</p>
 
 <p>It’s <a href="https://www.wheresyoured.at/optimistic-cowardice/">really hard to be a generative-AI skeptic right
 now</a>, by which I mean it
 takes a lot of effort to back up my skeptical, critical positions compared to
-what it takes to be optimistic<sup id="fnref:3"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>. All that said, <a href="https://drewdevault.com/2025/03/17/2025-03-17-Stop-externalizing-your-costs-on-me.html">here’s one example of the cost
+what it takes to be optimistic<sup id="fnref:3"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>. All that said, <a href="https://drewdevault.com/2025/03/17/2025-03-17-Stop-externalizing-your-costs-on-me.html">here’s one example of the cost
 of LLM
 optimism</a>—scraping
 is a tool like any other, which means it can be wielded for good or evil. I
@@ -395,7 +430,7 @@ not is what makes the whole thing feel like a grift (house of cards, tower of
 lies, etc.). Unfortunately, those of us that are skeptical feel like we have
 lots of data (qualitative and quantitative), anecdata, and experts to back up
 our position. Yet media unwilling to push back and ask tough questions coupled
-with expensive, aggressive marketing campaigns drowns that out for normies<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">3</a></sup> .
+with expensive, aggressive marketing campaigns drowns that out for normies<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">4</a></sup> .
 To be clear: I’m not saying “LLMs don’t work.” I’m saying “they don’t have the
 claimed market” and “they are destructive along many axes I examine” (most of
 which are more important to me than “code faster, worse”).</p>
@@ -420,6 +455,12 @@ have to accept the imperfection of the world we inhabit in order to wage the
 fight against other imperfections. This should not be taken as a version of
 “the ends justify the means.” Rather, this is the pragmatic understanding
 that in all things there are trade-offs. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p>Or <a href="https://garymarcus.substack.com/p/a-knockout-blow-for-llms">waiting to be
+invented</a>, if
+only we’d pursue things <em>other</em> than “reasoning”-based LLMs that collapse on
+complexity. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:3">
       <p>Still don’t believe me? <a href="https://ludic.mataroa.blog/blog/get-weird-and-disappear/">“Being seen to deviate is extremely
@@ -663,16 +704,4 @@ learn it or don’t, but don’t expect a completely out-of-the-box experience.
 Tinker!</li>
 </ul>
 
-<p>Oh, and don’t use a distro if you can avoid it. Prime agrees.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="vim" /><summary type="html"><![CDATA[You already know to run vimtutor and read :help. Here’s why:]]></summary></entry><entry><title type="html">Performance still matters</title><link href="https://benknoble.github.io/blog/2025/02/19/performance/" rel="alternate" type="text/html" title="Performance still matters" /><published>2025-02-19T00:00:00+00:00</published><updated>2025-02-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/02/19/performance</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/02/19/performance/"><![CDATA[<p>Simplicity is a feature.</p>
-
-<p>I built a tiny FAQ site to help Vimmers understand the idiosyncrasies of using
-Vim at Capital One. A colleague quipped:</p>
-
-<blockquote>
-  <p>This page loads too fast; it’s making me uncomfortable.</p>
-</blockquote>
-
-<p>Indeed—3 or 4 interlinked HTML pages and a single CSS file load quickly in any
-browser <em>because that’s what browsers were designed for.</em></p>
-
-<p><a href="https://infrequently.org/series/performance-inequality">It’s not hard to go fast if you don’t overengineer</a>.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="vim" /><category term="web" /><category term="performance" /><summary type="html"><![CDATA[Simplicity is a feature.]]></summary></entry></feed>
+<p>Oh, and don’t use a distro if you can avoid it. Prime agrees.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="vim" /><summary type="html"><![CDATA[You already know to run vimtutor and read :help. Here’s why:]]></summary></entry></feed>

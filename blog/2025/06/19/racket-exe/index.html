@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : A note about Racket's GC for threads</title>
+  <title>Junk Drawer : A note about building executables with Racket</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -71,62 +71,52 @@
   </ul>
 </nav>
 
-      <h1>A note about Racket's GC for threads</h1>
+      <h1>A note about building executables with Racket</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 10 Jun 2025 in Blog</p>
+ on 19 Jun 2025 in Blog</p>
 <div id="post">
-  <p>Yes, Racket will collect as garbage a thread that is blocked on a channel that
-can have no writers (according to Matthew Flatt).</p>
+  <p>This information is collected from my and other Racketeers dive into the
+documentation in one attempt to form a cohesive picture in response to the
+question “How do I use custom icons with GUI executables?”</p>
 
-<p>Matthew also suggested a nice refinement of my program below that demonstrates
-the effect. I’ll show his first:</p>
+<p>The extremely short version: changing the icon is something that happens at the
+point where you build an executable, not when running inside <code class="language-plaintext highlighter-rouge">racket</code>, DrRacket,
+etc. You control this by setting up your project as a package with an
+<code class="language-plaintext highlighter-rouge">info.rkt</code>. See <a href="https://docs.racket-lang.org/raco/setup-info.html">Controlling <code class="language-plaintext highlighter-rouge">raco
+setup</code></a>.</p>
 
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
+<p>Those docs will give you info for the <code class="language-plaintext highlighter-rouge">gracket-launcher-libraries</code> and
+<code class="language-plaintext highlighter-rouge">gracket-launcher-names</code> directives, which in turn lead you to the
+<code class="language-plaintext highlighter-rouge">racket-launcher-names</code> directive. That directive explains that it makes use of
+<code class="language-plaintext highlighter-rouge">make-racket-launcher</code> under the hood, and you must infer that the <code class="language-plaintext highlighter-rouge">gracket-*</code>
+directives must then use <code class="language-plaintext highlighter-rouge">make-gracket-launcher</code>.</p>
 
-<span class="c1">;; store a weak reference to the thread, but make sure the channel has no</span>
-<span class="c1">;; writers</span>
-<span class="p">(</span><span class="k">define</span> <span class="nv">t</span>
-  <span class="p">(</span><span class="nb">make-weak-box</span>
-   <span class="p">(</span><span class="k">let</span> <span class="p">()</span>
-     <span class="p">(</span><span class="k">define</span> <span class="nv">c</span> <span class="p">(</span><span class="nb">make-channel</span><span class="p">))</span>
-     <span class="p">(</span><span class="nb">thread</span> <span class="p">(</span><span class="nf">thunk</span> <span class="p">(</span><span class="nb">sync</span> <span class="nv">c</span><span class="p">))))))</span>
+<p>The <a href="https://docs.racket-lang.org/raco/exe.html#(def._((lib._launcher%2Flauncher..rkt)._make-gracket-launcher))">docs for <code class="language-plaintext highlighter-rouge">make-gracket-launcher</code></a> indicate that
+<code class="language-plaintext highlighter-rouge">build-aux-from-file</code> is used to find auxiliary filenames for related assets,
+and if you click through to the <a href="https://docs.racket-lang.org/raco/exe.html#(def._((lib._launcher%2Flauncher..rkt)._build-aux-from-path))">docs for <code class="language-plaintext highlighter-rouge">build-aux-from-file</code></a> it
+confirms that icons are included in those related assets. Ultimately what we
+figured out was that <code class="language-plaintext highlighter-rouge">info.rkt</code> needs to include something like</p>
 
-<span class="c1">;; The (sync (system-idle-evt)) will not return until the thread has run as far</span>
-<span class="c1">;; as it can, at which point it's GC-able. (The system-idle-evt constructor</span>
-<span class="c1">;; exists essentially only for this kind of test/example.)</span>
-<span class="p">(</span><span class="nb">sync</span> <span class="p">(</span><span class="nb">system-idle-evt</span><span class="p">))</span>
-<span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
-<span class="p">(</span><span class="nb">weak-box-value</span> <span class="nv">t</span><span class="p">)</span> <span class="c1">;=&gt; #f</span>
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="nv">gracket-launcher-names</span> <span class="o">'</span><span class="p">(</span><span class="nf">"My</span> <span class="nv">App</span> <span class="nv">Name</span><span class="o">.</span><span class="nv">app"</span><span class="p">))</span>
+<span class="p">(</span><span class="k">define</span> <span class="nv">gracket-launcher-libraries</span> <span class="o">'</span><span class="p">(</span><span class="nf">"app</span><span class="o">.</span><span class="nv">rkt"</span><span class="p">))</span>
 </code></pre></div></div>
 
-<p>My original version was:</p>
+<p>…where <code class="language-plaintext highlighter-rouge">app.rkt</code> is the file with a <code class="language-plaintext highlighter-rouge">main</code> submodule that starts the app’s GUI.
+And an <code class="language-plaintext highlighter-rouge">app.icns</code> file in the same folder as <code class="language-plaintext highlighter-rouge">app.rkt</code> is used for the program’s
+icon (png for linux).</p>
 
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
+<p>When you do <code class="language-plaintext highlighter-rouge">raco setup mypackagename</code> it creates the executable with that icon.</p>
 
-<span class="c1">;; store a weak reference to the thread, but make sure the channel has no</span>
-<span class="c1">;; writers</span>
-<span class="p">(</span><span class="k">define</span> <span class="nv">t</span>
-  <span class="p">(</span><span class="nb">make-weak-box</span>
-   <span class="p">(</span><span class="k">let</span> <span class="p">()</span>
-     <span class="p">(</span><span class="k">define</span> <span class="nv">c</span> <span class="p">(</span><span class="nb">make-channel</span><span class="p">))</span>
-     <span class="p">(</span><span class="nb">thread</span> <span class="p">(</span><span class="nf">thunk</span> <span class="p">(</span><span class="nb">sync</span> <span class="nv">c</span><span class="p">))))))</span>
+<p>Some of this is independently covered by <a href="https://docs.racket-lang.org/raco/exe.html">docs for <code class="language-plaintext highlighter-rouge">raco exe</code></a>, which
+supports <code class="language-plaintext highlighter-rouge">--ico</code> (Windows), <code class="language-plaintext highlighter-rouge">--icns</code> (macOS), and <code class="language-plaintext highlighter-rouge">++aux</code> for general icons and
+auxiliary files (which point you toward yet more docs about what you can give to
+<code class="language-plaintext highlighter-rouge">++aux</code>).</p>
 
-<span class="c1">;; wait for the GC to collect…</span>
-<span class="p">(</span><span class="k">let</span> <span class="nv">loop</span> <span class="p">()</span>
-  <span class="p">(</span><span class="nf">match</span> <span class="p">(</span><span class="nb">weak-box-value</span> <span class="nv">t</span><span class="p">)</span>
-    <span class="p">[(</span><span class="nf">?</span> <span class="nv">thread?</span><span class="p">)</span>
-     <span class="c1">;; …by forcing it (but not too aggressively)</span>
-     <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
-     <span class="p">(</span><span class="nf">loop</span><span class="p">)]</span>
-    <span class="p">[</span><span class="nf">#f</span> <span class="p">(</span><span class="nb">displayln</span> <span class="s">"thread was GC'd"</span><span class="p">)]))</span>
-</code></pre></div></div>
-
-<p>It reliably prints and exits within a second or 2 on my machine.</p>
 
 </div>
 <hr/>
@@ -136,12 +126,6 @@ the effect. I’ll show his first:</p>
     <li>
       <a href="https://benknoble.github.io/tags#racket" class="tag">
         racket
-      </a>
-    </li>
-  
-    <li>
-      <a href="https://benknoble.github.io/tags#concurrency" class="tag">
-        concurrency
       </a>
     </li>
   
@@ -161,8 +145,8 @@ the effect. I’ll show his first:</p>
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/";
-    this.page.identifier = "/blog/2025/06/10/racket-gc-thread";
+    this.page.url = "https://benknoble.github.io/blog/2025/06/19/racket-exe/";
+    this.page.identifier = "/blog/2025/06/19/racket-exe";
   };
 
   function load_comments(div) {
@@ -181,21 +165,17 @@ the effect. I’ll show his first:</p>
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2025/06/06/bisecting/"
-      title="Bisecting for Fun: Finding a Bugfix in Vim">
+    <a href="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/"
+      title="A note about Racket's GC for threads">
       Previous</a>
   </span>
   
   
-  <span id="next">
-    <a href="https://benknoble.github.io/blog/2025/06/19/racket-exe/"
-       title="A note about building executables with Racket">
-      Next</a>
-  </span>
+  <span id="no-next">Next</span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#a-note-about-racket-s-gc-for-threads">
+  <a href="/categories/#a-note-about-building-executables-with-racket">
     Back to posts</a>
 </div>
 
