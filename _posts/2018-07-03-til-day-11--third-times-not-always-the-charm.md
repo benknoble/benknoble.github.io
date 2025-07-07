@@ -25,11 +25,11 @@ related to tomorrow's [feature][] article as well), so hang tight.
 In the meantime, let me tell you about [another][] [strategy][] for [build][]
 [time][] [improvement][]: cached artifacts.
 
-It goes like this. We have a build--call it `meta`--that requires a lot of
+It goes like this. We have a build---call it `meta`---that requires a lot of
 smaller components, each of which have their own build process. So, to build
 `meta`, we build every single component. Every. Single. Time.
 
-This isn't such an issue when most of the components take 0-20 seconds. But a
+This isn't such an issue when most of the components take 0--20 seconds. But a
 few take several minutes, and some even break the 10 minute mark. So the overall
 time is quite long.
 

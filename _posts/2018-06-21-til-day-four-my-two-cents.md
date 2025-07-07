@@ -20,7 +20,7 @@ keep hitting `<CapsLock>` instead of `<Control>` because I haven't figured out
 how to do that remapping yet. Plus, there's the proxy (read on). Overall, a
 positive experience though, because it meant I finally have all my accounts
 (except possibly an `ssh` account on the internal servers for doing that
-work...).
+work…).
 
 Also, the trackpad scroll sucks.
 
@@ -38,7 +38,7 @@ all fixable. In other words, we all need to do better of speaking up and
 stepping up to work on things outside of our own areas.
 
 I learned from this that my role in Infra is to make sure everybody else can do
-their jobs effectively--they have better things to do than to wait on builds to
+their jobs effectively---they have better things to do than to wait on builds to
 finish.
 
 If you haven't figured out the title yet, the first Cent is the OS, and the

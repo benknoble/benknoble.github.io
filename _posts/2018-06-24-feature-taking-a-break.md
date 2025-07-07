@@ -13,18 +13,18 @@ When I get buried deep in a project, as I did on Friday (when this post was
 supposed to be written), I get into a "zone". This [zone][] is well-documented
 and studied; it is crucial to our ability to Get Things Done™. Interrupting it
 carries all the peril of interrupting a feeding [T. Rex][]. And, as Einstein so
-famously proved, time is relative--at least, when "in the zone," consumed by
+famously proved, time is relative---at least, when "in the zone," consumed by
 furiously-paced mental or physical exercise, it seems to go from 0 to 60 in a
 heartbeat.
 
 This zone also takes anywhere from 10 minutes to an hour to cultivate, and any
-interruption triggers a restart from square one--or even square *negative* one.
+interruption triggers a restart from square one---or even square *negative* one.
 So why do I find myself taking short breaks after a few hours in the zone?
 
 It comes down to this:
 
 1. Short breaks are good; and
-2. Short breaks don't interrupt
+2. Short breaks don't interrupt.
 
 In fact, they provide an opportunity for a wide variety of other necessary
 activities. My most frequent breaks are bathroom runs, efficiently combining a
@@ -33,7 +33,7 @@ chance to stand and stretch with more pressing tasks.
 If you've ever heard of or talked about doing your best thinking in the shower
 (or on the toilet), then you know what #2 is getting at. My trip to the bathroom
 is a mental stimulus, not a slowdown. It jogs me out of whatever stagnant
-thinking patterns I'd become engaged in, literally changes my perspective, and
+thinking patterns I've become engaged in, literally changes my perspective, and
 forces me to tackle my current problem differently. Much like [rubber-duck
 debugging][], it is an essential tool and has saved me on more than one
 occasion.
@@ -71,8 +71,9 @@ I took the bike out for a 5mi ride.
 And then things collapsed.
 
 See, I spent the rest of Saturday post-shower-and-lunch watching Netflix or the
-television ([NCIS][] is my all-time favorite, with [Grey's][] close behind--plus
-[Law & Order: SVU][] was marathoning again). Productivity levels: $$0$$.
+television ([NCIS][] is my all-time favorite, with [Grey's][] close
+behind---plus [Law & Order: SVU][] was marathoning again). Productivity levels:
+$$0$$.
 
 ### Sine waves
 
@@ -82,13 +83,13 @@ And man did it feel good. But would I have been able to do that fresh off my
 first week of work after a few weeks of summer vacation? Heck no! I had to rest,
 relax, rebound.
 
-I guess I really like the [3 R's...][].
+I guess I really like the [3 R's…][].
 
 Anyways, now you know the whole story. You know that it is important for me to
 have short thinking breaks and longer zombie ones (although, *"zombie"* here is
-relative--as long as I'm not directly working on or thinking about what I've
+relative---as long as I'm not directly working on or thinking about what I've
 been working on all week, I'm probably ok). You know that not breaking at all
-can be dangerous--everyone has tried it; it's either fatal or it fails. And, you
+can be dangerous---everyone has tried it; it's either fatal or it fails. And, you
 know that you make it through anything because your future is in the `sin`s, if
 you know how to read them.
 
@@ -113,5 +114,5 @@ work for you instead.
 [Tang Soo Do]: http://uskmartialarts.com
 [Grey's]: http://abc.go.com/shows/greys-anatomy
 [Law & Order: SVU]: https://www.nbc.com/law-and-order-special-victims-unit
-[3 R's...]: {% link _posts/2018-06-22-til-reading-refactoring-and-rpatterns.md %}
+[3 R's…]: {% link _posts/2018-06-22-til-reading-refactoring-and-rpatterns.md %}
 [Joel]: https://www.joelonsoftware.com

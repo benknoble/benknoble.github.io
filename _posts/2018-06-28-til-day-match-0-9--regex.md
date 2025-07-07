@@ -20,20 +20,20 @@ current code is, and I haven't configured the VPN yet. But for the things I was
 doing (Slack, email, web, even getting my [Dotfiles][] setup), I felt much
 better.
 
-Ubuntu terminal even supports truecolor and italics out of the box!
+Ubuntu's terminal even supports truecolor and italics out of the box!
 
 ## Tickle
 
 Yes, it's really pronounced that way. Apparently the language is revered for
 both it's simplicity and it's use in networking situations. I wouldn't know; we
-use it for some test suits (part of gash, the whole setup was never explained to
+use it for some test suites (part of gash, the whole setup was never explained to
 me). And today I had to use a little to fix a broken build.
 
-It was broken because of...
+It was broken because of…
 
 ## Regex ! :tada:
 
-[You know what they say...][regex]
+[You know what they say…][regex]
 
 So, here's the deal. Like I said, I'm not going to give a tutorial on regex. The
 manpages are actually pretty good at it. But I am going to point you to them,
@@ -53,24 +53,24 @@ for extended. Whether or not it is enhanced can be gleaned from the manpages
 (does it, for example, support black magic). Basically, `man` and `info` the
 tool.
 
-After that, we basically have the following
+After that, we have the following
 
 1. Perl, on which most other regex is based (`man perlrequick`)
 2. Vim, with it's own quirks (`:help pattern`)
 3. Python (`help(re)`)
-4. ...and every other language's unique flavor
+4. …and every other language's unique flavor
 
-Don't get me started on escape-character hell--no one should have to read
+Don't get me started on escape-character hell---no one should have to read
 `"\\"\\\\"` and try to figure out what it's doing. Heck, certain formats even
 have special rules and tables for *when* characters have special meaning or need
-escaped (vim's `(very)?magic` is famous for this).
+escaped (Vim's `(very)?magic` is famous for this).
 
 Does it support back references? Capture groups? What the hell is a negative
-look-behind? Why did vim decide to give us `\zs` and `\ze` (they're brilliantly
+look-behind? Why did Vim decide to give us `\zs` and `\ze` (they're brilliantly
 useful, by the way) ? And what about [non-greedy modifiers ??][??]
 
 Can I use my favorite feature of all, shortcut character classes? This one
-really gets me steamed up--shortcuts like `\w` for word-like characters and `\d`
+really gets me steamed up---shortcuts like `\w` for word-like characters and `\d`
 for digits are really helpful. It's *short*er than the equivalent `[:digit:]`,
 which often has to become `[[:digit:]]` for true RE use.
 

@@ -22,7 +22,7 @@ So I asked. I spent probably a half hour going back and forth with the colleague
 who was my go-to point for the task, and he made sure I felt like knew what I
 was doing. He even said one time:
 
-> Good question...
+> Good question…
 
 But I learned that some questions were better than others based on the answers
 and my difficulty asking them.

@@ -17,9 +17,9 @@ Remember how I [still][] didn't have my [work computer][]? I was able to put
 Ubuntu on it this evening, and tomorrow should be using primarily it. Huzzah.
 
 Let me tell you something about it though. The Ubuntu download is an ISO. No,
-not like Tron: Legacy, it's an image file, a snapshot of an entire file system.
-And everywhere online will tell you that, in order to make a bootable USB from
-one, you need special software.
+not like _Tron: Legacy_; it's an image file, a snapshot of an entire file
+system. And everywhere online will tell you that, in order to make a bootable
+USB from one, you need special software.
 
 You don't.
 
@@ -39,7 +39,7 @@ Now, we have some basic control flow: we can loop, doing the same step multiple
 times; we can make decisions about which steps to do; and we can even have
 someone else do a step for us in the background.
 
-*Recipes are fine*, you're thinking (I can hear your thoughts)--*They work in
+*Recipes are fine*, you're thinking (I can hear your thoughts)---*They work in
 the kitchen*. Well, bub, my shell is not your kitchen. For one, my shell won't
 taste bad if I leave it on too long. More importantly, if I screw up, I brick my
 laptop and not my whole house. Which of those things is more important, I'm
@@ -49,7 +49,7 @@ directory matters, whether or not files exist matters, &c. This is not unlike
 cooking, where having the dough mixed properly is essential to baking a cake.
 But you can go back and fix the dough. A script can't do that on its own.
 
-Here comes the tricky part--shell functions are a really nifty feature for
+Here comes the tricky part---shell functions are a really nifty feature for
 [refactoring][], enhancing the code's ability to read like English (or your
 language of choice). They encapsulate components of the recipe, much like
 `make_the_dough` might be a multi-step process necessary for `make_me_a_cake`.

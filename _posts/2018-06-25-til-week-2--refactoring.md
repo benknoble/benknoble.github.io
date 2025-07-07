@@ -4,7 +4,7 @@ tags: [ til, infra, intern, refactor, shell, builds ]
 category: Blog
 ---
 
-Something about those [R][]'s keeps coming back...
+Something about those [R][]'s keeps coming back…
 
 # Today I Learned
 
@@ -66,14 +66,14 @@ tests? Then you're really stuck.
 
 ### Relevance
 
-Today, I was a "complete fool." I didn't actually make a copy/paste error--thank
-goodness. I spent most of my time, as I did Friday, refactoring code and
-eliminating precisely the kind of duplicate code that goes hand-in-hand with
-copy/paste errors.
+Today, I was a "complete fool." I didn't actually make a copy/paste
+error---thank goodness. I spent most of my time, as I did Friday, refactoring
+code and eliminating precisely the kind of duplicate code that goes hand-in-hand
+with copy/paste errors.
 
 But I did make two mistakes that were agonizingly difficult to track down.
 
-And it's because of one of my favorite [vim][] features: auto-complete.
+And it's because of one of my favorite [Vim][] features: auto-complete.
 
 The first one goes like this. I have some shell script to fixup some files and
 then copy them to specific spots, so that a later build step will find it.
@@ -133,7 +133,7 @@ an hour. I suspected during the first half something was wrong, but I was
 certain by the end of an hour. And because I smartly logged everything I was
 doing, I was able to track the same line being output over and over and over.
 
-All because my gut said--this is broke.
+All because my gut said---this is broke.
 
 # Conclusion ?
 

@@ -14,11 +14,11 @@ My second day at work--progress was made.
 4. I can still write shell scripts
 
 Nuage's infra team uses the [Agile][] methodology as a guiding practice for
-making decisions and developing software (read: meeting our clients' needs--this
-often includes hardware builds). I did some further digging, thinking Agile was
-things like project boards and standups. Turns out, it's a set of [principles
-and values][prince] that should guide decisions towards certain goals. A little like
-the [scout oath][] and law.
+making decisions and developing software (read: meeting our clients'
+needs---this often includes hardware builds). I did some further digging,
+thinking Agile was things like project boards and standups. Turns out, it's a
+set of [principles and values][prince] that should guide decisions towards
+certain goals. A little like the [scout oath][] and law.
 
 While configuring the IXIA again today, we had to get it up and running on the
 network, which meant finding and assigning it a suitable IP as well as editing

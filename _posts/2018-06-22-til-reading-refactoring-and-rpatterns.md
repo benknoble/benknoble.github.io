@@ -5,7 +5,7 @@ category: Blog
 ---
 
 I couldn't leave the alliteration hanging in a title containing the word
-'patterns'...
+'patterns'…
 
 # Today I Learned
 
@@ -43,7 +43,7 @@ step, and failures/failure points if any
 
 We can solve 2 with well-refactored scripts, using function names as high- (and
 low-) level components. We can actually solve 3 with this as well: all of my
-bash scripts start with something like this--
+bash scripts start with something like this---
 
 ```bash
 log() {
@@ -55,10 +55,10 @@ log() {
 
 It helps me output simple information when I need it. But we also have to be
 choosy about what information that is! (If I have to scan through the output of
-another `./configure --whatever --feature=foobar`, I might go mad).
+another `./configure --whatever --feature=foobar`, I might go mad.)
 
 Reflecting 1 in all of this means documentation and a clear understanding of
-what the process is--in fact, this necessitates 2 and 3 be solved already.
+what the process is---in fact, this necessitates 2 and 3 be solved already.
 
 I'm dissecting this today because I have been reassigned to work on improving a
 build time. Apparently, someone's feature merge caused a 3x increase in
@@ -131,7 +131,7 @@ Not much to say here, just a quote from the colleague who assigned me this task:
 >
 > (and reducing build times by 3x is a super awesome project, imo)
 >
-> well, maybe not quite 3x reduction...but we can round up :wink:
+> well, maybe not quite 3x reduction… but we can round up :wink:
 
 So I'd say my first week finished strong.
 
