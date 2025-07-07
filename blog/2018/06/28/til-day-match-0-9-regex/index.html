@@ -99,13 +99,13 @@ current code is, and I haven’t configured the VPN yet. But for the things I wa
 doing (Slack, email, web, even getting my <a href="https://github.com/benknoble/Dotfiles">Dotfiles</a> setup), I felt much
 better.</p>
 
-<p>Ubuntu terminal even supports truecolor and italics out of the box!</p>
+<p>Ubuntu’s terminal even supports truecolor and italics out of the box!</p>
 
 <h2 id="tickle">Tickle</h2>
 
 <p>Yes, it’s really pronounced that way. Apparently the language is revered for
 both it’s simplicity and it’s use in networking situations. I wouldn’t know; we
-use it for some test suits (part of gash, the whole setup was never explained to
+use it for some test suites (part of gash, the whole setup was never explained to
 me). And today I had to use a little to fix a broken build.</p>
 
 <p>It was broken because of…</p>
@@ -135,7 +135,7 @@ for extended. Whether or not it is enhanced can be gleaned from the manpages
 (does it, for example, support black magic). Basically, <code class="language-plaintext highlighter-rouge">man</code> and <code class="language-plaintext highlighter-rouge">info</code> the
 tool.</p>
 
-<p>After that, we basically have the following</p>
+<p>After that, we have the following</p>
 
 <ol>
   <li>Perl, on which most other regex is based (<code class="language-plaintext highlighter-rouge">man perlrequick</code>)</li>
@@ -144,17 +144,17 @@ tool.</p>
   <li>…and every other language’s unique flavor</li>
 </ol>
 
-<p>Don’t get me started on escape-character hell–no one should have to read
+<p>Don’t get me started on escape-character hell—no one should have to read
 <code class="language-plaintext highlighter-rouge">"\\"\\\\"</code> and try to figure out what it’s doing. Heck, certain formats even
 have special rules and tables for <em>when</em> characters have special meaning or need
-escaped (vim’s <code class="language-plaintext highlighter-rouge">(very)?magic</code> is famous for this).</p>
+escaped (Vim’s <code class="language-plaintext highlighter-rouge">(very)?magic</code> is famous for this).</p>
 
 <p>Does it support back references? Capture groups? What the hell is a negative
-look-behind? Why did vim decide to give us <code class="language-plaintext highlighter-rouge">\zs</code> and <code class="language-plaintext highlighter-rouge">\ze</code> (they’re brilliantly
+look-behind? Why did Vim decide to give us <code class="language-plaintext highlighter-rouge">\zs</code> and <code class="language-plaintext highlighter-rouge">\ze</code> (they’re brilliantly
 useful, by the way) ? And what about <a href="https://www.ultraedit.com/support/tutorials-power-tips/ultraedit/non-greedy-perl-regex.html">non-greedy modifiers ??</a></p>
 
 <p>Can I use my favorite feature of all, shortcut character classes? This one
-really gets me steamed up–shortcuts like <code class="language-plaintext highlighter-rouge">\w</code> for word-like characters and <code class="language-plaintext highlighter-rouge">\d</code>
+really gets me steamed up—shortcuts like <code class="language-plaintext highlighter-rouge">\w</code> for word-like characters and <code class="language-plaintext highlighter-rouge">\d</code>
 for digits are really helpful. It’s <em>short</em>er than the equivalent <code class="language-plaintext highlighter-rouge">[:digit:]</code>,
 which often has to become <code class="language-plaintext highlighter-rouge">[[:digit:]]</code> for true RE use.</p>
 

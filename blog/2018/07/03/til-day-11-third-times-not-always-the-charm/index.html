@@ -105,11 +105,11 @@ related to tomorrow’s <a href="/blog/2018/07/04/feature-cycles/">feature</a> a
 <p>In the meantime, let me tell you about <a href="/blog/2018/06/22/til-reading-refactoring-and-rpatterns/">another</a> <a href="/blog/2018/06/25/til-week-2-refactoring/">strategy</a> for <a href="/blog/2018/06/26/til-day-7-asking-questions/">build</a>
 <a href="/blog/2018/06/27/til-day-8-context-and-computers/">time</a> <a href="/blog/2018/06/28/til-day-match-0-9-regex/">improvement</a>: cached artifacts.</p>
 
-<p>It goes like this. We have a build–call it <code class="language-plaintext highlighter-rouge">meta</code>–that requires a lot of
+<p>It goes like this. We have a build—call it <code class="language-plaintext highlighter-rouge">meta</code>—that requires a lot of
 smaller components, each of which have their own build process. So, to build
 <code class="language-plaintext highlighter-rouge">meta</code>, we build every single component. Every. Single. Time.</p>
 
-<p>This isn’t such an issue when most of the components take 0-20 seconds. But a
+<p>This isn’t such an issue when most of the components take 0–20 seconds. But a
 few take several minutes, and some even break the 10 minute mark. So the overall
 time is quite long.</p>
 
