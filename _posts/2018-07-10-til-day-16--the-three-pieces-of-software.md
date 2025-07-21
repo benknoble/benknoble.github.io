@@ -15,14 +15,14 @@ There's probably more than that, but these are the bigguns.
 ## Communication
 
 How many times have you heard me say it? *Communication is key.* And sure, that
-makes a nice, easy sort of sense--too easy, I say. Too easy, because it's apt to
-be forgot.
+makes a nice, easy sort of sense---too easy, I say. Too easy, because it's apt
+to be forgot.
 
 Today I was witness to the result of a communication breakdown. It wasn't
 exactly pretty, but it got the point across: some things aren't working, and we
 need to fix them. That's all I'll say about it.
 
-Piece #1: Communication (horizontal, vertical, and circular--if you achieve
+Piece #1: Communication (horizontal, vertical, and circular---if you achieve
 extra-dimensional, please let me know).
 
 ## Architects
@@ -53,7 +53,7 @@ Ok, well, *math* isn't broken, per se. But a build that runs fine sequentially
 is.
 
 Think of it like this. There are two steps to the build. Step 1 gives us `1`.
-And Step 2 gives us `1`. But they don't depend on each other--I can actually do
+And Step 2 gives us `1`. But they don't depend on each other---I can actually do
 them in any old order I want to (and I've checked that out pretty thoroughly).
 
 So, the end result is clear `1+1=2` right?

@@ -31,11 +31,11 @@ Let's recap, like any good GM should do...
 - Thursday, I played _Kobolds Ate My Babies !_ (kamb) for the first time
 
 Overall, both experiences were positive. I enjoyed the thrill of being a player
-again--I normally run Games, so it was a good experience to work out how
+again---I normally run Games, so it was a good experience to work out how
 to roleplay a character. It taught me that I **can** and **should** do a better
 job of applying that to characters in my Games.
 
-I also enjoyed trying some new things and the interruption to my routine--yes,
+I also enjoyed trying some new things and the interruption to my routine---yes,
 you read that right, I _enjoyed_ the interruption. :scream: The horror!
 
 I do have some thoughts about both nights, which I'll intersperse with my recap
@@ -65,12 +65,12 @@ Unfortunately, I struggled a little with our GM's pacing, information flow, and
 application of the rules.
 
 We disagreed on some of the rules, which happens, and I won't argue that one of
-us must be right--he's the GM, his game, his call. However, any time there's a
+us must be right---he's the GM, his game, his call. However, any time there's a
 rules dispute, I believe you take 60 seconds _max_ to talk about it; then, the GM
 makes a decision and we move on. There were too many scenes that got slowed down
 by constant rules arguments.
 
-Further, I don't feel he pushed the tempo during the tense--and only--combat of
+Further, I don't feel he pushed the tempo during the tense---and only---combat of
 the game (that's all we had time for, by the way). It was slow and drawn out
 except for a round or two in the middle. Things just moved and hit people.
 

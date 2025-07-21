@@ -10,12 +10,12 @@ who has NC State orientation.
 ## Today I Learned
 
 1. Where Nuage is and where they are headed
-2. Tasty 8s, the worlds best gourmet hot dog shop, has closed
+2. Tasty 8s, the world's best gourmet hot dog shop, has closed
 
 ### Nuage Networks
 
 A few weeks ago, we had a site-wide meeting at Raleigh, and I wrote about my
-experience--I discovered how I fit into the company.
+experience---I discovered how I fit into the company.
 
 Today, we had a site-wide meeting, and I discovered how the company fits into
 the world.

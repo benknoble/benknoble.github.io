@@ -26,7 +26,7 @@ elementals (but _[Dungeons & Dragons][]_ does).
 _CoC_ takes its inspiration from Lovecraftian horror, an entire genre based on
 books by H. P. Lovecraft himself. Even the [Evil Dead][] film references the
 Necronomicon, an artifact that can be encountered in the game. Typical
-'scenarios', run by the 'keeper', revolve around a mismatched team of unlikely
+'scenarios', run by the 'keeper,' revolve around a mismatched team of unlikely
 investigators who steadily uncover a horrifying and insanity-inducing truth.
 While runnable in any setting, the game is strongly designed for the 1920s.
 
@@ -49,7 +49,7 @@ In one night, I
 It's up to you to decide what happened in character and what out.
 
 This Wednesday, I'm joining some others for a little _D&D 5e: Rage of Demons_
-action--I'll put together a post on my new character for that soon. And Thursday
+action---I'll put together a post on my new character for that soon. And Thursday
 will be _Kobolds Ate My Babies_, so look forward to some hilarity.
 
 ## Snakes, Versions, and the Future, Oh My!

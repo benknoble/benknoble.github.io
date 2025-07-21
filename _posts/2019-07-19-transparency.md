@@ -27,7 +27,7 @@ part is that GitHub provides links to trace back from the merge commit to the PR
 to the issue, and a graphical history log (such as the Insights > Network tab on
 GitHub) shows the merge from the fork. Tools like `git-log` and `git-blame` make
 tracking these changes really easy. Finally, authorial information is correctly
-capture (I authored the commits and their messages).
+captured (I authored the commits and their messages).
 
 Instead, the same nicm did some form of a cherry-pick to another, separate fork,
 squashed the commits, edited the message to put my name on them, and merged that

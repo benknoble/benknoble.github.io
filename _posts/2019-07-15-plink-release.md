@@ -34,8 +34,8 @@ and put this shebang at the beginning:
 Run the file (`chmod u+x dotfiles.plink`), and then use make as usual! `env` can
 be replaced with `perl` if you don't have it.
 
-You can then start to take of plink syntax, all documented in the module and on
-GitHub.
+You can then start to take advantage of plink syntax, all documented in the
+module and on GitHub.
 
 Also see [vim-plink][] for vim syntax files!
 

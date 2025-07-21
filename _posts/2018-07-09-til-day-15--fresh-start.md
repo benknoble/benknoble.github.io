@@ -26,7 +26,7 @@ Those changes are actually present earlier in the `git` history, but I reverted
 them to ease testing when I thought they might have been part of the culprit.
 Now that I know things work, I can put them back in. They constitute
 backgrounding two build steps so that they run in parallel rather than
-series--I'm hoping to get a speed increase out of this.
+series---I'm hoping to get a speed increase out of this.
 
 On a further note, I read an interesting [post][] in response to an [article][]
 about TDD and its wastefulness. ~~I'll link them back later if I can find them
@@ -37,7 +37,7 @@ One point mentioned was that these kinds of tests condition developers to assume
 
 Well, firstly, these aren't unit tests, they're actually integration and
 regression tests, but we'll ignore that. I *did* get a little ego boost when I
-saw that green light--and now it's worrying. Did I really do everything right?
+saw that green light---and now it's worrying. Did I really do everything right?
 
 Fortunately, most of my changes were (small) shell-script refactorings. They had
 to [preserve all side-effects][preserve] (much like compiler optimizations), so
@@ -51,7 +51,7 @@ this technique with fake `Makefile`s before as well. Effectively, it lets me
 test code structures or external tooling to make sure the results are what I
 expect, or fix it if they're not.
 
-So, I'm *fairly* confident about the correctness--"fairly" as in "justly."
+So, I'm *fairly* confident about the correctness---"fairly" as in "justly."
 
 ## Tooling Around
 

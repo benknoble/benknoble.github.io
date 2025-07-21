@@ -7,17 +7,17 @@ category: Blog
 I've officially crossed the halfway point of my internship. But don't worry,
 because I start a co-op with the same company the week after.
 
-## The Recap--My Kneecaps
+## The Recap---My Kneecaps
 
 Last week things got crazy, what with RPGs pushing their way into my writing/til
 schedule.
 
 Then, Friday, I drove home again for a martial arts event. For the curious, I
-hold a 1st Dan in Tang Soo Do and was double-recertifying--I am now 3/4 of the
+hold a 1st Dan in Tang Soo Do and was double-recertifying---I am now 3/4 of the
 way to 2nd Dan. And my body is sore.
 
 I had promised a feature by the end of the weekend. I didn't do it, so I'm
-thinking I will spend this weeks feature on time management when I get to it.
+thinking I will spend this week's feature on time management when I get to it.
 
 In the meantime, enjoy a recap of the two things I learned at work on my half
 day:
@@ -32,7 +32,7 @@ wonderfully built little tool, piggy-backing off the language of `ed` (which
 later evolved into `ex`, forming the backbone of `vi` and `vim`, my favorite
 editor).
 
-Even more interestingly, about half of those substitutions--if not more--occur
+Even more interestingly, about half of those substitutions---if not more---occur
 on variables. But `bash` one-ups `sed` here. Invoking `sed` has to go through
 the rigamarole of firing up an external process and using it correctly (which is
 tricky even when you know `sed` syntax).
@@ -98,7 +98,7 @@ software developed described by a "red-green-refactor cycle". Essentially, one
 can choose to code in the following steps:
 
 1. Red: write a test that describes what your code should accomplish (it will
-   probably fail--if it doesn't, lucky you).
+   probably fail---if it doesn't, lucky you).
 2. Green: write the code necessary to make it pass
 3. Refactor: leave it better than you found it (the Boy Scout method, or
    "refactoring")

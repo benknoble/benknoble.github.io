@@ -147,8 +147,8 @@ The `env` magic is to work around the fact that interpreters on shebangs cannot
 be nested (since `plink` starts with `#! /usr/bin/env perl`, this is an issue).
 `env` doesn't care. It runs plink just fine.
 
-I'm still working exactly the design of plink (I need to decide how ordering of
-the plink file will work, and if there are semantics for what becomes the
+I'm still working out exactly the design of plink (I need to decide how ordering
+of the plink file will work, and if there are semantics for what becomes the
 default make target—and I really need to decide whether or not to generate
 unspecified code: see the lines for `SUFFIXES` and `SHELL` in the original). But
 it should be done soon—that's the advantage of Perl's text-processing power.
