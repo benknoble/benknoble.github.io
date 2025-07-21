@@ -222,8 +222,8 @@ to get a Makefile with the semantics I’ve described above.</p>
 be nested (since <code class="language-plaintext highlighter-rouge">plink</code> starts with <code class="language-plaintext highlighter-rouge">#! /usr/bin/env perl</code>, this is an issue).
 <code class="language-plaintext highlighter-rouge">env</code> doesn’t care. It runs plink just fine.</p>
 
-<p>I’m still working exactly the design of plink (I need to decide how ordering of
-the plink file will work, and if there are semantics for what becomes the
+<p>I’m still working out exactly the design of plink (I need to decide how ordering
+of the plink file will work, and if there are semantics for what becomes the
 default make target—and I really need to decide whether or not to generate
 unspecified code: see the lines for <code class="language-plaintext highlighter-rouge">SUFFIXES</code> and <code class="language-plaintext highlighter-rouge">SHELL</code> in the original). But
 it should be done soon—that’s the advantage of Perl’s text-processing power.</p>
