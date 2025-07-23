@@ -126,19 +126,32 @@ narrative: the stock price goes up only if investors truly believe these
 companies have found another hyperscaler market, so the companies benefit
 materially from creating the narrative that they have. (See [Altering the
 deal](https://pluralistic.net/2025/03/15/altering-the-deal/), [Big Tech
-economics](https://pluralistic.net/2025/03/06/privacy-last/), or [the fatfinger
-economy](https://pluralistic.net/2025/05/02/kpis-off/) for more information on
-how stock benefits hyperscalers by inflating price/earnings ratio and why it’s
-important that they keep that narrative alive.) Whether or not the market exists
-is actually a separate question for these companies. For us, believing it might
-not is what makes the whole thing feel like a grift (house of cards, tower of
-lies, etc.). Unfortunately, those of us that are skeptical feel like we have
-lots of data (qualitative and quantitative), anecdata, and experts to back up
-our position. Yet media unwilling to push back and ask tough questions coupled
-with expensive, aggressive marketing campaigns drowns that out for normies[^2] .
-To be clear: I’m not saying "LLMs don’t work." I’m saying "they don’t have the
-claimed market" and "they are destructive along many axes I examine" (most of
-which are more important to me than "code faster, worse").
+economics](https://pluralistic.net/2025/03/06/privacy-last/), [the fatfinger
+economy](https://pluralistic.net/2025/05/02/kpis-off/), or [When Google's slop
+meets webslop, search stops](https://pluralistic.net/2025/07/15/inhuman-gigapede/)
+for more information on how stock benefits hyperscalers by inflating
+price/earnings ratio and why it’s important that they keep that narrative
+alive.)
+
+Cory Doctorow writes:
+
+> the hundreds of billions being pumped into AI are not driven by [belief in AI
+> superintelligence]. Rather, they are the product of material conditions, a
+> system that sends high-flying companies into a nosedive the instant they stop
+> climbing. AI's merits and demerits are irrelevant to this: they pump AI
+> because they _must_ pump. It's why they pumped metaverse and cryptocurrency and
+> every other absurd fad. [emphasis original]
+
+Whether or not the market exists is actually a separate question for these
+companies. For us, believing it might not is what makes the whole thing feel
+like a grift (house of cards, tower of lies, etc.). Unfortunately, those of us
+that are skeptical feel like we have lots of qualitative data, quantitative
+data, anecdata, and experts to back up our position. Yet media unwilling to push
+back and ask tough questions coupled with expensive, aggressive marketing
+campaigns drowns that out for normies[^2] . To be clear: I’m not saying "LLMs
+don’t work." I’m saying "they don’t have the claimed market" and "they are
+destructive along many axes I examine" (most of which are more important to me
+than "code faster, worse").
 
 To judge by reactions of my peers, I'm not the only one who thinks these things.
 I'll try to keep being brave enough to say them.
