@@ -20,7 +20,7 @@ junk articles with nuggets of
 "neat"](https://thetechbubble.substack.com/p/the-phony-comforts-of-useful-idiots).
 The enthusiast will say that by pointing this out, my skepticism is a matter of
 moving the goalposts. Yet I have never claimed that the LLM does not work (only
-that it is not superhuman). Rather, I have repeatedly pointed---out over and
+that it is not superhuman). Rather, I have repeatedly pointed out---over and
 over and over again---the LLM does exactly what it is designed to do. Chiefly,
 it generates plausible-seeming text based on a statistical pattern. The problem
 is not that LLMs are not useful tools. The problem is that the development and
