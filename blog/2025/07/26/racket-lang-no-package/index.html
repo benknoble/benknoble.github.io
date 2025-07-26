@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : A note about building executables with Racket</title>
+  <title>Junk Drawer : A note about making Racket languages without installing a package</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -71,52 +71,56 @@
   </ul>
 </nav>
 
-      <h1>A note about building executables with Racket</h1>
+      <h1>A note about making Racket languages without installing a package</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 19 Jun 2025 in Blog</p>
+ on 26 Jul 2025 in Blog</p>
 <div id="post">
-  <p>This information is collected from my and other Racketeers dive into the
-documentation in one attempt to form a cohesive picture in response to the
-question “How do I use custom icons with GUI executables?”</p>
+  <p>This trick comes from Matthew Flatt via the Racket Discord.</p>
 
-<p>The extremely short version: changing the icon is something that happens at the
-point where you build an executable, not when running inside <code class="language-plaintext highlighter-rouge">racket</code>, DrRacket,
-etc. You control this by setting up your project as a package with an
-<code class="language-plaintext highlighter-rouge">info.rkt</code>. See <a href="https://docs.racket-lang.org/raco/setup-info.html">Controlling <code class="language-plaintext highlighter-rouge">raco
-setup</code></a>.</p>
+<p>Usually, when creating a Racket <code class="language-plaintext highlighter-rouge">#lang</code>, the reader needs to produce a module
+form like</p>
 
-<p>Those docs will give you info for the <code class="language-plaintext highlighter-rouge">gracket-launcher-libraries</code> and
-<code class="language-plaintext highlighter-rouge">gracket-launcher-names</code> directives, which in turn lead you to the
-<code class="language-plaintext highlighter-rouge">racket-launcher-names</code> directive. That directive explains that it makes use of
-<code class="language-plaintext highlighter-rouge">make-racket-launcher</code> under the hood, and you must infer that the <code class="language-plaintext highlighter-rouge">gracket-*</code>
-directives must then use <code class="language-plaintext highlighter-rouge">make-gracket-launcher</code>.</p>
-
-<p>The <a href="https://docs.racket-lang.org/raco/exe.html#(def._((lib._launcher%2Flauncher..rkt)._make-gracket-launcher))">docs for <code class="language-plaintext highlighter-rouge">make-gracket-launcher</code></a> indicate that
-<code class="language-plaintext highlighter-rouge">build-aux-from-file</code> is used to find auxiliary filenames for related assets,
-and if you click through to the <a href="https://docs.racket-lang.org/raco/exe.html#(def._((lib._launcher%2Flauncher..rkt)._build-aux-from-path))">docs for <code class="language-plaintext highlighter-rouge">build-aux-from-file</code></a> it
-confirms that icons are included in those related assets. Ultimately what we
-figured out was that <code class="language-plaintext highlighter-rouge">info.rkt</code> needs to include something like</p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="nv">gracket-launcher-names</span> <span class="o">'</span><span class="p">(</span><span class="nf">"My</span> <span class="nv">App</span> <span class="nv">Name</span><span class="o">.</span><span class="nv">app"</span><span class="p">))</span>
-<span class="p">(</span><span class="k">define</span> <span class="nv">gracket-launcher-libraries</span> <span class="o">'</span><span class="p">(</span><span class="nf">"app</span><span class="o">.</span><span class="nv">rkt"</span><span class="p">))</span>
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">module</span> <span class="nv">&lt;name&gt;</span> <span class="nv">&lt;initial-import-module&gt;</span>
+  <span class="nv">body</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>…where <code class="language-plaintext highlighter-rouge">app.rkt</code> is the file with a <code class="language-plaintext highlighter-rouge">main</code> submodule that starts the app’s GUI.
-And an <code class="language-plaintext highlighter-rouge">app.icns</code> file in the same folder as <code class="language-plaintext highlighter-rouge">app.rkt</code> is used for the program’s
-icon (png for linux).</p>
+<p>and the <code class="language-plaintext highlighter-rouge">&lt;initial-import-module&gt;</code> is best resolved as a reference to an
+installed collection. That is, instead of <code class="language-plaintext highlighter-rouge">"mylang/expander.rkt</code>,
+<code class="language-plaintext highlighter-rouge">mylang/expander</code> is preferred: the former is resolved relative to the PWD of
+the module being expanded!</p>
 
-<p>When you do <code class="language-plaintext highlighter-rouge">raco setup mypackagename</code> it creates the executable with that icon.</p>
+<p>To make this work typically requires an installed package or linked files. This
+is not a big hurdle for most Racket hackers, but might be confusing for
+students.</p>
 
-<p>Some of this is independently covered by <a href="https://docs.racket-lang.org/raco/exe.html">docs for <code class="language-plaintext highlighter-rouge">raco exe</code></a>, which
-supports <code class="language-plaintext highlighter-rouge">--ico</code> (Windows), <code class="language-plaintext highlighter-rouge">--icns</code> (macOS), and <code class="language-plaintext highlighter-rouge">++aux</code> for general icons and
-auxiliary files (which point you toward yet more docs about what you can give to
-<code class="language-plaintext highlighter-rouge">++aux</code>).</p>
+<p>Instead, we can use a trick to transform the relative module path, which is
+otherwise natural, into something that works regardless of location. (You’ll
+still need non-relative paths to make documentation work everywhere, I think.)</p>
 
+<p>Here’s the code.</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">module</span> <span class="nv">reader</span> <span class="nv">syntax/module-reader</span>
+  <span class="nt">#:language</span> <span class="p">(</span><span class="nf">collapse-module-path-index</span>
+              <span class="p">(</span><span class="nb">module-path-index-join</span> <span class="s">"mylang/expander.rkt"</span>
+                                      <span class="p">(</span><span class="nb">variable-reference-&gt;module-path-index</span>
+                                       <span class="p">(</span><span class="nf">#%variable-reference</span><span class="p">))))</span>
+  <span class="p">(</span><span class="k">require</span> <span class="nv">syntax/modcollapse</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Matthew says:</p>
+
+<blockquote>
+  <p>I’m not sure this solves any problem for you, but you can make a module path
+within <code class="language-plaintext highlighter-rouge">syntax/module-reader</code> relative by using <code class="language-plaintext highlighter-rouge">#:language</code>, which has an
+expression afterward instead of a literal. (It’s something I’ve wanted often
+enough that <code class="language-plaintext highlighter-rouge">rhombus/reader</code> treats a relative path like this, instead of like
+<code class="language-plaintext highlighter-rouge">syntax/module-reader</code>).</p>
+</blockquote>
 
 </div>
 <hr/>
@@ -145,8 +149,8 @@ auxiliary files (which point you toward yet more docs about what you can give to
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2025/06/19/racket-exe/";
-    this.page.identifier = "/blog/2025/06/19/racket-exe";
+    this.page.url = "https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package/";
+    this.page.identifier = "/blog/2025/07/26/racket-lang-no-package";
   };
 
   function load_comments(div) {
@@ -165,21 +169,17 @@ auxiliary files (which point you toward yet more docs about what you can give to
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/"
-      title="A note about Racket's GC for threads">
+    <a href="https://benknoble.github.io/blog/2025/06/19/racket-exe/"
+      title="A note about building executables with Racket">
       Previous</a>
   </span>
   
   
-  <span id="next">
-    <a href="https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package/"
-       title="A note about making Racket languages without installing a package">
-      Next</a>
-  </span>
+  <span id="no-next">Next</span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#a-note-about-building-executables-with-racket">
+  <a href="/categories/#a-note-about-making-racket-languages-without-installing-a-package">
     Back to posts</a>
 </div>
 

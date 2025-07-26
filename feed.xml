@@ -1,4 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-07-26T13:46:02+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A note about building executables with Racket</title><link href="https://benknoble.github.io/blog/2025/06/19/racket-exe/" rel="alternate" type="text/html" title="A note about building executables with Racket" /><published>2025-06-19T00:00:00+00:00</published><updated>2025-06-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/19/racket-exe</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/19/racket-exe/"><![CDATA[<p>This information is collected from my and other Racketeers dive into the
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-07-26T15:22:52+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A note about making Racket languages without installing a package</title><link href="https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package/" rel="alternate" type="text/html" title="A note about making Racket languages without installing a package" /><published>2025-07-26T00:00:00+00:00</published><updated>2025-07-26T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package/"><![CDATA[<p>This trick comes from Matthew Flatt via the Racket Discord.</p>
+
+<p>Usually, when creating a Racket <code class="language-plaintext highlighter-rouge">#lang</code>, the reader needs to produce a module
+form like</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">module</span> <span class="nv">&lt;name&gt;</span> <span class="nv">&lt;initial-import-module&gt;</span>
+  <span class="nv">body</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>and the <code class="language-plaintext highlighter-rouge">&lt;initial-import-module&gt;</code> is best resolved as a reference to an
+installed collection. That is, instead of <code class="language-plaintext highlighter-rouge">"mylang/expander.rkt</code>,
+<code class="language-plaintext highlighter-rouge">mylang/expander</code> is preferred: the former is resolved relative to the PWD of
+the module being expanded!</p>
+
+<p>To make this work typically requires an installed package or linked files. This
+is not a big hurdle for most Racket hackers, but might be confusing for
+students.</p>
+
+<p>Instead, we can use a trick to transform the relative module path, which is
+otherwise natural, into something that works regardless of location. (You’ll
+still need non-relative paths to make documentation work everywhere, I think.)</p>
+
+<p>Here’s the code.</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">module</span> <span class="nv">reader</span> <span class="nv">syntax/module-reader</span>
+  <span class="nt">#:language</span> <span class="p">(</span><span class="nf">collapse-module-path-index</span>
+              <span class="p">(</span><span class="nb">module-path-index-join</span> <span class="s">"mylang/expander.rkt"</span>
+                                      <span class="p">(</span><span class="nb">variable-reference-&gt;module-path-index</span>
+                                       <span class="p">(</span><span class="nf">#%variable-reference</span><span class="p">))))</span>
+  <span class="p">(</span><span class="k">require</span> <span class="nv">syntax/modcollapse</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Matthew says:</p>
+
+<blockquote>
+  <p>I’m not sure this solves any problem for you, but you can make a module path
+within <code class="language-plaintext highlighter-rouge">syntax/module-reader</code> relative by using <code class="language-plaintext highlighter-rouge">#:language</code>, which has an
+expression afterward instead of a literal. (It’s something I’ve wanted often
+enough that <code class="language-plaintext highlighter-rouge">rhombus/reader</code> treats a relative path like this, instead of like
+<code class="language-plaintext highlighter-rouge">syntax/module-reader</code>).</p>
+</blockquote>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[This trick comes from Matthew Flatt via the Racket Discord.]]></summary></entry><entry><title type="html">A note about building executables with Racket</title><link href="https://benknoble.github.io/blog/2025/06/19/racket-exe/" rel="alternate" type="text/html" title="A note about building executables with Racket" /><published>2025-06-19T00:00:00+00:00</published><updated>2025-06-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/19/racket-exe</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/19/racket-exe/"><![CDATA[<p>This information is collected from my and other Racketeers dive into the
 documentation in one attempt to form a cohesive picture in response to the
 question “How do I use custom icons with GUI executables?”</p>
 
@@ -700,23 +740,4 @@ about how Gerrit’s review UI works in a guide for new
 users</a>. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[Scott Chacon of Pro Git fame is writing about Git again: this time, with (yet another) take on how the company he helped build might be doing it wrong.]]></summary></entry><entry><title type="html">To learn Vim, practice smooth, iterative deepening</title><link href="https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening/" rel="alternate" type="text/html" title="To learn Vim, practice smooth, iterative deepening" /><published>2025-03-15T00:00:00+00:00</published><updated>2025-03-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/03/15/smooth-iterative-deepening/"><![CDATA[<p>You already know to run <code class="language-plaintext highlighter-rouge">vimtutor</code> and read <code class="language-plaintext highlighter-rouge">:help</code>. Here’s why:</p>
-
-<ul>
-  <li><a href="https://smallcultfollowing.com/babysteps/blog/2025/03/10/rust-2025-intro/#smooth-iterative-deepening">Smooth, iterative
-deepening</a>
-means that you can get started with very basic maneuvers: Insert mode, arrow
-keys, <code class="language-plaintext highlighter-rouge">ZZ</code>. Give motions and Normal mode a try. As you find places to improve
-or change the editor, you can do so with advanced <code class="language-plaintext highlighter-rouge">:help</code> topics.</li>
-  <li>As <a href="https://x.com/i/broadcasts/1RDxlzBlnXNGL">Primeagen says</a> around the 1h30
-mark, Vim isn’t hard: it’s just different. We have preconceived notions of
-programming and editors that Vim doesn’t fit into. The first time you learned
-what a file is or how a compiler creates an executable was equally
-foreign—you just don’t remember that. I frankly agree that modern IDEs are
-more confusing and distracting with all the window cruft they bolt on.</li>
-  <li>Vim is ultimately a tinkerer’s tool (in addition to being a ubiquitous Vi):
-learn it or don’t, but don’t expect a completely out-of-the-box experience.
-Tinker!</li>
-</ul>
-
-<p>Oh, and don’t use a distro if you can avoid it. Prime agrees.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="vim" /><summary type="html"><![CDATA[You already know to run vimtutor and read :help. Here’s why:]]></summary></entry></feed>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[Scott Chacon of Pro Git fame is writing about Git again: this time, with (yet another) take on how the company he helped build might be doing it wrong.]]></summary></entry></feed>
