@@ -7,6 +7,8 @@ category: [ Blog ]
 Squash and merge is a bad default action, and it grates when it's the _only_
 permitted merge option.
 
+[I'm not the only one to experience this pain](https://lucasoshiro.github.io/posts-en/2024-04-08-please_dont_squash/).
+
 Squash and merge collapses even carefully crafted PRs and commits into a giant
 blob (pun intended). All the juicy information we know how to unlock with tools
 like `git log` and `git blame` is now gone, made useless by the squash. It even
