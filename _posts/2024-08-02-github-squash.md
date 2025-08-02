@@ -34,8 +34,9 @@ pay dividends for the entire lifetime of a project and become more valuable the
 longer the project lives. This might as well be an exponential curve of payoff.
 Nothing is free, but the expected value of any single commit dwarfs the cost of
 the minutes involved in crafting its message. Squash and merge as a default
-eliminates those benefits and any incentives to reap them. Outside of a few
-narrow use cases, I recommend against it.
+eliminates those benefits and any incentives to reap them.
+
+Outside of a few narrow use cases, I recommend against it.
 
 Discuss with your teams and projects: decide what's right for you. Don't default
 to squash and merge because it seems easy or commonplace. One of the trade-offs
