@@ -110,7 +110,7 @@ Thought you were never going to hear that again, didn't you?
 `cake` works with files and directories across several locations. The cache has
 to live somewhere, there's a project and build location, things get copied
 around, the whole works. Not unlike `git`, which inspired it's model (more on
-that later if I get permission to open-source the project--otherwise, tough
+that later if I get permission to open-source the project---otherwise, tough
 luck).
 
 So you can imagine, then, that I might be doing some setup and cleanup during my
@@ -128,22 +128,22 @@ filesystem easily, so I am forced to use disk operations extensively in testing.
 Which makes me think about efficiency in my code to avoid the disk. Which is
 good.
 
-... I'm getting a little off track. Setup. Right. In python's `unittest`, you
+…I'm getting a little off track. Setup. Right. In python's `unittest`, you
 can define `setUp` and `tearDown` methods on a `TestCase`. Setup is run before
 each test, tear down afterwards.
 
 Mostly.
 
 See, if `setUp` fails for any reason, `tearDown` won't run. You can yell at me
-about poor tests later, but my `setUp` method needed to invoked methods on the
+about poor tests later, but my `setUp` method needed to invoke methods on the
 unit under test in order to pre-populate the cache. I didn't have to do it that
 way, but I did, and I'm not arguing about it now since it works.
 
 Anyways, that fails sometimes. So I ended up with temporary directories getting
 created and not removed; the deletion code was in the `tearDown` method.
 
-A google search and help doc later, I knew the answer. Turns out, 'cleanups' run
-no matter what. Perfect.
+A Google search and help document later, I knew the answer. Turns out,
+'cleanups' run no matter what. Perfect.
 
 I present the trimmed down solution.
 
