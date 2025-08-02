@@ -186,7 +186,7 @@ just as easy.</p>
 <p><code class="language-plaintext highlighter-rouge">cake</code> works with files and directories across several locations. The cache has
 to live somewhere, there’s a project and build location, things get copied
 around, the whole works. Not unlike <code class="language-plaintext highlighter-rouge">git</code>, which inspired it’s model (more on
-that later if I get permission to open-source the project–otherwise, tough
+that later if I get permission to open-source the project—otherwise, tough
 luck).</p>
 
 <p>So you can imagine, then, that I might be doing some setup and cleanup during my
@@ -204,22 +204,22 @@ filesystem easily, so I am forced to use disk operations extensively in testing.
 Which makes me think about efficiency in my code to avoid the disk. Which is
 good.</p>
 
-<p>… I’m getting a little off track. Setup. Right. In python’s <code class="language-plaintext highlighter-rouge">unittest</code>, you
+<p>…I’m getting a little off track. Setup. Right. In python’s <code class="language-plaintext highlighter-rouge">unittest</code>, you
 can define <code class="language-plaintext highlighter-rouge">setUp</code> and <code class="language-plaintext highlighter-rouge">tearDown</code> methods on a <code class="language-plaintext highlighter-rouge">TestCase</code>. Setup is run before
 each test, tear down afterwards.</p>
 
 <p>Mostly.</p>
 
 <p>See, if <code class="language-plaintext highlighter-rouge">setUp</code> fails for any reason, <code class="language-plaintext highlighter-rouge">tearDown</code> won’t run. You can yell at me
-about poor tests later, but my <code class="language-plaintext highlighter-rouge">setUp</code> method needed to invoked methods on the
+about poor tests later, but my <code class="language-plaintext highlighter-rouge">setUp</code> method needed to invoke methods on the
 unit under test in order to pre-populate the cache. I didn’t have to do it that
 way, but I did, and I’m not arguing about it now since it works.</p>
 
 <p>Anyways, that fails sometimes. So I ended up with temporary directories getting
 created and not removed; the deletion code was in the <code class="language-plaintext highlighter-rouge">tearDown</code> method.</p>
 
-<p>A google search and help doc later, I knew the answer. Turns out, ‘cleanups’ run
-no matter what. Perfect.</p>
+<p>A Google search and help document later, I knew the answer. Turns out,
+‘cleanups’ run no matter what. Perfect.</p>
 
 <p>I present the trimmed down solution.</p>
 
