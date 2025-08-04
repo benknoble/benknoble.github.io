@@ -43,6 +43,8 @@ Here is my short list of steps for digital control.
   shoved at you, collect a list of links to follow for updates when you want
   them. (Sound too good to be true, like the days when Facebook worked? [RSS is
   almost 26 years old as of this article](https://en.wikipedia.org/wiki/RSS).)
+    - Molly White published [a guide to organizing RSS
+      feeds](https://www.citationneeded.news/curate-with-rss/).
 - Consider alternate browsers and search engines. Recent trends favor engines
   like [Ecosia](https://www.ecosia.org) and [Kagi](https://kagi.com), as well as
   browsers from [Mozilla](https://www.mozilla.org/firefox/) (though Firefox has
