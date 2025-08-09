@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Week 7—Code and Communication</title>
+  <title>Junk Drawer : Recent LLM-hype critiques</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -71,85 +71,21 @@
   </ul>
 </nav>
 
-      <h1>Week 7—Code and Communication</h1>
+      <h1>Recent LLM-hype critiques</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 05 Aug 2018 in Blog</p>
+ on 09 Aug 2025 in Blog</p>
 <div id="post">
-  <p>One week after my forays of unit testing, and I’m almost ready to ship.</p>
+  <p>I’d like to signal-boost a couple of well-written critiques.</p>
 
-<p><em>I got caught up in a busy week, full of surprises and late nights. So I’m
-snowballing it all together.</em></p>
-
-<h2 id="this-week-i-learned">This Week I Learned</h2>
-
-<ol>
-  <li>How it feels when a plan comes together</li>
-  <li>How to build programs with <code class="language-plaintext highlighter-rouge">git</code>-like sub-commands using <code class="language-plaintext highlighter-rouge">argparse</code></li>
-  <li>Communication is essential</li>
-</ol>
-
-<p>I also spent time in the lab racking, stacking, lacing, and labeling servers,
-but it’s harder to write about because the process depends so heavily on the
-specific configuration desired. Suffice it to say Wednesday was a good,
-physical day, a nice change of pace from my cubicle.</p>
-
-<p>At any rate, on with this week’s lessons.</p>
-
-<h3 id="wrapping-it-all-up">Wrapping It All Up</h3>
-
-<p>After weeks of development, I finally have a full library of code that passes
-all my tests, implements all the desired “version one” features, and is nearly
-ready to integrate. I am still working on the command-line interface, but the
-project is coming to a close.</p>
-
-<p>The students in Raleigh have been offered time to present, demo, or whiteboard
-anything they want from their summer. It could be a challenge, a project, or
-something they learned. I will be presenting and demoing my caching project,
-provided I finish it. And I’m very excited.</p>
-
-<h3 id="cli">CLI</h3>
-
-<p>Python, with a mature language ecosystem, has several libraries for building
-command line programs. Click, docopt, and more all present themselves as easy to
-use. But they aren’t part of the standard library, and so they introduce
-dependency.</p>
-
-<p>Unfortunately, I am constrained—I can’t have any dependencies (for the time
-being). So I need a standard library solution—<code class="language-plaintext highlighter-rouge">argparse</code>.</p>
-
-<p>Argparse is remarkably simple—I programmatically build up parsers by defining
-what arguments they take and what to do with them. It takes care of building the
-help messages, parsing the command line, and all that jazz. The most difficult
-part was to decide how to implement subcommands.</p>
-
-<p>Fortunately, <code class="language-plaintext highlighter-rouge">argparse</code> makes defining subparsers easy. They even recommend an
-approach for associating a subparser with a particular method. With that
-capability, I’m able to define the flags, positional parameters, and actions for
-an entire CLI very quickly.</p>
-
-<p>The idea is to use <code class="language-plaintext highlighter-rouge">setDefaults</code> on each subparser with a ‘parameter’ like
-<code class="language-plaintext highlighter-rouge">func</code>. Then, when you parse the <code class="language-plaintext highlighter-rouge">args</code> out, you can call <code class="language-plaintext highlighter-rouge">args.func(args)</code>,
-passing an object into whatever function is appropriate based on the subcommand
-at the command line.</p>
-
-<h3 id="communication">Communication</h3>
-
-<p>It would seem, no matter how many times I repeat it, even I managed to forget
-how important communication is.</p>
-
-<p>A failure on my part to continuously update my colleague on the progress of this
-caching project, in addition to some other changes in the way we tracked work,
-lead to some concerns about how much time I was spending on which projects.</p>
-
-<p>Happily, the concern was easily alleviated by the rapid progress I was making
-(and my planned Tuesday finish). But it was a sharp reminder of how easily
-things can slip away if I’m not conscientious of communicating with my
-coworkers.</p>
+<ul>
+  <li>Luna Winters’s <a href="https://blog.foxtrotluna.social/theyre-putting-blue-food-coloring-in-everything/">They’re putting blue food coloring in everything</a></li>
+  <li>Colin Cornaby’s <a href="https://www.colincornaby.me/2025/08/in-the-future-all-food-will-be-cooked-in-a-microwave-and-if-you-cant-deal-with-that-then-you-need-to-get-out-of-the-kitchen/">In the Future All Food Will Be Cooked in a Microwave, and if You Can’t Deal With That Then You Need to Get Out of the Kitchen</a></li>
+</ul>
 
 </div>
 <hr/>
@@ -157,20 +93,8 @@ coworkers.</p>
 <ul class="tags">
   
     <li>
-      <a href="https://benknoble.github.io/tags#til" class="tag">
-        til
-      </a>
-    </li>
-  
-    <li>
-      <a href="https://benknoble.github.io/tags#infra" class="tag">
-        infra
-      </a>
-    </li>
-  
-    <li>
-      <a href="https://benknoble.github.io/tags#intern" class="tag">
-        intern
+      <a href="https://benknoble.github.io/tags#llm" class="tag">
+        llm
       </a>
     </li>
   
@@ -190,8 +114,8 @@ coworkers.</p>
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2018/08/05/til-week-7-code-and-communication/";
-    this.page.identifier = "/blog/2018/08/05/til-week-7--code-and-communication";
+    this.page.url = "https://benknoble.github.io/blog/2025/08/09/signal-boost/";
+    this.page.identifier = "/blog/2025/08/09/signal-boost";
   };
 
   function load_comments(div) {
@@ -210,21 +134,17 @@ coworkers.</p>
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2018/07/28/til-adventures-with-python-unittest/"
-      title="Adventures with Python unittest">
+    <a href="https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package/"
+      title="A note about making Racket languages without installing a package">
       Previous</a>
   </span>
   
   
-  <span id="next">
-    <a href="https://benknoble.github.io/blog/2018/12/08/octocat/"
-       title="Build-a-Octocat">
-      Next</a>
-  </span>
+  <span id="no-next">Next</span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#week-7-code-and-communication">
+  <a href="/categories/#recent-llm-hype-critiques">
     Back to posts</a>
 </div>
 

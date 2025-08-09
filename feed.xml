@@ -1,4 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-08-04T16:30:03+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A note about making Racket languages without installing a package</title><link href="https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package/" rel="alternate" type="text/html" title="A note about making Racket languages without installing a package" /><published>2025-07-26T00:00:00+00:00</published><updated>2025-07-26T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package/"><![CDATA[<p>This trick comes from Matthew Flatt via the Racket Discord.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-08-09T19:22:49+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Recent LLM-hype critiques</title><link href="https://benknoble.github.io/blog/2025/08/09/signal-boost/" rel="alternate" type="text/html" title="Recent LLM-hype critiques" /><published>2025-08-09T00:00:00+00:00</published><updated>2025-08-09T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/08/09/signal-boost</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/08/09/signal-boost/"><![CDATA[<p>I’d like to signal-boost a couple of well-written critiques.</p>
+
+<ul>
+  <li>Luna Winters’s <a href="https://blog.foxtrotluna.social/theyre-putting-blue-food-coloring-in-everything/">They’re putting blue food coloring in everything</a></li>
+  <li>Colin Cornaby’s <a href="https://www.colincornaby.me/2025/08/in-the-future-all-food-will-be-cooked-in-a-microwave-and-if-you-cant-deal-with-that-then-you-need-to-get-out-of-the-kitchen/">In the Future All Food Will Be Cooked in a Microwave, and if You Can’t Deal With That Then You Need to Get Out of the Kitchen</a></li>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[I’d like to signal-boost a couple of well-written critiques.]]></summary></entry><entry><title type="html">A note about making Racket languages without installing a package</title><link href="https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package/" rel="alternate" type="text/html" title="A note about making Racket languages without installing a package" /><published>2025-07-26T00:00:00+00:00</published><updated>2025-07-26T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package/"><![CDATA[<p>This trick comes from Matthew Flatt via the Racket Discord.</p>
 
 <p>Usually, when creating a Racket <code class="language-plaintext highlighter-rouge">#lang</code>, the reader needs to produce a module
 form like</p>
@@ -680,64 +685,4 @@ not, or in more restrcted environments, I sometimes use <code class="language-pl
 #'name)</code> to help track down <code class="language-plaintext highlighter-rouge">name</code>, since the binding can identify the source
 module. If I didn’t know where that module resides, I might try
 <code class="language-plaintext highlighter-rouge">(module-path-index-resolve (car (identifier-binding #'name)))</code>.</p>
-</blockquote>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[Straight from the horse’s mouth.]]></summary></entry><entry><title type="html">I am not the first to notice GitHub’s range-diff deficiency; I will not be the last</title><link href="https://benknoble.github.io/blog/2025/03/17/more-range-diff/" rel="alternate" type="text/html" title="I am not the first to notice GitHub’s range-diff deficiency; I will not be the last" /><published>2025-03-17T00:00:00+00:00</published><updated>2025-03-17T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/03/17/more-range-diff</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/03/17/more-range-diff/"><![CDATA[<p>Scott Chacon of Pro Git fame is writing about Git again: this time, with (yet
-another) take on how the company he helped build might be doing it wrong.</p>
-
-<p>In <a href="https://blog.gitbutler.com/interdiff-review-with-git-range-diff/">How to do patch-based review with git
-range-diff</a>,
-Chacon covers the ground on how to perform review in terms of versions of a
-branch, stuff Git developers have been doing for years. See <a href="/blog/2024/10/04/copy-range-diff/#primer">my own primer</a> for details on the
-workflow, especially with GitHub involvement. What’s particularly great about
-Chacon’s post for GitButler is its link to <a href="https://gist.github.com/thoughtpolice/9c45287550a56b2047c6311fbadebed2">Why some of us like “interdiff” code
-review</a>.</p>
-
-<p>This blog post-né-Gist captures many of my own recent thoughts about GitHub:</p>
-
-<ul>
-  <li>GitHub’s UI actively encourages suboptimal development technique<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. In
-practice, that means “diff soup” and “lack of solid tools for reviewers
-outside of the comment interface.”</li>
-  <li>In particular, implicit relationships and information loss abound, which sucks
-for reviewer and future code spelunker.</li>
-  <li>GitHub encourages <em>branch- and merge- heavy thinking</em><sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>. These are not
-necessarily even the easy parts of Git! They can be for a solo developer just
-getting started, but in true distributed settings come with their own
-challenges.</li>
-  <li>Interdiff reviewing requires more knowledge of Git than is typical or average
-(based on my own unscientific view of lots of colleagues), and thus would
-benefit more from UI help<sup id="fnref:3"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">3</a></sup> than typical branch and merge operations.</li>
-</ul>
-
-<p>It is nice to have language to talk about this. I can just see myself writing
-“Please stop feeding me <a href="https://gist.github.com/thoughtpolice/9c45287550a56b2047c6311fbadebed2?ref=blog.gitbutler.com">diff
-soup</a>:
-I don’t need a feast, but I would like some seasoning.” (Accompanied, of course,
-by details on how to improve!)</p>
-
-<p>PS Chacon’s article mentions that you’ll often need to note an original hash or
-find one in the reflog to compare the old branch version to the new branch
-version. For <code class="language-plaintext highlighter-rouge">git range-diff</code> superpowers, try <a href="/blog/2024/11/15/til-range-diff/#primer">using <code class="language-plaintext highlighter-rouge">git range-diff @{u}
-@{push} @</code> to see what’s changed since you pushed</a>.</p>
-
-<h2 id="notes">Notes</h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p>See <a href="/blog/2024/10/04/copy-range-diff/">how GitHub can’t show cross-version changes</a>, <a href="https://mitchellh.com/writing/github-changesets">Reorient GitHub Pull Requests
-Around Changesets</a> and
-commentary in <a href="/blog/2025/02/01/git-roundup/">A grab-bag of Git links</a>, a rant about <a href="/blog/2024/08/02/github-squash/">PR merge messages</a>, and <a href="/blog/2025/02/10/stackoverflow-github-corporate-interest/#on-presentation">notes on GitHub’s diff UI
-presentation</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:2">
-      <p>Some argue that <a href="https://medium.com/@danielesassoli/how-github-taught-the-world-code-reviews-the-wrong-way-f840a072f5be">GitHub taught us how to do review
-wrong</a>.
-As I reflect on how I use Git now, I find that I agree. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:3">
-      <p>I don’t know if Gerrit has an interdiff UI, but you can <a href="https://gitenterprise.me/2025/03/10/gerrit-code-review-a-how-to-guide-for-new-users/">find out more
-about how Gerrit’s review UI works in a guide for new
-users</a>. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[Scott Chacon of Pro Git fame is writing about Git again: this time, with (yet another) take on how the company he helped build might be doing it wrong.]]></summary></entry></feed>
+</blockquote>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[Straight from the horse’s mouth.]]></summary></entry></feed>
