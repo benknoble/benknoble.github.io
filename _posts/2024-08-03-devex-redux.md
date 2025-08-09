@@ -13,7 +13,7 @@ Our first article[^1] is an opinion piece on the nature of resistance to change.
 Denning and Lyons argue that human communities prefer equilibrium to disruption
 and present a framework for using that resistance to build a better case for
 your new idea, disruption, or innovation. In particular, they note that only
-changes in a communities otherwise-satisfied concerns will open the community to
+changes in a community's otherwise-satisfied concerns will open the community to
 a new equilibrium:
 
 > An innovation leader proposing a change of practice needs to understand and
@@ -35,7 +35,7 @@ resistance:
 
 What does this tell us about developer experience? Developer tools cannot be
 imposed by fiat or mandate: you risk a resistance movement that outlives any
-particular persons ability to declare "the way." Worse, you don't have the
+particular person's ability to declare "the way." Worse, you don't have the
 support of the community. There may be a period of perceived success, but it
 usually eventually crumbles.
 

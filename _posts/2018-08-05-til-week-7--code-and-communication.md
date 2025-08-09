@@ -41,10 +41,10 @@ command line programs. Click, docopt, and more all present themselves as easy to
 use. But they aren't part of the standard library, and so they introduce
 dependency.
 
-Unfortunately, I am constrained--I can't have any dependencies (for the time
-being). So I need a standard library solution--`argparse`.
+Unfortunately, I am constrained---I can't have any dependencies (for the time
+being). So I need a standard library solution---`argparse`.
 
-Argparse is remarkably simple--I programmatically build up parsers by defining
+Argparse is remarkably simple---I programmatically build up parsers by defining
 what arguments they take and what to do with them. It takes care of building the
 help messages, parsing the command line, and all that jazz. The most difficult
 part was to decide how to implement subcommands.
