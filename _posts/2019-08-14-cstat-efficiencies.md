@@ -4,7 +4,7 @@ tags: [dotfiles, git, shell, performance, refactor]
 category: Blog
 ---
 
-I convert a unusably slow script to a surprisingly fast tool.
+I convert an unusably slow script to a surprisingly fast tool.
 
 > Background: any program (script or compiled binary) named `git-*` in your `PATH`
 > can be run like a git sub-command. See `man git-sh-setup` for some utility
