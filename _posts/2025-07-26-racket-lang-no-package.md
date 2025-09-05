@@ -15,9 +15,9 @@ needs to produce a module form like
 ```
 
 and the `<initial-import-module>` is best resolved as a reference to an
-installed collection. That is, instead of `"mylang/expander.rkt`,
-`mylang/expander` is preferred: the former is resolved relative to the PWD of
-the module being expanded!
+installed collection. That is, instead of `"mylang/expander.rkt"`, we should use
+`mylang/expander`: the former is resolved relative to the PWD of the module
+being expanded!
 
 To make this work typically requires an installed package or linked files. This
 is not a big hurdle for most Racket hackers, but might be confusing for
