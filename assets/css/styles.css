@@ -529,10 +529,12 @@ kbd {
   border-width: 2px;
   border-radius: 5px;
   padding: 0.1em;
-  margin-bottom: 0.1em;
 }
 .load-comments:hover, .load-comments:active {
   background-color: #c6eafa;
+}
+.load-comments {
+  margin-bottom: 0.1em;
 }
 
 .post {
