@@ -90,9 +90,9 @@ needs to produce a module form like</p>
 </code></pre></div></div>
 
 <p>and the <code class="language-plaintext highlighter-rouge">&lt;initial-import-module&gt;</code> is best resolved as a reference to an
-installed collection. That is, instead of <code class="language-plaintext highlighter-rouge">"mylang/expander.rkt</code>,
-<code class="language-plaintext highlighter-rouge">mylang/expander</code> is preferred: the former is resolved relative to the PWD of
-the module being expanded!</p>
+installed collection. That is, instead of <code class="language-plaintext highlighter-rouge">"mylang/expander.rkt"</code>, we should use
+<code class="language-plaintext highlighter-rouge">mylang/expander</code>: the former is resolved relative to the PWD of the module
+being expanded!</p>
 
 <p>To make this work typically requires an installed package or linked files. This
 is not a big hurdle for most Racket hackers, but might be confusing for
