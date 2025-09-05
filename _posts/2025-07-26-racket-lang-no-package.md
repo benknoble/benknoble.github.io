@@ -1,13 +1,13 @@
 ---
-title: A note about making Racket languages without installing a package
+title: A note about making Racket languages without installing them as a package
 tags: [ racket ]
 category: [ Blog ]
 ---
 
 This trick comes from Matthew Flatt via the Racket Discord.
 
-Usually, when creating a Racket `#lang`, the reader needs to produce a module
-form like
+Usually, when creating a Racket `#lang` and customizing the reader, the reader
+needs to produce a module form like
 
 ```racket
 (module <name> <initial-import-module>
@@ -23,9 +23,17 @@ To make this work typically requires an installed package or linked files. This
 is not a big hurdle for most Racket hackers, but might be confusing for
 students.
 
-Instead, we can use a trick to transform the relative module path, which is
-otherwise natural, into something that works regardless of location. (You'll
-still need non-relative paths to make documentation work everywhere, I think.)
+When using `#lang s-exp`, of course, you can provide a relative path to an
+expander module. This works if you don't need a custom reader. If you do, the
+language syntax is restricted so that `#lang "mylang.rkt"` will never work.
+
+We _can_ use a trick so that our reader can output a variant on the original
+relative module path, though. That means our custom reader can yield an expander
+module that isn't in an installed package, like the title suggests.
+
+We need to create a module path that works regardless of location, but derive it
+from the relative path. (You'll still need non-relative paths to make
+documentation work everywhere, I think.)
 
 Here's the code.
 
