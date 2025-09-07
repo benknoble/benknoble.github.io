@@ -6,6 +6,10 @@ permalink: /git/
 Miscellaneous Git-related links. My posts are under the [Git tag]({% link
 pages/tags.html %}#git), and many of them link out to others.
 
+## Output formats, especially of underappreciated commands
+
+- [How to read `git show-branch`](https://wincent.dev/wiki/Understanding_the_output_of_%22git_show-branch%22)
+
 ## GitHub's flaws
 
 - [GitHub, Gerrit, & Commits](https://tylercipriani.com/blog/2019/03/11/of-git-commits-github-and-gerrit/)
