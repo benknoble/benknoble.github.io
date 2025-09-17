@@ -1,4 +1,127 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-09-15T12:49:03+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">More on the AI bubble</title><link href="https://benknoble.github.io/blog/2025/09/06/ai-bubble/" rel="alternate" type="text/html" title="More on the AI bubble" /><published>2025-09-06T00:00:00+00:00</published><updated>2025-09-06T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/09/06/ai-bubble</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/09/06/ai-bubble/"><![CDATA[<p>Say the hard things.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-09-17T22:59:48+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">A kludgy new way to git-blame</title><link href="https://benknoble.github.io/blog/2025/09/17/blame/" rel="alternate" type="text/html" title="A kludgy new way to git-blame" /><published>2025-09-17T00:00:00+00:00</published><updated>2025-09-17T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/09/17/blame</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/09/17/blame/"><![CDATA[<p>Lately I find myself feeding <code class="language-plaintext highlighter-rouge">git grep</code> results to <code class="language-plaintext highlighter-rouge">git blame</code> to help identify
+points of contact for a piece of code. I’ve scripted a few hacks together to
+make life easier.</p>
+
+<p><strong>Call for help:</strong> If you have ideas on how to better parse <code class="language-plaintext highlighter-rouge">git grep</code> output or
+feed it to <code class="language-plaintext highlighter-rouge">git blame</code>, please let me know <a href="https://github.com/benknoble/Dotfiles/">on
+GitHub</a> or in the comments.</p>
+
+<p>When I’m interested in who to talk to about a small chunk of code, I usually
+navigate to it in Vim and run <a href="https://github.com/tpope/vim-fugitive/blob/61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4/doc/fugitive.txt#L57"><code class="language-plaintext highlighter-rouge">:Git
+blame</code></a>.
+I might also throw the file or containing directory at <code class="language-plaintext highlighter-rouge">git shortlog</code> to get a
+sense of who’s active in the area.</p>
+
+<p>My current <code class="language-plaintext highlighter-rouge">$DAYJOB</code> includes working with a large monorepo, and I frequently
+have questions of the form “who should I ask about feature X that cuts across
+many different code modules?”—in such a situation, I’ve recently been piping
+<code class="language-plaintext highlighter-rouge">git grep</code> into <code class="language-plaintext highlighter-rouge">git blame</code>. (Feeding <code class="language-plaintext highlighter-rouge">git grep --files-with-matches</code> into <code class="language-plaintext highlighter-rouge">git
+shortlog</code> is not awful, but typically gives too many contacts.)</p>
+
+<p>The trouble is, each time I’ve done this I’ve had to recraft the pipeline. Often
+it’s some variant<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> of</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git <span class="nb">grep</span> … | fields <span class="nt">-f</span>: 1 2 | xargs <span class="nt">-L1</span> sh <span class="nt">-c</span> <span class="s1">'git blame -L$1,$1 $0'</span>
+</code></pre></div></div>
+
+<p>This doesn’t quite work correctly if I grep a specific revision. When I’m on a
+topic branch and a teammate has a question, I might do</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git f <span class="c"># short for fetch, and I have fetch.all=true configured</span>
+git <span class="nb">grep</span> … origin | fields <span class="nt">-f</span>: <span class="o">{</span>1..3<span class="o">}</span> | xargs <span class="nt">-L1</span> sh <span class="nt">-c</span> <span class="s1">'git blame -L $2,$2 $1 $0'</span>
+</code></pre></div></div>
+
+<p>Argh! And, although I haven’t lifted this limitation in my script, if I throw
+<code class="language-plaintext highlighter-rouge">-C</code>-style context results in there, this won’t work. If we get binary matches,
+this won’t work. Etc.</p>
+
+<p>I got tired of trying to get this right interactively and figured I’d capture
+the whole thing as a script. So let’s start with that.</p>
+
+<h2 id="git-greb-blame-matching-lines"><code class="language-plaintext highlighter-rouge">git-greb</code>: blame matching lines</h2>
+
+<p>If <code class="language-plaintext highlighter-rouge">grep</code> comes from <code class="language-plaintext highlighter-rouge">:g/re/p</code> in <code class="language-plaintext highlighter-rouge">ed(1)</code>, then <code class="language-plaintext highlighter-rouge">greb</code> is the natural extension
+to a “b for blame” verb.</p>
+
+<p>The <a href="https://github.com/benknoble/Dotfiles/commit/68002c7e705a1bb383160d09a89b57a858d9268d">initial version of the
+script</a>
+works for the main use cases above:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git greb …
+git greb -r origin -- …
+</code></pre></div></div>
+
+<p>Yahoo! And if I need to build more “blame input from X” tools, I now have <code class="language-plaintext highlighter-rouge">git
+blame-stdin</code> as plumbing I can re-use. That saves me from reconstructing
+different <code class="language-plaintext highlighter-rouge">fields … | xargs …</code> pipelines.</p>
+
+<p>Further, <code class="language-plaintext highlighter-rouge">git greb</code> supports most of the grep flags I care about for this sort
+of search.</p>
+
+<p>However, let’s talk about the ugly…</p>
+
+<h2 id="git-grep-is-not-designed-for-machine-consumption"><code class="language-plaintext highlighter-rouge">git grep</code> is not designed for machine consumption</h2>
+
+<p>In fact, <code class="language-plaintext highlighter-rouge">git grep</code> seems to go out of it’s way to avoid being useful as input
+to a script! Let’s see if I can explain how: config and command line options can
+dramatically affect output formats, which is tough to handle if you want to
+support most <code class="language-plaintext highlighter-rouge">git grep</code> invocations. I originally planned for <code class="language-plaintext highlighter-rouge">git greb</code> to be
+as easy as running <code class="language-plaintext highlighter-rouge">git grep …</code>, then <code class="language-plaintext highlighter-rouge">^p^b</code> in my shell would turn that into
+<code class="language-plaintext highlighter-rouge">git greb …</code>. Alas, not so. Some examples of what goes wrong:</p>
+
+<ul>
+  <li>We want to keep line numbers for effective blaming, so anything that changes
+that format is out. That mean <code class="language-plaintext highlighter-rouge">-h</code>, <code class="language-plaintext highlighter-rouge">-l</code>, <code class="language-plaintext highlighter-rouge">-c</code>, etc.</li>
+  <li>We don’t want to try to open files in the pager, but that was never going to
+be supported. Still, we have to reject that option.</li>
+  <li>Various options throw other noise into the output (<code class="language-plaintext highlighter-rouge">--break</code>, <code class="language-plaintext highlighter-rouge">--heading</code>).</li>
+  <li>None of the context options (<code class="language-plaintext highlighter-rouge">-A</code>, <code class="language-plaintext highlighter-rouge">-B</code>, <code class="language-plaintext highlighter-rouge">-C</code>, <code class="language-plaintext highlighter-rouge">-p</code>, <code class="language-plaintext highlighter-rouge">-W</code>) use the same
+<code class="language-plaintext highlighter-rouge">file:line</code> formatting, so we can’t use them at all (or we have to try to
+parse all possible formats, of which there are several, without screwing
+things up when a filename contains a hyphen or equals sign; we’re already
+screwed if a filename contains a colon).</li>
+  <li>And finally: <code class="language-plaintext highlighter-rouge">-z</code> for nul-delimited output <em>still isn’t sufficient</em>: we do get
+<code class="language-plaintext highlighter-rouge">file&lt;nul&gt;line&lt;nul&gt;</code>, the revision (if present) is prepended with <code class="language-plaintext highlighter-rouge">rev:</code>. But
+I can’t guarantee that doesn’t contain a colon, since <code class="language-plaintext highlighter-rouge">:/post:</code> is a valid
+revision (at least on this website’s code) and is displayed as typed! Further,
+parsing nul-delimited lines in a shell script is fraught.</li>
+</ul>
+
+<p>I was originally planning to support non-trivial filenames, but it quickly
+became too much work. So for now, I’m supporting filenames that don’t have to be
+escaped without <code class="language-plaintext highlighter-rouge">-z</code>, and that don’t contain a colon. I’m also explicitly
+rejecting any unsupported <code class="language-plaintext highlighter-rouge">git grep</code> option to make things easier.</p>
+
+<h2 id="git-grebs-interface-is-ugly"><code class="language-plaintext highlighter-rouge">git greb</code>’s interface is ugly</h2>
+
+<p>Yeah. Because of all the munging above, and because I need to feed a revision to
+<code class="language-plaintext highlighter-rouge">git blame</code> when one is present but not have ambiguous parsing that sometimes
+gets it wrong, I have <code class="language-plaintext highlighter-rouge">git-greb</code> take a <code class="language-plaintext highlighter-rouge">--revision &lt;rev&gt;</code> flag. But if it has
+flags, it has to delimit between its flags and <code class="language-plaintext highlighter-rouge">git-grep</code>’s flags. That’s the
+first <code class="language-plaintext highlighter-rouge">--</code> in its synopsis. (If you don’t use any options, you don’t need it.)</p>
+
+<p><em>Then</em>, I need to reinsert the revision at the end of the <code class="language-plaintext highlighter-rouge">git grep</code> command
+(but before any pathspecs), so if you provide a pathspec and a revision you
+<em>must</em> give the second <code class="language-plaintext highlighter-rouge">--</code> to separate the pathspec from the previous
+arguments. Ugh. (The code isn’t particularly pretty, either.)</p>
+
+<p>At least I had the foresight to include <code class="language-plaintext highlighter-rouge">-v</code> as a debugging aid in both scripts:
+that’s my way<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> of having scripts output the Git commands they run, which is
+also useful when I share the outputs with other folks so they can see what I
+did.</p>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="/blog/2019/09/11/fields/">My fields script is described on this blog</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>My <a href="/blog/2024/11/15/useful-utilities/#git"><code class="language-plaintext highlighter-rouge">git-div</code> script</a> was my first to support this. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[Lately I find myself feeding git grep results to git blame to help identify points of contact for a piece of code. I’ve scripted a few hacks together to make life easier.]]></summary></entry><entry><title type="html">More on the AI bubble</title><link href="https://benknoble.github.io/blog/2025/09/06/ai-bubble/" rel="alternate" type="text/html" title="More on the AI bubble" /><published>2025-09-06T00:00:00+00:00</published><updated>2025-09-06T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/09/06/ai-bubble</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/09/06/ai-bubble/"><![CDATA[<p>Say the hard things.</p>
 
 <p>I’ve <a href="/blog/2025/04/18/skepticism/">previously written some of my own criticism</a> and <a href="/blog/2025/08/09/signal-boost/">signal-boosted others</a>, so let’s tie a few more threads together.</p>
 
@@ -600,145 +723,4 @@ a talk I gave last year
 democratizing technology’s “elite” label. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[A brief essay to explore the business of producing and selling LLMs.]]></summary></entry><entry><title type="html">Thoughts from recent conversations on LLMs</title><link href="https://benknoble.github.io/blog/2025/04/08/musings/" rel="alternate" type="text/html" title="Thoughts from recent conversations on LLMs" /><published>2025-04-08T00:00:00+00:00</published><updated>2025-04-08T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/04/08/musings</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/04/08/musings/"><![CDATA[<p>Some unpolished thoughts from a recent conversation with other software
-engineers.</p>
-
-<p>Responding to claims in <a href="https://www.newsweek.com/ai-impact-interview-yann-lecun-llm-limitations-analysis-2054255">an interview with Meta’s Yann LeCun about LLMs being on
-the
-outs</a>,
-we discussed current trends:</p>
-
-<blockquote>
-  <p><strong>anon1</strong>: is this what a bubble feels like?</p>
-
-  <p><strong>me</strong>:</p>
-  <ul>
-    <li>I can’t help but feel that many who have LLM-based technology foisted upon
-them are not yet well-suited to judge their output</li>
-    <li>I also can’t help but see the economics of AI hype as similar to crypto
-grift or 2008 bubble in the way that all the money is interconnected and
-could go boom with just a little tip</li>
-  </ul>
-</blockquote>
-
-<p>We wondered about “language” and “low dimensionality”:</p>
-
-<blockquote>
-  <p><strong>anon2</strong>:</p>
-  <blockquote>
-    <p>It has come as a surprise to nearly everyone—even experts in
-linguistics—that human language fits this requirement for such a discrete,
-low-dimensional space</p>
-  </blockquote>
-
-  <p>This seems badly wrong. word2vec represents individual words as vectors in a
-high-dimensional space (seems like dozens if not hundreds is common), so it
-makes sense that anything that can produce reasonable text must be very
-high-dimensional.</p>
-</blockquote>
-
-<p>And we pondered important questions about values and ethics in technology:</p>
-
-<blockquote>
-  <p><strong>anon1</strong>: I’ve been slowly reading a collection of essays by anthropologist
-Diana Forsythe called “Studying those who study us” about her anthropological
-research of the research labs designing “expert systems” AI back in the
-80s-90s which feels relevant to that claim. The researchers believed that if
-you just captured the rules of an expert-driven activity, like medical
-diagnosis, you could reproduce it with a logical system. Her research
-critiques this strongly by pointing out all of the unexamined cultural
-context, assumptions, background knowledge, and expectations which are just as
-much a part of the work of an expert as the textbook details the expert
-themselves believed they used to make their decisions. One of her go-to
-examples was a diagnosis system suggesting that a biological male had
-amniocentesis, a pregnancy complication, because biological sex assumptions
-were considered obvious enough (in the 80s at least) as to not mention.</p>
-
-  <p>The larger point is, we may not actually know what information is required to
-take correct action, and the act of attempting to compile that information,
-even the successful reproduction of action by a non-expert using that compiled
-information, does not prove we’ve actually captured the whole picture. Because
-the author and the reader both share a massive collection of conscious and
-unconscious context which it may be difficult or impossible to efficiently and
-accurately identify with the task itself. LeCun’s assertion seems to agree
-with her research. Although the mechanics of AI have changed dramatically, the
-nature of its failures seems to remain in the same category.</p>
-
-  <p>And kudos to the article, and LeCun, for being careful in the delineation of
-the use of the word ‘reason’ – honestly it’s much better reporting than I was
-expecting. It mainly frustrates me how many writers just casually
-anthropomorphize LLMs without any basis, seemingly unaware that the question
-of whether it is reasoning (and what reasoning is) is the entire philisophical
-debate here.</p>
-
-  <p>Finally reading the whole article, I think he’s correct about LLMs and the
-current situation, but I feel there are some blind spots in the predictions
-(like I have any standing to say so, but anyways). I particularly find it
-interesting how close the writer comes to identifying the importance of
-physical embodiment to the mind, intelligence, and personhood… then seems to
-miss the idea. For a moment I was sure the conclusion would be that our AIs
-will need sensory bodies before they can function as “System 2” minds (which I
-personally find at least plausible).</p>
-
-  <p>Additionally I find the end goal kind of horrific, even if it were plausible.
-Is it a good goal for humanity to function as slavedrivers for
-nearly-personalized automatons which we constrain and “take down” when they
-“misbehave?” Regardless of the actual ethics with respect to the computers
-themselves, how does that morally affect <strong>us</strong>?</p>
-
-  <p>I worry that the folks most excited about this future are unconcerned with
-that question, or even trying to somehow sanitize and normalize behavior that
-would normally be considered inhumane if applied to human labor, precisely
-because they would be comfortable as slavedrivers if it were acceptable. I
-know that’s a strong accusation but it’s concerning when they use the same
-language so uncritically.</p>
-
-  <p><strong>me</strong>: Do you have a link to (details about) this collection? I’d like to add
-it to my backlog</p>
-
-  <p><strong>anon1</strong>: I could only find it in hardcopy. It was just a random
-recommendation from the algo on Bluesky and I just pulled the trigger. So far
-it’s been pretty interesting.
-<a href="https://www.sup.org/books/anthropology/studying-those-who-study-us">https://www.sup.org/books/anthropology/studying-those-who-study-us</a></p>
-
-  <p>[ed: in response to a point about how agents should not require boundless
-context to accomplish a task given a technical manual, because the manual is
-“more or less 1 to 1 with reality.”]</p>
-
-  <p><strong>me</strong>: I think we all should suspect that the manual is not 1–1 with reality.
-Further, one concern is that designing systems this way <strong>changes</strong> reality to
-fit the manual, rather than the manual to fit reality. Which of course begs
-the most important question: <strong>who writes the manual</strong>? What values do they
-imbue explicitly, implicitly, intentionally, unintentionally? If you don’t
-think this matters, look at automated policing and the affected populations,
-or many other examples cited by Ruha Benjamin in <strong>Race After Technology</strong>.</p>
-
-  <p><strong>anon1</strong>: You might find this lecure series interesting, too, related to
-“prescriptive technology” –
-<a href="https://www.cbc.ca/radio/ideas/the-1989-cbc-massey-lectures-the-real-world-of-technology-1.2946845">https://www.cbc.ca/radio/ideas/the-1989-cbc-massey-lectures-the-real-world-of-technology-1.2946845</a></p>
-
-  <p>Franklin’s analysis was related to how technology constrains the choices of
-workers, but it also applies to nonhuman agents</p>
-
-  <p>Between those two works I’ve been appreciating feminist analysis of technology
-a lot lately</p>
-
-  <p>(I don’t think you need to be excited about feminism to appreciate them, dunno
-your values, but worth noting it’s a linking factor in both)</p>
-
-  <p><strong>me</strong>: I was surprised that the article pointed out the question:</p>
-
-  <blockquote>
-    <p>Without a lived experience of their own, they will need to be imbued with
-human goals and objectives—but which ones, and whose variants?</p>
-  </blockquote>
-
-  <p>But not surprised (still frustrated) that it stopped short of actually
-engaging the question.</p>
-
-  <p><strong>anon1</strong>: There’s a wealth of questions they did not engage with lol (though
-to be fair to the author, it’s a short piece and evidently part of a series I
-haven’t read)</p>
-
-  <p><strong>me</strong>: Fair!</p>
-</blockquote>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><category term="unpolished" /><category term="politics" /><summary type="html"><![CDATA[Some unpolished thoughts from a recent conversation with other software engineers.]]></summary></entry></feed>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[A brief essay to explore the business of producing and selling LLMs.]]></summary></entry></feed>

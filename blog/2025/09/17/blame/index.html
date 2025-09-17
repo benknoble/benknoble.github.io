@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : A kludgy new way to git-blame</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <p>
+      I stand for the Constitution, for due process, and for community that
+      takes care of each other.
+      </p>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>A kludgy new way to git-blame</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 17 Sep 2025 in Blog</p>
+<div id="post">
+  <p>Lately I find myself feeding <code class="language-plaintext highlighter-rouge">git grep</code> results to <code class="language-plaintext highlighter-rouge">git blame</code> to help identify
+points of contact for a piece of code. I’ve scripted a few hacks together to
+make life easier.</p>
+
+<p><strong>Call for help:</strong> If you have ideas on how to better parse <code class="language-plaintext highlighter-rouge">git grep</code> output or
+feed it to <code class="language-plaintext highlighter-rouge">git blame</code>, please let me know <a href="https://github.com/benknoble/Dotfiles/">on
+GitHub</a> or in the comments.</p>
+
+<p>When I’m interested in who to talk to about a small chunk of code, I usually
+navigate to it in Vim and run <a href="https://github.com/tpope/vim-fugitive/blob/61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4/doc/fugitive.txt#L57"><code class="language-plaintext highlighter-rouge">:Git
+blame</code></a>.
+I might also throw the file or containing directory at <code class="language-plaintext highlighter-rouge">git shortlog</code> to get a
+sense of who’s active in the area.</p>
+
+<p>My current <code class="language-plaintext highlighter-rouge">$DAYJOB</code> includes working with a large monorepo, and I frequently
+have questions of the form “who should I ask about feature X that cuts across
+many different code modules?”—in such a situation, I’ve recently been piping
+<code class="language-plaintext highlighter-rouge">git grep</code> into <code class="language-plaintext highlighter-rouge">git blame</code>. (Feeding <code class="language-plaintext highlighter-rouge">git grep --files-with-matches</code> into <code class="language-plaintext highlighter-rouge">git
+shortlog</code> is not awful, but typically gives too many contacts.)</p>
+
+<p>The trouble is, each time I’ve done this I’ve had to recraft the pipeline. Often
+it’s some variant<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> of</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git <span class="nb">grep</span> … | fields <span class="nt">-f</span>: 1 2 | xargs <span class="nt">-L1</span> sh <span class="nt">-c</span> <span class="s1">'git blame -L$1,$1 $0'</span>
+</code></pre></div></div>
+
+<p>This doesn’t quite work correctly if I grep a specific revision. When I’m on a
+topic branch and a teammate has a question, I might do</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git f <span class="c"># short for fetch, and I have fetch.all=true configured</span>
+git <span class="nb">grep</span> … origin | fields <span class="nt">-f</span>: <span class="o">{</span>1..3<span class="o">}</span> | xargs <span class="nt">-L1</span> sh <span class="nt">-c</span> <span class="s1">'git blame -L $2,$2 $1 $0'</span>
+</code></pre></div></div>
+
+<p>Argh! And, although I haven’t lifted this limitation in my script, if I throw
+<code class="language-plaintext highlighter-rouge">-C</code>-style context results in there, this won’t work. If we get binary matches,
+this won’t work. Etc.</p>
+
+<p>I got tired of trying to get this right interactively and figured I’d capture
+the whole thing as a script. So let’s start with that.</p>
+
+<h2 id="git-greb-blame-matching-lines"><code class="language-plaintext highlighter-rouge">git-greb</code>: blame matching lines</h2>
+
+<p>If <code class="language-plaintext highlighter-rouge">grep</code> comes from <code class="language-plaintext highlighter-rouge">:g/re/p</code> in <code class="language-plaintext highlighter-rouge">ed(1)</code>, then <code class="language-plaintext highlighter-rouge">greb</code> is the natural extension
+to a “b for blame” verb.</p>
+
+<p>The <a href="https://github.com/benknoble/Dotfiles/commit/68002c7e705a1bb383160d09a89b57a858d9268d">initial version of the
+script</a>
+works for the main use cases above:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git greb …
+git greb -r origin -- …
+</code></pre></div></div>
+
+<p>Yahoo! And if I need to build more “blame input from X” tools, I now have <code class="language-plaintext highlighter-rouge">git
+blame-stdin</code> as plumbing I can re-use. That saves me from reconstructing
+different <code class="language-plaintext highlighter-rouge">fields … | xargs …</code> pipelines.</p>
+
+<p>Further, <code class="language-plaintext highlighter-rouge">git greb</code> supports most of the grep flags I care about for this sort
+of search.</p>
+
+<p>However, let’s talk about the ugly…</p>
+
+<h2 id="git-grep-is-not-designed-for-machine-consumption"><code class="language-plaintext highlighter-rouge">git grep</code> is not designed for machine consumption</h2>
+
+<p>In fact, <code class="language-plaintext highlighter-rouge">git grep</code> seems to go out of it’s way to avoid being useful as input
+to a script! Let’s see if I can explain how: config and command line options can
+dramatically affect output formats, which is tough to handle if you want to
+support most <code class="language-plaintext highlighter-rouge">git grep</code> invocations. I originally planned for <code class="language-plaintext highlighter-rouge">git greb</code> to be
+as easy as running <code class="language-plaintext highlighter-rouge">git grep …</code>, then <code class="language-plaintext highlighter-rouge">^p^b</code> in my shell would turn that into
+<code class="language-plaintext highlighter-rouge">git greb …</code>. Alas, not so. Some examples of what goes wrong:</p>
+
+<ul>
+  <li>We want to keep line numbers for effective blaming, so anything that changes
+that format is out. That mean <code class="language-plaintext highlighter-rouge">-h</code>, <code class="language-plaintext highlighter-rouge">-l</code>, <code class="language-plaintext highlighter-rouge">-c</code>, etc.</li>
+  <li>We don’t want to try to open files in the pager, but that was never going to
+be supported. Still, we have to reject that option.</li>
+  <li>Various options throw other noise into the output (<code class="language-plaintext highlighter-rouge">--break</code>, <code class="language-plaintext highlighter-rouge">--heading</code>).</li>
+  <li>None of the context options (<code class="language-plaintext highlighter-rouge">-A</code>, <code class="language-plaintext highlighter-rouge">-B</code>, <code class="language-plaintext highlighter-rouge">-C</code>, <code class="language-plaintext highlighter-rouge">-p</code>, <code class="language-plaintext highlighter-rouge">-W</code>) use the same
+<code class="language-plaintext highlighter-rouge">file:line</code> formatting, so we can’t use them at all (or we have to try to
+parse all possible formats, of which there are several, without screwing
+things up when a filename contains a hyphen or equals sign; we’re already
+screwed if a filename contains a colon).</li>
+  <li>And finally: <code class="language-plaintext highlighter-rouge">-z</code> for nul-delimited output <em>still isn’t sufficient</em>: we do get
+<code class="language-plaintext highlighter-rouge">file&lt;nul&gt;line&lt;nul&gt;</code>, the revision (if present) is prepended with <code class="language-plaintext highlighter-rouge">rev:</code>. But
+I can’t guarantee that doesn’t contain a colon, since <code class="language-plaintext highlighter-rouge">:/post:</code> is a valid
+revision (at least on this website’s code) and is displayed as typed! Further,
+parsing nul-delimited lines in a shell script is fraught.</li>
+</ul>
+
+<p>I was originally planning to support non-trivial filenames, but it quickly
+became too much work. So for now, I’m supporting filenames that don’t have to be
+escaped without <code class="language-plaintext highlighter-rouge">-z</code>, and that don’t contain a colon. I’m also explicitly
+rejecting any unsupported <code class="language-plaintext highlighter-rouge">git grep</code> option to make things easier.</p>
+
+<h2 id="git-grebs-interface-is-ugly"><code class="language-plaintext highlighter-rouge">git greb</code>’s interface is ugly</h2>
+
+<p>Yeah. Because of all the munging above, and because I need to feed a revision to
+<code class="language-plaintext highlighter-rouge">git blame</code> when one is present but not have ambiguous parsing that sometimes
+gets it wrong, I have <code class="language-plaintext highlighter-rouge">git-greb</code> take a <code class="language-plaintext highlighter-rouge">--revision &lt;rev&gt;</code> flag. But if it has
+flags, it has to delimit between its flags and <code class="language-plaintext highlighter-rouge">git-grep</code>’s flags. That’s the
+first <code class="language-plaintext highlighter-rouge">--</code> in its synopsis. (If you don’t use any options, you don’t need it.)</p>
+
+<p><em>Then</em>, I need to reinsert the revision at the end of the <code class="language-plaintext highlighter-rouge">git grep</code> command
+(but before any pathspecs), so if you provide a pathspec and a revision you
+<em>must</em> give the second <code class="language-plaintext highlighter-rouge">--</code> to separate the pathspec from the previous
+arguments. Ugh. (The code isn’t particularly pretty, either.)</p>
+
+<p>At least I had the foresight to include <code class="language-plaintext highlighter-rouge">-v</code> as a debugging aid in both scripts:
+that’s my way<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> of having scripts output the Git commands they run, which is
+also useful when I share the outputs with other folks so they can see what I
+did.</p>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="/blog/2019/09/11/fields/">My fields script is described on this blog</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>My <a href="/blog/2024/11/15/useful-utilities/#git"><code class="language-plaintext highlighter-rouge">git-div</code> script</a> was my first to support this. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2025/09/17/blame/";
+    this.page.identifier = "/blog/2025/09/17/blame";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2025/09/06/ai-bubble/"
+      title="More on the AI bubble">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#a-kludgy-new-way-to-git-blame">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <a href="https://www.goatcounter.com">No personal information collected</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
