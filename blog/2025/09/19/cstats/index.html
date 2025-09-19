@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Personal Commit Statistics</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <p>
+      I stand for the Constitution, for due process, and for community that
+      takes care of each other.
+      </p>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Personal Commit Statistics</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 19 Sep 2025 in Blog</p>
+<div id="post">
+  <p>Here’s some statistics on commits I’ve authored collected from <a href="/blog/2019/08/14/cstat-efficiencies/"><code class="language-plaintext highlighter-rouge">git-cstat</code></a> over a few work and open-source
+repositories.</p>
+
+<h2 id="min-max-average-commit-length-in-words">Min, max, average commit length in words</h2>
+
+<p>With my Dotfiles included:</p>
+
+<p><img src="/assets/img/cstats-2025-09-18-with-dotfiles.svg" alt="Commit stats distributions with Dotfiles" /></p>
+
+<p>Without my Dotfiles included:</p>
+
+<p><img src="/assets/img/cstats-2025-09-18.svg" alt="Commit stats distributions without Dotfiles" /></p>
+
+<h2 id="commentary">Commentary</h2>
+
+<ul>
+  <li>Short commits are mostly <code class="language-plaintext highlighter-rouge">init</code>, <code class="language-plaintext highlighter-rouge">chore: upgrade dependencies</code>, things like
+that. Occasionally my shortest contribution to a project is long, though! I
+think this happens most when I contribute to open source or innersource
+projects where I need to spell out my reasoning more clearly regardless of the
+commit.</li>
+  <li>Some extremely long commits are the result of squash-and-merge defaults at
+work. A few projects I’ve worked on required that as the only merge strategy
+and mostly kept the default “concatenate all commit messages” as the final
+message. So the reality is that several reasonably-long commits were squashed
+into a monster.</li>
+  <li>
+    <p>My average average drops from a little over 40 to a little over 20 when
+including my Dotfiles. That makes sense: my Dotfiles have a long life, going
+back to before I use Git in the way I do today. Even now there are plenty of
+~10 word commit messages and only a few long ones: for example, using my
+<a href="/blog/2019/09/11/fields/"><code class="language-plaintext highlighter-rouge">fields</code></a> and <a href="https://github.com/benknoble/Dotfiles/blob/850b629f4506debb91efcc0dfe0d7c77d7c0924d/links/zshfns/bucket10"><code class="language-plaintext highlighter-rouge">bucket10</code></a><sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>
+scripts:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  λ g cstat len | fields 1 | bucket10 | sort -n
+  1     21 ██
+  2    191 █████████████████████
+  3    648 ███████████████████████████████████████████████████████████████████████
+  4    380 ██████████████████████████████████████████
+  5    346 ██████████████████████████████████████
+  6    263 █████████████████████████████
+  7    172 ███████████████████
+  8    111 ████████████
+  9     68 ███████
+  10   178 ████████████████████
+  20   209 ███████████████████████
+  30   101 ███████████
+  40    73 ████████
+  50    16 ██
+  60    18 ██
+  70    14 ██
+  80    15 ██
+  90     7 █
+  100   13 █
+  200    4
+  700    1
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="raw-data">Raw Data</h2>
+
+<p>A comment marks the Dotfiles data</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># work
+# Short commits: "init", "chore: upgrade dependencies", etc.
+# Extremely long commits: squashed several reasonable lengths
+min: 1
+max: 55
+avg: 11.8571
+min: 3
+max: 662
+avg: 50.4
+min: 4
+max: 179
+avg: 41.8889
+min: 208
+max: 356
+avg: 282
+min: 1
+max: 202
+avg: 43.5833
+min: 23
+max: 3995
+avg: 1141.25
+min: 2
+max: 8046
+avg: 193.755
+min: 2
+max: 1145
+avg: 62.1368
+min: 1
+max: 27
+avg: 6.42222
+min: 2
+max: 251
+avg: 55.1667
+min: 7
+max: 68
+avg: 20.2222
+min: 93
+max: 598
+avg: 299
+min: 4
+max: 9
+avg: 7
+min: 2
+max: 279
+avg: 104.364
+min: 4
+max: 98
+avg: 33.3636
+min: 3
+max: 120
+avg: 21.1
+min: 1
+max: 105
+avg: 13.8854
+min: 1
+max: 215
+avg: 10.2741
+min: 1
+max: 160
+avg: 15.6222
+min: 4
+max: 464
+avg: 115.13
+
+# OSS
+min: 1
+max: 730
+avg: 17,1961
+min: 41
+max: 343
+avg: 103,4
+min: 2
+max: 102
+avg: 23,9048
+# Dotfiles
+min: 1
+max: 705
+avg: 10,3589
+</code></pre></div></div>
+
+<h2 id="pict-script">Pict script</h2>
+
+<p>This is also <a href="https://github.com/benknoble/Dotfiles/blob/850b629f4506debb91efcc0dfe0d7c77d7c0924d/links/bin/cstats-pics">in my <code class="language-plaintext highlighter-rouge">bin</code> directory</a>.</p>
+
+<p>It would arguably have been more efficient to read the data into a tidy
+dataframe from the outset, but I was more confident in this version of the
+parsing code, and it works.</p>
+
+<p>The empty <code class="language-plaintext highlighter-rouge">racket/gui</code> require is to make it easy to replace <code class="language-plaintext highlighter-rouge">(save-pict out)</code>
+with <code class="language-plaintext highlighter-rouge">show-pict</code> when you want just see the results. I experimented with an
+interface to either show or save the picture, and I didn’t come up with anything
+I particularly liked.</p>
+
+<p>PS Apparently the syntax highlighter here (rouge) doesn’t know how to parse
+Racket’s reader syntax for (Perl-ish) regular expressions.</p>
+
+<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#! /usr/bin/env racket</span>
+<span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
+<span class="c1">; vim: ft=racket</span>
+
+<span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="nf">only-in</span> <span class="nv">racket/gui</span><span class="p">)</span>
+         <span class="nv">pict</span>
+         <span class="nv">threading</span>
+         <span class="nv">data-frame</span>
+         <span class="nv">sawzall</span>
+         <span class="nv">graphite</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="nf">data-file</span> <span class="nv">out</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">command-line</span>
+   <span class="nt">#:args</span> <span class="p">(</span><span class="nf">data-file</span> <span class="nv">out</span><span class="p">)</span>
+   <span class="p">(</span><span class="nb">values</span> <span class="nv">data-file</span> <span class="nv">out</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="nb">min</span> <span class="nv">max</span> <span class="nv">avg</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">for/lists</span> <span class="p">(</span><span class="nf">min?</span> <span class="nv">max?</span> <span class="nv">avg?</span>
+              <span class="nt">#:result</span> <span class="p">(</span><span class="nb">values</span> <span class="p">(</span><span class="nf">filter</span> <span class="nv">values</span> <span class="nv">min?</span><span class="p">)</span>
+                               <span class="p">(</span><span class="nf">filter</span> <span class="nv">values</span> <span class="nv">max?</span><span class="p">)</span>
+                               <span class="p">(</span><span class="nf">filter</span> <span class="nv">values</span> <span class="nv">avg?</span><span class="p">)))</span>
+             <span class="p">([</span><span class="nf">line</span> <span class="p">(</span><span class="nf">in-lines</span> <span class="p">(</span><span class="nb">open-input-file</span> <span class="nv">data-file</span><span class="p">))])</span>
+    <span class="p">(</span><span class="nf">match</span> <span class="nv">line</span>
+      <span class="p">[(</span><span class="nb">pregexp</span> <span class="o">#</span><span class="nv">px"^min:</span> <span class="p">([[</span><span class="nf">:digit:</span><span class="p">]</span><span class="o">.</span><span class="p">]</span><span class="nv">+</span><span class="p">)</span><span class="s">" (list _ (app string-&gt;number min))) (values min #f #f)]
+      [(pregexp #px"</span><span class="nv">^max:</span> <span class="p">([[</span><span class="nf">:digit:</span><span class="p">]</span><span class="o">.</span><span class="p">]</span><span class="nv">+</span><span class="p">)</span><span class="s">" (list _ (app string-&gt;number max))) (values #f max #f)]
+      [(pregexp #px"</span><span class="nv">^avg:</span> <span class="p">([[</span><span class="nf">:digit:</span><span class="p">]</span><span class="o">.</span><span class="p">]</span><span class="nv">+</span><span class="p">)</span><span class="s">" (list _ (app string-&gt;number avg))) (values #f #f avg)]
+      [_ (values #f #f #f)])))
+
+(define df
+  (make-data-frame #:series (list (make-series "</span><span class="nv">min"</span> <span class="nt">#:data</span> <span class="p">(</span><span class="nb">list-&gt;vector</span> <span class="nv">min</span><span class="p">))</span>
+                                  <span class="p">(</span><span class="nf">make-series</span> <span class="s">"max"</span> <span class="nt">#:data</span> <span class="p">(</span><span class="nb">list-&gt;vector</span> <span class="nv">max</span><span class="p">))</span>
+                                  <span class="p">(</span><span class="nf">make-series</span> <span class="s">"avg"</span> <span class="nt">#:data</span> <span class="p">(</span><span class="nb">list-&gt;vector</span> <span class="nv">avg</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">df</span>
+    <span class="p">(</span><span class="nf">pivot-longer</span> <span class="nv">everything</span> <span class="nt">#:names-to</span> <span class="s">"stat"</span> <span class="nt">#:values-to</span> <span class="s">"words"</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">graph</span> <span class="nt">#:data</span> <span class="nv">_</span>
+            <span class="nt">#:mapping</span> <span class="p">(</span><span class="nf">aes</span> <span class="nt">#:y</span> <span class="s">"stat"</span> <span class="nt">#:x</span> <span class="s">"words"</span><span class="p">)</span>
+            <span class="nt">#:y-label</span> <span class="s">"Stat"</span> <span class="nt">#:x-label</span> <span class="s">"Number of words"</span>
+            <span class="nt">#:x-transform</span> <span class="nv">logarithmic-transform</span>
+            <span class="nt">#:title</span> <span class="s">"Commit message length (words)"</span>
+            <span class="p">(</span><span class="nf">boxplot</span> <span class="nt">#:invert?</span> <span class="no">#t</span> <span class="nt">#:show-outliers?</span> <span class="no">#t</span><span class="p">)</span>
+            <span class="p">(</span><span class="nf">points</span><span class="p">))</span>
+    <span class="p">(</span><span class="nf">save-pict</span> <span class="nv">out</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Based on that old <a href="/blog/2019/09/27/perl-v-bash/">post about Perl</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2025/09/19/cstats/";
+    this.page.identifier = "/blog/2025/09/19/cstats";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2025/09/17/blame/"
+      title="A kludgy new way to git-blame">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#personal-commit-statistics">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <a href="https://www.goatcounter.com">No personal information collected</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
