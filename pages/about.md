@@ -74,8 +74,8 @@ Here's some flair:
 
     No, it's not an IDE like Eclipse. It *is* a great way to manage projects and
     terminals. (Note: I don't even use iTerm! Terminal.app is good enough with
-    tmux, even if it doesn't support truecolor yet. I have spent the last year
-    or two in Alacritty, however.)
+    tmux, even if it doesn't support truecolor yet. I have been in Alacritty
+    since 2020, however.)
 
 - Favorite __shell__: `bash`.
 
