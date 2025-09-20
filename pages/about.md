@@ -18,7 +18,9 @@ This blog is dedicated to being a virtual representation of my junk drawers,
 holding musings and notes from my life. Primarily, I write about programming,
 but I frequently digress to other topics.
 
-To see my virtual Junk Drawer on GitHub, visit [benknoble/JunkDrawer][junk].
+These days my current virtual Junk Drawer is a private Git repo that holds all
+my wiki files, managed by [wiki-md](https://github.com/benknoble/wiki-md). My
+old virtual Junk Drawer on GitHub is at [benknoble/JunkDrawer][junk].
 
 ### Me
 
