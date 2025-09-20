@@ -105,7 +105,8 @@ progress.)
 - Favorite __OS__: macOS.
 
 I've been using a MacBook since 2012 and it's here to stay. I'm not convinced on
-the new touchbar thing yet though.
+the new touchbar thing yet though. These days I'm re-evaluating my setup and
+will probably shift to desktop Linux soon.
 
 - Favorite __version control__: definitely Git.
 
