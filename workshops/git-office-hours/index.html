@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Workshops</title>
+  <title>Junk Drawer : Git Office Hours</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -52,7 +52,7 @@
       <a href="https://benknoble.github.io/categories/">Posts</a>
     </li>
     
-    <li class="active">
+    <li class="">
       <a href="https://benknoble.github.io/workshops/">Workshops</a>
     </li>
     
@@ -71,81 +71,64 @@
   </ul>
 </nav>
 
-      <h1>Workshops</h1>
-      <p>
-Workshops and talks I've given
+      <h1>Git Office Hours</h1>
+      <p class="meta">Originally presented 01 Apr 2024 by <span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
 </p>
+<div id="workshop-content">
+  <p>(This “workshop” has lasted to the present)</p>
 
-<div id="workshops">
-  <ul class="workshops-list">
-    
-      <li class="workshop-item">
-        <a
-          id="14th-racketcon-frosthaven-manager-built-by-the-community"
-          href="/workshops/14th-racket-con/">
-          14th RacketCon: Frosthaven Manager: Built by the Community</a>
-        <small class="meta">Originally given: 05 Oct 2024</small>
-      </li>
-    
-      <li class="workshop-item">
-        <a
-          id="survival-guide-to-innersource-contributions"
-          href="/workshops/survival-guide-innersource/">
-          Survival Guide to Innersource Contributions</a>
-        <small class="meta">Originally given: 12 Sep 2024</small>
-      </li>
-    
-      <li class="workshop-item">
-        <a
-          id="git-office-hours"
-          href="/workshops/git-office-hours/">
-          Git Office Hours</a>
-        <small class="meta">Originally given: 01 Apr 2024</small>
-      </li>
-    
-      <li class="workshop-item">
-        <a
-          id="funarch-2023-functional-shell-and-reusable-components-for-easy-guis"
-          href="/workshops/gui-easy-funarch/">
-          FUNARCH 2023: Functional Shell and Reusable Components for Easy GUIs</a>
-        <small class="meta">Originally given: 08 Sep 2023</small>
-      </li>
-    
-      <li class="workshop-item">
-        <a
-          id="make-git-work-for-you"
-          href="/workshops/commits/">
-          Make Git Work For You</a>
-        <small class="meta">Originally given: 20 Oct 2022</small>
-      </li>
-    
-      <li class="workshop-item">
-        <a
-          id="build-your-own-racket-lightsaber-vim"
-          href="/workshops/lightsaber/">
-          Build Your Own Racket Lightsaber (Vim)</a>
-        <small class="meta">Originally given: 01 Oct 2022</small>
-      </li>
-    
-      <li class="workshop-item">
-        <a
-          id="git-wizard"
-          href="/workshops/git-wizard/">
-          Git wizard</a>
-        <small class="meta">Originally given: 22 Feb 2020</small>
-      </li>
-    
-      <li class="workshop-item">
-        <a
-          id="vim-maestro"
-          href="/workshops/vim-maestro/">
-          Vim maestro</a>
-        <small class="meta">Originally given: 10 Aug 2018</small>
-      </li>
-    
-  </ul>
+<p>My goal is to raise the bar on Git use within Capital One by exposing engineers
+to best practices, tools they might not know, and their benefits.</p>
+
+<p>Part 1 launched in 2024 as a personal weekly side-project. I recorded weekly
+short tutorial videos (5 minutes or less) and 30-minute long-form group sessions
+with guided practice, Q&amp;A, and discussions of best practices.</p>
+
+<p>My workshops helped inform multiple developer teams’ decisions for Git norms and
+enterprise-wide best practices.</p>
+
+<p>At the end of 2024, I realized I couldn’t sustain a weekly recording pace. I
+also developed grander plans to develop structured learning paths for Git and
+make all our recordings available to the public, which I couldn’t do alone.</p>
+
+<p>As a result, I switched to a community stewardship model: other developers at
+Capital One host workshops once a month, with myself and a team of volunteers
+providing guidance and structure as necessary. I lead the overall strategic
+direction and still occasionally produce a workshop or article.</p>
+
 </div>
 
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/workshops/git-office-hours/";
+    this.page.identifier = "/workshops/git-office-hours";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="back-to-workshops">
+  <a href="/workshops/#git-office-hours">
+    Back to workshops</a>
+</div>
 
     </section>
     <footer>
