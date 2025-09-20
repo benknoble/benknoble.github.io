@@ -50,9 +50,10 @@ Hi, I'm Ben :wave: and my pronouns are he/him/his.
   broad array of programming, development, learning, and teaching
   categories](https://benknoble.github.io/level-up/).
 - For some of the projects I'm working on, check out
-  [benknoble@GitHub][benknoble], or try my [showcase][showcase]. I'm also on the
-  Stack Exchange network (primarly [vim][vim], though I still use
-  [StackOverflow][stack_overflow] as well as a few others).
+  [benknoble@GitHub][benknoble]. I'm also on the Stack Exchange network
+  (primarly [Vi & Vim][vim], though I still use [StackOverflow][stack_overflow] as
+  well as a few others). I moderated the [Vi & Vim site][vim] for [about 5
+  years](https://vi.meta.stackexchange.com/q/1671/10604).
 
 Please [contact me][contact] with questions, corrections, or to chat.
 
