@@ -118,6 +118,8 @@ functional stuff (especially Racket and Rust).
 - Favorite **keyboard**: my Ergodox EZ. Here's my
   [layout](https://configure.zsa.io/ergodox-ez/layouts/BNalB/latest/0).
 
+    I also adore my Planck for travel.
+
 - Favorite __colorscheme__: I've been using Dracula for years. If you like
   Dracula, too, consider [purchasing the Pro version through my affiliate
   link](https://gumroad.com/a/968545299/tPfIDt). Dracula is used on this website
