@@ -43,9 +43,8 @@ Hi, I'm Ben :wave: and my pronouns are he/him/his.
   training for anything I do, including programming. Being self-taught keeps me
   curious. My biggest personal interests in the computer science sphere are
   programming languages and programming tools.
-    - I completed a Master's in CS in 2021. I have also completed my
-      undergraduate degree in CS and French, with a minor in Mathematics, which
-      I completed in 2020.
+    - I completed a Master's in CS in 2021. I also have an undergraduate degree
+      in CS and French, with a minor in Mathematics, which I completed in 2020.
 - [By a wonderful fluke, my Erdős number is 4](https://sites.google.com/site/dicksites/). My Top Gun number is 3.
 - I'm keeping track of my "developer level" via a [set of challenges that span a
   broad array of programming, development, learning, and teaching
