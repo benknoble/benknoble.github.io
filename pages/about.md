@@ -60,7 +60,6 @@ Please [contact me][contact] with questions, corrections, or to chat.
 Here's some flair:
 
 {% include SO_flair.html %}
-{% include github_flair.html %}
 {% include aws_badge.html %}
 
 ### Technical
