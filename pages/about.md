@@ -15,9 +15,8 @@ shoe box where I throw flyers, books, notes, scribbles, and thoughts. It's a
 catchall, and often times it gets quite cluttered.
 
 This blog is dedicated to being a virtual representation of my junk drawers,
-holding musings and notes from my life. Primarily, I will try to write about
-programming, but I will frequently digress to other topics, such as math,
-language (reading, writing, or programming), music, or D&D.
+holding musings and notes from my life. Primarily, I write about programming,
+but I frequently digress to other topics.
 
 To see my virtual Junk Drawer on GitHub, visit [benknoble/JunkDrawer][junk].
 
