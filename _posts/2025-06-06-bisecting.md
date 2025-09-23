@@ -52,7 +52,7 @@ yielded an error!
 
 ## The workaround
 
-Well, not being able to `call()` a lambda is pretty fundamental Vim error for
+Well, not being able to `call()` a lambda is a pretty fundamental Vim error for
 recent versions of Vim. I happened to be on v9.1.1016, and there had been new
 releases, so I figured I'll try the usual advice: upgrade.
 
@@ -153,7 +153,7 @@ git bisect new 9904cbca4132f7376246a1a31305eb53e9530023
 ## The fix
 
 To my surprise, I was one coincidental patch away from the fix! [Version
-9.1.107](https://github.com/vim/vim/pull/16450) fixed a bug from
+9.1.1017](https://github.com/vim/vim/pull/16450) fixed a bug from
 [9.1.1013](https://github.com/vim/vim/pull/16445) which was reported by
 [#16453](https://github.com/vim/vim/issues/16453). The original patch was yet
 another fix for [a different bug](https://github.com/vim/vim/issues/16430)
