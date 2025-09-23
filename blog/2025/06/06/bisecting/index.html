@@ -126,7 +126,7 @@ managed to simplify the error:</p>
 
 <h2 id="the-workaround">The workaround</h2>
 
-<p>Well, not being able to <code class="language-plaintext highlighter-rouge">call()</code> a lambda is pretty fundamental Vim error for
+<p>Well, not being able to <code class="language-plaintext highlighter-rouge">call()</code> a lambda is a pretty fundamental Vim error for
 recent versions of Vim. I happened to be on v9.1.1016, and there had been new
 releases, so I figured I’ll try the usual advice: upgrade.</p>
 
@@ -223,7 +223,7 @@ git bisect new 9904cbca4132f7376246a1a31305eb53e9530023
 <h2 id="the-fix">The fix</h2>
 
 <p>To my surprise, I was one coincidental patch away from the fix! <a href="https://github.com/vim/vim/pull/16450">Version
-9.1.107</a> fixed a bug from
+9.1.1017</a> fixed a bug from
 <a href="https://github.com/vim/vim/pull/16445">9.1.1013</a> which was reported by
 <a href="https://github.com/vim/vim/issues/16453">#16453</a>. The original patch was yet
 another fix for <a href="https://github.com/vim/vim/issues/16430">a different bug</a>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-09-20T13:18:34+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Personal Commit Statistics</title><link href="https://benknoble.github.io/blog/2025/09/19/cstats/" rel="alternate" type="text/html" title="Personal Commit Statistics" /><published>2025-09-19T00:00:00+00:00</published><updated>2025-09-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/09/19/cstats</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/09/19/cstats/"><![CDATA[<p>Here’s some statistics on commits I’ve authored collected from <a href="/blog/2019/08/14/cstat-efficiencies/"><code class="language-plaintext highlighter-rouge">git-cstat</code></a> over a few work and open-source
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-09-23T12:14:08+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Personal Commit Statistics</title><link href="https://benknoble.github.io/blog/2025/09/19/cstats/" rel="alternate" type="text/html" title="Personal Commit Statistics" /><published>2025-09-19T00:00:00+00:00</published><updated>2025-09-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/09/19/cstats</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/09/19/cstats/"><![CDATA[<p>Here’s some statistics on commits I’ve authored collected from <a href="/blog/2019/08/14/cstat-efficiencies/"><code class="language-plaintext highlighter-rouge">git-cstat</code></a> over a few work and open-source
 repositories.</p>
 
 <h2 id="min-max-average-commit-length-in-words">Min, max, average commit length in words</h2>
@@ -571,7 +571,7 @@ managed to simplify the error:</p>
 
 <h2 id="the-workaround">The workaround</h2>
 
-<p>Well, not being able to <code class="language-plaintext highlighter-rouge">call()</code> a lambda is pretty fundamental Vim error for
+<p>Well, not being able to <code class="language-plaintext highlighter-rouge">call()</code> a lambda is a pretty fundamental Vim error for
 recent versions of Vim. I happened to be on v9.1.1016, and there had been new
 releases, so I figured I’ll try the usual advice: upgrade.</p>
 
@@ -668,7 +668,7 @@ git bisect new 9904cbca4132f7376246a1a31305eb53e9530023
 <h2 id="the-fix">The fix</h2>
 
 <p>To my surprise, I was one coincidental patch away from the fix! <a href="https://github.com/vim/vim/pull/16450">Version
-9.1.107</a> fixed a bug from
+9.1.1017</a> fixed a bug from
 <a href="https://github.com/vim/vim/pull/16445">9.1.1013</a> which was reported by
 <a href="https://github.com/vim/vim/issues/16453">#16453</a>. The original patch was yet
 another fix for <a href="https://github.com/vim/vim/issues/16430">a different bug</a>
