@@ -3,6 +3,10 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "Ben always provides timely and well-explained ideas, solutions, and updates.
+  I feel that Ben's knowledge, willingness to collaborate, ability to share his
+  expertise, and his consideration of everyone's opinions makes him an excellent
+  teammate and very easy to work with."
 - "One thing that stands out is the level of intellectual rigor Ben brings to
   technical discussions. Ben digs deep into problems, asks smart questions, and
   offers thoughtful solutions that show a solid understanding of both the
