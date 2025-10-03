@@ -28,7 +28,7 @@ Hi, I'm Ben :wave: and my pronouns are he/him/his.
 
 - I'm D. Ben Knoble, a Software Engineer at Capital One. I'm also [an active
   open source contributor][benknoble]. [See what others say about me]({% link
-  pages/testimonials.md %}).
+  pages/testimonials.md %}) or [view my résumé](https://benknoble.github.io/resume/resume.pdf).
 - I break down complex answers to simple questions. Read [Adam Gordon Bell's
   article for Earthly](https://earthly.dev/blog/thought-leaders/) to learn why.
   As it turns out, [we don't know much about software
