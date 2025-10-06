@@ -3,6 +3,15 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "I see Ben's excellent organization, communication, and driven effort on
+  display almost every day. I believe Ben is a cut above and doing nearly all
+  the right things to redirect some of the organization's issues. I hope he
+  stays the course and keeps pushing in the way he is."
+- "You talk like a grad student"---[Matthew Flatt](https://users.cs.utah.edu/~mflatt/)
+- "Ben is extremely actively with the Customer Support team and threads. He
+  reaches out directly in situations that require immediate attention or to
+  clarify a point. Ben shares information with the team and provides perspective
+  on active tickets. A staple of the team."
 - "Ben always provides timely and well-explained ideas, solutions, and updates.
   I feel that Ben's knowledge, willingness to collaborate, ability to share his
   expertise, and his consideration of everyone's opinions makes him an excellent
