@@ -3,6 +3,15 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "Ben is an extremely talented developer whose passion for Git and the [Git
+  Office Hours]({% link _workshops/git-office-hours.md %}) is very evident. He
+  is very proactive in creating meeting plans and notes, and is very
+  professional in guiding the direction of the meetings we held. Furthermore,
+  Ben is very active in assisting the Git Stewards with their Workshops.
+  Specifically for my workshop, Ben's feedback on my slides and dry run provided
+  invaluable feedback that let the 'real' workshop go smoothly.
+
+    "Whoever he works with will be grateful to have his skills."
 - "I see Ben's excellent organization, communication, and driven effort on
   display almost every day. I believe Ben is a cut above and doing nearly all
   the right things to redirect some of the organization's issues. I hope he
