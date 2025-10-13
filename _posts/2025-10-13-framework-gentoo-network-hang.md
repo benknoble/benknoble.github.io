@@ -140,3 +140,4 @@ deciding which connection to use?
 - Related:
     - [https://community.frame.work/t/framework-13-amd-ai-wifi-issue-on-arch-linux/71019/2](https://community.frame.work/t/framework-13-amd-ai-wifi-issue-on-arch-linux/71019/2)
     - [https://forum.garudalinux.org/t/mediatek-mt7925e-wifi-speed-very-slow-on-close-to-fresh-install-and-some-updates/41845/6](https://forum.garudalinux.org/t/mediatek-mt7925e-wifi-speed-very-slow-on-close-to-fresh-install-and-some-updates/41845/6)
+    - [https://bbs.archlinux.org/viewtopic.php?id=300490](https://bbs.archlinux.org/viewtopic.php?id=300490)
