@@ -3,7 +3,7 @@
 # only main files contain this front matter, not partials.
 ---
 
-@import "syntax";
+@use "syntax";
 
 @import url('https://cdn.jsdelivr.net/npm/victormono@latest/dist/index.min.css');
 
@@ -363,7 +363,7 @@ iframe.scribbled {
 div.language-racket {
   .highlight {
     .p {
-      color: $dt-blue;
+      color: syntax.$dt-blue;
     }
   }
 }
@@ -376,7 +376,7 @@ div.language-racket {
   .c1,
   .cs {
     font-style: italic;
-    color: $dt-blue;
+    color: syntax.$dt-blue;
   }
 
   .bp,
