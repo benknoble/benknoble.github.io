@@ -66,3 +66,6 @@ collections:
 feed:
   collections:
     - writings
+
+gist:
+  noscript: false
