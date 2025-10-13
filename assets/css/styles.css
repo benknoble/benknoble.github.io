@@ -1,3 +1,4 @@
+@import url("https://cdn.jsdelivr.net/npm/victormono@latest/dist/index.min.css");
 /* Dracula Theme v1.2.5
  *
  * https://github.com/zenorocha/dracula-theme
@@ -18,7 +19,6 @@
 /*
  * Styles
  */
-@import url("https://cdn.jsdelivr.net/npm/victormono@latest/dist/index.min.css");
 .highlight {
   background: #282a36;
   color: #f8f8f2;

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Solving Network Hardware Hangs on Framework Desktop</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <p>
+      I stand for the Constitution, for due process, and for community that
+      takes care of each other.
+      </p>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Solving Network Hardware Hangs on Framework Desktop</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 13 Oct 2025 in Blog</p>
+<div id="post">
+  <p>I’ve recently installed Gentoo on my new Framework Desktop, and for a while the
+network would hang, causing any program that touched the hardware to also crap
+out.</p>
+
+<p>Here are some symptoms:</p>
+<ul>
+  <li>Thinks chug along just fine, until</li>
+  <li>The network goes down and commands start freezing. We’re talking no C-c, no
+C-\, no <code class="language-plaintext highlighter-rouge">pkill -9</code>: just dead in the water. (I hadn’t solved switching
+consoles with Alt-Function keys yet, so fortunately I had tmux running.)
+    <ul>
+      <li>Notably, commands like <code class="language-plaintext highlighter-rouge">emerge</code> hang when they get to network steps.
+Various <code class="language-plaintext highlighter-rouge">ip</code> &amp; <code class="language-plaintext highlighter-rouge">ifconfig</code> style commands hang immediately.</li>
+      <li>Commands like <code class="language-plaintext highlighter-rouge">nmcli</code> and <code class="language-plaintext highlighter-rouge">ping</code> don’t hang, but don’t work.</li>
+      <li>I’m pretty sure <code class="language-plaintext highlighter-rouge">/etc/resolv.conf</code> isn’t being touched.</li>
+    </ul>
+  </li>
+  <li>The <code class="language-plaintext highlighter-rouge">NetworkManager</code> daemon is running, but:
+    <ul>
+      <li>
+<code class="language-plaintext highlighter-rouge">top</code> shows “D” (d-sleep) and <code class="language-plaintext highlighter-rouge">ps</code> shows “Dsl”</li>
+      <li>
+<code class="language-plaintext highlighter-rouge">rc-status</code> reports NetworkManager as active, but <code class="language-plaintext highlighter-rouge">nmcli g</code> says its down</li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">rc-service NetworkManager restart</code> fails with</p>
+
+        <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  * Caching service dependencies ... [ ok ]
+  * Unmounting network filesystems ... [ ok ]
+  * Stoppping NetworkManager ...
+  * start-stop-daemon: 1 rocesses refused to stop [ !! ]
+  * ERROR: NetworkManager failed to stop
+  * Mounting network filesystems ... [ ok ]
+</code></pre></div>        </div>
+      </li>
+      <li>similarly with <code class="language-plaintext highlighter-rouge">s/restart/stop</code>, and <code class="language-plaintext highlighter-rouge">pkill -9 NetworkManager</code> has no
+effect!
+        <ul>
+          <li>I didn’t understand how <code class="language-plaintext highlighter-rouge">zap</code> worked at the time, so I wonder if that
+would have helped <img class="emoji" title=":thinking:" alt=":thinking:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f914.png" height="20" width="20">
+</li>
+        </ul>
+      </li>
+      <li>shutting down complains about not stopping the NetworkManager, too</li>
+    </ul>
+  </li>
+</ul>
+
+<p>I checked my hardware with <code class="language-plaintext highlighter-rouge">lspci</code>, which I’d fortunately installed during the
+main system installation process, and with <code class="language-plaintext highlighter-rouge">lspci -k</code> I found out my network
+card is</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>c0:00.0 Mediatek MT7925 (RZ717) Wi-Fi 7 160MHz [14c3:0717]
+</code></pre></div></div>
+
+<p>with kernel module (in use) <code class="language-plaintext highlighter-rouge">mt7925e</code>.</p>
+
+<p>First, I tried turning off WiFi power saving <a href="https://forum.garudalinux.org/t/mediatek-mt7925e-wifi-speed-very-slow-on-close-to-fresh-install-and-some-updates/41845/11">as recommended by Garuda folks</a>:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">'[connection]'</span> <span class="s1">'wifi.powersave = 0'</span> | doas <span class="nb">tee</span> /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+</code></pre></div></div>
+
+<p>That didn’t help: a little while into my next reboot, the hang happened again.
+Then I tried <a href="https://forum.garudalinux.org/t/mediatek-mt7925e-wifi-speed-very-slow-on-close-to-fresh-install-and-some-updates/41845/9">disabling the “Active State Power Management” for my network
+card</a>,
+which is apparently cursed with this problem:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s1">'options mt7925e disable_aspm=1'</span> | doas <span class="nb">tee</span> /etc/modprobe.d/7925e_wifi.conf
+</code></pre></div></div>
+
+<p>That seems to have done the trick, so I’ll delete the NetworkManager settings.</p>
+
+<h2 id="a-few-unrelated--things">A few unrelated (?) things</h2>
+
+<p>I don’t have kernel logs for the problematic scenario, but now that my system is
+running normally I can eliminate a few things from the problem space.</p>
+
+<p>In both working and non-working configurations, I saw repeated logs in <code class="language-plaintext highlighter-rouge">dmesg</code>
+for the network:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>disconnect from AP &lt;MAC&gt; for new auth to &lt;other MAC&gt;
+authenticate with &lt;other MAC&gt; (local address=&lt;my MAC&gt;)
+send auth to &lt;other MAC&gt; (try 1/3)
+authenticate with &lt;other MAC&gt; (local address=&lt;my MAC&gt;)
+send auth to &lt;2nd other MAC&gt; (try 1/3)
+authenticated
+associate with &lt;2nd other MAC&gt; (try 1/3)
+RX AssocResp from &lt;2nd other MAC&gt; (capab=0x1511 status=0 aid=3)
+associated
+Limiting TX power to 30 (30 - 0) dBm as advertised by &lt;2nd other MAC&gt;
+diassociated from &lt;2nd other MAC&gt; (Reason: 1=UNSPECIFIED)
+</code></pre></div></div>
+
+<p>Often these occur every 5 minutes and loop for a while, then die away.</p>
+
+<p>I saved some logs with</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ echo count from to;
+  grep 'disconnect from AP' /var/log/messages |
+    grep -o '\([[:xdigit:]][[:xdigit:]]:\?\)\{6\}' | paste - - |
+    sort | uniq -c; } | column -t
+</code></pre></div></div>
+
+<p>which gave for example</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>count  from               to
+3      &lt;prefix&gt;:2f:a9:51  &lt;prefix&gt;:2f:a9:59
+22     &lt;prefix&gt;:2f:a9:51  &lt;prefix&gt;:d2:14:29
+1      &lt;prefix&gt;:d2:14:21  &lt;prefix&gt;:2f:a9:59
+2      &lt;prefix&gt;:d2:14:21  &lt;prefix&gt;:d2:14:29
+</code></pre></div></div>
+
+<p>As far as I can tell, the (masked) <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;</code> there matches the output from
+another connected device when checking the router with <code class="language-plaintext highlighter-rouge">arp -a</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gr6exx0c-a940.lan (192.168.2.1) at &lt;prefix&gt;:2f:a9:40 on en0 ifscope [ethernet]
+</code></pre></div></div>
+
+<p>And my management app says</p>
+<ul>
+  <li>the router has a MAC of <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;:2f:a9:41</code>
+</li>
+  <li>the extender (MoCA) has a MAC of <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;:d2:14:10</code>
+</li>
+</ul>
+
+<p>So clearly something is going on here, and the NetworkManager is having trouble
+deciding which connection to use?</p>
+
+<h2 id="miscellany">Miscellany</h2>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">dmesg -Hw</code> is much nicer than regular <code class="language-plaintext highlighter-rouge">dmesg</code>
+</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">shutdown -hP</code> didn’t power off, but <code class="language-plaintext highlighter-rouge">reboot -p</code> did reboot</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">lspci -k &gt;/dev/null</code> complains:</p>
+
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  pcilib: Error reading /sys/bus/pci/devices/0000:00:08.3/label: Operation not permitted
+</code></pre></div>    </div>
+
+    <p>but running with usual output doesn’t.</p>
+  </li>
+  <li>
+    <p>Once I saw dmesg logs about my SSD?</p>
+
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  block nvme0n1: the capability attribute has been deprecated
+  No UUID available providing old NGUID
+</code></pre></div>    </div>
+  </li>
+  <li>Related:
+    <ul>
+      <li><a href="https://community.frame.work/t/framework-13-amd-ai-wifi-issue-on-arch-linux/71019/2">https://community.frame.work/t/framework-13-amd-ai-wifi-issue-on-arch-linux/71019/2</a></li>
+      <li><a href="https://forum.garudalinux.org/t/mediatek-mt7925e-wifi-speed-very-slow-on-close-to-fresh-install-and-some-updates/41845/6">https://forum.garudalinux.org/t/mediatek-mt7925e-wifi-speed-very-slow-on-close-to-fresh-install-and-some-updates/41845/6</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#linux" class="tag">
+        linux
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#network" class="tag">
+        network
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#gentoo" class="tag">
+        gentoo
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/";
+    this.page.identifier = "/blog/2025/10/13/framework-gentoo-network-hang";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2025/09/19/cstats/" title="Personal Commit Statistics">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#solving-network-hardware-hangs-on-framework-desktop">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <a href="https://www.goatcounter.com">No personal information collected</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

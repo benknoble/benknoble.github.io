@@ -1,4 +1,152 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-10-11T14:47:41+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Personal Commit Statistics</title><link href="https://benknoble.github.io/blog/2025/09/19/cstats/" rel="alternate" type="text/html" title="Personal Commit Statistics" /><published>2025-09-19T00:00:00+00:00</published><updated>2025-09-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/09/19/cstats</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/09/19/cstats/"><![CDATA[<p>Here’s some statistics on commits I’ve authored collected from <a href="/blog/2019/08/14/cstat-efficiencies/"><code class="language-plaintext highlighter-rouge">git-cstat</code></a> over a few work and open-source
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-10-13T22:53:02+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Solving Network Hardware Hangs on Framework Desktop</title><link href="https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/" rel="alternate" type="text/html" title="Solving Network Hardware Hangs on Framework Desktop" /><published>2025-10-13T00:00:00+00:00</published><updated>2025-10-13T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/"><![CDATA[<p>I’ve recently installed Gentoo on my new Framework Desktop, and for a while the
+network would hang, causing any program that touched the hardware to also crap
+out.</p>
+
+<p>Here are some symptoms:</p>
+<ul>
+  <li>Thinks chug along just fine, until</li>
+  <li>The network goes down and commands start freezing. We’re talking no C-c, no
+C-\, no <code class="language-plaintext highlighter-rouge">pkill -9</code>: just dead in the water. (I hadn’t solved switching
+consoles with Alt-Function keys yet, so fortunately I had tmux running.)
+    <ul>
+      <li>Notably, commands like <code class="language-plaintext highlighter-rouge">emerge</code> hang when they get to network steps.
+Various <code class="language-plaintext highlighter-rouge">ip</code> &amp; <code class="language-plaintext highlighter-rouge">ifconfig</code> style commands hang immediately.</li>
+      <li>Commands like <code class="language-plaintext highlighter-rouge">nmcli</code> and <code class="language-plaintext highlighter-rouge">ping</code> don’t hang, but don’t work.</li>
+      <li>I’m pretty sure <code class="language-plaintext highlighter-rouge">/etc/resolv.conf</code> isn’t being touched.</li>
+    </ul>
+  </li>
+  <li>The <code class="language-plaintext highlighter-rouge">NetworkManager</code> daemon is running, but:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">top</code> shows “D” (d-sleep) and <code class="language-plaintext highlighter-rouge">ps</code> shows “Dsl”</li>
+      <li><code class="language-plaintext highlighter-rouge">rc-status</code> reports NetworkManager as active, but <code class="language-plaintext highlighter-rouge">nmcli g</code> says its down</li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">rc-service NetworkManager restart</code> fails with</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  * Caching service dependencies ... [ ok ]
+  * Unmounting network filesystems ... [ ok ]
+  * Stoppping NetworkManager ...
+  * start-stop-daemon: 1 rocesses refused to stop [ !! ]
+  * ERROR: NetworkManager failed to stop
+  * Mounting network filesystems ... [ ok ]
+</code></pre></div>        </div>
+      </li>
+      <li>similarly with <code class="language-plaintext highlighter-rouge">s/restart/stop</code>, and <code class="language-plaintext highlighter-rouge">pkill -9 NetworkManager</code> has no
+effect!
+        <ul>
+          <li>I didn’t understand how <code class="language-plaintext highlighter-rouge">zap</code> worked at the time, so I wonder if that
+would have helped :thinking:</li>
+        </ul>
+      </li>
+      <li>shutting down complains about not stopping the NetworkManager, too</li>
+    </ul>
+  </li>
+</ul>
+
+<p>I checked my hardware with <code class="language-plaintext highlighter-rouge">lspci</code>, which I’d fortunately installed during the
+main system installation process, and with <code class="language-plaintext highlighter-rouge">lspci -k</code> I found out my network
+card is</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>c0:00.0 Mediatek MT7925 (RZ717) Wi-Fi 7 160MHz [14c3:0717]
+</code></pre></div></div>
+
+<p>with kernel module (in use) <code class="language-plaintext highlighter-rouge">mt7925e</code>.</p>
+
+<p>First, I tried turning off WiFi power saving <a href="https://forum.garudalinux.org/t/mediatek-mt7925e-wifi-speed-very-slow-on-close-to-fresh-install-and-some-updates/41845/11">as recommended by Garuda folks</a>:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="s1">'[connection]'</span> <span class="s1">'wifi.powersave = 0'</span> | doas <span class="nb">tee</span> /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+</code></pre></div></div>
+
+<p>That didn’t help: a little while into my next reboot, the hang happened again.
+Then I tried <a href="https://forum.garudalinux.org/t/mediatek-mt7925e-wifi-speed-very-slow-on-close-to-fresh-install-and-some-updates/41845/9">disabling the “Active State Power Management” for my network
+card</a>,
+which is apparently cursed with this problem:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s1">'options mt7925e disable_aspm=1'</span> | doas <span class="nb">tee</span> /etc/modprobe.d/7925e_wifi.conf
+</code></pre></div></div>
+
+<p>That seems to have done the trick, so I’ll delete the NetworkManager settings.</p>
+
+<h2 id="a-few-unrelated--things">A few unrelated (?) things</h2>
+
+<p>I don’t have kernel logs for the problematic scenario, but now that my system is
+running normally I can eliminate a few things from the problem space.</p>
+
+<p>In both working and non-working configurations, I saw repeated logs in <code class="language-plaintext highlighter-rouge">dmesg</code>
+for the network:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>disconnect from AP &lt;MAC&gt; for new auth to &lt;other MAC&gt;
+authenticate with &lt;other MAC&gt; (local address=&lt;my MAC&gt;)
+send auth to &lt;other MAC&gt; (try 1/3)
+authenticate with &lt;other MAC&gt; (local address=&lt;my MAC&gt;)
+send auth to &lt;2nd other MAC&gt; (try 1/3)
+authenticated
+associate with &lt;2nd other MAC&gt; (try 1/3)
+RX AssocResp from &lt;2nd other MAC&gt; (capab=0x1511 status=0 aid=3)
+associated
+Limiting TX power to 30 (30 - 0) dBm as advertised by &lt;2nd other MAC&gt;
+diassociated from &lt;2nd other MAC&gt; (Reason: 1=UNSPECIFIED)
+</code></pre></div></div>
+
+<p>Often these occur every 5 minutes and loop for a while, then die away.</p>
+
+<p>I saved some logs with</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ echo count from to;
+  grep 'disconnect from AP' /var/log/messages |
+    grep -o '\([[:xdigit:]][[:xdigit:]]:\?\)\{6\}' | paste - - |
+    sort | uniq -c; } | column -t
+</code></pre></div></div>
+
+<p>which gave for example</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>count  from               to
+3      &lt;prefix&gt;:2f:a9:51  &lt;prefix&gt;:2f:a9:59
+22     &lt;prefix&gt;:2f:a9:51  &lt;prefix&gt;:d2:14:29
+1      &lt;prefix&gt;:d2:14:21  &lt;prefix&gt;:2f:a9:59
+2      &lt;prefix&gt;:d2:14:21  &lt;prefix&gt;:d2:14:29
+</code></pre></div></div>
+
+<p>As far as I can tell, the (masked) <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;</code> there matches the output from
+another connected device when checking the router with <code class="language-plaintext highlighter-rouge">arp -a</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gr6exx0c-a940.lan (192.168.2.1) at &lt;prefix&gt;:2f:a9:40 on en0 ifscope [ethernet]
+</code></pre></div></div>
+
+<p>And my management app says</p>
+<ul>
+  <li>the router has a MAC of <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;:2f:a9:41</code></li>
+  <li>the extender (MoCA) has a MAC of <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;:d2:14:10</code></li>
+</ul>
+
+<p>So clearly something is going on here, and the NetworkManager is having trouble
+deciding which connection to use?</p>
+
+<h2 id="miscellany">Miscellany</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dmesg -Hw</code> is much nicer than regular <code class="language-plaintext highlighter-rouge">dmesg</code></li>
+  <li><code class="language-plaintext highlighter-rouge">shutdown -hP</code> didn’t power off, but <code class="language-plaintext highlighter-rouge">reboot -p</code> did reboot</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">lspci -k &gt;/dev/null</code> complains:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pcilib: Error reading /sys/bus/pci/devices/0000:00:08.3/label: Operation not permitted
+</code></pre></div>    </div>
+
+    <p>but running with usual output doesn’t.</p>
+  </li>
+  <li>
+    <p>Once I saw dmesg logs about my SSD?</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  block nvme0n1: the capability attribute has been deprecated
+  No UUID available providing old NGUID
+</code></pre></div>    </div>
+  </li>
+  <li>Related:
+    <ul>
+      <li><a href="https://community.frame.work/t/framework-13-amd-ai-wifi-issue-on-arch-linux/71019/2">https://community.frame.work/t/framework-13-amd-ai-wifi-issue-on-arch-linux/71019/2</a></li>
+      <li><a href="https://forum.garudalinux.org/t/mediatek-mt7925e-wifi-speed-very-slow-on-close-to-fresh-install-and-some-updates/41845/6">https://forum.garudalinux.org/t/mediatek-mt7925e-wifi-speed-very-slow-on-close-to-fresh-install-and-some-updates/41845/6</a></li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="linux" /><category term="network" /><category term="gentoo" /><summary type="html"><![CDATA[I’ve recently installed Gentoo on my new Framework Desktop, and for a while the network would hang, causing any program that touched the hardware to also crap out.]]></summary></entry><entry><title type="html">Personal Commit Statistics</title><link href="https://benknoble.github.io/blog/2025/09/19/cstats/" rel="alternate" type="text/html" title="Personal Commit Statistics" /><published>2025-09-19T00:00:00+00:00</published><updated>2025-09-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/09/19/cstats</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/09/19/cstats/"><![CDATA[<p>Here’s some statistics on commits I’ve authored collected from <a href="/blog/2019/08/14/cstat-efficiencies/"><code class="language-plaintext highlighter-rouge">git-cstat</code></a> over a few work and open-source
 repositories.</p>
 
 <h2 id="min-max-average-commit-length-in-words">Min, max, average commit length in words</h2>
@@ -706,44 +854,4 @@ is now available to make <code class="language-plaintext highlighter-rouge">--in
 stash pop</code> in Git 3.0.</p>
 
 <p><strong>Update 2025 June 7th</strong> Given the lack of enthusiasm or engagement, I’ll
-probably reroll this into a config option for now.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve contributed small fixes to Git before, and I’ve started replying to the mailing list more frequently, but my first large contribution is now available to make --index the default for git stash apply and git stash pop in Git 3.0.]]></summary></entry><entry><title type="html">Ask hard questions</title><link href="https://benknoble.github.io/blog/2025/05/06/hard-questions/" rel="alternate" type="text/html" title="Ask hard questions" /><published>2025-05-06T00:00:00+00:00</published><updated>2025-05-06T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/05/06/hard-questions</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/05/06/hard-questions/"><![CDATA[<p>The Wall Street Journal article <a href="https://www.wsj.com/tech/personal-tech/ai-personal-assistant-wearable-tech-impressions-28156b57">I Recorded Everything I Said for Three Months.
-AI Has Replaced My
-Memory.</a>
-is another example of tech reporters being unwilling to ask the hard questions
-and push back.</p>
-
-<p>When a company records your voice, stores it on their server, and says they
-don’t sell it: Do you believe them? Or do you ask to see policies and controls?</p>
-
-<p>Then there’s the notion that troves of data like this are almost always
-eventually leaked: are you still sure that the privacy trade-off will be worth
-it in the future?</p>
-
-<p>What does it even mean for these assistive devices to get “more helpful and more
-human-like”? And even if they were to become more helpful, that doesn’t mean that
-all bets are off on privacy. Privacy is still important.</p>
-
-<p>Worse, writing that it’s only a matter of time before these things are baked
-into other devices precludes the world where we decide that privacy is important
-and instead lauds the companies that invade our privacy. To me, that’s sloppy.
-It’s unserious. It’s a naked ad masquerading as journalism. There are tech
-communities actively working to make privacy the default, and there are policy
-communities actively working to make privacy a matter of law.</p>
-
-<p>As American police forces have no doubt found thanks to the tireless work of
-activists<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, being recorded all the time is not a punchline to close an ad.</p>
-
-<h2 id="notes">Notes</h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p>The act of recording law enforcement, in addition to being a measure of
-safety, is an important exercise in turning the watcher into the watched.
-Pervasive police and state surveillance are met by pervasive recording of
-the state. If that makes the watched police uncomfortable, then perhaps they
-will understand how the surveilled and scrutinized communities they claim to
-protect feel. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><category term="privacy" /><summary type="html"><![CDATA[The Wall Street Journal article I Recorded Everything I Said for Three Months. AI Has Replaced My Memory. is another example of tech reporters being unwilling to ask the hard questions and push back.]]></summary></entry></feed>
+probably reroll this into a config option for now.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve contributed small fixes to Git before, and I’ve started replying to the mailing list more frequently, but my first large contribution is now available to make --index the default for git stash apply and git stash pop in Git 3.0.]]></summary></entry></feed>
