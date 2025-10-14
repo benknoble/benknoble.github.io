@@ -33,9 +33,12 @@ Here are some symptoms:
 
     - similarly with `s/restart/stop`, and `pkill -9 NetworkManager` has no
       effect!
-        - I didn't understand how `zap` worked at the time, so I wonder if that
-          would have helped :thinking:
-    - shutting down complains about not stopping the NetworkManager, too
+      - I didn't understand how `zap` worked at the time, but it turns out not
+        to help
+      - shutting down complains about not stopping the NetworkManager, too
+    - Turns out, `wpa_supplicant` is also in "D" status! And owned by init. Hm.
+    - `grep -R wpa /var/logs` reminded me I needed to create
+      `/etc/wpa_supplicant/wpa_supplicant.conf`. (I've done so since.)
 
 I checked my hardware with `lspci`, which I'd fortunately installed during the
 main system installation process, and with `lspci -k` I found out my network
@@ -63,6 +66,10 @@ echo 'options mt7925e disable_aspm=1' | doas tee /etc/modprobe.d/7925e_wifi.conf
 ```
 
 That seems to have done the trick, so I'll delete the NetworkManager settings.
+
+Since I've now seen this recur, I've checked a few more things (added
+`wpa_supplicant` details above). I've also added `syslog` to the `USE` flags for
+NetworkManager to hopefully capture more information.
 
 ## A few unrelated (?) things
 
@@ -123,7 +130,12 @@ deciding which connection to use?
 ## Miscellany
 
 - `dmesg -Hw` is much nicer than regular `dmesg`
-- `shutdown -hP` didn't power off, but `reboot -p` did reboot
+- Miscellaneous adventures in power management:
+    - `shutdown -hP` didn't power off, but `reboot -p` did reboot
+    - Gentoo's dist kernels have ACPI enabled (though you want to install the
+      daemons and enable them at boot to get full features)
+    - `reboot=acpi` is a valid kernel option in newer kernels, but not `acpi=on`
+      (`force` is still valid, though unlikely to be needed)
 - `lspci -k >/dev/null` complains:
 
     ```
