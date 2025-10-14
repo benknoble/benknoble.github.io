@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-10-14T00:19:12+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Solving Network Hardware Hangs on Framework Desktop</title><link href="https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/" rel="alternate" type="text/html" title="Solving Network Hardware Hangs on Framework Desktop" /><published>2025-10-13T00:00:00+00:00</published><updated>2025-10-13T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/"><![CDATA[<p>I’ve recently installed Gentoo on my new Framework Desktop, and for a while the
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-10-14T01:51:52+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Solving Network Hardware Hangs on Framework Desktop</title><link href="https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/" rel="alternate" type="text/html" title="Solving Network Hardware Hangs on Framework Desktop" /><published>2025-10-13T00:00:00+00:00</published><updated>2025-10-13T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/"><![CDATA[<p>I’ve recently installed Gentoo on my new Framework Desktop, and for a while the
 network would hang, causing any program that touched the hardware to also crap
 out. <strong>Update same day:</strong> I’ve just had the problem recur! Agh!</p>
 
@@ -33,11 +33,14 @@ Various <code class="language-plaintext highlighter-rouge">ip</code> &amp; <code
       <li>similarly with <code class="language-plaintext highlighter-rouge">s/restart/stop</code>, and <code class="language-plaintext highlighter-rouge">pkill -9 NetworkManager</code> has no
 effect!
         <ul>
-          <li>I didn’t understand how <code class="language-plaintext highlighter-rouge">zap</code> worked at the time, so I wonder if that
-would have helped :thinking:</li>
+          <li>I didn’t understand how <code class="language-plaintext highlighter-rouge">zap</code> worked at the time, but it turns out not
+to help</li>
+          <li>shutting down complains about not stopping the NetworkManager, too</li>
         </ul>
       </li>
-      <li>shutting down complains about not stopping the NetworkManager, too</li>
+      <li>Turns out, <code class="language-plaintext highlighter-rouge">wpa_supplicant</code> is also in “D” status! And owned by init. Hm.</li>
+      <li><code class="language-plaintext highlighter-rouge">grep -R wpa /var/logs</code> reminded me I needed to create
+<code class="language-plaintext highlighter-rouge">/etc/wpa_supplicant/wpa_supplicant.conf</code>. (I’ve done so since.)</li>
     </ul>
   </li>
 </ul>
@@ -65,6 +68,10 @@ which is apparently cursed with this problem:</p>
 </code></pre></div></div>
 
 <p>That seems to have done the trick, so I’ll delete the NetworkManager settings.</p>
+
+<p>Since I’ve now seen this recur, I’ve checked a few more things (added
+<code class="language-plaintext highlighter-rouge">wpa_supplicant</code> details above). I’ve also added <code class="language-plaintext highlighter-rouge">syslog</code> to the <code class="language-plaintext highlighter-rouge">USE</code> flags for
+NetworkManager to hopefully capture more information.</p>
 
 <h2 id="a-few-unrelated--things">A few unrelated (?) things</h2>
 
@@ -124,7 +131,15 @@ deciding which connection to use?</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">dmesg -Hw</code> is much nicer than regular <code class="language-plaintext highlighter-rouge">dmesg</code></li>
-  <li><code class="language-plaintext highlighter-rouge">shutdown -hP</code> didn’t power off, but <code class="language-plaintext highlighter-rouge">reboot -p</code> did reboot</li>
+  <li>Miscellaneous adventures in power management:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">shutdown -hP</code> didn’t power off, but <code class="language-plaintext highlighter-rouge">reboot -p</code> did reboot</li>
+      <li>Gentoo’s dist kernels have ACPI enabled (though you want to install the
+daemons and enable them at boot to get full features)</li>
+      <li><code class="language-plaintext highlighter-rouge">reboot=acpi</code> is a valid kernel option in newer kernels, but not <code class="language-plaintext highlighter-rouge">acpi=on</code>
+(<code class="language-plaintext highlighter-rouge">force</code> is still valid, though unlikely to be needed)</li>
+    </ul>
+  </li>
   <li>
     <p><code class="language-plaintext highlighter-rouge">lspci -k &gt;/dev/null</code> complains:</p>
 

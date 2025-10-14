@@ -32,8 +32,7 @@
     <header>
   <h1>
   <a href="https://benknoble.github.io/">
-  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
-</h1>
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
   <p>For all those little papers scattered across your desk</p>
 </header>
 
@@ -100,15 +99,12 @@ Various <code class="language-plaintext highlighter-rouge">ip</code> &amp; <code
   </li>
   <li>The <code class="language-plaintext highlighter-rouge">NetworkManager</code> daemon is running, but:
     <ul>
-      <li>
-<code class="language-plaintext highlighter-rouge">top</code> shows “D” (d-sleep) and <code class="language-plaintext highlighter-rouge">ps</code> shows “Dsl”</li>
-      <li>
-<code class="language-plaintext highlighter-rouge">rc-status</code> reports NetworkManager as active, but <code class="language-plaintext highlighter-rouge">nmcli g</code> says its down</li>
+      <li><code class="language-plaintext highlighter-rouge">top</code> shows “D” (d-sleep) and <code class="language-plaintext highlighter-rouge">ps</code> shows “Dsl”</li>
+      <li><code class="language-plaintext highlighter-rouge">rc-status</code> reports NetworkManager as active, but <code class="language-plaintext highlighter-rouge">nmcli g</code> says its down</li>
       <li>
         <p><code class="language-plaintext highlighter-rouge">rc-service NetworkManager restart</code> fails with</p>
 
-        <div class="language-plaintext highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>  * Caching service dependencies ... [ ok ]
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  * Caching service dependencies ... [ ok ]
   * Unmounting network filesystems ... [ ok ]
   * Stoppping NetworkManager ...
   * start-stop-daemon: 1 rocesses refused to stop [ !! ]
@@ -119,12 +115,14 @@ Various <code class="language-plaintext highlighter-rouge">ip</code> &amp; <code
       <li>similarly with <code class="language-plaintext highlighter-rouge">s/restart/stop</code>, and <code class="language-plaintext highlighter-rouge">pkill -9 NetworkManager</code> has no
 effect!
         <ul>
-          <li>I didn’t understand how <code class="language-plaintext highlighter-rouge">zap</code> worked at the time, so I wonder if that
-would have helped <img class="emoji" title=":thinking:" alt=":thinking:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f914.png" height="20" width="20">
-</li>
+          <li>I didn’t understand how <code class="language-plaintext highlighter-rouge">zap</code> worked at the time, but it turns out not
+to help</li>
+          <li>shutting down complains about not stopping the NetworkManager, too</li>
         </ul>
       </li>
-      <li>shutting down complains about not stopping the NetworkManager, too</li>
+      <li>Turns out, <code class="language-plaintext highlighter-rouge">wpa_supplicant</code> is also in “D” status! And owned by init. Hm.</li>
+      <li><code class="language-plaintext highlighter-rouge">grep -R wpa /var/logs</code> reminded me I needed to create
+<code class="language-plaintext highlighter-rouge">/etc/wpa_supplicant/wpa_supplicant.conf</code>. (I’ve done so since.)</li>
     </ul>
   </li>
 </ul>
@@ -152,6 +150,10 @@ which is apparently cursed with this problem:</p>
 </code></pre></div></div>
 
 <p>That seems to have done the trick, so I’ll delete the NetworkManager settings.</p>
+
+<p>Since I’ve now seen this recur, I’ve checked a few more things (added
+<code class="language-plaintext highlighter-rouge">wpa_supplicant</code> details above). I’ve also added <code class="language-plaintext highlighter-rouge">syslog</code> to the <code class="language-plaintext highlighter-rouge">USE</code> flags for
+NetworkManager to hopefully capture more information.</p>
 
 <h2 id="a-few-unrelated--things">A few unrelated (?) things</h2>
 
@@ -200,10 +202,8 @@ another connected device when checking the router with <code class="language-pla
 
 <p>And my management app says</p>
 <ul>
-  <li>the router has a MAC of <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;:2f:a9:41</code>
-</li>
-  <li>the extender (MoCA) has a MAC of <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;:d2:14:10</code>
-</li>
+  <li>the router has a MAC of <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;:2f:a9:41</code></li>
+  <li>the extender (MoCA) has a MAC of <code class="language-plaintext highlighter-rouge">&lt;prefix&gt;:d2:14:10</code></li>
 </ul>
 
 <p>So clearly something is going on here, and the NetworkManager is having trouble
@@ -212,16 +212,20 @@ deciding which connection to use?</p>
 <h2 id="miscellany">Miscellany</h2>
 
 <ul>
-  <li>
-<code class="language-plaintext highlighter-rouge">dmesg -Hw</code> is much nicer than regular <code class="language-plaintext highlighter-rouge">dmesg</code>
-</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">shutdown -hP</code> didn’t power off, but <code class="language-plaintext highlighter-rouge">reboot -p</code> did reboot</li>
+  <li><code class="language-plaintext highlighter-rouge">dmesg -Hw</code> is much nicer than regular <code class="language-plaintext highlighter-rouge">dmesg</code></li>
+  <li>Miscellaneous adventures in power management:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">shutdown -hP</code> didn’t power off, but <code class="language-plaintext highlighter-rouge">reboot -p</code> did reboot</li>
+      <li>Gentoo’s dist kernels have ACPI enabled (though you want to install the
+daemons and enable them at boot to get full features)</li>
+      <li><code class="language-plaintext highlighter-rouge">reboot=acpi</code> is a valid kernel option in newer kernels, but not <code class="language-plaintext highlighter-rouge">acpi=on</code>
+(<code class="language-plaintext highlighter-rouge">force</code> is still valid, though unlikely to be needed)</li>
+    </ul>
+  </li>
   <li>
     <p><code class="language-plaintext highlighter-rouge">lspci -k &gt;/dev/null</code> complains:</p>
 
-    <div class="language-plaintext highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>  pcilib: Error reading /sys/bus/pci/devices/0000:00:08.3/label: Operation not permitted
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pcilib: Error reading /sys/bus/pci/devices/0000:00:08.3/label: Operation not permitted
 </code></pre></div>    </div>
 
     <p>but running with usual output doesn’t.</p>
@@ -229,8 +233,7 @@ deciding which connection to use?</p>
   <li>
     <p>Once I saw dmesg logs about my SSD?</p>
 
-    <div class="language-plaintext highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>  block nvme0n1: the capability attribute has been deprecated
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  block nvme0n1: the capability attribute has been deprecated
   No UUID available providing old NGUID
 </code></pre></div>    </div>
   </li>
@@ -244,7 +247,7 @@ deciding which connection to use?</p>
 </ul>
 
 </div>
-<hr>
+<hr/>
 <h4>Tags:</h4>
 <ul class="tags">
   
@@ -296,14 +299,14 @@ deciding which connection to use?</p>
     div.parentNode.removeChild(div)
   };
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-</noscript>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
 
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2025/09/19/cstats/" title="Personal Commit Statistics">
+    <a href="https://benknoble.github.io/blog/2025/09/19/cstats/"
+      title="Personal Commit Statistics">
       Previous</a>
   </span>
   
@@ -318,7 +321,7 @@ deciding which connection to use?</p>
 
     </section>
     <footer>
-<hr>
+<hr/>
   <ul>
     
     <li>
@@ -350,7 +353,7 @@ deciding which connection to use?</p>
     </li>
     
     <li>
-      <p xmlns:cc="http://creativecommons.org/ns#"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
     </li>
   </ul>
 </footer>
