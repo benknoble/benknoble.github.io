@@ -6,7 +6,7 @@ category: Blog
 
 I've recently installed Gentoo on my new Framework Desktop, and for a while the
 network would hang, causing any program that touched the hardware to also crap
-out.
+out. **Update same day:** I've just had the problem recur! Agh!
 
 Here are some symptoms:
 - Thinks chug along just fine, until
