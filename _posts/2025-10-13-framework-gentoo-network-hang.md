@@ -131,7 +131,8 @@ deciding which connection to use?
 
 - `dmesg -Hw` is much nicer than regular `dmesg`
 - Miscellaneous adventures in power management:
-    - `shutdown -hP` didn't power off, but `reboot -p` did reboot
+    - `shutdown -hP` didn't power off, but `reboot -p` did reboot (sometimes
+      `reboot` doesn't reboot, though!)
     - Gentoo's dist kernels have ACPI enabled (though you want to install the
       daemons and enable them at boot to get full features)
     - `reboot=acpi` is a valid kernel option in newer kernels, but not `acpi=on`
