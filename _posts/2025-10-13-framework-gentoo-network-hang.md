@@ -71,6 +71,26 @@ Since I've now seen this recur, I've checked a few more things (added
 `wpa_supplicant` details above). I've also added `syslog` to the `USE` flags for
 NetworkManager to hopefully capture more information.
 
+Here's a [capture between a reboot and when I saw the problem
+again](https://paste.gentoo.zip/gIeCuVQ4); I can also see `chronyd` fail
+(probably because the network is down) and some things about DHCP lease expiry
+or failures. At the end of that log dump, I `doas reboot`, and then have to hold
+the power button (see below) to truly power off and reboot.
+
+Relevant information:
+- [`/etc/conf.d/netmount`](https://bpa.st/5QMN6): I only found out about this
+  file from `view /etc/conf.d/net*` while reading [the Handbook's
+  troubleshooting
+  guide](https://wiki.gentoo.org/wiki/Troubleshooting/en#Collecting_additional_information);
+  looks like I need to tell `netmount` to talk to `NetworkManager`? Apparently
+  that file was briefly covered in in the Handbook's Networking intro, but the
+  NetworkingManager page does not cover this configuration (though there are
+  mentions of it in the Wireless part of the Handbook under WPA Supplicant).
+
+    OTOH, this is for network-mounted file-systems, so it's "after" the wireless
+    issues I'm having, right?
+- [`emerge --info`](https://bpa.st/3M5FA)
+
 ## A few unrelated (?) things
 
 I don't have kernel logs for the problematic scenario, but now that my system is
