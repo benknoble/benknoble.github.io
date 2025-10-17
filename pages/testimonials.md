@@ -3,6 +3,16 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "I really appreciate your ability to encourage active discourse during
+  meetings especially during workshop retrospectives. During the last workshop
+  retrospective you were able to mantle different personas based on what the
+  context called for. At times you worked as a facilitator encouraging
+  conversation and making sure we stayed on track. Other times, you engaged more
+  directly as a peer in conversation. The seamless transition is notable only
+  because of your effectiveness in pulling it off bringing all the benefits of
+  each persona together. It keeps engagement high, don't stop!"
+- "Helped me expand my reach, provided impact for me and the team, and made me
+  feel welcomed by talking through tasks, careers, and life."
 - "Ben is an extremely talented developer whose passion for Git and the [Git
   Office Hours]({% link _workshops/git-office-hours.md %}) is very evident. He
   is very proactive in creating meeting plans and notes, and is very
