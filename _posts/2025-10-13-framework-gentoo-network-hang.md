@@ -11,6 +11,9 @@ later:** I've [been
 told](https://public-inbox.gentoo.org/gentoo-user/8593449.T7Z3S40VBb@rogueboard/T/#md3942ad92b6fb9b0cc52126fc92361a04968cedf)
 `wpa_supplicant` is likely the problem and I should just use `iwd`. Onwards!
 
+**Update 2025-10-20:** It seems that sometime in the middle of the day on the
+18th, `iwd` stopped it's reassociation loop. Phew.
+
 Here are some symptoms:
 - Thinks chug along just fine, until
 - The network goes down and commands start freezing. We're talking no C-c, no
