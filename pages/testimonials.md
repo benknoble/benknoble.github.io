@@ -3,6 +3,35 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "I've worked with Ben in a somewhat limited capacity so far, but I've been
+  impressed with his advocacy for engineering excellence and the well-being of
+  engineers in our organization.
+
+    "From what I have seen, Ben has made several improvements across these
+    areas, including:
+
+    "Engineering Excellence:
+
+    "Wholesome documentation improvements: Commonly finding gaps in our
+    documentation, and taking the initiative to improve these gaps.
+
+    "Monorepo Logging improvements: Finding gaps and inconsistencies in logs
+    across various domains in the monorepo, and taking the initiative to
+    normalize these logs in pursuit of easing our ability to monitor Slingshot
+    as a whole.
+
+    "Well-being of Engineers:
+
+    "Ben cares a great deal about the well-being of our engineers, and I have
+    seen him advocate for us all in every occasion that comes to memory. He has
+    bridged candid feedback across various levels in our engineering
+    organization, and has been a driving force for voicing this collective
+    feedback to our leadership.
+
+    "I'd love to see Ben continue to lean in and drive impact in these areas.
+    There is so much potential for positive change in our organization, and I
+    believe you can be a key player in tangibly making that a reality."
+
 - "Ben does an excellent job expressing himself."
 - "Ben has been proactive in helping to improve the overall release process and
   coordinating with me and other team leads to ensure that we continue to
