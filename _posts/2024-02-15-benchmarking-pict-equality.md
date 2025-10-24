@@ -1,6 +1,6 @@
 ---
 title: 'Performance of Racket Pict Comparison'
-tags: [racket, performance]
+tags: [racket, frosthaven-manager, performance]
 category: [ Blog ]
 ---
 

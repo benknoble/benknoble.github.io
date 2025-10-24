@@ -1,6 +1,6 @@
 ---
 title: 'Server-sent events with Racket'
-tags: [racket, web]
+tags: [racket, frosthaven-manager, web]
 category: [ Blog ]
 ---
 
