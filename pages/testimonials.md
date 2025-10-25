@@ -10,23 +10,23 @@ permalink: /testimonials/
     "From what I have seen, Ben has made several improvements across these
     areas, including:
 
-    "Engineering Excellence:
+    - "Engineering Excellence:
 
-    "Wholesome documentation improvements: Commonly finding gaps in our
-    documentation, and taking the initiative to improve these gaps.
+        - "Wholesome documentation improvements: Commonly finding gaps in our
+          documentation, and taking the initiative to improve these gaps.
 
-    "Monorepo Logging improvements: Finding gaps and inconsistencies in logs
-    across various domains in the monorepo, and taking the initiative to
-    normalize these logs in pursuit of easing our ability to monitor Slingshot
-    as a whole.
+        - "Monorepo Logging improvements: Finding gaps and inconsistencies in
+          logs across various domains in the monorepo, and taking the initiative
+          to normalize these logs in pursuit of easing our ability to monitor
+          Slingshot as a whole.
 
-    "Well-being of Engineers:
+    - "Well-being of Engineers:
 
-    "Ben cares a great deal about the well-being of our engineers, and I have
-    seen him advocate for us all in every occasion that comes to memory. He has
-    bridged candid feedback across various levels in our engineering
-    organization, and has been a driving force for voicing this collective
-    feedback to our leadership.
+        - "Ben cares a great deal about the well-being of our engineers, and I
+          have seen him advocate for us all in every occasion that comes to
+          memory. He has bridged candid feedback across various levels in our
+          engineering organization, and has been a driving force for voicing
+          this collective feedback to our leadership.
 
     "I'd love to see Ben continue to lean in and drive impact in these areas.
     There is so much potential for positive change in our organization, and I
