@@ -3,6 +3,36 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- Ben has very strong communication within our team and with other teams. He is
+  able to effective communicate to stakeholders about projects, setting
+  expectations and encouraging meaningful discussions. He often lead small team
+  meetings, allowing for productive and structured meetings. He also has very
+  well-written documentations and peer reviews that provide clear information
+  transfer to other devs.
+
+    Ben also has exceptional judgement. When the team is swamped with my high
+    priority tasks, he is able to distribute work effective and keep our eyes on
+    the most important tasks. He is also able to challenge ownership and pull in
+    domain owners when appropriate. He is always challenging ideas whether it is
+    processes or code in peer reviews. This allows for the team to stay
+    efficient and ensure high standard for code quality across the team.
+
+- Ben was a great partner to work with during the [self-service SSO] experience,
+  especially in the early phases before the project transitioned fully to tech
+  implementation. He has a strong ability to explain complex technical details
+  in a way that’s accessible to non-technical partners, which made collaboration
+  smooth and productive. Ben consistently showed a clear understanding of the
+  importance of maintaining a consistent, well-communicated user experience—even
+  when timelines were tight and priorities shifted quickly.
+
+    His openness and proactive communication stood out, particularly when
+    usability concerns surfaced. By increasing the frequency of cross-functional
+    updates, Ben helped keep both tech and design aligned, allowing the team to
+    move quickly on critical adjustments during tech discovery. His teamwork,
+    adaptability, and clarity of communication make him a reliable and
+    collaborative partner, and I look forward to future opportunities to work
+    together.
+
 - "I've worked with Ben in a somewhat limited capacity so far, but I've been
   impressed with his advocacy for engineering excellence and the well-being of
   engineers in our organization.
