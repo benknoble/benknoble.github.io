@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-11-05T13:41:16+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Firefox with “normal” editing shortcuts in i3</title><link href="https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3/" rel="alternate" type="text/html" title="Firefox with “normal” editing shortcuts in i3" /><published>2025-11-05T00:00:00+00:00</published><updated>2025-11-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3/"><![CDATA[<p>My “desktop environment” is just i3 at this point, so there’s no GNOME or other
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-11-05T22:44:10+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Firefox with “normal” editing shortcuts in i3</title><link href="https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3/" rel="alternate" type="text/html" title="Firefox with “normal” editing shortcuts in i3" /><published>2025-11-05T00:00:00+00:00</published><updated>2025-11-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3/"><![CDATA[<p>My “desktop environment” is just i3 at this point, so there’s no GNOME or other
 Gtk environment to meet the <a href="https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly#w_developer-shortcuts">shortcuts enabled in GNOME
 requirement</a>.</p>
 
@@ -32,6 +32,9 @@ there, once I know what they control.</p>
 (Meta), and I’m not sure changing <code class="language-plaintext highlighter-rouge">accelKey</code> had any real affect. The one
 downside here is that M-q quits without warning despite those settings not
 changing. Oh well.</p>
+
+<p><strong>Update later that day:</strong> I had to re-enable the <code class="language-plaintext highlighter-rouge">accelKey</code> change, so maybe
+both are required?</p>
 
 <p>PS I know, there’s probably a way to get Vim + Firefox to work these days. I’ll
 explore that later. For now, I’m used to browsers, Slack, and others at least
