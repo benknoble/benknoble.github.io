@@ -40,6 +40,9 @@ there, once I know what they control.
 downside here is that M-q quits without warning despite those settings not
 changing. Oh well.
 
+**Update later that day:** I had to re-enable the `accelKey` change, so maybe
+both are required?
+
 PS I know, there's probably a way to get Vim + Firefox to work these days. I'll
 explore that later. For now, I'm used to browsers, Slack, and others at least
 letting me edit from a sensible part of my keyboard (C-n, C-a, C-k, etc.) when
