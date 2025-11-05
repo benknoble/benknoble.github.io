@@ -1,4 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-10-29T20:17:15+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Solving Network Hardware Hangs on Framework Desktop</title><link href="https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/" rel="alternate" type="text/html" title="Solving Network Hardware Hangs on Framework Desktop" /><published>2025-10-13T00:00:00+00:00</published><updated>2025-10-13T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/"><![CDATA[<p>I’ve recently installed Gentoo on my new Framework Desktop, and for a while the
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-11-05T13:30:07+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Firefox with “normal” editing shortcuts in i3</title><link href="https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3/" rel="alternate" type="text/html" title="Firefox with “normal” editing shortcuts in i3" /><published>2025-11-05T00:00:00+00:00</published><updated>2025-11-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3/"><![CDATA[<p>My “desktop environment” is just i3 at this point, so there’s no GNOME or other
+Gtk environment to meet the <a href="https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly#w_developer-shortcuts">shortcuts enabled in GNOME
+requirement</a>.</p>
+
+<p>Fortunately, there’s a way around that. After cobbling together <a href="http://www.linuxfocus.org/English/December2004/article358.shtml">a post from
+2004</a> (which no
+longer works but points in the right direction) with <a href="https://blog.karssen.org/2024/06/05/using-emacs-key-bindings-in-gnome-firefox-and-other-applications/">a much more recent
+post</a>,
+the following appears to work:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
+mkdir -p ~/.config/gtk-3.0
+cat &lt;&lt;EOF &gt;settings.ini
+[Settings]
+gtk-key-theme-name = Emacs
+EOF
+</code></pre></div></div>
+
+<p>and restart Firefox. Note I’m using the Gentoo desktop profile, so <code class="language-plaintext highlighter-rouge">gsettings</code>
+and the gtk config directory already existed despite not running GNOME.</p>
+
+<p>The only caveat I have so far is that I now have to exit focus from text inputs,
+including the address bar, before I can use Firefox shortcuts like C-h
+(history).</p>
+
+<p>The latter article also mentions
+<a href="https://kb.mozillazine.org/About:config_entries#UI."><code class="language-plaintext highlighter-rouge">ui.key.accelKey</code></a>, which
+pointed me to <code class="language-plaintext highlighter-rouge">generalAccessKey</code>, too. I might experiment with using other keys
+there, once I know what they control.</p>
+
+<p>PS I know, there’s probably a way to get Vim + Firefox to work these days. I’ll
+explore that later. For now, I’m used to browsers, Slack, and others at least
+letting me edit from a sensible part of my keyboard (C-n, C-a, C-k, etc.) when
+I’m not in Vim.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="linux" /><category term="gentoo" /><summary type="html"><![CDATA[My “desktop environment” is just i3 at this point, so there’s no GNOME or other Gtk environment to meet the shortcuts enabled in GNOME requirement.]]></summary></entry><entry><title type="html">Solving Network Hardware Hangs on Framework Desktop</title><link href="https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/" rel="alternate" type="text/html" title="Solving Network Hardware Hangs on Framework Desktop" /><published>2025-10-13T00:00:00+00:00</published><updated>2025-10-13T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/"><![CDATA[<p>I’ve recently installed Gentoo on my new Framework Desktop, and for a while the
 network would hang, causing any program that touched the hardware to also crap
 out. <strong>Update same day:</strong> I’ve just had the problem recur! Agh! <strong>Update
 later:</strong> I’ve <a href="https://public-inbox.gentoo.org/gentoo-user/8593449.T7Z3S40VBb@rogueboard/T/#md3942ad92b6fb9b0cc52126fc92361a04968cedf">been
@@ -3110,10 +3143,4 @@ see that it only “translates” the function name when given a string. Presuma
 that means funcrefs (like those produced by lambdas) remain untranslated, which
 makes sense if I assume that translation means “convert string to funcref.”</p>
 
-<p>Now I know!</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="bisect" /><category term="vim" /><summary type="html"><![CDATA[I experienced a non-breaking paper cut-style bug in Vim for the last 6 months or so, and I finally tracked down the details.]]></summary></entry><entry><title type="html">Contributing to Git</title><link href="https://benknoble.github.io/blog/2025/05/10/git-contribution/" rel="alternate" type="text/html" title="Contributing to Git" /><published>2025-05-10T00:00:00+00:00</published><updated>2025-05-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/05/10/git-contribution</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/05/10/git-contribution/"><![CDATA[<p>I’ve contributed small fixes to Git before, and I’ve started replying to the
-mailing list more frequently, but <a href="https://lore.kernel.org/git/20250510183358.36806-1-ben.knoble+github@gmail.com/T/#m401ea75fd80edb213924368c016b01b52c8d57cf">my first large contribution</a>
-is now available to make <code class="language-plaintext highlighter-rouge">--index</code> the default for <code class="language-plaintext highlighter-rouge">git stash apply</code> and <code class="language-plaintext highlighter-rouge">git
-stash pop</code> in Git 3.0.</p>
-
-<p><strong>Update 2025 June 7th</strong> Given the lack of enthusiasm or engagement, I’ll
-probably reroll this into a config option for now.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[I’ve contributed small fixes to Git before, and I’ve started replying to the mailing list more frequently, but my first large contribution is now available to make --index the default for git stash apply and git stash pop in Git 3.0.]]></summary></entry></feed>
+<p>Now I know!</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="bisect" /><category term="vim" /><summary type="html"><![CDATA[I experienced a non-breaking paper cut-style bug in Vim for the last 6 months or so, and I finally tracked down the details.]]></summary></entry></feed>
