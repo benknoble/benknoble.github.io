@@ -35,6 +35,11 @@ The latter article also mentions
 pointed me to `generalAccessKey`, too. I might experiment with using other keys
 there, once I know what they control.
 
+**Update later that day:** It seems `generalAccessKey=224` lets me use Command
+(Meta), and I'm not sure changing `accelKey` had any real affect. The one
+downside here is that M-q quits without warning despite those settings not
+changing. Oh well.
+
 PS I know, there's probably a way to get Vim + Firefox to work these days. I'll
 explore that later. For now, I'm used to browsers, Slack, and others at least
 letting me edit from a sensible part of my keyboard (C-n, C-a, C-k, etc.) when
