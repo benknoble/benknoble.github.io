@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Firefox with "normal" editing shortcuts in i3</title>
+  <title>Junk Drawer : Packaging git-credential-1password</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -71,57 +71,37 @@
   </ul>
 </nav>
 
-      <h1>Firefox with "normal" editing shortcuts in i3</h1>
+      <h1>Packaging git-credential-1password</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 05 Nov 2025 in Blog</p>
+ on 10 Nov 2025 in Blog</p>
 <div id="post">
-  <p>My “desktop environment” is just i3 at this point, so there’s no GNOME or other
-Gtk environment to meet the <a href="https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly#w_developer-shortcuts">shortcuts enabled in GNOME
-requirement</a>.</p>
+  <p>I’m proud to say that
+<a href="https://github.com/benknoble/benknoble-gentoo-overlay/commit/7f705e8db484dda377bfaa22d661ebf46b280ca8">packaging</a>
+this <a href="https://github.com/ethrgeist/git-credential-1password">1password-based credential
+helper</a>, at least for my
+personal overlay, was fairly easy.</p>
 
-<p>Fortunately, there’s a way around that. After cobbling together <a href="http://www.linuxfocus.org/English/December2004/article358.shtml">a post from
-2004</a> (which no
-longer works but points in the right direction) with <a href="https://blog.karssen.org/2024/06/05/using-emacs-key-bindings-in-gnome-firefox-and-other-applications/">a much more recent
-post</a>,
-the following appears to work:</p>
+<p>The gist was:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
-mkdir -p ~/.config/gtk-3.0
-cat &lt;&lt;EOF &gt;settings.ini
-[Settings]
-gtk-key-theme-name = Emacs
-EOF
-</code></pre></div></div>
+<ol>
+  <li>Create an overlay. I did <code class="language-plaintext highlighter-rouge">doas eselect repository create benknoble
+~/code/benknoble-gentoo-overlay</code>, then <code class="language-plaintext highlighter-rouge">git init</code> inside that directory.</li>
+  <li>Write the ebuild.</li>
+  <li>Update the manifest: <code class="language-plaintext highlighter-rouge">pkgdev manifest -d tmp $eb &amp;&amp; rm -r tmp</code></li>
+  <li>Test it: <code class="language-plaintext highlighter-rouge">doas ebuild $eb clean install</code> and verify all looks good</li>
+  <li>Commit and publish</li>
+</ol>
 
-<p>and restart Firefox. Note I’m using the Gentoo desktop profile, so <code class="language-plaintext highlighter-rouge">gsettings</code>
-and the gtk config directory already existed despite not running GNOME.</p>
-
-<p>The only caveat I have so far is that I now have to exit focus from text inputs,
-including the address bar, before I can use Firefox shortcuts like C-h
-(history).</p>
-
-<p>The latter article also mentions
-<a href="https://kb.mozillazine.org/About:config_entries#UI."><code class="language-plaintext highlighter-rouge">ui.key.accelKey</code></a>, which
-pointed me to <code class="language-plaintext highlighter-rouge">generalAccessKey</code>, too. I might experiment with using other keys
-there, once I know what they control.</p>
-
-<p><strong>Update later that day:</strong> It seems <code class="language-plaintext highlighter-rouge">generalAccessKey=224</code> lets me use Command
-(Meta), and I’m not sure changing <code class="language-plaintext highlighter-rouge">accelKey</code> had any real affect. The one
-downside here is that M-q quits without warning despite those settings not
-changing. Oh well.</p>
-
-<p><strong>Update later that day:</strong> I had to re-enable the <code class="language-plaintext highlighter-rouge">accelKey</code> change, so maybe
-both are required?</p>
-
-<p>PS I know, there’s probably a way to get Vim + Firefox to work these days. I’ll
-explore that later. For now, I’m used to browsers, Slack, and others at least
-letting me edit from a sensible part of my keyboard (C-n, C-a, C-k, etc.) when
-I’m not in Vim.</p>
+<p>Note that the Portage repository is not sync’able directly this way; it’s “live”
+in the sense that updates are immediately reflected on the system. So I could
+<code class="language-plaintext highlighter-rouge">doas emerge -av --autounmask git-credential-1password</code> even before the last
+step. Meanwhile, <em>users</em> who want the overlay but not to maintain it should use
+a different command listed in the overlay’s README to install the repo.</p>
 
 </div>
 <hr/>
@@ -129,14 +109,14 @@ I’m not in Vim.</p>
 <ul class="tags">
   
     <li>
-      <a href="https://benknoble.github.io/tags#linux" class="tag">
-        linux
+      <a href="https://benknoble.github.io/tags#gentoo" class="tag">
+        gentoo
       </a>
     </li>
   
     <li>
-      <a href="https://benknoble.github.io/tags#gentoo" class="tag">
-        gentoo
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
       </a>
     </li>
   
@@ -156,8 +136,8 @@ I’m not in Vim.</p>
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3/";
-    this.page.identifier = "/blog/2025/11/05/firefox-emacs-i3";
+    this.page.url = "https://benknoble.github.io/blog/2025/11/10/git-credential-1p/";
+    this.page.identifier = "/blog/2025/11/10/git-credential-1p";
   };
 
   function load_comments(div) {
@@ -176,21 +156,17 @@ I’m not in Vim.</p>
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2025/10/13/framework-gentoo-network-hang/"
-      title="Solving Network Hardware Hangs on Framework Desktop">
+    <a href="https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3/"
+      title="Firefox with "normal" editing shortcuts in i3">
       Previous</a>
   </span>
   
   
-  <span id="next">
-    <a href="https://benknoble.github.io/blog/2025/11/10/git-credential-1p/"
-       title="Packaging git-credential-1password">
-      Next</a>
-  </span>
+  <span id="no-next">Next</span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#firefox-with-normal-editing-shortcuts-in-i3">
+  <a href="/categories/#packaging-git-credential-1password">
     Back to posts</a>
 </div>
 
