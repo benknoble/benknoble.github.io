@@ -27,6 +27,7 @@ exclude:
   - subs/
   - tags-list
   - vendor/
+  - gems/
 
 defaults:
   -
