@@ -1,4 +1,176 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-11-11T02:18:18+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Packaging git-credential-1password</title><link href="https://benknoble.github.io/blog/2025/11/10/git-credential-1p/" rel="alternate" type="text/html" title="Packaging git-credential-1password" /><published>2025-11-10T00:00:00+00:00</published><updated>2025-11-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/10/git-credential-1p</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/10/git-credential-1p/"><![CDATA[<p>I’m proud to say that
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-11-14T14:37:16+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Analyzing 10 years of accepted patch series to Git</title><link href="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/" rel="alternate" type="text/html" title="Analyzing 10 years of accepted patch series to Git" /><published>2025-11-14T00:00:00+00:00</published><updated>2025-11-14T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/14/git-patch-series-length</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/"><![CDATA[<p>I was curious what length of patch series covered most of Git’s accepted
+patches. Here’s my analysis.</p>
+
+<p>First, in the following code, recall that I have the following function
+definitions:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">A() { awk "$@"; }</code> (autoloaded in Zsh)</li>
+  <li><code class="language-plaintext highlighter-rouge">frequency() { sort | uniq -c | sort -g; }</code> (see <a href="/blog/2019/09/27/perl-v-bash/">Bash vs. Perl</a>)</li>
+  <li>You’ll see a modified version of <a href="/blog/2024/08/07/churn-and-weight/"><code class="language-plaintext highlighter-rouge">code-percent</code>’s cumulative tallying
+code</a></li>
+  <li>I’ve got a <a href="/blog/2019/09/11/fields/">fields extracter</a></li>
+</ul>
+
+<p>My checkout of git.git’s master branch is currently at fd372d9b1a (RelNotes: fix
+typo in release notes for 2.52.0, 2025-11-13).</p>
+
+<p>Our first goal is to count the length of a series. I’ve come up with 2 different
+ways to do that:</p>
+
+<ol>
+  <li>Use the extremely regular structure of Git’s merge commits to parse the
+length of the series. All merges have an asterisk-bulleted line followed by
+the list of commits being merged (single-patch series don’t have a merge).</li>
+  <li>Or, use <code class="language-plaintext highlighter-rouge">git rev-list --count merge^..merge^2</code> to count the length of the
+series (commits not on first but on second parent). Unfortunately, this
+doesn’t work well for non-merge commits. The syntax <code class="language-plaintext highlighter-rouge">merge^-</code> is better,
+since it expands as expected for merge commits and still gives the single
+commit when it’s not a merge, but it overcounts merge commits by one, so we’d
+need extra processing there.</li>
+</ol>
+
+<p>I’ve opted for the first version, but I’d be curious to see someone’s code for
+the 2nd that gave identical results.</p>
+
+<p>We’ll start just by pairing each <code class="language-plaintext highlighter-rouge">--first-parent</code> commit with a length; in the
+final result, if we omit the commit identifier, we could probably shorten some
+of the processing pipeline to a giant Awk script.</p>
+
+<p>Here’s the code:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--first-parent</span> <span class="nt">--since</span><span class="o">=</span>10.years.ago | A <span class="s1">'BEGIN { count=0; }
+NR &gt; 1 &amp;&amp; /^commit/ &amp;&amp; !go { print "1" }
+go &amp;&amp; /^commit/ { print count; go=0; count=0; }
+/^commit/;
+go &amp;&amp; /[^[:space:]]/ { count++; }
+/^[[:space:]]+\*/ { go=1; }
+END { if (go) print count }'</span> | <span class="nb">paste</span> - -
+
+commit fd372d9b1a69a01a676398882bbe3840bf51fe72	1
+commit 99bd5a5c9f74abfe81196d96b8467d0d1d4723c5	1
+commit 621415c8b5371a4734315232a780dd8282f6fe4f	1
+commit e65e955c0328f6e1c4a7764ae86bbc875805e694	1
+commit da5841b45c2b1cce79e0357218693061c2741780	1
+commit cb9036aca1790d2258009d0db4c2991d972a07c2	1
+commit 4badef0c3503dc29059d678abba7fac0f042bc84	6
+commit e569dced68a486b38b14cdd2e3e0b34d21752a18	5
+commit 5db9d35a28f4fca5d13692f589a3bfcd5cd896cb	1
+commit f58ea683b53d78222937d66206ed66db1abffdd9	1
+…
+</code></pre></div></div>
+
+<p>The Awk script runs a state machine. The variable <code class="language-plaintext highlighter-rouge">go</code> tracks whether we should
+be counting lines towards the current patch series. So the rules are</p>
+<ul>
+  <li>If we see a commit line (except the first) but we weren’t tracking a patch
+series, the previous commit was a single-patch series. Emit “1”.</li>
+  <li>If we see a commit line and we are tracking a patch series, print the count
+and reset.</li>
+  <li>Print all commit lines.</li>
+  <li>While tracking a patch series, count lines that have a non-blank in them</li>
+  <li>Start tracking when you see that line consisting of spaces followed by <code class="language-plaintext highlighter-rouge">*</code></li>
+  <li>At the end, print the final count (otherwise the last commit is omitted from
+analysis).</li>
+</ul>
+
+<p>Paste just aligns the fields at the end for easy viewing.</p>
+
+<h2 id="barchart">Barchart</h2>
+
+<p>Now we can take that and pipe it, keeping only the count, building up a
+frequency chart by length of series, and make a barchart:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… | fields 3 | frequency | <span class="nb">sort</span> <span class="nt">-n</span> <span class="nt">-k2</span> | barchart
+
+0      1
+1   5456 ███████████████████████████████████████████████████████████████████████
+2   1073 ██████████████
+3    618 ████████
+4    384 █████
+5    253 ███
+6    217 ███
+7    176 ██
+8    122 ██
+9    105 █
+10   102 █
+11    79 █
+12    56 █
+13    44 █
+14    36
+15    34
+16    30
+17    19
+18    12
+19    18
+20    22
+21   137 ██
+</code></pre></div></div>
+
+<p>What? A 0-length series? Turns out that’s 995916e24f (Merge branch
+‘jk/avoid-redef-system-functions’, 2022-12-19), which has a strange structure:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 995916e24f25644987f34b8a8e9392c0150804d8
+Merge: efcc48efa7 395bec6b39
+Author: Junio C Hamano &lt;gitster@pobox.com&gt;
+Date:   Mon Dec 19 11:46:17 2022 +0900
+
+    Merge branch 'jk/avoid-redef-system-functions'
+
+    The jk/avoid-redef-system-functions-2.30 topic pre-merged for more
+    recent codebase.
+
+    * jk/avoid-redef-system-functions:
+
+</code></pre></div></div>
+
+<p>It’s insignificant for the rest of the analysis though.</p>
+
+<h2 id="cumulative-analysis">Cumulative analysis</h2>
+
+<p>I want to know, though, how many patches cover a significant majority of the
+lengths. Obviously the distribution skews towards the small end, but where’s the
+90% cutoff?</p>
+
+<p>Take the same command as before, and pipe it into a modified cumulative tally.
+We first map the counts per series length into a percentage-of-total per series
+length (the middle line in the stages below). Then we sort by the series length
+so we can run up the distribution in the expected order, emit a header for our
+table, and emit the running tally before pretty-printing it.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… | fields 3 | frequency |
+A <span class="s1">'{ total += $1; counts[$2] = $1; } END { for (k in counts) print k, counts[k]*100/total; }'</span> |
+<span class="nb">sort</span> <span class="nt">-n</span> | <span class="o">{</span> <span class="nb">echo</span> <span class="s1">'NumberPatches Percent CumulativePercent'</span><span class="p">;</span> A <span class="s1">'{ total += $2; print $0, total; }'</span><span class="p">;</span> <span class="o">}</span> | column <span class="nt">-t</span>
+
+NumberPatches  Percent    CumulativePercent
+0              0.0111185  0.0111185
+1              60.6627    60.6738
+2              11.9302    72.604
+3              6.87125    79.4753
+4              4.26951    83.7448
+5              2.81299    86.5578
+6              2.41272    88.9705
+7              1.95686    90.9273
+8              1.35646    92.2838
+9              1.16744    93.4512
+10             1.13409    94.5853
+11             0.878363   95.4637
+12             0.622637   96.0863
+13             0.489215   96.5756
+14             0.400267   96.9758
+15             0.37803    97.3539
+16             0.333556   97.6874
+17             0.211252   97.8987
+18             0.133422   98.0321
+19             0.200133   98.2322
+20             0.244608   98.4768
+21             1.52324    100
+</code></pre></div></div>
+
+<p>So 7 patches covers 90% of contributions to Git in the last 10 years, and 5 (a
+nice round number?) cover more than 85%. The interesting parts of the
+distribution (the tails) don’t change by more than about 1 percentage point if
+we restrict ourselves to the 5 recent years of contribution history.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="git" /><summary type="html"><![CDATA[I was curious what length of patch series covered most of Git’s accepted patches. Here’s my analysis.]]></summary></entry><entry><title type="html">Packaging git-credential-1password</title><link href="https://benknoble.github.io/blog/2025/11/10/git-credential-1p/" rel="alternate" type="text/html" title="Packaging git-credential-1password" /><published>2025-11-10T00:00:00+00:00</published><updated>2025-11-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/10/git-credential-1p</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/10/git-credential-1p/"><![CDATA[<p>I’m proud to say that
 <a href="https://github.com/benknoble/benknoble-gentoo-overlay/commit/7f705e8db484dda377bfaa22d661ebf46b280ca8">packaging</a>
 this <a href="https://github.com/ethrgeist/git-credential-1password">1password-based credential
 helper</a>, at least for my
@@ -2954,50 +3126,4 @@ icon (png for linux).</p>
 <p>Some of this is independently covered by <a href="https://docs.racket-lang.org/raco/exe.html">docs for <code class="language-plaintext highlighter-rouge">raco exe</code></a>, which
 supports <code class="language-plaintext highlighter-rouge">--ico</code> (Windows), <code class="language-plaintext highlighter-rouge">--icns</code> (macOS), and <code class="language-plaintext highlighter-rouge">++aux</code> for general icons and
 auxiliary files (which point you toward yet more docs about what you can give to
-<code class="language-plaintext highlighter-rouge">++aux</code>).</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[This information is collected from my and other Racketeers dive into the documentation in one attempt to form a cohesive picture in response to the question “How do I use custom icons with GUI executables?”]]></summary></entry><entry><title type="html">A note about Racket’s GC for threads</title><link href="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/" rel="alternate" type="text/html" title="A note about Racket’s GC for threads" /><published>2025-06-10T00:00:00+00:00</published><updated>2025-06-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/10/racket-gc-thread</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/10/racket-gc-thread/"><![CDATA[<p>Yes, Racket will collect as garbage a thread that is blocked on a channel that
-can have no writers (according to Matthew Flatt).</p>
-
-<p>Matthew also suggested a nice refinement of my program below that demonstrates
-the effect. I’ll show his first:</p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
-
-<span class="c1">;; store a weak reference to the thread, but make sure the channel has no</span>
-<span class="c1">;; writers</span>
-<span class="p">(</span><span class="k">define</span> <span class="nv">t</span>
-  <span class="p">(</span><span class="nb">make-weak-box</span>
-   <span class="p">(</span><span class="k">let</span> <span class="p">()</span>
-     <span class="p">(</span><span class="k">define</span> <span class="nv">c</span> <span class="p">(</span><span class="nb">make-channel</span><span class="p">))</span>
-     <span class="p">(</span><span class="nb">thread</span> <span class="p">(</span><span class="nf">thunk</span> <span class="p">(</span><span class="nb">sync</span> <span class="nv">c</span><span class="p">))))))</span>
-
-<span class="c1">;; The (sync (system-idle-evt)) will not return until the thread has run as far</span>
-<span class="c1">;; as it can, at which point it's GC-able. (The system-idle-evt constructor</span>
-<span class="c1">;; exists essentially only for this kind of test/example.)</span>
-<span class="p">(</span><span class="nb">sync</span> <span class="p">(</span><span class="nb">system-idle-evt</span><span class="p">))</span>
-<span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
-<span class="p">(</span><span class="nb">weak-box-value</span> <span class="nv">t</span><span class="p">)</span> <span class="c1">;=&gt; #f</span>
-</code></pre></div></div>
-
-<p>My original version was:</p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
-
-<span class="c1">;; store a weak reference to the thread, but make sure the channel has no</span>
-<span class="c1">;; writers</span>
-<span class="p">(</span><span class="k">define</span> <span class="nv">t</span>
-  <span class="p">(</span><span class="nb">make-weak-box</span>
-   <span class="p">(</span><span class="k">let</span> <span class="p">()</span>
-     <span class="p">(</span><span class="k">define</span> <span class="nv">c</span> <span class="p">(</span><span class="nb">make-channel</span><span class="p">))</span>
-     <span class="p">(</span><span class="nb">thread</span> <span class="p">(</span><span class="nf">thunk</span> <span class="p">(</span><span class="nb">sync</span> <span class="nv">c</span><span class="p">))))))</span>
-
-<span class="c1">;; wait for the GC to collect…</span>
-<span class="p">(</span><span class="k">let</span> <span class="nv">loop</span> <span class="p">()</span>
-  <span class="p">(</span><span class="nf">match</span> <span class="p">(</span><span class="nb">weak-box-value</span> <span class="nv">t</span><span class="p">)</span>
-    <span class="p">[(</span><span class="nf">?</span> <span class="nv">thread?</span><span class="p">)</span>
-     <span class="c1">;; …by forcing it (but not too aggressively)</span>
-     <span class="p">(</span><span class="nb">collect-garbage</span><span class="p">)</span>
-     <span class="p">(</span><span class="nf">loop</span><span class="p">)]</span>
-    <span class="p">[</span><span class="nf">#f</span> <span class="p">(</span><span class="nb">displayln</span> <span class="s">"thread was GC'd"</span><span class="p">)]))</span>
-</code></pre></div></div>
-
-<p>It reliably prints and exits within a second or 2 on my machine.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><category term="concurrency" /><summary type="html"><![CDATA[Yes, Racket will collect as garbage a thread that is blocked on a channel that can have no writers (according to Matthew Flatt).]]></summary></entry></feed>
+<code class="language-plaintext highlighter-rouge">++aux</code>).</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[This information is collected from my and other Racketeers dive into the documentation in one attempt to form a cohesive picture in response to the question “How do I use custom icons with GUI executables?”]]></summary></entry></feed>

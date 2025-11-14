@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Analyzing 10 years of accepted patch series to Git</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <p>
+      I stand for the Constitution, for due process, and for community that
+      takes care of each other.
+      </p>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Analyzing 10 years of accepted patch series to Git</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 14 Nov 2025 in Blog</p>
+<div id="post">
+  <p>I was curious what length of patch series covered most of Git’s accepted
+patches. Here’s my analysis.</p>
+
+<p>First, in the following code, recall that I have the following function
+definitions:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">A() { awk "$@"; }</code> (autoloaded in Zsh)</li>
+  <li><code class="language-plaintext highlighter-rouge">frequency() { sort | uniq -c | sort -g; }</code> (see <a href="/blog/2019/09/27/perl-v-bash/">Bash vs. Perl</a>)</li>
+  <li>You’ll see a modified version of <a href="/blog/2024/08/07/churn-and-weight/"><code class="language-plaintext highlighter-rouge">code-percent</code>’s cumulative tallying
+code</a></li>
+  <li>I’ve got a <a href="/blog/2019/09/11/fields/">fields extracter</a></li>
+</ul>
+
+<p>My checkout of git.git’s master branch is currently at fd372d9b1a (RelNotes: fix
+typo in release notes for 2.52.0, 2025-11-13).</p>
+
+<p>Our first goal is to count the length of a series. I’ve come up with 2 different
+ways to do that:</p>
+
+<ol>
+  <li>Use the extremely regular structure of Git’s merge commits to parse the
+length of the series. All merges have an asterisk-bulleted line followed by
+the list of commits being merged (single-patch series don’t have a merge).</li>
+  <li>Or, use <code class="language-plaintext highlighter-rouge">git rev-list --count merge^..merge^2</code> to count the length of the
+series (commits not on first but on second parent). Unfortunately, this
+doesn’t work well for non-merge commits. The syntax <code class="language-plaintext highlighter-rouge">merge^-</code> is better,
+since it expands as expected for merge commits and still gives the single
+commit when it’s not a merge, but it overcounts merge commits by one, so we’d
+need extra processing there.</li>
+</ol>
+
+<p>I’ve opted for the first version, but I’d be curious to see someone’s code for
+the 2nd that gave identical results.</p>
+
+<p>We’ll start just by pairing each <code class="language-plaintext highlighter-rouge">--first-parent</code> commit with a length; in the
+final result, if we omit the commit identifier, we could probably shorten some
+of the processing pipeline to a giant Awk script.</p>
+
+<p>Here’s the code:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--first-parent</span> <span class="nt">--since</span><span class="o">=</span>10.years.ago | A <span class="s1">'BEGIN { count=0; }
+NR &gt; 1 &amp;&amp; /^commit/ &amp;&amp; !go { print "1" }
+go &amp;&amp; /^commit/ { print count; go=0; count=0; }
+/^commit/;
+go &amp;&amp; /[^[:space:]]/ { count++; }
+/^[[:space:]]+\*/ { go=1; }
+END { if (go) print count }'</span> | <span class="nb">paste</span> - -
+
+commit fd372d9b1a69a01a676398882bbe3840bf51fe72	1
+commit 99bd5a5c9f74abfe81196d96b8467d0d1d4723c5	1
+commit 621415c8b5371a4734315232a780dd8282f6fe4f	1
+commit e65e955c0328f6e1c4a7764ae86bbc875805e694	1
+commit da5841b45c2b1cce79e0357218693061c2741780	1
+commit cb9036aca1790d2258009d0db4c2991d972a07c2	1
+commit 4badef0c3503dc29059d678abba7fac0f042bc84	6
+commit e569dced68a486b38b14cdd2e3e0b34d21752a18	5
+commit 5db9d35a28f4fca5d13692f589a3bfcd5cd896cb	1
+commit f58ea683b53d78222937d66206ed66db1abffdd9	1
+…
+</code></pre></div></div>
+
+<p>The Awk script runs a state machine. The variable <code class="language-plaintext highlighter-rouge">go</code> tracks whether we should
+be counting lines towards the current patch series. So the rules are</p>
+<ul>
+  <li>If we see a commit line (except the first) but we weren’t tracking a patch
+series, the previous commit was a single-patch series. Emit “1”.</li>
+  <li>If we see a commit line and we are tracking a patch series, print the count
+and reset.</li>
+  <li>Print all commit lines.</li>
+  <li>While tracking a patch series, count lines that have a non-blank in them</li>
+  <li>Start tracking when you see that line consisting of spaces followed by <code class="language-plaintext highlighter-rouge">*</code></li>
+  <li>At the end, print the final count (otherwise the last commit is omitted from
+analysis).</li>
+</ul>
+
+<p>Paste just aligns the fields at the end for easy viewing.</p>
+
+<h2 id="barchart">Barchart</h2>
+
+<p>Now we can take that and pipe it, keeping only the count, building up a
+frequency chart by length of series, and make a barchart:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… | fields 3 | frequency | <span class="nb">sort</span> <span class="nt">-n</span> <span class="nt">-k2</span> | barchart
+
+0      1
+1   5456 ███████████████████████████████████████████████████████████████████████
+2   1073 ██████████████
+3    618 ████████
+4    384 █████
+5    253 ███
+6    217 ███
+7    176 ██
+8    122 ██
+9    105 █
+10   102 █
+11    79 █
+12    56 █
+13    44 █
+14    36
+15    34
+16    30
+17    19
+18    12
+19    18
+20    22
+21   137 ██
+</code></pre></div></div>
+
+<p>What? A 0-length series? Turns out that’s 995916e24f (Merge branch
+‘jk/avoid-redef-system-functions’, 2022-12-19), which has a strange structure:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 995916e24f25644987f34b8a8e9392c0150804d8
+Merge: efcc48efa7 395bec6b39
+Author: Junio C Hamano &lt;gitster@pobox.com&gt;
+Date:   Mon Dec 19 11:46:17 2022 +0900
+
+    Merge branch 'jk/avoid-redef-system-functions'
+
+    The jk/avoid-redef-system-functions-2.30 topic pre-merged for more
+    recent codebase.
+
+    * jk/avoid-redef-system-functions:
+
+</code></pre></div></div>
+
+<p>It’s insignificant for the rest of the analysis though.</p>
+
+<h2 id="cumulative-analysis">Cumulative analysis</h2>
+
+<p>I want to know, though, how many patches cover a significant majority of the
+lengths. Obviously the distribution skews towards the small end, but where’s the
+90% cutoff?</p>
+
+<p>Take the same command as before, and pipe it into a modified cumulative tally.
+We first map the counts per series length into a percentage-of-total per series
+length (the middle line in the stages below). Then we sort by the series length
+so we can run up the distribution in the expected order, emit a header for our
+table, and emit the running tally before pretty-printing it.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… | fields 3 | frequency |
+A <span class="s1">'{ total += $1; counts[$2] = $1; } END { for (k in counts) print k, counts[k]*100/total; }'</span> |
+<span class="nb">sort</span> <span class="nt">-n</span> | <span class="o">{</span> <span class="nb">echo</span> <span class="s1">'NumberPatches Percent CumulativePercent'</span><span class="p">;</span> A <span class="s1">'{ total += $2; print $0, total; }'</span><span class="p">;</span> <span class="o">}</span> | column <span class="nt">-t</span>
+
+NumberPatches  Percent    CumulativePercent
+0              0.0111185  0.0111185
+1              60.6627    60.6738
+2              11.9302    72.604
+3              6.87125    79.4753
+4              4.26951    83.7448
+5              2.81299    86.5578
+6              2.41272    88.9705
+7              1.95686    90.9273
+8              1.35646    92.2838
+9              1.16744    93.4512
+10             1.13409    94.5853
+11             0.878363   95.4637
+12             0.622637   96.0863
+13             0.489215   96.5756
+14             0.400267   96.9758
+15             0.37803    97.3539
+16             0.333556   97.6874
+17             0.211252   97.8987
+18             0.133422   98.0321
+19             0.200133   98.2322
+20             0.244608   98.4768
+21             1.52324    100
+</code></pre></div></div>
+
+<p>So 7 patches covers 90% of contributions to Git in the last 10 years, and 5 (a
+nice round number?) cover more than 85%. The interesting parts of the
+distribution (the tails) don’t change by more than about 1 percentage point if
+we restrict ourselves to the 5 recent years of contribution history.</p>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/";
+    this.page.identifier = "/blog/2025/11/14/git-patch-series-length";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2025/11/10/git-credential-1p/"
+      title="Packaging git-credential-1password">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#analyzing-10-years-of-accepted-patch-series-to-git">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <a href="https://www.goatcounter.com">No personal information collected</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
