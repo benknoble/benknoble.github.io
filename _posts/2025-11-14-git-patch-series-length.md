@@ -14,7 +14,7 @@ longer example), so the tail of the analysis is incomplete. I'm going to update
 the analysis, but so far a useful trick for those cases is
 
 ```shell
-git log --after=10.years.ago | grep '^[[:blank:]]*\*.*[[:digit:]] commits'
+git log --first-parent --after=10.years.ago | grep '^[[:blank:]]*\*.*[[:digit:]] commits'
 ```
 
 First, in the following code, recall that I have the following function
