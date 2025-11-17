@@ -17,6 +17,10 @@ the analysis, but so far a useful trick for those cases is
 git log --first-parent --after=10.years.ago | grep '^[[:blank:]]*\*.*[[:digit:]] commits'
 ```
 
+**Update later that day:** I've corrected the analysis below after confirming
+that all 137 "21-length series" are correctly counted as larger series. See
+Git history for the old version of this post.
+
 First, in the following code, recall that I have the following function
 definitions:
 
@@ -46,6 +50,10 @@ ways to do that:
 I've opted for the first version, but I'd be curious to see someone's code for
 the 2nd that gave identical results.
 
+There's one caveat for item (1) here: the structure comes from `merge.log=true`
+configuration and cuts off series that are longer than 20 commits. So we'll do
+some extra processing on the bulleted line to grab the size.
+
 We'll start just by pairing each `--first-parent` commit with a length; in the
 final result, if we omit the commit identifier, we could probably shorten some
 of the processing pipeline to a giant Awk script.
@@ -54,11 +62,17 @@ Here's the code:
 
 ```shell
 git log --first-parent --since=10.years.ago | A 'BEGIN { count=0; }
-NR > 1 && /^commit/ && !go { print "1" }
+NR > 1 && /^commit/ && !go && !big { print "1" }
 go && /^commit/ { print count; go=0; count=0; }
-/^commit/;
+/^commit/ { big=0; print $0; }
 go && /[^[:space:]]/ { count++; }
 /^[[:space:]]+\*/ { go=1; }
+/^[[:space:]]+\*.*[[:digit:]] commits/ {
+    big=1; go=0
+    n_pieces = split($0, pieces, ":")
+    match(pieces[n_pieces], "[[:digit:]]+")
+    print substr(pieces[n_pieces], RSTART, RLENGTH)
+}
 END { if (go) print count }' | paste - -
 
 commit fd372d9b1a69a01a676398882bbe3840bf51fe72	1
@@ -76,13 +90,15 @@ commit f58ea683b53d78222937d66206ed66db1abffdd9	1
 
 The Awk script runs a state machine. The variable `go` tracks whether we should
 be counting lines towards the current patch series. So the rules are
-- If we see a commit line (except the first) but we weren't tracking a patch
-  series, the previous commit was a single-patch series. Emit "1".
+- If we see a commit line (except the first) but we weren't tracking a (big)
+  patch series, the previous commit was a single-patch series. Emit "1".
 - If we see a commit line and we are tracking a patch series, print the count
   and reset.
-- Print all commit lines.
+- Print all commit lines (resetting `big` as we go).
 - While tracking a patch series, count lines that have a non-blank in them
 - Start tracking when you see that line consisting of spaces followed by `*`
+- If you see a `*` line that ends contains digits followed by `commits`, use the
+  count from there and mark it `big` (so we can skip printing "1")
 - At the end, print the final count (otherwise the last commit is omitted from
   analysis).
 
@@ -117,7 +133,36 @@ frequency chart by length of series, and make a barchart:
 18    12
 19    18
 20    22
-21   137 ██
+21    16
+22    22
+23    13
+24     8
+25     8
+26     9
+27     7
+28     7
+29     5
+30     4
+31     1
+32     4
+33     3
+34     3
+35     2
+36     3
+37     1
+38     6
+39     1
+41     2
+42     2
+44     1
+45     1
+46     2
+47     1
+49     1
+50     1
+53     1
+81     1
+92     1
 ```
 
 What? A 0-length series? Turns out that's 995916e24f (Merge branch
@@ -155,7 +200,9 @@ table, and emit the running tally before pretty-printing it.
 ```shell
 … | fields 3 | frequency |
 A '{ total += $1; counts[$2] = $1; } END { for (k in counts) print k, counts[k]*100/total; }' |
-sort -n | { echo 'NumberPatches Percent CumulativePercent'; A '{ total += $2; print $0, total; }'; } | column -t
+sort -n |
+{ echo 'NumberPatches Percent CumulativePercent'; A '{ total += $2; print $0, total; }'; } |
+column -t
 
 NumberPatches  Percent    CumulativePercent
 0              0.0111185  0.0111185
@@ -179,10 +226,41 @@ NumberPatches  Percent    CumulativePercent
 18             0.133422   98.0321
 19             0.200133   98.2322
 20             0.244608   98.4768
-21             1.52324    100
+21             0.177896   98.6547
+22             0.244608   98.8993
+23             0.144541   99.0439
+24             0.0889482  99.1328
+25             0.0889482  99.2218
+26             0.100067   99.3218
+27             0.0778297  99.3997
+28             0.0778297  99.4775
+29             0.0555926  99.5331
+30             0.0444741  99.5776
+31             0.0111185  99.5887
+32             0.0444741  99.6331
+33             0.0333556  99.6665
+34             0.0333556  99.6999
+35             0.022237   99.7221
+36             0.0333556  99.7555
+37             0.0111185  99.7666
+38             0.0667111  99.8333
+39             0.0111185  99.8444
+41             0.022237   99.8666
+42             0.022237   99.8889
+44             0.0111185  99.9
+45             0.0111185  99.9111
+46             0.022237   99.9333
+47             0.0111185  99.9445
+49             0.0111185  99.9556
+50             0.0111185  99.9667
+53             0.0111185  99.9778
+81             0.0111185  99.9889
+92             0.0111185  100
 ```
 
 So 7 patches covers 90% of contributions to Git in the last 10 years, and 5 (a
 nice round number?) cover more than 85%. The interesting parts of the
-distribution (the tails) don't change by more than about 1 percentage point if
-we restrict ourselves to the 5 recent years of contribution history.
+distribution (the "left" or "top" tail) don't change by more than about 1
+percentage point if we restrict ourselves to the 5 recent years of contribution
+history, though on the "right"/"bottom" tail we stop at series with a maximum
+length of 49.
