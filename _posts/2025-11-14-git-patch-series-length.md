@@ -7,6 +7,16 @@ category: Blog
 I was curious what length of patch series covered most of Git's accepted
 patches. Here's my analysis.
 
+**Update 2025 November 17th:** Junio C Hamano (Git maintainer) points out in the
+comments that the structure I analyzed has a "cutoff" at 20 commits (see
+c1b23bd8aa (Merge branch 'tb/incremental-midx-part-3.1', 2025-10-29) for a
+longer example), so the tail of the analysis is incomplete. I'm going to update
+the analysis, but so far a useful trick for those cases is
+
+```shell
+git log --after=10.years.ago | grep '^[[:blank:]]*\*.*[[:digit:]] commits'
+```
+
 First, in the following code, recall that I have the following function
 definitions:
 
