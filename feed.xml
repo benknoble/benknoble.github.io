@@ -1,5 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-11-14T14:37:16+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Analyzing 10 years of accepted patch series to Git</title><link href="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/" rel="alternate" type="text/html" title="Analyzing 10 years of accepted patch series to Git" /><published>2025-11-14T00:00:00+00:00</published><updated>2025-11-14T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/14/git-patch-series-length</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/"><![CDATA[<p>I was curious what length of patch series covered most of Git’s accepted
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-11-17T13:22:34+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Analyzing 10 years of accepted patch series to Git</title><link href="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/" rel="alternate" type="text/html" title="Analyzing 10 years of accepted patch series to Git" /><published>2025-11-14T00:00:00+00:00</published><updated>2025-11-14T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/14/git-patch-series-length</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/"><![CDATA[<p>I was curious what length of patch series covered most of Git’s accepted
 patches. Here’s my analysis.</p>
+
+<p><strong>Update 2025 November 17th:</strong> Junio C Hamano (Git maintainer) points out in the
+comments that the structure I analyzed has a “cutoff” at 20 commits (see
+c1b23bd8aa (Merge branch ‘tb/incremental-midx-part-3.1’, 2025-10-29) for a
+longer example), so the tail of the analysis is incomplete. I’m going to update
+the analysis, but so far a useful trick for those cases is</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--after</span><span class="o">=</span>10.years.ago | <span class="nb">grep</span> <span class="s1">'^[[:blank:]]*\*.*[[:digit:]] commits'</span>
+</code></pre></div></div>
 
 <p>First, in the following code, recall that I have the following function
 definitions:</p>
