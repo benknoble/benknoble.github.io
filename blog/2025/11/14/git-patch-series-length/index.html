@@ -89,7 +89,7 @@ c1b23bd8aa (Merge branch ‘tb/incremental-midx-part-3.1’, 2025-10-29) for a
 longer example), so the tail of the analysis is incomplete. I’m going to update
 the analysis, but so far a useful trick for those cases is</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--after</span><span class="o">=</span>10.years.ago | <span class="nb">grep</span> <span class="s1">'^[[:blank:]]*\*.*[[:digit:]] commits'</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--first-parent</span> <span class="nt">--after</span><span class="o">=</span>10.years.ago | <span class="nb">grep</span> <span class="s1">'^[[:blank:]]*\*.*[[:digit:]] commits'</span>
 </code></pre></div></div>
 
 <p>First, in the following code, recall that I have the following function
