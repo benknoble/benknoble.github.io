@@ -102,11 +102,16 @@ functional stuff (especially Racket and Rust).
     things like SML or Clojure. The latter is, well, broken, though Deno seems
     to be making progress.)
 
-- Favorite __OS__: macOS.
+- Favorite __OS__: Gentoo.
 
-    I've been using a MacBook since 2012 and it's here to stay. I'm not
-    convinced on the new touchbar thing yet though. These days I'm re-evaluating
-    my setup and will probably shift to desktop Linux soon.
+    I like my MacBooks, but I'm ready for more control. Right now I'm running
+    Gentoo ("bare" i3wm) on a Framework Desktop with top-of-their-options specs,
+    and really enjoying it. I know the value-proposition of Framework for
+    desktop computers is limited, so for me it was about trading money (mild
+    extra cost) for ease-of-build for my first PC build.
+
+    Since we're talking about Framework, I explicitly do _not_ endorse DHH or
+    their connection to him.
 
 - Favorite __version control__: definitely Git.
 
