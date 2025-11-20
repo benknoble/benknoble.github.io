@@ -3,6 +3,11 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- Ben shows great ownership and thought leadership in driving and delivering SSO
+  project. Ben executes effectively on MVP goals with a customer focus mindset
+  by conducting research, delegating tasks to fellow engineers, and identifying
+  key risks and mitigation plans. Ben has great problem solving skills and
+  offers future improvement ideas and sets technical priorities for team.
 - Ben has been a pleasure to work with since his joining Slingshot. Ben is a
   talented engineer who is confident in his technical abilities and gets buy in
   from other engineers by demonstrating why he is confident. He has knowledge
