@@ -3,12 +3,13 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
-- Ben shows great ownership and thought leadership in driving and delivering SSO
-  project. Ben executes effectively on MVP goals with a customer focus mindset
-  by conducting research, delegating tasks to fellow engineers, and identifying
-  key risks and mitigation plans. Ben has great problem solving skills and
-  offers future improvement ideas and sets technical priorities for team.
-- Ben has been a pleasure to work with since his joining Slingshot. Ben is a
+- "Ben shows great ownership and thought leadership in driving and delivering
+  SSO project. Ben executes effectively on MVP goals with a customer focus
+  mindset by conducting research, delegating tasks to fellow engineers, and
+  identifying key risks and mitigation plans. Ben has great problem solving
+  skills and offers future improvement ideas and sets technical priorities for
+  team."
+- "Ben has been a pleasure to work with since his joining Slingshot. Ben is a
   talented engineer who is confident in his technical abilities and gets buy in
   from other engineers by demonstrating why he is confident. He has knowledge
   across a wide array of different areas and strives to understand the minor
@@ -16,7 +17,7 @@ permalink: /testimonials/
   to say when he does not know something and effectively uses others around him
   by driving the conversations when this happens.
 
-    I have primarily worked with Ben in relation to open incidents as well as
+    "I have primarily worked with Ben in relation to open incidents as well as
     blockers in our release management flow. In both of these areas Ben has
     demonstrated his strong judgment skills in understanding the customer impact
     and what tasks should take priority to mitigate customer impact and overall
@@ -26,16 +27,16 @@ permalink: /testimonials/
     timeline. Overall Ben's ability to communicate appropriately and effectively
     have allowed for many issues to be resolve in much more timely manners.
 
-    Outside of the above topics though, I'd like to highlight Ben's
+    "Outside of the above topics though, I'd like to highlight Ben's
     contributions to the developer experience at slingshot in two areas:
 
-    1. Mental Well Being -> Ben has set up routine meetings where he pulls in
+    1. "Mental Well Being -> Ben has set up routine meetings where he pulls in
        other developers to discuss what we are doing right and wrong in
        Slingshot in relation to our engineer's mental health. While these
        conversations are not always easy, the intent is close to home with
        Capital One's core values and also important to the longevity of the
        application.
-    2. Well Managed -> Ben has pushed through multiple different initiatives
+    2. "Well Managed -> Ben has pushed through multiple different initiatives
        focused on communicating and potentially resolving core issues that were
        causing (1) reduced developer efficiency and (2) increased incident
        potential. These types of changes often go under the radar in relation to
@@ -43,24 +44,24 @@ permalink: /testimonials/
        friction that developers experience in turn allows them to provide a
        better experience for our customers.
 
-    Overall I have very much enjoyed working with Ben and look forward to
-    working with him more in the future.
+    "Overall I have very much enjoyed working with Ben and look forward to
+    working with him more in the future."
 
-- Ben has very strong communication within our team and with other teams. He is
+- "Ben has very strong communication within our team and with other teams. He is
   able to effective communicate to stakeholders about projects, setting
   expectations and encouraging meaningful discussions. He often lead small team
   meetings, allowing for productive and structured meetings. He also has very
   well-written documentations and peer reviews that provide clear information
   transfer to other devs.
 
-    Ben also has exceptional judgement. When the team is swamped with my high
+    "Ben also has exceptional judgement. When the team is swamped with my high
     priority tasks, he is able to distribute work effective and keep our eyes on
     the most important tasks. He is also able to challenge ownership and pull in
     domain owners when appropriate. He is always challenging ideas whether it is
     processes or code in peer reviews. This allows for the team to stay
-    efficient and ensure high standard for code quality across the team.
+    efficient and ensure high standard for code quality across the team."
 
-- Ben was a great partner to work with during the [self-service SSO] experience,
+- "Ben was a great partner to work with during the [self-service SSO] experience,
   especially in the early phases before the project transitioned fully to tech
   implementation. He has a strong ability to explain complex technical details
   in a way that’s accessible to non-technical partners, which made collaboration
@@ -68,13 +69,13 @@ permalink: /testimonials/
   importance of maintaining a consistent, well-communicated user experience—even
   when timelines were tight and priorities shifted quickly.
 
-    His openness and proactive communication stood out, particularly when
+    "His openness and proactive communication stood out, particularly when
     usability concerns surfaced. By increasing the frequency of cross-functional
     updates, Ben helped keep both tech and design aligned, allowing the team to
     move quickly on critical adjustments during tech discovery. His teamwork,
     adaptability, and clarity of communication make him a reliable and
     collaborative partner, and I look forward to future opportunities to work
-    together.
+    together."
 
 - "I've worked with Ben in a somewhat limited capacity so far, but I've been
   impressed with his advocacy for engineering excellence and the well-being of
