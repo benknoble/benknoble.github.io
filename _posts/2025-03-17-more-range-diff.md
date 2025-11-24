@@ -57,6 +57,10 @@ _posts/2024-11-15-til-range-diff.md %}#primer).
     wrong](https://medium.com/@danielesassoli/how-github-taught-the-world-code-reviews-the-wrong-way-f840a072f5be).
     As I reflect on how I use Git now, I find that I agree.
 
-[^3]: I don't know if Gerrit has an interdiff UI, but you can [find out more
-    about how Gerrit's review UI works in a guide for new
+[^3]: ~~I don't know if Gerrit has an interdiff UI, but~~ **Update 2025 November
+    24:** I spoke with Daniele Sassoli, who kindly reached out after finding my
+    article, and he demoed a few Gerrit things for me. Gerrit can show the diff
+    between patch sets, and can help you rebase stacked changes when an early
+    change evolves in response to review feedback. You can [find out more about
+    how Gerrit's review UI works in a guide for new
     users](https://gitenterprise.me/2025/03/10/gerrit-code-review-a-how-to-guide-for-new-users/).
