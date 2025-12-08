@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-12-03T20:40:19+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Analyzing 10 years of accepted patch series to Git</title><link href="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/" rel="alternate" type="text/html" title="Analyzing 10 years of accepted patch series to Git" /><published>2025-11-14T00:00:00+00:00</published><updated>2025-11-14T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/14/git-patch-series-length</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/"><![CDATA[<p>I was curious what length of patch series covered most of Git’s accepted
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-12-08T21:17:42+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Packaged ZSA Keymapp for Gentoo</title><link href="https://benknoble.github.io/blog/2025/12/08/zsa-keymapp/" rel="alternate" type="text/html" title="Packaged ZSA Keymapp for Gentoo" /><published>2025-12-08T00:00:00+00:00</published><updated>2025-12-08T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/12/08/zsa-keymapp</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/12/08/zsa-keymapp/"><![CDATA[<p>My <a href="https://github.com/benknoble/benknoble-gentoo-overlay">Gentoo overlay</a> now
+contains an ebuild for ZSA’s Keymapp application.</p>
+
+<p>The licensing situation is unclear, so I’ve marked it “unknown” for now. In
+addition, the ebuild is “live” (so only rebuilds with <code class="language-plaintext highlighter-rouge">emerge @live-rebuild</code>);
+ZSA doesn’t publish versioned archives, as far as I can tell, so we can only
+grab the latest.</p>
+
+<p>When the archive has actually been updated, I’ll have to use <code class="language-plaintext highlighter-rouge">ebuild $(equery w
+zsa-keymapp) manifest</code> or similar to update the Manifest. (For some reason,
+<code class="language-plaintext highlighter-rouge">pkgdev</code> didn’t work on this one? And a couple of live ebuilds I checked don’t
+have manifest information, but they also use the Git eclass for fetching.)</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="gentoo" /><summary type="html"><![CDATA[My Gentoo overlay now contains an ebuild for ZSA’s Keymapp application.]]></summary></entry><entry><title type="html">Analyzing 10 years of accepted patch series to Git</title><link href="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/" rel="alternate" type="text/html" title="Analyzing 10 years of accepted patch series to Git" /><published>2025-11-14T00:00:00+00:00</published><updated>2025-11-14T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/14/git-patch-series-length</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/"><![CDATA[<p>I was curious what length of patch series covered most of Git’s accepted
 patches. Here’s my analysis.</p>
 
 <p><strong>Update 2025 November 17th:</strong> Junio C Hamano (Git maintainer) points out in the
@@ -3178,39 +3189,4 @@ within <code class="language-plaintext highlighter-rouge">syntax/module-reader</
 expression afterward instead of a literal. (It’s something I’ve wanted often
 enough that <code class="language-plaintext highlighter-rouge">rhombus/reader</code> treats a relative path like this, instead of like
 <code class="language-plaintext highlighter-rouge">syntax/module-reader</code>).</p>
-</blockquote>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[This trick comes from Matthew Flatt via the Racket Discord.]]></summary></entry><entry><title type="html">A note about building executables with Racket</title><link href="https://benknoble.github.io/blog/2025/06/19/racket-exe/" rel="alternate" type="text/html" title="A note about building executables with Racket" /><published>2025-06-19T00:00:00+00:00</published><updated>2025-06-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/06/19/racket-exe</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/06/19/racket-exe/"><![CDATA[<p>This information is collected from my and other Racketeers dive into the
-documentation in one attempt to form a cohesive picture in response to the
-question “How do I use custom icons with GUI executables?”</p>
-
-<p>The extremely short version: changing the icon is something that happens at the
-point where you build an executable, not when running inside <code class="language-plaintext highlighter-rouge">racket</code>, DrRacket,
-etc. You control this by setting up your project as a package with an
-<code class="language-plaintext highlighter-rouge">info.rkt</code>. See <a href="https://docs.racket-lang.org/raco/setup-info.html">Controlling <code class="language-plaintext highlighter-rouge">raco
-setup</code></a>.</p>
-
-<p>Those docs will give you info for the <code class="language-plaintext highlighter-rouge">gracket-launcher-libraries</code> and
-<code class="language-plaintext highlighter-rouge">gracket-launcher-names</code> directives, which in turn lead you to the
-<code class="language-plaintext highlighter-rouge">racket-launcher-names</code> directive. That directive explains that it makes use of
-<code class="language-plaintext highlighter-rouge">make-racket-launcher</code> under the hood, and you must infer that the <code class="language-plaintext highlighter-rouge">gracket-*</code>
-directives must then use <code class="language-plaintext highlighter-rouge">make-gracket-launcher</code>.</p>
-
-<p>The <a href="https://docs.racket-lang.org/raco/exe.html#(def._((lib._launcher%2Flauncher..rkt)._make-gracket-launcher))">docs for <code class="language-plaintext highlighter-rouge">make-gracket-launcher</code></a> indicate that
-<code class="language-plaintext highlighter-rouge">build-aux-from-file</code> is used to find auxiliary filenames for related assets,
-and if you click through to the <a href="https://docs.racket-lang.org/raco/exe.html#(def._((lib._launcher%2Flauncher..rkt)._build-aux-from-path))">docs for <code class="language-plaintext highlighter-rouge">build-aux-from-file</code></a> it
-confirms that icons are included in those related assets. Ultimately what we
-figured out was that <code class="language-plaintext highlighter-rouge">info.rkt</code> needs to include something like</p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">define</span> <span class="nv">gracket-launcher-names</span> <span class="o">'</span><span class="p">(</span><span class="nf">"My</span> <span class="nv">App</span> <span class="nv">Name</span><span class="o">.</span><span class="nv">app"</span><span class="p">))</span>
-<span class="p">(</span><span class="k">define</span> <span class="nv">gracket-launcher-libraries</span> <span class="o">'</span><span class="p">(</span><span class="nf">"app</span><span class="o">.</span><span class="nv">rkt"</span><span class="p">))</span>
-</code></pre></div></div>
-
-<p>…where <code class="language-plaintext highlighter-rouge">app.rkt</code> is the file with a <code class="language-plaintext highlighter-rouge">main</code> submodule that starts the app’s GUI.
-And an <code class="language-plaintext highlighter-rouge">app.icns</code> file in the same folder as <code class="language-plaintext highlighter-rouge">app.rkt</code> is used for the program’s
-icon (png for linux).</p>
-
-<p>When you do <code class="language-plaintext highlighter-rouge">raco setup mypackagename</code> it creates the executable with that icon.</p>
-
-<p>Some of this is independently covered by <a href="https://docs.racket-lang.org/raco/exe.html">docs for <code class="language-plaintext highlighter-rouge">raco exe</code></a>, which
-supports <code class="language-plaintext highlighter-rouge">--ico</code> (Windows), <code class="language-plaintext highlighter-rouge">--icns</code> (macOS), and <code class="language-plaintext highlighter-rouge">++aux</code> for general icons and
-auxiliary files (which point you toward yet more docs about what you can give to
-<code class="language-plaintext highlighter-rouge">++aux</code>).</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[This information is collected from my and other Racketeers dive into the documentation in one attempt to form a cohesive picture in response to the question “How do I use custom icons with GUI executables?”]]></summary></entry></feed>
+</blockquote>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[This trick comes from Matthew Flatt via the Racket Discord.]]></summary></entry></feed>
