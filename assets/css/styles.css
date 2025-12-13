@@ -293,6 +293,7 @@ blockquote {
   font-style: italic;
   margin: 0 0 1em 2em;
   font-size: 16px;
+  box-shadow: 2px 2px 4px 2px darkgrey;
 }
 blockquote p:last-child {
   margin: 0;
