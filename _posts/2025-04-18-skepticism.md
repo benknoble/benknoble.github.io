@@ -63,6 +63,8 @@ When such tools seek to monopolize digital control or enable the monopolization
 of digital control, then I will continue to call that out as antithetical to the
 modern computing movement.
 
+<a id=situated></a>
+
 It is my hope that such tools create a flood of ["situated
 software"](https://gwern.net/doc/technology/2004-03-30-shirky-situatedsoftware.html)---that
 is, software which is uniquely situated in its social context. Software often
