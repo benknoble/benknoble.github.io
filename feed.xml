@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-12-13T03:13:32+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Packaged ZSA Keymapp for Gentoo</title><link href="https://benknoble.github.io/blog/2025/12/08/zsa-keymapp/" rel="alternate" type="text/html" title="Packaged ZSA Keymapp for Gentoo" /><published>2025-12-08T00:00:00+00:00</published><updated>2025-12-08T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/12/08/zsa-keymapp</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/12/08/zsa-keymapp/"><![CDATA[<p>My <a href="https://github.com/benknoble/benknoble-gentoo-overlay">Gentoo overlay</a> now
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-12-30T15:30:04+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Core Values in Software</title><link href="https://benknoble.github.io/blog/2025/12/29/resonant-computing/" rel="alternate" type="text/html" title="Core Values in Software" /><published>2025-12-29T00:00:00+00:00</published><updated>2025-12-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/12/29/resonant-computing</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/12/29/resonant-computing/"><![CDATA[<p>I signed the <a href="https://resonantcomputing.org/">Resonant Computing Manifesto</a>
+today. I encourage you to consider your own core values and, if they align,
+consider signing.</p>
+
+<p>I’m <a href="/workshops/14th-racket-con/">working on an essay</a> (“Why I
+consider myself a modern Luddite”), and I’ve been thinking about <a href="/blog/2025/04/18/skepticism/#situated">situated
+software</a>, the balance of
+power, <a href="https://www.noemamag.com/the-politics-of-superintelligence/">LLMs as political
+tool</a>, and trusting
+fellow humans quite a bit. I find the manifesto a compelling tool for
+establishing core values for software design. More to come…</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="design" /><category term="critic" /><category term="llm" /><category term="privacy" /><summary type="html"><![CDATA[I signed the Resonant Computing Manifesto today. I encourage you to consider your own core values and, if they align, consider signing.]]></summary></entry><entry><title type="html">Packaged ZSA Keymapp for Gentoo</title><link href="https://benknoble.github.io/blog/2025/12/08/zsa-keymapp/" rel="alternate" type="text/html" title="Packaged ZSA Keymapp for Gentoo" /><published>2025-12-08T00:00:00+00:00</published><updated>2025-12-08T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/12/08/zsa-keymapp</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/12/08/zsa-keymapp/"><![CDATA[<p>My <a href="https://github.com/benknoble/benknoble-gentoo-overlay">Gentoo overlay</a> now
 contains an ebuild for ZSA’s Keymapp application.</p>
 
 <p>The licensing situation is unclear, so I’ve marked it “unknown” for now. In
@@ -3142,52 +3152,4 @@ guardian</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#
 <ul>
   <li>Luna Winters’s <a href="https://blog.foxtrotluna.social/theyre-putting-blue-food-coloring-in-everything/">They’re putting blue food coloring in everything</a></li>
   <li>Colin Cornaby’s <a href="https://www.colincornaby.me/2025/08/in-the-future-all-food-will-be-cooked-in-a-microwave-and-if-you-cant-deal-with-that-then-you-need-to-get-out-of-the-kitchen/">In the Future All Food Will Be Cooked in a Microwave, and if You Can’t Deal With That Then You Need to Get Out of the Kitchen</a></li>
-</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[I’d like to signal-boost a couple of well-written critiques.]]></summary></entry><entry><title type="html">A note about making Racket languages without installing them as a package</title><link href="https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package/" rel="alternate" type="text/html" title="A note about making Racket languages without installing them as a package" /><published>2025-07-26T00:00:00+00:00</published><updated>2025-07-26T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/07/26/racket-lang-no-package/"><![CDATA[<p>This trick comes from Matthew Flatt via the Racket Discord.</p>
-
-<p>Usually, when creating a Racket <code class="language-plaintext highlighter-rouge">#lang</code> and customizing the reader, the reader
-needs to produce a module form like</p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">module</span> <span class="nv">&lt;name&gt;</span> <span class="nv">&lt;initial-import-module&gt;</span>
-  <span class="nv">body</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>and the <code class="language-plaintext highlighter-rouge">&lt;initial-import-module&gt;</code> is best resolved as a reference to an
-installed collection. That is, instead of <code class="language-plaintext highlighter-rouge">"mylang/expander.rkt"</code>, we should use
-<code class="language-plaintext highlighter-rouge">mylang/expander</code>: the former is resolved relative to the PWD of the module
-being expanded!</p>
-
-<p>To make this work typically requires an installed package or linked files. This
-is not a big hurdle for most Racket hackers, but might be confusing for
-students.</p>
-
-<p>When using <code class="language-plaintext highlighter-rouge">#lang s-exp</code>, of course, you can provide a relative path to an
-expander module. This works if you don’t need a custom reader. If you do, the
-language syntax is restricted so that <code class="language-plaintext highlighter-rouge">#lang "mylang.rkt"</code> will never work.</p>
-
-<p>We <em>can</em> use a trick so that our reader can output a variant on the original
-relative module path, though. That means our custom reader can yield an expander
-module that isn’t in an installed package, like the title suggests.</p>
-
-<p>We need to create a module path that works regardless of location, but derive it
-from the relative path. (You’ll still need non-relative paths to make
-documentation work everywhere, I think.)</p>
-
-<p>Here’s the code.</p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">module</span> <span class="nv">reader</span> <span class="nv">syntax/module-reader</span>
-  <span class="nt">#:language</span> <span class="p">(</span><span class="nf">collapse-module-path-index</span>
-              <span class="p">(</span><span class="nb">module-path-index-join</span> <span class="s">"mylang/expander.rkt"</span>
-                                      <span class="p">(</span><span class="nb">variable-reference-&gt;module-path-index</span>
-                                       <span class="p">(</span><span class="nf">#%variable-reference</span><span class="p">))))</span>
-  <span class="p">(</span><span class="k">require</span> <span class="nv">syntax/modcollapse</span><span class="p">))</span>
-</code></pre></div></div>
-
-<p>Matthew says:</p>
-
-<blockquote>
-  <p>I’m not sure this solves any problem for you, but you can make a module path
-within <code class="language-plaintext highlighter-rouge">syntax/module-reader</code> relative by using <code class="language-plaintext highlighter-rouge">#:language</code>, which has an
-expression afterward instead of a literal. (It’s something I’ve wanted often
-enough that <code class="language-plaintext highlighter-rouge">rhombus/reader</code> treats a relative path like this, instead of like
-<code class="language-plaintext highlighter-rouge">syntax/module-reader</code>).</p>
-</blockquote>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[This trick comes from Matthew Flatt via the Racket Discord.]]></summary></entry></feed>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[I’d like to signal-boost a couple of well-written critiques.]]></summary></entry></feed>

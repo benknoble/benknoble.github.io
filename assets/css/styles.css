@@ -543,10 +543,22 @@ kbd {
   margin-bottom: 2em;
 }
 #post > p:first-child::first-letter {
-  -webkit-initial-letter: 2;
-  initial-letter: 2;
-  margin-right: 0.5em;
   font-style: italic;
+}
+@supports (initial-letter: 2) {
+  #post > p:first-child::first-letter {
+    -webkit-initial-letter: 2;
+    initial-letter: 2;
+    margin-right: 0.5em;
+  }
+}
+@supports not (initial-letter: 2) {
+  #post > p:first-child::first-letter {
+    float: left;
+    font-size: 48px;
+    margin-block-start: 0.25em;
+    margin-right: 0.2em;
+  }
 }
 
 .post {
