@@ -358,10 +358,18 @@ kbd {
     margin-bottom: 2em;
 
     &::first-letter {
-      -webkit-initial-letter: 2;
-      initial-letter: 2;
-      margin-right: 0.5em;
       font-style: italic;
+      @supports (initial-letter: 2) {
+        -webkit-initial-letter: 2;
+        initial-letter: 2;
+        margin-right: 0.5em;
+      }
+      @supports not (initial-letter: 2) {
+        float: left;
+        font-size: 48px;
+        margin-block-start: 0.25em;
+        margin-right: 0.2em;
+      }
     }
   }
 }
