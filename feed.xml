@@ -1,4 +1,107 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2025-12-30T15:58:15+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Core Values in Software</title><link href="https://benknoble.github.io/blog/2025/12/29/resonant-computing/" rel="alternate" type="text/html" title="Core Values in Software" /><published>2025-12-29T00:00:00+00:00</published><updated>2025-12-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/12/29/resonant-computing</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/12/29/resonant-computing/"><![CDATA[<p>I signed the <a href="https://resonantcomputing.org/">Resonant Computing Manifesto</a>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-01-01T16:49:57+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">2026 Goals</title><link href="https://benknoble.github.io/blog/2026/01/01/goals/" rel="alternate" type="text/html" title="2026 Goals" /><published>2026-01-01T00:00:00+00:00</published><updated>2026-01-01T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/01/01/goals</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/01/01/goals/"><![CDATA[<p>A short, probably sensible-only-to-me list of goals. Timeboxed.</p>
+
+<p>Guiding principles:</p>
+<ul>
+  <li>Meet good people. Do good work.</li>
+  <li>Keep in touch with folks.</li>
+  <li>Focus on a goal: file distractions away for later.</li>
+</ul>
+
+<p>Timeboxed:</p>
+<ul>
+  <li>1 month:
+    <ul class="task-list">
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Finish Rusty Boat (return application results; implement read-only correctness delay?)</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Paint regular Gamorrean Guards</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Clean up notepad, notebook</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Outline Luddite essay</li>
+    </ul>
+  </li>
+  <li>3 months:
+    <ul class="task-list">
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Finish Cabin Mixer, show to NCCJ</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Paint remaining Weequay Pirates</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Draft section or 2 of Luddite essay</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Test for 2nd Dan</li>
+    </ul>
+  </li>
+  <li>2 months:
+    <ul class="task-list">
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Explore <a href="http://www.kroah.com/log/blog/2025/12/15/tracking-kernel-commits-across-branches/">verhaal in Rust</a></li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Paint another squad</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Draft section or 2 of Luddite essay</li>
+    </ul>
+  </li>
+  <li>4 months:
+    <ul class="task-list">
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Rewrite mosaic program</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Paint another squad</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Draft section or 2 of Luddite essay</li>
+    </ul>
+  </li>
+  <li>2 months:
+    <ul class="task-list">
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Publish Luddite essay?</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Generally:</p>
+<ul>
+  <li>actively look for local folks: meetups, community groups, unions, etc. (wiki: 2025)</li>
+  <li>write more
+    <ul>
+      <li>Git: collected resources and my workflow</li>
+      <li>Critical thinking (wiki: critique/todo)</li>
+      <li>write about our experience reshaping our digital lives</li>
+      <li>share our general personal computing expertise/experience</li>
+      <li>start my book on GUI applications in Racket</li>
+    </ul>
+  </li>
+  <li>make time for board games (say, 1 big one per month? We play lots of little ones already)</li>
+  <li>go to USK 2–3 times/week</li>
+  <li>keep writing fun, useful programs.
+    <ul>
+      <li>think about where to direct open-source energy</li>
+    </ul>
+  </li>
+  <li>decrease household food waste</li>
+</ul>
+
+<p>Areas I want to learn more about this year:</p>
+<ul>
+  <li>Linux
+    <ul>
+      <li>Keyboard configuration</li>
+      <li>Productivity tools: controlling Firefox tabs, dunst/rofi/etc., manipulating my monitor’s settings, …</li>
+      <li>Email client (aerc) for open source work</li>
+      <li>Setup LSP for ebuilds</li>
+      <li>Networking (wiki: linux-concepts/tcp; <a href="https://bou.ke/blog/rust-ping/">Rootless pings</a> claims you need root for ping? FasterThanLime has a DIY ping series if memory serves)</li>
+    </ul>
+  </li>
+  <li>Alternative technology
+    <ul>
+      <li><a href="https://euro-stack.com">Euro Stack</a></li>
+      <li><a href="https://sr.ht/">sourcehut</a></li>
+      <li>Email server, domain, etc. (wiki: 2025)</li>
+      <li>VPN?</li>
+      <li>VPS or colocated hosting if needed?</li>
+      <li>Browsers (wiki: linux) if Firefox truly gets unbearable?</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Political ways I can get involved:</p>
+<ul>
+  <li>book access and general literacy</li>
+  <li>digital/mathematical literacy</li>
+  <li>LGBTQIA+ support</li>
+  <li>local reporting</li>
+  <li>digital control/privacy; personal computing</li>
+  <li>de-toxifying masculinity</li>
+</ul>
+
+<p>Last Changed: 2026 Jan 01</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="goals" /><summary type="html"><![CDATA[A short, probably sensible-only-to-me list of goals. Timeboxed.]]></summary></entry><entry><title type="html">Core Values in Software</title><link href="https://benknoble.github.io/blog/2025/12/29/resonant-computing/" rel="alternate" type="text/html" title="Core Values in Software" /><published>2025-12-29T00:00:00+00:00</published><updated>2025-12-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/12/29/resonant-computing</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/12/29/resonant-computing/"><![CDATA[<p>I signed the <a href="https://resonantcomputing.org/">Resonant Computing Manifesto</a>
 today. I encourage you to consider your own core values and, if they align,
 consider signing.</p>
 
@@ -3147,9 +3250,4 @@ parent or
 guardian</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[Say the hard things.]]></summary></entry><entry><title type="html">Recent LLM-hype critiques</title><link href="https://benknoble.github.io/blog/2025/08/09/signal-boost/" rel="alternate" type="text/html" title="Recent LLM-hype critiques" /><published>2025-08-09T00:00:00+00:00</published><updated>2025-08-09T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/08/09/signal-boost</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/08/09/signal-boost/"><![CDATA[<p>I’d like to signal-boost a couple of well-written critiques.</p>
-
-<ul>
-  <li>Luna Winters’s <a href="https://blog.foxtrotluna.social/theyre-putting-blue-food-coloring-in-everything/">They’re putting blue food coloring in everything</a></li>
-  <li>Colin Cornaby’s <a href="https://www.colincornaby.me/2025/08/in-the-future-all-food-will-be-cooked-in-a-microwave-and-if-you-cant-deal-with-that-then-you-need-to-get-out-of-the-kitchen/">In the Future All Food Will Be Cooked in a Microwave, and if You Can’t Deal With That Then You Need to Get Out of the Kitchen</a></li>
-</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[I’d like to signal-boost a couple of well-written critiques.]]></summary></entry></feed>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[Say the hard things.]]></summary></entry></feed>
