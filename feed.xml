@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-01-01T21:00:34+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">2026 Goals</title><link href="https://benknoble.github.io/blog/2026/01/01/goals/" rel="alternate" type="text/html" title="2026 Goals" /><published>2026-01-01T00:00:00+00:00</published><updated>2026-01-01T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/01/01/goals</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/01/01/goals/"><![CDATA[<p>A short, probably sensible-only-to-me list of goals. Timeboxed.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-01-04T14:34:25+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">2026 Goals</title><link href="https://benknoble.github.io/blog/2026/01/01/goals/" rel="alternate" type="text/html" title="2026 Goals" /><published>2026-01-01T00:00:00+00:00</published><updated>2026-01-01T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/01/01/goals</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/01/01/goals/"><![CDATA[<p>A short, probably sensible-only-to-me list of goals. Timeboxed. I’ll also add
+other things as I go.</p>
 
 <p>Guiding principles:</p>
 <ul>
@@ -13,8 +14,9 @@
     <ul class="task-list">
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Finish Rusty Boat (return application results; implement read-only correctness delay?)</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Paint regular Gamorrean Guards</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Clean up notepad, notebook</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Clean up notepad, notebook</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Outline Luddite essay</li>
+      <li class="task-list-item"><a href="https://bugs.gentoo.org/968366">submitted patch</a> for <code class="language-plaintext highlighter-rouge">equery(1)</code> manual</li>
     </ul>
   </li>
   <li>3 months:
@@ -101,7 +103,7 @@
   <li>de-toxifying masculinity</li>
 </ul>
 
-<p>Last Changed: 2026 Jan 01</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="goals" /><summary type="html"><![CDATA[A short, probably sensible-only-to-me list of goals. Timeboxed.]]></summary></entry><entry><title type="html">Core Values in Software</title><link href="https://benknoble.github.io/blog/2025/12/29/resonant-computing/" rel="alternate" type="text/html" title="Core Values in Software" /><published>2025-12-29T00:00:00+00:00</published><updated>2025-12-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/12/29/resonant-computing</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/12/29/resonant-computing/"><![CDATA[<p>I signed the <a href="https://resonantcomputing.org/">Resonant Computing Manifesto</a>
+<p>Last Changed: 2026 Jan 04</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="goals" /><summary type="html"><![CDATA[A short, probably sensible-only-to-me list of goals. Timeboxed. I’ll also add other things as I go.]]></summary></entry><entry><title type="html">Core Values in Software</title><link href="https://benknoble.github.io/blog/2025/12/29/resonant-computing/" rel="alternate" type="text/html" title="Core Values in Software" /><published>2025-12-29T00:00:00+00:00</published><updated>2025-12-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/12/29/resonant-computing</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/12/29/resonant-computing/"><![CDATA[<p>I signed the <a href="https://resonantcomputing.org/">Resonant Computing Manifesto</a>
 today. I encourage you to consider your own core values and, if they align,
 consider signing.</p>
 
