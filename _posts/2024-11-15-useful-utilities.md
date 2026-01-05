@@ -1,6 +1,6 @@
 ---
 title: 'Little utilities'
-tags: [shell]
+tags: [shell, git]
 category: [ Blog ]
 ---
 
