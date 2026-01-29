@@ -1,4 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-01-20T01:52:29+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">2026 Goals</title><link href="https://benknoble.github.io/blog/2026/01/01/goals/" rel="alternate" type="text/html" title="2026 Goals" /><published>2026-01-01T00:00:00+00:00</published><updated>2026-01-01T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/01/01/goals</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/01/01/goals/"><![CDATA[<p>A short, probably sensible-only-to-me list of goals. Timeboxed. I’ll also add
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-01-29T20:30:47+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Thoughts from recent conversations on LLMs</title><link href="https://benknoble.github.io/blog/2026/01/29/llms-chat/" rel="alternate" type="text/html" title="Thoughts from recent conversations on LLMs" /><published>2026-01-29T00:00:00+00:00</published><updated>2026-01-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/01/29/llms-chat</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/01/29/llms-chat/"><![CDATA[<p>Some unpolished thoughts from a recent conversation with other software
+engineers.</p>
+
+<p>I’m willing to be practical, but I find the « tools » conversation needs to wait
+until we’ve addressed at least some of the political weaponization. Ironically,
+this is one of the good things about the tools conversation! An LLM cannot do my
+job, and we should stop allowing them to be weaponized as if they could.</p>
+
+<p>[What is political weaponization?]</p>
+
+<p>See, e.g., Cory Doctorow’s « an LLM can’t do your job, but a salesman can
+convince your boss it can » for examples in employment (esp. in tech; companies
+would love for us to be as low-status as your average retail worker); see Grok
+being used to spew Musk’s many -isms or generally any attempt to dismantle the
+notion of truth (epistemological crisis); see US v China (Deepseek); see <a href="https://www.verysane.ai/p/agi-probably-not-2027">“AGI:
+Probably Not 2027”</a> for a
+rebuttal of the fantasy that swept up folks in our government; see <a href="https://deadsimpletech.com/blog">Iris
+Meredith’s blog</a> for some specifics on people
+and projects involved (I believe I got the phrase from them—site: search is
+probably useful to find relevant articles).</p>
+
+<p>[When pushed on how long the conversation should wait]</p>
+
+<p>I can see how [“we shouldn’t be talking about how this fits into our lives as
+developers as a tool until the weaponization stops”] is an interpretation of my
+statement. I suppose I mean: I find the tool conversation fascinating, but
+ultimately less urgent than systemic abuse.</p>
+
+<p>Right now my preferred direction of energy is toward addressing such abuse. (Of
+course, much like we sometimes get markers from Amazon to make our protest
+posters, I can use a devtool to support addressing such issues.)</p>
+
+<p>In all fairness, I think a lot of spaces I’m in (including this one) are having
+the tool conversation in good faith. But it sure didn’t feel that way at the
+start, and I still can’t wrap my head around one conversation often not
+acknowledging the other. But there’s so much going on in a giant intersection
+that it also seems entirely rational to focus in on small parts at a time, and
+it sure seems even harder to have an all-encompassing conversation! So I’m glad
+to try to focus and chat however it works out.</p>
+
+<p>I also find that my stubborn streak encourages me to make strong claims and then
+fall back to something closer to moderation in practice, provided we agree that
+« moderation » requires acknowledging certain indelible lines, even if we
+disagree how to implement those lines.</p>
+
+<p>Ambiguity is probably good for us like that.</p>
+
+<p>« Engineering Rigor in the Age of LLMs » has certainly given me a newfound
+excitement about the potential, despite all of my concerns about the «
+LLMentalist effect » or about the replication of harmful social norms.</p>
+
+<p>I think in particular it revealed a possibility of using the tool with
+discernment (« this use emphatically doesn’t matter »). I hold that such
+discernment is difficult and is helped by engagement with all the liberal arts,
+including sociology and feminist theory, etc.</p>
+
+<p>[What are good directions for addressing such abuse?]</p>
+
+<p>Simply (hah!): envision a better world and then work for it! A few caveats: of
+course that’s easier said than done. Ideally, we’d be directing our talents to
+serve folks already doing this hard work.</p>
+
+<p>Broadly, I’m looking away from computing to find these opportunities. My
+energies are mostly directed at things like the following. The list is too long
+but feels deeply connected for me.</p>
+
+<ul>
+  <li>Unions for software engineers. (<em>e.g.</em>, <a href="https://drewdevault.com/2025/06/09/2025-06-09-Unionize-or-die.html#resources">Drew DeVault’s
+Resources</a>)</li>
+  <li>Property rights à la right to repair (jailbreak); not allowing continued use
+of DMCA § 1201 to dictate how owners of a device may use said device (“felony
+contempt of business model”).</li>
+  <li>Self-determination: feminist theory and queer activists have a lot to say
+about being the ultimate arbiter and governor of your own body, which rhymes
+with the “despotic dominion” of property rights.</li>
+  <li>Privacy rights, especially digitally; done correctly, I think this could end
+surveillance advertising.</li>
+  <li>Anti-monopoly and anti-corruption policy and law.</li>
+  <li>Ethics of computation systems (<em>e.g.</em>, Ruha Benjamin’s <em>Race After
+Technology</em>, which inspired an essay I’ve been mulling over for a couple of
+years now). These systems intersect policing and justice in overt and covert
+ways.</li>
+  <li>Open source maintenance. As I understand it, the folks doing the really hard
+work are under a tremendous burden and need help. Ask the ones you know or
+depend on how you can help.</li>
+  <li><a href="/blog/2025/04/18/skepticism/#situated">Situated software</a>:
+local, specific software for communities. This rhymes for me with <a href="https://resonantcomputing.org/">Resonant
+Computing</a>.</li>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><category term="unpolished" /><category term="politics" /><summary type="html"><![CDATA[Some unpolished thoughts from a recent conversation with other software engineers.]]></summary></entry><entry><title type="html">2026 Goals</title><link href="https://benknoble.github.io/blog/2026/01/01/goals/" rel="alternate" type="text/html" title="2026 Goals" /><published>2026-01-01T00:00:00+00:00</published><updated>2026-01-01T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/01/01/goals</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/01/01/goals/"><![CDATA[<p>A short, probably sensible-only-to-me list of goals. Timeboxed. I’ll also add
 other things as I go.</p>
 
 <p>Guiding principles:</p>
@@ -20,8 +108,12 @@ other things as I go.</p>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Paint regular Gamorrean Guards</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Clean up notepad, notebook</li>
       <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Outline Luddite essay</li>
+      <li class="task-list-item"><a href="https://lore.kernel.org/git/cover.1767649692.git.ben.knoble+github@gmail.com/">sent the final few versions</a> of Julia Evans’s documentation improvements for <code class="language-plaintext highlighter-rouge">git-reset(1)</code></li>
       <li class="task-list-item"><a href="https://bugs.gentoo.org/968366">submitted patch</a> for <code class="language-plaintext highlighter-rouge">equery(1)</code> manual</li>
       <li class="task-list-item"><a href="https://lore.kernel.org/git/01a7acfaf87494419b3766da57d4c05cf99c79bb.1768873599.git.ben.knoble+github@gmail.com/T/#u">submitted patch</a> for <code class="language-plaintext highlighter-rouge">git-replay(1)</code> manual</li>
+      <li class="task-list-item"><a href="https://github.com/gentoo/gentoo/pull/45386">submitted patch</a> for <code class="language-plaintext highlighter-rouge">mhash</code> documentation build</li>
+      <li class="task-list-item">learned the basics of the reverse-engineering and debugging tool <a href="https://rada.re/n/index.html">radare2</a></li>
+      <li class="task-list-item">wrote some not-quite-fast-enough big file crunching code in Rust</li>
     </ul>
   </li>
   <li>3 months:
@@ -3199,62 +3291,4 @@ did.</p>
       <p>My <a href="/blog/2024/11/15/useful-utilities/#git"><code class="language-plaintext highlighter-rouge">git-div</code> script</a> was my first to support this. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[Lately I find myself feeding git grep results to git blame to help identify points of contact for a piece of code. I’ve scripted a few hacks together to make life easier.]]></summary></entry><entry><title type="html">More on the AI bubble</title><link href="https://benknoble.github.io/blog/2025/09/06/ai-bubble/" rel="alternate" type="text/html" title="More on the AI bubble" /><published>2025-09-06T00:00:00+00:00</published><updated>2025-09-06T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/09/06/ai-bubble</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/09/06/ai-bubble/"><![CDATA[<p>Say the hard things.</p>
-
-<p>I’ve <a href="/blog/2025/04/18/skepticism/">previously written some of my own criticism</a> and <a href="/blog/2025/08/09/signal-boost/">signal-boosted others</a>, so let’s tie a few more threads together.</p>
-
-<p>Ed Zitron famously writes about the AI bubble these days. I’ve just read Baldur
-Bjarnason’s <a href="https://www.baldurbjarnason.com/2025/the-melancholy-of-history-rhyming/">comparison to the financial bubble and Icelandic
-nationalism</a>,
-wherein he mentions “accountability sinks” (a phrase I’ve mostly learned from
-Cory Doctorow). And finally, Ron Jeffries of Agile and XP fame <a href="https://ronjeffries.com/articles/-w025/y/w/"><em>leads</em> with
-“tools of the oppressor”</a>.</p>
-
-<p>When I said “the development and use of LLMs consistently harms along the axes
-which I care more about,” these are the axes I mean. Politically, economically,
-and socially, LLMs chain us to the whims of oppressors, fascists, and
-monopolists who seek to enshrine their right to cheat us of ours.</p>
-
-<p>“Rights for me, not for thee.”</p>
-
-<p>Gross. I don’t want that world: remember when we had some protection from all
-the scams? Consumer harms? Plague? Those shields weren’t perfect, but to see
-folks now twist the very real history of racism in all aspects of this society
-to argue that the protections were the <em>problem</em> is horrific.</p>
-
-<p>I may not trust the government to make the best decision for me, but I sure as
-hell don’t trust oppressors, fascists, and monopolists either. In a functioning
-democracy backed by experts, at least I stand a chance of making a good
-decision and being protected from the worst harms.</p>
-
-<p>According to the Wall Street Journal article “Florida Seeks to End Vaccine
-Mandates for Schoolchildren” (2025 September 3rd), Michael Ramey said</p>
-
-<blockquote>
-  <p>Parents are capable of making these [vaccination] decisions, and will by
-nature safeguard the best interests of their children.</p>
-</blockquote>
-
-<p>This is no lie<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. Yet it is absurd to claim that, in this era of
-misinformation and <a href="https://pluralistic.net/tag/epistemology/">epistemological
-crisis</a>, any one of us can reliably
-sift through all the information we need to make a reasonable-enough judgement
-to keep ourselves and our families safe.</p>
-
-<p>But that’s what we’re required to do when we fire all the experts and poison the
-wells of knowledge.</p>
-
-<p>Isn’t that what the LLM bubblers are clamoring for?</p>
-
-<h2 id="notes">Notes</h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p>Except when it is: parents abuse children. According to the National
-Children’s Alliance, <a href="https://www.nationalchildrensalliance.org/media-room/national-statistics-on-child-abuse/">76% of substantiated abuse charges in 2022 fell on a
-parent or
-guardian</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[Say the hard things.]]></summary></entry></feed>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[Lately I find myself feeding git grep results to git blame to help identify points of contact for a piece of code. I’ve scripted a few hacks together to make life easier.]]></summary></entry></feed>
