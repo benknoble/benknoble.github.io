@@ -43,6 +43,17 @@ changing. Oh well.
 **Update later that day:** I had to re-enable the `accelKey` change, so maybe
 both are required?
 
+**Update 2026 February 9th:** I now have only one `ui.key` setting changed from
+the default: `accelKey=224`. That is, I use Command (Meta) for Firefox
+shortcuts. I can use Alt+Shift to use [`accesskey`
+shortcuts](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/accesskey),
+like `A-S-f` on https://wiki.gentoo.org to jump to the search bar. Phew! The
+`generalAccessKey` was affecting the latter shortcuts, and since they overlapped
+they could prevent access to the "base" shortcuts sometimes. Not fun. See
+[Customizing Mozilla](https://www-archive.mozilla.org/unix/customizing.html) and
+[ui.key.generalAccessKey](https://kb.mozillazine.org/Ui.key.generalAccessKey)
+for more details.
+
 PS I know, there's probably a way to get Vim + Firefox to work these days. I'll
 explore that later. For now, I'm used to browsers, Slack, and others at least
 letting me edit from a sensible part of my keyboard (C-n, C-a, C-k, etc.) when
