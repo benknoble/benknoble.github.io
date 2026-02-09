@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-02-07T22:02:28+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Thoughts from recent conversations on LLMs</title><link href="https://benknoble.github.io/blog/2026/01/29/llms-chat/" rel="alternate" type="text/html" title="Thoughts from recent conversations on LLMs" /><published>2026-01-29T00:00:00+00:00</published><updated>2026-01-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/01/29/llms-chat</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/01/29/llms-chat/"><![CDATA[<p>Some unpolished thoughts from a recent conversation with other software
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-02-09T23:00:49+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Thoughts from recent conversations on LLMs</title><link href="https://benknoble.github.io/blog/2026/01/29/llms-chat/" rel="alternate" type="text/html" title="Thoughts from recent conversations on LLMs" /><published>2026-01-29T00:00:00+00:00</published><updated>2026-01-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/01/29/llms-chat</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/01/29/llms-chat/"><![CDATA[<p>Some unpolished thoughts from a recent conversation with other software
 engineers.</p>
 
 <p>I’m willing to be practical, but I find the « tools » conversation needs to wait
@@ -544,6 +544,17 @@ changing. Oh well.</p>
 
 <p><strong>Update later that day:</strong> I had to re-enable the <code class="language-plaintext highlighter-rouge">accelKey</code> change, so maybe
 both are required?</p>
+
+<p><strong>Update 2026 February 9th:</strong> I now have only one <code class="language-plaintext highlighter-rouge">ui.key</code> setting changed from
+the default: <code class="language-plaintext highlighter-rouge">accelKey=224</code>. That is, I use Command (Meta) for Firefox
+shortcuts. I can use Alt+Shift to use <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/accesskey"><code class="language-plaintext highlighter-rouge">accesskey</code>
+shortcuts</a>,
+like <code class="language-plaintext highlighter-rouge">A-S-f</code> on https://wiki.gentoo.org to jump to the search bar. Phew! The
+<code class="language-plaintext highlighter-rouge">generalAccessKey</code> was affecting the latter shortcuts, and since they overlapped
+they could prevent access to the “base” shortcuts sometimes. Not fun. See
+<a href="https://www-archive.mozilla.org/unix/customizing.html">Customizing Mozilla</a> and
+<a href="https://kb.mozillazine.org/Ui.key.generalAccessKey">ui.key.generalAccessKey</a>
+for more details.</p>
 
 <p>PS I know, there’s probably a way to get Vim + Firefox to work these days. I’ll
 explore that later. For now, I’m used to browsers, Slack, and others at least
