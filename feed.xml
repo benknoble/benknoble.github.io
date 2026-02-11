@@ -1,4 +1,216 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-02-09T23:00:49+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Thoughts from recent conversations on LLMs</title><link href="https://benknoble.github.io/blog/2026/01/29/llms-chat/" rel="alternate" type="text/html" title="Thoughts from recent conversations on LLMs" /><published>2026-01-29T00:00:00+00:00</published><updated>2026-01-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/01/29/llms-chat</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/01/29/llms-chat/"><![CDATA[<p>Some unpolished thoughts from a recent conversation with other software
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-02-11T19:32:18+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">MT7925e Bluetooth woes</title><link href="https://benknoble.github.io/blog/2026/02/11/bluetooth/" rel="alternate" type="text/html" title="MT7925e Bluetooth woes" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/02/11/bluetooth</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/02/11/bluetooth/"><![CDATA[<p>Some details on an error I had today and the seeming resolution.</p>
+
+<p>I have a MediaTek Wireless device in my Framework desktop (outputs trimmed):</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># lsusb</span>
+Bus 003 Device 003: ID 0e8d:0717 MediaTek Inc. Wireless_Device
+<span class="c"># lshw</span>
+…
+           <span class="k">*</span><span class="nt">-network</span>
+                description: Ethernet interface
+                product: MT7925 <span class="o">(</span>RZ717<span class="o">)</span> Wi-Fi 7 160MHz
+                vendor: MEDIATEK Corp.
+                physical <span class="nb">id</span>: 0
+                bus info: pci@0000:c0:00.0
+                logical name: wlan0
+                version: 00
+                serial: ac:f2:3c:34:dd:8b
+                width: 64 bits
+                clock: 33MHz
+                capabilities: pciexpress msi pm bus_master cap_list ethernet physical
+                configuration: <span class="nv">broadcast</span><span class="o">=</span><span class="nb">yes </span><span class="nv">driver</span><span class="o">=</span>mt7925e <span class="nv">driverversion</span><span class="o">=</span>6.12.63-gentoo-dist <span class="nv">firmware</span><span class="o">=</span>____000000-20260106153120 <span class="nv">ip</span><span class="o">=</span>192.168.2.248 <span class="nv">latency</span><span class="o">=</span>0 <span class="nb">link</span><span class="o">=</span><span class="nb">yes </span><span class="nv">multicast</span><span class="o">=</span><span class="nb">yes
+                </span>resources: irq:158 memory:b0600000-b07fffff memory:b0800000-b0807fff
+…
+                 <span class="k">*</span><span class="nt">-usb</span>:1
+                      description: Bluetooth wireless interface
+                      product: Wireless_Device
+                      vendor: MediaTek Inc.
+                      physical <span class="nb">id</span>: 3
+                      bus info: usb@3:3
+                      version: 1.00
+                      serial: 000000000
+                      capabilities: usb-2.10 bluetooth
+                      configuration: <span class="nv">driver</span><span class="o">=</span>btusb <span class="nv">maxpower</span><span class="o">=</span>100mA <span class="nv">speed</span><span class="o">=</span>480Mbit/s
+</code></pre></div></div>
+
+<p>(The Bluetooth wireless interface is on a different pci slot from the Ethernet
+interface according to <code class="language-plaintext highlighter-rouge">lshw</code>, but I think it’s physically part of the same
+stuff?)</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># hwinfo</span>
+
+63: PCI c000.0: 0280 Network controller
+  <span class="o">[</span>Created at pci.386]
+  Unique ID: y9sn.W5ZKz6Jz0dA
+  Parent ID: aYFK.ZyxDeoKNER1
+  SysFS ID: /devices/pci0000:00/0000:00:02.3/0000:c0:00.0
+  SysFS BusID: 0000:c0:00.0
+  Hardware Class: network
+  Model: <span class="s2">"MEDIATEK Network controller"</span>
+  Vendor: pci 0x14c3 <span class="s2">"MEDIATEK Corp."</span>
+  Device: pci 0x0717 
+  SubVendor: pci 0x14c3 <span class="s2">"MEDIATEK Corp."</span>
+  SubDevice: pci 0x0717 
+  Driver: <span class="s2">"mt7925e"</span>
+  Driver Modules: <span class="s2">"mt7925e"</span>
+  Device File: wlan0
+  Memory Range: 0xb0600000-0xb07fffff <span class="o">(</span>rw,non-prefetchable<span class="o">)</span>
+  Memory Range: 0xb0800000-0xb0807fff <span class="o">(</span>rw,non-prefetchable<span class="o">)</span>
+  IRQ: 158 <span class="o">(</span>9607 events<span class="o">)</span>
+  HW Address: ac:f2:3c:34:dd:8b
+  Permanent HW Address: ac:f2:3c:34:dd:8b
+  Link detected: <span class="nb">yes
+  </span>Module Alias: <span class="s2">"pci:v000014C3d00000717sv000014C3sd00000717bc02sc80i00"</span>
+  Driver Info <span class="c">#0:</span>
+    Driver Status: mt7925e is active
+    Driver Activation Cmd: <span class="s2">"modprobe mt7925e"</span>
+  Config Status: <span class="nv">cfg</span><span class="o">=</span>new, <span class="nv">avail</span><span class="o">=</span><span class="nb">yes</span>, <span class="nv">need</span><span class="o">=</span>no, <span class="nv">active</span><span class="o">=</span>unknown
+  Attached to: <span class="c">#51 (PCI bridge)</span>
+
+88: USB 00.0: 0000 Unclassified device
+  <span class="o">[</span>Created at usb.122]
+  Unique ID: CiZ2.dgyAFLvpDoA
+  Parent ID: uIhY.5sqDI7PdmUC
+  SysFS ID: /devices/pci0000:00/0000:00:08.3/0000:c5:00.0/usb3/3-3/3-3:1.0
+  SysFS BusID: 3-3:1.0
+  Hardware Class: unknown
+  Model: <span class="s2">"MediaTek Wireless_Device"</span>
+  Hotplug: USB
+  Vendor: usb 0x0e8d <span class="s2">"MediaTek Inc."</span>
+  Device: usb 0x0717 <span class="s2">"Wireless_Device"</span>
+  Revision: <span class="s2">"1.00"</span>
+  Serial ID: <span class="s2">"000000000"</span>
+  Driver: <span class="s2">"btusb"</span>
+  Driver Modules: <span class="s2">"btusb"</span>
+  Speed: 480 Mbps
+  Module Alias: <span class="s2">"usb:v0E8Dp0717d0100dcEFdsc02dp01icE0isc01ip01in00"</span>
+  Driver Info <span class="c">#0:</span>
+    Driver Status: btusb is active
+    Driver Activation Cmd: <span class="s2">"modprobe btusb"</span>
+  Config Status: <span class="nv">cfg</span><span class="o">=</span>new, <span class="nv">avail</span><span class="o">=</span><span class="nb">yes</span>, <span class="nv">need</span><span class="o">=</span>no, <span class="nv">active</span><span class="o">=</span>unknown
+  Attached to: <span class="c">#94 (Hub)</span>
+</code></pre></div></div>
+
+<p>Anyway, after a reboot today, I saw the following issues</p>
+
+<ul>
+  <li>Bluetooth wasn’t on or working, including no mouse connection (fortunately I
+have mouse keys on my ErgoDox EZ)</li>
+  <li>The kernel had some interesting logs:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Feb 11 10:45:16 merguez kernel: Bluetooth: hci0: Execution of wmt command timed out
+Feb 11 10:45:16 merguez kernel: Bluetooth: hci0: Failed to send wmt func ctrl (-110)
+Feb 11 10:45:16 merguez kernel: Bluetooth: hci0: HCI Enhanced Setup Synchronous Connection command is advertised, but not supported.
+</code></pre></div></div>
+
+<p>Things got even weirder as I started poking the hardware with various tools like
+<code class="language-plaintext highlighter-rouge">inxi</code>, <code class="language-plaintext highlighter-rouge">lsusb -v</code>, and <code class="language-plaintext highlighter-rouge">hw-probe</code>, although that might also have been due to
+removing the kernel modules and re-adding them. In particular, reloading <code class="language-plaintext highlighter-rouge">btusb</code>
+did practically nothing; reloading <code class="language-plaintext highlighter-rouge">mt7925e</code> and <code class="language-plaintext highlighter-rouge">btusb</code> seemed to crash
+Bluetooth altogether (although WiFi came back with the <code class="language-plaintext highlighter-rouge">mt7925e</code> driver, so it
+was just the 2nd load of <code class="language-plaintext highlighter-rouge">btusb</code> that failed).</p>
+
+<p>I was able to confirm via <code class="language-plaintext highlighter-rouge">last</code> that I had booted my current kernel at least
+once prior to today, so I was pretty sure that wasn’t the issue (but I have
+several old kernels laying around just in case):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ ll /boot/vmlinuz-6.12.*
+-rw-r--r-- 1 root root 20439552 13 oct.  21:25 /boot/vmlinuz-6.12.47-gentoo-dist
+-rw-r--r-- 1 root root 20488704 13 oct.  15:35 /boot/vmlinuz-6.12.47-gentoo-dist.old
+-rw-r--r-- 1 root root 20451840  7 nov.  09:20 /boot/vmlinuz-6.12.54-gentoo-dist
+-rw-r--r-- 1 root root 20460032  1 déc.  16:49 /boot/vmlinuz-6.12.58-gentoo-dist
+-rw-r--r-- 1 root root 20619776 29 janv. 17:09 /boot/vmlinuz-6.12.63-gentoo-dist
+-rw-r--r-- 1 root root 20619776 13 janv. 08:42 /boot/vmlinuz-6.12.63-gentoo-dist.old
+</code></pre></div></div>
+
+<h2 id="solution">Solution</h2>
+
+<p>Turns out, <a href="https://forums.linuxmint.com/viewtopic.php?t=461458">the Mint folks were
+right</a>: I powered down
+completely, left the system unplugged for a while, and then booted on with no
+issues.</p>
+
+<p>Now the kernel logs look much nicer:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Feb 11 14:03:30 merguez kernel: Bluetooth: hci0: Device setup in 1738015 usecs
+Feb 11 14:03:30 merguez kernel: Bluetooth: hci0: HCI Enhanced Setup Synchronous Connection command is advertised, but not supported.
+Feb 11 14:03:31 merguez kernel: Bluetooth: hci0: AOSP extensions version v1.00
+Feb 11 14:03:31 merguez kernel: Bluetooth: hci0: AOSP quality report is supported
+Feb 11 14:03:31 merguez kernel: Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+Feb 11 14:03:31 merguez kernel: Bluetooth: BNEP filters: protocol multicast
+Feb 11 14:03:31 merguez kernel: Bluetooth: BNEP socket layer initialized
+Feb 11 14:03:31 merguez kernel: Bluetooth: MGMT ver 1.23
+Feb 11 14:03:46 merguez kernel: Bluetooth: RFCOMM TTY layer initialized
+Feb 11 14:03:46 merguez kernel: Bluetooth: RFCOMM socket layer initialized
+Feb 11 14:03:46 merguez kernel: Bluetooth: RFCOMM ver 1.11
+Feb 11 14:03:55 merguez kernel: magicmouse 0005:004C:0265.0005: unknown main item tag 0x0
+Feb 11 14:03:55 merguez kernel: input: Apple Inc. Magic Trackpad 2 as /devices/virtual/misc/uhid/0005:004C:0265.0005/input/input15
+Feb 11 14:03:55 merguez kernel: magicmouse 0005:004C:0265.0005: input,hidraw4: BLUETOOTH HID v3.11 Mouse [Slate] on ac:f2:3c:34:dd:8c
+</code></pre></div></div>
+
+<h2 id="kernel-devices">Kernel devices</h2>
+
+<p>Of note, the <code class="language-plaintext highlighter-rouge">drivers/bluetooth/btusb.c</code> doesn’t list <code class="language-plaintext highlighter-rouge">0e8d:0717</code> in the
+MediaTek devices, although there is what looks to my extremely untrained eyes
+like some kind of generic fallback device:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="cm">/* MediaTek Bluetooth devices */</span>
+	<span class="p">{</span> <span class="n">USB_VENDOR_AND_INTERFACE_INFO</span><span class="p">(</span><span class="mh">0x0e8d</span><span class="p">,</span> <span class="mh">0xe0</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">),</span>
+	  <span class="p">.</span><span class="n">driver_info</span> <span class="o">=</span> <span class="n">BTUSB_MEDIATEK</span> <span class="o">|</span>
+			 <span class="n">BTUSB_WIDEBAND_SPEECH</span> <span class="p">},</span>
+</code></pre></div></div>
+
+<p>(The docs for <code class="language-plaintext highlighter-rouge">USB_VENDOR_AND_INTERFACE</code> don’t mean much to me:)</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * USB_VENDOR_AND_INTERFACE_INFO - describe a specific usb vendor with a class of usb interfaces
+ * @vend: the 16 bit USB Vendor ID
+ * @cl: bInterfaceClass value
+ * @sc: bInterfaceSubClass value
+ * @pr: bInterfaceProtocol value
+ *
+ * This macro is used to create a struct usb_device_id that matches a
+ * specific vendor with a specific class of interfaces.
+ *
+ * This is especially useful when explicitly matching devices that have
+ * vendor specific bDeviceClass values, but standards-compliant interfaces.
+ */</span>
+<span class="cp">#define USB_VENDOR_AND_INTERFACE_INFO(vend, cl, sc, pr) \
+	.match_flags = USB_DEVICE_ID_MATCH_INT_INFO \
+		| USB_DEVICE_ID_MATCH_VENDOR, \
+	.idVendor = (vend), \
+	.bInterfaceClass = (cl), \
+	.bInterfaceSubClass = (sc), \
+	.bInterfaceProtocol = (pr)
+</span></code></pre></div></div>
+
+<p>For the network controller, we have <code class="language-plaintext highlighter-rouge">PCI_VENDOR_ID_MEDIATEK=0x14c3</code> via
+<code class="language-plaintext highlighter-rouge">include/linux/pci_ids.h</code> and then</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">pci_device_id</span> <span class="n">mt7925_pci_device_table</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="p">{</span> <span class="n">PCI_DEVICE</span><span class="p">(</span><span class="n">PCI_VENDOR_ID_MEDIATEK</span><span class="p">,</span> <span class="mh">0x7925</span><span class="p">),</span>
+		<span class="p">.</span><span class="n">driver_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">kernel_ulong_t</span><span class="p">)</span><span class="n">MT7925_FIRMWARE_WM</span> <span class="p">},</span>
+	<span class="p">{</span> <span class="n">PCI_DEVICE</span><span class="p">(</span><span class="n">PCI_VENDOR_ID_MEDIATEK</span><span class="p">,</span> <span class="mh">0x0717</span><span class="p">),</span>
+		<span class="p">.</span><span class="n">driver_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">kernel_ulong_t</span><span class="p">)</span><span class="n">MT7925_FIRMWARE_WM</span> <span class="p">},</span>
+	<span class="p">{</span> <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>in the <code class="language-plaintext highlighter-rouge">drivers/net/wireless/mediatek/mt76/mt7925</code> tree.</p>
+
+<h2 id="other-fora">Other fora</h2>
+
+<p>Places I looked for help via Ecosia searches of the kernel logs and model IDs:</p>
+
+<ul>
+  <li><a href="https://discussion.fedoraproject.org/t/bluetooth-mt7925e-doesnt-work-anymore-after-an-update-on-fedora-workstation-42/164707">Fedora forum</a></li>
+  <li><a href="https://community.frame.work/t/bluetooth-adapter-detected-but-unable-to-initialize-firmware/55427/3">Framework forum</a></li>
+  <li>Various Arch fora</li>
+</ul>
+
+<p>Seems like there are lots of MediaTek driver issues, but none were <em>exactly</em>
+like mine except that Mint forum.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="linux" /><summary type="html"><![CDATA[Some details on an error I had today and the seeming resolution.]]></summary></entry><entry><title type="html">Thoughts from recent conversations on LLMs</title><link href="https://benknoble.github.io/blog/2026/01/29/llms-chat/" rel="alternate" type="text/html" title="Thoughts from recent conversations on LLMs" /><published>2026-01-29T00:00:00+00:00</published><updated>2026-01-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/01/29/llms-chat</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/01/29/llms-chat/"><![CDATA[<p>Some unpolished thoughts from a recent conversation with other software
 engineers.</p>
 
 <p>I’m willing to be practical, but I find the « tools » conversation needs to wait
@@ -3184,127 +3396,4 @@ Racket’s reader syntax for (Perl-ish) regular expressions.</p>
       <p>Based on that old <a href="/blog/2019/09/27/perl-v-bash/">post about Perl</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="git" /><summary type="html"><![CDATA[Here’s some statistics on commits I’ve authored collected from git-cstat over a few work and open-source repositories.]]></summary></entry><entry><title type="html">A kludgy new way to git-blame</title><link href="https://benknoble.github.io/blog/2025/09/17/blame/" rel="alternate" type="text/html" title="A kludgy new way to git-blame" /><published>2025-09-17T00:00:00+00:00</published><updated>2025-09-17T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/09/17/blame</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/09/17/blame/"><![CDATA[<p>Lately I find myself feeding <code class="language-plaintext highlighter-rouge">git grep</code> results to <code class="language-plaintext highlighter-rouge">git blame</code> to help identify
-points of contact for a piece of code. I’ve scripted a few hacks together to
-make life easier.</p>
-
-<p><strong>Call for help:</strong> If you have ideas on how to better parse <code class="language-plaintext highlighter-rouge">git grep</code> output or
-feed it to <code class="language-plaintext highlighter-rouge">git blame</code>, please let me know <a href="https://github.com/benknoble/Dotfiles/">on
-GitHub</a> or in the comments.</p>
-
-<p>When I’m interested in who to talk to about a small chunk of code, I usually
-navigate to it in Vim and run <a href="https://github.com/tpope/vim-fugitive/blob/61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4/doc/fugitive.txt#L57"><code class="language-plaintext highlighter-rouge">:Git
-blame</code></a>.
-I might also throw the file or containing directory at <code class="language-plaintext highlighter-rouge">git shortlog</code> to get a
-sense of who’s active in the area.</p>
-
-<p>My current <code class="language-plaintext highlighter-rouge">$DAYJOB</code> includes working with a large monorepo, and I frequently
-have questions of the form “who should I ask about feature X that cuts across
-many different code modules?”—in such a situation, I’ve recently been piping
-<code class="language-plaintext highlighter-rouge">git grep</code> into <code class="language-plaintext highlighter-rouge">git blame</code>. (Feeding <code class="language-plaintext highlighter-rouge">git grep --files-with-matches</code> into <code class="language-plaintext highlighter-rouge">git
-shortlog</code> is not awful, but typically gives too many contacts.)</p>
-
-<p>The trouble is, each time I’ve done this I’ve had to recraft the pipeline. Often
-it’s some variant<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> of</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git <span class="nb">grep</span> … | fields <span class="nt">-f</span>: 1 2 | xargs <span class="nt">-L1</span> sh <span class="nt">-c</span> <span class="s1">'git blame -L$1,$1 $0'</span>
-</code></pre></div></div>
-
-<p>This doesn’t quite work correctly if I grep a specific revision. When I’m on a
-topic branch and a teammate has a question, I might do</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git f <span class="c"># short for fetch, and I have fetch.all=true configured</span>
-git <span class="nb">grep</span> … origin | fields <span class="nt">-f</span>: <span class="o">{</span>1..3<span class="o">}</span> | xargs <span class="nt">-L1</span> sh <span class="nt">-c</span> <span class="s1">'git blame -L $2,$2 $1 $0'</span>
-</code></pre></div></div>
-
-<p>Argh! And, although I haven’t lifted this limitation in my script, if I throw
-<code class="language-plaintext highlighter-rouge">-C</code>-style context results in there, this won’t work. If we get binary matches,
-this won’t work. Etc.</p>
-
-<p>I got tired of trying to get this right interactively and figured I’d capture
-the whole thing as a script. So let’s start with that.</p>
-
-<h2 id="git-greb-blame-matching-lines"><code class="language-plaintext highlighter-rouge">git-greb</code>: blame matching lines</h2>
-
-<p>If <code class="language-plaintext highlighter-rouge">grep</code> comes from <code class="language-plaintext highlighter-rouge">:g/re/p</code> in <code class="language-plaintext highlighter-rouge">ed(1)</code>, then <code class="language-plaintext highlighter-rouge">greb</code> is the natural extension
-to a “b for blame” verb.</p>
-
-<p>The <a href="https://github.com/benknoble/Dotfiles/commit/68002c7e705a1bb383160d09a89b57a858d9268d">initial version of the
-script</a>
-works for the main use cases above:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git greb …
-git greb -r origin -- …
-</code></pre></div></div>
-
-<p>Yahoo! And if I need to build more “blame input from X” tools, I now have <code class="language-plaintext highlighter-rouge">git
-blame-stdin</code> as plumbing I can re-use. That saves me from reconstructing
-different <code class="language-plaintext highlighter-rouge">fields … | xargs …</code> pipelines.</p>
-
-<p>Further, <code class="language-plaintext highlighter-rouge">git greb</code> supports most of the grep flags I care about for this sort
-of search.</p>
-
-<p>However, let’s talk about the ugly…</p>
-
-<h2 id="git-grep-is-not-designed-for-machine-consumption"><code class="language-plaintext highlighter-rouge">git grep</code> is not designed for machine consumption</h2>
-
-<p>In fact, <code class="language-plaintext highlighter-rouge">git grep</code> seems to go out of it’s way to avoid being useful as input
-to a script! Let’s see if I can explain how: config and command line options can
-dramatically affect output formats, which is tough to handle if you want to
-support most <code class="language-plaintext highlighter-rouge">git grep</code> invocations. I originally planned for <code class="language-plaintext highlighter-rouge">git greb</code> to be
-as easy as running <code class="language-plaintext highlighter-rouge">git grep …</code>, then <code class="language-plaintext highlighter-rouge">^p^b</code> in my shell would turn that into
-<code class="language-plaintext highlighter-rouge">git greb …</code>. Alas, not so. Some examples of what goes wrong:</p>
-
-<ul>
-  <li>We want to keep line numbers for effective blaming, so anything that changes
-that format is out. That mean <code class="language-plaintext highlighter-rouge">-h</code>, <code class="language-plaintext highlighter-rouge">-l</code>, <code class="language-plaintext highlighter-rouge">-c</code>, etc.</li>
-  <li>We don’t want to try to open files in the pager, but that was never going to
-be supported. Still, we have to reject that option.</li>
-  <li>Various options throw other noise into the output (<code class="language-plaintext highlighter-rouge">--break</code>, <code class="language-plaintext highlighter-rouge">--heading</code>).</li>
-  <li>None of the context options (<code class="language-plaintext highlighter-rouge">-A</code>, <code class="language-plaintext highlighter-rouge">-B</code>, <code class="language-plaintext highlighter-rouge">-C</code>, <code class="language-plaintext highlighter-rouge">-p</code>, <code class="language-plaintext highlighter-rouge">-W</code>) use the same
-<code class="language-plaintext highlighter-rouge">file:line</code> formatting, so we can’t use them at all (or we have to try to
-parse all possible formats, of which there are several, without screwing
-things up when a filename contains a hyphen or equals sign; we’re already
-screwed if a filename contains a colon).</li>
-  <li>And finally: <code class="language-plaintext highlighter-rouge">-z</code> for nul-delimited output <em>still isn’t sufficient</em>: we do get
-<code class="language-plaintext highlighter-rouge">file&lt;nul&gt;line&lt;nul&gt;</code>, the revision (if present) is prepended with <code class="language-plaintext highlighter-rouge">rev:</code>. But
-I can’t guarantee that doesn’t contain a colon, since <code class="language-plaintext highlighter-rouge">:/post:</code> is a valid
-revision (at least on this website’s code) and is displayed as typed! Further,
-parsing nul-delimited lines in a shell script is fraught.</li>
-</ul>
-
-<p>I was originally planning to support non-trivial filenames, but it quickly
-became too much work. So for now, I’m supporting filenames that don’t have to be
-escaped without <code class="language-plaintext highlighter-rouge">-z</code>, and that don’t contain a colon. I’m also explicitly
-rejecting any unsupported <code class="language-plaintext highlighter-rouge">git grep</code> option to make things easier.</p>
-
-<h2 id="git-grebs-interface-is-ugly"><code class="language-plaintext highlighter-rouge">git greb</code>’s interface is ugly</h2>
-
-<p>Yeah. Because of all the munging above, and because I need to feed a revision to
-<code class="language-plaintext highlighter-rouge">git blame</code> when one is present but not have ambiguous parsing that sometimes
-gets it wrong, I have <code class="language-plaintext highlighter-rouge">git-greb</code> take a <code class="language-plaintext highlighter-rouge">--revision &lt;rev&gt;</code> flag. But if it has
-flags, it has to delimit between its flags and <code class="language-plaintext highlighter-rouge">git-grep</code>’s flags. That’s the
-first <code class="language-plaintext highlighter-rouge">--</code> in its synopsis. (If you don’t use any options, you don’t need it.)</p>
-
-<p><em>Then</em>, I need to reinsert the revision at the end of the <code class="language-plaintext highlighter-rouge">git grep</code> command
-(but before any pathspecs), so if you provide a pathspec and a revision you
-<em>must</em> give the second <code class="language-plaintext highlighter-rouge">--</code> to separate the pathspec from the previous
-arguments. Ugh. (The code isn’t particularly pretty, either.)</p>
-
-<p>At least I had the foresight to include <code class="language-plaintext highlighter-rouge">-v</code> as a debugging aid in both scripts:
-that’s my way<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> of having scripts output the Git commands they run, which is
-also useful when I share the outputs with other folks so they can see what I
-did.</p>
-
-<h2 id="notes">Notes</h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p><a href="/blog/2019/09/11/fields/">My fields script is described on this blog</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:2">
-      <p>My <a href="/blog/2024/11/15/useful-utilities/#git"><code class="language-plaintext highlighter-rouge">git-div</code> script</a> was my first to support this. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[Lately I find myself feeding git grep results to git blame to help identify points of contact for a piece of code. I’ve scripted a few hacks together to make life easier.]]></summary></entry></feed>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="git" /><summary type="html"><![CDATA[Here’s some statistics on commits I’ve authored collected from git-cstat over a few work and open-source repositories.]]></summary></entry></feed>

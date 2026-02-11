@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : MT7925e Bluetooth woes</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <p>
+      I stand for the Constitution, for due process, and for community that
+      takes care of each other.
+      </p>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>MT7925e Bluetooth woes</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 11 Feb 2026 in Blog</p>
+<div id="post">
+  <p>Some details on an error I had today and the seeming resolution.</p>
+
+<p>I have a MediaTek Wireless device in my Framework desktop (outputs trimmed):</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># lsusb</span>
+Bus 003 Device 003: ID 0e8d:0717 MediaTek Inc. Wireless_Device
+<span class="c"># lshw</span>
+…
+           <span class="k">*</span><span class="nt">-network</span>
+                description: Ethernet interface
+                product: MT7925 <span class="o">(</span>RZ717<span class="o">)</span> Wi-Fi 7 160MHz
+                vendor: MEDIATEK Corp.
+                physical <span class="nb">id</span>: 0
+                bus info: pci@0000:c0:00.0
+                logical name: wlan0
+                version: 00
+                serial: ac:f2:3c:34:dd:8b
+                width: 64 bits
+                clock: 33MHz
+                capabilities: pciexpress msi pm bus_master cap_list ethernet physical
+                configuration: <span class="nv">broadcast</span><span class="o">=</span><span class="nb">yes </span><span class="nv">driver</span><span class="o">=</span>mt7925e <span class="nv">driverversion</span><span class="o">=</span>6.12.63-gentoo-dist <span class="nv">firmware</span><span class="o">=</span>____000000-20260106153120 <span class="nv">ip</span><span class="o">=</span>192.168.2.248 <span class="nv">latency</span><span class="o">=</span>0 <span class="nb">link</span><span class="o">=</span><span class="nb">yes </span><span class="nv">multicast</span><span class="o">=</span><span class="nb">yes
+                </span>resources: irq:158 memory:b0600000-b07fffff memory:b0800000-b0807fff
+…
+                 <span class="k">*</span><span class="nt">-usb</span>:1
+                      description: Bluetooth wireless interface
+                      product: Wireless_Device
+                      vendor: MediaTek Inc.
+                      physical <span class="nb">id</span>: 3
+                      bus info: usb@3:3
+                      version: 1.00
+                      serial: 000000000
+                      capabilities: usb-2.10 bluetooth
+                      configuration: <span class="nv">driver</span><span class="o">=</span>btusb <span class="nv">maxpower</span><span class="o">=</span>100mA <span class="nv">speed</span><span class="o">=</span>480Mbit/s
+</code></pre></div></div>
+
+<p>(The Bluetooth wireless interface is on a different pci slot from the Ethernet
+interface according to <code class="language-plaintext highlighter-rouge">lshw</code>, but I think it’s physically part of the same
+stuff?)</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># hwinfo</span>
+
+63: PCI c000.0: 0280 Network controller
+  <span class="o">[</span>Created at pci.386]
+  Unique ID: y9sn.W5ZKz6Jz0dA
+  Parent ID: aYFK.ZyxDeoKNER1
+  SysFS ID: /devices/pci0000:00/0000:00:02.3/0000:c0:00.0
+  SysFS BusID: 0000:c0:00.0
+  Hardware Class: network
+  Model: <span class="s2">"MEDIATEK Network controller"</span>
+  Vendor: pci 0x14c3 <span class="s2">"MEDIATEK Corp."</span>
+  Device: pci 0x0717 
+  SubVendor: pci 0x14c3 <span class="s2">"MEDIATEK Corp."</span>
+  SubDevice: pci 0x0717 
+  Driver: <span class="s2">"mt7925e"</span>
+  Driver Modules: <span class="s2">"mt7925e"</span>
+  Device File: wlan0
+  Memory Range: 0xb0600000-0xb07fffff <span class="o">(</span>rw,non-prefetchable<span class="o">)</span>
+  Memory Range: 0xb0800000-0xb0807fff <span class="o">(</span>rw,non-prefetchable<span class="o">)</span>
+  IRQ: 158 <span class="o">(</span>9607 events<span class="o">)</span>
+  HW Address: ac:f2:3c:34:dd:8b
+  Permanent HW Address: ac:f2:3c:34:dd:8b
+  Link detected: <span class="nb">yes
+  </span>Module Alias: <span class="s2">"pci:v000014C3d00000717sv000014C3sd00000717bc02sc80i00"</span>
+  Driver Info <span class="c">#0:</span>
+    Driver Status: mt7925e is active
+    Driver Activation Cmd: <span class="s2">"modprobe mt7925e"</span>
+  Config Status: <span class="nv">cfg</span><span class="o">=</span>new, <span class="nv">avail</span><span class="o">=</span><span class="nb">yes</span>, <span class="nv">need</span><span class="o">=</span>no, <span class="nv">active</span><span class="o">=</span>unknown
+  Attached to: <span class="c">#51 (PCI bridge)</span>
+
+88: USB 00.0: 0000 Unclassified device
+  <span class="o">[</span>Created at usb.122]
+  Unique ID: CiZ2.dgyAFLvpDoA
+  Parent ID: uIhY.5sqDI7PdmUC
+  SysFS ID: /devices/pci0000:00/0000:00:08.3/0000:c5:00.0/usb3/3-3/3-3:1.0
+  SysFS BusID: 3-3:1.0
+  Hardware Class: unknown
+  Model: <span class="s2">"MediaTek Wireless_Device"</span>
+  Hotplug: USB
+  Vendor: usb 0x0e8d <span class="s2">"MediaTek Inc."</span>
+  Device: usb 0x0717 <span class="s2">"Wireless_Device"</span>
+  Revision: <span class="s2">"1.00"</span>
+  Serial ID: <span class="s2">"000000000"</span>
+  Driver: <span class="s2">"btusb"</span>
+  Driver Modules: <span class="s2">"btusb"</span>
+  Speed: 480 Mbps
+  Module Alias: <span class="s2">"usb:v0E8Dp0717d0100dcEFdsc02dp01icE0isc01ip01in00"</span>
+  Driver Info <span class="c">#0:</span>
+    Driver Status: btusb is active
+    Driver Activation Cmd: <span class="s2">"modprobe btusb"</span>
+  Config Status: <span class="nv">cfg</span><span class="o">=</span>new, <span class="nv">avail</span><span class="o">=</span><span class="nb">yes</span>, <span class="nv">need</span><span class="o">=</span>no, <span class="nv">active</span><span class="o">=</span>unknown
+  Attached to: <span class="c">#94 (Hub)</span>
+</code></pre></div></div>
+
+<p>Anyway, after a reboot today, I saw the following issues</p>
+
+<ul>
+  <li>Bluetooth wasn’t on or working, including no mouse connection (fortunately I
+have mouse keys on my ErgoDox EZ)</li>
+  <li>The kernel had some interesting logs:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Feb 11 10:45:16 merguez kernel: Bluetooth: hci0: Execution of wmt command timed out
+Feb 11 10:45:16 merguez kernel: Bluetooth: hci0: Failed to send wmt func ctrl (-110)
+Feb 11 10:45:16 merguez kernel: Bluetooth: hci0: HCI Enhanced Setup Synchronous Connection command is advertised, but not supported.
+</code></pre></div></div>
+
+<p>Things got even weirder as I started poking the hardware with various tools like
+<code class="language-plaintext highlighter-rouge">inxi</code>, <code class="language-plaintext highlighter-rouge">lsusb -v</code>, and <code class="language-plaintext highlighter-rouge">hw-probe</code>, although that might also have been due to
+removing the kernel modules and re-adding them. In particular, reloading <code class="language-plaintext highlighter-rouge">btusb</code>
+did practically nothing; reloading <code class="language-plaintext highlighter-rouge">mt7925e</code> and <code class="language-plaintext highlighter-rouge">btusb</code> seemed to crash
+Bluetooth altogether (although WiFi came back with the <code class="language-plaintext highlighter-rouge">mt7925e</code> driver, so it
+was just the 2nd load of <code class="language-plaintext highlighter-rouge">btusb</code> that failed).</p>
+
+<p>I was able to confirm via <code class="language-plaintext highlighter-rouge">last</code> that I had booted my current kernel at least
+once prior to today, so I was pretty sure that wasn’t the issue (but I have
+several old kernels laying around just in case):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ ll /boot/vmlinuz-6.12.*
+-rw-r--r-- 1 root root 20439552 13 oct.  21:25 /boot/vmlinuz-6.12.47-gentoo-dist
+-rw-r--r-- 1 root root 20488704 13 oct.  15:35 /boot/vmlinuz-6.12.47-gentoo-dist.old
+-rw-r--r-- 1 root root 20451840  7 nov.  09:20 /boot/vmlinuz-6.12.54-gentoo-dist
+-rw-r--r-- 1 root root 20460032  1 déc.  16:49 /boot/vmlinuz-6.12.58-gentoo-dist
+-rw-r--r-- 1 root root 20619776 29 janv. 17:09 /boot/vmlinuz-6.12.63-gentoo-dist
+-rw-r--r-- 1 root root 20619776 13 janv. 08:42 /boot/vmlinuz-6.12.63-gentoo-dist.old
+</code></pre></div></div>
+
+<h2 id="solution">Solution</h2>
+
+<p>Turns out, <a href="https://forums.linuxmint.com/viewtopic.php?t=461458">the Mint folks were
+right</a>: I powered down
+completely, left the system unplugged for a while, and then booted on with no
+issues.</p>
+
+<p>Now the kernel logs look much nicer:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Feb 11 14:03:30 merguez kernel: Bluetooth: hci0: Device setup in 1738015 usecs
+Feb 11 14:03:30 merguez kernel: Bluetooth: hci0: HCI Enhanced Setup Synchronous Connection command is advertised, but not supported.
+Feb 11 14:03:31 merguez kernel: Bluetooth: hci0: AOSP extensions version v1.00
+Feb 11 14:03:31 merguez kernel: Bluetooth: hci0: AOSP quality report is supported
+Feb 11 14:03:31 merguez kernel: Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+Feb 11 14:03:31 merguez kernel: Bluetooth: BNEP filters: protocol multicast
+Feb 11 14:03:31 merguez kernel: Bluetooth: BNEP socket layer initialized
+Feb 11 14:03:31 merguez kernel: Bluetooth: MGMT ver 1.23
+Feb 11 14:03:46 merguez kernel: Bluetooth: RFCOMM TTY layer initialized
+Feb 11 14:03:46 merguez kernel: Bluetooth: RFCOMM socket layer initialized
+Feb 11 14:03:46 merguez kernel: Bluetooth: RFCOMM ver 1.11
+Feb 11 14:03:55 merguez kernel: magicmouse 0005:004C:0265.0005: unknown main item tag 0x0
+Feb 11 14:03:55 merguez kernel: input: Apple Inc. Magic Trackpad 2 as /devices/virtual/misc/uhid/0005:004C:0265.0005/input/input15
+Feb 11 14:03:55 merguez kernel: magicmouse 0005:004C:0265.0005: input,hidraw4: BLUETOOTH HID v3.11 Mouse [Slate] on ac:f2:3c:34:dd:8c
+</code></pre></div></div>
+
+<h2 id="kernel-devices">Kernel devices</h2>
+
+<p>Of note, the <code class="language-plaintext highlighter-rouge">drivers/bluetooth/btusb.c</code> doesn’t list <code class="language-plaintext highlighter-rouge">0e8d:0717</code> in the
+MediaTek devices, although there is what looks to my extremely untrained eyes
+like some kind of generic fallback device:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="cm">/* MediaTek Bluetooth devices */</span>
+	<span class="p">{</span> <span class="n">USB_VENDOR_AND_INTERFACE_INFO</span><span class="p">(</span><span class="mh">0x0e8d</span><span class="p">,</span> <span class="mh">0xe0</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">),</span>
+	  <span class="p">.</span><span class="n">driver_info</span> <span class="o">=</span> <span class="n">BTUSB_MEDIATEK</span> <span class="o">|</span>
+			 <span class="n">BTUSB_WIDEBAND_SPEECH</span> <span class="p">},</span>
+</code></pre></div></div>
+
+<p>(The docs for <code class="language-plaintext highlighter-rouge">USB_VENDOR_AND_INTERFACE</code> don’t mean much to me:)</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * USB_VENDOR_AND_INTERFACE_INFO - describe a specific usb vendor with a class of usb interfaces
+ * @vend: the 16 bit USB Vendor ID
+ * @cl: bInterfaceClass value
+ * @sc: bInterfaceSubClass value
+ * @pr: bInterfaceProtocol value
+ *
+ * This macro is used to create a struct usb_device_id that matches a
+ * specific vendor with a specific class of interfaces.
+ *
+ * This is especially useful when explicitly matching devices that have
+ * vendor specific bDeviceClass values, but standards-compliant interfaces.
+ */</span>
+<span class="cp">#define USB_VENDOR_AND_INTERFACE_INFO(vend, cl, sc, pr) \
+	.match_flags = USB_DEVICE_ID_MATCH_INT_INFO \
+		| USB_DEVICE_ID_MATCH_VENDOR, \
+	.idVendor = (vend), \
+	.bInterfaceClass = (cl), \
+	.bInterfaceSubClass = (sc), \
+	.bInterfaceProtocol = (pr)
+</span></code></pre></div></div>
+
+<p>For the network controller, we have <code class="language-plaintext highlighter-rouge">PCI_VENDOR_ID_MEDIATEK=0x14c3</code> via
+<code class="language-plaintext highlighter-rouge">include/linux/pci_ids.h</code> and then</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">pci_device_id</span> <span class="n">mt7925_pci_device_table</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="p">{</span> <span class="n">PCI_DEVICE</span><span class="p">(</span><span class="n">PCI_VENDOR_ID_MEDIATEK</span><span class="p">,</span> <span class="mh">0x7925</span><span class="p">),</span>
+		<span class="p">.</span><span class="n">driver_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">kernel_ulong_t</span><span class="p">)</span><span class="n">MT7925_FIRMWARE_WM</span> <span class="p">},</span>
+	<span class="p">{</span> <span class="n">PCI_DEVICE</span><span class="p">(</span><span class="n">PCI_VENDOR_ID_MEDIATEK</span><span class="p">,</span> <span class="mh">0x0717</span><span class="p">),</span>
+		<span class="p">.</span><span class="n">driver_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">kernel_ulong_t</span><span class="p">)</span><span class="n">MT7925_FIRMWARE_WM</span> <span class="p">},</span>
+	<span class="p">{</span> <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>in the <code class="language-plaintext highlighter-rouge">drivers/net/wireless/mediatek/mt76/mt7925</code> tree.</p>
+
+<h2 id="other-fora">Other fora</h2>
+
+<p>Places I looked for help via Ecosia searches of the kernel logs and model IDs:</p>
+
+<ul>
+  <li><a href="https://discussion.fedoraproject.org/t/bluetooth-mt7925e-doesnt-work-anymore-after-an-update-on-fedora-workstation-42/164707">Fedora forum</a></li>
+  <li><a href="https://community.frame.work/t/bluetooth-adapter-detected-but-unable-to-initialize-firmware/55427/3">Framework forum</a></li>
+  <li>Various Arch fora</li>
+</ul>
+
+<p>Seems like there are lots of MediaTek driver issues, but none were <em>exactly</em>
+like mine except that Mint forum.</p>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#linux" class="tag">
+        linux
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2026/02/11/bluetooth/";
+    this.page.identifier = "/blog/2026/02/11/bluetooth";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2026/01/29/llms-chat/" title="Thoughts from recent conversations on LLMs">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#mt7925e-bluetooth-woes">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <a href="https://www.goatcounter.com">No personal information collected</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>
