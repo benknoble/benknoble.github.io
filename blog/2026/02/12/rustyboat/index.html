@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Rusty Boat Retrospective</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <p>
+      I stand for the Constitution, for due process, and for community that
+      takes care of each other.
+      </p>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Rusty Boat Retrospective</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 12 Feb 2026 in Blog</p>
+<div id="post">
+  <p>Brief reflections on implementing Raft in Rust.</p>
+
+<p><a href="https://github.com/benknoble/rusty-raft/">Public code</a>.</p>
+
+<h2 id="raft">Raft</h2>
+
+<p>I hadn’t thought about consensus algorithms since my MS year in 2020/2021, and
+I’d certainly never thought deeply about them. Studying the paper and
+Ousterhout’s video presentations convinced me that implementing Raft ought to be
+possible, in that same way that
+<a href="https://github.com/oxidecomputer/hubris">hubris</a> is necessary to take on
+certain challenges. I was <a href="https://github.com/benknoble/rusty-raft/commit/1d24310badc58dfc1fdd72e07813d584a3896990">demonstrably
+humbled</a>
+more than once<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, but Raft’s goal (as I understand it) is to be practically
+implementable correctly.</p>
+
+<p>The details matter immensely for correctness. Each statement is load-bearing.</p>
+
+<p>As I wrote in the public README, there’s little formal validation that my
+implementation is faithful to any spec or upholds the relevant properties. I
+have a few unit tests, but I haven’t taken the dive on fuzzing or property
+testing this code. It deserves it. (I probably won’t try any proof tools, though
+if memory serves creusot exists to fill that gap.<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>)</p>
+
+<p>I especially enjoyed explicitly modelling an abstract Clock, which I did for one
+of our warmup exercises during the course—it made some reasoning deliciously
+simple. Its implementation is not perfect (a <code class="language-plaintext highlighter-rouge">sleep</code> loop doesn’t really get you
+precise ticking frequency), but a real example could tie into hardware clocks.</p>
+
+<h2 id="rust">Rust</h2>
+
+<p>This is my most extensive foray into Rust to-date, though I’d dabbled a bit
+before. I like to say I can read Rust fairly well, having done that for years
+now and especially due to the writings of Ralf Jung and others. I understand
+a bit of the ideas Rust builds on, so I didn’t find many ownership challenges
+while writing this project—I intentionally structured the driver loop and main
+algorithm so that who owned what data was clear, except for some fiddly bits
+about sending application results around which end up just cloning.</p>
+
+<p>I still stumble over some parts of Rust’s module system, but that got easier
+with time.</p>
+
+<p>Rust’s tools are great, of course.</p>
+
+<p>I shied away from async Rust in this project; it seemed like too much to bite
+off at the time. I’m more comfortable with message-passing threads from some Go
+(years ago) and Racket (more recent), so I usually think in that model.</p>
+
+<p>In a similar way, I didn’t go dependency hunting here (I don’t <a href="https://oxide-and-friends.transistor.fm/episodes/a-crate-is-born/transcript">browse crates.io
+for fun</a>).
+I have serde for serialization, which ended up being more code than I thought I
+would have to write (integrating with serde-lexpr to use S-expression formats),
+and rand for randomness. There are likely other things that would be nice to
+glue in, and for other projects dependencies are a necessity. Here I was mostly
+satisfied with the standard library<sup id="fnref:3"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>.</p>
+
+<p>I suspect my use of dependencies would look different if Rust’s documentation
+were integrated in the same way that <a href="https://docs.racket-lang.org">Racket’s
+is</a>, but I realize that’s less practical for a
+bigger ecosystem.</p>
+
+<h2 id="overall">Overall</h2>
+
+<p>I’m quite pleased I was able to implement such a fascinating system in a few
+days of hard work: the essence was written between August 26th and 29th, with
+less than 20 commits afterwards<sup id="fnref:4"><a href="#fn:4" class="footnote" rel="footnote" role="doc-noteref">4</a></sup>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ g dategraph
+2025-08-26  13 ███████████████████
+2025-08-27  28 ████████████████████████████████████████
+2025-08-28  45 █████████████████████████████████████████████████████████████████
+2025-08-29  42 █████████████████████████████████████████████████████████████
+2025-09-20   1 █
+2026-01-03   1 █
+2026-01-04   2 ███
+2026-01-05   1 █
+2026-01-06   3 ████
+2026-01-10   1 █
+2026-01-19   3 ████
+2026-02-03   4 ██████
+
+λ DATEGRAPH=additions g dategraph
+2025-08-26  652 ████████████████████████████████████████████████████████████████
+2025-08-27  530 ████████████████████████████████████████████████████
+2025-08-28  436 ███████████████████████████████████████████
+2025-08-29  409 ████████████████████████████████████████
+2025-09-20   11 █
+2026-01-03    3
+2026-01-04    8 █
+2026-01-05   52 █████
+2026-01-06   12 █
+2026-01-19   45 ████
+2026-02-03  204 ████████████████████
+</code></pre></div></div>
+
+<p>I’m also pleased I was able to return months later and reconstruct my thinking
+without too much hassle. A few details were peculiar, but I’ve already forgotten
+which ones!</p>
+
+<p>And I can’t resist<sup id="fnref:5"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">5</a></sup>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ g ls-files | code-percent
+RowNumber  File                        PercentTotal  CumulativePercentTotal
+1          src/lib.rs                  30.525        30.525
+2          src/test_protocol.rs        26.2913       56.8163
+3          src/main.rs                 11.3463       68.1626
+4          README.md                   9.99153       78.1541
+5          src/net.rs                  5.7155        83.8696
+6          src/net/bytes.rs            5.63082       89.5005
+7          src/test_append_entries.rs  4.65707       94.1575
+8          start-cluster               1.31245       95.47
+9          src/test_save_restore.rs    1.10076       96.5707
+10         src/bin/client.rs           1.98984       98.5606
+11         watch-cluster               0.127011      98.6876
+12         start-client                0.127011      98.8146
+13         src/net/config.rs           0.550381      99.365
+14         .gitignore                  0.211685      99.5767
+15         Cargo.toml                  0.42337       100
+</code></pre></div></div>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Try <code class="language-plaintext highlighter-rouge">git log --grep fix</code>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>I have an old <a href="https://github.com/benknoble/advent2021/blob/prove-unflatten/day18/Day18.v">incomplete proof of some supposed
+inverses</a>
+I’d like to finish, too… alas. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>Though not with the un-hashability of <code class="language-plaintext highlighter-rouge">mpsc::Sender</code>s. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p><a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/git-dategraph"><code class="language-plaintext highlighter-rouge">git-dategraph</code> script</a> <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5">
+      <p><a href="/blog/2024/08/07/churn-and-weight/"><code class="language-plaintext highlighter-rouge">code-percent</code> discussion</a> <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+</div>
+<hr/>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#rust" class="tag">
+        rust
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2026/02/12/rustyboat/";
+    this.page.identifier = "/blog/2026/02/12/rustyboat";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2026/02/11/bluetooth/"
+      title="MT7925e Bluetooth woes">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#rusty-boat-retrospective">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+<hr/>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <a href="https://www.goatcounter.com">No personal information collected</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        window.counter = 'https://benknoble_github_io.goatcounter.com/count'
+        script.async = 1;
+        script.src = '//gc.zgo.at/count.js';
+
+        var ins = document.getElementsByTagName('script')[0];
+        ins.parentNode.insertBefore(script, ins)
+      })();
+    </script>
+  </body>
+</html>

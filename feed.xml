@@ -1,4 +1,146 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-02-11T19:32:18+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">MT7925e Bluetooth woes</title><link href="https://benknoble.github.io/blog/2026/02/11/bluetooth/" rel="alternate" type="text/html" title="MT7925e Bluetooth woes" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/02/11/bluetooth</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/02/11/bluetooth/"><![CDATA[<p>Some details on an error I had today and the seeming resolution.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-02-13T18:14:42+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Rusty Boat Retrospective</title><link href="https://benknoble.github.io/blog/2026/02/12/rustyboat/" rel="alternate" type="text/html" title="Rusty Boat Retrospective" /><published>2026-02-12T00:00:00+00:00</published><updated>2026-02-12T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/02/12/rustyboat</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/02/12/rustyboat/"><![CDATA[<p>Brief reflections on implementing Raft in Rust.</p>
+
+<p><a href="https://github.com/benknoble/rusty-raft/">Public code</a>.</p>
+
+<h2 id="raft">Raft</h2>
+
+<p>I hadn’t thought about consensus algorithms since my MS year in 2020/2021, and
+I’d certainly never thought deeply about them. Studying the paper and
+Ousterhout’s video presentations convinced me that implementing Raft ought to be
+possible, in that same way that
+<a href="https://github.com/oxidecomputer/hubris">hubris</a> is necessary to take on
+certain challenges. I was <a href="https://github.com/benknoble/rusty-raft/commit/1d24310badc58dfc1fdd72e07813d584a3896990">demonstrably
+humbled</a>
+more than once<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, but Raft’s goal (as I understand it) is to be practically
+implementable correctly.</p>
+
+<p>The details matter immensely for correctness. Each statement is load-bearing.</p>
+
+<p>As I wrote in the public README, there’s little formal validation that my
+implementation is faithful to any spec or upholds the relevant properties. I
+have a few unit tests, but I haven’t taken the dive on fuzzing or property
+testing this code. It deserves it. (I probably won’t try any proof tools, though
+if memory serves creusot exists to fill that gap.<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>)</p>
+
+<p>I especially enjoyed explicitly modelling an abstract Clock, which I did for one
+of our warmup exercises during the course—it made some reasoning deliciously
+simple. Its implementation is not perfect (a <code class="language-plaintext highlighter-rouge">sleep</code> loop doesn’t really get you
+precise ticking frequency), but a real example could tie into hardware clocks.</p>
+
+<h2 id="rust">Rust</h2>
+
+<p>This is my most extensive foray into Rust to-date, though I’d dabbled a bit
+before. I like to say I can read Rust fairly well, having done that for years
+now and especially due to the writings of Ralf Jung and others. I understand
+a bit of the ideas Rust builds on, so I didn’t find many ownership challenges
+while writing this project—I intentionally structured the driver loop and main
+algorithm so that who owned what data was clear, except for some fiddly bits
+about sending application results around which end up just cloning.</p>
+
+<p>I still stumble over some parts of Rust’s module system, but that got easier
+with time.</p>
+
+<p>Rust’s tools are great, of course.</p>
+
+<p>I shied away from async Rust in this project; it seemed like too much to bite
+off at the time. I’m more comfortable with message-passing threads from some Go
+(years ago) and Racket (more recent), so I usually think in that model.</p>
+
+<p>In a similar way, I didn’t go dependency hunting here (I don’t <a href="https://oxide-and-friends.transistor.fm/episodes/a-crate-is-born/transcript">browse crates.io
+for fun</a>).
+I have serde for serialization, which ended up being more code than I thought I
+would have to write (integrating with serde-lexpr to use S-expression formats),
+and rand for randomness. There are likely other things that would be nice to
+glue in, and for other projects dependencies are a necessity. Here I was mostly
+satisfied with the standard library<sup id="fnref:3"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>.</p>
+
+<p>I suspect my use of dependencies would look different if Rust’s documentation
+were integrated in the same way that <a href="https://docs.racket-lang.org">Racket’s
+is</a>, but I realize that’s less practical for a
+bigger ecosystem.</p>
+
+<h2 id="overall">Overall</h2>
+
+<p>I’m quite pleased I was able to implement such a fascinating system in a few
+days of hard work: the essence was written between August 26th and 29th, with
+less than 20 commits afterwards<sup id="fnref:4"><a href="#fn:4" class="footnote" rel="footnote" role="doc-noteref">4</a></sup>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ g dategraph
+2025-08-26  13 ███████████████████
+2025-08-27  28 ████████████████████████████████████████
+2025-08-28  45 █████████████████████████████████████████████████████████████████
+2025-08-29  42 █████████████████████████████████████████████████████████████
+2025-09-20   1 █
+2026-01-03   1 █
+2026-01-04   2 ███
+2026-01-05   1 █
+2026-01-06   3 ████
+2026-01-10   1 █
+2026-01-19   3 ████
+2026-02-03   4 ██████
+
+λ DATEGRAPH=additions g dategraph
+2025-08-26  652 ████████████████████████████████████████████████████████████████
+2025-08-27  530 ████████████████████████████████████████████████████
+2025-08-28  436 ███████████████████████████████████████████
+2025-08-29  409 ████████████████████████████████████████
+2025-09-20   11 █
+2026-01-03    3
+2026-01-04    8 █
+2026-01-05   52 █████
+2026-01-06   12 █
+2026-01-19   45 ████
+2026-02-03  204 ████████████████████
+</code></pre></div></div>
+
+<p>I’m also pleased I was able to return months later and reconstruct my thinking
+without too much hassle. A few details were peculiar, but I’ve already forgotten
+which ones!</p>
+
+<p>And I can’t resist<sup id="fnref:5"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">5</a></sup>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ g ls-files | code-percent
+RowNumber  File                        PercentTotal  CumulativePercentTotal
+1          src/lib.rs                  30.525        30.525
+2          src/test_protocol.rs        26.2913       56.8163
+3          src/main.rs                 11.3463       68.1626
+4          README.md                   9.99153       78.1541
+5          src/net.rs                  5.7155        83.8696
+6          src/net/bytes.rs            5.63082       89.5005
+7          src/test_append_entries.rs  4.65707       94.1575
+8          start-cluster               1.31245       95.47
+9          src/test_save_restore.rs    1.10076       96.5707
+10         src/bin/client.rs           1.98984       98.5606
+11         watch-cluster               0.127011      98.6876
+12         start-client                0.127011      98.8146
+13         src/net/config.rs           0.550381      99.365
+14         .gitignore                  0.211685      99.5767
+15         Cargo.toml                  0.42337       100
+</code></pre></div></div>
+
+<h2 id="notes">Notes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Try <code class="language-plaintext highlighter-rouge">git log --grep fix</code>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>I have an old <a href="https://github.com/benknoble/advent2021/blob/prove-unflatten/day18/Day18.v">incomplete proof of some supposed
+inverses</a>
+I’d like to finish, too… alas. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>Though not with the un-hashability of <code class="language-plaintext highlighter-rouge">mpsc::Sender</code>s. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p><a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/git-dategraph"><code class="language-plaintext highlighter-rouge">git-dategraph</code> script</a> <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5">
+      <p><a href="/blog/2024/08/07/churn-and-weight/"><code class="language-plaintext highlighter-rouge">code-percent</code> discussion</a> <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rust" /><summary type="html"><![CDATA[Brief reflections on implementing Raft in Rust.]]></summary></entry><entry><title type="html">MT7925e Bluetooth woes</title><link href="https://benknoble.github.io/blog/2026/02/11/bluetooth/" rel="alternate" type="text/html" title="MT7925e Bluetooth woes" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/02/11/bluetooth</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/02/11/bluetooth/"><![CDATA[<p>Some details on an error I had today and the seeming resolution.</p>
 
 <p>I have a MediaTek Wireless device in my Framework desktop (outputs trimmed):</p>
 
@@ -3181,219 +3323,4 @@ pselect6(13, [3 4 6 8 9 10 12], [], [3], {tv_sec=8, tv_nsec=491558000}, NULL) = 
 setsockopt(5, SOL_NETLINK, NETLINK_EXT_ACK, [1], 4) = 0
 setsockopt(5, SOL_NETLINK, NETLINK_CAP_ACK, [1], 4) = 0
 sendmsg(5, {msg_name={sa_family=AF_NETLINK, nl_pid=0, nl_groups=00000000}, msg_namelen=12, msg_iov=[{iov_base=[{nlmsg_len=28, nlmsg_type=nl80211, nlmsg_flags=NLM_F_REQUEST|NLM_F_ACK, nlmsg_seq=2534355535, nlmsg_pid=-494925830}, {cmd=0x72, version=0}, [{nla_len=8, nla_type=0x3}, "\x03\x00\x00\x00"]], iov_len=28}], msg_iovlen=1, msg_controllen=0, msg_flags=0}, 0
-</code></pre></div></div>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="linux" /><category term="network" /><category term="gentoo" /><summary type="html"><![CDATA[I’ve recently installed Gentoo on my new Framework Desktop, and for a while the network would hang, causing any program that touched the hardware to also crap out. Update same day: I’ve just had the problem recur! Agh! Update later: I’ve been told wpa_supplicant is likely the problem and I should just use iwd. Onwards!]]></summary></entry><entry><title type="html">Personal Commit Statistics</title><link href="https://benknoble.github.io/blog/2025/09/19/cstats/" rel="alternate" type="text/html" title="Personal Commit Statistics" /><published>2025-09-19T00:00:00+00:00</published><updated>2025-09-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/09/19/cstats</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/09/19/cstats/"><![CDATA[<p>Here’s some statistics on commits I’ve authored collected from <a href="/blog/2019/08/14/cstat-efficiencies/"><code class="language-plaintext highlighter-rouge">git-cstat</code></a> over a few work and open-source
-repositories.</p>
-
-<h2 id="min-max-average-commit-length-in-words">Min, max, average commit length in words</h2>
-
-<p><em>Note the logarithmic x-axis (words).</em></p>
-
-<p>With my Dotfiles included:</p>
-
-<p><img src="/assets/img/cstats-2025-09-18-with-dotfiles.svg" alt="Commit stats distributions with Dotfiles" /></p>
-
-<p>Without my Dotfiles included:</p>
-
-<p><img src="/assets/img/cstats-2025-09-18.svg" alt="Commit stats distributions without Dotfiles" /></p>
-
-<h2 id="commentary">Commentary</h2>
-
-<ul>
-  <li>Short commits are mostly <code class="language-plaintext highlighter-rouge">init</code>, <code class="language-plaintext highlighter-rouge">chore: upgrade dependencies</code>, things like
-that. Occasionally my shortest contribution to a project is long, though! I
-think this happens most when I contribute to open source or innersource
-projects where I need to spell out my reasoning more clearly regardless of the
-commit.</li>
-  <li>Some extremely long commits are the result of squash-and-merge defaults at
-work. A few projects I’ve worked on required that as the only merge strategy
-and mostly kept the default “concatenate all commit messages” as the final
-message. So the reality is that several reasonably-long commits were squashed
-into a monster.</li>
-  <li>
-    <p>My average average drops from a little over 40 to a little over 20 when
-including my Dotfiles. That makes sense: my Dotfiles have a long life, going
-back to before I use Git in the way I do today. Even now there are plenty of
-~10 word commit messages and only a few long ones: for example, using my
-<a href="/blog/2019/09/11/fields/"><code class="language-plaintext highlighter-rouge">fields</code></a> and <a href="https://github.com/benknoble/Dotfiles/blob/850b629f4506debb91efcc0dfe0d7c77d7c0924d/links/zshfns/bucket10"><code class="language-plaintext highlighter-rouge">bucket10</code></a><sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>
-scripts:</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  λ g cstat len | fields 1 | bucket10 | sort -n
-  1     21 ██
-  2    191 █████████████████████
-  3    648 ███████████████████████████████████████████████████████████████████████
-  4    380 ██████████████████████████████████████████
-  5    346 ██████████████████████████████████████
-  6    263 █████████████████████████████
-  7    172 ███████████████████
-  8    111 ████████████
-  9     68 ███████
-  10   178 ████████████████████
-  20   209 ███████████████████████
-  30   101 ███████████
-  40    73 ████████
-  50    16 ██
-  60    18 ██
-  70    14 ██
-  80    15 ██
-  90     7 █
-  100   13 █
-  200    4
-  700    1
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<h2 id="raw-data">Raw Data</h2>
-
-<p>A comment marks the Dotfiles data</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># work
-# Short commits: "init", "chore: upgrade dependencies", etc.
-# Extremely long commits: squashed several reasonable lengths
-min: 1
-max: 55
-avg: 11.8571
-min: 3
-max: 662
-avg: 50.4
-min: 4
-max: 179
-avg: 41.8889
-min: 208
-max: 356
-avg: 282
-min: 1
-max: 202
-avg: 43.5833
-min: 23
-max: 3995
-avg: 1141.25
-min: 2
-max: 8046
-avg: 193.755
-min: 2
-max: 1145
-avg: 62.1368
-min: 1
-max: 27
-avg: 6.42222
-min: 2
-max: 251
-avg: 55.1667
-min: 7
-max: 68
-avg: 20.2222
-min: 93
-max: 598
-avg: 299
-min: 4
-max: 9
-avg: 7
-min: 2
-max: 279
-avg: 104.364
-min: 4
-max: 98
-avg: 33.3636
-min: 3
-max: 120
-avg: 21.1
-min: 1
-max: 105
-avg: 13.8854
-min: 1
-max: 215
-avg: 10.2741
-min: 1
-max: 160
-avg: 15.6222
-min: 4
-max: 464
-avg: 115.13
-
-# OSS
-min: 1
-max: 730
-avg: 17,1961
-min: 41
-max: 343
-avg: 103,4
-min: 2
-max: 102
-avg: 23,9048
-# Dotfiles
-min: 1
-max: 705
-avg: 10,3589
-</code></pre></div></div>
-
-<h2 id="pict-script">Pict script</h2>
-
-<p>This is also <a href="https://github.com/benknoble/Dotfiles/blob/850b629f4506debb91efcc0dfe0d7c77d7c0924d/links/bin/cstats-pics">in my <code class="language-plaintext highlighter-rouge">bin</code> directory</a>.</p>
-
-<p>It would arguably have been more efficient to read the data into a tidy
-dataframe from the outset, but I was more confident in this version of the
-parsing code, and it works.</p>
-
-<p>The empty <code class="language-plaintext highlighter-rouge">racket/gui</code> require is to make it easy to replace <code class="language-plaintext highlighter-rouge">(save-pict out)</code>
-with <code class="language-plaintext highlighter-rouge">show-pict</code> when you want just see the results. I experimented with an
-interface to either show or save the picture, and I didn’t come up with anything
-I particularly liked.</p>
-
-<p>PS Apparently the syntax highlighter here (rouge) doesn’t know how to parse
-Racket’s reader syntax for (Perl-ish) regular expressions.</p>
-
-<div class="language-racket highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#! /usr/bin/env racket</span>
-<span class="o">#</span><span class="nv">lang</span> <span class="nv">racket</span>
-<span class="c1">; vim: ft=racket</span>
-
-<span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="nf">only-in</span> <span class="nv">racket/gui</span><span class="p">)</span>
-         <span class="nv">pict</span>
-         <span class="nv">threading</span>
-         <span class="nv">data-frame</span>
-         <span class="nv">sawzall</span>
-         <span class="nv">graphite</span><span class="p">)</span>
-
-<span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="nf">data-file</span> <span class="nv">out</span><span class="p">)</span>
-  <span class="p">(</span><span class="nf">command-line</span>
-   <span class="nt">#:args</span> <span class="p">(</span><span class="nf">data-file</span> <span class="nv">out</span><span class="p">)</span>
-   <span class="p">(</span><span class="nb">values</span> <span class="nv">data-file</span> <span class="nv">out</span><span class="p">)))</span>
-
-<span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="nb">min</span> <span class="nv">max</span> <span class="nv">avg</span><span class="p">)</span>
-  <span class="p">(</span><span class="nf">for/lists</span> <span class="p">(</span><span class="nf">min?</span> <span class="nv">max?</span> <span class="nv">avg?</span>
-              <span class="nt">#:result</span> <span class="p">(</span><span class="nb">values</span> <span class="p">(</span><span class="nf">filter</span> <span class="nv">values</span> <span class="nv">min?</span><span class="p">)</span>
-                               <span class="p">(</span><span class="nf">filter</span> <span class="nv">values</span> <span class="nv">max?</span><span class="p">)</span>
-                               <span class="p">(</span><span class="nf">filter</span> <span class="nv">values</span> <span class="nv">avg?</span><span class="p">)))</span>
-             <span class="p">([</span><span class="nf">line</span> <span class="p">(</span><span class="nf">in-lines</span> <span class="p">(</span><span class="nb">open-input-file</span> <span class="nv">data-file</span><span class="p">))])</span>
-    <span class="p">(</span><span class="nf">match</span> <span class="nv">line</span>
-      <span class="p">[(</span><span class="nb">pregexp</span> <span class="o">#</span><span class="nv">px"^min:</span> <span class="p">([[</span><span class="nf">:digit:</span><span class="p">]</span><span class="o">.</span><span class="p">]</span><span class="nv">+</span><span class="p">)</span><span class="s">" (list _ (app string-&gt;number min))) (values min #f #f)]
-      [(pregexp #px"</span><span class="nv">^max:</span> <span class="p">([[</span><span class="nf">:digit:</span><span class="p">]</span><span class="o">.</span><span class="p">]</span><span class="nv">+</span><span class="p">)</span><span class="s">" (list _ (app string-&gt;number max))) (values #f max #f)]
-      [(pregexp #px"</span><span class="nv">^avg:</span> <span class="p">([[</span><span class="nf">:digit:</span><span class="p">]</span><span class="o">.</span><span class="p">]</span><span class="nv">+</span><span class="p">)</span><span class="s">" (list _ (app string-&gt;number avg))) (values #f #f avg)]
-      [_ (values #f #f #f)])))
-
-(define df
-  (make-data-frame #:series (list (make-series "</span><span class="nv">min"</span> <span class="nt">#:data</span> <span class="p">(</span><span class="nb">list-&gt;vector</span> <span class="nv">min</span><span class="p">))</span>
-                                  <span class="p">(</span><span class="nf">make-series</span> <span class="s">"max"</span> <span class="nt">#:data</span> <span class="p">(</span><span class="nb">list-&gt;vector</span> <span class="nv">max</span><span class="p">))</span>
-                                  <span class="p">(</span><span class="nf">make-series</span> <span class="s">"avg"</span> <span class="nt">#:data</span> <span class="p">(</span><span class="nb">list-&gt;vector</span> <span class="nv">avg</span><span class="p">)))))</span>
-
-<span class="p">(</span><span class="nf">~&gt;</span> <span class="nv">df</span>
-    <span class="p">(</span><span class="nf">pivot-longer</span> <span class="nv">everything</span> <span class="nt">#:names-to</span> <span class="s">"stat"</span> <span class="nt">#:values-to</span> <span class="s">"words"</span><span class="p">)</span>
-    <span class="p">(</span><span class="nf">graph</span> <span class="nt">#:data</span> <span class="nv">_</span>
-            <span class="nt">#:mapping</span> <span class="p">(</span><span class="nf">aes</span> <span class="nt">#:y</span> <span class="s">"stat"</span> <span class="nt">#:x</span> <span class="s">"words"</span><span class="p">)</span>
-            <span class="nt">#:y-label</span> <span class="s">"Stat"</span> <span class="nt">#:x-label</span> <span class="s">"Number of words"</span>
-            <span class="nt">#:x-transform</span> <span class="nv">logarithmic-transform</span>
-            <span class="nt">#:title</span> <span class="s">"Commit message length (words)"</span>
-            <span class="p">(</span><span class="nf">boxplot</span> <span class="nt">#:invert?</span> <span class="no">#t</span> <span class="nt">#:show-outliers?</span> <span class="no">#t</span><span class="p">)</span>
-            <span class="p">(</span><span class="nf">points</span><span class="p">))</span>
-    <span class="p">(</span><span class="nf">save-pict</span> <span class="nv">out</span><span class="p">))</span>
-</code></pre></div></div>
-
-<h2 id="notes">Notes</h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p>Based on that old <a href="/blog/2019/09/27/perl-v-bash/">post about Perl</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="git" /><summary type="html"><![CDATA[Here’s some statistics on commits I’ve authored collected from git-cstat over a few work and open-source repositories.]]></summary></entry></feed>
+</code></pre></div></div>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="linux" /><category term="network" /><category term="gentoo" /><summary type="html"><![CDATA[I’ve recently installed Gentoo on my new Framework Desktop, and for a while the network would hang, causing any program that touched the hardware to also crap out. Update same day: I’ve just had the problem recur! Agh! Update later: I’ve been told wpa_supplicant is likely the problem and I should just use iwd. Onwards!]]></summary></entry></feed>
