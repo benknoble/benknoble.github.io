@@ -7,6 +7,10 @@ category: Blog
 I was curious what length of patch series covered most of Git's accepted
 patches. Here's my analysis.
 
+**Update 2026 February 23rd:** Git-for-Windows maintainer Dscho sent me some
+interesting data, which I've added [near the end of the
+post](#a-different-analysis).
+
 **Update 2025 November 17th:** Junio C Hamano (Git maintainer) points out in the
 comments that the structure I analyzed has a "cutoff" at 20 commits (see
 c1b23bd8aa (Merge branch 'tb/incremental-midx-part-3.1', 2025-10-29) for a
@@ -264,3 +268,335 @@ distribution (the "left" or "top" tail) don't change by more than about 1
 percentage point if we restrict ourselves to the 5 recent years of contribution
 history, though on the "right"/"bottom" tail we stop at series with a maximum
 length of 49.
+
+## A different analysis
+
+Dscho sent me a script that does a better job counting. To test it and look for
+discrepancies, I first made sure I could replicate my original data:
+
+```shell
+git log --first-parent --since='17th November 2015 13:52:48-0500' | A 'BEGIN { count=0; }
+NR > 1 && /^commit/ && !go && !big { print "1" }
+go && /^commit/ { print count; go=0; count=0; }
+/^commit/ { big=0; print $0; }
+go && /[^[:space:]]/ { count++; }
+/^[[:space:]]+\*/ { go=1; }
+/^[[:space:]]+\*.*[[:digit:]] commits/ {
+    big=1; go=0
+    n_pieces = split($0, pieces, ":")
+    match(pieces[n_pieces], "[[:digit:]]+")
+    print substr(pieces[n_pieces], RSTART, RLENGTH)
+}
+END { if (go) print count }' | paste - - | fields 3 | frequency | sort -n -k2 | barchart
+```
+
+Unfortunately, this produces a few differences… but it's close. In particular, I
+noticed that this now counts (starting from the same commit, mind you!) 1072
+2-patch series and 254 5-patch series (1 less and 1 more, respectively):
+
+```
+0      1
+1   5456 ███████████████████████████████████████████████████████████████████████
+2   1072 ██████████████
+3    618 ████████
+4    384 █████
+5    254 ███
+6    217 ███
+7    176 ██
+8    122 ██
+9    105 █
+10   102 █
+11    79 █
+12    56 █
+13    44 █
+14    36
+15    34
+16    29
+17    19
+18    13
+19    18
+20    22
+21    16
+22    22
+23    13
+24     8
+25     8
+26     9
+27     7
+28     7
+29     5
+30     4
+31     1
+32     4
+33     3
+34     3
+35     2
+36     3
+37     1
+38     6
+39     1
+41     2
+42     2
+44     1
+45     1
+46     2
+47     1
+49     1
+50     1
+53     1
+81     1
+92     1
+```
+
+Here is Dscho's Node script, which I am supposed to run like
+
+```shell
+git rev-list --parents --topo-order --boundary --since='17th November 2015 13:52:48-0500' @ |
+    ./patch-series-analyzer.js 92
+```
+
+```javascript
+#!/usr/bin/env node
+
+const readline = require('readline');
+
+// Set of commits in the first-parent chain
+const firstParentCommits = new Set();
+
+// Map from commit to its corresponding first-parent merge commit
+const commit2merge = new Map();
+
+// Map from merge commit to { count: number, mergeCommitCount: number }
+const mergeCommitInfo = new Map();
+
+// Array of first-parent merge commits (in order encountered)
+const firstParentMerges = [];
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false
+});
+
+rl.on('line', (line) => {
+  const [commit, ...parents] = line.trim().split(/\s+/);
+
+  if (commit.startsWith('-')) {
+    const commit2 = commit.slice(1);
+    if (!firstParentCommits.has(commit2)) {
+      const merge = commit2merge.get(commit2);
+      if (merge) mergeCommitInfo.get(merge).incomplete = true;
+    }
+    return;
+  }
+
+  if (firstParentCommits.size === 0) firstParentCommits.add(commit);
+
+  if (firstParentCommits.has(commit)) {
+    if (parents.length > 0) firstParentCommits.add(parents[0]);
+    if (commit === '15664a5f35b6db8077e3e8aeb377e72f0f95e23e') ; // ignore criss-cross merge
+    else if (parents.length > 1) {
+      // This is a merge commit in the first-parent chain
+      firstParentMerges.push(commit);
+      mergeCommitInfo.set(commit, { commit, count: 0, mergeCommitCount: 0 });
+      parents.slice(1).forEach(parent => {
+        const merge = commit2merge.get(parent);
+        if (merge) merge.doubleCountedAncestors = true;
+        commit2merge.set(parent, commit);
+      });
+    }
+  } else {
+    const merge = commit2merge.get(commit);
+    if (merge) {
+      const info = mergeCommitInfo.get(merge);
+      if (parents.length === 1) info.count++;
+      else if (parents.length > 1) info.mergeCommitCount++;
+      parents.forEach((parent) => {
+        const merge2 = commit2merge.get(parent);
+        if (merge2) merge.doubleCountedAncestors = true;
+        commit2merge.set(parent, merge);
+      })
+    }
+  }
+});
+
+rl.on('close', () => {
+  printResults();
+});
+
+function printResults() {
+  firstParentMerges.sort((a, b) =>
+    a.mergeCommitCount !== b.mergeCommitCount
+    ? a.mergeCommitCount - b.mergeCommitCount
+    : a.count - b.count);
+
+  const stats = firstParentMerges.reduce((a, merge) => {
+    const info = mergeCommitInfo.get(merge);
+    if (!info || info.mergeCommitCount || info.doubleCountedAncestors || info.incomplete) return a;
+    a.set(info.count, 1 + (a.get(info.count) || 0));
+    return a;
+  }, new Map());
+  const sorted = [...stats.entries()].sort((a, b) => a[0] - b[0]);
+
+  console.log('Patch Series Length Analysis:');
+  console.log('==============================');
+  console.log('Length |      Count | Distribution');
+  console.log('-'.repeat(60));
+
+  if (sorted.length === 0) {
+    console.log('No merge commits found.');
+    return;
+  }
+
+  const maxCount = Math.max(...sorted.map(([_, count]) => count));
+
+  for (const [length, count] of sorted) {
+    const barLength = Math.floor((count / maxCount) * 50);
+    const bar = '█'.repeat(barLength);
+    console.log(`${length.toString().padStart(6)} | ${count.toString().padStart(10)} | ${bar}`);
+  }
+
+  console.log();
+  console.log('Summary:');
+  console.log('--------');
+
+  const total = sorted.reduce((sum, [_, count]) => sum + count, 0);
+  let cumulative = 0;
+  let found50 = false;
+  let found90 = false;
+
+  for (const [length, count] of sorted) {
+    cumulative += count;
+    const percentage = (cumulative / total) * 100;
+
+    if (!found50 && percentage >= 50) {
+      console.log(`50% of series have ${length} or fewer commits`);
+      found50 = true;
+    }
+    if (!found90 && percentage >= 90) {
+      console.log(`90% of series have ${length} or fewer commits`);
+      found90 = true;
+    }
+  }
+
+  console.log(`Total merge commits analyzed: ${total}`);
+
+  process.argv.slice(2).forEach((arg) => {
+    const n = Number.parseInt(arg);
+    console.log(`${n}:`, firstParentMerges.filter((merge) => {
+      const info = mergeCommitInfo.get(merge);
+      return info && info.count === n && info.mergeCommitCount === 0 && !info.doubleCountedAncestors && !info.incomplete
+    }));
+  })
+}
+```
+
+And here are the results (it is _much_ quicker than my method):
+
+```
+Patch Series Length Analysis:
+==============================
+Length |      Count | Distribution
+------------------------------------------------------------
+     0 |         12 |
+     1 |       4314 | ██████████████████████████████████████████████████
+     2 |       1040 | ████████████
+     3 |        584 | ██████
+     4 |        360 | ████
+     5 |        232 | ██
+     6 |        200 | ██
+     7 |        158 | █
+     8 |        105 | █
+     9 |         97 | █
+    10 |         88 | █
+    11 |         69 |
+    12 |         41 |
+    13 |         36 |
+    14 |         28 |
+    15 |         26 |
+    16 |         23 |
+    17 |         15 |
+    18 |         10 |
+    19 |         13 |
+    20 |         15 |
+    21 |         12 |
+    22 |         16 |
+    23 |         10 |
+    24 |          6 |
+    25 |          2 |
+    26 |          6 |
+    27 |          4 |
+    28 |          4 |
+    29 |          4 |
+    30 |          3 |
+    31 |          1 |
+    32 |          2 |
+    33 |          3 |
+    34 |          3 |
+    35 |          2 |
+    36 |          3 |
+    37 |          1 |
+    38 |          3 |
+    39 |          1 |
+    41 |          2 |
+    42 |          1 |
+    44 |          1 |
+    45 |          1 |
+    46 |          1 |
+    47 |          1 |
+    50 |          1 |
+    53 |          1 |
+    92 |          1 |
+
+Summary:
+--------
+50% of series have 1 or fewer commits
+90% of series have 7 or fewer commits
+Total merge commits analyzed: 7562
+92: [ 'e572fef9d459497de2bd719747d5625a27c9b41d' ]
+```
+
+Notice all the discrepancies (and I'd be more inclined to trust this script
+parsing Git's actual parents)! This counts 7562 series. My version counted 8994
+series. So maybe that accounts for some things… other than the 0-length series,
+I think Dscho's counts are all smaller than mine.
+
+Dscho also sent some other interesting data:
+
+> The answer to [What on Earth could this patch series be that was accepted
+> despite consisting of 92 (!!!) patches] is this: [Compare on
+> GitHub](https://github.com/git/git/compare/e572fef9d459497de2bd719747d5625a27c9b41d%5E...e572fef9d459497de2bd719747d5625a27c9b41d).
+> Rather a monster of a patch series, I thought. But then I discovered that it
+> was not sent as a single patch series, but as [nine separate
+> ones](https://lore.kernel.org/git/1452599378-47882-1-git-send-email-gitter.spiros@gmail.com/).
+>
+> The contributions became more civil this year (at least the ones that were merged):
+>
+> ```
+> Length |      Count | Distribution
+> ------------------------------------------------------------
+>      1 |        311 | ██████████████████████████████████████████████████
+>      2 |         82 | █████████████
+>      3 |         40 | ██████
+>      4 |         31 | ████
+>      5 |         25 | ████
+>      6 |         20 | ███
+>      7 |         12 | █
+>      8 |          7 | █
+>      9 |         12 | █
+>     10 |          8 | █
+>     11 |          3 |
+>     12 |          4 |
+>     13 |          4 |
+>     14 |          2 |
+>     16 |          2 |
+>     17 |          1 |
+>     18 |          1 |
+>     20 |          1 |
+> ```
+>
+> (The 20-strong patch series corresponds to
+> [ps/test-wo-perl-prereq](https://git.kernel.org/pub/scm/git/git.git/commit/?id=9bdd7ecf7ec90433fc1803bf5d608d08857b3b49).)
+
+Thanks, Dscho! If anyone can figure out why the counts are so different between
+the approaches, I'm all ears :)
