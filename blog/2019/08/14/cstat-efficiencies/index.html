@@ -32,7 +32,8 @@
     <header>
   <h1>
   <a href="https://benknoble.github.io/">
-  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
   <p>For all those little papers scattered across your desk</p>
 </header>
 
@@ -88,7 +89,8 @@ can be run like a git sub-command. See <code class="language-plaintext highlight
 functions for scripts.</p>
 </blockquote>
 
-<h2 id="meet-git-cstat">Meet <code class="language-plaintext highlighter-rouge">git-cstat</code></h2>
+<h2 id="meet-git-cstat">Meet <code class="language-plaintext highlighter-rouge">git-cstat</code>
+</h2>
 
 <p><a href="https://github.com/benknoble/Dotfiles/commit/f7657493f61b449b2b27ceb8f4e24f2dfb43e71c">This little
 script</a>
@@ -192,7 +194,7 @@ post-merge</a>,
 but overall this was a huge success. The old script ran in 10s of seconds on my
 Dotfiles repo. The new one runs in less than 0.5 seconds.</p>
 
-<hr />
+<hr>
 
 <p>Things to know:</p>
 
@@ -358,7 +360,7 @@ g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class
 </code></pre></div></div>
 
 </div>
-<hr/>
+<hr>
 <h4>Tags:</h4>
 <ul class="tags">
   
@@ -422,21 +424,20 @@ g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class
     div.parentNode.removeChild(div)
   };
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
 
 
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2019/08/13/github-actions-ruby/"
-      title="Ruby, where are you (in GitHub workflows)?">
+    <a href="https://benknoble.github.io/blog/2019/08/13/github-actions-ruby/" title="Ruby, where are you (in GitHub workflows)?">
       Previous</a>
   </span>
   
   
   <span id="next">
-    <a href="https://benknoble.github.io/blog/2019/08/23/funnels/"
-       title="I/O Funnels">
+    <a href="https://benknoble.github.io/blog/2019/08/23/funnels/" title="I/O Funnels">
       Next</a>
   </span>
   
@@ -448,7 +449,6 @@ g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class
 
     </section>
     <footer>
-<hr/>
   <ul>
     
     <li>
@@ -480,9 +480,22 @@ g log <span class="nt">--pretty</span><span class="o">=</span>format:<span class
     </li>
     
     <li>
-      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+      <p xmlns:cc="http://creativecommons.org/ns#"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
     </li>
   </ul>
+  <script type="text/javascript">
+    // Source: https://stackoverflow.com/a/8876069/4400820
+    // Posted by ryanve, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-03-05, License - CC BY-SA 4.0
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    // End StackOverflow snippet
+
+    // see assets/css/styles.scss:/@media
+    const num_games = vw > 740 ? 10 : 3
+
+    document.write(`
+      <script type="text/javascript" src="https://boardgamegeek.com/jswidget.php?username=benkenobli&numitems=${num_games}&header=1&text=none&images=small&show=recentplays&imagesonly=1&imagepos=center&inline=1&addstyles=1&domains%5B%5D=boardgame"></` + `script>`)
+  </script>
 </footer>
 
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->

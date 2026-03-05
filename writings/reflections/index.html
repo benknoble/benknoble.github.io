@@ -32,7 +32,8 @@
     <header>
   <h1>
   <a href="https://benknoble.github.io/">
-  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
   <p>For all those little papers scattered across your desk</p>
 </header>
 
@@ -82,7 +83,7 @@
 <div id="writing">
   <p>Another piece for a close friend.</p>
 
-<hr />
+<hr>
 
 <p>Dark. Everything was dark. Shadows of trees rushed by, silhouetted against the
 gray night sky. The usual forest scents were smothered, the expected twitters,
@@ -169,7 +170,7 @@ blonde…oh well. Her eyes drifted shut.</p>
 flipped. Suddenly he was reaching up from the sky into an ice-filled ocean
 towards a girl up above him. He pulled her down to him into a now-cloudless sky.</p>
 
-<hr />
+<hr>
 
 <p>She awoke in paradise, staring at the blue eyes of some boy who had apparently
 rescued her. She tried to sit up, but a blinding headache knocked her down. A
@@ -189,7 +190,7 @@ brown eyes and brown hair whose arms stood protectively around the girl atop his
 back. The blonde man nodded. <em>Take care of her</em>. And he turned away as they
 galloped into the forest.</p>
 
-<hr />
+<hr>
 
 <p>He was skimming through the air, admiring the returned stars and occasionally
 just drifting as his mind wandered back to that strange day. He carried
@@ -225,7 +226,8 @@ joined the stars in their colorful triumph.</p>
     div.parentNode.removeChild(div)
   };
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
 
 
 <div id="back-to-writings">
@@ -235,7 +237,6 @@ joined the stars in their colorful triumph.</p>
 
     </section>
     <footer>
-<hr/>
   <ul>
     
     <li>
@@ -267,9 +268,22 @@ joined the stars in their colorful triumph.</p>
     </li>
     
     <li>
-      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+      <p xmlns:cc="http://creativecommons.org/ns#"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
     </li>
   </ul>
+  <script type="text/javascript">
+    // Source: https://stackoverflow.com/a/8876069/4400820
+    // Posted by ryanve, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-03-05, License - CC BY-SA 4.0
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    // End StackOverflow snippet
+
+    // see assets/css/styles.scss:/@media
+    const num_games = vw > 740 ? 10 : 3
+
+    document.write(`
+      <script type="text/javascript" src="https://boardgamegeek.com/jswidget.php?username=benkenobli&numitems=${num_games}&header=1&text=none&images=small&show=recentplays&imagesonly=1&imagepos=center&inline=1&addstyles=1&domains%5B%5D=boardgame"></` + `script>`)
+  </script>
 </footer>
 
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->

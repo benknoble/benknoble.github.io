@@ -32,7 +32,8 @@
     <header>
   <h1>
   <a href="https://benknoble.github.io/">
-  <img src='/assets/img/logo.png' alt='Junk Drawer Logo' width=32 height=32> Junk Drawer</a></h1>
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
   <p>For all those little papers scattered across your desk</p>
 </header>
 
@@ -120,7 +121,8 @@ this won’t work. Etc.</p>
 <p>I got tired of trying to get this right interactively and figured I’d capture
 the whole thing as a script. So let’s start with that.</p>
 
-<h2 id="git-greb-blame-matching-lines"><code class="language-plaintext highlighter-rouge">git-greb</code>: blame matching lines</h2>
+<h2 id="git-greb-blame-matching-lines">
+<code class="language-plaintext highlighter-rouge">git-greb</code>: blame matching lines</h2>
 
 <p>If <code class="language-plaintext highlighter-rouge">grep</code> comes from <code class="language-plaintext highlighter-rouge">:g/re/p</code> in <code class="language-plaintext highlighter-rouge">ed(1)</code>, then <code class="language-plaintext highlighter-rouge">greb</code> is the natural extension
 to a “b for blame” verb.</p>
@@ -142,7 +144,8 @@ of search.</p>
 
 <p>However, let’s talk about the ugly…</p>
 
-<h2 id="git-grep-is-not-designed-for-machine-consumption"><code class="language-plaintext highlighter-rouge">git grep</code> is not designed for machine consumption</h2>
+<h2 id="git-grep-is-not-designed-for-machine-consumption">
+<code class="language-plaintext highlighter-rouge">git grep</code> is not designed for machine consumption</h2>
 
 <p>In fact, <code class="language-plaintext highlighter-rouge">git grep</code> seems to go out of it’s way to avoid being useful as input
 to a script! Let’s see if I can explain how: config and command line options can
@@ -174,7 +177,8 @@ became too much work. So for now, I’m supporting filenames that don’t have t
 escaped without <code class="language-plaintext highlighter-rouge">-z</code>, and that don’t contain a colon. I’m also explicitly
 rejecting any unsupported <code class="language-plaintext highlighter-rouge">git grep</code> option to make things easier.</p>
 
-<h2 id="git-grebs-interface-is-ugly"><code class="language-plaintext highlighter-rouge">git greb</code>’s interface is ugly</h2>
+<h2 id="git-grebs-interface-is-ugly">
+<code class="language-plaintext highlighter-rouge">git greb</code>’s interface is ugly</h2>
 
 <p>Yeah. Because of all the munging above, and because I need to feed a revision to
 <code class="language-plaintext highlighter-rouge">git blame</code> when one is present but not have ambiguous parsing that sometimes
@@ -197,16 +201,16 @@ did.</p>
 <div class="footnotes" role="doc-endnotes">
   <ol>
     <li id="fn:1">
-      <p><a href="/blog/2019/09/11/fields/">My fields script is described on this blog</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p><a href="/blog/2019/09/11/fields/">My fields script is described on this blog</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
     <li id="fn:2">
-      <p>My <a href="/blog/2024/11/15/useful-utilities/#git"><code class="language-plaintext highlighter-rouge">git-div</code> script</a> was my first to support this. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p>My <a href="/blog/2024/11/15/useful-utilities/#git"><code class="language-plaintext highlighter-rouge">git-div</code> script</a> was my first to support this. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
   </ol>
 </div>
 
 </div>
-<hr/>
+<hr>
 <h4>Tags:</h4>
 <ul class="tags">
   
@@ -246,21 +250,20 @@ did.</p>
     div.parentNode.removeChild(div)
   };
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
 
 
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2025/09/06/ai-bubble/"
-      title="More on the AI bubble">
+    <a href="https://benknoble.github.io/blog/2025/09/06/ai-bubble/" title="More on the AI bubble">
       Previous</a>
   </span>
   
   
   <span id="next">
-    <a href="https://benknoble.github.io/blog/2025/09/19/cstats/"
-       title="Personal Commit Statistics">
+    <a href="https://benknoble.github.io/blog/2025/09/19/cstats/" title="Personal Commit Statistics">
       Next</a>
   </span>
   
@@ -272,7 +275,6 @@ did.</p>
 
     </section>
     <footer>
-<hr/>
   <ul>
     
     <li>
@@ -304,9 +306,22 @@ did.</p>
     </li>
     
     <li>
-      <p xmlns:cc="http://creativecommons.org/ns#" ><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+      <p xmlns:cc="http://creativecommons.org/ns#"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
     </li>
   </ul>
+  <script type="text/javascript">
+    // Source: https://stackoverflow.com/a/8876069/4400820
+    // Posted by ryanve, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-03-05, License - CC BY-SA 4.0
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    // End StackOverflow snippet
+
+    // see assets/css/styles.scss:/@media
+    const num_games = vw > 740 ? 10 : 3
+
+    document.write(`
+      <script type="text/javascript" src="https://boardgamegeek.com/jswidget.php?username=benkenobli&numitems=${num_games}&header=1&text=none&images=small&show=recentplays&imagesonly=1&imagepos=center&inline=1&addstyles=1&domains%5B%5D=boardgame"></` + `script>`)
+  </script>
 </footer>
 
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->

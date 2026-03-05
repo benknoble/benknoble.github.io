@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : 6am Wake-up Call: Day 3</title>
+  <title>Junk Drawer : xrandr brightness glitch</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -72,36 +72,32 @@
   </ul>
 </nav>
 
-      <h1>6am Wake-up Call: Day 3</h1>
+      <h1>xrandr brightness glitch</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 23 Oct 2019 in Blog</p>
+ on 27 Feb 2026 in Blog</p>
 <div id="post">
-  <p>Day 3 of the early-bird experiment.</p>
+  <p>I’ve had this glitch twice now, where I wake up my external monitor and the
+screen is washed out with brightness. I can see enough to try to fix it, but
+it’s not the hardware brightness settings. The software brightness settings are
+out of wack.</p>
 
-<h2 id="day-3">Day 3</h2>
+<p>I think both times I’ve ended up fixing this by rebooting, but I recently
+learned that I can use <code class="language-plaintext highlighter-rouge">xrandr</code> to control the software brightness like</p>
 
-<p>Today’s accomplishments:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xrandr --output DisplayPort-3 --brightness 1
+</code></pre></div></div>
 
-<ul>
-  <li>vi.stackexchange.com</li>
-  <li>uploaded another class recording</li>
-  <li>started work on a hex-editing mode for vim</li>
-  <li>watched an episode of Yu-gi-oh!</li>
-  <li>worked on a research program</li>
-</ul>
+<p>You’ll have to adjust for your output device, of course. The <code class="language-plaintext highlighter-rouge">brightness</code> value
+appears to be a scale factor, so fractions dim the output and values greater
+than 1 lead to the wash out effect.</p>
 
-<p>And, of course, I wrote this post.</p>
-
-<h2 id="bsms">BS/MS</h2>
-
-<p>The really exciting news today is that I was accepted to the BS/MS program at
-UNC Chapel Hill! This means I’ll be staying in school for an extra year to do a
-master’s in Computer Science, and I’m <em>very</em> excited.</p>
+<p>I’m not sure <em>what</em> toggled the <code class="language-plaintext highlighter-rouge">xrandr</code> setting, but at least next time I’ll
+have an idea of how to fix it.</p>
 
 </div>
 <hr>
@@ -109,44 +105,8 @@ master’s in Computer Science, and I’m <em>very</em> excited.</p>
 <ul class="tags">
   
     <li>
-      <a href="https://benknoble.github.io/tags#college" class="tag">
-        college
-      </a>
-    </li>
-  
-    <li>
-      <a href="https://benknoble.github.io/tags#feature" class="tag">
-        feature
-      </a>
-    </li>
-  
-    <li>
-      <a href="https://benknoble.github.io/tags#study" class="tag">
-        study
-      </a>
-    </li>
-  
-    <li>
-      <a href="https://benknoble.github.io/tags#time" class="tag">
-        time
-      </a>
-    </li>
-  
-    <li>
-      <a href="https://benknoble.github.io/tags#productivity" class="tag">
-        productivity
-      </a>
-    </li>
-  
-    <li>
-      <a href="https://benknoble.github.io/tags#early-bird" class="tag">
-        early-bird
-      </a>
-    </li>
-  
-    <li>
-      <a href="https://benknoble.github.io/tags#BS%2FMS" class="tag">
-        BS/MS
+      <a href="https://benknoble.github.io/tags#linux" class="tag">
+        linux
       </a>
     </li>
   
@@ -166,8 +126,8 @@ master’s in Computer Science, and I’m <em>very</em> excited.</p>
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2019/10/23/wakeup3/";
-    this.page.identifier = "/blog/2019/10/23/wakeup3";
+    this.page.url = "https://benknoble.github.io/blog/2026/02/27/xrandr-brightness/";
+    this.page.identifier = "/blog/2026/02/27/xrandr-brightness";
   };
 
   function load_comments(div) {
@@ -187,19 +147,16 @@ master’s in Computer Science, and I’m <em>very</em> excited.</p>
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2019/10/22/wakeup2/" title="6am Wake-up Call: Day 2">
+    <a href="https://benknoble.github.io/blog/2026/02/12/rustyboat/" title="Rusty Boat Retrospective">
       Previous</a>
   </span>
   
   
-  <span id="next">
-    <a href="https://benknoble.github.io/blog/2019/10/25/wakeup45/" title="6am Wake-up Call: Day 4/5">
-      Next</a>
-  </span>
+  <span id="no-next">Next</span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#6am-wake-up-call-day-3">
+  <a href="/categories/#xrandr-brightness-glitch">
     Back to posts</a>
 </div>
 

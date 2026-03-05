@@ -340,11 +340,14 @@ hr {
 
 footer ul {
   list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
-footer li {
-  float: left;
-  padding: 0.5em;
+footer {
+  background: #c6eafa;
+  padding: 1em 1em;
 }
 
 nav {
