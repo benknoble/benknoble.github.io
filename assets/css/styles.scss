@@ -164,15 +164,14 @@ hr {
 
 footer ul {
   list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 footer {
   // doesn't work???
   // background: #c6eafa;
-  li {
-    float: left;
-    padding: 0.5em;
-  }
 }
 
 nav {
