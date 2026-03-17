@@ -3,6 +3,8 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "Ben brings passion, drive, and intentionality: he would thrive in a startup"
+  ([Sean Gorksy](https://www.linkedin.com/in/sean-gorsky-721aa246/))
 - "Ben shows great ownership and thought leadership in driving and delivering
   SSO project. Ben executes effectively on MVP goals with a customer focus
   mindset by conducting research, delegating tasks to fellow engineers, and
