@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : xrandr brightness glitch</title>
+  <title>Junk Drawer : Notes on Racket quit handlers</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -72,32 +72,77 @@
   </ul>
 </nav>
 
-      <h1>xrandr brightness glitch</h1>
+      <h1>Notes on Racket quit handlers</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 27 Feb 2026 in Blog</p>
+ on 25 Mar 2026 in Blog</p>
 <div id="post">
-  <p>I’ve had this glitch twice now, where I wake up my external monitor and the
-screen is washed out with brightness. I can see enough to try to fix it, but
-it’s not the hardware brightness settings. The software brightness settings are
-out of wack.</p>
+  <p>Notes from Discord.</p>
 
-<p>I think both times I’ve ended up fixing this by rebooting, but I recently
-learned that I can use <code class="language-plaintext highlighter-rouge">xrandr</code> to control the software brightness like</p>
+<p>I recently found that, at least on Linux, the quit handler
+<code class="language-plaintext highlighter-rouge">application-quit-handler</code> only closes the most recent window :/ not quite what
+I was expecting.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xrandr --output DisplayPort-3 --brightness 1
-</code></pre></div></div>
+<p>But apparently I’m holding it wrong:</p>
 
-<p>You’ll have to adjust for your output device, of course. The <code class="language-plaintext highlighter-rouge">brightness</code> value
-appears to be a scale factor, so fractions dim the output and values greater
-than 1 lead to the wash out effect.</p>
+<blockquote>
+  <p>[we’re not] intended to call the <code class="language-plaintext highlighter-rouge">application-quit-handler</code> from code.
+Instead, I think it is a hook for reacting to requests from the desktop
+environment that the application please quit, just as the other handlers
+documented in that section respond to other events from the environment. In
+particular:</p>
 
-<p>I’m not sure <em>what</em> toggled the <code class="language-plaintext highlighter-rouge">xrandr</code> setting, but at least next time I’ll
-have an idea of how to fix it.</p>
+  <blockquote>
+    <p>The default handler queues a call to the <code class="language-plaintext highlighter-rouge">can-exit?</code> method of the most
+recently active frame in the initial eventspace (and then calls the frame’s
+<code class="language-plaintext highlighter-rouge">on-exit</code> method if the result is true). The result is <code class="language-plaintext highlighter-rouge">#t</code> if the
+eventspace is left with no open frames after <code class="language-plaintext highlighter-rouge">on-exit</code> returns, <code class="language-plaintext highlighter-rouge">#f</code>
+otherwise.</p>
+  </blockquote>
+</blockquote>
+
+<p>(<a href="https://docs.racket-lang.org/gui/Windowing_Functions.html#(def._((lib._mred%2Fmain..rkt)._application-quit-handler))">Documentation on Windowing Functions</a>)</p>
+
+<p>Which of course makes quite a bit more sense, and should probably be stated in
+documentation.</p>
+
+<p>I had wanted to use it as the action for my “File &gt; Quit” menu, which now just
+uses <code class="language-plaintext highlighter-rouge">exit</code> (I have no special cleanup to do for the moment).</p>
+
+<p>I know macOS automatically provides a Quit option on .apps, which I suppose is
+an example of a “request[] from the desktop environment.” Do other DEs do
+something similar? My Gentoo box is currently running i3 without a DE, so I
+don’t know what typical Linux/Gtk behavior is, for example. Although a good many
+programs don’t have a close/quit button, which seems to imply they assume the DE
+will provide one. (I have keys in i3 to close them in that case.)</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">framework</code> module uses
+<a href="https://docs.racket-lang.org/framework/Frame.html#%28meth._%28%28%28lib._framework%2Fmain..rkt%29._frame~3astandard-menus~3c~25~3e%29._file-menu~3aquit-callback%29%29"><code class="language-plaintext highlighter-rouge">file-menu:quit-callback</code></a>
+which “by default goes through the exit-related hooks in the framework.”</p>
+
+<blockquote>
+  <p>On non-Mac platforms, applications are supposed to add a “File &gt; Quit” item
+themselves: see <code class="language-plaintext highlighter-rouge">file-menu:create-quit?</code> from framework. But DEs do have other
+ways to ask an application to quit. The <code class="language-plaintext highlighter-rouge">application-quit-handler</code> docs don’t
+mention other Unix, but, on KDE, right-clicking on DrRacket’s icon in my task
+bar and choosing Quit definitely goes through some graceful mechanism
+prompting me to save or cancel. Likewise if I’m logging out or rebooting. IIRC
+there’s an XDG spec for how to ask an application to quit.</p>
+</blockquote>
+
+<p>And others say</p>
+
+<blockquote>
+  <p>For the File &gt; Exit menu option in Molasses (which should probably be File &gt;
+Quit), I do <code class="language-plaintext highlighter-rouge">(send frame on-exit)</code>. The default <code class="language-plaintext highlighter-rouge">on-exit</code> handler will in turn
+call <code class="language-plaintext highlighter-rouge">on-close</code>, which I overrode and put my custom Exit/Quit code.</p>
+</blockquote>
+
+<p>This seems quite sensible also.</p>
 
 </div>
 <hr>
@@ -105,8 +150,8 @@ have an idea of how to fix it.</p>
 <ul class="tags">
   
     <li>
-      <a href="https://benknoble.github.io/tags#linux" class="tag">
-        linux
+      <a href="https://benknoble.github.io/tags#racket" class="tag">
+        racket
       </a>
     </li>
   
@@ -126,8 +171,8 @@ have an idea of how to fix it.</p>
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2026/02/27/xrandr-brightness/";
-    this.page.identifier = "/blog/2026/02/27/xrandr-brightness";
+    this.page.url = "https://benknoble.github.io/blog/2026/03/25/application-quit-handler/";
+    this.page.identifier = "/blog/2026/03/25/application-quit-handler";
   };
 
   function load_comments(div) {
@@ -147,19 +192,16 @@ have an idea of how to fix it.</p>
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2026/02/12/rustyboat/" title="Rusty Boat Retrospective">
+    <a href="https://benknoble.github.io/blog/2026/02/27/xrandr-brightness/" title="xrandr brightness glitch">
       Previous</a>
   </span>
   
   
-  <span id="next">
-    <a href="https://benknoble.github.io/blog/2026/03/25/application-quit-handler/" title="Notes on Racket quit handlers">
-      Next</a>
-  </span>
+  <span id="no-next">Next</span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#xrandr-brightness-glitch">
+  <a href="/categories/#notes-on-racket-quit-handlers">
     Back to posts</a>
 </div>
 

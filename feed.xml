@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-03-17T13:46:22+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">xrandr brightness glitch</title><link href="https://benknoble.github.io/blog/2026/02/27/xrandr-brightness/" rel="alternate" type="text/html" title="xrandr brightness glitch" /><published>2026-02-27T00:00:00+00:00</published><updated>2026-02-27T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/02/27/xrandr-brightness</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/02/27/xrandr-brightness/"><![CDATA[<p>I’ve had this glitch twice now, where I wake up my external monitor and the
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-03-25T23:04:25+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Notes on Racket quit handlers</title><link href="https://benknoble.github.io/blog/2026/03/25/application-quit-handler/" rel="alternate" type="text/html" title="Notes on Racket quit handlers" /><published>2026-03-25T00:00:00+00:00</published><updated>2026-03-25T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/03/25/application-quit-handler</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/03/25/application-quit-handler/"><![CDATA[<p>Notes from Discord.</p>
+
+<p>I recently found that, at least on Linux, the quit handler
+<code class="language-plaintext highlighter-rouge">application-quit-handler</code> only closes the most recent window :/ not quite what
+I was expecting.</p>
+
+<p>But apparently I’m holding it wrong:</p>
+
+<blockquote>
+  <p>[we’re not] intended to call the <code class="language-plaintext highlighter-rouge">application-quit-handler</code> from code.
+Instead, I think it is a hook for reacting to requests from the desktop
+environment that the application please quit, just as the other handlers
+documented in that section respond to other events from the environment. In
+particular:</p>
+
+  <blockquote>
+    <p>The default handler queues a call to the <code class="language-plaintext highlighter-rouge">can-exit?</code> method of the most
+recently active frame in the initial eventspace (and then calls the frame’s
+<code class="language-plaintext highlighter-rouge">on-exit</code> method if the result is true). The result is <code class="language-plaintext highlighter-rouge">#t</code> if the
+eventspace is left with no open frames after <code class="language-plaintext highlighter-rouge">on-exit</code> returns, <code class="language-plaintext highlighter-rouge">#f</code>
+otherwise.</p>
+  </blockquote>
+</blockquote>
+
+<p>(<a href="https://docs.racket-lang.org/gui/Windowing_Functions.html#(def._((lib._mred%2Fmain..rkt)._application-quit-handler))">Documentation on Windowing Functions</a>)</p>
+
+<p>Which of course makes quite a bit more sense, and should probably be stated in
+documentation.</p>
+
+<p>I had wanted to use it as the action for my “File &gt; Quit” menu, which now just
+uses <code class="language-plaintext highlighter-rouge">exit</code> (I have no special cleanup to do for the moment).</p>
+
+<p>I know macOS automatically provides a Quit option on .apps, which I suppose is
+an example of a “request[] from the desktop environment.” Do other DEs do
+something similar? My Gentoo box is currently running i3 without a DE, so I
+don’t know what typical Linux/Gtk behavior is, for example. Although a good many
+programs don’t have a close/quit button, which seems to imply they assume the DE
+will provide one. (I have keys in i3 to close them in that case.)</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">framework</code> module uses
+<a href="https://docs.racket-lang.org/framework/Frame.html#%28meth._%28%28%28lib._framework%2Fmain..rkt%29._frame~3astandard-menus~3c~25~3e%29._file-menu~3aquit-callback%29%29"><code class="language-plaintext highlighter-rouge">file-menu:quit-callback</code></a>
+which “by default goes through the exit-related hooks in the framework.”</p>
+
+<blockquote>
+  <p>On non-Mac platforms, applications are supposed to add a “File &gt; Quit” item
+themselves: see <code class="language-plaintext highlighter-rouge">file-menu:create-quit?</code> from framework. But DEs do have other
+ways to ask an application to quit. The <code class="language-plaintext highlighter-rouge">application-quit-handler</code> docs don’t
+mention other Unix, but, on KDE, right-clicking on DrRacket’s icon in my task
+bar and choosing Quit definitely goes through some graceful mechanism
+prompting me to save or cancel. Likewise if I’m logging out or rebooting. IIRC
+there’s an XDG spec for how to ask an application to quit.</p>
+</blockquote>
+
+<p>And others say</p>
+
+<blockquote>
+  <p>For the File &gt; Exit menu option in Molasses (which should probably be File &gt;
+Quit), I do <code class="language-plaintext highlighter-rouge">(send frame on-exit)</code>. The default <code class="language-plaintext highlighter-rouge">on-exit</code> handler will in turn
+call <code class="language-plaintext highlighter-rouge">on-close</code>, which I overrode and put my custom Exit/Quit code.</p>
+</blockquote>
+
+<p>This seems quite sensible also.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[Notes from Discord.]]></summary></entry><entry><title type="html">xrandr brightness glitch</title><link href="https://benknoble.github.io/blog/2026/02/27/xrandr-brightness/" rel="alternate" type="text/html" title="xrandr brightness glitch" /><published>2026-02-27T00:00:00+00:00</published><updated>2026-02-27T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/02/27/xrandr-brightness</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/02/27/xrandr-brightness/"><![CDATA[<p>I’ve had this glitch twice now, where I wake up my external monitor and the
 screen is washed out with brightness. I can see enough to try to fix it, but
 it’s not the hardware brightness settings. The software brightness settings are
 out of wack.</p>
@@ -1213,56 +1274,4 @@ personal overlay, was fairly easy.</p>
 in the sense that updates are immediately reflected on the system. So I could
 <code class="language-plaintext highlighter-rouge">doas emerge -av --autounmask git-credential-1password</code> even before the last
 step. Meanwhile, <em>users</em> who want the overlay but not to maintain it should use
-a different command listed in the overlay’s README to install the repo.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="gentoo" /><category term="git" /><summary type="html"><![CDATA[I’m proud to say that packaging this 1password-based credential helper, at least for my personal overlay, was fairly easy.]]></summary></entry><entry><title type="html">Firefox with “normal” editing shortcuts in i3</title><link href="https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3/" rel="alternate" type="text/html" title="Firefox with “normal” editing shortcuts in i3" /><published>2025-11-05T00:00:00+00:00</published><updated>2025-11-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/05/firefox-emacs-i3/"><![CDATA[<p>My “desktop environment” is just i3 at this point, so there’s no GNOME or other
-Gtk environment to meet the <a href="https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly#w_developer-shortcuts">shortcuts enabled in GNOME
-requirement</a>.</p>
-
-<p>Fortunately, there’s a way around that. After cobbling together <a href="http://www.linuxfocus.org/English/December2004/article358.shtml">a post from
-2004</a> (which no
-longer works but points in the right direction) with <a href="https://blog.karssen.org/2024/06/05/using-emacs-key-bindings-in-gnome-firefox-and-other-applications/">a much more recent
-post</a>,
-the following appears to work:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
-mkdir -p ~/.config/gtk-3.0
-cat &lt;&lt;EOF &gt;settings.ini
-[Settings]
-gtk-key-theme-name = Emacs
-EOF
-</code></pre></div></div>
-
-<p>and restart Firefox. Note I’m using the Gentoo desktop profile, so <code class="language-plaintext highlighter-rouge">gsettings</code>
-and the gtk config directory already existed despite not running GNOME.</p>
-
-<p>The only caveat I have so far is that I now have to exit focus from text inputs,
-including the address bar, before I can use Firefox shortcuts like C-h
-(history).</p>
-
-<p>The latter article also mentions
-<a href="https://kb.mozillazine.org/About:config_entries#UI."><code class="language-plaintext highlighter-rouge">ui.key.accelKey</code></a>, which
-pointed me to <code class="language-plaintext highlighter-rouge">generalAccessKey</code>, too. I might experiment with using other keys
-there, once I know what they control.</p>
-
-<p><strong>Update later that day:</strong> It seems <code class="language-plaintext highlighter-rouge">generalAccessKey=224</code> lets me use Command
-(Meta), and I’m not sure changing <code class="language-plaintext highlighter-rouge">accelKey</code> had any real affect. The one
-downside here is that M-q quits without warning despite those settings not
-changing. Oh well.</p>
-
-<p><strong>Update later that day:</strong> I had to re-enable the <code class="language-plaintext highlighter-rouge">accelKey</code> change, so maybe
-both are required?</p>
-
-<p><strong>Update 2026 February 9th:</strong> I now have only one <code class="language-plaintext highlighter-rouge">ui.key</code> setting changed from
-the default: <code class="language-plaintext highlighter-rouge">accelKey=224</code>. That is, I use Command (Meta) for Firefox
-shortcuts. I can use Alt+Shift to use <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/accesskey"><code class="language-plaintext highlighter-rouge">accesskey</code>
-shortcuts</a>,
-like <code class="language-plaintext highlighter-rouge">A-S-f</code> on https://wiki.gentoo.org to jump to the search bar. Phew! The
-<code class="language-plaintext highlighter-rouge">generalAccessKey</code> was affecting the latter shortcuts, and since they overlapped
-they could prevent access to the “base” shortcuts sometimes. Not fun. See
-<a href="https://www-archive.mozilla.org/unix/customizing.html">Customizing Mozilla</a> and
-<a href="https://kb.mozillazine.org/Ui.key.generalAccessKey">ui.key.generalAccessKey</a>
-for more details.</p>
-
-<p>PS I know, there’s probably a way to get Vim + Firefox to work these days. I’ll
-explore that later. For now, I’m used to browsers, Slack, and others at least
-letting me edit from a sensible part of my keyboard (C-n, C-a, C-k, etc.) when
-I’m not in Vim.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="linux" /><category term="gentoo" /><summary type="html"><![CDATA[My “desktop environment” is just i3 at this point, so there’s no GNOME or other Gtk environment to meet the shortcuts enabled in GNOME requirement.]]></summary></entry></feed>
+a different command listed in the overlay’s README to install the repo.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="gentoo" /><category term="git" /><summary type="html"><![CDATA[I’m proud to say that packaging this 1password-based credential helper, at least for my personal overlay, was fairly easy.]]></summary></entry></feed>
