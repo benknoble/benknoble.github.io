@@ -23,3 +23,6 @@ As a result, I switched to a community stewardship model: other developers at
 Capital One host workshops once a month, with myself and a team of volunteers
 providing guidance and structure as necessary. I lead the overall strategic
 direction and still occasionally produce a workshop or article.
+
+These days we're focused on how most effectively organize all our materials for
+folks to learn from and use to solve problems.
