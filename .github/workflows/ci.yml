@@ -10,21 +10,21 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: true
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
+          ruby-version: '3.3'
           bundler-cache: true
 
       - name: Install Racket
-        uses: Bogdanp/setup-racket@v1.11
+        uses: Bogdanp/setup-racket@v1.15
         with:
           architecture: 'x64'
           distribution: 'full'
           variant: 'CS'
-          version: '8.2'
+          version: stable
 
       - name: Install Racket deps
         run: raco pkg install scribble-lp2-manual
