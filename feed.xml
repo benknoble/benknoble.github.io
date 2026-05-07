@@ -1,4 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-04-25T18:20:03+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Notes on Racket quit handlers</title><link href="https://benknoble.github.io/blog/2026/03/25/application-quit-handler/" rel="alternate" type="text/html" title="Notes on Racket quit handlers" /><published>2026-03-25T00:00:00+00:00</published><updated>2026-03-25T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/03/25/application-quit-handler</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/03/25/application-quit-handler/"><![CDATA[<p>Notes from Discord.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-05-07T12:47:50+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Modelling language or controlling it?</title><link href="https://benknoble.github.io/blog/2026/05/07/machines-humans/" rel="alternate" type="text/html" title="Modelling language or controlling it?" /><published>2026-05-07T00:00:00+00:00</published><updated>2026-05-07T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/05/07/machines-humans</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/05/07/machines-humans/"><![CDATA[<p>Machines should bend to suit humans (centaurs), not humans bend to suit machines
+(reverse centaurs).</p>
+
+<ul>
+  <li><a href="https://sites.google.com/view/llmwritingdistortion/home">How LLMs Distort Our Written Language</a></li>
+  <li><a href="https://arxiv.org/abs/2510.04226v2">Epistemic Diversity and Knowledge Collapse in Large Language Models</a></li>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llms" /><summary type="html"><![CDATA[Machines should bend to suit humans (centaurs), not humans bend to suit machines (reverse centaurs).]]></summary></entry><entry><title type="html">Chats on LLMs</title><link href="https://benknoble.github.io/blog/2026/05/05/llms-conversation/" rel="alternate" type="text/html" title="Chats on LLMs" /><published>2026-05-05T00:00:00+00:00</published><updated>2026-05-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/05/05/llms-conversation</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/05/05/llms-conversation/"><![CDATA[<p>Collected from Discord</p>
+
+<p>In response to both this quote:</p>
+
+<blockquote>
+  <p>The user apparently believes LLMs are inherently unethical in their existence,
+so, by extension, any use of them is also inherently unethical, and they (the
+user) will therefore not use any products of LLMs in any way whatsoever.</p>
+</blockquote>
+
+<p>and recent projects collecting lists of “tainted” “slopware”:</p>
+
+<p>I think most absolute positions are likely incorrect, but at the same time
+contain merits. For example, I think the notion of abstaining entirely from any
+software that has been touched by an LLM (Vim? The Linux kernel?) is untenable
+in the long run, and I desperately hope it won’t lead to too much fragmentation
+of ideas. (Competing software that does it better is of course welcome.)</p>
+
+<p>As another example, take explicitly condoning LLM use without a statement
+engaging with others’ concerns (be it quality, displacement of labor, ethics, or
+anything else). I can also sympathize with the absolute position that this
+condones and encourages other evils associated with the makers of today’s
+commercial LLMs. So my modulation is to take those concerns as indicative that
+perhaps we ought to form a community statement about what, precisely, LLM use
+means to Racket.</p>
+
+<p>A tool and aid for continuing to do things we value? Something else?</p>
+
+<p>See for example « Engineering rigor in the age of LLMs » and « The peril of
+laziness lost » which I have linked before. I may dislike some of Brian’s
+enthusiasm for them, but I also can see where he’s coming from and respect how
+he encourages rigorous use.</p>
+
+<hr />
+
+<p>In response to this quote:</p>
+
+<blockquote>
+  <p>I think it’s inevitable though. Every leap in technology from books to
+film/video to the internet often displaces/shakes industries up. It’s either
+adapt or be the old man who shouts at the clouds saying “back in my day…”.
+Whether its generated by LLMs or not, what matters above all else is if its
+valuable and improves the project</p>
+</blockquote>
+
+<p>I think the difficulty is pinning down meanings of « valuable » and « improves
+».</p>
+
+<p>Is it valuable to add new features if they also create legal risk ? Is it an
+improvement to automate away paper cut bugs that deprive new contributors of
+pathways to get started, learn the code base, and mature into maintainers?</p>
+
+<p>These things are decidedly grey areas to me.</p>
+
+<hr />
+
+<p>I think it’s hard to deny that there are valuable uses. I think it is equally
+hard to deny there are wasteful, or evil, or &lt;other negatively connoted&gt; uses.
+And I think the commercial side (even Anthropic in some ways) leans into one
+side more than the other, to our detriment. I think this makes it more important
+to qualify what our community holds dear and how LLMs fit (and don’t fit) into
+that equation.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llms" /><summary type="html"><![CDATA[Collected from Discord]]></summary></entry><entry><title type="html">Notes on Racket quit handlers</title><link href="https://benknoble.github.io/blog/2026/03/25/application-quit-handler/" rel="alternate" type="text/html" title="Notes on Racket quit handlers" /><published>2026-03-25T00:00:00+00:00</published><updated>2026-03-25T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/03/25/application-quit-handler</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/03/25/application-quit-handler/"><![CDATA[<p>Notes from Discord.</p>
 
 <p>I recently found that, at least on Linux, the quit handler
 <code class="language-plaintext highlighter-rouge">application-quit-handler</code> only closes the most recent window :/ not quite what
@@ -665,616 +732,4 @@ in the sense of <code class="language-plaintext highlighter-rouge">@live-rebuild
 <p>When the archive has actually been updated, I’ll have to use <code class="language-plaintext highlighter-rouge">ebuild $(equery w
 zsa-keymapp) manifest</code> or similar to update the Manifest. (For some reason,
 <code class="language-plaintext highlighter-rouge">pkgdev</code> didn’t work on this one? And a couple of live ebuilds I checked don’t
-have manifest information, but they also use the Git eclass for fetching.)</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="gentoo" /><summary type="html"><![CDATA[My Gentoo overlay now contains an ebuild for ZSA’s Keymapp application.]]></summary></entry><entry><title type="html">Analyzing 10 years of accepted patch series to Git</title><link href="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/" rel="alternate" type="text/html" title="Analyzing 10 years of accepted patch series to Git" /><published>2025-11-14T00:00:00+00:00</published><updated>2025-11-14T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/14/git-patch-series-length</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/14/git-patch-series-length/"><![CDATA[<p>I was curious what length of patch series covered most of Git’s accepted
-patches. Here’s my analysis.</p>
-
-<p><strong>Update 2026 February 23rd:</strong> Git-for-Windows maintainer Dscho sent me some
-interesting data, which I’ve added <a href="#a-different-analysis">near the end of the
-post</a>.</p>
-
-<p><strong>Update 2025 November 17th:</strong> Junio C Hamano (Git maintainer) points out in the
-comments that the structure I analyzed has a “cutoff” at 20 commits (see
-c1b23bd8aa (Merge branch ‘tb/incremental-midx-part-3.1’, 2025-10-29) for a
-longer example), so the tail of the analysis is incomplete. I’m going to update
-the analysis, but so far a useful trick for those cases is</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--first-parent</span> <span class="nt">--after</span><span class="o">=</span>10.years.ago | <span class="nb">grep</span> <span class="s1">'^[[:blank:]]*\*.*[[:digit:]] commits'</span>
-</code></pre></div></div>
-
-<p><strong>Update later that day:</strong> I’ve corrected the analysis below after confirming
-that all 137 “21-length series” are correctly counted as larger series. See
-Git history for the old version of this post.</p>
-
-<p>First, in the following code, recall that I have the following function
-definitions:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">A() { awk "$@"; }</code> (autoloaded in Zsh)</li>
-  <li><code class="language-plaintext highlighter-rouge">frequency() { sort | uniq -c | sort -g; }</code> (see <a href="/blog/2019/09/27/perl-v-bash/">Bash vs. Perl</a>)</li>
-  <li>You’ll see a modified version of <a href="/blog/2024/08/07/churn-and-weight/"><code class="language-plaintext highlighter-rouge">code-percent</code>’s cumulative tallying
-code</a></li>
-  <li>I’ve got a <a href="/blog/2019/09/11/fields/">fields extracter</a></li>
-</ul>
-
-<p>My checkout of git.git’s master branch is currently at fd372d9b1a (RelNotes: fix
-typo in release notes for 2.52.0, 2025-11-13).</p>
-
-<p>Our first goal is to count the length of a series. I’ve come up with 2 different
-ways to do that:</p>
-
-<ol>
-  <li>Use the extremely regular structure of Git’s merge commits to parse the
-length of the series. All merges have an asterisk-bulleted line followed by
-the list of commits being merged (single-patch series don’t have a merge).</li>
-  <li>Or, use <code class="language-plaintext highlighter-rouge">git rev-list --count merge^..merge^2</code> to count the length of the
-series (commits not on first but on second parent). Unfortunately, this
-doesn’t work well for non-merge commits. The syntax <code class="language-plaintext highlighter-rouge">merge^-</code> is better,
-since it expands as expected for merge commits and still gives the single
-commit when it’s not a merge, but it overcounts merge commits by one, so we’d
-need extra processing there.</li>
-</ol>
-
-<p>I’ve opted for the first version, but I’d be curious to see someone’s code for
-the 2nd that gave identical results.</p>
-
-<p>There’s one caveat for item (1) here: the structure comes from <code class="language-plaintext highlighter-rouge">merge.log=true</code>
-configuration and cuts off series that are longer than 20 commits. So we’ll do
-some extra processing on the bulleted line to grab the size.</p>
-
-<p>We’ll start just by pairing each <code class="language-plaintext highlighter-rouge">--first-parent</code> commit with a length; in the
-final result, if we omit the commit identifier, we could probably shorten some
-of the processing pipeline to a giant Awk script.</p>
-
-<p>Here’s the code:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--first-parent</span> <span class="nt">--since</span><span class="o">=</span>10.years.ago | A <span class="s1">'BEGIN { count=0; }
-NR &gt; 1 &amp;&amp; /^commit/ &amp;&amp; !go &amp;&amp; !big { print "1" }
-go &amp;&amp; /^commit/ { print count; go=0; count=0; }
-/^commit/ { big=0; print $0; }
-go &amp;&amp; /[^[:space:]]/ { count++; }
-/^[[:space:]]+\*/ { go=1; }
-/^[[:space:]]+\*.*[[:digit:]] commits/ {
-    big=1; go=0
-    n_pieces = split($0, pieces, ":")
-    match(pieces[n_pieces], "[[:digit:]]+")
-    print substr(pieces[n_pieces], RSTART, RLENGTH)
-}
-END { if (go) print count }'</span> | <span class="nb">paste</span> - -
-
-commit fd372d9b1a69a01a676398882bbe3840bf51fe72	1
-commit 99bd5a5c9f74abfe81196d96b8467d0d1d4723c5	1
-commit 621415c8b5371a4734315232a780dd8282f6fe4f	1
-commit e65e955c0328f6e1c4a7764ae86bbc875805e694	1
-commit da5841b45c2b1cce79e0357218693061c2741780	1
-commit cb9036aca1790d2258009d0db4c2991d972a07c2	1
-commit 4badef0c3503dc29059d678abba7fac0f042bc84	6
-commit e569dced68a486b38b14cdd2e3e0b34d21752a18	5
-commit 5db9d35a28f4fca5d13692f589a3bfcd5cd896cb	1
-commit f58ea683b53d78222937d66206ed66db1abffdd9	1
-…
-</code></pre></div></div>
-
-<p>The Awk script runs a state machine. The variable <code class="language-plaintext highlighter-rouge">go</code> tracks whether we should
-be counting lines towards the current patch series. So the rules are</p>
-<ul>
-  <li>If we see a commit line (except the first) but we weren’t tracking a (big)
-patch series, the previous commit was a single-patch series. Emit “1”.</li>
-  <li>If we see a commit line and we are tracking a patch series, print the count
-and reset.</li>
-  <li>Print all commit lines (resetting <code class="language-plaintext highlighter-rouge">big</code> as we go).</li>
-  <li>While tracking a patch series, count lines that have a non-blank in them</li>
-  <li>Start tracking when you see that line consisting of spaces followed by <code class="language-plaintext highlighter-rouge">*</code></li>
-  <li>If you see a <code class="language-plaintext highlighter-rouge">*</code> line that ends contains digits followed by <code class="language-plaintext highlighter-rouge">commits</code>, use the
-count from there and mark it <code class="language-plaintext highlighter-rouge">big</code> (so we can skip printing “1”)</li>
-  <li>At the end, print the final count (otherwise the last commit is omitted from
-analysis).</li>
-</ul>
-
-<p>Paste just aligns the fields at the end for easy viewing.</p>
-
-<h2 id="barchart">Barchart</h2>
-
-<p>Now we can take that and pipe it, keeping only the count, building up a
-frequency chart by length of series, and make a barchart:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… | fields 3 | frequency | <span class="nb">sort</span> <span class="nt">-n</span> <span class="nt">-k2</span> | barchart
-
-0      1
-1   5456 ███████████████████████████████████████████████████████████████████████
-2   1073 ██████████████
-3    618 ████████
-4    384 █████
-5    253 ███
-6    217 ███
-7    176 ██
-8    122 ██
-9    105 █
-10   102 █
-11    79 █
-12    56 █
-13    44 █
-14    36
-15    34
-16    30
-17    19
-18    12
-19    18
-20    22
-21    16
-22    22
-23    13
-24     8
-25     8
-26     9
-27     7
-28     7
-29     5
-30     4
-31     1
-32     4
-33     3
-34     3
-35     2
-36     3
-37     1
-38     6
-39     1
-41     2
-42     2
-44     1
-45     1
-46     2
-47     1
-49     1
-50     1
-53     1
-81     1
-92     1
-</code></pre></div></div>
-
-<p>What? A 0-length series? Turns out that’s 995916e24f (Merge branch
-‘jk/avoid-redef-system-functions’, 2022-12-19), which has a strange structure:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 995916e24f25644987f34b8a8e9392c0150804d8
-Merge: efcc48efa7 395bec6b39
-Author: Junio C Hamano &lt;gitster@pobox.com&gt;
-Date:   Mon Dec 19 11:46:17 2022 +0900
-
-    Merge branch 'jk/avoid-redef-system-functions'
-
-    The jk/avoid-redef-system-functions-2.30 topic pre-merged for more
-    recent codebase.
-
-    * jk/avoid-redef-system-functions:
-
-</code></pre></div></div>
-
-<p>It’s insignificant for the rest of the analysis though.</p>
-
-<h2 id="cumulative-analysis">Cumulative analysis</h2>
-
-<p>I want to know, though, how many patches cover a significant majority of the
-lengths. Obviously the distribution skews towards the small end, but where’s the
-90% cutoff?</p>
-
-<p>Take the same command as before, and pipe it into a modified cumulative tally.
-We first map the counts per series length into a percentage-of-total per series
-length (the middle line in the stages below). Then we sort by the series length
-so we can run up the distribution in the expected order, emit a header for our
-table, and emit the running tally before pretty-printing it.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>… | fields 3 | frequency |
-A <span class="s1">'{ total += $1; counts[$2] = $1; } END { for (k in counts) print k, counts[k]*100/total; }'</span> |
-<span class="nb">sort</span> <span class="nt">-n</span> |
-<span class="o">{</span> <span class="nb">echo</span> <span class="s1">'NumberPatches Percent CumulativePercent'</span><span class="p">;</span> A <span class="s1">'{ total += $2; print $0, total; }'</span><span class="p">;</span> <span class="o">}</span> |
-column <span class="nt">-t</span>
-
-NumberPatches  Percent    CumulativePercent
-0              0.0111185  0.0111185
-1              60.6627    60.6738
-2              11.9302    72.604
-3              6.87125    79.4753
-4              4.26951    83.7448
-5              2.81299    86.5578
-6              2.41272    88.9705
-7              1.95686    90.9273
-8              1.35646    92.2838
-9              1.16744    93.4512
-10             1.13409    94.5853
-11             0.878363   95.4637
-12             0.622637   96.0863
-13             0.489215   96.5756
-14             0.400267   96.9758
-15             0.37803    97.3539
-16             0.333556   97.6874
-17             0.211252   97.8987
-18             0.133422   98.0321
-19             0.200133   98.2322
-20             0.244608   98.4768
-21             0.177896   98.6547
-22             0.244608   98.8993
-23             0.144541   99.0439
-24             0.0889482  99.1328
-25             0.0889482  99.2218
-26             0.100067   99.3218
-27             0.0778297  99.3997
-28             0.0778297  99.4775
-29             0.0555926  99.5331
-30             0.0444741  99.5776
-31             0.0111185  99.5887
-32             0.0444741  99.6331
-33             0.0333556  99.6665
-34             0.0333556  99.6999
-35             0.022237   99.7221
-36             0.0333556  99.7555
-37             0.0111185  99.7666
-38             0.0667111  99.8333
-39             0.0111185  99.8444
-41             0.022237   99.8666
-42             0.022237   99.8889
-44             0.0111185  99.9
-45             0.0111185  99.9111
-46             0.022237   99.9333
-47             0.0111185  99.9445
-49             0.0111185  99.9556
-50             0.0111185  99.9667
-53             0.0111185  99.9778
-81             0.0111185  99.9889
-92             0.0111185  100
-</code></pre></div></div>
-
-<p>So 7 patches covers 90% of contributions to Git in the last 10 years, and 5 (a
-nice round number?) cover more than 85%. The interesting parts of the
-distribution (the “left” or “top” tail) don’t change by more than about 1
-percentage point if we restrict ourselves to the 5 recent years of contribution
-history, though on the “right”/”bottom” tail we stop at series with a maximum
-length of 49.</p>
-
-<h2 id="a-different-analysis">A different analysis</h2>
-
-<p>Dscho sent me a script that does a better job counting. To test it and look for
-discrepancies, I first made sure I could replicate my original data:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log <span class="nt">--first-parent</span> <span class="nt">--since</span><span class="o">=</span><span class="s1">'17th November 2015 13:52:48-0500'</span> | A <span class="s1">'BEGIN { count=0; }
-NR &gt; 1 &amp;&amp; /^commit/ &amp;&amp; !go &amp;&amp; !big { print "1" }
-go &amp;&amp; /^commit/ { print count; go=0; count=0; }
-/^commit/ { big=0; print $0; }
-go &amp;&amp; /[^[:space:]]/ { count++; }
-/^[[:space:]]+\*/ { go=1; }
-/^[[:space:]]+\*.*[[:digit:]] commits/ {
-    big=1; go=0
-    n_pieces = split($0, pieces, ":")
-    match(pieces[n_pieces], "[[:digit:]]+")
-    print substr(pieces[n_pieces], RSTART, RLENGTH)
-}
-END { if (go) print count }'</span> | <span class="nb">paste</span> - - | fields 3 | frequency | <span class="nb">sort</span> <span class="nt">-n</span> <span class="nt">-k2</span> | barchart
-</code></pre></div></div>
-
-<p>Unfortunately, this produces a few differences… but it’s close. In particular, I
-noticed that this now counts (starting from the same commit, mind you!) 1072
-2-patch series and 254 5-patch series (1 less and 1 more, respectively):</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0      1
-1   5456 ███████████████████████████████████████████████████████████████████████
-2   1072 ██████████████
-3    618 ████████
-4    384 █████
-5    254 ███
-6    217 ███
-7    176 ██
-8    122 ██
-9    105 █
-10   102 █
-11    79 █
-12    56 █
-13    44 █
-14    36
-15    34
-16    29
-17    19
-18    13
-19    18
-20    22
-21    16
-22    22
-23    13
-24     8
-25     8
-26     9
-27     7
-28     7
-29     5
-30     4
-31     1
-32     4
-33     3
-34     3
-35     2
-36     3
-37     1
-38     6
-39     1
-41     2
-42     2
-44     1
-45     1
-46     2
-47     1
-49     1
-50     1
-53     1
-81     1
-92     1
-</code></pre></div></div>
-
-<p>Here is Dscho’s Node script, which I am supposed to run like</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rev-list <span class="nt">--parents</span> <span class="nt">--topo-order</span> <span class="nt">--boundary</span> <span class="nt">--since</span><span class="o">=</span><span class="s1">'17th November 2015 13:52:48-0500'</span> @ |
-    ./patch-series-analyzer.js 92
-</code></pre></div></div>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#!/usr/bin/env node
-</span>
-<span class="kd">const</span> <span class="nx">readline</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">readline</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="c1">// Set of commits in the first-parent chain</span>
-<span class="kd">const</span> <span class="nx">firstParentCommits</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Set</span><span class="p">();</span>
-
-<span class="c1">// Map from commit to its corresponding first-parent merge commit</span>
-<span class="kd">const</span> <span class="nx">commit2merge</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">();</span>
-
-<span class="c1">// Map from merge commit to { count: number, mergeCommitCount: number }</span>
-<span class="kd">const</span> <span class="nx">mergeCommitInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">();</span>
-
-<span class="c1">// Array of first-parent merge commits (in order encountered)</span>
-<span class="kd">const</span> <span class="nx">firstParentMerges</span> <span class="o">=</span> <span class="p">[];</span>
-
-<span class="kd">const</span> <span class="nx">rl</span> <span class="o">=</span> <span class="nx">readline</span><span class="p">.</span><span class="nf">createInterface</span><span class="p">({</span>
-  <span class="na">input</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">,</span>
-  <span class="na">output</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">,</span>
-  <span class="na">terminal</span><span class="p">:</span> <span class="kc">false</span>
-<span class="p">});</span>
-
-<span class="nx">rl</span><span class="p">.</span><span class="nf">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">line</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">line</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="p">[</span><span class="nx">commit</span><span class="p">,</span> <span class="p">...</span><span class="nx">parents</span><span class="p">]</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nf">trim</span><span class="p">().</span><span class="nf">split</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+/</span><span class="p">);</span>
-
-  <span class="k">if </span><span class="p">(</span><span class="nx">commit</span><span class="p">.</span><span class="nf">startsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">-</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">commit2</span> <span class="o">=</span> <span class="nx">commit</span><span class="p">.</span><span class="nf">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">firstParentCommits</span><span class="p">.</span><span class="nf">has</span><span class="p">(</span><span class="nx">commit2</span><span class="p">))</span> <span class="p">{</span>
-      <span class="kd">const</span> <span class="nx">merge</span> <span class="o">=</span> <span class="nx">commit2merge</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">commit2</span><span class="p">);</span>
-      <span class="k">if </span><span class="p">(</span><span class="nx">merge</span><span class="p">)</span> <span class="nx">mergeCommitInfo</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">merge</span><span class="p">).</span><span class="nx">incomplete</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="k">if </span><span class="p">(</span><span class="nx">firstParentCommits</span><span class="p">.</span><span class="nx">size</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="nx">firstParentCommits</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nx">commit</span><span class="p">);</span>
-
-  <span class="k">if </span><span class="p">(</span><span class="nx">firstParentCommits</span><span class="p">.</span><span class="nf">has</span><span class="p">(</span><span class="nx">commit</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">if </span><span class="p">(</span><span class="nx">parents</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="nx">firstParentCommits</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nx">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-    <span class="k">if </span><span class="p">(</span><span class="nx">commit</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">15664a5f35b6db8077e3e8aeb377e72f0f95e23e</span><span class="dl">'</span><span class="p">)</span> <span class="p">;</span> <span class="c1">// ignore criss-cross merge</span>
-    <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">parents</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// This is a merge commit in the first-parent chain</span>
-      <span class="nx">firstParentMerges</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">commit</span><span class="p">);</span>
-      <span class="nx">mergeCommitInfo</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="nx">commit</span><span class="p">,</span> <span class="p">{</span> <span class="nx">commit</span><span class="p">,</span> <span class="na">count</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">mergeCommitCount</span><span class="p">:</span> <span class="mi">0</span> <span class="p">});</span>
-      <span class="nx">parents</span><span class="p">.</span><span class="nf">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nf">forEach</span><span class="p">(</span><span class="nx">parent</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="kd">const</span> <span class="nx">merge</span> <span class="o">=</span> <span class="nx">commit2merge</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">parent</span><span class="p">);</span>
-        <span class="k">if </span><span class="p">(</span><span class="nx">merge</span><span class="p">)</span> <span class="nx">merge</span><span class="p">.</span><span class="nx">doubleCountedAncestors</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="nx">commit2merge</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">commit</span><span class="p">);</span>
-      <span class="p">});</span>
-    <span class="p">}</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">merge</span> <span class="o">=</span> <span class="nx">commit2merge</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">commit</span><span class="p">);</span>
-    <span class="k">if </span><span class="p">(</span><span class="nx">merge</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">const</span> <span class="nx">info</span> <span class="o">=</span> <span class="nx">mergeCommitInfo</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">merge</span><span class="p">);</span>
-      <span class="k">if </span><span class="p">(</span><span class="nx">parents</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="nx">info</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span><span class="p">;</span>
-      <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">parents</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="nx">info</span><span class="p">.</span><span class="nx">mergeCommitCount</span><span class="o">++</span><span class="p">;</span>
-      <span class="nx">parents</span><span class="p">.</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">parent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="kd">const</span> <span class="nx">merge2</span> <span class="o">=</span> <span class="nx">commit2merge</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">parent</span><span class="p">);</span>
-        <span class="k">if </span><span class="p">(</span><span class="nx">merge2</span><span class="p">)</span> <span class="nx">merge</span><span class="p">.</span><span class="nx">doubleCountedAncestors</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="nx">commit2merge</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">merge</span><span class="p">);</span>
-      <span class="p">})</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-
-<span class="nx">rl</span><span class="p">.</span><span class="nf">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">close</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nf">printResults</span><span class="p">();</span>
-<span class="p">});</span>
-
-<span class="kd">function</span> <span class="nf">printResults</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">firstParentMerges</span><span class="p">.</span><span class="nf">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span>
-    <span class="nx">a</span><span class="p">.</span><span class="nx">mergeCommitCount</span> <span class="o">!==</span> <span class="nx">b</span><span class="p">.</span><span class="nx">mergeCommitCount</span>
-    <span class="p">?</span> <span class="nx">a</span><span class="p">.</span><span class="nx">mergeCommitCount</span> <span class="o">-</span> <span class="nx">b</span><span class="p">.</span><span class="nx">mergeCommitCount</span>
-    <span class="p">:</span> <span class="nx">a</span><span class="p">.</span><span class="nx">count</span> <span class="o">-</span> <span class="nx">b</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span>
-
-  <span class="kd">const</span> <span class="nx">stats</span> <span class="o">=</span> <span class="nx">firstParentMerges</span><span class="p">.</span><span class="nf">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">merge</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">info</span> <span class="o">=</span> <span class="nx">mergeCommitInfo</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">merge</span><span class="p">);</span>
-    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">info</span> <span class="o">||</span> <span class="nx">info</span><span class="p">.</span><span class="nx">mergeCommitCount</span> <span class="o">||</span> <span class="nx">info</span><span class="p">.</span><span class="nx">doubleCountedAncestors</span> <span class="o">||</span> <span class="nx">info</span><span class="p">.</span><span class="nx">incomplete</span><span class="p">)</span> <span class="k">return</span> <span class="nx">a</span><span class="p">;</span>
-    <span class="nx">a</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="nx">info</span><span class="p">.</span><span class="nx">count</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">info</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span> <span class="o">||</span> <span class="mi">0</span><span class="p">));</span>
-    <span class="k">return</span> <span class="nx">a</span><span class="p">;</span>
-  <span class="p">},</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">());</span>
-  <span class="kd">const</span> <span class="nx">sorted</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">stats</span><span class="p">.</span><span class="nf">entries</span><span class="p">()].</span><span class="nf">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nx">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-
-  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Patch Series Length Analysis:</span><span class="dl">'</span><span class="p">);</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">==============================</span><span class="dl">'</span><span class="p">);</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Length |      Count | Distribution</span><span class="dl">'</span><span class="p">);</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">-</span><span class="dl">'</span><span class="p">.</span><span class="nf">repeat</span><span class="p">(</span><span class="mi">60</span><span class="p">));</span>
-
-  <span class="k">if </span><span class="p">(</span><span class="nx">sorted</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">No merge commits found.</span><span class="dl">'</span><span class="p">);</span>
-    <span class="k">return</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="kd">const</span> <span class="nx">maxCount</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">max</span><span class="p">(...</span><span class="nx">sorted</span><span class="p">.</span><span class="nf">map</span><span class="p">(([</span><span class="nx">_</span><span class="p">,</span> <span class="nx">count</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="nx">count</span><span class="p">));</span>
-
-  <span class="k">for </span><span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">length</span><span class="p">,</span> <span class="nx">count</span><span class="p">]</span> <span class="k">of</span> <span class="nx">sorted</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">barLength</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">((</span><span class="nx">count</span> <span class="o">/</span> <span class="nx">maxCount</span><span class="p">)</span> <span class="o">*</span> <span class="mi">50</span><span class="p">);</span>
-    <span class="kd">const</span> <span class="nx">bar</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">█</span><span class="dl">'</span><span class="p">.</span><span class="nf">repeat</span><span class="p">(</span><span class="nx">barLength</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">length</span><span class="p">.</span><span class="nf">toString</span><span class="p">().</span><span class="nf">padStart</span><span class="p">(</span><span class="mi">6</span><span class="p">)}</span><span class="s2"> | </span><span class="p">${</span><span class="nx">count</span><span class="p">.</span><span class="nf">toString</span><span class="p">().</span><span class="nf">padStart</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span><span class="s2"> | </span><span class="p">${</span><span class="nx">bar</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-  <span class="p">}</span>
-
-  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">();</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Summary:</span><span class="dl">'</span><span class="p">);</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">--------</span><span class="dl">'</span><span class="p">);</span>
-
-  <span class="kd">const</span> <span class="nx">total</span> <span class="o">=</span> <span class="nx">sorted</span><span class="p">.</span><span class="nf">reduce</span><span class="p">((</span><span class="nx">sum</span><span class="p">,</span> <span class="p">[</span><span class="nx">_</span><span class="p">,</span> <span class="nx">count</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="nx">sum</span> <span class="o">+</span> <span class="nx">count</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-  <span class="kd">let</span> <span class="nx">cumulative</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="kd">let</span> <span class="nx">found50</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-  <span class="kd">let</span> <span class="nx">found90</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-
-  <span class="k">for </span><span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">length</span><span class="p">,</span> <span class="nx">count</span><span class="p">]</span> <span class="k">of</span> <span class="nx">sorted</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">cumulative</span> <span class="o">+=</span> <span class="nx">count</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="nx">percentage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">cumulative</span> <span class="o">/</span> <span class="nx">total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span>
-
-    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">found50</span> <span class="o">&amp;&amp;</span> <span class="nx">percentage</span> <span class="o">&gt;=</span> <span class="mi">50</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`50% of series have </span><span class="p">${</span><span class="nx">length</span><span class="p">}</span><span class="s2"> or fewer commits`</span><span class="p">);</span>
-      <span class="nx">found50</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">found90</span> <span class="o">&amp;&amp;</span> <span class="nx">percentage</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`90% of series have </span><span class="p">${</span><span class="nx">length</span><span class="p">}</span><span class="s2"> or fewer commits`</span><span class="p">);</span>
-      <span class="nx">found90</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-
-  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`Total merge commits analyzed: </span><span class="p">${</span><span class="nx">total</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-
-  <span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">.</span><span class="nf">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">arg</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">n</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="nf">parseInt</span><span class="p">(</span><span class="nx">arg</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">n</span><span class="p">}</span><span class="s2">:`</span><span class="p">,</span> <span class="nx">firstParentMerges</span><span class="p">.</span><span class="nf">filter</span><span class="p">((</span><span class="nx">merge</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="kd">const</span> <span class="nx">info</span> <span class="o">=</span> <span class="nx">mergeCommitInfo</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">merge</span><span class="p">);</span>
-      <span class="k">return</span> <span class="nx">info</span> <span class="o">&amp;&amp;</span> <span class="nx">info</span><span class="p">.</span><span class="nx">count</span> <span class="o">===</span> <span class="nx">n</span> <span class="o">&amp;&amp;</span> <span class="nx">info</span><span class="p">.</span><span class="nx">mergeCommitCount</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">info</span><span class="p">.</span><span class="nx">doubleCountedAncestors</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">info</span><span class="p">.</span><span class="nx">incomplete</span>
-    <span class="p">}));</span>
-  <span class="p">})</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>And here are the results (it is <em>much</em> quicker than my method):</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Patch Series Length Analysis:
-==============================
-Length |      Count | Distribution
-------------------------------------------------------------
-     0 |         12 |
-     1 |       4314 | ██████████████████████████████████████████████████
-     2 |       1040 | ████████████
-     3 |        584 | ██████
-     4 |        360 | ████
-     5 |        232 | ██
-     6 |        200 | ██
-     7 |        158 | █
-     8 |        105 | █
-     9 |         97 | █
-    10 |         88 | █
-    11 |         69 |
-    12 |         41 |
-    13 |         36 |
-    14 |         28 |
-    15 |         26 |
-    16 |         23 |
-    17 |         15 |
-    18 |         10 |
-    19 |         13 |
-    20 |         15 |
-    21 |         12 |
-    22 |         16 |
-    23 |         10 |
-    24 |          6 |
-    25 |          2 |
-    26 |          6 |
-    27 |          4 |
-    28 |          4 |
-    29 |          4 |
-    30 |          3 |
-    31 |          1 |
-    32 |          2 |
-    33 |          3 |
-    34 |          3 |
-    35 |          2 |
-    36 |          3 |
-    37 |          1 |
-    38 |          3 |
-    39 |          1 |
-    41 |          2 |
-    42 |          1 |
-    44 |          1 |
-    45 |          1 |
-    46 |          1 |
-    47 |          1 |
-    50 |          1 |
-    53 |          1 |
-    92 |          1 |
-
-Summary:
---------
-50% of series have 1 or fewer commits
-90% of series have 7 or fewer commits
-Total merge commits analyzed: 7562
-92: [ 'e572fef9d459497de2bd719747d5625a27c9b41d' ]
-</code></pre></div></div>
-
-<p>Notice all the discrepancies (and I’d be more inclined to trust this script
-parsing Git’s actual parents)! This counts 7562 series. My version counted 8994
-series. So maybe that accounts for some things… other than the 0-length series,
-I think Dscho’s counts are all smaller than mine.</p>
-
-<p>Dscho also sent some other interesting data:</p>
-
-<blockquote>
-  <p>The answer to [What on Earth could this patch series be that was accepted
-despite consisting of 92 (!!!) patches] is this: <a href="https://github.com/git/git/compare/e572fef9d459497de2bd719747d5625a27c9b41d%5E...e572fef9d459497de2bd719747d5625a27c9b41d">Compare on
-GitHub</a>.
-Rather a monster of a patch series, I thought. But then I discovered that it
-was not sent as a single patch series, but as <a href="https://lore.kernel.org/git/1452599378-47882-1-git-send-email-gitter.spiros@gmail.com/">nine separate
-ones</a>.</p>
-
-  <p>The contributions became more civil this year (at least the ones that were merged):</p>
-
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Length |      Count | Distribution
-------------------------------------------------------------
-     1 |        311 | ██████████████████████████████████████████████████
-     2 |         82 | █████████████
-     3 |         40 | ██████
-     4 |         31 | ████
-     5 |         25 | ████
-     6 |         20 | ███
-     7 |         12 | █
-     8 |          7 | █
-     9 |         12 | █
-    10 |          8 | █
-    11 |          3 |
-    12 |          4 |
-    13 |          4 |
-    14 |          2 |
-    16 |          2 |
-    17 |          1 |
-    18 |          1 |
-    20 |          1 |
-</code></pre></div>  </div>
-
-  <p>(The 20-strong patch series corresponds to
-<a href="https://git.kernel.org/pub/scm/git/git.git/commit/?id=9bdd7ecf7ec90433fc1803bf5d608d08857b3b49">ps/test-wo-perl-prereq</a>.)</p>
-</blockquote>
-
-<p>Thanks, Dscho! If anyone can figure out why the counts are so different between
-the approaches, I’m all ears :)</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="git" /><summary type="html"><![CDATA[I was curious what length of patch series covered most of Git’s accepted patches. Here’s my analysis.]]></summary></entry><entry><title type="html">Packaging git-credential-1password</title><link href="https://benknoble.github.io/blog/2025/11/10/git-credential-1p/" rel="alternate" type="text/html" title="Packaging git-credential-1password" /><published>2025-11-10T00:00:00+00:00</published><updated>2025-11-10T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/11/10/git-credential-1p</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/11/10/git-credential-1p/"><![CDATA[<p>I’m proud to say that
-<a href="https://github.com/benknoble/benknoble-gentoo-overlay/commit/7f705e8db484dda377bfaa22d661ebf46b280ca8">packaging</a>
-this <a href="https://github.com/ethrgeist/git-credential-1password">1password-based credential
-helper</a>, at least for my
-personal overlay, was fairly easy.</p>
-
-<p>The gist was:</p>
-
-<ol>
-  <li>Create an overlay. I did <code class="language-plaintext highlighter-rouge">doas eselect repository create benknoble
-~/code/benknoble-gentoo-overlay</code>, then <code class="language-plaintext highlighter-rouge">git init</code> inside that directory.</li>
-  <li>Write the ebuild.</li>
-  <li>Update the manifest: <code class="language-plaintext highlighter-rouge">pkgdev manifest -d tmp $eb &amp;&amp; rm -r tmp</code></li>
-  <li>Test it: <code class="language-plaintext highlighter-rouge">doas ebuild $eb clean install</code> and verify all looks good</li>
-  <li>Commit and publish</li>
-</ol>
-
-<p>Note that the Portage repository is not sync’able directly this way; it’s “live”
-in the sense that updates are immediately reflected on the system. So I could
-<code class="language-plaintext highlighter-rouge">doas emerge -av --autounmask git-credential-1password</code> even before the last
-step. Meanwhile, <em>users</em> who want the overlay but not to maintain it should use
-a different command listed in the overlay’s README to install the repo.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="gentoo" /><category term="git" /><summary type="html"><![CDATA[I’m proud to say that packaging this 1password-based credential helper, at least for my personal overlay, was fairly easy.]]></summary></entry></feed>
+have manifest information, but they also use the Git eclass for fetching.)</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="gentoo" /><summary type="html"><![CDATA[My Gentoo overlay now contains an ebuild for ZSA’s Keymapp application.]]></summary></entry></feed>
