@@ -1,6 +1,6 @@
 ---
 title: Modelling language or controlling it?
-tags: [ llms ]
+tags: [ llm ]
 category: [ Blog ]
 ---
 

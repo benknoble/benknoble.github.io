@@ -1,6 +1,6 @@
 ---
 title: Chats on LLMs
-tags: [ llms ]
+tags: [ llm ]
 category: [ Blog ]
 ---
 
