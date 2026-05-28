@@ -3,6 +3,10 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "Ben’s dedication to cross-functional success and his ability to bridge the
+  gap between technically complex details and executive communication make him a
+  highly valued team member. Ben is very pleasant to work with and demonstrates
+  an interest in broader team success."
 - "Ben brings passion, drive, and intentionality: he would thrive in a startup"
   ([Sean Gorksy](https://www.linkedin.com/in/sean-gorsky-721aa246/))
 - "Ben shows great ownership and thought leadership in driving and delivering
