@@ -1,4 +1,168 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-06-15T13:08:29+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Modelling language or controlling it?</title><link href="https://benknoble.github.io/blog/2026/05/07/machines-humans/" rel="alternate" type="text/html" title="Modelling language or controlling it?" /><published>2026-05-07T00:00:00+00:00</published><updated>2026-05-07T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/05/07/machines-humans</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/05/07/machines-humans/"><![CDATA[<p>Machines should bend to suit humans (centaurs), not humans bend to suit machines
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-06-23T13:02:16+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Improving Git Search Performance</title><link href="https://benknoble.github.io/blog/2026/06/23/git-log-S-performance/" rel="alternate" type="text/html" title="Improving Git Search Performance" /><published>2026-06-23T00:00:00+00:00</published><updated>2026-06-23T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/06/23/git-log-S-performance</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/06/23/git-log-S-performance/"><![CDATA[<p>In reply to <a href="https://alexharri.com/blog/searching-and-navigating-git-commits">Searching for and navigating Git commits</a>.</p>
+
+<p>The below advice on performance applies equally to <code class="language-plaintext highlighter-rouge">git log</code>’s other search
+modes (<code class="language-plaintext highlighter-rouge">--grep</code>, <code class="language-plaintext highlighter-rouge">-G</code>) and to <code class="language-plaintext highlighter-rouge">git grep</code>, though I’ve never found <code class="language-plaintext highlighter-rouge">git grep</code> to
+be slow.</p>
+
+<p>Alex Harri wrote an excellent piece explaining how they often need more context
+when examining a piece of code, and Git provides tools for recovering that
+context.</p>
+
+<p>Towards the end, they wrote:</p>
+
+<blockquote>
+  <p>If your codebase is significantly larger, you may run into performance
+bottlenecks. If you do, I’d love to hear how you work around them!</p>
+</blockquote>
+
+<p>This is my reply.</p>
+
+<h2 id="performance-advice">Performance advice</h2>
+
+<p>My typical advice is to narrow the search scope:</p>
+
+<ul>
+  <li>give some pathspecs to the log (<code class="language-plaintext highlighter-rouge">git log -S&lt;text&gt; -- path spec …</code>); use <code class="language-plaintext highlighter-rouge">git
+grep</code> or your knowledge of the architecture to suggest useful areas</li>
+  <li>limit with date options (<code class="language-plaintext highlighter-rouge">--since</code>, <code class="language-plaintext highlighter-rouge">--until</code>)</li>
+  <li>limit by author or committer</li>
+  <li>limit by revision range (e.g., <code class="language-plaintext highlighter-rouge">vX..vX+1</code> if the feature was introduced in
+<code class="language-plaintext highlighter-rouge">vX+1</code>)</li>
+  <li>turn off any external diffing or text conversions you might have configured
+(<code class="language-plaintext highlighter-rouge">--no-ext-diff</code>, <code class="language-plaintext highlighter-rouge">--no-textconv</code>)</li>
+</ul>
+
+<p>Or, we can do the equivalent of <code class="language-plaintext highlighter-rouge">git log -S&lt;text&gt; --oneline | head -n1</code> and then
+feed the preimage and pathspec of the “interesting bits” back into <code class="language-plaintext highlighter-rouge">-S</code>,
+assuming the first hit is useful.</p>
+
+<p>Of course all of these limit the search, so therefore risk missing things that
+are interesting. But they are typically orders of magnitude faster, depending on
+how much you cut away in scope.</p>
+
+<h2 id="example">Example</h2>
+
+<p>A somewhat toy example I use at work to demonstrate the speedup is the Vim
+source code; compare performance of</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log -S term_list
+git log -S term_list v8.0.0000..v9.0.0000
+git log -S term_list -- src/{evalfunc,terminal}.c
+git log -S term_list v8.0.0000..v9.0.0000 -- src/{evalfunc,terminal}.c
+</code></pre></div></div>
+
+<p>I happened to be looking for the introduction of a feature (the <code class="language-plaintext highlighter-rouge">term_list()</code>
+function); my first search above was too slow. I narrowed by knowing that it was
+released sometime between Vim 8 (8.1 was the first release with <code class="language-plaintext highlighter-rouge">:terminal</code>) and
+Vim 9, so I cast a somewhat wide net of revisions. In hindsight, limiting
+between Vim 8 and Vim 8.1 would have been much faster. I also could see from
+<code class="language-plaintext highlighter-rouge">git grep term_list</code> that the relevant definitions were limited to 2 source
+files.</p>
+
+<p>On my older machine, here’s some information about my current checkout of Vim:</p>
+
+<ul>
+  <li>Commit: d167c50de4 (patch 9.2.0707: completion: popup misplaced when text before it is concealed, 2026-06-22)</li>
+  <li>I have Vim’s history grafted on <a href="https://github.com/vim/vim-history#merge-the-whole-history">as described in the vim-history repository</a></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git repo structure --format=table</code></p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  | Repository structure | Value      |
+  | -------------------- | ---------- |
+  | * References         |            |
+  |   * Count            |  22.04 k   |
+  |     * Branches       |      2     |
+  |     * Tags           |  21.50 k   |
+  |     * Remotes        |    340     |
+  |     * Others         |    199     |
+  |                      |            |
+  | * Reachable objects  |            |
+  |   * Count            | 265.87 k   |
+  |     * Commits        |  26.54 k   |
+  |     * Trees          |  87.25 k   |
+  |     * Blobs          | 148.92 k   |
+  |     * Tags           |   3.17 k   |
+  |   * Inflated size    |  11.33 GiB |
+  |     * Commits        |  16.16 MiB |
+  |     * Trees          | 567.11 MiB |
+  |     * Blobs          |  10.76 GiB |
+  |     * Tags           |   2.95 MiB |
+  |   * Disk size        | 344.03 MiB |
+  |     * Commits        |  10.97 MiB |
+  |     * Trees          |  27.90 MiB |
+  |     * Blobs          | 302.83 MiB |
+  |     * Tags           |   2.32 MiB |
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git repo info --all</code></p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  layout.bare=false
+  layout.shallow=false
+  object.format=sha1
+  references.format=files
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>(I haven’t tried to see if converting to reftables are more performant for these
+searches, but I somehow doubt it unless you’re giving <code class="language-plaintext highlighter-rouge">--all</code> to <code class="language-plaintext highlighter-rouge">git log</code>,
+which would broaden the scope, not limit it.)</p>
+
+<p>I have Git’s automatic maintenance enabled, so most objects are packed (346
+loose objects; 139 info and pack files, including a multi-pack-index and commit
+graph).</p>
+
+<h3 id="timing">Timing</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>benchmarks=(
+    # 'git log -S term_list'
+    # too slow!
+    'git log -S term_list v8.0.0000..v9.0.0000'
+    'git log -S term_list -- src/{evalfunc,terminal}.c'
+    'git log -S term_list v8.0.0000..v9.0.0000 -- src/{evalfunc,terminal}.c'
+)
+hyperfine "${benchmarks[@]}"
+
+Benchmark 1: git log -S term_list v8.0.0000..v9.0.0000
+  Time (mean ± σ):     17.536 s ±  0.138 s    [User: 14.442 s, System: 3.065 s]
+  Range (min … max):   17.435 s … 17.920 s    10 runs
+
+Benchmark 2: git log -S term_list -- src/{evalfunc,terminal}.c
+  Time (mean ± σ):      1.872 s ±  0.002 s    [User: 1.758 s, System: 0.106 s]
+  Range (min … max):    1.868 s …  1.875 s    10 runs
+
+Benchmark 3: git log -S term_list v8.0.0000..v9.0.0000 -- src/{evalfunc,terminal}.c
+  Time (mean ± σ):      1.009 s ±  0.005 s    [User: 0.926 s, System: 0.077 s]
+  Range (min … max):    1.002 s …  1.018 s    10 runs
+
+Summary
+  git log -S term_list v8.0.0000..v9.0.0000 -- src/{evalfunc,terminal}.c ran
+    1.86 ± 0.01 times faster than git log -S term_list -- src/{evalfunc,terminal}.c
+   17.38 ± 0.16 times faster than git log -S term_list v8.0.0000..v9.0.0000
+</code></pre></div></div>
+
+<p>And using the hindsight to limit to Vim 8.1:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Benchmark 1: git log -S term_list v8.0.0000..v8.1.0000
+  Time (mean ± σ):      2.720 s ±  0.091 s    [User: 2.265 s, System: 0.437 s]
+  Range (min … max):    2.650 s …  2.891 s    10 runs
+
+Benchmark 2: git log -S term_list -- src/{evalfunc,terminal}.c
+  Time (mean ± σ):      1.923 s ±  0.039 s    [User: 1.802 s, System: 0.112 s]
+  Range (min … max):    1.894 s …  2.008 s    10 runs
+
+Benchmark 3: git log -S term_list v8.0.0000..v8.1.0000 -- src/{evalfunc,terminal}.c
+  Time (mean ± σ):     228.3 ms ±   2.8 ms    [User: 201.4 ms, System: 22.6 ms]
+  Range (min … max):   224.8 ms … 232.1 ms    12 runs
+
+Summary
+  git log -S term_list v8.0.0000..v8.1.0000 -- src/{evalfunc,terminal}.c ran
+    8.42 ± 0.20 times faster than git log -S term_list -- src/{evalfunc,terminal}.c
+   11.91 ± 0.42 times faster than git log -S term_list v8.0.0000..v8.1.0000
+</code></pre></div></div>
+
+<p>Sub-second results for the fully limited version!</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><summary type="html"><![CDATA[In reply to Searching for and navigating Git commits.]]></summary></entry><entry><title type="html">Modelling language or controlling it?</title><link href="https://benknoble.github.io/blog/2026/05/07/machines-humans/" rel="alternate" type="text/html" title="Modelling language or controlling it?" /><published>2026-05-07T00:00:00+00:00</published><updated>2026-05-07T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/05/07/machines-humans</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/05/07/machines-humans/"><![CDATA[<p>Machines should bend to suit humans (centaurs), not humans bend to suit machines
 (reverse centaurs).</p>
 
 <ul>
@@ -720,16 +884,4 @@ software</a>, the balance of
 power, <a href="https://www.noemamag.com/the-politics-of-superintelligence/">LLMs as political
 tool</a>, and trusting
 fellow humans quite a bit. I find the manifesto a compelling tool for
-establishing core values for software design. More to come…</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="design" /><category term="critic" /><category term="llm" /><category term="privacy" /><summary type="html"><![CDATA[I signed the Resonant Computing Manifesto today. I encourage you to consider your own core values and, if they align, consider signing.]]></summary></entry><entry><title type="html">Packaged ZSA Keymapp for Gentoo</title><link href="https://benknoble.github.io/blog/2025/12/08/zsa-keymapp/" rel="alternate" type="text/html" title="Packaged ZSA Keymapp for Gentoo" /><published>2025-12-08T00:00:00+00:00</published><updated>2025-12-08T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/12/08/zsa-keymapp</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/12/08/zsa-keymapp/"><![CDATA[<p>My <a href="https://github.com/benknoble/benknoble-gentoo-overlay">Gentoo overlay</a> now
-contains an ebuild for ZSA’s Keymapp application.</p>
-
-<p>The licensing situation is unclear, so I’ve marked it “unknown” for now. In
-addition, the ebuild is “live” (so only rebuilds with <code class="language-plaintext highlighter-rouge">emerge @live-rebuild</code>);
-ZSA doesn’t publish versioned archives, as far as I can tell, so we can only
-grab the latest. In spite of being version 9999, the ebuild is not actually live
-in the sense of <code class="language-plaintext highlighter-rouge">@live-rebuild</code>. Strange.</p>
-
-<p>When the archive has actually been updated, I’ll have to use <code class="language-plaintext highlighter-rouge">ebuild $(equery w
-zsa-keymapp) manifest</code> or similar to update the Manifest. (For some reason,
-<code class="language-plaintext highlighter-rouge">pkgdev</code> didn’t work on this one? And a couple of live ebuilds I checked don’t
-have manifest information, but they also use the Git eclass for fetching.)</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="gentoo" /><summary type="html"><![CDATA[My Gentoo overlay now contains an ebuild for ZSA’s Keymapp application.]]></summary></entry></feed>
+establishing core values for software design. More to come…</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="design" /><category term="critic" /><category term="llm" /><category term="privacy" /><summary type="html"><![CDATA[I signed the Resonant Computing Manifesto today. I encourage you to consider your own core values and, if they align, consider signing.]]></summary></entry></feed>

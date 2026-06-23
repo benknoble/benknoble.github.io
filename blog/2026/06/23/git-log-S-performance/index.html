@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Improving Git Search Performance</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#c6eafa">
+  <meta name="theme-color" content="#c6eafa">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <p>
+      I stand for the Constitution, for due process, and for community that
+      takes care of each other.
+      </p>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Improving Git Search Performance</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 23 Jun 2026 in Blog</p>
+<div id="post">
+  <p>In reply to <a href="https://alexharri.com/blog/searching-and-navigating-git-commits">Searching for and navigating Git commits</a>.</p>
+
+<p>The below advice on performance applies equally to <code class="language-plaintext highlighter-rouge">git log</code>’s other search
+modes (<code class="language-plaintext highlighter-rouge">--grep</code>, <code class="language-plaintext highlighter-rouge">-G</code>) and to <code class="language-plaintext highlighter-rouge">git grep</code>, though I’ve never found <code class="language-plaintext highlighter-rouge">git grep</code> to
+be slow.</p>
+
+<p>Alex Harri wrote an excellent piece explaining how they often need more context
+when examining a piece of code, and Git provides tools for recovering that
+context.</p>
+
+<p>Towards the end, they wrote:</p>
+
+<blockquote>
+  <p>If your codebase is significantly larger, you may run into performance
+bottlenecks. If you do, I’d love to hear how you work around them!</p>
+</blockquote>
+
+<p>This is my reply.</p>
+
+<h2 id="performance-advice">Performance advice</h2>
+
+<p>My typical advice is to narrow the search scope:</p>
+
+<ul>
+  <li>give some pathspecs to the log (<code class="language-plaintext highlighter-rouge">git log -S&lt;text&gt; -- path spec …</code>); use <code class="language-plaintext highlighter-rouge">git
+grep</code> or your knowledge of the architecture to suggest useful areas</li>
+  <li>limit with date options (<code class="language-plaintext highlighter-rouge">--since</code>, <code class="language-plaintext highlighter-rouge">--until</code>)</li>
+  <li>limit by author or committer</li>
+  <li>limit by revision range (e.g., <code class="language-plaintext highlighter-rouge">vX..vX+1</code> if the feature was introduced in
+<code class="language-plaintext highlighter-rouge">vX+1</code>)</li>
+  <li>turn off any external diffing or text conversions you might have configured
+(<code class="language-plaintext highlighter-rouge">--no-ext-diff</code>, <code class="language-plaintext highlighter-rouge">--no-textconv</code>)</li>
+</ul>
+
+<p>Or, we can do the equivalent of <code class="language-plaintext highlighter-rouge">git log -S&lt;text&gt; --oneline | head -n1</code> and then
+feed the preimage and pathspec of the “interesting bits” back into <code class="language-plaintext highlighter-rouge">-S</code>,
+assuming the first hit is useful.</p>
+
+<p>Of course all of these limit the search, so therefore risk missing things that
+are interesting. But they are typically orders of magnitude faster, depending on
+how much you cut away in scope.</p>
+
+<h2 id="example">Example</h2>
+
+<p>A somewhat toy example I use at work to demonstrate the speedup is the Vim
+source code; compare performance of</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log -S term_list
+git log -S term_list v8.0.0000..v9.0.0000
+git log -S term_list -- src/{evalfunc,terminal}.c
+git log -S term_list v8.0.0000..v9.0.0000 -- src/{evalfunc,terminal}.c
+</code></pre></div></div>
+
+<p>I happened to be looking for the introduction of a feature (the <code class="language-plaintext highlighter-rouge">term_list()</code>
+function); my first search above was too slow. I narrowed by knowing that it was
+released sometime between Vim 8 (8.1 was the first release with <code class="language-plaintext highlighter-rouge">:terminal</code>) and
+Vim 9, so I cast a somewhat wide net of revisions. In hindsight, limiting
+between Vim 8 and Vim 8.1 would have been much faster. I also could see from
+<code class="language-plaintext highlighter-rouge">git grep term_list</code> that the relevant definitions were limited to 2 source
+files.</p>
+
+<p>On my older machine, here’s some information about my current checkout of Vim:</p>
+
+<ul>
+  <li>Commit: d167c50de4 (patch 9.2.0707: completion: popup misplaced when text before it is concealed, 2026-06-22)</li>
+  <li>I have Vim’s history grafted on <a href="https://github.com/vim/vim-history#merge-the-whole-history">as described in the vim-history repository</a>
+</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git repo structure --format=table</code></p>
+
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  | Repository structure | Value      |
+  | -------------------- | ---------- |
+  | * References         |            |
+  |   * Count            |  22.04 k   |
+  |     * Branches       |      2     |
+  |     * Tags           |  21.50 k   |
+  |     * Remotes        |    340     |
+  |     * Others         |    199     |
+  |                      |            |
+  | * Reachable objects  |            |
+  |   * Count            | 265.87 k   |
+  |     * Commits        |  26.54 k   |
+  |     * Trees          |  87.25 k   |
+  |     * Blobs          | 148.92 k   |
+  |     * Tags           |   3.17 k   |
+  |   * Inflated size    |  11.33 GiB |
+  |     * Commits        |  16.16 MiB |
+  |     * Trees          | 567.11 MiB |
+  |     * Blobs          |  10.76 GiB |
+  |     * Tags           |   2.95 MiB |
+  |   * Disk size        | 344.03 MiB |
+  |     * Commits        |  10.97 MiB |
+  |     * Trees          |  27.90 MiB |
+  |     * Blobs          | 302.83 MiB |
+  |     * Tags           |   2.32 MiB |
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git repo info --all</code></p>
+
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  layout.bare=false
+  layout.shallow=false
+  object.format=sha1
+  references.format=files
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>(I haven’t tried to see if converting to reftables are more performant for these
+searches, but I somehow doubt it unless you’re giving <code class="language-plaintext highlighter-rouge">--all</code> to <code class="language-plaintext highlighter-rouge">git log</code>,
+which would broaden the scope, not limit it.)</p>
+
+<p>I have Git’s automatic maintenance enabled, so most objects are packed (346
+loose objects; 139 info and pack files, including a multi-pack-index and commit
+graph).</p>
+
+<h3 id="timing">Timing</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>benchmarks=(
+    # 'git log -S term_list'
+    # too slow!
+    'git log -S term_list v8.0.0000..v9.0.0000'
+    'git log -S term_list -- src/{evalfunc,terminal}.c'
+    'git log -S term_list v8.0.0000..v9.0.0000 -- src/{evalfunc,terminal}.c'
+)
+hyperfine "${benchmarks[@]}"
+
+Benchmark 1: git log -S term_list v8.0.0000..v9.0.0000
+  Time (mean ± σ):     17.536 s ±  0.138 s    [User: 14.442 s, System: 3.065 s]
+  Range (min … max):   17.435 s … 17.920 s    10 runs
+
+Benchmark 2: git log -S term_list -- src/{evalfunc,terminal}.c
+  Time (mean ± σ):      1.872 s ±  0.002 s    [User: 1.758 s, System: 0.106 s]
+  Range (min … max):    1.868 s …  1.875 s    10 runs
+
+Benchmark 3: git log -S term_list v8.0.0000..v9.0.0000 -- src/{evalfunc,terminal}.c
+  Time (mean ± σ):      1.009 s ±  0.005 s    [User: 0.926 s, System: 0.077 s]
+  Range (min … max):    1.002 s …  1.018 s    10 runs
+
+Summary
+  git log -S term_list v8.0.0000..v9.0.0000 -- src/{evalfunc,terminal}.c ran
+    1.86 ± 0.01 times faster than git log -S term_list -- src/{evalfunc,terminal}.c
+   17.38 ± 0.16 times faster than git log -S term_list v8.0.0000..v9.0.0000
+</code></pre></div></div>
+
+<p>And using the hindsight to limit to Vim 8.1:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Benchmark 1: git log -S term_list v8.0.0000..v8.1.0000
+  Time (mean ± σ):      2.720 s ±  0.091 s    [User: 2.265 s, System: 0.437 s]
+  Range (min … max):    2.650 s …  2.891 s    10 runs
+
+Benchmark 2: git log -S term_list -- src/{evalfunc,terminal}.c
+  Time (mean ± σ):      1.923 s ±  0.039 s    [User: 1.802 s, System: 0.112 s]
+  Range (min … max):    1.894 s …  2.008 s    10 runs
+
+Benchmark 3: git log -S term_list v8.0.0000..v8.1.0000 -- src/{evalfunc,terminal}.c
+  Time (mean ± σ):     228.3 ms ±   2.8 ms    [User: 201.4 ms, System: 22.6 ms]
+  Range (min … max):   224.8 ms … 232.1 ms    12 runs
+
+Summary
+  git log -S term_list v8.0.0000..v8.1.0000 -- src/{evalfunc,terminal}.c ran
+    8.42 ± 0.20 times faster than git log -S term_list -- src/{evalfunc,terminal}.c
+   11.91 ± 0.42 times faster than git log -S term_list v8.0.0000..v8.1.0000
+</code></pre></div></div>
+
+<p>Sub-second results for the fully limited version!</p>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2026/06/23/git-log-S-performance/";
+    this.page.identifier = "/blog/2026/06/23/git-log-S-performance";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2026/05/07/machines-humans/" title="Modelling language or controlling it?">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#improving-git-search-performance">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <a href="https://www.goatcounter.com">No personal information collected</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+  <script type="text/javascript">
+    // Source: https://stackoverflow.com/a/8876069/4400820
+    // Posted by ryanve, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-03-05, License - CC BY-SA 4.0
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    // End StackOverflow snippet
+
+    // see assets/css/styles.scss:/@media
+    const num_games = vw > 740 ? 10 : 3
+
+    document.write(`
+      <script type="text/javascript" src="https://boardgamegeek.com/jswidget.php?username=benkenobli&numitems=${num_games}&header=1&text=none&images=small&show=recentplays&imagesonly=1&imagepos=center&inline=1&addstyles=1&domains%5B%5D=boardgame"></` + `script>`)
+  </script>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script data-goatcounter="https://benknoble_github_io.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+  </body>
+</html>
