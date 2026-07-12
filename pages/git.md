@@ -22,3 +22,7 @@ pages/tags.html %}#git), and many of them link out to others.
 - [How Git learned to deal better with timestamps](https://stackoverflow.com/a/71003895/4400820)
 - [Racy Git "magic"](https://tylercipriani.com/blog/2023/11/30/racy-git/)
 - [The Git index race condition](http://www-cs-students.stanford.edu/~blynn/gg/race.html)
+
+## Communication
+
+- [Communicating in Pull Requests](https://stolee.dev/2025/12/31/pr-communication)
