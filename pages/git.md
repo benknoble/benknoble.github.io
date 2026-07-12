@@ -14,6 +14,7 @@ pages/tags.html %}#git), and many of them link out to others.
 
 - [GitHub, Gerrit, & Commits](https://tylercipriani.com/blog/2019/03/11/of-git-commits-github-and-gerrit/)
 - [GitHub's Code Review History](https://tylercipriani.com/blog/2024/08/31/the-pull-request/)
+- 2026 Performance: [github and the crime against software](https://eblog.fly.dev/githubbad.html)
 
 ## Racy Git
 
