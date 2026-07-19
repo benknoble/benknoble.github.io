@@ -1,4 +1,235 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-07-12T18:35:00+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Improving Git Search Performance</title><link href="https://benknoble.github.io/blog/2026/06/23/git-log-S-performance/" rel="alternate" type="text/html" title="Improving Git Search Performance" /><published>2026-06-23T00:00:00+00:00</published><updated>2026-06-23T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/06/23/git-log-S-performance</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/06/23/git-log-S-performance/"><![CDATA[<p>In reply to <a href="https://alexharri.com/blog/searching-and-navigating-git-commits">Searching for and navigating Git commits</a>.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-07-19T16:32:31+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">NetworkManager resetting hostname to localhost.localdomain</title><link href="https://benknoble.github.io/blog/2026/07/19/networkmanager/" rel="alternate" type="text/html" title="NetworkManager resetting hostname to localhost.localdomain" /><published>2026-07-19T00:00:00+00:00</published><updated>2026-07-19T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/07/19/networkmanager</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/07/19/networkmanager/"><![CDATA[<p>I explain (as best I can) how I figured out what screwed up my machine’s
+hostname the day before a vacation.</p>
+
+<p>July 8th, I’m getting ready to be out of town, and doing a few updates to my
+daily driver (beefy PC running Gentoo). There’s a kernel update available, and I
+want to reboot and make sure everything comes up so it will be accessible via
+TailScale while I’m out of town.</p>
+
+<p>Imagine my surprise when the reboot shows the hostname as <code class="language-plaintext highlighter-rouge">localhost</code>!</p>
+
+<p>Well, that’s odd, I think—must be the new kernel. So I reboot and use GRUB to
+load the previous kernel, which I of course still have around. No change, big
+scary. And of course, after launching X and trying to reset the hostname
+manually, things break even worse. Uh oh, my desktop is broken too? I can’t
+start new programs? What is going on?</p>
+
+<p>This feels like a <em>really</em> bad upgrade.</p>
+
+<hr />
+
+<p>I spent a few hours poking around, assuming that my desktop issues and my
+hostname issues were separate. I even figured maybe TailScale was futzing it up
+somehow, so I tried booting with that disabled—no luck. I had dinner plans
+with my family, though, so I had to give up and leave (machine powered down).</p>
+
+<p>While there, I realized my best shot was to revert all the updates I had done
+and slowly try to narrow down which update broke things. I could of course
+restore from the prior night’s backup, but… I’d spent the morning setting up
+Wine to run an old childhood favorite (I Spy Spooky Mansion), and I didn’t want
+to have to redo that work. So, I really wanted to try downgrading first.</p>
+
+<p>When I got home, I set out to do that, eyeballing the <code class="language-plaintext highlighter-rouge">qlop</code> output:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>qlop <span class="nt">-d</span> 2026-07-07 <span class="nt">-d</span> 2026-07-09 <span class="nt">-E</span>
+N    app-emulation/wine-gecko-2.47.4
+N    app-emulation/wine-mono-10.4.1
+N    app-eselect/eselect-wine-2.0.2-r2
+N    sys-libs/libunwind-1.8.3
+N    app-emulation/wine-desktop-common-20150204-r2
+N    dev-util/mingw64-toolchain-14.0.0
+N    app-emulation/wine-vanilla-11.0
+  U  dev-libs/vala-common-0.56.19 <span class="o">[</span>0.56.18]
+  U  dev-libs/libunistring-1.4.2 <span class="o">[</span>1.3]
+  U  sys-apps/sandbox-2.49 <span class="o">[</span>2.46]
+  U  dev-libs/gobject-introspection-common-1.86.0 <span class="o">[</span>1.84.0]
+  U  app-containers/containerd-2.2.5-r1 <span class="o">[</span>2.2.2-r1]
+  U  app-admin/eselect-1.4.32 <span class="o">[</span>1.4.31]
+N    media-libs/libid3tag-0.16.4
+  U  kde-frameworks/extra-cmake-modules-6.27.0 <span class="o">[</span>6.25.0]
+  U  app-eselect/eselect-lua-4-r3 <span class="o">[</span>4-r2]
+N    dev-libs/snowball-stemmer-3.1.1
+N    dev-cpp/simdutf-9.0.0
+  U  dev-python/snakeoil-0.11.1 <span class="o">[</span>0.11.0]
+  U  sys-apps/portage-3.0.81.1 <span class="o">[</span>3.0.79-r1]
+N    dev-util/glib-utils-2.88.2
+N    sys-apps/pkgcore-0.12.35
+N    sys-kernel/gentoo-kernel-6.18.37_p1
+ R   net-libs/nodejs-24.14.0
+N    virtual/dist-kernel-6.18.37_p1
+  U  dev-util/pkgcheck-0.10.40-r1 <span class="o">[</span>0.10.39-r1]
+  U  dev-libs/glib-2.88.2 <span class="o">[</span>2.84.4-r5]
+  U  dev-util/gdbus-codegen-2.88.2 <span class="o">[</span>2.84.4]
+  U  app-text/enchant-2.8.16 <span class="o">[</span>2.8.12]
+  U  dev-libs/gobject-introspection-1.86.0 <span class="o">[</span>1.84.0-r2]
+  U  sys-apps/hwloc-2.12.2 <span class="o">[</span>2.11.2-r1]
+  U  net-print/cups-2.4.19 <span class="o">[</span>2.4.16]
+  U  dev-lang/vala-0.56.19 <span class="o">[</span>0.56.18]
+  U  dev-python/pygobject-3.56.3 <span class="o">[</span>3.50.1]
+  U  x11-libs/pango-1.57.1 <span class="o">[</span>1.57.0]
+  U  gnome-base/librsvg-2.62.2-r1 <span class="o">[</span>2.60.0]
+ R   media-libs/imlib2-1.12.6
+  U  x11-libs/gtk+-3.24.52 <span class="o">[</span>3.24.51]
+N    gui-libs/qt-color-widgets-3.0.0
+N    dev-libs/appstream-1.0.6
+N    kde-frameworks/kguiaddons-6.27.0
+N    kde-frameworks/threadweaver-6.27.0
+N    kde-frameworks/ksecretd-services-6.27.0
+N    kde-frameworks/ki18n-6.27.0
+N    kde-frameworks/kcoreaddons-6.27.0
+N    kde-frameworks/kconfig-6.27.0
+N    kde-frameworks/karchive-6.27.0
+N    kde-frameworks/kcodecs-6.27.0
+N    kde-frameworks/kitemviews-6.27.0
+N    kde-frameworks/kdbusaddons-6.27.0
+N    kde-frameworks/breeze-icons-6.27.0
+N    kde-frameworks/kwindowsystem-6.27.0
+N    kde-frameworks/kglobalaccel-6.27.0
+N    kde-frameworks/kwidgetsaddons-6.27.0
+N    kde-frameworks/sonnet-6.27.0
+N    kde-frameworks/solid-6.27.0
+N    kde-frameworks/kirigami-6.27.0
+  U  net-misc/networkmanager-1.56.0 <span class="o">[</span>1.52.1]
+  U  media-video/pipewire-1.6.7 <span class="o">[</span>1.6.4]
+  U  net-libs/webkit-gtk-2.52.3-r411 <span class="o">[</span>2.50.5-r410]
+N    kde-frameworks/kcrash-6.27.0
+N    kde-apps/libkexiv2-26.04.3
+N    kde-frameworks/kcolorscheme-6.27.0
+N    kde-frameworks/kcompletion-6.27.0
+N    media-gfx/flameshot-13.3.0
+N    kde-frameworks/kpty-6.27.0
+N    kde-frameworks/kdoctools-6.27.0
+  U  kde-frameworks/kimageformats-6.27.0 <span class="o">[</span>6.25.0]
+  U  media-video/wireplumber-0.5.15 <span class="o">[</span>0.5.14]
+  U  kde-frameworks/knotifications-6.27.0 <span class="o">[</span>6.25.0]
+N    kde-frameworks/kservice-6.27.0
+N    kde-frameworks/ktextwidgets-6.27.0
+N    kde-frameworks/kjobwidgets-6.27.0
+N    kde-frameworks/kconfigwidgets-6.27.0
+  U  kde-frameworks/kiconthemes-6.27.0 <span class="o">[</span>6.25.0]
+N    www-client/firefox-bin-152.0.5
+N    kde-frameworks/kded-6.27.0
+N    kde-frameworks/kbookmarks-6.27.0
+N    kde-frameworks/kxmlgui-6.27.0
+  U  kde-frameworks/kwallet-6.27.0 <span class="o">[</span>6.25.0]
+  U  kde-frameworks/kwallet-runtime-6.27.0 <span class="o">[</span>6.25.0]
+  U  kde-frameworks/kio-6.27.0 <span class="o">[</span>6.25.0]
+  U  kde-frameworks/kparts-6.27.0 <span class="o">[</span>6.25.0]
+  U  kde-frameworks/kcmutils-6.27.0 <span class="o">[</span>6.25.0]
+  U  kde-apps/okular-26.04.3 <span class="o">[</span>26.04.1]
+</code></pre></div></div>
+
+<p>Something interesting stood out: NetworkManager.</p>
+
+<p>The <a href="https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/main/NEWS?ref_type=heads">NEWS file for
+NetworkManager</a>
+didn’t hint at significant changes in hostname settings, though. A little
+internet searching brought me to <a href="https://networkmanager.dev/blog/addressing-hostname-assignment-in-networkmanager-1-40/">a blog post about v1.40 and a similar
+issue</a>,
+which definitely felt like the right track! Only, I’ve been running 1.52.1 for
+the (admittedly short: not quite 12 months yet) lifetime of the machine, and the
+upgrade was to 1.56.0!</p>
+
+<p>Anyway, that article also pointed me towards GLib, which I noticed had a few
+updates as well:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  U  dev-libs/glib-2.88.2 [2.84.4-r5]
+  U  dev-util/gdbus-codegen-2.88.2 [2.84.4]
+</code></pre></div></div>
+
+<p>(Once again nothing in the <a href="https://gitlab.gnome.org/GNOME/glib/-/blob/main/NEWS?ref_type=heads">NEWS
+file</a> stood
+out.)</p>
+
+<p>So, I next tried downgrading only those packages (more <code class="language-plaintext highlighter-rouge">qlop</code> output):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  UD net-misc/networkmanager-1.52.1 [1.56.0]
+  UD dev-libs/glib-2.84.4-r5 [2.88.2]
+  UD dev-util/gdbus-codegen-2.84.4 [2.88.2]
+</code></pre></div></div>
+
+<p>Absolutely no change (with either kernel)! Agh!</p>
+
+<p>At some point in this process, I decided to narrow down the desktop issue, and I
+discovered that programs wouldn’t start on the desktop if the hostname didn’t
+match what it was when the X server started. I can’t 100% explain this (is it
+because X is network aware? Because of DBus addresses?), but it did give me hope
+that solving this hostname would fix everything else.</p>
+
+<p>Now that I knew NetworkManager was a likely culprit, too, I went back to logs
+with a more useful query than <code class="language-plaintext highlighter-rouge">localhost</code> or <code class="language-plaintext highlighter-rouge">hostname</code>. And I noticed something
+a bit suspicious:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/var/log/syslog:Jul  8 20:59:51 merguez NetworkManager[1966]: &lt;info&gt;  [1783558791.7113] hostname: static hostname changed from (none) to "localhost"
+</code></pre></div></div>
+
+<p>First: why is it being changed? Second, why does it say “(none)” as the old
+value?</p>
+
+<p>Even more worrying, this has been happening for a long while:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>zgrep <span class="s1">'to "localhost'</span> /var/log/syslog<span class="k">*</span>
+/var/log/syslog:Jul  8 20:59:51 merguez NetworkManager[1966]: &lt;info&gt;  <span class="o">[</span>1783558791.7113] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog:Jul  8 21:09:06 merguez NetworkManager[15809]: &lt;info&gt;  <span class="o">[</span>1783559346.0807] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog:Jul  8 21:32:41 merguez NetworkManager[15809]: &lt;info&gt;  <span class="o">[</span>1783560761.1627] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="s2">"merguez"</span> to <span class="s2">"localhost"</span>
+/var/log/syslog:Jul  8 21:35:40 merguez NetworkManager[46052]: &lt;info&gt;  <span class="o">[</span>1783560940.6739] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog:Jul  8 21:38:50 merguez NetworkManager[60328]: &lt;info&gt;  <span class="o">[</span>1783561130.4501] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog:Jul  8 21:40:15 merguez NetworkManager[2049]: &lt;info&gt;  <span class="o">[</span>1783561215.0657] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:May 10 10:58:15 merguez NetworkManager[1980]: &lt;info&gt;  <span class="o">[</span>1778425095.8529] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:May 15 15:58:44 merguez NetworkManager[2062]: &lt;info&gt;  <span class="o">[</span>1778875124.9800] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:Jun  4 17:10:13 merguez NetworkManager[2029]: &lt;info&gt;  <span class="o">[</span>1780607413.9324] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:Jun  8 14:22:36 merguez NetworkManager[1992]: &lt;info&gt;  <span class="o">[</span>1780942956.6790] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:Jun  8 15:31:16 merguez NetworkManager[1982]: &lt;info&gt;  <span class="o">[</span>1780947076.9328] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:Jun 19 10:22:04 merguez NetworkManager[2247]: &lt;info&gt;  <span class="o">[</span>1781878924.8232] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:Jun 21 13:39:01 merguez NetworkManager[2027]: &lt;info&gt;  <span class="o">[</span>1782063542.0005] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:Jun 27 20:42:37 merguez NetworkManager[2228]: &lt;info&gt;  <span class="o">[</span>1782607357.8853] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:Jul  8 18:29:06 merguez NetworkManager[2051]: &lt;info&gt;  <span class="o">[</span>1783549746.1208] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:Jul  8 18:33:03 merguez NetworkManager[7510]: &lt;info&gt;  <span class="o">[</span>1783549983.6724] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:Jul  8 18:34:00 merguez NetworkManager[1960]: &lt;info&gt;  <span class="o">[</span>1783550040.8156] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:Jul  8 18:44:49 merguez NetworkManager[2036]: &lt;info&gt;  <span class="o">[</span>1783550689.9128] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.0:Jul  8 18:47:33 merguez NetworkManager[1974]: &lt;info&gt;  <span class="o">[</span>1783550853.7683] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.1.gz:Mar 26 12:55:06 merguez NetworkManager[2078]: &lt;info&gt;  <span class="o">[</span>1774544106.9472] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.1.gz:Apr 27 17:25:16 merguez NetworkManager[1998]: &lt;info&gt;  <span class="o">[</span>1777325116.8897] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.1.gz:May  4 16:43:30 merguez NetworkManager[2002]: &lt;info&gt;  <span class="o">[</span>1777927410.6758] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.1.gz:May  4 17:06:04 merguez NetworkManager[1977]: &lt;info&gt;  <span class="o">[</span>1777928764.7400] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.1.gz:May  5 19:58:40 merguez NetworkManager[1995]: &lt;info&gt;  <span class="o">[</span>1778025520.7352] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.3.gz:Oct  9 15:25:31 merguez NetworkManager[8586]: &lt;info&gt;  <span class="o">[</span>1760037931.7152] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.3.gz:Oct 13 20:48:04 merguez NetworkManager[3631]: &lt;info&gt;  <span class="o">[</span>1760402884.2840] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.3.gz:Oct 17 15:30:24 merguez NetworkManager[13794]: &lt;info&gt;  <span class="o">[</span>1760729424.0976] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+/var/log/syslog.3.gz:Oct 17 15:49:31 merguez NetworkManager[15170]: &lt;info&gt;  <span class="o">[</span>1760730571.1947] <span class="nb">hostname</span>: static <span class="nb">hostname </span>changed from <span class="o">(</span>none<span class="o">)</span> to <span class="s2">"localhost"</span>
+</code></pre></div></div>
+
+<p>But I’ve never <em>actually</em> had the hostname change once OpenRC set it from
+<code class="language-plaintext highlighter-rouge">/etc/hostname</code> until today! What?!</p>
+
+<p>Clearly some combination of recent changes activated the same issues present in
+that blog article, but symptoms had been around for a while. Notably, by
+comparison with <code class="language-plaintext highlighter-rouge">last | grep boot</code>, I knew this wasn’t happening on every boot
+up. How bizarre…</p>
+
+<p>Finally, I stumbled on <a href="https://wiki.gentoo.org/wiki/NetworkManager#Hostname_problems">the Gentoo wiki for
+NetworkManager</a>,
+which gives 2 options:</p>
+
+<ol>
+  <li>Prevent NM from touching the hostname.</li>
+  <li>Duplicate the value in <code class="language-plaintext highlighter-rouge">/etc/hostname</code> to <code class="language-plaintext highlighter-rouge">/etc/conf.d/hostname</code>.</li>
+</ol>
+
+<p>Well, (2) is for the OpenRC script that’s been working successfully all this
+time anyway, so apply (1) and restart NetworkManager. Hoho, it’s no longer
+automatically touching the hostname!</p>
+
+<p>Now, upgrade and restart: still viable. Ok, reboot?</p>
+
+<p>Problems are gone… phew!</p>
+
+<p>The fix looks like this in <code class="language-plaintext highlighter-rouge">/etc/NetworkManager/conf.d/hostname.conf</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[main]
+plugins=keyfile
+hostname-mode=none
+</code></pre></div></div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="linux" /><category term="network" /><summary type="html"><![CDATA[I explain (as best I can) how I figured out what screwed up my machine’s hostname the day before a vacation.]]></summary></entry><entry><title type="html">Improving Git Search Performance</title><link href="https://benknoble.github.io/blog/2026/06/23/git-log-S-performance/" rel="alternate" type="text/html" title="Improving Git Search Performance" /><published>2026-06-23T00:00:00+00:00</published><updated>2026-06-23T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/06/23/git-log-S-performance</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/06/23/git-log-S-performance/"><![CDATA[<p>In reply to <a href="https://alexharri.com/blog/searching-and-navigating-git-commits">Searching for and navigating Git commits</a>.</p>
 
 <p>The below advice on performance applies equally to <code class="language-plaintext highlighter-rouge">git log</code>’s other search
 modes (<code class="language-plaintext highlighter-rouge">--grep</code>, <code class="language-plaintext highlighter-rouge">-G</code>) and to <code class="language-plaintext highlighter-rouge">git grep</code>, though I’ve never found <code class="language-plaintext highlighter-rouge">git grep</code> to
@@ -874,14 +1105,4 @@ other things as I go.</p>
   <li>de-toxifying masculinity</li>
 </ul>
 
-<p>Last Changed: 2026 Apr 19</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="goals" /><summary type="html"><![CDATA[A short, probably sensible-only-to-me list of goals. Timeboxed. I’ll also add other things as I go.]]></summary></entry><entry><title type="html">Core Values in Software</title><link href="https://benknoble.github.io/blog/2025/12/29/resonant-computing/" rel="alternate" type="text/html" title="Core Values in Software" /><published>2025-12-29T00:00:00+00:00</published><updated>2025-12-29T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2025/12/29/resonant-computing</id><content type="html" xml:base="https://benknoble.github.io/blog/2025/12/29/resonant-computing/"><![CDATA[<p>I signed the <a href="https://resonantcomputing.org/">Resonant Computing Manifesto</a>
-today. I encourage you to consider your own core values and, if they align,
-consider signing.</p>
-
-<p>I’m <a href="/workshops/14th-racket-con/">working on an essay</a> (“Why I
-consider myself a modern Luddite”), and I’ve been thinking about <a href="/blog/2025/04/18/skepticism/#situated">situated
-software</a>, the balance of
-power, <a href="https://www.noemamag.com/the-politics-of-superintelligence/">LLMs as political
-tool</a>, and trusting
-fellow humans quite a bit. I find the manifesto a compelling tool for
-establishing core values for software design. More to come…</p>]]></content><author><name>D. Ben Knoble</name></author><category term="Blog" /><category term="design" /><category term="critic" /><category term="llm" /><category term="privacy" /><summary type="html"><![CDATA[I signed the Resonant Computing Manifesto today. I encourage you to consider your own core values and, if they align, consider signing.]]></summary></entry></feed>
+<p>Last Changed: 2026 Apr 19</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="goals" /><summary type="html"><![CDATA[A short, probably sensible-only-to-me list of goals. Timeboxed. I’ll also add other things as I go.]]></summary></entry></feed>
