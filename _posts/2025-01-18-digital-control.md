@@ -6,6 +6,11 @@ category: [ Blog ]
 
 Here is my short list of steps for digital control.
 
+**Update 2026 August 10th** See also [Dealing with
+dickovers](https://pluralistic.net/2026/07/21/dickovers/) from Cory Doctorow,
+which contains especially useful advice for blocking popups, paywalls, and other
+form of Internet annoyance.
+
 ## Basics
 
 - Reject all cookies. Some sites [make this
