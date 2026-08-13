@@ -16,6 +16,11 @@ pages/tags.html %}#git), and many of them link out to others.
 - [GitHub's Code Review History](https://tylercipriani.com/blog/2024/08/31/the-pull-request/)
 - 2026 Performance: [github and the crime against software](https://eblog.fly.dev/githubbad.html)
 
+## Alternatives to Conventional Commits
+
+- [Scoped Commits](https://scopedcommits.com/)
+    - FAQ links to resources for "Commit logs do not make good Changelogs"
+
 ## Racy Git
 
 - [Git LFS description](https://github.com/git-lfs/git-lfs/issues/196)
