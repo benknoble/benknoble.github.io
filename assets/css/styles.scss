@@ -414,3 +414,13 @@ div.language-racket {
     font-style: normal;
   }
 }
+
+#post a[href^="{{ site.url }}"]::after,
+#post a[href^="/"]::after {
+  content: '°';
+}
+
+#post a[href^="http"]:not([href*="{{ site.url }}"])::after,
+.post a[href^="http"]:not([href*="{{ site.url }}"])::after {
+  content: '→'
+}
