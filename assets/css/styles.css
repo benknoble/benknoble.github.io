@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://cdn.jsdelivr.net/npm/victormono@latest/dist/index.min.css");
 @import url("https://cdn.jsdelivr.net/npm/charter-webfont@latest/charter.min.css");
 /* Dracula Theme v1.2.5
@@ -596,6 +597,16 @@ div.language-racket .highlight .p {
 .highlight .vi,
 .highlight .vm {
   font-style: normal;
+}
+
+#post a[href^="https://benknoble.github.io"]::after,
+#post a[href^="/"]::after {
+  content: "°";
+}
+
+#post a[href^=http]:not([href*="https://benknoble.github.io"])::after,
+.post a[href^=http]:not([href*="https://benknoble.github.io"])::after {
+  content: "→";
 }
 
 /*# sourceMappingURL=styles.css.map */
