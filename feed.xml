@@ -1,4 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-08-15T15:48:12+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Library Discernment</title><link href="https://benknoble.github.io/blog/2026/08/15/library-discernment/" rel="alternate" type="text/html" title="Library Discernment" /><published>2026-08-15T00:00:00+00:00</published><updated>2026-08-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/15/library-discernment</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/15/library-discernment/"><![CDATA[<p>This is extracted from a document I wrote ~2 years ago about making it easy to
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-08-16T22:18:19+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Thoughts from Felienne Hermans’ “The Programer’s Brain”</title><link href="https://benknoble.github.io/blog/2026/08/16/programmers-brain/" rel="alternate" type="text/html" title="Thoughts from Felienne Hermans’ “The Programer’s Brain”" /><published>2026-08-16T00:00:00+00:00</published><updated>2026-08-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/16/programmers-brain</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/16/programmers-brain/"><![CDATA[<p>A few notes from reading a recent section of the book.</p>
+
+<p>I’m not quite finished, and I think I “discovered” a significant portion of the
+early sections for myself by teaching myself to program. After the recent
+section, I wrote down a few reminders for myself.</p>
+
+<h2 id="leave-comments-in-code-while-exploring">Leave comments in code while exploring</h2>
+
+<p>I often use Vim’s Quickfix list via commands like <code class="language-plaintext highlighter-rouge">:grep</code>, Fugitive’s <code class="language-plaintext highlighter-rouge">:Ggrep</code>,
+and more to search through a codebase and browse related code. I also jump to
+definition via LSPs and Universal Ctags. I <em>also</em> find related code through <a href="/blog/2026/06/23/git-log-S-performance/">Git
+searches</a>.</p>
+
+<p>Anyway, there’s usually a mental “stacking” effect as I browse the code; after
+reading some section and coming to some insight about how it works or how it
+affects what I care about, I often leave a small split open with that section
+and continue navigating in yet another window. I’m holding in my head the
+insight I just came to, trying not lose it.</p>
+
+<p>A quick aside: I believe that, while flow time is immensely valuable, maligning
+the negative effects of interruptions masks laziness in argumentation.
+Interruptions aren’t great, sure, but we should all practice habits that
+cheapen interruptions so that we can be better prepared to engage fruitfully
+with our colleagues. That means externalizing the context we build up
+internally!</p>
+
+<p>So, holding those insights in my head doesn’t play well with imminent eruptions
+or, more generally, <em>cognitive load</em>.</p>
+
+<p>Hermans advises us to leave comments in the code when we derive such insights!
+For example, “saw this while Xing Y” or “I think this does…”</p>
+
+<p>I used to hesitate to do so, since it isn’t usually the goal for the changes I
+plan to submit. But I don’t hesitate to create preparatory or “while at it”
+commits when doing my main work that fix <em>code</em>. Why not also “comment complex
+reasoning” for others? Heck, Git means I will have the opportunity to decide to
+keep or throw away later, so there’s no reason to fear such comments.</p>
+
+<h2 id="refactor-to-understand-and-explore-code">Refactor to understand and explore code</h2>
+
+<p>This is a lesson from early in the book that surfaced late, I think.</p>
+
+<p>The idea is that, to understand code, we need to play with it. (I certainly
+require this to develop <em>fingerspitzengefühl</em>.) One way to do that with existing
+code is to refactor it into a shape I know.</p>
+
+<p>Much like the above, I have hesitated to do this. The working copy feels
+“sacred” to me, for some reason, in some contexts (why? I really need to pin
+that down) but not in others. Despite my Git fluency, some while-at-it changes
+are fine for me and others not.</p>
+
+<p>I’d like to practice exploratory refactoring more. I’ll probably throw most of
+it away over time, but every now and then I might come up with a nugget worth
+keeping.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="software-engineering" /><category term="git" /><category term="refactor" /><summary type="html"><![CDATA[A few notes from reading a recent section of the book.]]></summary></entry><entry><title type="html">Theory Building with Git</title><link href="https://benknoble.github.io/blog/2026/08/16/theory-building/" rel="alternate" type="text/html" title="Theory Building with Git" /><published>2026-08-16T00:00:00+00:00</published><updated>2026-08-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/16/theory-building</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/16/theory-building/"><![CDATA[<p>A few notes from thinking about <a href="https://feelingof.com/episodes/061/">Feeling of Coding’s episode on “Programming as
+Theory Building”</a>.</p>
+
+<p>(Yes, I’m late listening to it. No time like the present!)</p>
+
+<p>At some point in the episode, our hosts remark that Git is not well-designed for
+theory building. I must disagree.</p>
+
+<p>Admittedly, the theory building the episode discusses is particular; in Naur’s
+conception (as I understand it), only the original team working on the codebase
+has the theory, and there is <em>no way</em> to transmit it to anyone else. Any attempt
+can only be an approximation and would lead to a new theory, not the original.</p>
+
+<p>And yet… isn’t Git a wonderful approximation? Git captures both historical
+context and the evolution-in-time of the codebase. Arguably, that is likely to
+omit a lot of external context and personal viewpoints of the original team. Yet
+through commit messages we have the ability to share in writing a part of our
+theory that isn’t evident from the code itself.</p>
+
+<p>A commit message will never capture or transmit the entire theory. Still, it’s
+value lies in making available more of the theory than we get with just code, or
+just code + revisions.</p>
+
+<p>Finally, I’d like to point out that Git was originally designed for Linux kernel
+development. That kind of model has no analog in what I recall of Naur’s paper:
+the “team” is large, distributed in all dimensions, and no one person has a
+complete theory of the entire kernel.</p>
+
+<p>So if that disqualifies Git from serving Naur’s original theory building, that’s
+fine with me. I think you’ll find it hard to argue that Git is poorly suited for
+transmitting theory about the kernel since it’s used so successfully to
+contribute to and explore the kernel’s source.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="software-engineering" /><category term="git" /><summary type="html"><![CDATA[A few notes from thinking about Feeling of Coding’s episode on “Programming as Theory Building”.]]></summary></entry><entry><title type="html">Library Discernment</title><link href="https://benknoble.github.io/blog/2026/08/15/library-discernment/" rel="alternate" type="text/html" title="Library Discernment" /><published>2026-08-15T00:00:00+00:00</published><updated>2026-08-15T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/15/library-discernment</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/15/library-discernment/"><![CDATA[<p>This is extracted from a document I wrote ~2 years ago about making it easy to
 find and assess-for-fit internal libraries. Some of these items are both an
 evaluation criterion and a suggestion for the production of high-quality
 libraries.</p>
@@ -717,358 +801,4 @@ appears to be a scale factor, so fractions dim the output and values greater
 than 1 lead to the wash out effect.</p>
 
 <p>I’m not sure <em>what</em> toggled the <code class="language-plaintext highlighter-rouge">xrandr</code> setting, but at least next time I’ll
-have an idea of how to fix it.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="linux" /><summary type="html"><![CDATA[I’ve had this glitch twice now, where I wake up my external monitor and the screen is washed out with brightness. I can see enough to try to fix it, but it’s not the hardware brightness settings. The software brightness settings are out of wack.]]></summary></entry><entry><title type="html">Rusty Boat Retrospective</title><link href="https://benknoble.github.io/blog/2026/02/12/rustyboat/" rel="alternate" type="text/html" title="Rusty Boat Retrospective" /><published>2026-02-12T00:00:00+00:00</published><updated>2026-02-12T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/02/12/rustyboat</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/02/12/rustyboat/"><![CDATA[<p>Brief reflections on implementing Raft in Rust.</p>
-
-<p><a href="https://github.com/benknoble/rusty-raft/">Public code</a>.</p>
-
-<h2 id="raft">Raft</h2>
-
-<p>I hadn’t thought about consensus algorithms since my MS year in 2020/2021, and
-I’d certainly never thought deeply about them. Studying the paper and
-Ousterhout’s video presentations convinced me that implementing Raft ought to be
-possible, in that same way that
-<a href="https://github.com/oxidecomputer/hubris">hubris</a> is necessary to take on
-certain challenges. I was <a href="https://github.com/benknoble/rusty-raft/commit/1d24310badc58dfc1fdd72e07813d584a3896990">demonstrably
-humbled</a>
-more than once<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, but Raft’s goal (as I understand it) is to be practically
-implementable correctly.</p>
-
-<p>The details matter immensely for correctness. Each statement is load-bearing.</p>
-
-<p>As I wrote in the public README, there’s little formal validation that my
-implementation is faithful to any spec or upholds the relevant properties. I
-have a few unit tests, but I haven’t taken the dive on fuzzing or property
-testing this code. It deserves it. (I probably won’t try any proof tools, though
-if memory serves creusot exists to fill that gap.<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>)</p>
-
-<p>I especially enjoyed explicitly modelling an abstract Clock, which I did for one
-of our warmup exercises during the course—it made some reasoning deliciously
-simple. Its implementation is not perfect (a <code class="language-plaintext highlighter-rouge">sleep</code> loop doesn’t really get you
-precise ticking frequency), but a real example could tie into hardware clocks.</p>
-
-<h2 id="rust">Rust</h2>
-
-<p>This is my most extensive foray into Rust to-date, though I’d dabbled a bit
-before. I like to say I can read Rust fairly well, having done that for years
-now and especially due to the writings of Ralf Jung and others. I understand
-a bit of the ideas Rust builds on, so I didn’t find many ownership challenges
-while writing this project—I intentionally structured the driver loop and main
-algorithm so that who owned what data was clear, except for some fiddly bits
-about sending application results around which end up just cloning.</p>
-
-<p>I still stumble over some parts of Rust’s module system, but that got easier
-with time.</p>
-
-<p>Rust’s tools are great, of course.</p>
-
-<p>I shied away from async Rust in this project; it seemed like too much to bite
-off at the time. I’m more comfortable with message-passing threads from some Go
-(years ago) and Racket (more recent), so I usually think in that model.</p>
-
-<p>In a similar way, I didn’t go dependency hunting here (I don’t <a href="https://oxide-and-friends.transistor.fm/episodes/a-crate-is-born/transcript">browse crates.io
-for fun</a>).
-I have serde for serialization, which ended up being more code than I thought I
-would have to write (integrating with serde-lexpr to use S-expression formats),
-and rand for randomness. There are likely other things that would be nice to
-glue in, and for other projects dependencies are a necessity. Here I was mostly
-satisfied with the standard library<sup id="fnref:3"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>.</p>
-
-<p>I suspect my use of dependencies would look different if Rust’s documentation
-were integrated in the same way that <a href="https://docs.racket-lang.org">Racket’s
-is</a>, but I realize that’s less practical for a
-bigger ecosystem.</p>
-
-<h2 id="overall">Overall</h2>
-
-<p>I’m quite pleased I was able to implement such a fascinating system in a few
-days of hard work: the essence was written between August 26th and 29th, with
-less than 20 commits afterwards<sup id="fnref:4"><a href="#fn:4" class="footnote" rel="footnote" role="doc-noteref">4</a></sup>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ g dategraph
-2025-08-26  13 ███████████████████
-2025-08-27  28 ████████████████████████████████████████
-2025-08-28  45 █████████████████████████████████████████████████████████████████
-2025-08-29  42 █████████████████████████████████████████████████████████████
-2025-09-20   1 █
-2026-01-03   1 █
-2026-01-04   2 ███
-2026-01-05   1 █
-2026-01-06   3 ████
-2026-01-10   1 █
-2026-01-19   3 ████
-2026-02-03   4 ██████
-
-λ DATEGRAPH=additions g dategraph
-2025-08-26  652 ████████████████████████████████████████████████████████████████
-2025-08-27  530 ████████████████████████████████████████████████████
-2025-08-28  436 ███████████████████████████████████████████
-2025-08-29  409 ████████████████████████████████████████
-2025-09-20   11 █
-2026-01-03    3
-2026-01-04    8 █
-2026-01-05   52 █████
-2026-01-06   12 █
-2026-01-19   45 ████
-2026-02-03  204 ████████████████████
-</code></pre></div></div>
-
-<p>I’m also pleased I was able to return months later and reconstruct my thinking
-without too much hassle. A few details were peculiar, but I’ve already forgotten
-which ones!</p>
-
-<p>And I can’t resist<sup id="fnref:5"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">5</a></sup>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ g ls-files | code-percent
-RowNumber  File                        PercentTotal  CumulativePercentTotal
-1          src/lib.rs                  30.525        30.525
-2          src/test_protocol.rs        26.2913       56.8163
-3          src/main.rs                 11.3463       68.1626
-4          README.md                   9.99153       78.1541
-5          src/net.rs                  5.7155        83.8696
-6          src/net/bytes.rs            5.63082       89.5005
-7          src/test_append_entries.rs  4.65707       94.1575
-8          start-cluster               1.31245       95.47
-9          src/test_save_restore.rs    1.10076       96.5707
-10         src/bin/client.rs           1.98984       98.5606
-11         watch-cluster               0.127011      98.6876
-12         start-client                0.127011      98.8146
-13         src/net/config.rs           0.550381      99.365
-14         .gitignore                  0.211685      99.5767
-15         Cargo.toml                  0.42337       100
-</code></pre></div></div>
-
-<h2 id="notes">Notes</h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1">
-      <p>Try <code class="language-plaintext highlighter-rouge">git log --grep fix</code>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:2">
-      <p>I have an old <a href="https://github.com/benknoble/advent2021/blob/prove-unflatten/day18/Day18.v">incomplete proof of some supposed
-inverses</a>
-I’d like to finish, too… alas. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:3">
-      <p>Though not with the un-hashability of <code class="language-plaintext highlighter-rouge">mpsc::Sender</code>s. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:4">
-      <p><a href="https://github.com/benknoble/Dotfiles/blob/master/links/bin/git-dategraph"><code class="language-plaintext highlighter-rouge">git-dategraph</code> script</a> <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:5">
-      <p><a href="/blog/2024/08/07/churn-and-weight/"><code class="language-plaintext highlighter-rouge">code-percent</code> discussion</a> <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="rust" /><summary type="html"><![CDATA[Brief reflections on implementing Raft in Rust.]]></summary></entry><entry><title type="html">MT7925e Bluetooth woes</title><link href="https://benknoble.github.io/blog/2026/02/11/bluetooth/" rel="alternate" type="text/html" title="MT7925e Bluetooth woes" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/02/11/bluetooth</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/02/11/bluetooth/"><![CDATA[<p>Some details on an error I had today and the seeming resolution.</p>
-
-<p>I have a MediaTek Wireless device in my Framework desktop (outputs trimmed):</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># lsusb</span>
-Bus 003 Device 003: ID 0e8d:0717 MediaTek Inc. Wireless_Device
-<span class="c"># lshw</span>
-…
-           <span class="k">*</span><span class="nt">-network</span>
-                description: Ethernet interface
-                product: MT7925 <span class="o">(</span>RZ717<span class="o">)</span> Wi-Fi 7 160MHz
-                vendor: MEDIATEK Corp.
-                physical <span class="nb">id</span>: 0
-                bus info: pci@0000:c0:00.0
-                logical name: wlan0
-                version: 00
-                serial: ac:f2:3c:34:dd:8b
-                width: 64 bits
-                clock: 33MHz
-                capabilities: pciexpress msi pm bus_master cap_list ethernet physical
-                configuration: <span class="nv">broadcast</span><span class="o">=</span><span class="nb">yes </span><span class="nv">driver</span><span class="o">=</span>mt7925e <span class="nv">driverversion</span><span class="o">=</span>6.12.63-gentoo-dist <span class="nv">firmware</span><span class="o">=</span>____000000-20260106153120 <span class="nv">ip</span><span class="o">=</span>192.168.2.248 <span class="nv">latency</span><span class="o">=</span>0 <span class="nb">link</span><span class="o">=</span><span class="nb">yes </span><span class="nv">multicast</span><span class="o">=</span><span class="nb">yes
-                </span>resources: irq:158 memory:b0600000-b07fffff memory:b0800000-b0807fff
-…
-                 <span class="k">*</span><span class="nt">-usb</span>:1
-                      description: Bluetooth wireless interface
-                      product: Wireless_Device
-                      vendor: MediaTek Inc.
-                      physical <span class="nb">id</span>: 3
-                      bus info: usb@3:3
-                      version: 1.00
-                      serial: 000000000
-                      capabilities: usb-2.10 bluetooth
-                      configuration: <span class="nv">driver</span><span class="o">=</span>btusb <span class="nv">maxpower</span><span class="o">=</span>100mA <span class="nv">speed</span><span class="o">=</span>480Mbit/s
-</code></pre></div></div>
-
-<p>(The Bluetooth wireless interface is on a different pci slot from the Ethernet
-interface according to <code class="language-plaintext highlighter-rouge">lshw</code>, but I think it’s physically part of the same
-stuff?)</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># hwinfo</span>
-
-63: PCI c000.0: 0280 Network controller
-  <span class="o">[</span>Created at pci.386]
-  Unique ID: y9sn.W5ZKz6Jz0dA
-  Parent ID: aYFK.ZyxDeoKNER1
-  SysFS ID: /devices/pci0000:00/0000:00:02.3/0000:c0:00.0
-  SysFS BusID: 0000:c0:00.0
-  Hardware Class: network
-  Model: <span class="s2">"MEDIATEK Network controller"</span>
-  Vendor: pci 0x14c3 <span class="s2">"MEDIATEK Corp."</span>
-  Device: pci 0x0717 
-  SubVendor: pci 0x14c3 <span class="s2">"MEDIATEK Corp."</span>
-  SubDevice: pci 0x0717 
-  Driver: <span class="s2">"mt7925e"</span>
-  Driver Modules: <span class="s2">"mt7925e"</span>
-  Device File: wlan0
-  Memory Range: 0xb0600000-0xb07fffff <span class="o">(</span>rw,non-prefetchable<span class="o">)</span>
-  Memory Range: 0xb0800000-0xb0807fff <span class="o">(</span>rw,non-prefetchable<span class="o">)</span>
-  IRQ: 158 <span class="o">(</span>9607 events<span class="o">)</span>
-  HW Address: ac:f2:3c:34:dd:8b
-  Permanent HW Address: ac:f2:3c:34:dd:8b
-  Link detected: <span class="nb">yes
-  </span>Module Alias: <span class="s2">"pci:v000014C3d00000717sv000014C3sd00000717bc02sc80i00"</span>
-  Driver Info <span class="c">#0:</span>
-    Driver Status: mt7925e is active
-    Driver Activation Cmd: <span class="s2">"modprobe mt7925e"</span>
-  Config Status: <span class="nv">cfg</span><span class="o">=</span>new, <span class="nv">avail</span><span class="o">=</span><span class="nb">yes</span>, <span class="nv">need</span><span class="o">=</span>no, <span class="nv">active</span><span class="o">=</span>unknown
-  Attached to: <span class="c">#51 (PCI bridge)</span>
-
-88: USB 00.0: 0000 Unclassified device
-  <span class="o">[</span>Created at usb.122]
-  Unique ID: CiZ2.dgyAFLvpDoA
-  Parent ID: uIhY.5sqDI7PdmUC
-  SysFS ID: /devices/pci0000:00/0000:00:08.3/0000:c5:00.0/usb3/3-3/3-3:1.0
-  SysFS BusID: 3-3:1.0
-  Hardware Class: unknown
-  Model: <span class="s2">"MediaTek Wireless_Device"</span>
-  Hotplug: USB
-  Vendor: usb 0x0e8d <span class="s2">"MediaTek Inc."</span>
-  Device: usb 0x0717 <span class="s2">"Wireless_Device"</span>
-  Revision: <span class="s2">"1.00"</span>
-  Serial ID: <span class="s2">"000000000"</span>
-  Driver: <span class="s2">"btusb"</span>
-  Driver Modules: <span class="s2">"btusb"</span>
-  Speed: 480 Mbps
-  Module Alias: <span class="s2">"usb:v0E8Dp0717d0100dcEFdsc02dp01icE0isc01ip01in00"</span>
-  Driver Info <span class="c">#0:</span>
-    Driver Status: btusb is active
-    Driver Activation Cmd: <span class="s2">"modprobe btusb"</span>
-  Config Status: <span class="nv">cfg</span><span class="o">=</span>new, <span class="nv">avail</span><span class="o">=</span><span class="nb">yes</span>, <span class="nv">need</span><span class="o">=</span>no, <span class="nv">active</span><span class="o">=</span>unknown
-  Attached to: <span class="c">#94 (Hub)</span>
-</code></pre></div></div>
-
-<p>Anyway, after a reboot today, I saw the following issues</p>
-
-<ul>
-  <li>Bluetooth wasn’t on or working, including no mouse connection (fortunately I
-have mouse keys on my ErgoDox EZ)</li>
-  <li>The kernel had some interesting logs:</li>
-</ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Feb 11 10:45:16 merguez kernel: Bluetooth: hci0: Execution of wmt command timed out
-Feb 11 10:45:16 merguez kernel: Bluetooth: hci0: Failed to send wmt func ctrl (-110)
-Feb 11 10:45:16 merguez kernel: Bluetooth: hci0: HCI Enhanced Setup Synchronous Connection command is advertised, but not supported.
-</code></pre></div></div>
-
-<p>Things got even weirder as I started poking the hardware with various tools like
-<code class="language-plaintext highlighter-rouge">inxi</code>, <code class="language-plaintext highlighter-rouge">lsusb -v</code>, and <code class="language-plaintext highlighter-rouge">hw-probe</code>, although that might also have been due to
-removing the kernel modules and re-adding them. In particular, reloading <code class="language-plaintext highlighter-rouge">btusb</code>
-did practically nothing; reloading <code class="language-plaintext highlighter-rouge">mt7925e</code> and <code class="language-plaintext highlighter-rouge">btusb</code> seemed to crash
-Bluetooth altogether (although WiFi came back with the <code class="language-plaintext highlighter-rouge">mt7925e</code> driver, so it
-was just the 2nd load of <code class="language-plaintext highlighter-rouge">btusb</code> that failed).</p>
-
-<p>I was able to confirm via <code class="language-plaintext highlighter-rouge">last</code> that I had booted my current kernel at least
-once prior to today, so I was pretty sure that wasn’t the issue (but I have
-several old kernels laying around just in case):</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ ll /boot/vmlinuz-6.12.*
--rw-r--r-- 1 root root 20439552 13 oct.  21:25 /boot/vmlinuz-6.12.47-gentoo-dist
--rw-r--r-- 1 root root 20488704 13 oct.  15:35 /boot/vmlinuz-6.12.47-gentoo-dist.old
--rw-r--r-- 1 root root 20451840  7 nov.  09:20 /boot/vmlinuz-6.12.54-gentoo-dist
--rw-r--r-- 1 root root 20460032  1 déc.  16:49 /boot/vmlinuz-6.12.58-gentoo-dist
--rw-r--r-- 1 root root 20619776 29 janv. 17:09 /boot/vmlinuz-6.12.63-gentoo-dist
--rw-r--r-- 1 root root 20619776 13 janv. 08:42 /boot/vmlinuz-6.12.63-gentoo-dist.old
-</code></pre></div></div>
-
-<h2 id="solution">Solution</h2>
-
-<p>Turns out, <a href="https://forums.linuxmint.com/viewtopic.php?t=461458">the Mint folks were
-right</a>: I powered down
-completely, left the system unplugged for a while, and then booted on with no
-issues.</p>
-
-<p>Now the kernel logs look much nicer:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Feb 11 14:03:30 merguez kernel: Bluetooth: hci0: Device setup in 1738015 usecs
-Feb 11 14:03:30 merguez kernel: Bluetooth: hci0: HCI Enhanced Setup Synchronous Connection command is advertised, but not supported.
-Feb 11 14:03:31 merguez kernel: Bluetooth: hci0: AOSP extensions version v1.00
-Feb 11 14:03:31 merguez kernel: Bluetooth: hci0: AOSP quality report is supported
-Feb 11 14:03:31 merguez kernel: Bluetooth: BNEP (Ethernet Emulation) ver 1.3
-Feb 11 14:03:31 merguez kernel: Bluetooth: BNEP filters: protocol multicast
-Feb 11 14:03:31 merguez kernel: Bluetooth: BNEP socket layer initialized
-Feb 11 14:03:31 merguez kernel: Bluetooth: MGMT ver 1.23
-Feb 11 14:03:46 merguez kernel: Bluetooth: RFCOMM TTY layer initialized
-Feb 11 14:03:46 merguez kernel: Bluetooth: RFCOMM socket layer initialized
-Feb 11 14:03:46 merguez kernel: Bluetooth: RFCOMM ver 1.11
-Feb 11 14:03:55 merguez kernel: magicmouse 0005:004C:0265.0005: unknown main item tag 0x0
-Feb 11 14:03:55 merguez kernel: input: Apple Inc. Magic Trackpad 2 as /devices/virtual/misc/uhid/0005:004C:0265.0005/input/input15
-Feb 11 14:03:55 merguez kernel: magicmouse 0005:004C:0265.0005: input,hidraw4: BLUETOOTH HID v3.11 Mouse [Slate] on ac:f2:3c:34:dd:8c
-</code></pre></div></div>
-
-<h2 id="kernel-devices">Kernel devices</h2>
-
-<p>Of note, the <code class="language-plaintext highlighter-rouge">drivers/bluetooth/btusb.c</code> doesn’t list <code class="language-plaintext highlighter-rouge">0e8d:0717</code> in the
-MediaTek devices, although there is what looks to my extremely untrained eyes
-like some kind of generic fallback device:</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="cm">/* MediaTek Bluetooth devices */</span>
-	<span class="p">{</span> <span class="n">USB_VENDOR_AND_INTERFACE_INFO</span><span class="p">(</span><span class="mh">0x0e8d</span><span class="p">,</span> <span class="mh">0xe0</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">),</span>
-	  <span class="p">.</span><span class="n">driver_info</span> <span class="o">=</span> <span class="n">BTUSB_MEDIATEK</span> <span class="o">|</span>
-			 <span class="n">BTUSB_WIDEBAND_SPEECH</span> <span class="p">},</span>
-</code></pre></div></div>
-
-<p>(The docs for <code class="language-plaintext highlighter-rouge">USB_VENDOR_AND_INTERFACE</code> don’t mean much to me:)</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * USB_VENDOR_AND_INTERFACE_INFO - describe a specific usb vendor with a class of usb interfaces
- * @vend: the 16 bit USB Vendor ID
- * @cl: bInterfaceClass value
- * @sc: bInterfaceSubClass value
- * @pr: bInterfaceProtocol value
- *
- * This macro is used to create a struct usb_device_id that matches a
- * specific vendor with a specific class of interfaces.
- *
- * This is especially useful when explicitly matching devices that have
- * vendor specific bDeviceClass values, but standards-compliant interfaces.
- */</span>
-<span class="cp">#define USB_VENDOR_AND_INTERFACE_INFO(vend, cl, sc, pr) \
-	.match_flags = USB_DEVICE_ID_MATCH_INT_INFO \
-		| USB_DEVICE_ID_MATCH_VENDOR, \
-	.idVendor = (vend), \
-	.bInterfaceClass = (cl), \
-	.bInterfaceSubClass = (sc), \
-	.bInterfaceProtocol = (pr)
-</span></code></pre></div></div>
-
-<p>For the network controller, we have <code class="language-plaintext highlighter-rouge">PCI_VENDOR_ID_MEDIATEK=0x14c3</code> via
-<code class="language-plaintext highlighter-rouge">include/linux/pci_ids.h</code> and then</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">pci_device_id</span> <span class="n">mt7925_pci_device_table</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="p">{</span> <span class="n">PCI_DEVICE</span><span class="p">(</span><span class="n">PCI_VENDOR_ID_MEDIATEK</span><span class="p">,</span> <span class="mh">0x7925</span><span class="p">),</span>
-		<span class="p">.</span><span class="n">driver_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">kernel_ulong_t</span><span class="p">)</span><span class="n">MT7925_FIRMWARE_WM</span> <span class="p">},</span>
-	<span class="p">{</span> <span class="n">PCI_DEVICE</span><span class="p">(</span><span class="n">PCI_VENDOR_ID_MEDIATEK</span><span class="p">,</span> <span class="mh">0x0717</span><span class="p">),</span>
-		<span class="p">.</span><span class="n">driver_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">kernel_ulong_t</span><span class="p">)</span><span class="n">MT7925_FIRMWARE_WM</span> <span class="p">},</span>
-	<span class="p">{</span> <span class="p">},</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p>in the <code class="language-plaintext highlighter-rouge">drivers/net/wireless/mediatek/mt76/mt7925</code> tree.</p>
-
-<h2 id="other-fora">Other fora</h2>
-
-<p>Places I looked for help via Ecosia searches of the kernel logs and model IDs:</p>
-
-<ul>
-  <li><a href="https://discussion.fedoraproject.org/t/bluetooth-mt7925e-doesnt-work-anymore-after-an-update-on-fedora-workstation-42/164707">Fedora forum</a></li>
-  <li><a href="https://community.frame.work/t/bluetooth-adapter-detected-but-unable-to-initialize-firmware/55427/3">Framework forum</a></li>
-  <li>Various Arch fora</li>
-</ul>
-
-<p>Seems like there are lots of MediaTek driver issues, but none were <em>exactly</em>
-like mine except that Mint forum.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="linux" /><summary type="html"><![CDATA[Some details on an error I had today and the seeming resolution.]]></summary></entry></feed>
+have an idea of how to fix it.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="linux" /><summary type="html"><![CDATA[I’ve had this glitch twice now, where I wake up my external monitor and the screen is washed out with brightness. I can see enough to try to fix it, but it’s not the hardware brightness settings. The software brightness settings are out of wack.]]></summary></entry></feed>

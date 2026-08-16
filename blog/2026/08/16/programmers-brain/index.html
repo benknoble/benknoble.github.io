@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Digital Etiquette</title>
+  <title>Junk Drawer : Thoughts from Felienne Hermans' "The Programer's Brain"</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -71,25 +71,69 @@
   </ul>
 </nav>
 
-      <h1>Digital Etiquette</h1>
+      <h1>Thoughts from Felienne Hermans' "The Programer's Brain"</h1>
       <p class="meta"><span class="authors">
   
   
     D. Ben Knoble
   
 </span>
- on 15 Aug 2026 in Blog</p>
+ on 16 Aug 2026 in Blog</p>
 <div id="post">
-  <p>I’d like to signal-boost a couple of well-written posts. (Apparently this is
-becoming an annual August tradition.)</p>
+  <p>A few notes from reading a recent section of the book.</p>
 
-<ul>
-  <li>
-<a href="https://paperless.blog/llm-etiquette">LLM Etiquette</a> (pairs well with the
-mention of “antisocial” in <a href="https://andrewkelley.me/post/my-thoughts-bun-rust-rewrite.html">Andrew Kelley’s Thoughts on the Bun
-Rewrite</a>)</li>
-  <li><a href="https://third-bit.com/2026/08/04/rainy-day-thoughts-on-ai/">Rainy Day Thoughts on AI</a></li>
-</ul>
+<p>I’m not quite finished, and I think I “discovered” a significant portion of the
+early sections for myself by teaching myself to program. After the recent
+section, I wrote down a few reminders for myself.</p>
+
+<h2 id="leave-comments-in-code-while-exploring">Leave comments in code while exploring</h2>
+
+<p>I often use Vim’s Quickfix list via commands like <code class="language-plaintext highlighter-rouge">:grep</code>, Fugitive’s <code class="language-plaintext highlighter-rouge">:Ggrep</code>,
+and more to search through a codebase and browse related code. I also jump to
+definition via LSPs and Universal Ctags. I <em>also</em> find related code through <a href="/blog/2026/06/23/git-log-S-performance/">Git
+searches</a>.</p>
+
+<p>Anyway, there’s usually a mental “stacking” effect as I browse the code; after
+reading some section and coming to some insight about how it works or how it
+affects what I care about, I often leave a small split open with that section
+and continue navigating in yet another window. I’m holding in my head the
+insight I just came to, trying not lose it.</p>
+
+<p>A quick aside: I believe that, while flow time is immensely valuable, maligning
+the negative effects of interruptions masks laziness in argumentation.
+Interruptions aren’t great, sure, but we should all practice habits that
+cheapen interruptions so that we can be better prepared to engage fruitfully
+with our colleagues. That means externalizing the context we build up
+internally!</p>
+
+<p>So, holding those insights in my head doesn’t play well with imminent eruptions
+or, more generally, <em>cognitive load</em>.</p>
+
+<p>Hermans advises us to leave comments in the code when we derive such insights!
+For example, “saw this while Xing Y” or “I think this does…”</p>
+
+<p>I used to hesitate to do so, since it isn’t usually the goal for the changes I
+plan to submit. But I don’t hesitate to create preparatory or “while at it”
+commits when doing my main work that fix <em>code</em>. Why not also “comment complex
+reasoning” for others? Heck, Git means I will have the opportunity to decide to
+keep or throw away later, so there’s no reason to fear such comments.</p>
+
+<h2 id="refactor-to-understand-and-explore-code">Refactor to understand and explore code</h2>
+
+<p>This is a lesson from early in the book that surfaced late, I think.</p>
+
+<p>The idea is that, to understand code, we need to play with it. (I certainly
+require this to develop <em>fingerspitzengefühl</em>.) One way to do that with existing
+code is to refactor it into a shape I know.</p>
+
+<p>Much like the above, I have hesitated to do this. The working copy feels
+“sacred” to me, for some reason, in some contexts (why? I really need to pin
+that down) but not in others. Despite my Git fluency, some while-at-it changes
+are fine for me and others not.</p>
+
+<p>I’d like to practice exploratory refactoring more. I’ll probably throw most of
+it away over time, but every now and then I might come up with a nugget worth
+keeping.</p>
 
 </div>
 <hr>
@@ -97,8 +141,20 @@ Rewrite</a>)</li>
 <ul class="tags">
   
     <li>
-      <a href="https://benknoble.github.io/tags#llm" class="tag">
-        llm
+      <a href="https://benknoble.github.io/tags#software-engineering" class="tag">
+        software-engineering
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#refactor" class="tag">
+        refactor
       </a>
     </li>
   
@@ -118,8 +174,8 @@ Rewrite</a>)</li>
 <script>
   var disqus_shortname = 'https-benknoble-github-io';
   var disqus_config = function () {
-    this.page.url = "https://benknoble.github.io/blog/2026/08/15/signal-boost/";
-    this.page.identifier = "/blog/2026/08/15/signal-boost";
+    this.page.url = "https://benknoble.github.io/blog/2026/08/16/programmers-brain/";
+    this.page.identifier = "/blog/2026/08/16/programmers-brain";
   };
 
   function load_comments(div) {
@@ -139,19 +195,19 @@ Rewrite</a>)</li>
 <div id="post-navigation">
   
   <span id="previous">
-    <a href="https://benknoble.github.io/blog/2026/08/15/library-discernment/" title="Library Discernment">
+    <a href="https://benknoble.github.io/blog/2026/08/15/signal-boost/" title="Digital Etiquette">
       Previous</a>
   </span>
   
   
   <span id="next">
-    <a href="https://benknoble.github.io/blog/2026/08/16/programmers-brain/" title="Thoughts from Felienne Hermans' " the programer brain>
+    <a href="https://benknoble.github.io/blog/2026/08/16/theory-building/" title="Theory Building with Git">
       Next</a>
   </span>
   
 </div>
 <div id="back-to-posts">
-  <a href="/categories/#digital-etiquette">
+  <a href="/categories/#thoughts-from-felienne-hermans-the-programer-s-brain">
     Back to posts</a>
 </div>
 

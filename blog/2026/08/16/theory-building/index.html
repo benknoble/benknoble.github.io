@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Home</title>
+  <title>Junk Drawer : Theory Building with Git</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -71,35 +71,114 @@
   </ul>
 </nav>
 
-      <h1>Home</h1>
-      <p><em>Do you keep your junk drawer full of fun and creative things?</em></p>
-
-<p>On this site, <a href="/about/#me">I break down complex answers to simple questions</a>.</p>
-
-<h2 id="latest-post">Latest Post</h2>
-
-<p><a href="/blog/2026/08/16/theory-building/">Theory Building with Git</a> posted on 16 August 2026</p>
-
-<p>Excerpt:</p>
-
-<blockquote>
+      <h1>Theory Building with Git</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 16 Aug 2026 in Blog</p>
+<div id="post">
   <p>A few notes from thinking about <a href="https://feelingof.com/episodes/061/">Feeling of Coding’s episode on “Programming as
 Theory Building”</a>.</p>
-</blockquote>
 
-<h2 id="recent-posts">Recent Posts</h2>
-<ul>
+<p>(Yes, I’m late listening to it. No time like the present!)</p>
 
-  <li>
-  <a href="/blog/2026/08/16/programmers-brain/">Thoughts from Felienne Hermans' "The Programer's Brain"</a> posted on 16 August 2026
-  </li>
+<p>At some point in the episode, our hosts remark that Git is not well-designed for
+theory building. I must disagree.</p>
 
-  <li>
-  <a href="/blog/2026/08/15/signal-boost/">Digital Etiquette</a> posted on 15 August 2026
-  </li>
+<p>Admittedly, the theory building the episode discusses is particular; in Naur’s
+conception (as I understand it), only the original team working on the codebase
+has the theory, and there is <em>no way</em> to transmit it to anyone else. Any attempt
+can only be an approximation and would lead to a new theory, not the original.</p>
 
+<p>And yet… isn’t Git a wonderful approximation? Git captures both historical
+context and the evolution-in-time of the codebase. Arguably, that is likely to
+omit a lot of external context and personal viewpoints of the original team. Yet
+through commit messages we have the ability to share in writing a part of our
+theory that isn’t evident from the code itself.</p>
+
+<p>A commit message will never capture or transmit the entire theory. Still, it’s
+value lies in making available more of the theory than we get with just code, or
+just code + revisions.</p>
+
+<p>Finally, I’d like to point out that Git was originally designed for Linux kernel
+development. That kind of model has no analog in what I recall of Naur’s paper:
+the “team” is large, distributed in all dimensions, and no one person has a
+complete theory of the entire kernel.</p>
+
+<p>So if that disqualifies Git from serving Naur’s original theory building, that’s
+fine with me. I think you’ll find it hard to argue that Git is poorly suited for
+transmitting theory about the kernel since it’s used so successfully to
+contribute to and explore the kernel’s source.</p>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#software-engineering" class="tag">
+        software-engineering
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
 </ul>
 
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2026/08/16/theory-building/";
+    this.page.identifier = "/blog/2026/08/16/theory-building";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2026/08/16/programmers-brain/" title="Thoughts from Felienne Hermans' " the programer brain>
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#theory-building-with-git">
+    Back to posts</a>
+</div>
 
     </section>
     <footer>
