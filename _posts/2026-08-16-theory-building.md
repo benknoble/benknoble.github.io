@@ -36,3 +36,9 @@ So if that disqualifies Git from serving Naur's original theory building, that's
 fine with me. I think you'll find it hard to argue that Git is poorly suited for
 transmitting theory about the kernel since it's used so successfully to
 contribute to and explore the kernel's source.
+
+While I'm here, I should also point you to [Computer Science Off Course
+Epsiode 1](https://www.felienne.nl/csoc-s01-e01/), which covers the same paper
+in interesting ways. This includes that generating code with LLMs leaves us
+without a theory of the code, so we are left unable to justify decisions or
+reason about modifications. Programming is not just the generation of code.
