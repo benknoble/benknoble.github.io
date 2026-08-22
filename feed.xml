@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-08-21T17:47:01+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Thoughts from Felienne Hermans’ “The Programer’s Brain”</title><link href="https://benknoble.github.io/blog/2026/08/16/programmers-brain/" rel="alternate" type="text/html" title="Thoughts from Felienne Hermans’ “The Programer’s Brain”" /><published>2026-08-16T00:00:00+00:00</published><updated>2026-08-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/16/programmers-brain</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/16/programmers-brain/"><![CDATA[<p>A few notes from reading a recent section of the book.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-08-22T17:18:35+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Breaking Changes in Dracula Pro for Vim</title><link href="https://benknoble.github.io/blog/2026/08/22/dracula-pro/" rel="alternate" type="text/html" title="Breaking Changes in Dracula Pro for Vim" /><published>2026-08-22T00:00:00+00:00</published><updated>2026-08-22T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/22/dracula-pro</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/22/dracula-pro/"><![CDATA[<p>PSA: If you use Dracula Pro, the filenames were changed recently.</p>
+
+<p>There is an agglomerate Dracula Pro Git repository that contains sources for all
+the Pro themes. There is also a seperate repo for each application.</p>
+
+<p>While doing my usual maintenance to pull changes from the FOSS Dracula theme for
+Vim, I noticed a commit in the agglomerate repo that changed all instances of
+<code class="language-plaintext highlighter-rouge">dracula_pro</code> to <code class="language-plaintext highlighter-rouge">dracula-pro</code>, including other underscores. I have, despite my
+misgivings, cherry-picked that change back into the Vim-only Pro repo.</p>
+
+<p>So, if you pull from either the agglomerate repo after 14th August or the
+Vim-only repo after today (22nd August), you’ll need to adjust your invocations
+of <code class="language-plaintext highlighter-rouge">:colorscheme</code> or your <code class="language-plaintext highlighter-rouge">ColorScheme</code> autocommands for Vim. Other applications
+may be similarly affected.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="dracula" /><summary type="html"><![CDATA[PSA: If you use Dracula Pro, the filenames were changed recently.]]></summary></entry><entry><title type="html">Thoughts from Felienne Hermans’ “The Programer’s Brain”</title><link href="https://benknoble.github.io/blog/2026/08/16/programmers-brain/" rel="alternate" type="text/html" title="Thoughts from Felienne Hermans’ “The Programer’s Brain”" /><published>2026-08-16T00:00:00+00:00</published><updated>2026-08-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/16/programmers-brain</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/16/programmers-brain/"><![CDATA[<p>A few notes from reading a recent section of the book.</p>
 
 <p>I’m not quite finished, and I think I “discovered” a significant portion of the
 early sections for myself by teaching myself to program. After the recent
@@ -791,20 +804,4 @@ Quit), I do <code class="language-plaintext highlighter-rouge">(send frame on-ex
 call <code class="language-plaintext highlighter-rouge">on-close</code>, which I overrode and put my custom Exit/Quit code.</p>
 </blockquote>
 
-<p>This seems quite sensible also.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[Notes from Discord.]]></summary></entry><entry><title type="html">xrandr brightness glitch</title><link href="https://benknoble.github.io/blog/2026/02/27/xrandr-brightness/" rel="alternate" type="text/html" title="xrandr brightness glitch" /><published>2026-02-27T00:00:00+00:00</published><updated>2026-02-27T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/02/27/xrandr-brightness</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/02/27/xrandr-brightness/"><![CDATA[<p>I’ve had this glitch twice now, where I wake up my external monitor and the
-screen is washed out with brightness. I can see enough to try to fix it, but
-it’s not the hardware brightness settings. The software brightness settings are
-out of wack.</p>
-
-<p>I think both times I’ve ended up fixing this by rebooting, but I recently
-learned that I can use <code class="language-plaintext highlighter-rouge">xrandr</code> to control the software brightness like</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xrandr --output DisplayPort-3 --brightness 1
-</code></pre></div></div>
-
-<p>You’ll have to adjust for your output device, of course. The <code class="language-plaintext highlighter-rouge">brightness</code> value
-appears to be a scale factor, so fractions dim the output and values greater
-than 1 lead to the wash out effect.</p>
-
-<p>I’m not sure <em>what</em> toggled the <code class="language-plaintext highlighter-rouge">xrandr</code> setting, but at least next time I’ll
-have an idea of how to fix it.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="linux" /><summary type="html"><![CDATA[I’ve had this glitch twice now, where I wake up my external monitor and the screen is washed out with brightness. I can see enough to try to fix it, but it’s not the hardware brightness settings. The software brightness settings are out of wack.]]></summary></entry></feed>
+<p>This seems quite sensible also.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="racket" /><summary type="html"><![CDATA[Notes from Discord.]]></summary></entry></feed>
