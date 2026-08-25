@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Building on Git</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#c6eafa">
+  <meta name="theme-color" content="#c6eafa">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <p>
+      I stand for the Constitution, for due process, and for community that
+      takes care of each other.
+      </p>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/consulting/">Consulting</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Building on Git</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 25 Aug 2026 in Blog</p>
+<div id="post">
+  <p>A conversation-via-blog with Dev Doshi about Git’s role in the future of
+software development.</p>
+
+<p>I apologize in advance for excessive parentheticals (I do like
+<a href="https://racket-lang.org/">Racket</a>, so perhaps this is expected).</p>
+
+<p>Dev asked recently about my “ideal version-control system” and if I’m “actively
+using or building it” (he having moved his personal projects away from Git).
+Here’s a summary of my initial reply:</p>
+
+<p>I like building new things on old stuff. From my perspective Git pulls in ideas
+for features from the “future” (<em>e.g.</em>,
+<a href="https://docs.jj-vcs.dev/latest/">Jujutsu</a>-inspired
+<a href="https://git-scm.com/docs/git-history">git-history(1)</a>). I like what SourceHut
+is doing in terms of email-driven workflows (building on old, reliable
+technology).</p>
+
+<p>I think, as with all things, the less-than-stellar areas of Git today are those
+that have seen relatively little focus by contributors (<em>e.g.</em>, worktrees and
+notes). These features might be functional, but paid and volunteer contributors
+are most motivated by features that impact their company (server-side hosting
+for the typical employees at GitHub/GitLab/Gerrit/etc.) or personal workflows
+(<em>e.g.</em>, the <code class="language-plaintext highlighter-rouge">git-subtree(1)</code> utility is being revitalized by a passionate
+contributor).</p>
+
+<p>I think these were all underused until recently, and now we’re going to have to
+invest more in them. For worktrees in particular, see also <a href="https://git.github.io/rev_news/2026/07/31/edition-137/">Git Rev News
+#137</a> and my patch
+series on <code class="language-plaintext highlighter-rouge">core.useNanosec</code>, which will help once I can land it.</p>
+
+<p>I conceive of Git as a <em>durable</em> technology: it can be continually evolved to
+stay relevant, though that might require significant engineering, and old
+versions ought to continue to function well into the future. Other comparable
+(computer) technologies are email, plain text, and lisp-qua-idea. No wonder Git
+plays so well with some of these!</p>
+
+<p>Now, my <a href="https://feelingof.com/">Feeling of Computing</a> friends have argued it’s
+time for these things to die—and I often nod along with them. How can that be?
+I believe the best way to displace these limited technologies is to <em>augment</em>
+them, to create ecosystems of tools and data that support the “old” way of
+working while ushering in new development. I don’t think the network effects of
+a total revolution in these areas will sustain interest (which sustains
+development).</p>
+
+<p>A harmonizing note, and perhaps my melody: to throw away Git for something else
+is also to reject, at least partially, the community of contributors that have
+made Git what it is. Put more softly, to revolutionize Git at scale you’d need
+to bring along a large, distributed community with vast experience working on
+version control. We’d still have to give up the indisputable value of what
+brought us here.</p>
+
+<p>That sounds an awful lot like the sunk-cost fallacy.</p>
+
+<p>I claim the cost is not sunk: Git powers a dominant portion of version control
+and software collaboration today. It could use more diverse networks (<a href="https://sfconservancy.org/GiveUpGitHub/">breaking
+the GitHub monopoly</a>), certainly, but
+network effects demand interoperability, collaboratively or adversarially. Hence
+<em>augment</em> rather than <em>replace</em>.</p>
+
+<p>Further, any new revolution in this space would need to replicate the power of
+the community surrounding Git, which goes beyond the core mailing list
+contributors. Learning that my impact is larger in collaboration with a team was
+critical for my success at Capital One, and I think the same is true of open
+source: we achieve more together than by siloing off our innovation.</p>
+
+<p>(I’m all for <a href="/blog/2025/04/18/skepticism/#situated">situated software</a>.
+Version control underlies software development, though, and I fear that deeply
+segregated software networks—such as those formed by each inventing our own
+bespoke system—make contribution difficult and will either (a) re-invent Git
+as “diff + email” or (b) stifle open source software communities
+from forming. We need version control that encourages working in the commons.)</p>
+
+<p>My current finger on the pulse suggests 2 things:</p>
+
+<ul>
+  <li>Git embraces innovation driven by competitors.</li>
+  <li>Competitors are fragmented, each bring sometimes-orthogonal and
+sometimes-overlapping innovation.</li>
+</ul>
+
+<p>I consequently prefer to stick with and contribute to Git until a consensus
+emerges among competitors. Git serves me well and could become that consensus
+with care.</p>
+
+<h2 id="philosophy-aside">Philosophy aside</h2>
+
+<p>Dev raised some interesting areas that need further work or aren’t well
+supported, saying this makes him feel like Git is not the right foundation. His
+sense is that backwards compatibility enjoinders fixing many of these areas.</p>
+
+<p>I asked for folks like Dev to tell the Git community about the limitations and
+implicitly to contribute to fixing them <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20">.</p>
+
+<p>I also said that I am seeing more willingness to throw away historic baggage if
+well-justified (cf. 3.0 Breaking Changes document, removal of <code class="language-plaintext highlighter-rouge">git whatchanged</code>,
+etc.).</p>
+
+<p>This will definitely require continued culture shift over time, too! I think
+it’s possible to build on the stellar community without having to reinvent
+everything.</p>
+
+<p>It’s also an open protocol, so you can build your own client or VCS on top of
+it.</p>
+
+<p>So, here’s the list of things Dev said were limits of points of friction, one at
+a time with replies.</p>
+
+<blockquote>
+  <ul>
+    <li>giving a freelancer granular access to some part of a repo without being able
+to read another part. CODEOWNERS exists but it’s limited and it’s a
+github/gitlab thing not a git thing</li>
+    <li>having a private repo that has some public repo parts, and managing changes</li>
+    <li>there’s no concept of layers. for example a layer that applies some debugging
+lines and such, environment files, whatever. stashes are close but not quite</li>
+    <li>architectural impedance mismatches; not designed to be composed, not designed
+for agents (especially worktrees/”forking”. I hear you on that being possible
+to improve)</li>
+  </ul>
+</blockquote>
+
+<p>It’s certainly true that Git doesn’t support slicing repositories well. The
+state of the art for Git is
+<a href="https://github.com/newren/git-filter-repo">git-filter-repo</a> and
+<a href="https://manpages.debian.org/testing/git-man/git-subtree.1.en.html">git-subtree</a>,
+or submodules. I use submodules for my Dotfiles and like them, but there are
+plenty of rough edges when collaborating. I’ve used the subtree merge strategy
+from both usptream to downstream (the latter has the former in a subdirectory)
+and from downstream to upstream (picking changes back upstream) when working
+on Dracula Pro’s Vim theme, and it’s smooth but requires advanced knowledge or a
+competent integrator.</p>
+
+<p>Another option is a branch that you merge into your current work for debugging,
+etc. The workflow is not great there, either, but can be made to work with
+interactive rebase. Use <code class="language-plaintext highlighter-rouge">--autosquash --update-refs --rebase-merges</code> or similar
+with <code class="language-plaintext highlighter-rouge">commit --fixup</code>, etc., to change patches before the merge, and rebase the
+merge away when preparing for final integration. I once worked on ~5 branches at
+once with a mega-merge and this kind of workflow, based on <a href="https://steveklabnik.github.io/jujutsu-tutorial/advanced/simultaneous-edits.html">Steve Klabnik’s “all
+branches at once” paradigm from
+Jujutsu</a>,
+and lately it reminds me of <a href="https://gitbutler.com/">GitButler</a>’s parallel
+branches (the Desktop demo is best there).</p>
+
+<p>If you could split a repo nicely, an integrator responsible for accepting the
+freelancer’s patches could also rewrite them to apply to the non-split repo
+where that was necessary (possibly with help from Git). That’s policy-driven
+more than mechanism-driven, though.</p>
+
+<p>In contrast, <a href="https://replicated.wiki/">Beagle</a> supports
+<a href="https://replicated.wiki/blog/partI.html">overlays</a>. I could imagine an overlay
+implementation using multiple Git indices, but it would need a lot of work for a
+smooth user experience. Overlaying a public repo into a private one trivializes
+the second bullet, I think, but as I said it needs implementation.</p>
+
+<p>On the other hand, I’ve never needed to give someone access to only part of a
+codebase. That permission model doesn’t exist in Git; if you can talk a host of
+some kind and read the repository (even just <code class="language-plaintext highlighter-rouge">file://</code>- or SSH- URLs), then you
+can get and recreate everything. So that needs something beyond the ability to
+combine repos like overlays; you need a pragmatic “split” operation.</p>
+
+<p>Demands of this kind are arguably signals that our code is not ideally
+structured for the needs we have. I am sympathetic, though: I detest adapting my
+work to a tool rather than the tool adapting to my work.</p>
+
+<blockquote>
+  <ul>
+    <li>overall composability as a distributed system. an api sdk generation company
+wanted me to implement an sdk release workflow using release-please on github
+actions. There are some race conditions that are basically impossible to deal
+with by design</li>
+  </ul>
+</blockquote>
+
+<p>I’m not entirely sure I understand what the issues are here, and I’ve used
+release-please (in anger).</p>
+
+<p>One thing that comes to mind is workflows that trigger on tag pushes (say, to
+create a release). Tags are mutable, so one could kick off a job but later
+change the tag in such a way that something bad happens?</p>
+
+<p>If memory serves, though, release-please likes to manage tags itself.</p>
+
+<p>It is true that the Git ecosystem is <em>fragmented</em> in the sense that composition
+requires knowledge of 3rd-party tools and how to obtain them. I’m loathe to
+suggest a “package manager for Git extensions,” but… Anyway, I’ve also seen
+plenty of half-baked Git integrations that make unfounded assumptions and break
+with even slight deviations from the tutorialized workflows (<em>e.g.</em>, it’s common
+to assume the only workflow is <code class="language-plaintext highlighter-rouge">push.default=simple</code> and <code class="language-plaintext highlighter-rouge">@{upstream}</code> points to
+the place you push).</p>
+
+<blockquote>
+  <ul>
+    <li>large files are annoying to deal with. you’d imagine a natural fit between
+artifacts from ci/cd being associated with the commits they came from plus the
+run they came from.</li>
+    <li>typically I have a versioned artifact model so code is versioned alongside
+artifacts and code refers to versioned artifacts (directly or indirectly) like
+darklang, unisonlang, etc.</li>
+  </ul>
+</blockquote>
+
+<p>Yep. Git-LFS is still hanging on, but changes to the object database (“odb”)
+subsystem are building towards <em>pluggable odbs</em>. That means you can natively
+plug in storage of your choice for Git objects—S3, Postgres, whatever. I sent
+a similar note to Andrew Nesbitt after he wrote about <a href="https://nesbitt.io/2026/02/26/git-in-postgres.html">Git in
+Postgres</a>. NVIDIA is also
+running a hackathon to work on a Git-LFS replacement after this fall’s Gerrit
+User Summit.</p>
+
+<p>The CI/CD artifact association is, I think, better handled by something like Git
+notes, but we have a long way to go at making users aware of them, integrating
+them with popular forges (GitHub <em>removed</em> support for displaying notes, but
+still receives and sends them with pushes/fetches), and making notes management
+facile. It’s easy to end overwrite notes you didn’t intend to today, since most
+tutorials on synchronizing notes recommend a forceful refspec
+<code class="language-plaintext highlighter-rouge">+refs/notes/*:refs/notes/*</code>. If you omit the <code class="language-plaintext highlighter-rouge">+</code>, you then might have to deal
+with failed fetches by manually reconciling notes (<code class="language-plaintext highlighter-rouge">git fetch … &amp;&amp; git notes
+merge</code>).</p>
+
+<p>I also wish I could expose folks to <a href="https://replicated.live/blog/link">Beagle’s
+links</a> (cf. <a href="https://replicated.live/blog/wiki">Wiki is Not
+Enough</a>). I have similar facilities baked
+into Vim with Fugitive, which makes navigating Git history a breeze.</p>
+
+<blockquote>
+  <ul>
+    <li>committing itself is kind of weird if you think about it. or at least the way
+most people commit. I commit just as checkpoints of code, without them
+reflecting any statement about buildability, releasability, deployability etc.
+but coding agents</li>
+  </ul>
+</blockquote>
+
+<p>I’m not sure what agents do differently, but my hope (see <a href="/workshops/git-office-hours/">Git Office Hours</a> and <a href="/blog/2026/08/16/theory-building/">Theory Building with Git</a> for just a <em>taste</em>) is actually that we
+train more human programmers to use commits as a meaningful state of the world.</p>
+
+<p>That is, I like the “local can be meaningless checkpoints as long as what I send
+for review has semantic weight.” Git’s own code review enforces this and creates
+a much more meaningful history as a result.</p>
+
+<p>Trunk-based development and a philosophy I can no longer find that I associate
+with some notion of “monotonic commits” (the system wouldn’t commit if tests
+didn’t pass, or something) have similar thoughts: check-ins should be buildable
+and releasable at any moment (aided by modern notions that “deployed does not
+imply released” in industry, perhaps).</p>
+
+<blockquote>
+  <ul>
+    <li>things like ordered ADRs or changesets.dev (possibly more of a statement about
+file systems not having the concept of a list or collection or array where you
+can just dump stuff in without caring about names)</li>
+  </ul>
+</blockquote>
+
+<p>I’m not sure what Dev is missing here, but a directory with numbered files might
+work (or a single large file, heh…).</p>
+
+<p>Anyway, I’ve seen plenty of folks store changeset- or ADR- related content in
+Git. I think the invention of changesets as a response to “handling merge
+constant conflicts in a shared CHANGELOG file” does reveal a real pain point
+though.</p>
+
+<blockquote>
+  <ul>
+    <li>based on diffing text not structured data (see lix.dev and other projects).</li>
+  </ul>
+</blockquote>
+
+<p>Sure. Beagle uses <a href="https://replicated.wiki/wiki/">structured syntax-aware data</a>,
+but I wonder about how that impacts durability as I previously defined it. I use
+lots of languages, and I don’t relish teaching Git about all of them.</p>
+
+<p>On the other hand, <a href="https://lore.kernel.org/git/Pine.LNX.4.58.0504150753440.7211@ppc970.osdl.org/">Linus’s infamous rant about
+renames</a>
+applies: as long as work with the original form, we can always layer additional
+smarts on top. That’s how <a href="https://git-scm.com/docs/gitattributes#_defining_a_custom_hunk_header">defining a custom hunk
+header</a>
+and related
+<a href="https://git-scm.com/docs/gitattributes#_performing_text_diffs_of_binary_files">textconv</a>
+work: we can make smarter diffs. Smarter merges are possible with
+<a href="https://git-scm.com/docs/git-mergetool">mergetools</a>.</p>
+
+<p>It could be nice to integrate tree-sitter with Git for fallbacks on some of
+these, though. The user experience of managing tree-sitter grammars is painful,
+though, and has some interesting security implications if I understand the
+situation correctly with respect to loading compiled grammars into process
+memory.</p>
+
+<blockquote>
+  <ul>
+    <li>git hooks (from an ergonomic and security perspective)</li>
+  </ul>
+</blockquote>
+
+<p>I’ve not seriously considered the security implications, but note that Git
+accepts that its shell prompt may cause arbitrary execution in an untrusted
+repo, so best practice is to be wary of untrusted repos. (I can’t find the
+reference I’m thinking of, but <a href="https://github.com/justinsteven/advisories/blob/main/2022_git_buried_bare_repos_and_fsmonitor_various_abuses.md">this advisory looks
+related</a>,
+as do the links in <a href="https://stackoverflow.com/q/74200395/4400820">a StackOverflow
+post</a>.)</p>
+
+<blockquote>
+  <ul>
+    <li>
+<a href="https://www.linkedin.com/feed/update/urn:li:activity:7481394893186109440/">https://www.linkedin.com/feed/update/urn:li:activity:7481394893186109440/</a>
+(not sure if git or github, but fundamental performance issues)</li>
+  </ul>
+</blockquote>
+
+<p>Sounds like a mix of Git (no “patch theory”, pushes are not “boring”) and
+high availability demands.</p>
+
+<p>If we accept Git’s distributed nature and don’t require constant contact with a
+server, maybe we can sacrifice high availability. That might require giving up
+GitHub <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20">.</p>
+
+<p>This is separate from the so-called <a href="https://eblog.fly.dev/githubbad.html">“crime against software” performance
+issues</a>, related to the <a href="https://mrshu.github.io/github-statuses/">Missing GitHub
+Status page</a>.</p>
+
+<blockquote>
+  <ul>
+    <li>most file systems are fundamentally inefficient with git repos / lots of small
+files, most OSs don’t usually handle them well. in contrast, I have a simple
+append-only log with OCC and a content addressed store. with that I can build
+pretty much anything, it works in memory as a library easily, I can fork
+extremely cheaply, and usually don’t pay file system taxes until I absolutely
+need to (is it fair to say disks are possibly 10k x slower than memory?)</li>
+    <li>fwiw I think some of the issues are because of the POSIX file system model
+which I don’t like either</li>
+    <li><a href="https://rcrowley.org/2010/01/06/things-unix-can-do-atomically.html">https://rcrowley.org/2010/01/06/things-unix-can-do-atomically.html</a></li>
+  </ul>
+</blockquote>
+
+<p>Since I don’t have much experience with filesystems suffering like this, I can’t
+speak to this well.</p>
+
+<p>Git does have the ability to build in-memory indices and objects, though, and
+(see next) libifying Git to allow other programs to take advantage of this is an
+ongoing effort. Recently, git-history and
+<a href="https://git-scm.com/docs/git-replay">git-replay</a> use this to their advantage
+for performance.</p>
+
+<blockquote>
+  <ul>
+    <li>so maybe I’m proposing more of an unbundling refactoring of git</li>
+  </ul>
+</blockquote>
+
+<p>Yep, making <code class="language-plaintext highlighter-rouge">libgit</code> (the library built from Git sources that its builtins link
+to, possibly statically?) useable is a long, noble, and active project. One of
+the major current efforts is making more procedures independent of the global
+<code class="language-plaintext highlighter-rouge">the_repository</code> instance so they can be used with any <code class="language-plaintext highlighter-rouge">struct repository</code>.</p>
+
+<p>Anyway, long-term I hope that <code class="language-plaintext highlighter-rouge">libgit</code> will supplant <code class="language-plaintext highlighter-rouge">libgit2</code>, which isn’t
+actively developed as far as I know and has found it hard to replicate modern
+Git features.</p>
+
+<h2 id="git-at-any-scale">Git At Any Scale</h2>
+
+<p>And of course the recent <a href="https://cursor.com/blog/git-at-any-scale">Git At Any
+Scale</a> article came up.</p>
+
+<p>I think the article misses some points:</p>
+
+<ul>
+  <li>Relying on a central server is anathema for Git. Maybe that’s ok, and we can
+move on from that model? Open source communities in particular ought to reduce
+dependence on a single point of failure.</li>
+  <li>The scalability problem is hard if you insist that all the parallel
+repositories stay synchronized (<em>i.e.</em>, that they pretend to implement a
+single repository). If we were willing to accept temporary drift, I wonder if
+that could help? Few options need a truly synchronized view for a forge, I
+think. From what I can tell, this would require some further changes in Git,
+though, if write + read inconsistency confuses Git.</li>
+  <li>If distributed hash tables were great, why not fix clones to not require the
+packfiles? Maybe that could still happen.</li>
+</ul>
+
+<p>Still, they seem to have a clear-headed analysis for Git hosting “in the large.”
+Some specifics are tied to agents, which apparently create many small unused
+repos? Unless those repos are on a forge, I’m not sure why the host is paying
+for them, though. Some are tied to monorepos, which we know have tradeoffs for
+their size. Though if the Linux kernel can make automated compilation farming
+work, why can’t everyone else use their job runner for CI tests with their large
+monorepo? I confess I’m confused there. Maybe it’s the number of
+jobs—presumably the Linux kernel project only pays for CI on dedicated
+branches and trees, while a company wants every PR to run CI all the time.</p>
+
+<p>My suspicion, from observing a lot of small communities, is that the problems
+here are only relevant from a certain industrial perspective. Plenty of Git
+hosting in the <em>small</em> is content with plain old HTTPS, static sites generated
+from repos, or small instances of popular forge implementations.</p>
+
+<p>And Continuity-style S3 object storage ought to be accessible to all via
+pluggable odbs, though I regret that Continuity specifically seems tied to
+Amazon. (Bring your own cloud?) Perhaps these folks will contribute to the Git
+ecosystem and the pluggable odb work. I’m not sure I’ll hold my breath.</p>
+
+<h2 id="wrapping-up">Wrapping up</h2>
+
+<p>I look forward to continued dialog with Dev :) If he posts any kind of reply to
+this publicly, I’ll link it here.</p>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#software-engineering" class="tag">
+        software-engineering
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2026/08/25/building-on-git/";
+    this.page.identifier = "/blog/2026/08/25/building-on-git";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2026/08/22/dracula-pro/" title="Breaking Changes in Dracula Pro for Vim">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#building-on-git">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <a href="https://www.goatcounter.com">No personal information collected</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+  <script type="text/javascript">
+    // Source: https://stackoverflow.com/a/8876069/4400820
+    // Posted by ryanve, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-03-05, License - CC BY-SA 4.0
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    // End StackOverflow snippet
+
+    // see assets/css/styles.scss:/@media
+    const num_games = vw > 740 ? 10 : 3
+
+    document.write(`
+      <script type="text/javascript" src="https://boardgamegeek.com/jswidget.php?username=benkenobli&numitems=${num_games}&header=1&text=none&images=small&show=recentplays&imagesonly=1&imagepos=center&inline=1&addstyles=1&domains%5B%5D=boardgame"></` + `script>`)
+  </script>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script data-goatcounter="https://benknoble_github_io.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+  </body>
+</html>
