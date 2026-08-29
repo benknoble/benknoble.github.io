@@ -11,6 +11,13 @@ libraries.
 
 Also relevant is [Linux Dev Time Episode 151](https://latenightlinux.com/linux-dev-time-episode-151/).
 
+**Update 2026-08-29:** I have not read the paper, but [The Rising Cost of Trust:
+Practitioners' Trust Signals, Controls, and Responses in the Software Supply
+Chain](https://arxiv.org/abs/2608.20675) seems (though I'm partly skeptical of
+claims in the Abstract of "revealed preferences"). While here, I should make
+explicit what I left implicit below: star count is not a reliable proxy for
+dependency fit.
+
 ## Guiding Principles
 
 The [OpenSSF](https://openssf.org/) publishes additional guiding questions for
