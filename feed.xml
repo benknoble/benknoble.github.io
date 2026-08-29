@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-08-25T22:54:38+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Building on Git</title><link href="https://benknoble.github.io/blog/2026/08/25/building-on-git/" rel="alternate" type="text/html" title="Building on Git" /><published>2026-08-25T00:00:00+00:00</published><updated>2026-08-25T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/25/building-on-git</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/25/building-on-git/"><![CDATA[<p>A conversation-via-blog with Dev Doshi about Git’s role in the future of
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-08-29T16:00:54+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Building on Git</title><link href="https://benknoble.github.io/blog/2026/08/25/building-on-git/" rel="alternate" type="text/html" title="Building on Git" /><published>2026-08-25T00:00:00+00:00</published><updated>2026-08-25T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/25/building-on-git</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/25/building-on-git/"><![CDATA[<p>A conversation-via-blog with Dev Doshi about Git’s role in the future of
 software development.</p>
 
 <p>I apologize in advance for excessive parentheticals (I do like
@@ -509,6 +509,13 @@ evaluation criterion and a suggestion for the production of high-quality
 libraries.</p>
 
 <p>Also relevant is <a href="https://latenightlinux.com/linux-dev-time-episode-151/">Linux Dev Time Episode 151</a>.</p>
+
+<p><strong>Update 2026-08-29:</strong> I have not read the paper, but <a href="https://arxiv.org/abs/2608.20675">The Rising Cost of Trust:
+Practitioners’ Trust Signals, Controls, and Responses in the Software Supply
+Chain</a> seems (though I’m partly skeptical of
+claims in the Abstract of “revealed preferences”). While here, I should make
+explicit what I left implicit below: star count is not a reliable proxy for
+dependency fit.</p>
 
 <h2 id="guiding-principles">Guiding Principles</h2>
 
