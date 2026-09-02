@@ -1,4 +1,146 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-08-31T20:11:49+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Building on Git</title><link href="https://benknoble.github.io/blog/2026/08/25/building-on-git/" rel="alternate" type="text/html" title="Building on Git" /><published>2026-08-25T00:00:00+00:00</published><updated>2026-08-25T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/25/building-on-git</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/25/building-on-git/"><![CDATA[<p>A conversation-via-blog with Dev Doshi about Git’s role in the future of
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-09-02T13:21:29+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">In Dialogue with “Just a tool”</title><link href="https://benknoble.github.io/blog/2026/09/02/tool-dialogue/" rel="alternate" type="text/html" title="In Dialogue with “Just a tool”" /><published>2026-09-02T00:00:00+00:00</published><updated>2026-09-02T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/09/02/tool-dialogue</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/09/02/tool-dialogue/"><![CDATA[<p>After reading Iris Meredith’s <a href="https://deadsimpletech.com/blog/no-such-thing-as-just-a-tool">There’s no such thing as Just a
+Tool</a>, I was
+reminded of some related work.</p>
+
+<p>If you’ve been thinking along Torvalds’ line (it’s “just a tool”), you might be
+interested in reflecting upon the above article. Meredith gives a fascinating
+analysis of how human–tool combinations are not value-neutral despite how we
+might idealize them. I see clear dialogue here with questions like “Can you
+separate the creator from their work?” and “How do we embody values in our
+technology? Who gets to choose what values are embodied?”</p>
+
+<p>Related work along those themes:</p>
+
+<ul>
+  <li><a href="https://third-bit.com/2026/08/04/rainy-day-thoughts-on-ai/">Greg Wilson’s “Rainy Day Thoughts on
+AI”</a> (first
+mentioned in <a href="/blog/2026/08/15/signal-boost/">Digital Etiquette</a>) opens with Orwell &amp; Dali (creator vs. work)</li>
+  <li>Ruha Benjamin’s excellent book <em>Race After Technology</em> provokes, prods, and
+pokes many of these questions with recent examples, including software built
+on statistical models (from, <em>e.g.</em>, predictive policing and other legal
+system applications to things as supposedly innocuous as Google Maps).</li>
+  <li>I naïvely engaged this question (or maybe sidestepped it) when <a href="/blog/2026/01/29/llms-chat/">thinking about
+LLMs in January</a>: I took the “tool
+conversation” (how to use an LLM effectively) for granted and wished to set it
+aside for a different but related conversation about power and harm. Thanks to
+this post’s impetus, I’m now reconsidering that the 2 conversations fit in the
+same framework—using an LLM engenders different priorities and goals, which
+are evidently related to power and harm. We exercise power to achieve our
+goals, and we might want to decide how to do so while minimizing harm.</li>
+</ul>
+
+<p>I also stumbled across a few related articles (least useful to most):</p>
+
+<ul>
+  <li>
+    <p>Bryan Tan wrote <a href="https://lucidthemes.substack.com/p/ai-is-not-just-a-tool-53557d39bc5e">AI is not “just a
+tool”</a>.
+He asks a few ok questions:</p>
+
+    <blockquote>
+      <p>What does the tool do? What is the scope of its operations? What will it
+replace? How will it effect our lifestyles?</p>
+    </blockquote>
+
+    <p>But, in my view, he performs a kind of
+<a href="https://peoples-things.ghost.io/youre-doing-it-wrong-notes-on-criticism-and-technology-hype/">criti-hype</a>,
+which Cory Doctorow has <a href="https://pluralistic.net/tag/criti-hype/">introduced me to more than
+once</a>. Tan writes</p>
+
+    <blockquote>
+      <p>moralizing about technology can be beside the point. It isn’t necessary in
+this discussion to talk about tech’s inherent goodness or badness. We can
+limit ourselves to pondering its effects. We just have to turn our eyes
+away from how these tools will enable us to shape the world, and start
+looking at how using these tools will shape us.</p>
+    </blockquote>
+
+    <p>and then further, disguised in what appears on the surface to be critical,
+promotes the technology:</p>
+
+    <blockquote>
+      <p>We’re in the nascent days of this technology, where the products that are
+going to shape the future are just now hitting the public at scale in
+their most primitive forms. We’re at a critical juncture where we need to
+think deeply about what some of these effects might be.</p>
+
+      <p>[…]</p>
+
+      <p>[AI’s] arrival brings not one new medium to reckon with, but countless,
+and the obsolescence of just as many.</p>
+    </blockquote>
+
+    <p>So rather than engage with the good questions (such as how we are shaped by
+the human–tool gestalt), he asserts that “AI” will obsolete many media and
+create new ones, that it will shape the future. I suppose that’s vague
+enough to be hard to falsify, and thus probably true. Yet it can’t help but
+leave the “tool” question short.</p>
+  </li>
+  <li>
+    <p><a href="https://christinehaskell.com/">Christine Haskell</a> wrote <a href="https://christinehaskell.substack.com/p/ai-is-not-just-a-tool">AI Is Not Just A
+Tool</a>, which I
+think wants to make a deep point: most tools engage us with our
+reality, while “AI” proposes (or invents!) a different reality. That’s a
+really interesting thesis, from which we ask more questions: who determines
+the shapes of those realities? Whose values are thus embodied? What might
+reality distortions through the lens of these tools do to our psyches?</p>
+
+    <p>Haskell goes on to write about legal and regulatory differences between a tool
+and a system, which naturally calls into question responsibility. Are these
+things inherently <a href="https://aworkinglibrary.com/writing/accountability-sinks">accountability
+sinks</a>, or are there
+other modes? What do we do when things go wrong? Better to understand that
+“systems acting on the public [should be] answerable to the public.” Yet today
+it so often seems our public systems place vastly more burden on harmed
+individuals, and make it harder for them to claim and redress harm, than they
+do to regulate and hold accountable said systems. (Fortunately, <a href="https://www.cbc.ca/radio/podcastnews/who-broke-the-internet-understood-transcripts-listen-1.7611600">this is a
+matter of policy, and policy can
+change</a>.)</p>
+
+    <p>But here’s why I still find this engagement with the tool question not as
+helpful as others: from the second paragraph onward the writing reeks of LLM
+output. I nearly didn’t finish the article, and many sentences become
+meaningless for their flowery. I find this disappointing from such an
+intellectually distinguished individual who prides herself on “keeping values
+in the room.” It’s not that the LLM <em>can’t</em> be helpful in writing; it’s that
+the generated text so clearly distracts from or obscures her useful points. I
+have a hard time discerning which values are in the room with me.</p>
+  </li>
+  <li>
+    <p>Finally, <a href="https://www.frank.computer/">HCI and data visualization and accessibility researcher Frank
+Elavsky</a> wrote <a href="https://www.frank.computer/blog/2025/05/just-a-tool.html">Stop saying that AI is just a
+tool and it only matters how it is
+used</a>. Watch the
+whole talk, too.</p>
+
+    <p>Unsurprisingly, this article takes as given that <a href="https://faculty.cc.gatech.edu/~beki/cs4001/Winner.pdf">“artifacts have
+politics”</a> and
+interrogates how “just a tool” is used. In Elavsky’s conception, it is
+“deceptively misleading,” “deceptively simple,” and “insultingly naive”: in
+other words, might it only serve to shut down or limit the conversation, just
+as Meredith writes? Uttering this phrase doesn’t contribute anything
+meaningful to our current discourse.</p>
+
+    <p>Elavsky is also concerned by the usual follow up, “it matters how you use it.”
+Besides refusing to engage with centuries of thinking about morality (<a href="https://philosophy.stackexchange.com/q/141228">as do
+the answers at time of writing to the StackExchange question “Ethics of using
+AI in creative work”</a>—no
+wonder Felienne Hermans is so concerned with <a href="https://www.felienne.nl/csoc-s01e03/">CS not engaging with other
+fields</a>!), this phrase also participates
+in a tradition of individualism that some credit with destroying community and
+blinding us to structural, systematic change that might solve some of our most
+pressing problems.</p>
+
+    <p>I am thus utterly unsurprised that Elavsky also cites Heidegger as Meredith
+did.</p>
+
+    <p>I won’t summarize all (the rest) of Elavsky’s engagement with this question
+(sneak peaks: getting rid of all pain and flattening our being are not good
+results; find the street’s use for these things; “go and do what machines
+cannot”). Really, you should go read. Engage with the question yourself: what
+tools shape you, and how?</p>
+  </li>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[After reading Iris Meredith’s There’s no such thing as Just a Tool, I was reminded of some related work.]]></summary></entry><entry><title type="html">Building on Git</title><link href="https://benknoble.github.io/blog/2026/08/25/building-on-git/" rel="alternate" type="text/html" title="Building on Git" /><published>2026-08-25T00:00:00+00:00</published><updated>2026-08-25T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/25/building-on-git</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/25/building-on-git/"><![CDATA[<p>A conversation-via-blog with Dev Doshi about Git’s role in the future of
 software development.</p>
 
 <p>I apologize in advance for excessive parentheticals (I do like
@@ -1091,65 +1233,4 @@ Summary
 <ul>
   <li><a href="https://sites.google.com/view/llmwritingdistortion/home">How LLMs Distort Our Written Language</a></li>
   <li><a href="https://arxiv.org/abs/2510.04226v2">Epistemic Diversity and Knowledge Collapse in Large Language Models</a></li>
-</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[Machines should bend to suit humans (centaurs), not humans bend to suit machines (reverse centaurs).]]></summary></entry><entry><title type="html">Chats on LLMs</title><link href="https://benknoble.github.io/blog/2026/05/05/llms-conversation/" rel="alternate" type="text/html" title="Chats on LLMs" /><published>2026-05-05T00:00:00+00:00</published><updated>2026-05-05T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/05/05/llms-conversation</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/05/05/llms-conversation/"><![CDATA[<p>Collected from Discord</p>
-
-<p>In response to both this quote:</p>
-
-<blockquote>
-  <p>The user apparently believes LLMs are inherently unethical in their existence,
-so, by extension, any use of them is also inherently unethical, and they (the
-user) will therefore not use any products of LLMs in any way whatsoever.</p>
-</blockquote>
-
-<p>and recent projects collecting lists of “tainted” “slopware”:</p>
-
-<p>I think most absolute positions are likely incorrect, but at the same time
-contain merits. For example, I think the notion of abstaining entirely from any
-software that has been touched by an LLM (Vim? The Linux kernel?) is untenable
-in the long run, and I desperately hope it won’t lead to too much fragmentation
-of ideas. (Competing software that does it better is of course welcome.)</p>
-
-<p>As another example, take explicitly condoning LLM use without a statement
-engaging with others’ concerns (be it quality, displacement of labor, ethics, or
-anything else). I can also sympathize with the absolute position that this
-condones and encourages other evils associated with the makers of today’s
-commercial LLMs. So my modulation is to take those concerns as indicative that
-perhaps we ought to form a community statement about what, precisely, LLM use
-means to Racket.</p>
-
-<p>A tool and aid for continuing to do things we value? Something else?</p>
-
-<p>See for example « Engineering rigor in the age of LLMs » and « The peril of
-laziness lost » which I have linked before. I may dislike some of Brian’s
-enthusiasm for them, but I also can see where he’s coming from and respect how
-he encourages rigorous use.</p>
-
-<hr />
-
-<p>In response to this quote:</p>
-
-<blockquote>
-  <p>I think it’s inevitable though. Every leap in technology from books to
-film/video to the internet often displaces/shakes industries up. It’s either
-adapt or be the old man who shouts at the clouds saying “back in my day…”.
-Whether its generated by LLMs or not, what matters above all else is if its
-valuable and improves the project</p>
-</blockquote>
-
-<p>I think the difficulty is pinning down meanings of « valuable » and « improves
-».</p>
-
-<p>Is it valuable to add new features if they also create legal risk ? Is it an
-improvement to automate away paper cut bugs that deprive new contributors of
-pathways to get started, learn the code base, and mature into maintainers?</p>
-
-<p>These things are decidedly grey areas to me.</p>
-
-<hr />
-
-<p>I think it’s hard to deny that there are valuable uses. I think it is equally
-hard to deny there are wasteful, or evil, or &lt;other negatively connoted&gt; uses.
-And I think the commercial side (even Anthropic in some ways) leans into one
-side more than the other, to our detriment. I think this makes it more important
-to qualify what our community holds dear and how LLMs fit (and don’t fit) into
-that equation.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[Collected from Discord]]></summary></entry></feed>
+</ul>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><summary type="html"><![CDATA[Machines should bend to suit humans (centaurs), not humans bend to suit machines (reverse centaurs).]]></summary></entry></feed>
