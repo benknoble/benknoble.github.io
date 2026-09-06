@@ -31,7 +31,8 @@ permalink: /cats/
 ### Evening
 
 - Same as morning
-- **Treat**. Kelsey receives one Greenie from the glass jar.
+- **Treat**. Each cat receives one Greenie from the glass jar. Ollie won't eat
+  his unless it is thrown for him to chase a couple times first.
 
 ### Every other day
 
@@ -59,7 +60,7 @@ Call if you have any questions or concerns.
 - **Ollie** ("Ollie bean," "Ollie pop," "little man," "little brother"). Grey
   tabby; male.
     - Playful and snuggly little kitten. Can be held if he's calm, but not when
-      playing. Does _not_ know "soft paw."
+      playing. Is learning to "soft paw."
     - Has a complex lung condition that affects his breathing. A little
       increased effort/rate is normal for him, but there's a cat inhaler
       available in case of emergencies.
