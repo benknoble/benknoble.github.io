@@ -7,7 +7,7 @@ category: Blog
 Today I made some status badges to represent the quality of the code I publish
 on the internet. Here they are.
 
-> Inspired heavily by [arp242](https://arp242.net/project-status-badges.html).
+> Inspired heavily by [arp242](https://web.archive.org/web/20190902185923/https://arp242.net/project-status-badges.html).
 > See his post for more details on semantics.
 
 Except for "archived," many of these badges also answer the question ["Is this
