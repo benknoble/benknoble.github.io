@@ -18,7 +18,7 @@ for details.
 
 - [![This project is considered experimental](https://img.shields.io/badge/status-experimental-critical.svg)](https://benknoble.github.io/status/experimental/)
 
-  May work, or may sacrifice your first-born to Justin Bieber.
+  May work, or may have serious flaws.
 
 - [![This project is considered stable](https://img.shields.io/badge/status-stable-success.svg)](https://benknoble.github.io/status/stable/)
 
