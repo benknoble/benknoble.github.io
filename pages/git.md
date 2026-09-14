@@ -31,3 +31,11 @@ pages/tags.html %}#git), and many of them link out to others.
 ## Communication
 
 - [Communicating in Pull Requests](https://stolee.dev/2025/12/31/pr-communication)
+
+### Commit messages
+
+I have a long backlog of items to add here, so please be patient. If your
+favorite resource isn't listed, [contact me]({% link pages/contact.md %}) and
+I'll prioritize reviewing and including it.
+
+- Not writing commit messages is [Chesterton's middle finger](https://www.arp242.net/chestersons-finger.html)
