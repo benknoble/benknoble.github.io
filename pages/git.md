@@ -39,3 +39,12 @@ favorite resource isn't listed, [contact me]({% link pages/contact.md %}) and
 I'll prioritize reviewing and including it.
 
 - Not writing commit messages is [Chesterton's middle finger](https://www.arp242.net/chestersons-finger.html)
+- As far back as 2009 (and probably earlier), programmers were writing [On
+  commit messages](https://who-t.blogspot.com/2009/12/on-commit-messages.html).
+  It's like the shopping cart test; "a commit message shows whether a developer
+  is a good collaborator."
+
+## Collections of articles
+
+- [Git Rev News](https://git.github.io/rev_news/archive/)
+- Edward Thomson's [Advent of Git](https://www.edwardthomson.com/blog/git_tips_and_tricks_advent_calendar)
