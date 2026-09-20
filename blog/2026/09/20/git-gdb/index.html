@@ -135,6 +135,16 @@ history size:  The size of the command history is 256.
 <p>So I suppose I’ll be configuring GDB shortly to save history, and maybe there’s
 a good way to wrap the above settings?</p>
 
+<h2 id="aside-missing-auto-load-script">Aside: Missing auto-load script</h2>
+
+<p>If you see</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>⚠️ warning: Missing auto-load script at offset 0 in section .debug_gdb_scripts
+</code></pre></div></div>
+
+<p>you need to use the Rust GDB wrapper (typically <code class="language-plaintext highlighter-rouge">rust-gdb</code>) or ignore the
+warning if you don’t plan to debug Rust code.</p>
+
 </div>
 <hr>
 <h4>Tags:</h4>

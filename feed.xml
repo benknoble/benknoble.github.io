@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-09-20T22:21:57+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Debugging Subprocess-heavy Code</title><link href="https://benknoble.github.io/blog/2026/09/20/git-gdb/" rel="alternate" type="text/html" title="Debugging Subprocess-heavy Code" /><published>2026-09-20T00:00:00+00:00</published><updated>2026-09-20T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/09/20/git-gdb</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/09/20/git-gdb/"><![CDATA[<p>Some quick notes on debugging programs like Git with GDB.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-09-20T22:24:27+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Debugging Subprocess-heavy Code</title><link href="https://benknoble.github.io/blog/2026/09/20/git-gdb/" rel="alternate" type="text/html" title="Debugging Subprocess-heavy Code" /><published>2026-09-20T00:00:00+00:00</published><updated>2026-09-20T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/09/20/git-gdb</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/09/20/git-gdb/"><![CDATA[<p>Some quick notes on debugging programs like Git with GDB.</p>
 
 <p>Git is subprocess-heavy: many of the original scripts to implement porcelain
 commands orchestrated subprocesses, and <a href="https://lore.kernel.org/git/782fe91251111fbb28359574d860e4a6d2e45fc0.1789853192.git.ben.knoble@gmail.com/">vestiges of that remain
@@ -47,7 +47,17 @@ history size:  The size of the command history is 256.
 </code></pre></div></div>
 
 <p>So I suppose I’ll be configuring GDB shortly to save history, and maybe there’s
-a good way to wrap the above settings?</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="debugging" /><category term="gdb" /><summary type="html"><![CDATA[Some quick notes on debugging programs like Git with GDB.]]></summary></entry><entry><title type="html">Second Self</title><link href="https://benknoble.github.io/blog/2026/09/20/turkle/" rel="alternate" type="text/html" title="Second Self" /><published>2026-09-20T00:00:00+00:00</published><updated>2026-09-20T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/09/20/turkle</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/09/20/turkle/"><![CDATA[<p><em>The Second Self</em> in conversation with <a href="/blog/2026/09/02/tool-dialogue/">Just a Tool</a>.</p>
+a good way to wrap the above settings?</p>
+
+<h2 id="aside-missing-auto-load-script">Aside: Missing auto-load script</h2>
+
+<p>If you see</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>⚠️ warning: Missing auto-load script at offset 0 in section .debug_gdb_scripts
+</code></pre></div></div>
+
+<p>you need to use the Rust GDB wrapper (typically <code class="language-plaintext highlighter-rouge">rust-gdb</code>) or ignore the
+warning if you don’t plan to debug Rust code.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="git" /><category term="debugging" /><category term="gdb" /><summary type="html"><![CDATA[Some quick notes on debugging programs like Git with GDB.]]></summary></entry><entry><title type="html">Second Self</title><link href="https://benknoble.github.io/blog/2026/09/20/turkle/" rel="alternate" type="text/html" title="Second Self" /><published>2026-09-20T00:00:00+00:00</published><updated>2026-09-20T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/09/20/turkle</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/09/20/turkle/"><![CDATA[<p><em>The Second Self</em> in conversation with <a href="/blog/2026/09/02/tool-dialogue/">Just a Tool</a>.</p>
 
 <p>Thanks again to Felienne Hermans and Hanna Schraffenberger via <a href="https://www.felienne.nl/csoc-s01e07/">Computer
 Science, Off Course! Episode 2</a>, which
