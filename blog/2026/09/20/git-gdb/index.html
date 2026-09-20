@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Home</title>
+  <title>Junk Drawer : Debugging Subprocess-heavy Code</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -75,34 +75,141 @@
   </ul>
 </nav>
 
-      <h1>Home</h1>
-      <p><em>Do you keep your junk drawer full of fun and creative things?</em></p>
+      <h1>Debugging Subprocess-heavy Code</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 20 Sep 2026 in Blog</p>
+<div id="post">
+  <p>Some quick notes on debugging programs like Git with GDB.</p>
 
-<p>On this site, <a href="/about/#me">I break down complex answers to simple questions</a>.</p>
+<p>Git is subprocess-heavy: many of the original scripts to implement porcelain
+commands orchestrated subprocesses, and <a href="https://lore.kernel.org/git/782fe91251111fbb28359574d860e4a6d2e45fc0.1789853192.git.ben.knoble@gmail.com/">vestiges of that remain
+throughout</a>.</p>
 
-<h2 id="latest-post">Latest Post</h2>
+<p>Unfortunately, that makes typical debugging interactions challenging:</p>
 
-<p><a href="/blog/2026/09/20/turkle/">Second Self</a> posted on 20 September 2026</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>λ gdb git merge --autostash
+(gdb) b do_stash_apply
+(gdb) run
+</code></pre></div></div>
 
-<p>Excerpt:</p>
+<p>and the <code class="language-plaintext highlighter-rouge">git-stash</code> subprocess never gets debugged, because GDB detaches from it
+when it gets forked!</p>
 
-<blockquote>
-  <p><em>The Second Self</em> in conversation with <a href="/blog/2026/09/02/tool-dialogue/">Just a Tool</a>.</p>
-</blockquote>
+<p>It seems that the incantation to make Git step into subprocesses (without
+requiring <em>too</em> much juggling) is <a href="https://stackoverflow.com/a/27163134/4400820">something
+like</a>:</p>
 
-<h2 id="recent-posts">Recent Posts</h2>
-<ul>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set detach-on-fork off
+set schedule-multiple on
+set follow-fork-mode parent
+set non-stop on
+set target-async on
+</code></pre></div></div>
 
-  <li>
-  <a href="/blog/2026/09/20/git-gdb/">Debugging Subprocess-heavy Code</a> posted on 20 September 2026
-  </li>
+<p>Now, in my GDB 17.2, <code class="language-plaintext highlighter-rouge">follow-fork-mode=parent</code> is the default and <code class="language-plaintext highlighter-rouge">target-async</code>
+is now called <code class="language-plaintext highlighter-rouge">mi-async</code>, so adjust accordingly.</p>
 
-  <li>
-  <a href="/blog/2026/09/14/what-for/">What for?</a> posted on 14 September 2026
-  </li>
+<p>This way, we can set the breakpoint, <code class="language-plaintext highlighter-rouge">run</code>, and then when stopped say <code class="language-plaintext highlighter-rouge">info
+inferiors</code> and <code class="language-plaintext highlighter-rouge">inferior &lt;n&gt;</code> to change to the subprocess that hit our
+breakpoint. Great!</p>
 
+<p>But, I can’t think of a good way to package this up… and I previously had to
+keep referring to the StackOverflow answer when time would pass between using
+these options (I have a hard time internalizing all their names as “magic
+subprocess mode”). Worse, <a href="https://stackoverflow.com/q/3176800/4400820">it seems GDB turns history <em>off</em> by
+default</a>?</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) show history
+history expansion:  History expansion on command input is off.
+history filename:  The filename in which to record the command history is "/home/benknoble/.gdb_history".
+history remove-duplicates:  The number of history entries to look back at for duplicates is 0.
+history save:  Saving of the history record on exit is off.
+history size:  The size of the command history is 256.
+</code></pre></div></div>
+
+<p>So I suppose I’ll be configuring GDB shortly to save history, and maybe there’s
+a good way to wrap the above settings?</p>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#git" class="tag">
+        git
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#debugging" class="tag">
+        debugging
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#gdb" class="tag">
+        gdb
+      </a>
+    </li>
+  
 </ul>
 
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2026/09/20/git-gdb/";
+    this.page.identifier = "/blog/2026/09/20/git-gdb";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2026/09/14/what-for/" title="What for?">
+      Previous</a>
+  </span>
+  
+  
+  <span id="next">
+    <a href="https://benknoble.github.io/blog/2026/09/20/turkle/" title="Second Self">
+      Next</a>
+  </span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#debugging-subprocess-heavy-code">
+    Back to posts</a>
+</div>
 
     </section>
     <footer>
