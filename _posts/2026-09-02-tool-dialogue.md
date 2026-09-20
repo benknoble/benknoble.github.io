@@ -20,7 +20,7 @@ Related work along those themes:
 - [Greg Wilson's "Rainy Day Thoughts on
   AI"](https://third-bit.com/2026/08/04/rainy-day-thoughts-on-ai/) (first
   mentioned in [Digital Etiquette]({% link _posts/2026-08-15-signal-boost.md
-  %})) opens with Orwell & Dali (creator vs. work)
+  %})) opens with Orwell & Dali (creator vs. work).
 - Ruha Benjamin's excellent book _Race After Technology_ provokes, prods, and
   pokes many of these questions with recent examples, including software built
   on statistical models (from, _e.g._, predictive policing and other legal
