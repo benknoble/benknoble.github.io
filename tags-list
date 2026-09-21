@@ -16,7 +16,7 @@ main() {
   if (($# > 0)) ; then
     filter=(grep -E "$@")
   fi
-  tags | "${filter[@]}"
+  tags | "${filter[@]}" | sort -rn
 }
 
 main "$@"
