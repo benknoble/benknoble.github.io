@@ -125,12 +125,25 @@ so we’ll use that instead of running a Docker container.</p>
   <li>
 <code class="language-plaintext highlighter-rouge">app-admin/vaultwarden</code>, with <code class="language-plaintext highlighter-rouge">web</code> and <code class="language-plaintext highlighter-rouge">sqlite</code> USE flags for sure, and I also
 have the <code class="language-plaintext highlighter-rouge">cli</code> flag</li>
-  <li><code class="language-plaintext highlighter-rouge">app-admin/bitwarden-desktop-bin</code></li>
+  <li>
+<code class="language-plaintext highlighter-rouge">app-admin/bitwarden-desktop-bin</code>.</li>
 </ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">web</code> flag will pull in Vaultwarden’s web client, which you’ll probably need
 to make user invites work well (invite emails have sign-up links that use the
 web client whether or not it is installed).</p>
+
+<p>You’ll need to accept unstable keywords for these packages at time of writing
+(<code class="language-plaintext highlighter-rouge">/etc/portage/package.accept_keywords/vaultwarden</code> for me):</p>
+
+<div class="language-config highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># servers
+</span><span class="n">app</span>-<span class="n">admin</span>/<span class="n">vaultwarden</span>
+<span class="n">www</span>-<span class="n">apps</span>/<span class="n">vaultwarden</span>-<span class="n">web</span>
+
+<span class="c"># clients
+</span><span class="n">app</span>-<span class="n">admin</span>/<span class="n">bitwarden</span>-<span class="n">cli</span>-<span class="n">bin</span>
+<span class="n">app</span>-<span class="n">admin</span>/<span class="n">bitwarden</span>-<span class="n">desktop</span>-<span class="n">bin</span>
+</code></pre></div></div>
 
 <h3 id="https">HTTPS</h3>
 
@@ -149,58 +162,58 @@ on the 4th, 5th, or 6th:</p>
 <p>Now let’s configure nginx. We need to enable our certificates, and we can also
 go ahead and configure the SSL cache:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http {
-    ssl_session_cache shared:SSL:10m;
-    server {
-        listen 443 ssl;
-        listen [::]:443 ssl;
-        ssl_certificate     &lt;host&gt;.crt;
-        ssl_certificate_key &lt;host&gt;.key;
-    }
-}
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">http</span> <span class="p">{</span>
+    <span class="kn">ssl_session_cache</span> <span class="s">shared:SSL:10m</span><span class="p">;</span>
+    <span class="kn">server</span> <span class="p">{</span>
+        <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span>
+        <span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span><span class="p">;</span>
+        <span class="kn">ssl_certificate</span>     <span class="s">&lt;host&gt;.crt</span><span class="p">;</span>
+        <span class="kn">ssl_certificate_key</span> <span class="s">&lt;host&gt;.key</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>In this case, I’m hosting Vaultwarden on a <em>path</em> in my server, rather than
 hosting multiple domains from this single server. So in the same server block,
 I’ll add a route for (<em>e.g.</em>) <code class="language-plaintext highlighter-rouge">/vaultwarden/</code>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http {
-    # …
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">http</span> <span class="p">{</span>
+    <span class="c1"># …</span>
 
-    map $http_upgrade $connection_upgrade {
-        default upgrade;
-        ''      "";
-    }
+    <span class="kn">map</span> <span class="nv">$http_upgrade</span> <span class="nv">$connection_upgrade</span> <span class="p">{</span>
+        <span class="kn">default</span> <span class="s">upgrade</span><span class="p">;</span>
+        <span class="kn">''</span>      <span class="s">""</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    # https://stackoverflow.com/a/67492000/4400820
-    # https://serverfault.com/a/1046256
-    map $request $custom_request {
-        ~^(.*)([\?&amp;]access_token=)([^&amp;]*)(.*)$  "$1$2***redacted***$4";
-        default                                 $request;
-    }
+    <span class="c1"># https://stackoverflow.com/a/67492000/4400820</span>
+    <span class="c1"># https://serverfault.com/a/1046256</span>
+    <span class="kn">map</span> <span class="nv">$request</span> <span class="nv">$custom_request</span> <span class="p">{</span>
+        <span class="kn">~^</span><span class="s">(.*)([</span><span class="err">\</span><span class="s">?&amp;]access_token=)([^&amp;]*)(.*)</span>$  <span class="s">"</span><span class="nv">$1$2</span><span class="s">***redacted***</span><span class="nv">$4</span><span class="s">"</span><span class="p">;</span>
+        <span class="kn">default</span>                                 <span class="nv">$request</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    log_format no_jwt '$remote_addr - $remote_user [$time_local] '
-        '"$custom_request" $status $body_bytes_sent '
-        '"$http_referer" "$http_user_agent"';
+    <span class="kn">log_format</span> <span class="s">no_jwt</span> <span class="s">'</span><span class="nv">$remote_addr</span> <span class="s">-</span> <span class="nv">$remote_user</span> <span class="s">[</span><span class="nv">$time_local</span><span class="s">]</span> <span class="s">'</span>
+        <span class="s">'"</span><span class="nv">$custom_request</span><span class="s">"</span> <span class="nv">$status</span> <span class="nv">$body_bytes_sent</span> <span class="s">'</span>
+        <span class="s">'"</span><span class="nv">$http_referer</span><span class="s">"</span> <span class="s">"</span><span class="nv">$http_user_agent</span><span class="s">"'</span><span class="p">;</span>
 
-    server {
-        # …
+    <span class="kn">server</span> <span class="p">{</span>
+        <span class="c1"># …</span>
 
-        location /vaultwarden/ {
-            # https://serverfault.com/a/772049
-            if ($scheme = http) {
-                return 308 https://&lt;host&gt;$request_uri;
-            }
+        <span class="kn">location</span> <span class="n">/vaultwarden/</span> <span class="p">{</span>
+            <span class="c1"># https://serverfault.com/a/772049</span>
+            <span class="kn">if</span> <span class="s">(</span><span class="nv">$scheme</span> <span class="p">=</span> <span class="s">http)</span> <span class="p">{</span>
+                <span class="kn">return</span> <span class="mi">308</span> <span class="s">https://&lt;host&gt;</span><span class="nv">$request_uri</span><span class="p">;</span>
+            <span class="p">}</span>
 
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection $connection_upgrade;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_pass http://127.0.0.1:&lt;port&gt;/vaultwarden/;
+            <span class="kn">proxy_set_header</span> <span class="s">Upgrade</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+            <span class="kn">proxy_set_header</span> <span class="s">Connection</span> <span class="nv">$connection_upgrade</span><span class="p">;</span>
+            <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+            <span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:&lt;port&gt;/vaultwarden/</span><span class="p">;</span>
 
-            access_log /var/log/nginx/vaultwarden_access.log.gz no_jwt gzip;
-        }
-    }
-}
+            <span class="kn">access_log</span> <span class="n">/var/log/nginx/vaultwarden_access.log.gz</span> <span class="s">no_jwt</span> <span class="s">gzip</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>There’s 3 main things going on here:</p>
@@ -230,8 +243,8 @@ Vaultwarden itself to use the syslog it <a href="https://github.com/dani-garcia/
 logs</a>. So instead
 add the following:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>output_logger=logger
-error_logger="$output_logger"
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">output_logger</span><span class="o">=</span>logger
+<span class="nv">error_logger</span><span class="o">=</span><span class="s2">"</span><span class="nv">$output_logger</span><span class="s2">"</span>
 </code></pre></div></div>
 
 <p>and we’ll configure Vaultwarden to log via stdio.</p>
@@ -260,7 +273,8 @@ admin page for your instance.</li>
 only made <code class="language-plaintext highlighter-rouge">SMTP_FROM</code> my email address and <code class="language-plaintext highlighter-rouge">USE_SENDMAIL=true</code>. Your settings
 may vary.</li>
   <li>Finally, configure <code class="language-plaintext highlighter-rouge">ROCKET_ADDRESS=127.0.0.1</code> (localhost only) and
-<code class="language-plaintext highlighter-rouge">ROCKET_PORT=&lt;port&gt;</code>.</li>
+<code class="language-plaintext highlighter-rouge">ROCKET_PORT=&lt;port&gt;</code>. The address <em>must</em> be an IP address; using <code class="language-plaintext highlighter-rouge">localhost</code>
+won’t work.</li>
 </ul>
 
 <p>With that, you should be able to <code class="language-plaintext highlighter-rouge">rc-service vaultwarden start</code>, see logs in
@@ -275,6 +289,9 @@ configuring SNI, disabling password hint display, or setting up Fail2Ban
 rules via Fail2Ban).</p>
 
 <p>If all is working, I suggest <code class="language-plaintext highlighter-rouge">rc-update add vaultwarden default</code>.</p>
+
+<p>Future updates to the Vaultwarden package will require using <code class="language-plaintext highlighter-rouge">dispatch-conf</code> to
+merge changes in.</p>
 
 <p>Finally, backups. I already make nightly system backups, but we want to backup
 the database specially to avoid getting an incomplete corrupt copy. I run a
