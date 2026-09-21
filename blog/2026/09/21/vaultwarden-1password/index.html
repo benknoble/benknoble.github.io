@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Junk Drawer : Self-hosting Vaultwarden on Gentoo</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- link to main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://benknoble.github.io/assets/css/styles.css" media="screen">
+
+  <script src="/assets/js/scale.fix.js"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" >
+  </script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#c6eafa">
+  <meta name="theme-color" content="#c6eafa">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="https://benknoble.github.io/feed.xml" title="Junk Drawer" />
+</head>
+
+  <body>
+    <header>
+  <h1>
+  <a href="https://benknoble.github.io/">
+  <img src="/assets/img/logo.png" alt="Junk Drawer Logo" width="32" height="32"> Junk Drawer</a>
+</h1>
+  <p>For all those little papers scattered across your desk</p>
+</header>
+
+    <section>
+      <p>
+      I stand for the Constitution, for due process, and for community that
+      takes care of each other.
+      </p>
+      <nav>
+  <ul>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/about/">About</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/categories/">Posts</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/workshops/">Workshops</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/papers/">Papers</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/writings/">Writings</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/reading/">Reading List</a>
+    </li>
+    
+    <li class="">
+      <a href="https://benknoble.github.io/consulting/">Consulting</a>
+    </li>
+    
+  </ul>
+</nav>
+
+      <h1>Self-hosting Vaultwarden on Gentoo</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 21 Sep 2026 in Blog</p>
+<div id="post">
+  <p>After the <a href="https://www.theverge.com/tech/988536/1password-dhh-linux-controversy">1Password announcement of Omarchy
+sponsorship</a>,
+I took a hard look at alternatives.
+<a href="https://github.com/dani-garcia/vaultwarden">Vaultwarden</a> is easy to self-host
+and gave me enough of what I needed.</p>
+
+<p>At the end of this post, I’ll include the email I sent to 1Password’s customer
+support and their response.</p>
+
+<p>Vaultwarden is a <a href="https://bitwarden.com/">Bitwarden</a>-compatible backend for
+securely storing passwords, user data, other metadata that the official
+Bitwarden clients (desktop, web, browser, mobile) use to implement a
+1Password-like password manager. Bitwarden is not as pretty as 1Password, and
+some things irritate me:</p>
+
+<ul>
+  <li>no image uploads for users or organizations</li>
+  <li>no “universal shortcut” for autofill</li>
+</ul>
+
+<p>but the data lives on my machine (thanks to Vaultwarden) and the whole project
+is <a href="https://github.com/bitwarden/">open source</a>. You can also self-host using
+the official backend, but I’m more comfortable using Vaultwarden (which also
+means I’m not paying for additional features).</p>
+
+<h2 id="notes-for-gentoo">Notes for Gentoo</h2>
+
+<p>I have a <a href="https://tailscale.com">tailscale VPN</a>, so we’ll use that for the
+necessary HTTPS certificates and for exposing Vaultwarden to my devices securely
+from my homelab. I run an nginx web-server, which will be the reverse proxy to a
+local HTTP service. Gentoo already packages Vaultwarden with an OpenRC service,
+so we’ll use that instead of running a Docker container.</p>
+
+<h3 id="packages">Packages</h3>
+
+<p>First, emerge the following packages:</p>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">app-admin/vaultwarden</code>, with <code class="language-plaintext highlighter-rouge">web</code> and <code class="language-plaintext highlighter-rouge">sqlite</code> USE flags for sure, and I also
+have the <code class="language-plaintext highlighter-rouge">cli</code> flag</li>
+  <li><code class="language-plaintext highlighter-rouge">app-admin/bitwarden-desktop-bin</code></li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">web</code> flag will pull in Vaultwarden’s web client, which you’ll probably need
+to make user invites work well (invite emails have sign-up links that use the
+web client whether or not it is installed).</p>
+
+<h3 id="https">HTTPS</h3>
+
+<p>While that’s running, get HTTPS certificates:
+<code class="language-plaintext highlighter-rouge">(cd /etc/nginx &amp;&amp; tailscale cert &lt;host&gt;)</code>.
+We can also go ahead and add a crontab entry to renew our certs, which is <a href="https://letsencrypt.org/docs/cert-lifetimes/">best
+practice today</a>. In
+<a href="http://fcron.free.fr/">fcron</a> syntax, running each month in the early morning
+on the 4th, 5th, or 6th:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%monthly * 0-5 4-6 cd /etc/nginx &amp;&amp; /usr/bin/tailscale cert &lt;host&gt;
+</code></pre></div></div>
+
+<h3 id="nginx">nginx</h3>
+
+<p>Now let’s configure nginx. We need to enable our certificates, and we can also
+go ahead and configure the SSL cache:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http {
+    ssl_session_cache shared:SSL:10m;
+    server {
+        listen 443 ssl;
+        listen [::]:443 ssl;
+        ssl_certificate     &lt;host&gt;.crt;
+        ssl_certificate_key &lt;host&gt;.key;
+    }
+}
+</code></pre></div></div>
+
+<p>In this case, I’m hosting Vaultwarden on a <em>path</em> in my server, rather than
+hosting multiple domains from this single server. So in the same server block,
+I’ll add a route for (<em>e.g.</em>) <code class="language-plaintext highlighter-rouge">/vaultwarden/</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http {
+    # …
+
+    map $http_upgrade $connection_upgrade {
+        default upgrade;
+        ''      "";
+    }
+
+    # https://stackoverflow.com/a/67492000/4400820
+    # https://serverfault.com/a/1046256
+    map $request $custom_request {
+        ~^(.*)([\?&amp;]access_token=)([^&amp;]*)(.*)$  "$1$2***redacted***$4";
+        default                                 $request;
+    }
+
+    log_format no_jwt '$remote_addr - $remote_user [$time_local] '
+        '"$custom_request" $status $body_bytes_sent '
+        '"$http_referer" "$http_user_agent"';
+
+    server {
+        # …
+
+        location /vaultwarden/ {
+            # https://serverfault.com/a/772049
+            if ($scheme = http) {
+                return 308 https://&lt;host&gt;$request_uri;
+            }
+
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_pass http://127.0.0.1:&lt;port&gt;/vaultwarden/;
+
+            access_log /var/log/nginx/vaultwarden_access.log.gz no_jwt gzip;
+        }
+    }
+}
+</code></pre></div></div>
+
+<p>There’s 3 main things going on here:</p>
+
+<ol>
+  <li>HTTP redirects to HTTPS. You don’t need this, probably, if your server
+doesn’t listen for HTTP traffic. I serve both on my VPN, since tailscale
+encrypts the connection anyway, but Vaultwarden won’t work without HTTPS.</li>
+  <li>Reverse proxying with connection upgrades. See <a href="https://github.com/dani-garcia/vaultwarden/wiki/Proxy-examples">the Vaultwarden
+wiki</a>.</li>
+  <li>Custom logging format. The <a href="https://github.com/dani-garcia/vaultwarden/wiki/Hardening-Guide#access-logs-contain-access_token-parameter">Vaultwarden wiki</a>
+explains that access logs contain a JWT token for WSS connections, and that
+should be redacted.</li>
+</ol>
+
+<p>Also take note of which port you decide to <code class="language-plaintext highlighter-rouge">proxy_pass</code> to, as we’ll need to
+tell Vaultwarden to use the same one.</p>
+
+<h3 id="openrc">OpenRC</h3>
+
+<p>We don’t need to adjust the <code class="language-plaintext highlighter-rouge">/etc/conf.d/vaultwarden</code> at all.</p>
+
+<p>We will adjust the <code class="language-plaintext highlighter-rouge">/etc/init.d/vaultwarden</code> script to set <code class="language-plaintext highlighter-rouge">output_logger</code> and
+<code class="language-plaintext highlighter-rouge">error_logger</code>, which in retrospect might work in <code class="language-plaintext highlighter-rouge">/etc/conf.d</code> too? In
+particular, I want Vaultwarden routed via <code class="language-plaintext highlighter-rouge">syslog</code>, and if we configure
+Vaultwarden itself to use the syslog it <a href="https://github.com/dani-garcia/vaultwarden/discussions/7721">produces incorrect timestamps in the
+logs</a>. So instead
+add the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>output_logger=logger
+error_logger="$output_logger"
+</code></pre></div></div>
+
+<p>and we’ll configure Vaultwarden to log via stdio.</p>
+
+<h3 id="vaultwarden">Vaultwarden</h3>
+
+<p>Finally we’re ready to configure Vaultwarden itself via
+<code class="language-plaintext highlighter-rouge">/etc/vaultwarden/vaultwarden.conf</code>. Make sure this file is readable only to the
+<code class="language-plaintext highlighter-rouge">root</code> user and <code class="language-plaintext highlighter-rouge">vaultwarden</code> group (recent Gentoo installations should have
+this correct, but the package <a href="https://bugs.gentoo.org/show_bug.cgi?id=982150">used to leave the config file loosely
+permissioned</a>.</p>
+
+<ul>
+  <li>If you want to enable push notifications, follow the instructions to get a key
+and ID from Bitwarden and enable <code class="language-plaintext highlighter-rouge">PUSH_ENABLED=true</code> along with the key/ID
+variables (these secrets are why we control access permissions!).</li>
+  <li>You <em>must</em> configure <code class="language-plaintext highlighter-rouge">DOMAIN</code> as <code class="language-plaintext highlighter-rouge">https://&lt;host&gt;/&lt;path&gt;</code>.</li>
+  <li>Following the hardening guide on the wiki, <code class="language-plaintext highlighter-rouge">SIGNUPS_ALLOWED=false</code> and
+<code class="language-plaintext highlighter-rouge">INVITATIONS_ALLOWED=false</code>.</li>
+  <li>We turn on <code class="language-plaintext highlighter-rouge">EXTENDED_LOGGING=true</code> and set none of <code class="language-plaintext highlighter-rouge">USE_SYSLOG</code> or <code class="language-plaintext highlighter-rouge">LOG_FILE</code>
+to log extended data to stdio.</li>
+  <li>Generate (and save) an admin password, then <code class="language-plaintext highlighter-rouge">vaultwarden hash</code> it for an
+Argon2 PHC string which goes in <code class="language-plaintext highlighter-rouge">ADMIN_TOKEN</code>. You’ll need this to access the
+admin page for your instance.</li>
+  <li>I use <code class="language-plaintext highlighter-rouge">nullmailer</code> to send emails through my existing Gmail account, so I
+only made <code class="language-plaintext highlighter-rouge">SMTP_FROM</code> my email address and <code class="language-plaintext highlighter-rouge">USE_SENDMAIL=true</code>. Your settings
+may vary.</li>
+  <li>Finally, configure <code class="language-plaintext highlighter-rouge">ROCKET_ADDRESS=127.0.0.1</code> (localhost only) and
+<code class="language-plaintext highlighter-rouge">ROCKET_PORT=&lt;port&gt;</code>.</li>
+</ul>
+
+<p>With that, you should be able to <code class="language-plaintext highlighter-rouge">rc-service vaultwarden start</code>, see logs in
+syslog, and go to your Vaultwarden endpoint (<code class="language-plaintext highlighter-rouge">/admin</code>) to get to the admin
+console. From there you can invite your first user. When connecting new clients,
+make sure to set the server address using your host/port combination.</p>
+
+<p>You may want to check out additional <a href="https://github.com/dani-garcia/vaultwarden/wiki/Hardening-Guide">hardening guide
+steps</a>, such as
+configuring SNI, disabling password hint display, or setting up Fail2Ban
+(although Linux gurus I trust are wary of letting attackers control firewall
+rules via Fail2Ban).</p>
+
+<p>If all is working, I suggest <code class="language-plaintext highlighter-rouge">rc-update add vaultwarden default</code>.</p>
+
+<p>Finally, backups. I already make nightly system backups, but we want to backup
+the database specially to avoid getting an incomplete corrupt copy. I run a
+single nightly database backup (again via fcron), and I haven’t decided on an
+automated pruning strategy yet, since my database and user-base are small:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%nightly * 21 ENV_FILE=/etc/vaultwarden/vaultwarden.conf /usr/bin/vaultwarden backup
+</code></pre></div></div>
+
+<p>It’s important to set <code class="language-plaintext highlighter-rouge">ENV_FILE</code> or Vaultwarden won’t find the database!</p>
+
+<h3 id="migrating-from-1password">Migrating from 1Password</h3>
+
+<p>Bitwarden understands 1Password export formats, so export from 1Password and
+import to Bitwarden.</p>
+
+<p>Things you’ll have to do manually:</p>
+
+<ul>
+  <li>Re-upload file attachments</li>
+  <li>Move any “shared vault” items into a new organization vault that you create</li>
+</ul>
+
+<h3 id="desktop-client">Desktop client</h3>
+
+<p>The Linux desktop client quits itself when I press <kbd>Ctrl</kbd>+<kbd>w</kbd>.
+1Password would stick around in the system tray. The equivalent for Bitwarden is
+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>m</kbd>.</p>
+
+<h2 id="letter-to-1password">Letter to 1Password</h2>
+
+<p>When <a href="https://blogs.library.duke.edu/blog/2023/11/30/why-were-dropping-basecamp/">Duke University Libraries dropped Basecamp in 2023</a>, it seemed
+fairly obvious they were on the right side of history and their own
+values.</p>
+
+<p>As a long time 1Password customer (my current account dates to 2021,
+but I’ve been using it since at least 2012), I am frankly disappointed
+and mistrustful of the move to support OmaCom and related projects. I
+know I am not alone among your customers.</p>
+
+<p>1Password’s stated mission is to “build a safer, simpler digital
+future for everyone”—but folks like DHH repeatedly use exclusionary
+rhetoric to espouse exclusionary visions of the world. 1Password wants
+to give back “for good,” but this donation is more likely to help what
+some consider a grift by DHH than it is to help either 1Password’s own
+business interests or to contribute to community good. Even the
+“Giving back in Toronto” program does not align with one of OmaCom’s
+funding members, Shopify’s Tobias Lütke, whom <a href="https://www.theverge.com/tech/988536/1password-dhh-linux-controversy">the Verge cites as
+supporting voting proportional to wealth in Canada</a>.</p>
+
+<p>One of these things is not like the other.</p>
+
+<p>It seems to me, as a programmer and open-source advocate, that a far
+simpler path to helping your customers (even if Omarchy is a huge user
+base for you) would be to support foundational technologies. For
+example</p>
+
+<ul>
+  <li>Arch, on which Omarchy is built</li>
+  <li>Linux kernel development, such as the security team</li>
+  <li>various Linux desktop efforts for X, Wayland, accessibility, etc.</li>
+  <li>the long list of shared libraries you link to</li>
+  <li>the Rust foundation and related ecosystem</li>
+</ul>
+
+<p>And, if you’re already doing these things, it’s not clear what
+supporting OmaCom can do additionally. Certainly downplaying internal
+concerns will not help either. An explicit <em>rejection</em> of DHH’s
+positions seems called for, alongside specific and concrete action for
+an equitable future (actions speak louder; right now, we weigh an
+implicit endorsement against a denial of explicit endorsement—you can
+see how an explicit rejection might help tip those scales).</p>
+
+<p>My plan renews in February 2027. At this time, I must seriously
+consider alternative offerings so that I may be prepared to let my
+subscription lapse if I cannot bring myself to continue to trust
+1Password’s position and alignment with its own stated values.</p>
+
+<h2 id="1passwords-response">1Password’s response</h2>
+
+<p>Thank you for reaching out and sharing your concerns about our decision to
+become a corporate patron of the Omacom Foundation. We value the relationship we
+have with you, and we want to respond thoughtfully and openly about the purpose
+of this commitment and how we’re approaching it at 1Password.</p>
+
+<p>At 1Password, we support developer and open-source communities because they’re
+an important part of the ecosystem our customers rely on. We have a long history
+of supporting open source projects, including the Linux, Rails, and Rust
+Foundations. We chose to support Omarchy because it is a growing Linux
+environment that developers use and value, and because 1Password already had a
+meaningful presence in that community.</p>
+
+<p>Contributing to the Omacom Foundation is intended to support hosting
+infrastructure and provides stable, long-term funding for the upstream
+open-source projects and maintainers on which Omarchy depends.</p>
+
+<p>We recognize that Omarchy is closely associated with its founder, and that
+raises questions about what our support means. Our contribution is made to the
+Omacom Foundation, not to an individual, and is not an endorsement of any
+individual’s personal or political views. 1Password does not endorse hateful,
+dehumanizing, or exclusionary views.</p>
+
+<p>The patronage is also separate from product decisions. It includes no
+requirements or guarantees related to product placement, exclusivity,
+endorsement, or roadmap influence.</p>
+
+<p>We understand that this explanation may not change how you feel about our
+decision. We take all feedback seriously and share it with the appropriate
+teams. Our commitment to the security and privacy of our customers remains
+unchanged.</p>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#linux" class="tag">
+        linux
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#open-source" class="tag">
+        open-source
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#gentoo" class="tag">
+        gentoo
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#politics" class="tag">
+        politics
+      </a>
+    </li>
+  
+</ul>
+
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2026/09/21/vaultwarden-1password/";
+    this.page.identifier = "/blog/2026/09/21/vaultwarden-1password";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2026/09/20/turkle/" title="Second Self">
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#self-hosting-vaultwarden-on-gentoo">
+    Back to posts</a>
+</div>
+
+    </section>
+    <footer>
+  <ul>
+    
+    <li>
+      <a href="https://benknoble.github.io/">Home</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/contact/">Contact</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/sitemap.xml">Sitemap</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/feed.xml">RSS Feed</a>
+    </li>
+    
+    <li>
+      <a href="https://benknoble.github.io/colophon/">Colophon</a>
+    </li>
+    
+    <li>
+      <a href="https://github.com/benknoble/benknoble.github.io/blob/master/LICENSE">Copyright D. Ben Knoble</a>
+    </li>
+    
+    <li>
+      <a href="https://www.goatcounter.com">No personal information collected</a>
+    </li>
+    
+    <li>
+      <p xmlns:cc="http://creativecommons.org/ns#"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+    </li>
+  </ul>
+  <script type="text/javascript">
+    // Source: https://stackoverflow.com/a/8876069/4400820
+    // Posted by ryanve, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-03-05, License - CC BY-SA 4.0
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    // End StackOverflow snippet
+
+    // see assets/css/styles.scss:/@media
+    const num_games = vw > 740 ? 10 : 3
+
+    document.write(`
+      <script type="text/javascript" src="https://boardgamegeek.com/jswidget.php?username=benkenobli&numitems=${num_games}&header=1&text=none&images=small&show=recentplays&imagesonly=1&imagepos=center&inline=1&addstyles=1&domains%5B%5D=boardgame"></` + `script>`)
+  </script>
+</footer>
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script data-goatcounter="https://benknoble_github_io.goatcounter.com/count" async src="//gc.zgo.at/count.js">
+    </script>
+  </body>
+</html>
