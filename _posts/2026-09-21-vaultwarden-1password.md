@@ -41,11 +41,24 @@ First, emerge the following packages:
 
 - `app-admin/vaultwarden`, with `web` and `sqlite` USE flags for sure, and I also
   have the `cli` flag
-- `app-admin/bitwarden-desktop-bin`
+- `app-admin/bitwarden-desktop-bin`.
 
 The `web` flag will pull in Vaultwarden's web client, which you'll probably need
 to make user invites work well (invite emails have sign-up links that use the
 web client whether or not it is installed).
+
+You'll need to accept unstable keywords for these packages at time of writing
+(`/etc/portage/package.accept_keywords/vaultwarden` for me):
+
+```config
+# servers
+app-admin/vaultwarden
+www-apps/vaultwarden-web
+
+# clients
+app-admin/bitwarden-cli-bin
+app-admin/bitwarden-desktop-bin
+```
 
 ### HTTPS
 
@@ -65,7 +78,7 @@ on the 4th, 5th, or 6th:
 Now let's configure nginx. We need to enable our certificates, and we can also
 go ahead and configure the SSL cache:
 
-```
+```nginx
 http {
     ssl_session_cache shared:SSL:10m;
     server {
@@ -81,7 +94,7 @@ In this case, I'm hosting Vaultwarden on a *path* in my server, rather than
 hosting multiple domains from this single server. So in the same server block,
 I'll add a route for (_e.g._) `/vaultwarden/`:
 
-```
+```nginx
 http {
     # …
 
@@ -146,7 +159,7 @@ Vaultwarden itself to use the syslog it [produces incorrect timestamps in the
 logs](https://github.com/dani-garcia/vaultwarden/discussions/7721). So instead
 add the following:
 
-```
+```shell
 output_logger=logger
 error_logger="$output_logger"
 ```
@@ -176,7 +189,8 @@ permissioned](https://bugs.gentoo.org/show_bug.cgi?id=982150).
   only made `SMTP_FROM` my email address and `USE_SENDMAIL=true`. Your settings
   may vary.
 - Finally, configure `ROCKET_ADDRESS=127.0.0.1` (localhost only) and
-  `ROCKET_PORT=<port>`.
+  `ROCKET_PORT=<port>`. The address *must* be an IP address; using `localhost`
+  won't work.
 
 With that, you should be able to `rc-service vaultwarden start`, see logs in
 syslog, and go to your Vaultwarden endpoint (`/admin`) to get to the admin
@@ -190,6 +204,9 @@ configuring SNI, disabling password hint display, or setting up Fail2Ban
 rules via Fail2Ban).
 
 If all is working, I suggest `rc-update add vaultwarden default`.
+
+Future updates to the Vaultwarden package will require using `dispatch-conf` to
+merge changes in.
 
 Finally, backups. I already make nightly system backups, but we want to backup
 the database specially to avoid getting an incomplete corrupt copy. I run a
