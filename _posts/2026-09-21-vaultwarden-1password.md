@@ -75,17 +75,54 @@ on the 4th, 5th, or 6th:
 
 ### nginx
 
-Now let's configure nginx. We need to enable our certificates, and we can also
-go ahead and configure the SSL cache:
+Now let's configure nginx. We'll listen only on the tailscale-assigned IP and
+hostname. We need to enable our certificates, and we can also go ahead and
+configure the SSL cache:
 
 ```nginx
 http {
     ssl_session_cache shared:SSL:10m;
     server {
-        listen 443 ssl;
-        listen [::]:443 ssl;
+        listen <tailscale-IP>:443 ssl;
+        listen [<tailscale-IPv6>]:443 ssl;
+        server_name <host>;
         ssl_certificate     <host>.crt;
         ssl_certificate_key <host>.key;
+    }
+}
+```
+
+Now, if this is the first server block that matches the request *port*, it will
+end up being the [default
+server](https://nginx.org/en/docs/http/request_processing.html), which means it
+may serve responses if no other block matches (even if the `Host` header doesn't
+match). I *think* that the IP is included in this default mode, though, so at
+least we won't try to handle requests for other IPs? The docs are not
+particularly clear…
+
+We can (and probably should) [configure a server to drop host-less
+requests](https://nginx.org/en/docs/http/request_processing.html), but I'm not
+sure if that's meaningful for HTTPS.
+
+If you like, and I think this provides some straightforward additional security,
+we can allowlist only the tailscale IPs that should be allowed to connect (see
+[Reserved IP Addresses](https://tailscale.com/docs/reference/reserved-ip-addresses)):
+
+```
+http {
+    # …
+
+    server {
+        # …
+        deny 100.100.100.100;
+        deny 100.101.102.103;
+        deny 100.100.100.0/24;
+        deny 100.100.0.0/24;
+        deny 100.115.92.0/23;
+        allow 100.64.0.0/10;
+        deny fd7a:115c:a1e0::53;
+        allow fd7a:115c:a1e0::/48;
+        deny all;
     }
 }
 ```
