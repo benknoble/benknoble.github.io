@@ -159,18 +159,54 @@ on the 4th, 5th, or 6th:</p>
 
 <h3 id="nginx">nginx</h3>
 
-<p>Now let’s configure nginx. We need to enable our certificates, and we can also
-go ahead and configure the SSL cache:</p>
+<p>Now let’s configure nginx. We’ll listen only on the tailscale-assigned IP and
+hostname. We need to enable our certificates, and we can also go ahead and
+configure the SSL cache:</p>
 
 <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">http</span> <span class="p">{</span>
     <span class="kn">ssl_session_cache</span> <span class="s">shared:SSL:10m</span><span class="p">;</span>
     <span class="kn">server</span> <span class="p">{</span>
-        <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span>
-        <span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span><span class="p">;</span>
+        <span class="kn">listen</span> <span class="s">&lt;tailscale-IP&gt;:443</span> <span class="s">ssl</span><span class="p">;</span>
+        <span class="kn">listen</span> <span class="s">[&lt;tailscale-IPv6&gt;]:443</span> <span class="s">ssl</span><span class="p">;</span>
+        <span class="kn">server_name</span> <span class="s">&lt;host&gt;</span><span class="p">;</span>
         <span class="kn">ssl_certificate</span>     <span class="s">&lt;host&gt;.crt</span><span class="p">;</span>
         <span class="kn">ssl_certificate_key</span> <span class="s">&lt;host&gt;.key</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now, if this is the first server block that matches the request <em>port</em>, it will
+end up being the <a href="https://nginx.org/en/docs/http/request_processing.html">default
+server</a>, which means it
+may serve responses if no other block matches (even if the <code class="language-plaintext highlighter-rouge">Host</code> header doesn’t
+match). I <em>think</em> that the IP is included in this default mode, though, so at
+least we won’t try to handle requests for other IPs? The docs are not
+particularly clear…</p>
+
+<p>We can (and probably should) <a href="https://nginx.org/en/docs/http/request_processing.html">configure a server to drop host-less
+requests</a>, but I’m not
+sure if that’s meaningful for HTTPS.</p>
+
+<p>If you like, and I think this provides some straightforward additional security,
+we can allowlist only the tailscale IPs that should be allowed to connect (see
+<a href="https://tailscale.com/docs/reference/reserved-ip-addresses">Reserved IP Addresses</a>):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http {
+    # …
+
+    server {
+        # …
+        deny 100.100.100.100;
+        deny 100.101.102.103;
+        deny 100.100.100.0/24;
+        deny 100.100.0.0/24;
+        deny 100.115.92.0/23;
+        allow 100.64.0.0/10;
+        deny fd7a:115c:a1e0::53;
+        allow fd7a:115c:a1e0::/48;
+        deny all;
+    }
+}
 </code></pre></div></div>
 
 <p>In this case, I’m hosting Vaultwarden on a <em>path</em> in my server, rather than
