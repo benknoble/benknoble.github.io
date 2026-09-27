@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-09-24T13:18:45+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Once more, not “just a tool”</title><link href="https://benknoble.github.io/blog/2026/09/21/once-more/" rel="alternate" type="text/html" title="Once more, not “just a tool”" /><published>2026-09-21T00:00:00+00:00</published><updated>2026-09-21T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/09/21/once-more</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/09/21/once-more/"><![CDATA[<p>Of <em>course</em> we are shaped by the choices presented to us!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-09-27T13:19:06+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Can we address today’s problems?</title><link href="https://benknoble.github.io/blog/2026/09/27/todays-problems/" rel="alternate" type="text/html" title="Can we address today’s problems?" /><published>2026-09-27T00:00:00+00:00</published><updated>2026-09-27T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/09/27/todays-problems</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/09/27/todays-problems/"><![CDATA[<p>mandy brown wrote a compelling <a href="https://aworkinglibrary.com/writing/an-addiction">note on <em>To Write Like a
+Woman</em></a>.</p>
+
+<p>In it, she claims that “all the potential horrors ascribed to a future AI are in
+fact real and present today.” This is the <a href="https://pluralistic.net/2023/09/05/not-that-naomi/#if-the-naomi-be-klein-youre-doing-just-fine">mirror-world warping</a>
+that turns today’s problems into conspiracy theories, deflecting us from
+addressing systemic problems by insisting we debate the existence of nonsense.</p>
+
+<p>It’s no wonder everyone I know is anxious about the future. We can’t agree on
+the present.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="llm" /><category term="politics" /><summary type="html"><![CDATA[mandy brown wrote a compelling note on To Write Like a Woman.]]></summary></entry><entry><title type="html">Once more, not “just a tool”</title><link href="https://benknoble.github.io/blog/2026/09/21/once-more/" rel="alternate" type="text/html" title="Once more, not “just a tool”" /><published>2026-09-21T00:00:00+00:00</published><updated>2026-09-21T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/09/21/once-more</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/09/21/once-more/"><![CDATA[<p>Of <em>course</em> we are shaped by the choices presented to us!</p>
 
 <p>At the beginning of August, Lauren Leek published <a href="https://laurenleek.substack.com/p/temperature-zero-for-culture-why">Temperature Zero for Culture:
 Why Everything Is Starting to Look the
@@ -1149,41 +1158,4 @@ are fine for me and others not.</p>
 
 <p>I’d like to practice exploratory refactoring more. I’ll probably throw most of
 it away over time, but every now and then I might come up with a nugget worth
-keeping.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="software-engineering" /><category term="git" /><category term="refactor" /><summary type="html"><![CDATA[A few notes from reading a recent section of the book.]]></summary></entry><entry><title type="html">Theory Building with Git</title><link href="https://benknoble.github.io/blog/2026/08/16/theory-building/" rel="alternate" type="text/html" title="Theory Building with Git" /><published>2026-08-16T00:00:00+00:00</published><updated>2026-08-16T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/16/theory-building</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/16/theory-building/"><![CDATA[<p>A few notes from thinking about <a href="https://feelingof.com/episodes/061/">Feeling of Coding’s episode on “Programming as
-Theory Building”</a>.</p>
-
-<p>(Yes, I’m late listening to it. No time like the present!)</p>
-
-<p>At some point in the episode, our hosts remark that Git is not well-designed for
-theory building. I must disagree.</p>
-
-<p>Admittedly, the theory building the episode discusses is particular; in Naur’s
-conception (as I understand it), only the original team working on the codebase
-has the theory, and there is <em>no way</em> to transmit it to anyone else. Any attempt
-can only be an approximation and would lead to a new theory, not the original.</p>
-
-<p>And yet… isn’t Git a wonderful approximation? Git captures both historical
-context and the evolution-in-time of the codebase. Arguably, that is likely to
-omit a lot of external context and personal viewpoints of the original team. Yet
-through commit messages we have the ability to share in writing a part of our
-theory that isn’t evident from the code itself.</p>
-
-<p>A commit message will never capture or transmit the entire theory. Still, it’s
-value lies in making available more of the theory than we get with just code, or
-just code + revisions.</p>
-
-<p>Finally, I’d like to point out that Git was originally designed for Linux kernel
-development. That kind of model has no analog in what I recall of Naur’s paper:
-the “team” is large, distributed in all dimensions, and no one person has a
-complete theory of the entire kernel.</p>
-
-<p>So if that disqualifies Git from serving Naur’s original theory building, that’s
-fine with me. I think you’ll find it hard to argue that Git is poorly suited for
-transmitting theory about the kernel since it’s used so successfully to
-contribute to and explore the kernel’s source.</p>
-
-<p>While I’m here, I should also point you to <a href="https://www.felienne.nl/csoc-s01-e01/">Computer Science Off Course
-Epsiode 1</a>, which covers the same paper
-in interesting ways. This includes that generating code with LLMs leaves us
-without a theory of the code, so we are left unable to justify decisions or
-reason about modifications. Programming is not just the generation of code.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="software-engineering" /><category term="git" /><summary type="html"><![CDATA[A few notes from thinking about Feeling of Coding’s episode on “Programming as Theory Building”.]]></summary></entry></feed>
+keeping.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="software-engineering" /><category term="git" /><category term="refactor" /><summary type="html"><![CDATA[A few notes from reading a recent section of the book.]]></summary></entry></feed>
