@@ -1,5 +1,5 @@
 ---
-title: Notes on Racket quit handlers
+title: A note on Racket quit handlers
 tags: [ racket ]
 category: [ Blog ]
 ---

@@ -1,13 +1,10 @@
 ---
-title: 'Collected chats about Racket'
+title: A note about R7RS implicit phasing
 tags: [ racket ]
 category: [ Blog ]
 ---
 
-This post serves primarily to host an indexable copy of some chat replies about
-the Racket programming language.
-
-## Questions about [R7RS implicit phasing](https://codeberg.org/scheme/r7rs/issues/217)
+Questions about [R7RS implicit phasing](https://codeberg.org/scheme/r7rs/issues/217).
 
 - *a*: hm. what stops a `#lang` from reimplementing whatever algorithm a
   r7rs-large compiler does?

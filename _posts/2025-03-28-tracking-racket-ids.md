@@ -1,5 +1,5 @@
 ---
-title: A tip on tracking down bound identifiers in Racket
+title: A note about tracking down bound identifiers in Racket
 tags: [ racket ]
 category: [ Blog ]
 ---
