@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Junk Drawer : Home</title>
+  <title>Junk Drawer : Renewing Tailscale-provided Certificates</title>
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -75,34 +75,132 @@
   </ul>
 </nav>
 
-      <h1>Home</h1>
-      <p><em>Do you keep your junk drawer full of fun and creative things?</em></p>
-
-<p>On this site, <a href="/about/#me">I break down complex answers to simple questions</a>.</p>
-
-<h2 id="latest-post">Latest Post</h2>
-
-<p><a href="/blog/2026/10/06/tailscale-cert/">Renewing Tailscale-provided Certificates</a> posted on 06 October 2026</p>
-
-<p>Excerpt:</p>
-
-<blockquote>
+      <h1>Renewing Tailscale-provided Certificates</h1>
+      <p class="meta"><span class="authors">
+  
+  
+    D. Ben Knoble
+  
+</span>
+ on 06 Oct 2026 in Blog</p>
+<div id="post">
   <p>A quick note on Tailscale-provided SSL certificates.</p>
-</blockquote>
 
-<h2 id="recent-posts">Recent Posts</h2>
-<ul>
+<p>Tailscale provides certificates through the ACME protocol with <a href="https://letsencrypt.org">Let’s
+Encrypt</a>. Their <a href="https://letsencrypt.org/docs/cert-lifetimes/">current
+policy</a> recommends frequent
+automatic rotation within the 90-day window, and in 2028 we’ll have a 45-day
+window.</p>
 
-  <li>
-  <a href="/blog/2026/10/02/reading-notes-configuration-work/">Reading notes on "Configuration Work"</a> posted on 02 October 2026
-  </li>
+<p>So, one might think to set up a cron job like</p>
 
-  <li>
-  <a href="/blog/2026/09/27/todays-problems/">Can we address today's problems?</a> posted on 27 September 2026
-  </li>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%monthly * 0-5 4-6 cd /etc/nginx &amp;&amp; /usr/bin/tailscale cert &lt;host&gt;
+</code></pre></div></div>
 
+<p>to trigger a rotation near the beginning of each month. Nice and automatic, and
+works for the 45-day window, too, right?</p>
+
+<p>Well, the first time my such job ran, I got</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Public cert unchanged at &lt;host&gt;.crt
+Private key unchanged at &lt;host&gt;.key
+</code></pre></div></div>
+
+<p>What?</p>
+
+<p>It turns out that <a href="https://github.com/tailscale/tailscale/issues/8204">even after some changes in certificate
+renewal</a>, Tailscale waits
+for Let’s Encrypt to say it’s a good window for renewal and then queues a
+background job to update the cert! Thanks to <a href="https://community.letsencrypt.org/t/tailscale-certificates/198895/21">the Let’s Encrypt community
+forum</a> for
+pointing me to that information.</p>
+
+<p>So I’ve now settled on a weekly job:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%weekly * 0-5 /root/renew-cert
+</code></pre></div></div>
+
+<p>that runs a simple script:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/sh</span>
+
+<span class="nb">cd</span> /etc/nginx <span class="o">||</span> <span class="nb">exit </span>1
+/usr/bin/tailscale cert &lt;host&gt;.net <span class="o">&gt;</span>/dev/null 2&gt;&amp;1 <span class="o">||</span> <span class="o">{</span>
+  <span class="nv">err</span><span class="o">=</span><span class="nv">$?</span>
+  <span class="nb">echo</span> <span class="s1">'failed to renew certificate'</span>
+  <span class="nb">exit</span> <span class="nv">$err</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The output is for my email, since I let cron email me output. (Apparently that’s
+antiquated now?)</p>
+
+</div>
+<hr>
+<h4>Tags:</h4>
+<ul class="tags">
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#linux" class="tag">
+        linux
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://benknoble.github.io/tags#tailscale" class="tag">
+        tailscale
+      </a>
+    </li>
+  
 </ul>
 
+<div id="post-categories">
+  <h4>Categories:
+  
+    <a href="/categories/#blog">Blog</a>
+    
+  
+  </h4>
+</div>
+
+<div id="disqus_thread"></div>
+<div class="load-comments" onclick="load_comments(this)">Load Comments</div>
+<script>
+  var disqus_shortname = 'https-benknoble-github-io';
+  var disqus_config = function () {
+    this.page.url = "https://benknoble.github.io/blog/2026/10/06/tailscale-cert/";
+    this.page.identifier = "/blog/2026/10/06/tailscale-cert";
+  };
+
+  function load_comments(div) {
+    var d = document, s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    div.parentNode.removeChild(div)
+  };
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+<div id="post-navigation">
+  
+  <span id="previous">
+    <a href="https://benknoble.github.io/blog/2026/10/02/reading-notes-configuration-work/" title="Reading notes on " configuration work>
+      Previous</a>
+  </span>
+  
+  
+  <span id="no-next">Next</span>
+  
+</div>
+<div id="back-to-posts">
+  <a href="/categories/#renewing-tailscale-provided-certificates">
+    Back to posts</a>
+</div>
 
     </section>
     <footer>

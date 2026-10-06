@@ -1,4 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-10-05T20:30:55+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Reading notes on “Configuration Work”</title><link href="https://benknoble.github.io/blog/2026/10/02/reading-notes-configuration-work/" rel="alternate" type="text/html" title="Reading notes on “Configuration Work”" /><published>2026-10-02T00:00:00+00:00</published><updated>2026-10-02T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/10/02/reading-notes-configuration-work</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/10/02/reading-notes-configuration-work/"><![CDATA[<p>My notes on <a href="https://arxiv.org/pdf/2512.19189">Configuration Work: Four Consequences of
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://benknoble.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://benknoble.github.io/" rel="alternate" type="text/html" /><updated>2026-10-06T16:09:31+00:00</updated><id>https://benknoble.github.io/feed.xml</id><title type="html">Junk Drawer</title><subtitle>For all those little papers scattered across your desk</subtitle><author><name>benknoble</name></author><entry><title type="html">Renewing Tailscale-provided Certificates</title><link href="https://benknoble.github.io/blog/2026/10/06/tailscale-cert/" rel="alternate" type="text/html" title="Renewing Tailscale-provided Certificates" /><published>2026-10-06T00:00:00+00:00</published><updated>2026-10-06T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/10/06/tailscale-cert</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/10/06/tailscale-cert/"><![CDATA[<p>A quick note on Tailscale-provided SSL certificates.</p>
+
+<p>Tailscale provides certificates through the ACME protocol with <a href="https://letsencrypt.org">Let’s
+Encrypt</a>. Their <a href="https://letsencrypt.org/docs/cert-lifetimes/">current
+policy</a> recommends frequent
+automatic rotation within the 90-day window, and in 2028 we’ll have a 45-day
+window.</p>
+
+<p>So, one might think to set up a cron job like</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%monthly * 0-5 4-6 cd /etc/nginx &amp;&amp; /usr/bin/tailscale cert &lt;host&gt;
+</code></pre></div></div>
+
+<p>to trigger a rotation near the beginning of each month. Nice and automatic, and
+works for the 45-day window, too, right?</p>
+
+<p>Well, the first time my such job ran, I got</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Public cert unchanged at &lt;host&gt;.crt
+Private key unchanged at &lt;host&gt;.key
+</code></pre></div></div>
+
+<p>What?</p>
+
+<p>It turns out that <a href="https://github.com/tailscale/tailscale/issues/8204">even after some changes in certificate
+renewal</a>, Tailscale waits
+for Let’s Encrypt to say it’s a good window for renewal and then queues a
+background job to update the cert! Thanks to <a href="https://community.letsencrypt.org/t/tailscale-certificates/198895/21">the Let’s Encrypt community
+forum</a> for
+pointing me to that information.</p>
+
+<p>So I’ve now settled on a weekly job:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%weekly * 0-5 /root/renew-cert
+</code></pre></div></div>
+
+<p>that runs a simple script:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/sh</span>
+
+<span class="nb">cd</span> /etc/nginx <span class="o">||</span> <span class="nb">exit </span>1
+/usr/bin/tailscale cert &lt;host&gt;.net <span class="o">&gt;</span>/dev/null 2&gt;&amp;1 <span class="o">||</span> <span class="o">{</span>
+  <span class="nv">err</span><span class="o">=</span><span class="nv">$?</span>
+  <span class="nb">echo</span> <span class="s1">'failed to renew certificate'</span>
+  <span class="nb">exit</span> <span class="nv">$err</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The output is for my email, since I let cron email me output. (Apparently that’s
+antiquated now?)</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="linux" /><category term="tailscale" /><summary type="html"><![CDATA[A quick note on Tailscale-provided SSL certificates.]]></summary></entry><entry><title type="html">Reading notes on “Configuration Work”</title><link href="https://benknoble.github.io/blog/2026/10/02/reading-notes-configuration-work/" rel="alternate" type="text/html" title="Reading notes on “Configuration Work”" /><published>2026-10-02T00:00:00+00:00</published><updated>2026-10-02T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/10/02/reading-notes-configuration-work</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/10/02/reading-notes-configuration-work/"><![CDATA[<p>My notes on <a href="https://arxiv.org/pdf/2512.19189">Configuration Work: Four Consequences of
 LLMs<em>-in-use</em></a>.</p>
 
 <p>These notes will focus primarily on the research project and the result,
@@ -708,7 +757,7 @@ endorsement, or roadmap influence.</p>
 <p>We understand that this explanation may not change how you feel about our
 decision. We take all feedback seriously and share it with the appropriate
 teams. Our commitment to the security and privacy of our customers remains
-unchanged.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="linux" /><category term="open-source" /><category term="gentoo" /><category term="politics" /><summary type="html"><![CDATA[After the 1Password announcement of Omarchy sponsorship, I took a hard look at alternatives. Vaultwarden is easy to self-host and gave me enough of what I needed.]]></summary></entry><entry><title type="html">Debugging Subprocess-heavy Code</title><link href="https://benknoble.github.io/blog/2026/09/20/git-gdb/" rel="alternate" type="text/html" title="Debugging Subprocess-heavy Code" /><published>2026-09-20T00:00:00+00:00</published><updated>2026-09-20T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/09/20/git-gdb</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/09/20/git-gdb/"><![CDATA[<p>Some quick notes on debugging programs like Git with GDB.</p>
+unchanged.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="linux" /><category term="tailscale" /><category term="open-source" /><category term="gentoo" /><category term="politics" /><summary type="html"><![CDATA[After the 1Password announcement of Omarchy sponsorship, I took a hard look at alternatives. Vaultwarden is easy to self-host and gave me enough of what I needed.]]></summary></entry><entry><title type="html">Debugging Subprocess-heavy Code</title><link href="https://benknoble.github.io/blog/2026/09/20/git-gdb/" rel="alternate" type="text/html" title="Debugging Subprocess-heavy Code" /><published>2026-09-20T00:00:00+00:00</published><updated>2026-09-20T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/09/20/git-gdb</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/09/20/git-gdb/"><![CDATA[<p>Some quick notes on debugging programs like Git with GDB.</p>
 
 <p>Git is subprocess-heavy: many of the original scripts to implement porcelain
 commands orchestrated subprocesses, and <a href="https://lore.kernel.org/git/782fe91251111fbb28359574d860e4a6d2e45fc0.1789853192.git.ben.knoble@gmail.com/">vestiges of that remain
@@ -1415,17 +1464,4 @@ ecosystem and the pluggable odb work. I’m not sure I’ll hold my breath.</p>
 <h2 id="wrapping-up">Wrapping up</h2>
 
 <p>I look forward to continued dialog with Dev :) If he posts any kind of reply to
-this publicly, I’ll link it here.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="software-engineering" /><category term="git" /><summary type="html"><![CDATA[A conversation-via-blog with Dev Doshi about Git’s role in the future of software development.]]></summary></entry><entry><title type="html">Breaking Changes in Dracula Pro for Vim</title><link href="https://benknoble.github.io/blog/2026/08/22/dracula-pro/" rel="alternate" type="text/html" title="Breaking Changes in Dracula Pro for Vim" /><published>2026-08-22T00:00:00+00:00</published><updated>2026-08-22T00:00:00+00:00</updated><id>https://benknoble.github.io/blog/2026/08/22/dracula-pro</id><content type="html" xml:base="https://benknoble.github.io/blog/2026/08/22/dracula-pro/"><![CDATA[<p>PSA: If you use Dracula Pro, the filenames were changed recently.</p>
-
-<p>There is an agglomerate Dracula Pro Git repository that contains sources for all
-the Pro themes. There is also a seperate repo for each application.</p>
-
-<p>While doing my usual maintenance to pull changes from the FOSS Dracula theme for
-Vim, I noticed a commit in the agglomerate repo that changed all instances of
-<code class="language-plaintext highlighter-rouge">dracula_pro</code> to <code class="language-plaintext highlighter-rouge">dracula-pro</code>, including other underscores. I have, despite my
-misgivings, cherry-picked that change back into the Vim-only Pro repo.</p>
-
-<p>So, if you pull from either the agglomerate repo after 14th August or the
-Vim-only repo after today (22nd August), you’ll need to adjust your invocations
-of <code class="language-plaintext highlighter-rouge">:colorscheme</code> or your <code class="language-plaintext highlighter-rouge">ColorScheme</code> autocommands for Vim. Other applications
-may be similarly affected.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="dracula" /><summary type="html"><![CDATA[PSA: If you use Dracula Pro, the filenames were changed recently.]]></summary></entry></feed>
+this publicly, I’ll link it here.</p>]]></content><author><name>D. Ben Knoble</name></author><category term="[&quot;Blog&quot;]" /><category term="software-engineering" /><category term="git" /><summary type="html"><![CDATA[A conversation-via-blog with Dev Doshi about Git’s role in the future of software development.]]></summary></entry></feed>
