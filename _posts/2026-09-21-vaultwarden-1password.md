@@ -1,6 +1,6 @@
 ---
 title: Self-hosting Vaultwarden on Gentoo
-tags: [ linux, open-source, gentoo, politics ]
+tags: [ linux, tailscale, open-source, gentoo, politics ]
 category: [ Blog ]
 ---
 
