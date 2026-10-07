@@ -15,6 +15,7 @@ permalink: /contact/
 |--------|---------|
 | github | [@benknoble][github] |
 | gitlab | [@benknoble][gitlab] |
+| codeberg | [@benknoble][codeberg] |
 | stack overflow | [D. Ben Knoble][stack] |
 | linkedin | [ben-knoble][linkedin] |
 | portfolio (outdated) | [git showcase][portfolio] |
@@ -24,5 +25,6 @@ permalink: /contact/
 [portfolio]: {{ site.data.people.benknoble.portfolio }}
 [github]: {{ site.data.people.benknoble.github }}
 [gitlab]: {{ site.data.people.benknoble.gitlab }}
+[codeberg]: {{ site.data.people.benknoble.codeberg }}
 [stack]: {{ site.data.people.benknoble.stack_network }}
 [linkedin]: {{ site.data.people.benknoble.linkedin }}
