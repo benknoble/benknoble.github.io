@@ -11,7 +11,7 @@ You already know to run `vimtutor` and read `:help`. Here's why:
   means that you can get started with very basic maneuvers: Insert mode, arrow
   keys, `ZZ`. Give motions and Normal mode a try. As you find places to improve
   or change the editor, you can do so with advanced `:help` topics.
-- As [Primeagen says](https://x.com/i/broadcasts/1RDxlzBlnXNGL) around the 1h30
+- As [Primeagen says](https://x.com/i/broadcasts/1RDxlzBlnXNGL)[^1] around the 1h30
   mark, Vim isn't hard: it's just different. We have preconceived notions of
   programming and editors that Vim doesn't fit into. The first time you learned
   what a file is or how a compiler creates an executable was equally
@@ -22,3 +22,9 @@ You already know to run `vimtutor` and read `:help`. Here's why:
   Tinker!
 
 Oh, and don't use a distro if you can avoid it. Prime agrees.
+
+## Notes
+
+[^1]: I still agree with this take, but as of late 2026 I feel compelled to
+    notify you that [ThePrimeagen is a core developer for the fascist Omarchy
+    project](https://brennan.day/normalized-fascism-in-open-source-12-million-given-to-dhh/).
