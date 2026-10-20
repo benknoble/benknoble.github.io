@@ -10,6 +10,9 @@ I took a hard look at alternatives.
 [Vaultwarden](https://github.com/dani-garcia/vaultwarden) is easy to self-host
 and gave me enough of what I needed.
 
+If you're still not sure about 1Password's actions, take a look at
+[StopOmarchy.org](https://stopomarchy.org).
+
 At the end of this post, I'll include the email I sent to 1Password's customer
 support and their response.
 
