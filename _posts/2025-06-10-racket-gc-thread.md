@@ -7,6 +7,10 @@ category: [ Blog ]
 Yes, Racket will collect as garbage a thread that is blocked on a channel that
 can have no writers (according to Matthew Flatt).
 
+**Update 2026-10-20:** Racket's concurrency semantics and philosophy is also
+well-covered at [a ConcurrentML explainer using
+Racket](https://nikhilism.com/post/2026/golang-racket-concurrency/).
+
 Matthew also suggested a nice refinement of my program below that demonstrates
 the effect. I'll show his first:
 
