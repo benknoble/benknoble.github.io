@@ -3,6 +3,16 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "Ben shows great leadership qualities as is evident in his time, effort and
+  contributions to many groups within the Capital One org. Between mentoring
+  TDPs, building engineering culture within various sub groups (such as git and
+  developer-experience), and contributing to open source projects, he shows a
+  true passion for engineering. He also has a keen ability to think deeply about
+  problems and ideas, and convey them in ways that are easy to understand. He is
+  thorough with his reasoning, delivers the most important information for a
+  given audience and is always receptive to feedback. I also appreciate his
+  commitment to engineering writing as a craft and sharing ideas that provoke
+  thought to change how our organization works."
 - "Ben is one of the deepest technical engineers I've worked with, especially
   regarding his research & discovery. What sets his work apart is
   the exceptional level of detail he puts into thinking a problem through before
