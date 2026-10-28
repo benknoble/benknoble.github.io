@@ -9,19 +9,12 @@ permalink: /cats/
 
 - **Wet Food**.
     - All cats get one quarter can of corresponding wet food with a handful of
-      dry food sprinkled on top. Ollie gets 2 handfuls to slow him down (the
-      others just feel left out). Sometimes Lilly likes a little adult food with
-      her kitten food.
+      dry food (~5 pieces or so) sprinkled on top.
     - Kelsey and Lilly sometimes wonder; they'll usually eat more if you bring
       their food to their new spot.
     - Ollie will try to steal from the others; if they are mostly finished, it's
       OK, but make sure everyone gets their fill first.
-- **Lysine**. Both kittens get lysine supplements twice per day. Squeeze
-  half-inch or so onto one finger (per cat).
-    - Ollie will likely lick it right off your finger. Lilly will probably not.
-    - For kittens that won't lick it, grab them and smear it on one of their
-      paws (Lilly prefers front left). Try to spread it out; they can shake off
-      the clumps.
+    - Frankly, they all swap food a little these days. It won't hurt them.
 - **Dry food**. The automatic feeder should be operational, but checking
   it has enough never hurts. If there is not much dry food available, filling
   the porcelain bowl is a good idea.
