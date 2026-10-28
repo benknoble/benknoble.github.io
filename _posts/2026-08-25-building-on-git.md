@@ -79,7 +79,7 @@ from forming. We need version control that encourages working in the commons.)
 My current finger on the pulse suggests 2 things:
 
 - Git embraces innovation driven by competitors.
-- Competitors are fragmented, each bring sometimes-orthogonal and
+- Competitors are fragmented; each brings sometimes-orthogonal and
   sometimes-overlapping innovation.
 
 I consequently prefer to stick with and contribute to Git until a consensus
@@ -225,8 +225,8 @@ _posts/2026-08-16-theory-building.md %}) for just a _taste_) is actually that we
 train more human programmers to use commits as a meaningful state of the world.
 
 That is, I like the "local can be meaningless checkpoints as long as what I send
-for review has semantic weight." Git's own code review enforces this and creates
-a much more meaningful history as a result.
+for review has semantic weight" model. Git's own code review enforces this and
+creates a much more meaningful history as a result.
 
 Trunk-based development and a philosophy I can no longer find that I associate
 with some notion of "monotonic commits" (the system wouldn't commit if tests
@@ -254,8 +254,8 @@ lots of languages, and I don't relish teaching Git about all of them.
 
 On the other hand, [Linus's infamous rant about
 renames](https://lore.kernel.org/git/Pine.LNX.4.58.0504150753440.7211@ppc970.osdl.org/)
-applies: as long as work with the original form, we can always layer additional
-smarts on top. That's how [defining a custom hunk
+applies: as long as we work with the original form, we can always layer
+additional smarts on top. That's how [defining a custom hunk
 header](https://git-scm.com/docs/gitattributes#_defining_a_custom_hunk_header)
 and related
 [textconv](https://git-scm.com/docs/gitattributes#_performing_text_diffs_of_binary_files)

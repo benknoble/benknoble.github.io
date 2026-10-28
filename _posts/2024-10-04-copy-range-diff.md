@@ -6,8 +6,8 @@ category: [ Blog ]
 
 I've been using `git range-diff` for the past few months to explain changes
 between versions of a patch series, such as different versions of a branch after
-responding to review comments on a Pull Request. This post explains how I use
-post the output for Markdown-ish consumption on GitHub.
+responding to review comments on a Pull Request. This post explains how I post
+the output for Markdown-ish consumption on GitHub.
 
 ## Primer
 
