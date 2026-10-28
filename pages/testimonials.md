@@ -3,6 +3,12 @@ title: Testimonials
 permalink: /testimonials/
 ---
 
+- "I see Ben everywhere in Slack channels dedicated to developer experience,
+  technology discussion, and developer support. I hang out with him in the
+  Capital One Git Community group, where we discuss the latest updates to Git
+  and how to use it most effectively. I even see him in planning committees for
+  internal conferences such as Async Live. His influence in those scenes in
+  Capital One cannot be understated."
 - "Ben shows great leadership qualities as is evident in his time, effort and
   contributions to many groups within the Capital One org. Between mentoring
   TDPs, building engineering culture within various sub groups (such as git and
