@@ -11,6 +11,7 @@ Services:
 - Full-stack software engineering.
 - IT support.
 - Linux server or desktop support.
+- Tutoring in math, logic, programming & software engineering, Git, French, writing.
 
 ## Prior Experience
 
