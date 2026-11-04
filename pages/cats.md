@@ -30,8 +30,8 @@ permalink: /cats/
 ### Every other day
 
 - **Litter**. If you prefer more frequently, that's fine, too.
-    - The three boxes are located in the game room (in a coffee table-like box),
-      in the main bathroom, and in the upstairs guest bathroom.
+    - The three boxes are located in the game room (in a coffee table-like
+      box) and in the closet at the top of the stairs (2 boxes).
     - Implements (scoop, paper or plastic bag, supplemental litter) are located
       in the closet at the top of the stairs.
 
