@@ -8,9 +8,9 @@ permalink: /cats/
 ### Morning
 
 - **Wet Food**.
-    - All cats get one quarter can of corresponding wet food with a handful of
-      dry food (~5 pieces or so) sprinkled on top.
-    - Kelsey and Lilly sometimes wonder; they'll usually eat more if you bring
+    - All cats get one quarter can of wet food with a handful of dry food (~5
+      pieces or so) sprinkled on top.
+    - Kelsey and Lilly sometimes wander; they'll usually eat more if you bring
       their food to their new spot.
     - Ollie will try to steal from the others; if they are mostly finished, it's
       OK, but make sure everyone gets their fill first.
